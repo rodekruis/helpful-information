@@ -1,0 +1,13 @@
+ion-tab-bar {
+  border-bottom: none;
+}
+
+ion-tab-button {
+  &.tab-disabled {
+    opacity: 0.6;
+  }
+}
+
+ion-img {
+  object-fit: contain;
+}
