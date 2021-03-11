@@ -1,6 +1,6 @@
 <div
   [ngClass]="{
-    'offer': true,
+    offer: true,
     'is-actionable': !showDetails
   }"
 >
@@ -37,85 +37,56 @@
     color="dark"
   >
     <p *ngIf="offer.offerLink">
-      <strong>
-        Website:
-      </strong>
+      <strong> Website: </strong>
       &nbsp;
       <a
         [href]="offer.offerLink"
         (click)="logClick('website')"
         target="_blank"
         rel="noopener"
-      >{{ offer.offerLink }}</a>
+        >{{ offer.offerLink }}</a
+      >
     </p>
-    <div
-      *ngIf="offer.offerOpeningHoursWeekdays"
-      class="ion-margin-vertical"
-    >
+    <div *ngIf="offer.offerOpeningHoursWeekdays" class="ion-margin-vertical">
       <strong>
         Opening Hours
         <span *ngIf="offer.offerOpeningHoursWeekends"> - Weekdays</span>:
       </strong>
       <pre class="ion-no-margin">{{ offer.offerOpeningHoursWeekdays }}</pre>
     </div>
-    <div
-      *ngIf="offer.offerOpeningHoursWeekends"
-      class="ion-margin-vertical"
-    >
+    <div *ngIf="offer.offerOpeningHoursWeekends" class="ion-margin-vertical">
       <strong>
         Opening Hours
         <span *ngIf="offer.offerOpeningHoursWeekends"> - Weekends</span>:
       </strong>
       <pre class="ion-no-margin">{{ offer.offerOpeningHoursWeekends }}</pre>
     </div>
-    <p
-      *ngIf="offer.offerEmail"
-      class="ion-margin-vertical"
-    >
-      <strong>
-        Email:
-      </strong>
+    <p *ngIf="offer.offerEmail" class="ion-margin-vertical">
+      <strong> Email: </strong>
       &nbsp;
       <a
         href="mailto:{{ offer.offerEmail }}?subject=Sent via Referral App"
         (click)="logClick('email')"
-      >{{ offer.offerEmail }}</a>
+        >{{ offer.offerEmail }}</a
+      >
     </p>
     <p *ngIf="offer.offerNumber">
-      <strong>
-        Phone:
-      </strong>
+      <strong> Phone: </strong>
       &nbsp;
-      <a
-        href="tel:{{ offer.offerNumber }}"
-        (click)="logClick('phone')"
-      >{{ offer.offerNumber }}</a>
+      <a href="tel:{{ offer.offerNumber }}" (click)="logClick('phone')">{{
+        offer.offerNumber
+      }}</a>
     </p>
-    <div
-      *ngIf="offer.offerAddress"
-      class="ion-margin-vertical"
-    >
-      <strong>
-        Address:
-      </strong>
+    <div *ngIf="offer.offerAddress" class="ion-margin-vertical">
+      <strong> Address: </strong>
       <pre class="ion-no-margin">{{ offer.offerAddress }}</pre>
     </div>
-    <div
-      *ngIf="offer.offerWhatWillYouNeed"
-      class="ion-margin-vertical"
-    >
-      <strong>
-        What will you need?
-      </strong>
+    <div *ngIf="offer.offerWhatWillYouNeed" class="ion-margin-vertical">
+      <strong> What will you need? </strong>
       <pre class="ion-no-margin">{{ offer.offerWhatWillYouNeed }}</pre>
     </div>
-    <div
-      *ngIf="offer.offerBasicRight"
-      class="ion-margin-vertical"
-    >
-      <strong>
-        Basic Rights:
-      </strong>
+    <div *ngIf="offer.offerBasicRight" class="ion-margin-vertical">
+      <strong> Basic Rights: </strong>
       <pre class="ion-no-margin">{{ offer.offerBasicRight }}</pre>
     </div>
   </div>

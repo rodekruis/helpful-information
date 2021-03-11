@@ -15,9 +15,9 @@
     "debug:service-worker": "npm run build:debug && npm run copy:sw-debug && npm run serve:prod",
     "test": "ng test --no-watch --browsers=ChromeHeadless",
     "test:dev": "ng test",
-    "lint:syntax": "prettier --check \"**/*.{md,js,ts,scss}\"",
-    "lint": "npm run lint:syntax",
-    "fix:syntax": "npm run lint:syntax -- --write",
+    "lint": "npm run format:check",
+    "format:check": "prettier --check \"**/*.{md,js,ts,scss,html}\"",
+    "format:fix": "npm run format:check -- --write",
     "e2e": "ng e2e"
   },
   "private": true,
