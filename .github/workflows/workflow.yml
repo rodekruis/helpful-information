@@ -28,7 +28,27 @@ jobs:
           npm run lint --if-present
           npm run test --if-present
 
-      - name: Build And Deploy
+      - name: Build And Deploy to Stage
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v0.0.1-preview
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GREEN_PEBBLE_0707A6B03 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: 'upload'
+          ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: '/' # App source code path
+          api_location: '' # Api source code path - optional
+          output_location: 'www' # Built app content directory - optional
+          ###### End of Repository/Build Configurations ######
+        env:
+          REGIONS: ${{ secrets.STAGE_REGIONS }}
+          GOOGLE_SHEETS_API_URL: ${{ secrets.GOOGLE_SHEETS_API_URL }}
+          GOOGLE_SHEETS_SHEET_IDS: ${{ secrets.STAGE_GOOGLE_SHEETS_SHEET_IDS }}
+          NG_AI_IKEY: ${{ secrets.NG_AI_IKEY }}
+          NG_AI_ENDPOINT: ${{ secrets.NG_AI_ENDPOINT }}
+
+      - name: Build And Deploy to Production
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
         with:
@@ -53,7 +73,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:
-      - name: Close Pull Request
+      - name: Close Pull Request on Stage
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v0.0.1-preview
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GREEN_PEBBLE_0707A6B03 }}
+          action: 'close'
+
+      - name: Close Pull Request on Production
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
         with:
