@@ -13,7 +13,7 @@ export class AppComponent {
   ) {
     this.initializeApp();
 
-    this.loggingService.logPageView();
+    this.loggingService.logPageView('app');
   }
 
   initializeApp() {
