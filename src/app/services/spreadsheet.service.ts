@@ -127,18 +127,24 @@ export class SpreadsheetService {
         offerRow,
         'gsx$whatservice',
       ),
-      offerLink: SpreadsheetService.readCellValue(
+      offerLinks: SpreadsheetService.readCellValue(
         offerRow,
         'gsx$linktowebsite',
-      ),
-      offerNumber: SpreadsheetService.readCellValue(
+      )
+        .split('\n')
+        .filter((_) => _),
+      offerNumbers: SpreadsheetService.readCellValue(
         offerRow,
         'gsx$phonenumber',
-      ),
-      offerEmail: SpreadsheetService.readCellValue(
+      )
+        .split('\n')
+        .filter((_) => _),
+      offerEmails: SpreadsheetService.readCellValue(
         offerRow,
         'gsx$emailaddress',
-      ),
+      )
+        .split('\n')
+        .filter((_) => _),
       offerAddress: SpreadsheetService.readCellValue(offerRow, 'gsx$address'),
       offerOpeningHoursWeekdays: SpreadsheetService.readCellValue(
         offerRow,
