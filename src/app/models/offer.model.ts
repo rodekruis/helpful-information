@@ -15,5 +15,4 @@ export class Offer {
   offerVisible: boolean;
   subCategoryID: number;
   categoryID: number;
-  vaccinationLocations?: string;
 }
