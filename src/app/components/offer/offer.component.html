@@ -36,17 +36,6 @@
     class="offer--details ion-margin-vertical"
     color="dark"
   >
-    <p *ngIf="offer.offerLink">
-      <strong> Website: </strong>
-      &nbsp;
-      <a
-        [href]="offer.offerLink"
-        (click)="logClick('website')"
-        target="_blank"
-        rel="noopener"
-        >{{ offer.offerLink }}</a
-      >
-    </p>
     <div *ngIf="offer.offerOpeningHoursWeekdays" class="ion-margin-vertical">
       <strong>
         Opening Hours
@@ -61,6 +50,17 @@
       </strong>
       <pre class="ion-no-margin">{{ offer.offerOpeningHoursWeekends }}</pre>
     </div>
+    <p *ngIf="offer.offerLink">
+      <strong> Website: </strong>
+      &nbsp;
+      <a
+        [href]="offer.offerLink"
+        (click)="logClick('website')"
+        target="_blank"
+        rel="noopener"
+        >{{ offer.offerLink }}</a
+      >
+    </p>
     <p *ngIf="offer.offerEmail" class="ion-margin-vertical">
       <strong> Email: </strong>
       &nbsp;
