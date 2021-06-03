@@ -85,6 +85,10 @@
       <strong> What do you need to know? </strong>
       <pre class="ion-no-margin">{{ offer.offerDoYouNeedToKnow }}</pre>
     </div>
+    <div *ngIf="offer.vaccinationLocations" class="ion-margin-vertical">
+      <strong> Vaccination Locations </strong>
+      <pre class="ion-no-margin">{{ offer.vaccinationLocations }}</pre>
+    </div>
     <div *ngIf="offer.offerBasicRight" class="ion-margin-vertical">
       <strong> Basic Rights: </strong>
       <pre class="ion-no-margin">{{ offer.offerBasicRight }}</pre>
