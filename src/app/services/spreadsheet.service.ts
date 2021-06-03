@@ -165,6 +165,10 @@ export class SpreadsheetService {
       categoryID: Number(
         SpreadsheetService.readCellValue(offerRow, 'gsx$categoryid'),
       ),
+      vaccinationLocations: SpreadsheetService.readCellValue(
+        offerRow,
+        'gsx$vaccinationlocations',
+      ),
     };
   }
 
