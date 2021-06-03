@@ -155,9 +155,9 @@ export class SpreadsheetService {
         'gsx$openinghoursweekends',
       ),
       offerForWhom: SpreadsheetService.readCellValue(offerRow, 'gsx$forwhom'),
-      offerWhatWillYouNeed: SpreadsheetService.readCellValue(
+      offerDoYouNeedToKnow: SpreadsheetService.readCellValue(
         offerRow,
-        'gsx$whatwillyouneed',
+        'gsx$whatdoyouneedtoknow',
       ),
       offerBasicRight: SpreadsheetService.readCellValue(
         offerRow,
@@ -170,6 +170,10 @@ export class SpreadsheetService {
       ),
       categoryID: Number(
         SpreadsheetService.readCellValue(offerRow, 'gsx$categoryid'),
+      ),
+      vaccinationLocations: SpreadsheetService.readCellValue(
+        offerRow,
+        'gsx$vaccinationlocations',
       ),
     };
   }
