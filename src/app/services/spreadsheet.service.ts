@@ -5,6 +5,7 @@ import { ReferralPageData } from 'src/app/models/referral-page-data';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
+import { toKebabCase } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -27,7 +28,10 @@ export class SpreadsheetService {
   }
 
   loadSheetIds(): void {
-    const regions: string[] = environment.regions.trim().split(/\s*,\s*/);
+    const regions: string[] = environment.regions
+      .trim()
+      .split(/\s*,\s*/)
+      .map(toKebabCase);
     const spreadsheetIds: string[] = environment.google_sheets_sheet_ids
       .trim()
       .split(/\s*,\s*/);
@@ -127,18 +131,24 @@ export class SpreadsheetService {
         offerRow,
         'gsx$whatservice',
       ),
-      offerLink: SpreadsheetService.readCellValue(
+      offerLinks: SpreadsheetService.readCellValue(
         offerRow,
         'gsx$linktowebsite',
-      ),
-      offerNumber: SpreadsheetService.readCellValue(
+      )
+        .split('\n')
+        .filter((_) => _),
+      offerNumbers: SpreadsheetService.readCellValue(
         offerRow,
         'gsx$phonenumber',
-      ),
-      offerEmail: SpreadsheetService.readCellValue(
+      )
+        .split('\n')
+        .filter((_) => _),
+      offerEmails: SpreadsheetService.readCellValue(
         offerRow,
         'gsx$emailaddress',
-      ),
+      )
+        .split('\n')
+        .filter((_) => _),
       offerAddress: SpreadsheetService.readCellValue(offerRow, 'gsx$address'),
       offerOpeningHoursWeekdays: SpreadsheetService.readCellValue(
         offerRow,
@@ -149,9 +159,9 @@ export class SpreadsheetService {
         'gsx$openinghoursweekends',
       ),
       offerForWhom: SpreadsheetService.readCellValue(offerRow, 'gsx$forwhom'),
-      offerWhatWillYouNeed: SpreadsheetService.readCellValue(
+      offerDoYouNeedToKnow: SpreadsheetService.readCellValue(
         offerRow,
-        'gsx$whatwillyouneed',
+        'gsx$whatdoyouneedtoknow',
       ),
       offerBasicRight: SpreadsheetService.readCellValue(
         offerRow,

@@ -19,7 +19,7 @@
           'use-overflow-scroll': !showDetails
         }"
       >
-        <p>{{ offer.offerDescription }}</p>
+        <pre>{{ offer.offerDescription }}</pre>
       </ion-text>
       <ion-button
         *ngIf="offer.offerName && !showDetails"
@@ -36,17 +36,6 @@
     class="offer--details ion-margin-vertical"
     color="dark"
   >
-    <p *ngIf="offer.offerLink">
-      <strong> Website: </strong>
-      &nbsp;
-      <a
-        [href]="offer.offerLink"
-        (click)="logClick('website')"
-        target="_blank"
-        rel="noopener"
-        >{{ offer.offerLink }}</a
-      >
-    </p>
     <div *ngIf="offer.offerOpeningHoursWeekdays" class="ion-margin-vertical">
       <strong>
         Opening Hours
@@ -61,21 +50,41 @@
       </strong>
       <pre class="ion-no-margin">{{ offer.offerOpeningHoursWeekends }}</pre>
     </div>
-    <p *ngIf="offer.offerEmail" class="ion-margin-vertical">
+    <div *ngIf="offer.offerDoYouNeedToKnow" class="ion-margin-vertical">
+      <strong> What do you need to know? </strong>
+      <pre class="ion-no-margin">{{ offer.offerDoYouNeedToKnow }}</pre>
+    </div>
+    <p *ngIf="offer.offerLinks.length">
+      <strong> Website: </strong>
+      &nbsp;
+      <a
+        *ngFor="let offerLink of offer.offerLinks"
+        [href]="offerLink"
+        (click)="logClick('website')"
+        target="_blank"
+        rel="noopener"
+        >{{ offerLink }}</a
+      >
+    </p>
+    <p *ngIf="offer.offerEmails.length" class="ion-margin-vertical">
       <strong> Email: </strong>
       &nbsp;
       <a
-        href="mailto:{{ offer.offerEmail }}?subject=Sent via Referral App"
+        *ngFor="let offerEmail of offer.offerEmails"
+        href="mailto:{{ offerEmail }}?subject=Sent via Helpful Information"
         (click)="logClick('email')"
-        >{{ offer.offerEmail }}</a
+        >{{ offerEmail }}</a
       >
     </p>
-    <p *ngIf="offer.offerNumber">
+    <p *ngIf="offer.offerNumbers.length">
       <strong> Phone: </strong>
       &nbsp;
-      <a href="tel:{{ offer.offerNumber }}" (click)="logClick('phone')">{{
-        offer.offerNumber
-      }}</a>
+      <a
+        *ngFor="let offerNumber of offer.offerNumbers"
+        href="tel:{{ offerNumber }}"
+        (click)="logClick('phone')"
+        >{{ offerNumber }}</a
+      >
     </p>
     <div *ngIf="offer.offerAddress" class="ion-margin-vertical">
       <strong> Address: </strong>

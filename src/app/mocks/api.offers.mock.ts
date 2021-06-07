@@ -6,7 +6,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.wereldhuis.org',
+    offerLinks: ['www.wereldhuis.org'],
     subCategoryID: 1,
     categoryID: 1,
   },
@@ -17,7 +17,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.boostamsterdam.nl',
+    offerLinks: ['www.boostamsterdam.nl'],
     subCategoryID: 1,
     categoryID: 1,
   },
@@ -28,7 +28,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.hvoquerido.nl',
+    offerLinks: ['www.hvoquerido.nl'],
     subCategoryID: 2,
     categoryID: 1,
   },
@@ -39,7 +39,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.legerdesheils.nl',
+    offerLinks: ['www.legerdesheils.nl'],
     subCategoryID: 2,
     categoryID: 1,
   },
@@ -50,7 +50,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.amsterdam.nl',
+    offerLinks: ['www.amsterdam.nl'],
     subCategoryID: 2,
     categoryID: 1,
   },
@@ -61,7 +61,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.amsterdam.nl',
+    offerLinks: ['www.amsterdam.nl'],
     subCategoryID: 2,
     categoryID: 1,
   },
@@ -72,7 +72,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.harriettubmanhuis.nl',
+    offerLinks: ['www.harriettubmanhuis.nl'],
     subCategoryID: 3,
     categoryID: 1,
   },
@@ -83,7 +83,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.noelhuis.nl',
+    offerLinks: ['www.noelhuis.nl'],
     subCategoryID: 3,
     categoryID: 1,
   },
@@ -94,7 +94,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.vluchtlingenwerk.nl',
+    offerLinks: ['www.vluchtlingenwerk.nl'],
     subCategoryID: 4,
     categoryID: 2,
   },
@@ -105,7 +105,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.juridischolket.nl',
+    offerLinks: ['www.juridischolket.nl'],
     subCategoryID: 4,
     categoryID: 2,
   },
@@ -116,7 +116,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.askv.nl',
+    offerLinks: ['www.askv.nl'],
     subCategoryID: 4,
     categoryID: 2,
   },
@@ -127,7 +127,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.amsterdam.nl',
+    offerLinks: ['www.amsterdam.nl'],
     subCategoryID: 4,
     categoryID: 2,
   },
@@ -138,7 +138,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.advocatenspreekuur.nl',
+    offerLinks: ['www.advocatenspreekuur.nl'],
     subCategoryID: 4,
     categoryID: 2,
   },
@@ -149,7 +149,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.doktersvandewereld.org',
+    offerLinks: ['www.doktersvandewereld.org'],
     subCategoryID: 5,
     categoryID: 3,
   },
@@ -160,7 +160,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.oudezijds100.nl',
+    offerLinks: ['www.oudezijds100.nl'],
     subCategoryID: 5,
     categoryID: 3,
   },
@@ -171,7 +171,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.spoedeisendepsychiatrieamsterdam.nl',
+    offerLinks: ['www.spoedeisendepsychiatrieamsterdam.nl'],
     subCategoryID: 6,
     categoryID: 3,
   },
@@ -182,7 +182,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.oudezijds100.nl',
+    offerLinks: ['www.oudezijds100.nl'],
     subCategoryID: 6,
     categoryID: 3,
   },
@@ -193,7 +193,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    offerLink: 'www.i-psy.nl',
+    offerLinks: ['www.i-psy.nl'],
     subCategoryID: 6,
     categoryID: 3,
   },

@@ -44,9 +44,15 @@
   }
 }
 
+pre,
+a {
+  line-height: 1.5;
+}
+
 a:link,
 a {
   color: var(--ion-color-secondary);
+  display: block;
 
   &:visited {
     color: var(--ion-color-secondary-shade);

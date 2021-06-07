@@ -13,6 +13,7 @@ import { LoggingService } from 'src/app/services/logging.service';
 import { LogoService } from 'src/app/services/logo.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { toKebabCase } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -67,11 +68,7 @@ export class ReferralPage implements OnInit {
   }
 
   public toKebabCase(value: string) {
-    return value
-      .replace(/\W+/g, ' ')
-      .split(/ |\B(?=[A-Z])/)
-      .map((word) => word.toLowerCase())
-      .join('-');
+    return toKebabCase(value);
   }
 
   private async loadReferralData() {
