@@ -58,6 +58,8 @@ export class SpreadsheetService {
         categoryRow,
         'gsx$categorydescription',
       ),
+      categoryVisible:
+        SpreadsheetService.readCellValue(categoryRow, 'gsx$visible') === 'Show',
     };
   }
 
@@ -68,7 +70,9 @@ export class SpreadsheetService {
     )
       .then((response) => response.json())
       .then((response) => {
-        return response.feed.entry.map(this.convertCategoryRowToCategoryObject);
+        return response.feed.entry
+          .map(this.convertCategoryRowToCategoryObject)
+          .filter((category: Category): boolean => category.categoryVisible);
       })
       .catch((error) => {
         if (this.loggingService) {
@@ -95,6 +99,9 @@ export class SpreadsheetService {
         subCategoryRow,
         'gsx$subcategorydescription',
       ),
+      subCategoryVisible:
+        SpreadsheetService.readCellValue(subCategoryRow, 'gsx$visible') ===
+        'Show',
       categoryID: Number(
         SpreadsheetService.readCellValue(subCategoryRow, 'gsx$categoryid'),
       ),
@@ -108,9 +115,12 @@ export class SpreadsheetService {
     )
       .then((response) => response.json())
       .then((response) => {
-        return response.feed.entry.map(
-          this.convertSubCategoryRowToSubCategoryObject,
-        );
+        return response.feed.entry
+          .map(this.convertSubCategoryRowToSubCategoryObject)
+          .filter(
+            (subCategory: SubCategory): boolean =>
+              subCategory.subCategoryVisible,
+          );
       })
       .catch((error) => {
         if (this.loggingService) {
@@ -187,7 +197,7 @@ export class SpreadsheetService {
       .then((response) => {
         return response.feed.entry
           .map(this.convertOfferRowToOfferObject)
-          .filter((offer) => offer.offerVisible);
+          .filter((offer: Offer): boolean => offer.offerVisible);
       })
       .catch((error) => {
         if (this.loggingService) {

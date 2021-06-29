@@ -3,5 +3,6 @@ export class SubCategory {
   subCategoryName: string;
   subCategoryIcon: string;
   subCategoryDescription?: string;
+  subCategoryVisible: boolean;
   categoryID: number;
 }
