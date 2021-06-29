@@ -7,9 +7,11 @@ import { OfferComponent } from 'src/app/components/offer/offer.component';
 import { SubCategoryComponent } from 'src/app/components/sub-category/sub-category.component';
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
+import { SheetComponent } from '../components/sheet/sheet.component';
 
 @NgModule({
   declarations: [
+    SheetComponent,
     CategoryComponent,
     SubCategoryComponent,
     OfferComponent,
@@ -18,6 +20,7 @@ import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
   ],
   imports: [CommonModule, IonicModule, FormsModule],
   exports: [
+    SheetComponent,
     CategoryComponent,
     SubCategoryComponent,
     OfferComponent,
