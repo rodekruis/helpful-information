@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import {
+  ApplicationInsights,
+  ITelemetryItem,
+} from '@microsoft/applicationinsights-web';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { environment } from 'src/environments/environment';
 import {
@@ -32,8 +35,20 @@ export class LoggingService {
     });
 
     this.appInsights.loadAppInsights();
+    this.appInsights.addTelemetryInitializer(this.telemetryInitializer);
     this.appInsightsEnabled = true;
   }
+
+  private telemetryInitializer = (item: ITelemetryItem): void => {
+    console.log(document.referrer);
+    Object.assign(item.data, {
+      isProduction: environment.production,
+      baseUrl: this.getBaseUrl(),
+    });
+  };
+
+  private getBaseUrl = (): string =>
+    document.referrer ? document.referrer.match(/:\/\/(.[^/]+)/)[1] : null;
 
   public logPageView(name?: string): void {
     if (this.appInsightsEnabled) {
