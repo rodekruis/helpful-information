@@ -6,6 +6,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     categoryDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    categoryVisible: true,
   },
   {
     categoryID: 2,
@@ -13,6 +14,7 @@ export default [
     categoryIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     categoryDescription: ' ',
+    categoryVisible: true,
   },
   {
     categoryID: 3,
@@ -21,5 +23,6 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     categoryDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    categoryVisible: false,
   },
 ];

@@ -3,4 +3,5 @@ export default {
   categoryName: 'Mock Category Name',
   categoryIcon: 'Mock Category Icon',
   categoryDescription: 'Mock Category Description',
+  categoryVisible: true,
 };

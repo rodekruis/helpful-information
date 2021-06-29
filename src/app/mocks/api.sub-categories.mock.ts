@@ -6,6 +6,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     subCategoryDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    subCategoryVisible: true,
     categoryID: 1,
   },
   {
@@ -15,6 +16,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     subCategoryDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    subCategoryVisible: true,
     categoryID: 1,
   },
   {
@@ -24,6 +26,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     subCategoryDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    subCategoryVisible: true,
     categoryID: 1,
   },
   {
@@ -33,6 +36,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     subCategoryDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    subCategoryVisible: true,
     categoryID: 2,
   },
   {
@@ -42,6 +46,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     subCategoryDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    subCategoryVisible: true,
     categoryID: 3,
   },
   {
@@ -51,6 +56,7 @@ export default [
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     subCategoryDescription:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    subCategoryVisible: false,
     categoryID: 3,
   },
 ];
