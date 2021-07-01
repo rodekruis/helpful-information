@@ -1,0 +1,12 @@
+<ion-toolbar color="secondary">
+  <ion-title class="ion-text-center">
+    <ion-text *ngIf="!loading">
+      {{ title }}
+    </ion-text>
+    <ion-skeleton-text
+      *ngIf="loading"
+      animated
+      style="width: 50%; line-height: 1; margin: auto"
+    ></ion-skeleton-text>
+  </ion-title>
+</ion-toolbar>

@@ -9,6 +9,7 @@ import {
 import { Offer } from 'src/app/models/offer.model';
 import { ReferralPageData } from 'src/app/models/referral-page-data';
 import { SubCategory } from 'src/app/models/sub-category.model';
+import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { LogoService } from 'src/app/services/logo.service';
 import { OffersService } from 'src/app/services/offers.service';
@@ -33,7 +34,9 @@ export class ReferralPage implements OnInit {
   public subCategory: SubCategory;
   public offer: Offer;
 
-  public referralPageData: ReferralPageData;
+  public referralPageData: ReferralPageData = {
+    referralPageTitle: 'Helpful Information',
+  } as ReferralPageData;
 
   public readonly rootHref: string = '/';
 
@@ -45,6 +48,7 @@ export class ReferralPage implements OnInit {
     private router: Router,
     private loggingService: LoggingService,
     private referralPageDataService: ReferralPageDataService,
+    private lastUpdatedTimeService: LastUpdatedTimeService,
     private titleService: Title,
     private logoService: LogoService,
   ) {}
@@ -78,6 +82,9 @@ export class ReferralPage implements OnInit {
         this.region,
       );
       this.titleService.setTitle(this.referralPageData.referralPageTitle);
+      this.lastUpdatedTimeService.setLastUpdatedTime(
+        this.referralPageData.referralLastUpdatedTime,
+      );
       this.logoService.logo = this.referralPageData.referralPageLogo;
       this.categories = await this.offersService.getCategories(this.region);
       this.subCategories = await this.offersService.getSubCategories(
