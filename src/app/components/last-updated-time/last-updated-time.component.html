@@ -1,0 +1,10 @@
+<ion-toolbar color="secondary" class="toolbar-sub-title">
+  <ion-title class="ion-text-center" size="small" *ngIf="!loading">
+    Last Updated on {{ lastUpdatedTime }}
+  </ion-title>
+  <ion-skeleton-text
+    *ngIf="loading"
+    animated
+    style="width: 40%; line-height: 1; margin: auto"
+  ></ion-skeleton-text>
+</ion-toolbar>

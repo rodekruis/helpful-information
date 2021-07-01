@@ -1,17 +1,12 @@
 <ion-header>
-  <ion-toolbar color="secondary">
-    <ion-title class="ion-text-center">
-      <ion-text *ngIf="!loading">
-        {{ isSupportedRegion() ? referralPageData.referralPageTitle : "Helpful
-        Information" }}
-      </ion-text>
-      <ion-skeleton-text
-        *ngIf="loading"
-        animated
-        style="width: 50%; line-height: 1; margin: auto"
-      ></ion-skeleton-text>
-    </ion-title>
-  </ion-toolbar>
+  <app-title
+    [title]="referralPageData.referralPageTitle"
+    [loading]="loading"
+  ></app-title>
+  <app-last-updated-time
+    *ngIf="isSupportedRegion()"
+    [loading]="loading"
+  ></app-last-updated-time>
 </ion-header>
 
 <ion-content *ngIf="isSupportedRegion()" color="dark" class="ion-padding">

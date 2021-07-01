@@ -19,7 +19,7 @@ export class SpreadsheetService {
   private offerSheetIndex = 1;
   private referralPageSheetIndex = 5;
 
-  constructor(public loggingService: LoggingService) {
+  constructor(private loggingService: LoggingService) {
     this.loadSheetIds();
   }
 
@@ -241,6 +241,10 @@ export class SpreadsheetService {
       ),
       referralWhatsAppLink: SpreadsheetService.readCellValue(
         referralPageDataRows[7],
+        'gsx$value',
+      ),
+      referralLastUpdatedTime: SpreadsheetService.readCellValue(
+        referralPageDataRows[8],
         'gsx$value',
       ),
     };
