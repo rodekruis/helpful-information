@@ -1,10 +1,7 @@
-<div class="sheet">
-  <ion-card class="sheet--button">
-    <ion-card-header>
-      <ion-img src="assets/icons/red_cross.png" [alt]="sheetName"></ion-img>
-      <ion-card-title class="ion-text-center sheet--title">
-        {{ sheetName | titlecase }}
-      </ion-card-title>
-    </ion-card-header>
-  </ion-card>
-</div>
+<ion-card class="sheet--button" (click)="onSheetClick()">
+  <ion-card-header>
+    <ion-card-title class="ion-text-center sheet--title">
+      {{ sheetName | titlecase }}
+    </ion-card-title>
+  </ion-card-header>
+</ion-card>

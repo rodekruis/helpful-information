@@ -136,12 +136,12 @@
       </ion-card-subtitle>
     </ion-card-header>
   </ion-card>
-  <a
-    [routerLink]="['/', toKebabCase(region)]"
-    *ngFor="let region of regions; first as isFirst; last as isLast"
-  >
-    <sheet [sheetName]="region"></sheet>
-  </a>
+  <div class="sheets-container">
+    <sheet
+      *ngFor="let region of regions; first as isFirst; last as isLast"
+      [sheetName]="region"
+    ></sheet>
+  </div>
 </ion-content>
 
 <ion-footer *ngIf="isSupportedRegion()" color="secondary">

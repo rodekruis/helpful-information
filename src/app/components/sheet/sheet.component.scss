@@ -1,23 +1,15 @@
-.sheet {
-  display: inline-block;
-}
-
 .sheet--button {
-  width: 100px;
+  width: 140px;
   height: 100px;
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 
   background: var(--ion-color-secondary);
   color: var(--ion-color-secondary-contrast);
 
   cursor: pointer;
-
-  ion-img {
-    height: 30px;
-    width: 30px;
-    margin: auto;
-    padding: 5%;
-  }
 }
 
 .sheet--title {
