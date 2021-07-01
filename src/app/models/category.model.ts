@@ -3,4 +3,5 @@ export class Category {
   categoryName: string;
   categoryIcon: string;
   categoryDescription?: string;
+  categoryVisible: boolean;
 }

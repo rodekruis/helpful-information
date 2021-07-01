@@ -3,5 +3,6 @@ export default {
   subCategoryName: 'Mock SubCategory Name',
   subCategoryIcon: 'Mock SubCategory Icon',
   subCategoryDescription: 'Mock SubCategory Description',
+  subCategoryVisible: true,
   categoryID: 1,
 };
