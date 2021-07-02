@@ -6,6 +6,7 @@ export enum LoggingEventCategory {
 export enum LoggingEvent {
   error = 'error',
   exception = 'exception',
+  BackFromRegion = 'back-from-region',
   BackFromCategory = 'back-from-category',
   BackFromOffer = 'back-from-offer',
   BackFromSubCategory = 'back-from-sub-category',

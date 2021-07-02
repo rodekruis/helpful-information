@@ -141,7 +141,7 @@
 
 <ion-footer *ngIf="isSupportedRegion()" color="secondary">
   <ion-toolbar>
-    <ion-buttons *ngIf="category" slot="start">
+    <ion-buttons slot="start">
       <ion-button
         (click)="goBack()"
         class="nested-button-with-label ion-text-start"
@@ -151,9 +151,9 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-buttons *ngIf="category" class="ion-justify-content-center">
+    <ion-buttons class="ion-justify-content-center">
       <ion-button
-        (click)="showCategories()"
+        (click)="showRootPage()"
         class="nested-button-with-label ion-text-start"
       >
         <ion-icon name="radio-button-on" class="icon-as-button"></ion-icon>

@@ -204,6 +204,13 @@ export class ReferralPage implements OnInit {
       );
       this.category = null;
       this.router.navigate([this.getRegionHref()]);
+    } else {
+      this.loggingService.logEvent(
+        LoggingEventCategory.ai,
+        LoggingEvent.BackFromRegion,
+        this.getLogProperties(true),
+      );
+      this.router.navigate([this.rootHref]);
     }
   }
 
@@ -222,7 +229,7 @@ export class ReferralPage implements OnInit {
     return logParams;
   }
 
-  showCategories() {
+  showRootPage() {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.MainScreenClick,
@@ -231,7 +238,7 @@ export class ReferralPage implements OnInit {
     this.category = null;
     this.subCategory = null;
     this.offer = null;
-    this.router.navigate([this.getRegionHref()]);
+    this.router.navigate([this.rootHref]);
   }
 
   logContactClick(type: 'tel' | 'whatsapp') {
