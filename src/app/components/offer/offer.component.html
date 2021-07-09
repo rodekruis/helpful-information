@@ -8,7 +8,7 @@
     <ion-card class="offer--button ion-no-margin">
       <ion-img
         [src]="offer.offerIcon"
-        [alt]="offer.offerName"
+        alt="Helpful Information"
         class="offer--logo"
       ></ion-img>
     </ion-card>
@@ -22,12 +22,12 @@
         <pre>{{ offer.offerDescription }}</pre>
       </ion-text>
       <ion-button
-        *ngIf="offer.offerName && !showDetails"
+        *ngIf="referralOfferButtonLabel && !showDetails"
         color="primary"
         size="small"
         class="ion-text-center"
       >
-        {{ offer.offerName }}
+        {{ referralOfferButtonLabel }}
       </ion-button>
     </div>
   </div>

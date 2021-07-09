@@ -19,6 +19,9 @@ export class OfferComponent {
   showDetails = false;
 
   @Input()
+  referralOfferButtonLabel: string = 'Click for Info';
+
+  @Input()
   goBack;
 
   constructor(private loggingService: LoggingService) {}
@@ -27,10 +30,7 @@ export class OfferComponent {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.OfferClick,
-      {
-        name,
-        offerName: this.offer.offerName,
-      },
+      { name },
     );
   }
 }
