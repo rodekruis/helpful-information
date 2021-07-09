@@ -21,7 +21,15 @@
     class="sub-category--description ion-padding"
   >
     <ion-text>
-      {{ subCategory.subCategoryDescription }}
+      <pre>{{ subCategory.subCategoryDescription }}</pre>
     </ion-text>
+    <ion-button
+      *ngIf="referralSubCategoryButtonLabel && showBottomDescription"
+      color="primary"
+      size="small"
+      class="ion-text-center"
+    >
+      {{ referralSubCategoryButtonLabel }}
+    </ion-button>
   </div>
 </div>

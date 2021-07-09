@@ -250,6 +250,10 @@ export class SpreadsheetService {
         referralPageDataRows[9],
         'gsx$value',
       ),
+      referralSubCategoryButtonLabel: SpreadsheetService.readCellValue(
+        referralPageDataRows[10],
+        'gsx$value',
+      ),
     };
   }
 
