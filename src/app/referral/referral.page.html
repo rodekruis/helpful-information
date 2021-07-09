@@ -85,6 +85,7 @@
       <offer
         *ngFor="let _offer of offers | categoryFilter: category | subCategoryFilter: subCategory"
         [offer]="_offer"
+        [referralOfferButtonLabel]="referralPageData.referralOfferButtonLabel"
         (click)="clickOffer(_offer)"
         class="ion-margin-bottom"
       ></offer>
@@ -92,6 +93,7 @@
     <div *ngIf="category && subCategory && offer">
       <offer
         [offer]="offer"
+        [referralOfferButtonLabel]="referralPageData.referralOfferButtonLabel"
         [showDetails]="true"
         [goBack]="goBack.bind(this)"
         (click)="clickOffer(offer)"

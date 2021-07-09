@@ -135,7 +135,6 @@ export class SpreadsheetService {
       offerID: Number(
         SpreadsheetService.readCellValue(offerRow, 'gsx$offerid'),
       ),
-      offerName: SpreadsheetService.readCellValue(offerRow, 'gsx$name'),
       offerIcon: SpreadsheetService.readCellValue(offerRow, 'gsx$icon'),
       offerDescription: SpreadsheetService.readCellValue(
         offerRow,
@@ -245,6 +244,10 @@ export class SpreadsheetService {
       ),
       referralLastUpdatedTime: SpreadsheetService.readCellValue(
         referralPageDataRows[8],
+        'gsx$value',
+      ),
+      referralOfferButtonLabel: SpreadsheetService.readCellValue(
+        referralPageDataRows[9],
         'gsx$value',
       ),
     };

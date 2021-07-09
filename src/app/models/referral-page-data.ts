@@ -8,4 +8,5 @@ export class ReferralPageData {
   referralPhoneNumber: string;
   referralWhatsAppLink: string;
   referralLastUpdatedTime: string;
+  referralOfferButtonLabel: string;
 }

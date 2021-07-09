@@ -1,6 +1,5 @@
 export default {
   offerID: 1,
-  offerName: 'Mock Offer Name',
   offerIcon: 'Mock Offer Icon',
   offerDescription: 'Mock Offer Description',
   offerLinks: ['Mock Offer Link'],

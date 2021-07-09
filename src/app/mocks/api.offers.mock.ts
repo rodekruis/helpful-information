@@ -1,7 +1,6 @@
 export default [
   {
     offerID: 1,
-    offerName: 'Wereld Huis',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -12,7 +11,6 @@ export default [
   },
   {
     offerID: 2,
-    offerName: 'Boost',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -23,7 +21,6 @@ export default [
   },
   {
     offerID: 3,
-    offerName: 'Hvoquerido',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -34,7 +31,6 @@ export default [
   },
   {
     offerID: 4,
-    offerName: 'Leger des Heils',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -45,7 +41,6 @@ export default [
   },
   {
     offerID: 5,
-    offerName: 'Gemeente Amsterdam',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -56,7 +51,6 @@ export default [
   },
   {
     offerID: 6,
-    offerName: 'Ask V',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -67,7 +61,6 @@ export default [
   },
   {
     offerID: 7,
-    offerName: 'Harriet Tubman Huis',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -78,7 +71,6 @@ export default [
   },
   {
     offerID: 8,
-    offerName: 'Janette Noelhuis',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -89,7 +81,6 @@ export default [
   },
   {
     offerID: 9,
-    offerName: 'Vluchtlingen Werk',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -100,7 +91,6 @@ export default [
   },
   {
     offerID: 10,
-    offerName: 'Juridischolket',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -111,7 +101,6 @@ export default [
   },
   {
     offerID: 11,
-    offerName: 'Ask V',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -122,7 +111,6 @@ export default [
   },
   {
     offerID: 12,
-    offerName: 'Gemeente Amsterdam',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -133,7 +121,6 @@ export default [
   },
   {
     offerID: 13,
-    offerName: 'Advocaten Spreekuur',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -144,7 +131,6 @@ export default [
   },
   {
     offerID: 14,
-    offerName: 'Dokters van de Wereld',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -155,7 +141,6 @@ export default [
   },
   {
     offerID: 15,
-    offerName: 'Oude Zijds 100',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -166,7 +151,6 @@ export default [
   },
   {
     offerID: 16,
-    offerName: 'Spoedeisende Psychiatrie',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -177,7 +161,6 @@ export default [
   },
   {
     offerID: 17,
-    offerName: 'Oude Zijds 100',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -188,7 +171,6 @@ export default [
   },
   {
     offerID: 18,
-    offerName: 'i-psy',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
