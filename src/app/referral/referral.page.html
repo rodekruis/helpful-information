@@ -66,6 +66,7 @@
         <sub-category
           *ngFor="let _subCategory of subCategories | categoryFilter: category"
           [subCategory]="_subCategory"
+          [referralSubCategoryButtonLabel]="referralPageData.referralSubCategoryButtonLabel"
           [showRightDescription]="false"
           [showBottomDescription]="true"
           (click)="clickSubCategory(_subCategory)"
@@ -75,6 +76,7 @@
       <div *ngIf="category && subCategory" class="ion-margin-bottom">
         <sub-category
           [subCategory]="subCategory"
+          [referralSubCategoryButtonLabel]="referralPageData.referralSubCategoryButtonLabel"
           [showRightDescription]="true && !offer"
           [showBottomDescription]="false"
           (click)="goBack()"
