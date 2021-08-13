@@ -14,6 +14,7 @@ export const environment = {
   regions: '',
 
   // Google Sheets:
+  google_sheets_api_key: '',
   google_sheets_api_url: '',
   google_sheets_sheet_ids: '',
 

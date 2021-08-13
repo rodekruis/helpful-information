@@ -14,17 +14,18 @@ import { environment } from 'src/environments/environment';
 export class SpreadsheetService {
   private spreadsheetURL = environment.google_sheets_api_url;
   private spreadsheetId = {};
-  private categorySheetIndex = 2;
-  private subCategorySheetIndex = 3;
-  private offerSheetIndex = 1;
-  private referralPageSheetIndex = 5;
+  private apiKey = environment.google_sheets_api_key;
+  private categorySheetName = 'Categories';
+  private subCategorySheetName = 'Sub-Categories';
+  private offerSheetName = 'Offers';
+  private referralPageSheetName = 'Referral Page';
 
   constructor(private loggingService: LoggingService) {
     this.loadSheetIds();
   }
 
-  static readCellValue(row, key): string {
-    return row[key].$t.toString().trim();
+  static readCellValue(row, key: number): string {
+    return key < row.length ? row[key].trim() : '';
   }
 
   loadSheetIds(): void {
@@ -43,34 +44,24 @@ export class SpreadsheetService {
 
   convertCategoryRowToCategoryObject(categoryRow): Category {
     return {
-      categoryID: Number(
-        SpreadsheetService.readCellValue(categoryRow, 'gsx$categoryid'),
-      ),
-      categoryName: SpreadsheetService.readCellValue(
-        categoryRow,
-        'gsx$categoryname',
-      ),
-      categoryIcon: SpreadsheetService.readCellValue(
-        categoryRow,
-        'gsx$categoryicon',
-      ),
-      categoryDescription: SpreadsheetService.readCellValue(
-        categoryRow,
-        'gsx$categorydescription',
-      ),
+      categoryID: Number(SpreadsheetService.readCellValue(categoryRow, 0)),
+      categoryName: SpreadsheetService.readCellValue(categoryRow, 1),
+      categoryIcon: SpreadsheetService.readCellValue(categoryRow, 2),
+      categoryDescription: SpreadsheetService.readCellValue(categoryRow, 3),
       categoryVisible:
-        SpreadsheetService.readCellValue(categoryRow, 'gsx$visible') === 'Show',
+        SpreadsheetService.readCellValue(categoryRow, 4) === 'Show',
     };
   }
 
   getCategories(region): Promise<Category[]> {
     return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}/${this.categorySheetIndex}` +
-        '/public/values?alt=json',
+      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
+        `/values/${this.categorySheetName}` +
+        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
     )
       .then((response) => response.json())
       .then((response) => {
-        return response.feed.entry
+        return response.values
           .map(this.convertCategoryRowToCategoryObject)
           .filter((category: Category): boolean => category.categoryVisible);
       })
@@ -85,37 +76,29 @@ export class SpreadsheetService {
   convertSubCategoryRowToSubCategoryObject(subCategoryRow): SubCategory {
     return {
       subCategoryID: Number(
-        SpreadsheetService.readCellValue(subCategoryRow, 'gsx$subcategoryid'),
+        SpreadsheetService.readCellValue(subCategoryRow, 0),
       ),
-      subCategoryName: SpreadsheetService.readCellValue(
-        subCategoryRow,
-        'gsx$subcategoryname',
-      ),
-      subCategoryIcon: SpreadsheetService.readCellValue(
-        subCategoryRow,
-        'gsx$subcategoryicon',
-      ),
+      subCategoryName: SpreadsheetService.readCellValue(subCategoryRow, 1),
+      subCategoryIcon: SpreadsheetService.readCellValue(subCategoryRow, 2),
       subCategoryDescription: SpreadsheetService.readCellValue(
         subCategoryRow,
-        'gsx$subcategorydescription',
+        3,
       ),
       subCategoryVisible:
-        SpreadsheetService.readCellValue(subCategoryRow, 'gsx$visible') ===
-        'Show',
-      categoryID: Number(
-        SpreadsheetService.readCellValue(subCategoryRow, 'gsx$categoryid'),
-      ),
+        SpreadsheetService.readCellValue(subCategoryRow, 4) === 'Show',
+      categoryID: Number(SpreadsheetService.readCellValue(subCategoryRow, 5)),
     };
   }
 
   getSubCategories(region): Promise<SubCategory[]> {
     return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}/${this.subCategorySheetIndex}` +
-        '/public/values?alt=json',
+      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
+        `/values/${this.subCategorySheetName}` +
+        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
     )
       .then((response) => response.json())
       .then((response) => {
-        return response.feed.entry
+        return response.values
           .map(this.convertSubCategoryRowToSubCategoryObject)
           .filter(
             (subCategory: SubCategory): boolean =>
@@ -132,69 +115,39 @@ export class SpreadsheetService {
 
   convertOfferRowToOfferObject(offerRow): Offer {
     return {
-      offerID: Number(
-        SpreadsheetService.readCellValue(offerRow, 'gsx$offerid'),
-      ),
-      offerIcon: SpreadsheetService.readCellValue(offerRow, 'gsx$icon'),
-      offerDescription: SpreadsheetService.readCellValue(
-        offerRow,
-        'gsx$whatservice',
-      ),
-      offerLinks: SpreadsheetService.readCellValue(
-        offerRow,
-        'gsx$linktowebsite',
-      )
+      offerID: Number(SpreadsheetService.readCellValue(offerRow, 3)),
+      offerIcon: SpreadsheetService.readCellValue(offerRow, 5),
+      offerDescription: SpreadsheetService.readCellValue(offerRow, 6),
+      offerLinks: SpreadsheetService.readCellValue(offerRow, 9)
         .split('\n')
         .filter((_) => _),
-      offerNumbers: SpreadsheetService.readCellValue(
-        offerRow,
-        'gsx$phonenumber',
-      )
+      offerNumbers: SpreadsheetService.readCellValue(offerRow, 7)
         .split('\n')
         .filter((_) => _),
-      offerEmails: SpreadsheetService.readCellValue(
-        offerRow,
-        'gsx$emailaddress',
-      )
+      offerEmails: SpreadsheetService.readCellValue(offerRow, 8)
         .split('\n')
         .filter((_) => _),
-      offerAddress: SpreadsheetService.readCellValue(offerRow, 'gsx$address'),
-      offerOpeningHoursWeekdays: SpreadsheetService.readCellValue(
-        offerRow,
-        'gsx$openinghoursweekdays',
-      ),
-      offerOpeningHoursWeekends: SpreadsheetService.readCellValue(
-        offerRow,
-        'gsx$openinghoursweekends',
-      ),
-      offerForWhom: SpreadsheetService.readCellValue(offerRow, 'gsx$forwhom'),
-      offerDoYouNeedToKnow: SpreadsheetService.readCellValue(
-        offerRow,
-        'gsx$whatdoyouneedtoknow',
-      ),
-      offerBasicRight: SpreadsheetService.readCellValue(
-        offerRow,
-        'gsx$basicright',
-      ),
-      offerVisible:
-        SpreadsheetService.readCellValue(offerRow, 'gsx$visible') === 'Show',
-      subCategoryID: Number(
-        SpreadsheetService.readCellValue(offerRow, 'gsx$sub-categoryid'),
-      ),
-      categoryID: Number(
-        SpreadsheetService.readCellValue(offerRow, 'gsx$categoryid'),
-      ),
+      offerAddress: SpreadsheetService.readCellValue(offerRow, 10),
+      offerOpeningHoursWeekdays: SpreadsheetService.readCellValue(offerRow, 11),
+      offerOpeningHoursWeekends: SpreadsheetService.readCellValue(offerRow, 12),
+      offerForWhom: SpreadsheetService.readCellValue(offerRow, 13),
+      offerDoYouNeedToKnow: SpreadsheetService.readCellValue(offerRow, 14),
+      offerBasicRight: SpreadsheetService.readCellValue(offerRow, 15),
+      offerVisible: SpreadsheetService.readCellValue(offerRow, 4) === 'Show',
+      subCategoryID: Number(SpreadsheetService.readCellValue(offerRow, 1)),
+      categoryID: Number(SpreadsheetService.readCellValue(offerRow, 2)),
     };
   }
 
   getOffers(region): Promise<Offer[]> {
     return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}/${this.offerSheetIndex}` +
-        '/public/values?alt=json',
+      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
+        `/values/${this.offerSheetName}` +
+        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
     )
       .then((response) => response.json())
       .then((response) => {
-        return response.feed.entry
+        return response.values
           .map(this.convertOfferRowToOfferObject)
           .filter((offer: Offer): boolean => offer.offerVisible);
       })
@@ -211,61 +164,62 @@ export class SpreadsheetService {
   ): ReferralPageData {
     return {
       referralPageLogo: SpreadsheetService.readCellValue(
-        referralPageDataRows[0],
-        'gsx$value',
+        referralPageDataRows[1],
+        1,
       ),
       referralPageTitle: SpreadsheetService.readCellValue(
-        referralPageDataRows[1],
-        'gsx$value',
+        referralPageDataRows[2],
+        1,
       ),
       referralPageGreeting: SpreadsheetService.readCellValue(
-        referralPageDataRows[2],
-        'gsx$value',
+        referralPageDataRows[3],
+        1,
       ),
       referralPageInstructions: SpreadsheetService.readCellValue(
-        referralPageDataRows[3],
-        'gsx$value',
+        referralPageDataRows[4],
+        1,
       ),
       referralBackButtonLabel: SpreadsheetService.readCellValue(
-        referralPageDataRows[4],
-        'gsx$value',
+        referralPageDataRows[5],
+        1,
       ),
       referralMainScreenButtonLabel: SpreadsheetService.readCellValue(
-        referralPageDataRows[5],
-        'gsx$value',
+        referralPageDataRows[6],
+        1,
       ),
       referralPhoneNumber: SpreadsheetService.readCellValue(
-        referralPageDataRows[6],
-        'gsx$value',
+        referralPageDataRows[7],
+        1,
       ),
       referralWhatsAppLink: SpreadsheetService.readCellValue(
-        referralPageDataRows[7],
-        'gsx$value',
+        referralPageDataRows[8],
+        1,
       ),
       referralLastUpdatedTime: SpreadsheetService.readCellValue(
-        referralPageDataRows[8],
-        'gsx$value',
+        referralPageDataRows[9],
+        1,
       ),
       referralOfferButtonLabel: SpreadsheetService.readCellValue(
-        referralPageDataRows[9],
-        'gsx$value',
+        referralPageDataRows[10],
+        1,
       ),
       referralSubCategoryButtonLabel: SpreadsheetService.readCellValue(
-        referralPageDataRows[10],
-        'gsx$value',
+        referralPageDataRows[11],
+        1,
       ),
     };
   }
 
   getReferralPageData(region): Promise<ReferralPageData> {
     return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}/${this.referralPageSheetIndex}` +
-        '/public/values?alt=json',
+      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
+        `/values/${this.referralPageSheetName}` +
+        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
     )
       .then((response) => response.json())
       .then((response) => {
         return this.convertReferralPageDataRowToReferralPageDataObject(
-          response.feed.entry,
+          response.values,
         );
       })
       .catch((error) => {
