@@ -42,13 +42,14 @@ jobs:
           api_location: '' # Api source code path - optional
           output_location: 'www' # Built app content directory - optional
           app_build_command: 'npm run build -- --prod'
-          app_artifact_location: "www"
-          routes_location: "/"
+          app_artifact_location: 'www'
+          routes_location: '/'
           ###### End of Repository/Build Configurations ######
         env:
           NG_PRODUCTION: ${{ secrets.STAGE_NG_PRODUCTION }}
           NG_USE_SERVICE_WORKER: ${{ secrets.STAGE_NG_USE_SERVICE_WORKER }}
           REGIONS: ${{ secrets.STAGE_REGIONS }}
+          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: ${{ secrets.GOOGLE_SHEETS_API_URL }}
           GOOGLE_SHEETS_SHEET_IDS: ${{ secrets.STAGE_GOOGLE_SHEETS_SHEET_IDS }}
           NG_AI_IKEY: ${{ secrets.NG_AI_IKEY }}
@@ -67,13 +68,14 @@ jobs:
           api_location: '' # Api source code path - optional
           output_location: 'www' # Built app content directory - optional
           app_build_command: 'npm run build -- --prod'
-          app_artifact_location: "www"
-          routes_location: "/"
+          app_artifact_location: 'www'
+          routes_location: '/'
           ###### End of Repository/Build Configurations ######
         env:
           NG_PRODUCTION: ${{ secrets.NG_PRODUCTION }}
           NG_USE_SERVICE_WORKER: ${{ secrets.NG_USE_SERVICE_WORKER }}
           REGIONS: ${{ secrets.REGIONS }}
+          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: ${{ secrets.GOOGLE_SHEETS_API_URL }}
           GOOGLE_SHEETS_SHEET_IDS: ${{ secrets.GOOGLE_SHEETS_SHEET_IDS }}
           NG_AI_IKEY: ${{ secrets.NG_AI_IKEY }}
