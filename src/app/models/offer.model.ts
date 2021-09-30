@@ -14,4 +14,11 @@ export class Offer {
   offerVisible: boolean;
   subCategoryID: number;
   categoryID: number;
+  findAVaccinationCenter?: string;
+  redCrossHelpDesk?: string;
+  whatToExpect?: string;
+  furtherInformation?: string;
+  travelAbroad?: string;
+  healthDeclarationDownload?: string;
+  faqs?: string;
 }

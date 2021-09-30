@@ -136,6 +136,13 @@ export class SpreadsheetService {
       offerVisible: SpreadsheetService.readCellValue(offerRow, 4) === 'Show',
       subCategoryID: Number(SpreadsheetService.readCellValue(offerRow, 1)),
       categoryID: Number(SpreadsheetService.readCellValue(offerRow, 2)),
+      findAVaccinationCenter: SpreadsheetService.readCellValue(offerRow, 17),
+      redCrossHelpDesk: SpreadsheetService.readCellValue(offerRow, 18),
+      whatToExpect: SpreadsheetService.readCellValue(offerRow, 19),
+      furtherInformation: SpreadsheetService.readCellValue(offerRow, 20),
+      travelAbroad: SpreadsheetService.readCellValue(offerRow, 21),
+      healthDeclarationDownload: SpreadsheetService.readCellValue(offerRow, 22),
+      faqs: SpreadsheetService.readCellValue(offerRow, 23),
     };
   }
 
