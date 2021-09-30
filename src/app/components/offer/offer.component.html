@@ -98,5 +98,54 @@
       <strong> Basic Rights: </strong>
       <pre class="ion-no-margin">{{ offer.offerBasicRight }}</pre>
     </div>
+    <p *ngIf="offer.findAVaccinationCenter">
+      <strong> Find a vaccination center: </strong>
+      &nbsp;
+      <a
+        [href]="offer.findAVaccinationCenter"
+        (click)="logClick('findAVaccinationCenter')"
+        target="_blank"
+        rel="noopener"
+        >{{ offer.findAVaccinationCenter }}</a
+      >
+    </p>
+    <div *ngIf="offer.redCrossHelpDesk" class="ion-margin-vertical">
+      <strong> Red Cross helpdesk: </strong>
+      <pre class="ion-no-margin">{{ offer.redCrossHelpDesk }}</pre>
+    </div>
+    <div *ngIf="offer.whatToExpect" class="ion-margin-vertical">
+      <strong> What to expect? </strong>
+      <pre class="ion-no-margin">{{ offer.whatToExpect }}</pre>
+    </div>
+    <div *ngIf="offer.furtherInformation" class="ion-margin-vertical">
+      <strong> Further information: </strong>
+      <pre class="ion-no-margin">{{ offer.furtherInformation }}</pre>
+    </div>
+    <div *ngIf="offer.travelAbroad" class="ion-margin-vertical">
+      <strong> Travel abroad: </strong>
+      <pre class="ion-no-margin">{{ offer.travelAbroad }}</pre>
+    </div>
+    <p *ngIf="offer.healthDeclarationDownload">
+      <strong> Health declaration download: </strong>
+      &nbsp;
+      <a
+        [href]="offer.healthDeclarationDownload"
+        (click)="logClick('healthDeclarationDownload')"
+        target="_blank"
+        rel="noopener"
+        >{{ offer.healthDeclarationDownload }}</a
+      >
+    </p>
+    <p *ngIf="offer.faqs">
+      <strong> FAQs: </strong>
+      &nbsp;
+      <a
+        [href]="offer.faqs"
+        (click)="logClick('faqs')"
+        target="_blank"
+        rel="noopener"
+        >{{ offer.faqs }}</a
+      >
+    </p>
   </div>
 </div>
