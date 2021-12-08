@@ -32,7 +32,19 @@ For production-mode, these values need to be set in a [`.env`](.env.example)-fil
 
 And edit the `.env`-file locally.
 
----
+## Local development
+
+### Recommended code-editor/IDE tools/extensions
+
+- [Workspace recommendations for VS Code](.vscode/extensions.json)
+  When you use [VS Code](https://code.visualstudio.com/) and go to: "_Extensions_" and use the filter: "_Recommended_";
+  A list should be shown and each extension can be installed individually.
+
+### Libraries/frameworks in use
+
+- [Ionic v4](https://ionicframework.com/docs/v4/)
+- [Angular v7](https://v7.angular.io/docs/)
+- [`ngx-translate`](https://github.com/ngx-translate/core#readme)
 
 ## License
 
