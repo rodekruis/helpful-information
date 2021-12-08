@@ -15,9 +15,9 @@
     "start:production": "npm run build:production && npm run serve:production",
     "test": "ng test --no-watch --browsers=ChromeHeadless",
     "test:dev": "ng test",
-    "lint": "npm run format:check",
-    "format:check": "prettier --check \"**/*.{md,js,ts,scss,html}\"",
-    "format:fix": "npm run format:check -- --write",
+    "lint": "npm run lint:syntax",
+    "lint:syntax": "prettier --check \"**/*.{md,js,ts,scss,html}\"",
+    "fix:syntax": "npm run lint:syntax -- --write",
     "e2e": "ng e2e"
   },
   "private": true,
