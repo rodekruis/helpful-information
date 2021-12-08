@@ -52,7 +52,8 @@
           *ngFor="let _category of categories"
           [category]="_category"
           (click)="clickCategory(_category)"
-        ></category>
+        >
+        </category>
       </div>
       <div *ngIf="category && !subCategory" class="ion-margin-bottom">
         <category
@@ -60,7 +61,8 @@
           [showDescription]="true"
           (click)="goBack()"
           class="ion-margin-bottom"
-        ></category>
+        >
+        </category>
       </div>
       <div *ngIf="category && !subCategory">
         <sub-category
