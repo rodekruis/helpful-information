@@ -65,6 +65,7 @@
     "karma-jasmine": "~3.3.1",
     "karma-jasmine-html-reporter": "^1.5.4",
     "lint-staged": "^12.1.2",
+    "node-sass": "^4.14.1",
     "prettier": "2.2.0",
     "prettier-plugin-organize-imports": "^1.1.1",
     "protractor": "^7.0.0",
