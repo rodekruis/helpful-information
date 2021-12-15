@@ -55,7 +55,9 @@ Some specific information needs to be configured before use:
 
 ## Local development
 
-### Recommended code-editor/IDE tools/extensions
+As part of the installed dev-dependencies, we use [Prettier](https://prettier.io/) to format our code and [husky](https://typicode.github.io/husky/#/?id=faq) to automate that when using Git.
+
+### Recommended tools
 
 - [Workspace recommendations for VS Code](.vscode/extensions.json)
   When you use [VS Code](https://code.visualstudio.com/) and go to: "_Extensions_" and use the filter: "_Recommended_";
