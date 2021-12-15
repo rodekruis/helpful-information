@@ -8,8 +8,6 @@ export const environment = {
   // Configuration/Feature-switches:
   useServiceWorker: false, // Enable 'offline' support
 
-  // APIs:
-
   // Regions:
   regions: '',
 

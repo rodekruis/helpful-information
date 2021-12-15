@@ -7,8 +7,6 @@ export const environment = {
   // Configuration/Feature-switches:
   useServiceWorker: ${process.env.NG_USE_SERVICE_WORKER === 'true' || true},
 
-  // APIs:
-
   // Regions:
   regions: '${process.env.REGIONS}',
 

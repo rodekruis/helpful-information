@@ -1,10 +1,10 @@
 {
   "name": "helpful-information",
-  "author": "Gulfaraz Rahman",
   "homepage": "https://helpfulinformation.redcross.nl/",
   "scripts": {
     "ionic": "ionic",
     "ng": "ng",
+    "prepare": "husky install",
     "start": "ng serve --port 0",
     "set-env-variables": "node ./_set-env-variabes.js",
     "prebuild": "npm run set-env-variables",
@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.13.10",
-    "@angular-devkit/build-angular": "~0.13.8",
+    "@angular-devkit/build-angular": "^0.13.10",
     "@angular-devkit/core": "^7.3.10",
     "@angular-devkit/schematics": "^7.3.10",
     "@angular/cli": "^7.3.10",
@@ -56,6 +56,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "10.x",
     "codelyzer": "^5.2.2",
+    "husky": "^7.0.4",
     "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "~5.0.2",
     "karma": "^5.1.1",
@@ -63,12 +64,16 @@
     "karma-coverage-istanbul-reporter": "^3.0.3",
     "karma-jasmine": "~3.3.1",
     "karma-jasmine-html-reporter": "^1.5.4",
-    "node-sass": "^4.0.0",
+    "lint-staged": "^12.1.2",
+    "node-sass": "^4.14.1",
     "prettier": "2.2.0",
     "prettier-plugin-organize-imports": "^1.1.1",
     "protractor": "^7.0.0",
     "ts-node": "~9.1.0",
     "tslint": "~5.20.1",
     "typescript": "~3.2.4"
+  },
+  "lint-staged": {
+    "*.{md,js,ts,scss,html}": "prettier --write"
   }
 }
