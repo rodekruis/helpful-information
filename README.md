@@ -1,12 +1,26 @@
 # Helpful Information
 
-The front-end of the application _People Affected_ use to lookup useful organizations.
+> A (web-)app _People Affected_ can use to lookup useful organizations.
+
+---
+
+## Status
+
+Latest releases and notable changes are in the [CHANGELOG](CHANGELOG.md).
+
+---
 
 ## Getting Started
 
 - Install environment requirements:
 
-  - Node.js LTS v14
+  Install the Node.js version specified in the [`.node-version`](.node-version)-file.  
+  To prevent conflicts it is recommended to use a 'version manager'.
+
+  - [`fnm`](https://github.com/Schniz/fnm#readme) (for Windows/macOS/Linux)
+    After installing, run in this directory:
+
+        fnm use
 
 - Install dependencies (from this folder):
 
@@ -22,15 +36,22 @@ The front-end of the application _People Affected_ use to lookup useful organiza
 
 ## Configuration
 
-Some specific information need to be configured before development-use:
+Some specific information needs to be configured before use:
 
-- Set the API-endpoint(s) in the [`environment.ts`](./src/environments/environment.ts)-file.
+- For development-mode:  
+  Set these different properties in the [`environment.ts`](./src/environments/environment.ts)-file.
 
-For production-mode, these values need to be set in a [`.env`](.env.example)-file. To start, run:
+- For production-mode:  
+  These values need to be set in a [`.env`](.env.example)-file.  
+  To start, run:
 
-    cp .env.example .env
+      cp .env.example .env
 
-And edit the `.env`-file locally.
+  And edit the `.env`-file locally.
+
+- For deployments:  
+  The ENV-variables defined in the [`.env.example`](.env.example)-file need to be defined in the build-environment according to the specific deployment-tool/service.  
+  See for example the [GitHub Action workflow](.github/workflows/workflow.yml).
 
 ## Local development
 

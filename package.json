@@ -1,6 +1,5 @@
 {
   "name": "helpful-information",
-  "author": "Gulfaraz Rahman",
   "homepage": "https://helpfulinformation.redcross.nl/",
   "scripts": {
     "ionic": "ionic",
