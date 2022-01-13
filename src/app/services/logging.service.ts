@@ -40,7 +40,6 @@ export class LoggingService {
   }
 
   private telemetryInitializer(item: ITelemetryItem): void {
-    console.log(document.referrer);
     Object.assign(item.data, {
       isProduction: environment.production,
       baseUrl: this.getBaseUrl(),
