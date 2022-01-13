@@ -78,9 +78,8 @@ export class ReferralPage implements OnInit {
   private async loadReferralData() {
     if (this.isSupportedRegion()) {
       this.loading = true;
-      this.referralPageData = await this.referralPageDataService.getReferralPageData(
-        this.region,
-      );
+      this.referralPageData =
+        await this.referralPageDataService.getReferralPageData(this.region);
       this.titleService.setTitle(this.referralPageData.referralPageTitle);
       this.lastUpdatedTimeService.setLastUpdatedTime(
         this.referralPageData.referralLastUpdatedTime,
