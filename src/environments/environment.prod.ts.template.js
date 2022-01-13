@@ -17,7 +17,7 @@ export const environment = {
   google_sheets_sheet_ids: '${process.env.GOOGLE_SHEETS_SHEET_IDS}',
 
   // Application Insights
-  ai_ikey: '${process.env.NG_AI_IKEY}',
-  ai_endpoint: '${process.env.NG_AI_ENDPOINT}',
+  ai_ikey: '${process.env.NG_AI_IKEY || ''}',
+  ai_endpoint: '${process.env.NG_AI_ENDPOINT || ''}',
 };
 `;
