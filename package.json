@@ -16,7 +16,7 @@
     "test": "npm run lint && ng test --no-watch --browsers=ChromeHeadless",
     "test:dev": "ng test",
     "lint": "npm run lint:syntax && ng lint",
-    "lint:syntax": "prettier --check \"**/*.{md,js,ts,scss,html}\"",
+    "lint:syntax": "prettier --check \"**/*.{md,js,json,ts,scss,html}\"",
     "fix:syntax": "npm run lint:syntax -- --write"
   },
   "private": true,
