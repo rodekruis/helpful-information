@@ -67,7 +67,6 @@ As part of the installed dev-dependencies, we use [Prettier](https://prettier.io
 
 - [Ionic v4](https://ionicframework.com/docs/v4/)
 - [Angular v7](https://v7.angular.io/docs/)
-- [`ngx-translate`](https://github.com/ngx-translate/core#readme)
 
 ## License
 
