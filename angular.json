@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "defaultProject": "app",
   "newProjectRoot": "projects",
@@ -48,8 +48,7 @@
                 "input": "src/app/app.scss"
               }
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -91,7 +90,6 @@
           "configurations": {
             "production": {
               "browserTarget": "app:build:production",
-              "namedChunks": true,
               "commonChunk": true,
               "vendorChunk": true
             },
