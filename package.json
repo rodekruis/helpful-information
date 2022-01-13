@@ -67,6 +67,6 @@
     "typescript": "~3.5.3"
   },
   "lint-staged": {
-    "*.{md,js,ts,scss,html}": "prettier --write"
+    "*.{md,js,json,ts,scss,html}": "prettier --write"
   }
 }
