@@ -15,10 +15,12 @@ export class LastUpdatedTimeComponent {
   constructor(private lastUpdatedTimeService: LastUpdatedTimeService) {
     this.lastUpdatedTimeService
       .getLastUpdatedTimeSubscription()
-      .subscribe(this.lastUpdatedTimeChange);
+      .subscribe((lastUpdatedTime) => {
+        this.lastUpdatedTime = this.stripSeconds(lastUpdatedTime);
+      });
   }
 
-  private lastUpdatedTimeChange(lastUpdatedTime: string) {
-    this.lastUpdatedTime = lastUpdatedTime;
+  private stripSeconds(value: string): string {
+    return value.replace(/(\d{1,2}-\d{1,2}-\d{4} \d{1,2}:\d{1,2}):\d+/, '$1');
   }
 }
