@@ -6,12 +6,14 @@ const routes: Routes = [
   {
     path: ':region',
     component: TabsPage,
-    loadChildren: '../referral/referral.module#ReferralPageModule',
+    loadChildren: () =>
+      import('../referral/referral.module').then((m) => m.ReferralPageModule),
   },
   {
     path: '',
     component: TabsPage,
-    loadChildren: '../referral/referral.module#ReferralPageModule',
+    loadChildren: () =>
+      import('../referral/referral.module').then((m) => m.ReferralPageModule),
   },
 ];
 
