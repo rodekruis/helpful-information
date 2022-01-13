@@ -8,13 +8,13 @@ export const environment = {
   useServiceWorker: ${process.env.NG_USE_SERVICE_WORKER === 'true' || true},
 
   // Regions:
-  regions: '${process.env.REGIONS}',
+  regions: '${process.env.REGIONS || ''}',
 
   // Third-party tokens:
   // Google Sheets API:
-  google_sheets_api_key: '${process.env.GOOGLE_SHEETS_API_KEY}',
-  google_sheets_api_url: '${process.env.GOOGLE_SHEETS_API_URL}',
-  google_sheets_sheet_ids: '${process.env.GOOGLE_SHEETS_SHEET_IDS}',
+  google_sheets_api_key: '${process.env.GOOGLE_SHEETS_API_KEY || ''}',
+  google_sheets_api_url: '${process.env.GOOGLE_SHEETS_API_URL || ''}',
+  google_sheets_sheet_ids: '${process.env.GOOGLE_SHEETS_SHEET_IDS || ''}',
 
   // Application Insights
   ai_ikey: '${process.env.NG_AI_IKEY || ''}',
