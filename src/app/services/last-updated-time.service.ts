@@ -9,11 +9,11 @@ export class LastUpdatedTimeService {
 
   constructor() {}
 
-  public setLastUpdatedTime = (lastUpdatedTime: string): void => {
+  public setLastUpdatedTime(lastUpdatedTime: string): void {
     this.lastUpdatedTime.next(lastUpdatedTime);
-  };
+  }
 
-  public getLastUpdatedTimeSubscription = (): Observable<string> => {
+  public getLastUpdatedTimeSubscription(): Observable<string> {
     return this.lastUpdatedTime.asObservable();
-  };
+  }
 }

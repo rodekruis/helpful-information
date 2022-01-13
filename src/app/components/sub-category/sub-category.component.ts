@@ -17,7 +17,7 @@ export class SubCategoryComponent {
   showBottomDescription = false;
 
   @Input()
-  referralSubCategoryButtonLabel: string = 'Click for Info';
+  referralSubCategoryButtonLabel = 'Click for Info';
 
   constructor() {}
 }

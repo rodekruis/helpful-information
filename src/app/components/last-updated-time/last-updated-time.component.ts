@@ -18,7 +18,7 @@ export class LastUpdatedTimeComponent {
       .subscribe(this.lastUpdatedTimeChange);
   }
 
-  private lastUpdatedTimeChange = (lastUpdatedTime: string) => {
+  private lastUpdatedTimeChange(lastUpdatedTime: string) {
     this.lastUpdatedTime = lastUpdatedTime;
-  };
+  }
 }
