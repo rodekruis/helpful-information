@@ -5,7 +5,7 @@
     "ionic": "ionic",
     "ng": "ng",
     "prepare": "husky install",
-    "start": "ng serve --port 0",
+    "start": "ng serve",
     "set-env-variables": "node ./_set-env-variabes.js",
     "prebuild": "npm run set-env-variables",
     "build": "ng build",
