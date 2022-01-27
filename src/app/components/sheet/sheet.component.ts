@@ -13,7 +13,7 @@ export class SheetComponent {
 
   constructor(private router: Router) {}
 
-  public onSheetClick = () => {
+  public onSheetClick() {
     this.router.navigate([toKebabCase(this.sheetName)]);
-  };
+  }
 }

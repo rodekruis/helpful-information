@@ -2,10 +2,56 @@
   "$schema": "https://json.schemastore.org/web-manifest",
   "name": "Helpful Information",
   "short_name": "Helpful Information",
+  "dir": "ltr",
+  "lang": "en",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "./",
-  "start_url": "./"
+  "start_url": "./?standalone",
+  "icons": [
+    {
+      "src": "/assets/icons/icon_48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon_72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon_96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon_128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon_384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ]
 }

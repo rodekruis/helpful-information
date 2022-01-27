@@ -1,4 +1,10 @@
-node_modules
+# (local) Configuration files
 .env
-www
 **/*.prod.ts
+
+# Generated code
+www
+coverage
+
+# Third party code
+node_modules

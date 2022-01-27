@@ -26,8 +26,7 @@ jobs:
       - name: Run ci, lint and test scripts
         run: |
           npm ci
-          npm run lint --if-present
-          npm run test --if-present
+          npm test
 
       - name: Build And Deploy to Stage
         id: builddeploystage

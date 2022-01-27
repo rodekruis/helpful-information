@@ -39,16 +39,18 @@ export class LoggingService {
     this.appInsightsEnabled = true;
   }
 
-  private telemetryInitializer = (item: ITelemetryItem): void => {
-    console.log(document.referrer);
+  private telemetryInitializer(item: ITelemetryItem): void {
     Object.assign(item.data, {
       isProduction: environment.production,
       baseUrl: this.getBaseUrl(),
     });
-  };
+  }
 
-  private getBaseUrl = (): string =>
-    document.referrer ? document.referrer.match(/:\/\/(.[^/]+)/)[1] : null;
+  private getBaseUrl(): string {
+    return document.referrer
+      ? document.referrer.match(/:\/\/(.[^/]+)/)[1]
+      : null;
+  }
 
   public logPageView(name?: string): void {
     if (this.appInsightsEnabled) {

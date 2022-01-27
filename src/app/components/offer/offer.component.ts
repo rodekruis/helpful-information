@@ -19,7 +19,7 @@ export class OfferComponent {
   showDetails = false;
 
   @Input()
-  referralOfferButtonLabel: string = 'Click for Info';
+  referralOfferButtonLabel = 'Click for Info';
 
   @Input()
   goBack;
