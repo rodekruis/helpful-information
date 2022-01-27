@@ -1,0 +1,31 @@
+# Please see the documentation for all configuration options:
+# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    versioning-strategy: increase-if-necessary
+    ignore:
+      - dependency-name: '@angular/*'
+        versions: ['>= 8.0.0', '>= 0.800.0']
+      - dependency-name: '@angular-devkit/*'
+        versions: ['>= 8.0.0', '>= 0.800.0']
+      - dependency-name: '@ionic/angular'
+        versions: ['>= 5.0.0']
+      - dependency-name: '@types/node'
+        versions: ['>= 15.0.0']
+      - dependency-name: codelyzer
+        versions: ['>= 6.0.0']
+      - dependency-name: tslint
+        versions: ['>= 6.0.0']
+      - dependency-name: typescript
+        versions: ['>= 3.6.0']
+      - dependency-name: karma
+        versions: ['>= 6.0.0']
+      - dependency-name: rxjs
+        versions: ['>= 6.7.0']
+      - dependency-name: 'zone.js'
+        versions: ['>= v0.11.1']
