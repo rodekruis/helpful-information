@@ -33,9 +33,7 @@
     "@ionic/angular": "^4.11.13",
     "@ionic/cli": "^6.18.1",
     "@microsoft/applicationinsights-web": "^2.5.9",
-    "core-js": "2.6.8",
     "rxjs": "^6.6.7",
-    "tslib": "^1.12.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -50,7 +48,7 @@
     "@ionic/angular-toolkit": "^2.1.2",
     "@types/jasmine": "^3.10.3",
     "@types/jasminewd2": "^2.0.10",
-    "@types/node": "14.x",
+    "@types/node": "^14.18.9",
     "codelyzer": "^5.0.1",
     "http-server": "^14.1.0",
     "husky": "^7.0.4",
@@ -61,7 +59,7 @@
     "karma-coverage-istanbul-reporter": "^3.0.3",
     "karma-jasmine": "~3.3.1",
     "karma-jasmine-html-reporter": "^1.7.0",
-    "lint-staged": "^12.1.7",
+    "lint-staged": "^12.3.2",
     "prettier": "^2.5.1",
     "prettier-plugin-organize-imports": "^2.3.4",
     "ts-node": "~9.1.0",
