@@ -7,8 +7,6 @@ import { LogoService } from 'src/app/services/logo.service';
   styleUrls: ['tabs.page.scss'],
 })
 export class TabsPage {
-  public validationDisabled = true;
-
   constructor(private logoService: LogoService) {}
 
   public getLogo(): string {
