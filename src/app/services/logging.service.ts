@@ -27,8 +27,8 @@ export class LoggingService {
       config: {
         connectionString: `InstrumentationKey=${environment.ai_ikey};IngestionEndpoint=${environment.ai_endpoint}`,
         instrumentationKey: environment.ai_ikey,
+        disableCookiesUsage: true,
         enableAutoRouteTracking: true,
-        isCookieUseDisabled: true,
         isStorageUseDisabled: true,
         enableSessionStorageBuffer: true,
       },
