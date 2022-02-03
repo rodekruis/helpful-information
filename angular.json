@@ -124,12 +124,17 @@
                 "output": "./assets"
               },
               "src/manifest.json"
-            ]
+            ],
+            "codeCoverage": true,
+            "watch": true,
+            "progress": true,
+            "browsers": "Chrome"
           },
           "configurations": {
             "ci": {
               "progress": false,
-              "watch": false
+              "watch": false,
+              "browsers": "ChromeHeadless"
             }
           }
         },
