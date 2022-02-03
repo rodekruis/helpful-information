@@ -4,6 +4,7 @@ coverage
 
 # Don't format generated code
 package*.json
+**/environment.prod.ts
 
 # Don't reorder imports for polyfills:
 src/polyfills.ts
