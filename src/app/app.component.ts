@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 import { LoggingService } from './services/logging.service';
 
 @Component({
@@ -7,6 +8,8 @@ import { LoggingService } from './services/logging.service';
   templateUrl: 'app.component.html',
 })
 export class AppComponent {
+  public envName: string = environment.envName;
+
   constructor(
     private platform: Platform,
     private loggingService: LoggingService,
@@ -17,6 +20,10 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {});
+    this.platform.ready().then(() => {
+      if (!!this.envName) {
+        document.title += ` [ ${this.envName} ]`;
+      }
+    });
   }
 }

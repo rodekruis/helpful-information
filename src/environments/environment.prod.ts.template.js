@@ -5,6 +5,7 @@ export const environment = {
   production: ${process.env.NG_PRODUCTION === 'true' || true},
 
   // Configuration/Feature-switches:
+  envName: '${process.env.ENV_NAME || ''}',
   useServiceWorker: ${process.env.NG_USE_SERVICE_WORKER === 'true' || true},
 
   // Regions:

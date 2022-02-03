@@ -5,6 +5,19 @@
 // file can hold Sass mixins, functions, and placeholder classes to be imported
 // and used throughout the application.
 
+// Label to show current environment
+.env-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.2em;
+  text-align: center;
+  background: gold;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 // Limit the app-viewport to make it look like a 'mobile app'
 @media (min-width: 500px) and (min-height: 800px) {
   body {
