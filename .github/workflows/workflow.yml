@@ -46,6 +46,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           NG_PRODUCTION: ${{ secrets.STAGE_NG_PRODUCTION }}
+          ENV_NAME: ${{ secrets.STAGE_ENV_NAME }}
           NG_USE_SERVICE_WORKER: ${{ secrets.STAGE_NG_USE_SERVICE_WORKER }}
           REGIONS: ${{ secrets.STAGE_REGIONS }}
           GOOGLE_SHEETS_API_KEY: ${{ secrets.STAGE_GOOGLE_SHEETS_API_KEY }}
@@ -72,6 +73,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           NG_PRODUCTION: ${{ secrets.NG_PRODUCTION }}
+          ENV_NAME: ''
           NG_USE_SERVICE_WORKER: ${{ secrets.NG_USE_SERVICE_WORKER }}
           REGIONS: ${{ secrets.REGIONS }}
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
