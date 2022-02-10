@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LogoService } from 'src/app/services/logo.service';
 
 @Component({
@@ -8,10 +8,22 @@ import { LogoService } from 'src/app/services/logo.service';
 })
 export class TitleComponent {
   @Input()
-  title: string;
+  public title: string;
 
   @Input()
-  loading: boolean;
+  public loading: boolean;
+
+  @Input()
+  public backButtonLabel: string;
+
+  @Output()
+  public backAction = new EventEmitter<MouseEvent>();
+
+  @Input()
+  public logoActionLabel: string;
+
+  @Output()
+  public logoAction = new EventEmitter<MouseEvent>();
 
   public logoUrl: string;
 
@@ -19,5 +31,14 @@ export class TitleComponent {
     this.logoService.logo$.subscribe((url) => {
       this.logoUrl = url;
     });
+  }
+
+  public backClick($event: MouseEvent) {
+    return this.backAction.emit($event);
+  }
+
+  public logoClick($event: MouseEvent) {
+    $event.preventDefault();
+    return this.logoAction.emit($event);
   }
 }
