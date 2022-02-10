@@ -80,11 +80,15 @@ export class ReferralPage implements OnInit {
       this.loading = true;
       this.referralPageData =
         await this.referralPageDataService.getReferralPageData(this.region);
+
       this.titleService.setTitle(this.referralPageData.referralPageTitle);
+
+      this.logoService.setLogo(this.referralPageData.referralPageLogo);
+
       this.lastUpdatedTimeService.setLastUpdatedTime(
         this.referralPageData.referralLastUpdatedTime,
       );
-      this.logoService.logo = this.referralPageData.referralPageLogo;
+
       this.categories = await this.offersService.getCategories(this.region);
       this.subCategories = await this.offersService.getSubCategories(
         this.region,

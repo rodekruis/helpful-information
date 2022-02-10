@@ -1,5 +1,5 @@
 <ion-toolbar color="secondary">
-  <ion-title class="ion-text-center">
+  <ion-title class="ion-text-center app-header--title">
     <ion-text *ngIf="!loading">
       {{ title }}
     </ion-text>
@@ -9,4 +9,13 @@
       style="width: 50%; line-height: 1; margin: auto"
     ></ion-skeleton-text>
   </ion-title>
+  <ion-buttons slot="end">
+    <ng-container *ngIf="logoUrl">
+      <a href="/" class="app-header--logo-link">
+        <ion-thumbnail>
+          <ion-img [src]="logoUrl" alt="" class="app-header--logo"></ion-img>
+        </ion-thumbnail>
+      </a>
+    </ng-container>
+  </ion-buttons>
 </ion-toolbar>

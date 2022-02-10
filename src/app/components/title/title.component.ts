@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { LogoService } from 'src/app/services/logo.service';
 
 @Component({
   selector: 'app-title',
@@ -12,5 +13,11 @@ export class TitleComponent {
   @Input()
   loading: boolean;
 
-  constructor() {}
+  public logoUrl: string;
+
+  constructor(private logoService: LogoService) {
+    this.logoService.logo$.subscribe((url) => {
+      this.logoUrl = url;
+    });
+  }
 }

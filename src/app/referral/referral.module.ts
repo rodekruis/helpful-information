@@ -12,7 +12,16 @@ import { ReferralPage } from './referral.page';
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: ReferralPage }]),
+    RouterModule.forChild([
+      {
+        path: ':region',
+        component: ReferralPage,
+      },
+      {
+        path: '',
+        component: ReferralPage,
+      },
+    ]),
     SharedModule,
   ],
   declarations: [ReferralPage],
