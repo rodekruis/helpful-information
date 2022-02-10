@@ -94,8 +94,12 @@ export class ReferralPage implements OnInit {
         this.region,
       );
       this.offers = await this.offersService.getOffers(this.region);
+
       this.readQueryParams();
+
       this.loading = false;
+    } else {
+      this.router.navigate([this.rootHref]);
     }
   }
 

@@ -156,28 +156,6 @@
 
 <ion-footer *ngIf="isSupportedRegion()" color="secondary">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button
-        (click)="goBack()"
-        class="nested-button-with-label ion-text-start"
-      >
-        <ion-icon name="arrow-back" class="icon-as-button"></ion-icon>
-        <ion-text>{{ referralPageData.referralBackButtonLabel }}</ion-text>
-      </ion-button>
-    </ion-buttons>
-
-    <ion-buttons class="ion-justify-content-center">
-      <ion-button
-        (click)="showRootPage()"
-        class="nested-button-with-label ion-text-start"
-      >
-        <ion-icon name="radio-button-on" class="icon-as-button"></ion-icon>
-        <ion-text
-          >{{ referralPageData.referralMainScreenButtonLabel }}</ion-text
-        >
-      </ion-button>
-    </ion-buttons>
-
     <ion-buttons slot="end">
       <ion-button
         *ngIf="referralPageData.referralPhoneNumber"
