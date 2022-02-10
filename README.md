@@ -8,6 +8,10 @@
 
 Latest releases and notable changes are in the [CHANGELOG](CHANGELOG.md).
 
+- [![Tests](https://github.com/rodekruis/helpful-information/actions/workflows/tests.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/tests.yml)
+- [![staging: Deploy Azure Static Web App](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging.yml)
+- [![production: Deploy Azure Static Web App](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production.yml)
+
 ---
 
 ## Getting Started
