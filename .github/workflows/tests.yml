@@ -1,0 +1,52 @@
+# More information on Static Web App workflow configurations,
+# See: https://aka.ms/swaworkflowconfig
+# See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+
+name: 'Tests'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['14', '16']
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build for Production
+        run: npm run build:production
+        env:
+          NG_PRODUCTION: true
+          ENV_NAME: 'TEST'
+          NG_USE_SERVICE_WORKER: true
+          REGIONS: 'test'
+          GOOGLE_SHEETS_API_KEY: 'test'
+          GOOGLE_SHEETS_API_URL: 'test'
+          GOOGLE_SHEETS_SHEET_IDS: 'test'
+          NG_AI_IKEY: 'test'
+          NG_AI_ENDPOINT: 'test'
