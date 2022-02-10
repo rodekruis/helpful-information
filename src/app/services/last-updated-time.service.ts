@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LastUpdatedTimeService {
-  private lastUpdatedTime = new Subject<string>();
+  private lastUpdatedTime = new BehaviorSubject<string>('');
 
-  constructor() {}
+  public lastUpdatedTime$: Observable<string>;
 
-  public setLastUpdatedTime(lastUpdatedTime: string): void {
-    this.lastUpdatedTime.next(lastUpdatedTime);
+  constructor() {
+    this.lastUpdatedTime$ = this.lastUpdatedTime.asObservable();
   }
 
-  public getLastUpdatedTimeSubscription(): Observable<string> {
-    return this.lastUpdatedTime.asObservable();
+  public setLastUpdatedTime(value: string): void {
+    this.lastUpdatedTime.next(value);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 
 @Component({
@@ -7,17 +7,12 @@ import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.servi
   styleUrls: ['./last-updated-time.component.scss'],
 })
 export class LastUpdatedTimeComponent {
-  @Input()
-  loading: boolean;
-
   public lastUpdatedTime: string;
 
   constructor(private lastUpdatedTimeService: LastUpdatedTimeService) {
-    this.lastUpdatedTimeService
-      .getLastUpdatedTimeSubscription()
-      .subscribe((lastUpdatedTime) => {
-        this.lastUpdatedTime = this.stripSeconds(lastUpdatedTime);
-      });
+    this.lastUpdatedTimeService.lastUpdatedTime$.subscribe((value) => {
+      this.lastUpdatedTime = this.stripSeconds(value);
+    });
   }
 
   private stripSeconds(value: string): string {

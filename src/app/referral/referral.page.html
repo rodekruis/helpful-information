@@ -3,10 +3,6 @@
     [title]="referralPageData.referralPageTitle"
     [loading]="loading"
   ></app-title>
-  <app-last-updated-time
-    *ngIf="isSupportedRegion()"
-    [loading]="loading"
-  ></app-last-updated-time>
 </ion-header>
 
 <ion-content *ngIf="isSupportedRegion()" color="dark" class="ion-padding">
@@ -93,6 +89,10 @@
         (click)="clickOffer(_offer)"
         class="ion-margin-bottom"
       ></offer>
+
+      <app-last-updated-time
+        class="ion-margin-vertical"
+      ></app-last-updated-time>
     </div>
     <div *ngIf="category && subCategory && offer">
       <offer
@@ -102,7 +102,12 @@
         [goBack]="goBack.bind(this)"
         (click)="clickOffer(offer)"
       ></offer>
+
+      <app-last-updated-time
+        class="ion-margin-vertical"
+      ></app-last-updated-time>
     </div>
+
     <div
       *ngIf="categories?.length === 0 || subCategories?.length === 0 || offers?.length === 0"
     >
