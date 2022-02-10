@@ -1,0 +1,42 @@
+{
+  "_schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "_docs": "https://docs.microsoft.com/en-us/azure/static-web-apps/configuration",
+  "routes": [
+    {
+      "route": "/*.js",
+      "headers": {
+        "Cache-Control": "immutable, no-transform, max-age=31536000"
+      }
+    },
+    {
+      "route": "/*.css",
+      "headers": {
+        "Cache-Control": "immutable, no-transform, max-age=31536000"
+      }
+    },
+    {
+      "route": "/assets/*",
+      "headers": {
+        "Cache-Control": "must-revalidate, no-transform, max-age=2592000"
+      }
+    },
+    {
+      "route": "/svg/*.svg",
+      "headers": {
+        "Cache-Control": "no-transform, max-age=31536000"
+      }
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "index.html",
+    "exclude": ["/assets/*", "/svg/*"]
+  },
+  "responseOverrides": {
+    "404": {
+      "redirect": "/"
+    }
+  },
+  "globalHeaders": {
+    "X-Frame-Options": "DENY"
+  }
+}
