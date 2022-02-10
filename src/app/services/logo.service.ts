@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LogoService {
-  private logo = new BehaviorSubject<string>('assets/icons/red_cross.png');
+  private logo = new BehaviorSubject<string>('assets/icons/icon_48.png');
 
   public logo$: Observable<string>;
 
