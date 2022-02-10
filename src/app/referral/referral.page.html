@@ -1,12 +1,12 @@
 <ion-header>
-  <app-title
+  <app-header
     [title]="referralPageData?.referralPageTitle"
     [loading]="loading"
     (backAction)="goBack()"
     [backButtonLabel]="referralPageData?.referralBackButtonLabel || ''"
     (logoAction)="showRootPage()"
     [logoActionLabel]="referralPageData?.referralMainScreenButtonLabel || ''"
-  ></app-title>
+  ></app-header>
 </ion-header>
 
 <ion-content *ngIf="isSupportedRegion()" color="dark" class="ion-padding">
