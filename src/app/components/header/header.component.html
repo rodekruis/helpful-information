@@ -1,0 +1,45 @@
+<ion-toolbar color="secondary">
+  <ion-buttons slot="start">
+    <ion-button
+      *ngIf="backButtonLabel"
+      (click)="backClick($event)"
+      class="app-header--back-button ion-no-padding"
+    >
+      <!-- Inlined SVG icon: chevron-back-outline from Ionicons v5.5 -->
+      <ion-icon
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill=none stroke=currentColor stroke-linecap=round stroke-linejoin=round stroke-width=48 d='M328 112L184 256l144 144'/%3E%3C/svg%3E"
+        aria-hidden="true"
+        class="app-header--back-icon"
+      ></ion-icon>
+
+      {{ backButtonLabel }}
+    </ion-button>
+  </ion-buttons>
+
+  <ion-title class="ion-text-center app-header--title">
+    <ion-text *ngIf="!loading">
+      {{ title || 'Helpful Information' }}
+    </ion-text>
+    <ion-skeleton-text
+      *ngIf="loading"
+      animated
+      style="width: 70%; line-height: 1; margin: auto"
+    ></ion-skeleton-text>
+  </ion-title>
+
+  <ion-buttons slot="end">
+    <ng-container *ngIf="logoUrl">
+      <a
+        href="/"
+        (click)="logoClick($event)"
+        [title]="logoActionLabel"
+        [attr.aria-label]="logoActionLabel"
+        class="app-header--logo-link"
+      >
+        <ion-thumbnail>
+          <ion-img [src]="logoUrl" alt="" class="app-header--logo"></ion-img>
+        </ion-thumbnail>
+      </a>
+    </ng-container>
+  </ion-buttons>
+</ion-toolbar>

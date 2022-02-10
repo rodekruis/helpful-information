@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./tabs/tabs.module').then((m) => m.TabsPageModule),
+      import('./referral/referral.module').then((m) => m.ReferralPageModule),
   },
   {
     path: '**',

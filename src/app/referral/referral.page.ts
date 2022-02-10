@@ -34,9 +34,7 @@ export class ReferralPage implements OnInit {
   public subCategory: SubCategory;
   public offer: Offer;
 
-  public referralPageData: ReferralPageData = {
-    referralPageTitle: 'Helpful Information',
-  } as ReferralPageData;
+  public referralPageData: ReferralPageData = {};
 
   public readonly rootHref: string = '/';
 
@@ -80,18 +78,26 @@ export class ReferralPage implements OnInit {
       this.loading = true;
       this.referralPageData =
         await this.referralPageDataService.getReferralPageData(this.region);
+
       this.titleService.setTitle(this.referralPageData.referralPageTitle);
+
+      this.logoService.setLogo(this.referralPageData.referralPageLogo);
+
       this.lastUpdatedTimeService.setLastUpdatedTime(
         this.referralPageData.referralLastUpdatedTime,
       );
-      this.logoService.logo = this.referralPageData.referralPageLogo;
+
       this.categories = await this.offersService.getCategories(this.region);
       this.subCategories = await this.offersService.getSubCategories(
         this.region,
       );
       this.offers = await this.offersService.getOffers(this.region);
+
       this.readQueryParams();
+
       this.loading = false;
+    } else {
+      this.router.navigate([this.rootHref]);
     }
   }
 
