@@ -34,9 +34,7 @@ export class ReferralPage implements OnInit {
   public subCategory: SubCategory;
   public offer: Offer;
 
-  public referralPageData: ReferralPageData = {
-    referralPageTitle: 'Helpful Information',
-  } as ReferralPageData;
+  public referralPageData: ReferralPageData = {};
 
   public readonly rootHref: string = '/';
 

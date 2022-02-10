@@ -18,14 +18,15 @@
 
   <ion-title class="ion-text-center app-header--title">
     <ion-text *ngIf="!loading">
-      {{ title }}
+      {{ title || 'Helpful Information' }}
     </ion-text>
     <ion-skeleton-text
       *ngIf="loading"
       animated
-      style="width: 50%; line-height: 1; margin: auto"
+      style="width: 70%; line-height: 1; margin: auto"
     ></ion-skeleton-text>
   </ion-title>
+
   <ion-buttons slot="end">
     <ng-container *ngIf="logoUrl">
       <a
