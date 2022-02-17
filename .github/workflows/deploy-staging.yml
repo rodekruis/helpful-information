@@ -4,6 +4,9 @@
 
 name: 'staging: Deploy Azure Static Web App'
 
+env:
+  FORCE_COLOR: true # See: https://github.com/actions/setup-node/issues/317#issuecomment-929694556
+
 on:
   workflow_dispatch:
   push:
