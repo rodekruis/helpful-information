@@ -1,5 +1,7 @@
 # (local) Configuration files
 .env
+.env.*
+!.env.example
 **/*.prod.ts
 
 # Generated code
