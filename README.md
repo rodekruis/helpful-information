@@ -56,6 +56,18 @@ Some specific information needs to be configured before use:
   The ENV-variables defined in the [`.env.example`](.env.example)-file need to be defined in the build-environment according to the specific deployment-tool/service.  
   See for example the [GitHub Action workflow (production)](.github/workflows/deploy-production.yml).
 
+### Using the Google Sheets API
+
+The contents of the web-app is loaded at runtime by the visitor's browser from the [Google Sheets API](https://developers.google.com/sheets/api).
+
+- To be able to use that a 'credential' in the shape of an API-key is required.
+- To get an API-key, follow the instructions:  
+  <https://developers.google.com/workspace/guides/create-credentials#api-key>
+- Configure the restrictions on the API-key following:  
+  <https://cloud.google.com/docs/authentication/api-keys#adding_http_restrictions>  
+  Make sure to include _only_ the domains/referrers that will be used.  
+  Also include `http://localhost:4200/*` and `http://localhost:8080/*` to be able to load data during local development. (Or even better; create a separate API-key for that)
+
 ## Local development
 
 As part of the installed dev-dependencies, we use [Prettier](https://prettier.io/) to format our code and [husky](https://typicode.github.io/husky/#/?id=faq) to automate that when using Git.
