@@ -7,7 +7,7 @@
     "prepare": "husky install",
     "setup": "cp -i .env.example .env && npm run prepare",
     "start": "ng serve",
-    "set-env-variables": "node ./_set-env-variabes.js",
+    "set-env-variables": "node ./_set-env-variables.js",
     "prebuild": "npm run set-env-variables",
     "build": "ng build",
     "build:production": "npm run build -- --prod",
