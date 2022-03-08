@@ -1,6 +1,9 @@
 <a
   [routerLink]="['./']"
-  [queryParams]="{ categoryID: category.categoryID }"
+  [queryParams]="{
+    categoryID: category.categoryID,
+    subCategoryID: subCategory ? subCategory.subCategoryID : null
+  }"
   class="link-tile"
   (click)="click(category)"
 >

@@ -122,7 +122,7 @@ export class ReferralPage implements OnInit {
     });
   }
 
-  private getNextSubCategory(category: Category) {
+  public getNextSubCategory(category: Category) {
     const subCategories: SubCategory[] = this.subCategories.filter(
       (subCategory: SubCategory) => {
         return subCategory.categoryID === category.categoryID;

@@ -50,7 +50,10 @@
       <div *ngIf="!category" style="margin: 0 -10px">
         <ul class="list-flat tile-grid">
           <li *ngFor="let categoryItem of categories" class="tile-grid--item">
-            <link-tile [category]="categoryItem"></link-tile>
+            <link-tile
+              [category]="categoryItem"
+              [subCategory]="getNextSubCategory(categoryItem)"
+            ></link-tile>
           </li>
         </ul>
       </div>

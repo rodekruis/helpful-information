@@ -4,6 +4,7 @@ import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
+import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
@@ -14,6 +15,9 @@ import { LoggingService } from 'src/app/services/logging.service';
 export class LinkTileComponent {
   @Input()
   category: Category;
+
+  @Input()
+  subCategory: SubCategory;
 
   constructor(private loggingService: LoggingService) {}
 
