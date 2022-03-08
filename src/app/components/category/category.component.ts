@@ -10,8 +10,5 @@ export class CategoryComponent {
   @Input()
   category: Category;
 
-  @Input()
-  showDescription = false;
-
   constructor() {}
 }

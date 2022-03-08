@@ -54,14 +54,16 @@
           </li>
         </ul>
       </div>
-      <div *ngIf="category && !subCategory" class="ion-margin-bottom">
-        <category
-          [category]="category"
-          [showDescription]="true"
-          (click)="goBack()"
-          class="ion-margin-bottom"
-        >
-        </category>
+      <div
+        *ngIf="category && !subCategory"
+        class="ion-margin-bottom ion-padding-bottom"
+      >
+        <h2 class="ion-no-margin text-style--header text-style--size-1">
+          {{ category.categoryName }}
+        </h2>
+        <p *ngIf="category.categoryDescription">
+          {{ category.categoryDescription }}
+        </p>
       </div>
       <div *ngIf="category && !subCategory">
         <sub-category

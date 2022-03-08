@@ -48,3 +48,15 @@
 html.plt-mobile ion-app {
   user-select: auto;
 }
+
+//
+// Text Style Utilities:
+//
+.text-style--header {
+  font-family: var(--ion-font-family-header);
+  font-weight: bold;
+  letter-spacing: 0.08em;
+}
+.text-style--size-1 {
+  font-size: 1rem;
+}
