@@ -47,8 +47,9 @@
   </div>
   <div *ngIf="!loading">
     <div>
-      <div *ngIf="!category" style="margin: 0 -10px">
-        <ul class="list-flat tile-grid">
+      <div *ngIf="!category" class="ion-padding-bottom">
+        <!-- Root/Main Category-list -->
+        <ul class="list-flat tile-grid ion-margin-bottom">
           <li *ngFor="let categoryItem of categories" class="tile-grid--item">
             <link-tile
               [category]="categoryItem"
@@ -56,6 +57,7 @@
             ></link-tile>
           </li>
         </ul>
+        <br /><br /><br />
       </div>
       <div
         *ngIf="category && !subCategory"

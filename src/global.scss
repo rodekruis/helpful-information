@@ -66,10 +66,11 @@ html.plt-mobile ion-app {
   flex-flow: row wrap;
   justify-content: flex-start;
   align-content: flex-start;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
 }
 .tile-grid--item {
-  padding: 0.25em;
-  flex-basis: 25%;
+  flex-basis: 32%;
 }
 
 //
