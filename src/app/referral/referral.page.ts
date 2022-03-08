@@ -228,6 +228,7 @@ export class ReferralPage implements OnInit {
       logParams.subCategory = this.subCategory.subCategoryName;
     }
     if (this.category) {
+      logParams.categoryID = this.category.categoryID;
       logParams.category = this.category.categoryName;
     }
     return logParams;

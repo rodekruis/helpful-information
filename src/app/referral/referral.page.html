@@ -48,12 +48,11 @@
   <div *ngIf="!loading">
     <div>
       <div *ngIf="!category" style="margin: 0 -10px">
-        <category
-          *ngFor="let _category of categories"
-          [category]="_category"
-          (click)="clickCategory(_category)"
-        >
-        </category>
+        <ul class="tile-grid">
+          <li *ngFor="let categoryItem of categories" class="tile-grid--item">
+            <link-tile [category]="categoryItem"></link-tile>
+          </li>
+        </ul>
       </div>
       <div *ngIf="category && !subCategory" class="ion-margin-bottom">
         <category
