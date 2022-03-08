@@ -11,9 +11,6 @@ export class SubCategoryComponent {
   subCategory: SubCategory;
 
   @Input()
-  showRightDescription = false;
-
-  @Input()
   showBottomDescription = false;
 
   @Input()

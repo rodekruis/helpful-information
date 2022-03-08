@@ -70,20 +70,21 @@
           *ngFor="let _subCategory of subCategories | categoryFilter: category"
           [subCategory]="_subCategory"
           [referralSubCategoryButtonLabel]="referralPageData.referralSubCategoryButtonLabel"
-          [showRightDescription]="false"
           [showBottomDescription]="true"
           (click)="clickSubCategory(_subCategory)"
           class="ion-margin-end"
         ></sub-category>
       </div>
-      <div *ngIf="category && subCategory" class="ion-margin-bottom">
-        <sub-category
-          [subCategory]="subCategory"
-          [referralSubCategoryButtonLabel]="referralPageData.referralSubCategoryButtonLabel"
-          [showRightDescription]="true && !offer"
-          [showBottomDescription]="false"
-          (click)="goBack()"
-        ></sub-category>
+      <div
+        *ngIf="category && subCategory"
+        class="ion-margin-bottom ion-padding-bottom"
+      >
+        <h2 class="ion-no-margin text-style--header text-style--size-1">
+          {{ subCategory.subCategoryName }}
+        </h2>
+        <p *ngIf="subCategory.subCategoryDescription">
+          {{ subCategory.subCategoryDescription }}
+        </p>
       </div>
     </div>
     <div *ngIf="category && subCategory && !offer">

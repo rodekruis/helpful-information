@@ -1,7 +1,7 @@
 <div
   class="sub-category"
   [ngClass]="{
-    'as-header': !showBottomDescription || showRightDescription
+    'as-header': !showBottomDescription
   }"
 >
   <ion-card class="sub-category--icon ion-no-margin">
@@ -18,7 +18,7 @@
     </ion-card-header>
   </ion-card>
   <div
-    *ngIf="showRightDescription || showBottomDescription"
+    *ngIf="showBottomDescription"
     class="sub-category--description ion-padding"
   >
     <ion-text>
