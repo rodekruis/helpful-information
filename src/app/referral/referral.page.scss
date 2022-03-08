@@ -39,17 +39,3 @@ ion-footer {
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
-
-.tile-grid {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-content: flex-start;
-  padding: 0;
-}
-.tile-grid--item {
-  list-style: none;
-  margin: 0;
-  padding: 0.25em;
-  flex-basis: 25%;
-}

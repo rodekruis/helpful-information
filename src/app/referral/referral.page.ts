@@ -225,6 +225,7 @@ export class ReferralPage implements OnInit {
       logParams.offerID = this.offer.offerID;
     }
     if (this.subCategory) {
+      logParams.subCategoryID = this.subCategory.subCategoryID;
       logParams.subCategory = this.subCategory.subCategoryName;
     }
     if (this.category) {
