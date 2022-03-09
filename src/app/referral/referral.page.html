@@ -152,7 +152,10 @@
   </div>
   <ul class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical">
     <li *ngFor="let region of regions" class="tile-grid--item">
-      <sheet [sheetName]="region"></sheet>
+      <sheet
+        [sheetName]="regionsLabels[regions.indexOf(region)]"
+        [sheetUrl]="region"
+      ></sheet>
     </li>
   </ul>
   <br /><br /><br />

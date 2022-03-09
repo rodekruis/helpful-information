@@ -1,20 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { toKebabCase } from 'src/app/shared/utils';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'sheet',
   templateUrl: './sheet.component.html',
   styleUrls: ['./sheet.component.scss'],
 })
-export class SheetComponent implements OnInit {
+export class SheetComponent {
   @Input()
-  sheetName: string;
+  public sheetName: string;
 
+  @Input()
   public sheetUrl: string;
 
   constructor() {}
-
-  ngOnInit() {
-    this.sheetUrl = toKebabCase(this.sheetName);
-  }
 }

@@ -14,8 +14,10 @@ export const environment = {
   mainPageHeader: 'The Red Cross provides helpful information.',
   mainPageIntroduction: 'Please choose a location.',
 
-  // Regions:
+  // Regions: (A comnma-separated list of URL paths/slugs)
   regions: '',
+  // Regions Labels: (A comnma-separated list of human-readable text-strings)
+  regionsLabels: '',
 
   // Google Sheets:
   google_sheets_api_key: '',

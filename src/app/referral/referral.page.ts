@@ -14,7 +14,6 @@ import { LoggingService } from 'src/app/services/logging.service';
 import { LogoService } from 'src/app/services/logo.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
-import { toKebabCase } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -25,6 +24,9 @@ import { environment } from 'src/environments/environment';
 export class ReferralPage implements OnInit {
   public region: string;
   public regions: string[] = environment.regions.trim().split(/\s*,\s*/);
+  public regionsLabels: string[] = environment.regionsLabels
+    .trim()
+    .split(/\s*,\s*/);
 
   public offers: Offer[];
   public categories: Category[];
@@ -66,14 +68,7 @@ export class ReferralPage implements OnInit {
   }
 
   public isSupportedRegion() {
-    return (
-      this.region &&
-      this.regions.includes(this.region.replace(/\-/g, ' ').toLowerCase())
-    );
-  }
-
-  public toKebabCase(value: string) {
-    return toKebabCase(value);
+    return this.region && this.regions.includes(this.region);
   }
 
   private async loadReferralData() {

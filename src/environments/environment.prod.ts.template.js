@@ -15,6 +15,7 @@ export const environment = {
 
   // Regions:
   regions: '${process.env.REGIONS || ''}',
+  regionsLabels: '${process.env.REGIONS_LABELS || ''}',
 
   // Third-party tokens:
   // Google Sheets API:
