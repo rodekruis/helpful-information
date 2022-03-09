@@ -19,12 +19,13 @@ export const environment = {
   // Regions Labels: (A comnma-separated list of human-readable text-strings)
   regionsLabels: '',
 
-  // Google Sheets:
+  // Third-party tokens:
+
+  // Google Sheets API:
   google_sheets_api_key: '',
   google_sheets_api_url: '',
   google_sheets_sheet_ids: '',
 
-  // Third-party tokens:
-  ai_ikey: '',
-  ai_endpoint: '',
+  // Application Insights:
+  appInsightsConnectionString: '',
 };

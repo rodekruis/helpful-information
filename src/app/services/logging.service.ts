@@ -20,13 +20,12 @@ export class LoggingService {
   }
 
   private setupApplicationInsights() {
-    if (!environment.ai_ikey || !environment.ai_endpoint) {
+    if (!environment.appInsightsConnectionString) {
       return;
     }
     this.appInsights = new ApplicationInsights({
       config: {
-        connectionString: `InstrumentationKey=${environment.ai_ikey};IngestionEndpoint=${environment.ai_endpoint}`,
-        instrumentationKey: environment.ai_ikey,
+        connectionString: environment.appInsightsConnectionString,
         disableCookiesUsage: true,
         enableAutoRouteTracking: true,
         isStorageUseDisabled: true,
