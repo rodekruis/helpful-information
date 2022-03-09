@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { SheetComponent } from './sheet.component';
 
 describe('SheetComponent', () => {
@@ -10,7 +10,7 @@ describe('SheetComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SheetComponent],
-      imports: [RouterModule.forRoot([])],
+      imports: [RouterTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
@@ -18,7 +18,8 @@ describe('SheetComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SheetComponent);
     component = fixture.componentInstance;
-    component.sheetName = 'mockSheet';
+    component.sheetName = 'Mock Sheet';
+    component.sheetUrl = 'mock-sheet';
     fixture.detectChanges();
   });
 

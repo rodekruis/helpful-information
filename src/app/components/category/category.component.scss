@@ -29,14 +29,3 @@
   font-size: 0.8rem;
   font-weight: bold;
 }
-
-// Alternative view of "category-button-as-category-header"
-.category.category--as-header {
-  display: flex;
-}
-.category--icon {
-  flex: 0 0 auto;
-}
-.category--description {
-  flex: 1 1 auto;
-}

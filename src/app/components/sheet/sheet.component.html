@@ -1,7 +1,6 @@
-<ion-card class="sheet--button" (click)="onSheetClick()">
-  <ion-card-header>
-    <ion-card-title class="ion-text-center sheet--title">
-      {{ sheetName | titlecase }}
-    </ion-card-title>
-  </ion-card-header>
-</ion-card>
+<a
+  [routerLink]="['/', sheetUrl]"
+  class="sheet--button action text-style--header text-style--size-1"
+>
+  {{ sheetName }}
+</a>

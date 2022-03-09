@@ -9,8 +9,15 @@ export const environment = {
   envName: 'development', // (Optional) Label to show which environment is used
   useServiceWorker: false, // Enable 'offline' support
 
-  // Regions:
+  // Configuration of content
+  appName: 'Helpful Information',
+  mainPageHeader: 'The Red Cross provides helpful information.',
+  mainPageIntroduction: 'Please choose a language/region.',
+
+  // Regions: (A comnma-separated list of URL paths/slugs)
   regions: '',
+  // Regions Labels: (A comnma-separated list of human-readable text-strings)
+  regionsLabels: '',
 
   // Google Sheets:
   google_sheets_api_key: '',

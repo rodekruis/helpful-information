@@ -1,0 +1,23 @@
+<a
+  [routerLink]="['./']"
+  [queryParams]="{
+    categoryID: category.categoryID,
+    subCategoryID: subCategory ? subCategory.subCategoryID : null
+  }"
+  class="link-tile action"
+  (click)="click(category)"
+>
+  <img
+    [src]="
+      category.categoryIcon ||
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+    "
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    class="link-tile--icon"
+  />
+  <strong class="link-tile--label text-style--header">
+    {{ category.categoryName }}
+  </strong>
+</a>

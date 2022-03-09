@@ -1,4 +1,4 @@
-<div *ngIf="!showDescription" class="category">
+<div class="category">
   <ion-card class="category--button">
     <ion-card-header>
       <ion-img
@@ -11,26 +11,4 @@
       </ion-card-title>
     </ion-card-header>
   </ion-card>
-</div>
-
-<div *ngIf="showDescription" class="category category--as-header">
-  <div class="category--icon">
-    <ion-card class="category--button ion-no-margin">
-      <ion-card-header>
-        <ion-img
-          [src]="category.categoryIcon"
-          [alt]="category.categoryName"
-          loading="lazy"
-        ></ion-img>
-        <ion-card-title class="ion-text-center category--title">
-          {{ category.categoryName }}
-        </ion-card-title>
-      </ion-card-header>
-    </ion-card>
-  </div>
-  <div class="category--description ion-padding">
-    <ion-text>
-      {{ category.categoryDescription }}
-    </ion-text>
-  </div>
 </div>

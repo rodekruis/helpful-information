@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { toKebabCase } from 'src/app/shared/utils';
 
 @Component({
   selector: 'sheet',
@@ -9,11 +7,10 @@ import { toKebabCase } from 'src/app/shared/utils';
 })
 export class SheetComponent {
   @Input()
-  sheetName: string;
+  public sheetName: string;
 
-  constructor(private router: Router) {}
+  @Input()
+  public sheetUrl: string;
 
-  public onSheetClick() {
-    this.router.navigate([toKebabCase(this.sheetName)]);
-  }
+  constructor() {}
 }

@@ -46,7 +46,11 @@ jobs:
           NG_PRODUCTION: ${{ secrets.NG_PRODUCTION }}
           ENV_NAME: ''
           NG_USE_SERVICE_WORKER: ${{ secrets.NG_USE_SERVICE_WORKER }}
+          TXT_APP_NAME: 'Helpful Information'
+          TXT_MAIN_PAGE_HEADER: 'The Netherlands Red Cross provides Helpful Information.'
+          TXT_MAIN_PAGE_INTRO: 'Please choose a location to view the helpful information.'
           REGIONS: ${{ secrets.REGIONS }}
+          REGIONS_LABELS: ${{ secrets.REGIONS_LABELS }}
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: ${{ secrets.GOOGLE_SHEETS_API_URL }}
           GOOGLE_SHEETS_SHEET_IDS: ${{ secrets.GOOGLE_SHEETS_SHEET_IDS }}

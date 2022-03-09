@@ -8,28 +8,26 @@ import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
-  selector: 'sub-category',
-  templateUrl: './sub-category.component.html',
-  styleUrls: ['./sub-category.component.scss'],
+  selector: 'link-tile',
+  templateUrl: './link-tile.component.html',
+  styleUrls: ['./link-tile.component.scss'],
 })
-export class SubCategoryComponent {
-  @Input()
-  subCategory: SubCategory;
-
+export class LinkTileComponent {
   @Input()
   category: Category;
 
+  @Input()
+  subCategory: SubCategory;
+
   constructor(private loggingService: LoggingService) {}
 
-  public click() {
+  public click(category: Category) {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
-      LoggingEvent.SubCategoryClick,
+      LoggingEvent.CategoryClick,
       {
-        categoryID: this.category.categoryID,
-        category: this.category.categoryName,
-        subCategoryID: this.subCategory.subCategoryID,
-        subCategory: this.subCategory.subCategoryName,
+        categoryID: category.categoryID,
+        category: category.categoryName,
       },
     );
   }

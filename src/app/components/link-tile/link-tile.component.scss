@@ -1,0 +1,23 @@
+.link-tile {
+  padding: 0.25rem;
+
+  min-width: 5rem;
+  height: 100%;
+
+  text-align: center;
+  font-size: 0.8125rem;
+}
+
+.link-tile--icon {
+  display: block;
+  margin: 0.5rem auto;
+  max-width: 100%;
+  height: auto;
+  min-height: 52px;
+  max-height: 52px;
+  aspect-ratio: 1 / 1;
+}
+
+.link-tile--label {
+  display: block;
+}

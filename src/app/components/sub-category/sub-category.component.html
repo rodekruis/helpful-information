@@ -1,36 +1,23 @@
-<div
-  class="sub-category"
-  [ngClass]="{
-    'as-header': !showBottomDescription || showRightDescription
+<a
+  [routerLink]="['./']"
+  [queryParams]="{
+    categoryID: category?.categoryID,
+    subCategoryID: subCategory?.subCategoryID
   }"
+  (click)="click()"
+  class="link-row action"
 >
-  <ion-card class="sub-category--icon ion-no-margin">
-    <ion-card-header>
-      <ion-img
-        [src]="subCategory.subCategoryIcon"
-        [alt]="subCategory.subCategoryName"
-        loading="lazy"
-        class="sub-category--img"
-      ></ion-img>
-      <ion-card-title class="sub-category--label ion-text-center">
-        {{ subCategory.subCategoryName }}
-      </ion-card-title>
-    </ion-card-header>
-  </ion-card>
-  <div
-    *ngIf="showRightDescription || showBottomDescription"
-    class="sub-category--description ion-padding"
-  >
-    <ion-text>
-      <pre>{{ subCategory.subCategoryDescription }}</pre>
-    </ion-text>
-    <ion-button
-      *ngIf="referralSubCategoryButtonLabel && showBottomDescription"
-      color="primary"
-      size="small"
-      class="ion-text-center"
-    >
-      {{ referralSubCategoryButtonLabel }}
-    </ion-button>
-  </div>
-</div>
+  <img
+    [src]="
+      subCategory?.subCategoryIcon ||
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+    "
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    class="link-row--icon"
+  />
+  <strong class="link-row--label text-style--header text-style--size-1">
+    {{ subCategory?.subCategoryName }}
+  </strong>
+</a>

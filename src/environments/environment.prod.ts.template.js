@@ -8,8 +8,14 @@ export const environment = {
   envName: '${process.env.ENV_NAME || ''}',
   useServiceWorker: ${process.env.NG_USE_SERVICE_WORKER === 'true' || true},
 
+  // Configuration of content
+  appName: '${process.env.TXT_APP_NAME || ''}',
+  mainPageHeader: '${process.env.TXT_MAIN_PAGE_HEADER || ''}',
+  mainPageIntroduction: '${process.env.TXT_MAIN_PAGE_INTRO || ''}',
+
   // Regions:
   regions: '${process.env.REGIONS || ''}',
+  regionsLabels: '${process.env.REGIONS_LABELS || ''}',
 
   // Third-party tokens:
   // Google Sheets API:
