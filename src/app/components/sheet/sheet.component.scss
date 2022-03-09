@@ -1,36 +1,7 @@
-:host {
-  // v2:
-  // --sheet-link--color: #fff;
-  // --sheet-link--color-active: #fff;
-  // --sheet-link--background-color: #1f3958;
-  // --sheet-link--background-color-active: #3a4f6a;
-  --sheet-link--color: #011e60;
-  --sheet-link--color-active: #011e60;
-  --sheet-link--background-color: #fff;
-  --sheet-link--background-color-active: #efefef;
-}
-
 .sheet--button {
-  display: block;
   padding: 1rem;
 
-  width: 100%;
   height: 100%;
 
-  border-radius: 0.25rem;
-
   text-align: center;
-  text-decoration: none;
-
-  &:link,
-  &:visited {
-    color: var(--sheet-link--color);
-    background-color: var(--sheet-link--background-color);
-  }
-
-  &:hover,
-  &:focus {
-    color: var(--sheet-link--color-active);
-    background-color: var(--sheet-link--background-color-active);
-  }
 }
