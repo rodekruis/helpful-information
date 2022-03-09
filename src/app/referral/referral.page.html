@@ -49,7 +49,7 @@
     <div>
       <div *ngIf="!category" class="ion-padding-bottom">
         <!-- Root/Main Category-list -->
-        <ul class="list-flat tile-grid ion-margin-bottom">
+        <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-bottom">
           <li *ngFor="let categoryItem of categories" class="tile-grid--item">
             <link-tile
               [category]="categoryItem"
@@ -145,23 +145,19 @@
   ></ion-spinner>
 </ion-content>
 
-<ion-content *ngIf="!isSupportedRegion()" color="dark">
-  <ion-card *ngIf="!category">
-    <ion-card-header>
-      <ion-card-title>
-        The Netherlands Red Cross provides Helpful Information.
-      </ion-card-title>
-      <ion-card-subtitle>
-        Please choose a location to view the helpful information.
-      </ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
-  <div class="sheets-container">
-    <sheet
-      *ngFor="let region of regions; first as isFirst; last as isLast"
-      [sheetName]="region"
-    ></sheet>
+<ion-content *ngIf="!isSupportedRegion()" color="dark" class="ion-padding">
+  <div *ngIf="!category" class="ion-margin-bottom ion-padding-bottom">
+    <h2 class="text-style--header text-style--size-1">
+      The Netherlands Red Cross provides Helpful Information.
+    </h2>
+    <p>Please choose a location to view the helpful information.</p>
   </div>
+  <ul class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical">
+    <li *ngFor="let region of regions" class="tile-grid--item">
+      <sheet [sheetName]="region"></sheet>
+    </li>
+  </ul>
+  <br /><br /><br />
 </ion-content>
 
 <ion-footer *ngIf="isSupportedRegion()" color="secondary">

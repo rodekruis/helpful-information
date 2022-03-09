@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { toKebabCase } from 'src/app/shared/utils';
 
 @Component({
@@ -7,13 +6,15 @@ import { toKebabCase } from 'src/app/shared/utils';
   templateUrl: './sheet.component.html',
   styleUrls: ['./sheet.component.scss'],
 })
-export class SheetComponent {
+export class SheetComponent implements OnInit {
   @Input()
   sheetName: string;
 
-  constructor(private router: Router) {}
+  public sheetUrl: string;
 
-  public onSheetClick() {
-    this.router.navigate([toKebabCase(this.sheetName)]);
+  constructor() {}
+
+  ngOnInit() {
+    this.sheetUrl = toKebabCase(this.sheetName);
   }
 }
