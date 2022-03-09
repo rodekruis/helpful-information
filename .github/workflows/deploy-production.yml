@@ -54,8 +54,7 @@ jobs:
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: ${{ secrets.GOOGLE_SHEETS_API_URL }}
           GOOGLE_SHEETS_SHEET_IDS: ${{ secrets.GOOGLE_SHEETS_SHEET_IDS }}
-          NG_AI_IKEY: ${{ secrets.NG_AI_IKEY }}
-          NG_AI_ENDPOINT: ${{ secrets.NG_AI_ENDPOINT }}
+          AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
