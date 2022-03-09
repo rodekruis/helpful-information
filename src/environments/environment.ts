@@ -12,7 +12,7 @@ export const environment = {
   // Configuration of content
   appName: 'Helpful Information',
   mainPageHeader: 'The Red Cross provides helpful information.',
-  mainPageIntroduction: 'Please choose a location.',
+  mainPageIntroduction: 'Please choose a language/region.',
 
   // Regions: (A comnma-separated list of URL paths/slugs)
   regions: '',
