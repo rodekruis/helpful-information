@@ -147,10 +147,8 @@
 
 <ion-content *ngIf="!isSupportedRegion()" color="dark" class="ion-padding">
   <div *ngIf="!category" class="ion-margin-bottom ion-padding-bottom">
-    <h2 class="text-style--header text-style--size-1">
-      The Netherlands Red Cross provides Helpful Information.
-    </h2>
-    <p>Please choose a location to view the helpful information.</p>
+    <h2 class="text-style--header text-style--size-1">{{ pageHeader }}</h2>
+    <p>{{ pageIntroduction }}</p>
   </div>
   <ul class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical">
     <li *ngFor="let region of regions" class="tile-grid--item">

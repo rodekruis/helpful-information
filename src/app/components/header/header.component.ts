@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LogoService } from 'src/app/services/logo.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,7 @@ export class AppHeaderComponent {
   @Output()
   public logoAction = new EventEmitter<MouseEvent>();
 
+  public fallbackTitle = environment.appName;
   public logoUrl: string;
 
   constructor(private logoService: LogoService) {

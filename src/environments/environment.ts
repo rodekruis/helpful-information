@@ -9,6 +9,11 @@ export const environment = {
   envName: 'development', // (Optional) Label to show which environment is used
   useServiceWorker: false, // Enable 'offline' support
 
+  // Configuration of content
+  appName: 'Helpful Information',
+  mainPageHeader: 'The Red Cross provides helpful information.',
+  mainPageIntroduction: 'Please choose a location.',
+
   // Regions:
   regions: '',
 

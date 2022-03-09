@@ -40,6 +40,9 @@ export class ReferralPage implements OnInit {
 
   public loading = false;
 
+  public pageHeader = environment.mainPageHeader;
+  public pageIntroduction = environment.mainPageIntroduction;
+
   constructor(
     public offersService: OffersService,
     private route: ActivatedRoute,

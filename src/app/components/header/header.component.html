@@ -18,7 +18,7 @@
 
   <ion-title class="ion-text-center app-header--title">
     <ion-text *ngIf="!loading">
-      {{ title || 'Helpful Information' }}
+      {{ title || fallbackTitle }}
     </ion-text>
     <ion-skeleton-text
       *ngIf="loading"
