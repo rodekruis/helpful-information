@@ -1,15 +1,15 @@
 <a
   [routerLink]="['./']"
   [queryParams]="{
-    categoryID: category.categoryID,
-    subCategoryID: subCategory.subCategoryID
+    categoryID: category?.categoryID,
+    subCategoryID: subCategory?.subCategoryID
   }"
   (click)="click()"
   class="link-row action"
 >
   <img
     [src]="
-      subCategory.subCategoryIcon ||
+      subCategory?.subCategoryIcon ||
       'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
     "
     alt=""
@@ -18,6 +18,6 @@
     class="link-row--icon"
   />
   <strong class="link-row--label text-style--header text-style--size-1">
-    {{ subCategory.subCategoryName }}
+    {{ subCategory?.subCategoryName }}
   </strong>
 </a>
