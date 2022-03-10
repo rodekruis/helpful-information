@@ -163,7 +163,10 @@
   <br /><br /><br />
 </ion-content>
 
-<ion-footer *ngIf="isSupportedRegion()" color="secondary">
+<ion-footer
+  *ngIf="isSupportedRegion() && (!!referralPageData.referralPhoneNumber || !!referralPageData.referralWhatsAppLink)"
+  color="secondary"
+>
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-button
