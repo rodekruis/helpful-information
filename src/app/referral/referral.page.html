@@ -123,21 +123,24 @@
         class="ion-margin-vertical"
       ></app-last-updated-time>
     </div>
+  </div>
+</ion-content>
 
-    <div
-      *ngIf="categories?.length === 0 || subCategories?.length === 0 || offers?.length === 0"
-    >
-      <ion-card class="referral-data-unavailable-card ion-text-center">
-        <ion-card-header>
-          <ion-card-subtitle>Data Unavailable</ion-card-subtitle>
-        </ion-card-header>
+<!-- Error/404 page -->
+<ion-content
+  *ngIf="categories?.length === 0 || subCategories?.length === 0 || offers?.length === 0"
+>
+  <div>
+    <ion-card class="referral-data-unavailable-card ion-text-center">
+      <ion-card-header>
+        <ion-card-subtitle>Data Unavailable</ion-card-subtitle>
+      </ion-card-header>
 
-        <ion-card-content>
-          Please reach out to us at
-          <a href="https://www.rodekruis.nl/">https://www.rodekruis.nl/</a>.
-        </ion-card-content>
-      </ion-card>
-    </div>
+      <ion-card-content>
+        Please reach out to us at
+        <a href="https://www.rodekruis.nl/">https://www.rodekruis.nl/</a>.
+      </ion-card-content>
+    </ion-card>
   </div>
   <ion-spinner
     *ngIf="loading"
@@ -147,6 +150,7 @@
   ></ion-spinner>
 </ion-content>
 
+<!-- Main/Root/Regions-list page -->
 <ion-content *ngIf="!isSupportedRegion()" color="dark" class="ion-padding">
   <div *ngIf="!category" class="ion-margin-bottom ion-padding-bottom">
     <h2 class="text-style--header text-style--size-1">{{ pageHeader }}</h2>
