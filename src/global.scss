@@ -150,6 +150,14 @@ html.plt-mobile ion-app {
   }
 }
 
+.sheet--button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
 .icon {
   &.icon_small {
     width: 0.8125em;
