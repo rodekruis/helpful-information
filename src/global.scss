@@ -62,21 +62,29 @@ html.plt-mobile ion-app {
 }
 
 .tile-grid {
+  --column-gap: 0.25rem;
+
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
   align-content: flex-start;
-  column-gap: 0.5rem;
-  row-gap: 0.5rem;
+  margin-left: calc(-2 * var(--column-gap));
+  margin-right: calc(-2 * var(--column-gap));
+
+  .tile-grid--item {
+    padding-left: var(--column-gap);
+    padding-right: var(--column-gap);
+    margin-bottom: 1rem;
+  }
 
   &.tile-grid_base-2 {
     .tile-grid--item {
-      flex-basis: 49%;
+      flex: 0 0 50%;
     }
   }
   &.tile-grid_base-3 {
     .tile-grid--item {
-      flex-basis: 32%;
+      flex: 0 0 33%;
     }
   }
 }
