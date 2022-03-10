@@ -1,22 +1,3 @@
-// Light
-.skeleton-text--light {
-  --background-rgb: var(--ion-color-dark-contrast-rgb);
-}
-
-//
-ion-card {
-  background: #ffffff;
-  box-shadow: none;
-
-  &.referral-data-unavailable-card {
-    width: 300px;
-    margin: 5% auto;
-    a {
-      color: #3171e0;
-    }
-  }
-}
-
 ion-footer {
   .button-icon--whatsapp-image {
     height: 50px;

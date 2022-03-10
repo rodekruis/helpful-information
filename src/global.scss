@@ -111,6 +111,10 @@ html.plt-mobile ion-app {
   overflow: hidden;
 }
 
+.skeleton-text--light {
+  --background-rgb: var(--ion-color-dark-contrast-rgb);
+}
+
 //
 // Components
 //

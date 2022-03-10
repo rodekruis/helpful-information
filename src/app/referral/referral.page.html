@@ -9,164 +9,160 @@
   ></app-header>
 </ion-header>
 
-<ion-content *ngIf="isSupportedRegion()" color="dark" class="ion-padding">
-  <!-- Loading-placeholder -->
-  <div *ngIf="loading">
-    <h2>
-      <ion-skeleton-text
-        animated
-        class="skeleton-text--light"
-        style="width: 25%; line-height: 1"
-      ></ion-skeleton-text>
-    </h2>
-    <div class="ion-margin-vertical ion-padding-bottom">
-      <br />
-      <ion-skeleton-text
-        animated
-        class="skeleton-text--light"
-        width="100%"
-      ></ion-skeleton-text>
-      <ion-skeleton-text
-        animated
-        class="skeleton-text--light"
-        width="100%"
-      ></ion-skeleton-text>
-      <ion-skeleton-text
-        animated
-        class="skeleton-text--light"
-        width="80%"
-      ></ion-skeleton-text>
-    </div>
+<!-- Loading-placeholder -->
+<ion-content
+  *ngIf="isSupportedRegion() && loading"
+  color="dark"
+  class="ion-padding"
+>
+  <h2>
+    <ion-skeleton-text
+      animated
+      class="skeleton-text--light"
+      style="width: 25%; line-height: 1"
+    ></ion-skeleton-text>
+  </h2>
+  <div class="ion-margin-vertical ion-padding-bottom">
+    <br />
+    <ion-skeleton-text
+      animated
+      class="skeleton-text--light"
+      width="100%"
+    ></ion-skeleton-text>
+    <ion-skeleton-text
+      animated
+      class="skeleton-text--light"
+      width="100%"
+    ></ion-skeleton-text>
+    <ion-skeleton-text
+      animated
+      class="skeleton-text--light"
+      width="80%"
+    ></ion-skeleton-text>
   </div>
+</ion-content>
 
-  <!-- Region-page = Category-list -->
-  <div *ngIf="!loading">
-    <!-- Region-page = Category-list -->
-    <div *ngIf="!category" class="ion-padding-bottom">
-      <h2 class="ion-no-margin">{{ referralPageData.referralPageGreeting }}</h2>
-      <div
-        class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom"
-      >
-        <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
-      </div>
-      <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-vertical">
-        <li *ngFor="let categoryItem of categories" class="tile-grid--item">
-          <link-tile
-            [category]="categoryItem"
-            [subCategory]="getNextSubCategory(categoryItem)"
-          ></link-tile>
-        </li>
-      </ul>
-      <br /><br /><br />
-    </div>
+<!-- Region-page = Category-list -->
+<ion-content
+  *ngIf="isSupportedRegion() && !loading && !category && !(categories?.length === 0 || subCategories?.length === 0 || offers?.length === 0)"
+  color="dark"
+  class="ion-padding"
+>
+  <h2 class="ion-no-margin">{{ referralPageData.referralPageGreeting }}</h2>
+  <div class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom">
+    <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
+  </div>
+  <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-vertical">
+    <li *ngFor="let categoryItem of categories" class="tile-grid--item">
+      <link-tile
+        [category]="categoryItem"
+        [subCategory]="getNextSubCategory(categoryItem)"
+      ></link-tile>
+    </li>
+  </ul>
+  <br /><br /><br />
+</ion-content>
 
-    <!-- Category-page = Sub-Category-list -->
-    <div
-      *ngIf="category && !subCategory"
-      class="ion-margin-bottom ion-padding-bottom"
+<!-- Category-page = Sub-Category-list -->
+<ion-content
+  *ngIf="isSupportedRegion() && !loading && category && !subCategory"
+  color="dark"
+  class="ion-padding"
+>
+  <h2 class="ion-no-margin text-style--header text-style--size-1">
+    {{ category.categoryName }}
+  </h2>
+  <p *ngIf="category.categoryDescription">{{ category.categoryDescription }}</p>
+
+  <ul class="list-flat ion-margin-vertical">
+    <li
+      *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
+      class="ion-margin-bottom"
     >
-      <h2 class="ion-no-margin text-style--header text-style--size-1">
-        {{ category.categoryName }}
-      </h2>
-      <p *ngIf="category.categoryDescription">
-        {{ category.categoryDescription }}
-      </p>
+      <sub-category
+        [subCategory]="subCategoryItem"
+        [category]="category"
+      ></sub-category>
+    </li>
+  </ul>
+</ion-content>
 
-      <ul class="list-flat ion-margin-vertical">
-        <li
-          *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
-          class="ion-margin-bottom"
-        >
-          <sub-category
-            [subCategory]="subCategoryItem"
-            [category]="category"
-          ></sub-category>
-        </li>
-      </ul>
-    </div>
+<!-- Sub-Category-page = Offer-list -->
+<ion-content
+  *ngIf="isSupportedRegion() && !loading && category && subCategory && !offer"
+  color="dark"
+  class="ion-padding"
+>
+  <h2 class="ion-no-margin text-style--header text-style--size-1">
+    {{ subCategory.subCategoryName }}
+  </h2>
+  <p *ngIf="subCategory.subCategoryDescription">
+    {{ subCategory.subCategoryDescription }}
+  </p>
 
-    <!-- Sub-Category-page = Offer-list -->
-    <div
-      *ngIf="category && subCategory && !offer"
-      class="ion-margin-bottom ion-padding-bottom"
+  <ul class="list-flat ion-margin-vertical">
+    <li
+      *ngFor="let _offer of offers | categoryFilter: category | subCategoryFilter: subCategory"
+      class="ion-margin-bottom"
     >
-      <h2 class="ion-no-margin text-style--header text-style--size-1">
-        {{ subCategory.subCategoryName }}
-      </h2>
-      <p *ngIf="subCategory.subCategoryDescription">
-        {{ subCategory.subCategoryDescription }}
-      </p>
-
-      <ul class="list-flat ion-margin-vertical">
-        <li
-          *ngFor="let _offer of offers | categoryFilter: category | subCategoryFilter: subCategory"
-          class="ion-margin-bottom"
-        >
-          <a
-            [routerLink]="['.']"
-            [queryParams]="{
+      <a
+        [routerLink]="['.']"
+        [queryParams]="{
                 categoryID: _offer.categoryID,
                 subCategoryID: _offer.subCategoryID,
                 offerID: _offer.offerID
               }"
-            (click)="clickOffer(_offer)"
-            class="action list-item"
-          >
-            <span class="logo-badge list-item--icon">
-              <ion-img
-                [title]="_offer.offerIcon"
-                [src]="_offer.offerIcon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'"
-                alt=""
-                loading="lazy"
-                class="logo-badge--image"
-              ></ion-img>
-            </span>
-            <span class="list-item--content text-style--hide-overflow_4">
-              <strong>{{ _offer.offerName || '&nbsp;' }}</strong><br />
-              {{ _offer.offerDescription }}
-            </span>
-          </a>
-        </li>
-      </ul>
+        (click)="clickOffer(_offer)"
+        class="action list-item"
+      >
+        <span class="logo-badge list-item--icon">
+          <ion-img
+            [title]="_offer.offerIcon"
+            [src]="_offer.offerIcon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'"
+            alt=""
+            loading="lazy"
+            class="logo-badge--image"
+          ></ion-img>
+        </span>
+        <span class="list-item--content text-style--hide-overflow_4">
+          <strong>{{ _offer.offerName || '&nbsp;' }}</strong><br />
+          {{ _offer.offerDescription }}
+        </span>
+      </a>
+    </li>
+  </ul>
 
-      <app-last-updated-time
-        class="ion-margin-vertical"
-      ></app-last-updated-time>
-    </div>
+  <app-last-updated-time class="ion-margin-vertical"></app-last-updated-time>
+</ion-content>
 
-    <!-- Offer-detail page -->
-    <div *ngIf="category && subCategory && offer">
-      <offer [offer]="offer"></offer>
+<!-- Offer-detail page -->
+<ion-content
+  *ngIf="isSupportedRegion() && !loading && category && subCategory && offer"
+  color="dark"
+  class="ion-padding"
+>
+  <offer [offer]="offer"></offer>
 
-      <app-last-updated-time
-        class="ion-margin-vertical"
-      ></app-last-updated-time>
-    </div>
-  </div>
+  <app-last-updated-time class="ion-margin-vertical"></app-last-updated-time>
 </ion-content>
 
 <!-- Error/404 page -->
 <ion-content
-  *ngIf="categories?.length === 0 || subCategories?.length === 0 || offers?.length === 0"
+  *ngIf="isSupportedRegion() && !loading && (categories?.length === 0 || subCategories?.length === 0 || offers?.length === 0)"
+  color="dark"
+  class="ion-padding"
 >
-  <div>
-    <ion-card class="referral-data-unavailable-card ion-text-center">
-      <ion-card-header>
-        <ion-card-subtitle>Data Unavailable</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        Please reach out to us at
-        <a href="https://www.rodekruis.nl/">https://www.rodekruis.nl/</a>.
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <ion-spinner
-    *ngIf="loading"
-    name="crescent"
-    color="light"
-    class="ion-margin ion-padding"
-  ></ion-spinner>
+  <h2>Data Unavailable</h2>
+  <p>
+    Please reach out to us at:
+    <a href="https://www.rodekruis.nl/" style="color: red"
+      >https://www.rodekruis.nl/</a
+    >
+    <br /><br /><br />
+    <a href="/" onclick="location.reload(true)" style="color: gold">
+      Try again?
+    </a>
+  </p>
 </ion-content>
 
 <!-- Main/Root/Regions-list page -->
