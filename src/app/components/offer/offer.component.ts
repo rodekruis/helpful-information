@@ -16,9 +16,6 @@ export class OfferComponent {
   offer: Offer;
 
   @Input()
-  showDetails = false;
-
-  @Input()
   referralOfferButtonLabel = 'Click for Info';
 
   @Input()
