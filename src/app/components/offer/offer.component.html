@@ -1,42 +1,19 @@
-<div
-  [ngClass]="{
-    offer: true,
-    'is-actionable': !showDetails
-  }"
->
-  <div class="offer--head">
-    <ion-card class="offer--button ion-no-margin">
+<div class="offer">
+  <div class="text-style--wrap-newlines">
+    <span class="logo-badge offer--float-logo">
       <ion-img
-        [src]="offer.offerIcon"
+        [src]="
+          offer.offerIcon ||
+          'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+        "
         alt=""
         loading="lazy"
-        class="offer--logo"
+        class="logo-badge--image"
       ></ion-img>
-    </ion-card>
-    <div class="offer--summary ion-padding-start">
-      <ion-text
-        [ngClass]="{
-          'offer--description': true,
-          'use-overflow-scroll': !showDetails
-        }"
-      >
-        <pre>{{ offer.offerDescription }}</pre>
-      </ion-text>
-      <ion-button
-        *ngIf="referralOfferButtonLabel && !showDetails"
-        color="primary"
-        size="small"
-        class="ion-text-center"
-      >
-        {{ referralOfferButtonLabel }}
-      </ion-button>
-    </div>
+    </span>
+    {{ offer.offerDescription }}
   </div>
-  <div
-    *ngIf="showDetails"
-    class="offer--details ion-margin-vertical"
-    color="dark"
-  >
+  <div class="offer--details ion-margin-vertical">
     <div *ngIf="offer.offerOpeningHoursWeekdays" class="ion-margin-vertical">
       <strong>
         Opening Hours
@@ -61,23 +38,22 @@
           src="./assets/icons/external-link.svg"
           alt=""
           aria-hidden="true"
+          loading="lazy"
           class="icon icon_small"
         />
         Website:
       </strong>
-      &nbsp;
       <a
         *ngFor="let offerLink of offer.offerLinks"
         [href]="offerLink"
         (click)="logClick('website')"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         >{{ offerLink }}</a
       >
     </p>
     <p *ngIf="offer.offerEmails.length" class="ion-margin-vertical">
       <strong> Email: </strong>
-      &nbsp;
       <a
         *ngFor="let offerEmail of offer.offerEmails"
         href="mailto:{{ offerEmail }}?subject=Sent via Helpful Information"
@@ -91,11 +67,11 @@
           src="./assets/icons/phone.svg"
           alt=""
           aria-hidden="true"
+          loading="lazy"
           class="icon icon_small"
         />
         Phone:
       </strong>
-      &nbsp;
       <a
         *ngFor="let offerNumber of offer.offerNumbers"
         href="tel:{{ offerNumber }}"
@@ -117,12 +93,11 @@
     </div>
     <p *ngIf="offer.findAVaccinationCenter">
       <strong> Find a vaccination center: </strong>
-      &nbsp;
       <a
         [href]="offer.findAVaccinationCenter"
         (click)="logClick('findAVaccinationCenter')"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         >{{ offer.findAVaccinationCenter }}</a
       >
     </p>
@@ -144,23 +119,21 @@
     </div>
     <p *ngIf="offer.healthDeclarationDownload">
       <strong> Health declaration download: </strong>
-      &nbsp;
       <a
         [href]="offer.healthDeclarationDownload"
         (click)="logClick('healthDeclarationDownload')"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         >{{ offer.healthDeclarationDownload }}</a
       >
     </p>
     <p *ngIf="offer.faqs">
       <strong> FAQs: </strong>
-      &nbsp;
       <a
         [href]="offer.faqs"
         (click)="logClick('faqs')"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         >{{ offer.faqs }}</a
       >
     </p>

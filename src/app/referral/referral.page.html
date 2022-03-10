@@ -10,114 +10,136 @@
 </ion-header>
 
 <ion-content *ngIf="isSupportedRegion()" color="dark" class="ion-padding">
-  <div *ngIf="!category">
-    <div *ngIf="loading">
-      <h2>
-        <ion-skeleton-text
-          animated
-          class="skeleton-text--light"
-          style="width: 25%; line-height: 1"
-        ></ion-skeleton-text>
-      </h2>
-      <div class="ion-margin-vertical ion-padding-bottom">
-        <br />
-        <ion-skeleton-text
-          animated
-          class="skeleton-text--light"
-          width="100%"
-        ></ion-skeleton-text>
-        <ion-skeleton-text
-          animated
-          class="skeleton-text--light"
-          width="100%"
-        ></ion-skeleton-text>
-        <ion-skeleton-text
-          animated
-          class="skeleton-text--light"
-          width="80%"
-        ></ion-skeleton-text>
-      </div>
-    </div>
-    <div *ngIf="!loading">
-      <h2 class="ion-no-margin">{{ referralPageData.referralPageGreeting }}</h2>
-      <div
-        class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom"
-      >
-        <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
-      </div>
+  <!-- Loading-placeholder -->
+  <div *ngIf="loading">
+    <h2>
+      <ion-skeleton-text
+        animated
+        class="skeleton-text--light"
+        style="width: 25%; line-height: 1"
+      ></ion-skeleton-text>
+    </h2>
+    <div class="ion-margin-vertical ion-padding-bottom">
+      <br />
+      <ion-skeleton-text
+        animated
+        class="skeleton-text--light"
+        width="100%"
+      ></ion-skeleton-text>
+      <ion-skeleton-text
+        animated
+        class="skeleton-text--light"
+        width="100%"
+      ></ion-skeleton-text>
+      <ion-skeleton-text
+        animated
+        class="skeleton-text--light"
+        width="80%"
+      ></ion-skeleton-text>
     </div>
   </div>
+
+  <!-- Region-page = Category-list -->
   <div *ngIf="!loading">
-    <div>
-      <div *ngIf="!category" class="ion-padding-bottom">
-        <!-- Root/Main Category-list -->
-        <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-bottom">
-          <li *ngFor="let categoryItem of categories" class="tile-grid--item">
-            <link-tile
-              [category]="categoryItem"
-              [subCategory]="getNextSubCategory(categoryItem)"
-            ></link-tile>
-          </li>
-        </ul>
-        <br /><br /><br />
-      </div>
-      <div
-        *ngIf="category && !subCategory"
-        class="ion-margin-bottom ion-padding-bottom"
-      >
-        <h2 class="ion-no-margin text-style--header text-style--size-1">
-          {{ category.categoryName }}
+    <!-- Region-page = Category-list -->
+    <div *ngIf="!category" class="ion-padding-bottom">
+      <div>
+        <h2 class="ion-no-margin">
+          {{ referralPageData.referralPageGreeting }}
         </h2>
-        <p *ngIf="category.categoryDescription">
-          {{ category.categoryDescription }}
-        </p>
+        <div
+          class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom"
+        >
+          <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
+        </div>
       </div>
-      <div *ngIf="category && !subCategory">
-        <ul class="list-flat ion-margin-vertical">
-          <li
-            *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
-            class="ion-margin-bottom"
-          >
-            <sub-category
-              [subCategory]="subCategoryItem"
-              [category]="category"
-            ></sub-category>
-          </li>
-        </ul>
-      </div>
-      <div
-        *ngIf="category && subCategory"
-        class="ion-margin-bottom ion-padding-bottom"
-      >
-        <h2 class="ion-no-margin text-style--header text-style--size-1">
-          {{ subCategory.subCategoryName }}
-        </h2>
-        <p *ngIf="subCategory.subCategoryDescription">
-          {{ subCategory.subCategoryDescription }}
-        </p>
-      </div>
+      <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-bottom">
+        <li *ngFor="let categoryItem of categories" class="tile-grid--item">
+          <link-tile
+            [category]="categoryItem"
+            [subCategory]="getNextSubCategory(categoryItem)"
+          ></link-tile>
+        </li>
+      </ul>
+      <br /><br /><br />
     </div>
-    <div *ngIf="category && subCategory && !offer">
-      <offer
-        *ngFor="let _offer of offers | categoryFilter: category | subCategoryFilter: subCategory"
-        [offer]="_offer"
-        [referralOfferButtonLabel]="referralPageData.referralOfferButtonLabel"
-        (click)="clickOffer(_offer)"
-        class="ion-margin-bottom"
-      ></offer>
+
+    <!-- Category-page = Sub-Category-list -->
+    <div
+      *ngIf="category && !subCategory"
+      class="ion-margin-bottom ion-padding-bottom"
+    >
+      <h2 class="ion-no-margin text-style--header text-style--size-1">
+        {{ category.categoryName }}
+      </h2>
+      <p *ngIf="category.categoryDescription">
+        {{ category.categoryDescription }}
+      </p>
+
+      <ul class="list-flat ion-margin-vertical">
+        <li
+          *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
+          class="ion-margin-bottom"
+        >
+          <sub-category
+            [subCategory]="subCategoryItem"
+            [category]="category"
+          ></sub-category>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sub-Category-page = Offer-list -->
+    <div
+      *ngIf="category && subCategory && !offer"
+      class="ion-margin-bottom ion-padding-bottom"
+    >
+      <h2 class="ion-no-margin text-style--header text-style--size-1">
+        {{ subCategory.subCategoryName }}
+      </h2>
+      <p *ngIf="subCategory.subCategoryDescription">
+        {{ subCategory.subCategoryDescription }}
+      </p>
+
+      <ul class="list-flat ion-margin-vertical">
+        <li
+          *ngFor="let _offer of offers | categoryFilter: category | subCategoryFilter: subCategory"
+          class="ion-margin-bottom"
+        >
+          <a
+            [routerLink]="['.']"
+            [queryParams]="{
+                categoryID: _offer.categoryID,
+                subCategoryID: _offer.subCategoryID,
+                offerID: _offer.offerID
+              }"
+            (click)="clickOffer(_offer)"
+            class="action list-item"
+          >
+            <span class="logo-badge list-item--icon">
+              <ion-img
+                [title]="_offer.offerIcon"
+                [src]="_offer.offerIcon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'"
+                alt=""
+                loading="lazy"
+                class="logo-badge--image"
+              ></ion-img>
+            </span>
+            <span class="list-item--content text-style--hide-overflow_4">
+              {{ _offer.offerDescription }}
+            </span>
+          </a>
+        </li>
+      </ul>
 
       <app-last-updated-time
         class="ion-margin-vertical"
       ></app-last-updated-time>
     </div>
+
+    <!-- Offer-detail page -->
     <div *ngIf="category && subCategory && offer">
-      <offer
-        [offer]="offer"
-        [referralOfferButtonLabel]="referralPageData.referralOfferButtonLabel"
-        [showDetails]="true"
-        [goBack]="goBack.bind(this)"
-        (click)="clickOffer(offer)"
-      ></offer>
+      <offer [offer]="offer" [showDetails]="true"></offer>
 
       <app-last-updated-time
         class="ion-margin-vertical"
@@ -177,7 +199,7 @@
         *ngIf="referralPageData.referralPhoneNumber"
         [href]="'tel:' + referralPageData.referralPhoneNumber"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         (click)="logContactClick('tel')"
       >
         <ion-icon slot="icon-only" name="call"></ion-icon>
@@ -186,7 +208,7 @@
         *ngIf="referralPageData.referralWhatsAppLink"
         [href]="referralPageData.referralWhatsAppLink"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         (click)="logContactClick('whatsapp')"
       >
         <ion-img
