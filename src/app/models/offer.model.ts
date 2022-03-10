@@ -1,6 +1,7 @@
 export class Offer {
   offerID: number;
   offerIcon: string;
+  offerName: string;
   offerDescription: string;
   offerLinks: string[];
   offerNumbers: string[];

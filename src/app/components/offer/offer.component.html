@@ -11,6 +11,12 @@
         class="logo-badge--image"
       ></ion-img>
     </span>
+    <h2
+      *ngIf="offer.offerName"
+      class="ion-no-margin text-style--header text-style--size-1"
+    >
+      {{ offer.offerName }}
+    </h2>
     {{ offer.offerDescription }}
   </div>
   <div class="offer--details ion-margin-vertical">
