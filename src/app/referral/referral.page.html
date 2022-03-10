@@ -43,17 +43,13 @@
   <div *ngIf="!loading">
     <!-- Region-page = Category-list -->
     <div *ngIf="!category" class="ion-padding-bottom">
-      <div>
-        <h2 class="ion-no-margin">
-          {{ referralPageData.referralPageGreeting }}
-        </h2>
-        <div
-          class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom"
-        >
-          <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
-        </div>
+      <h2 class="ion-no-margin">{{ referralPageData.referralPageGreeting }}</h2>
+      <div
+        class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom"
+      >
+        <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
       </div>
-      <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-bottom">
+      <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-vertical">
         <li *ngFor="let categoryItem of categories" class="tile-grid--item">
           <link-tile
             [category]="categoryItem"
