@@ -15,15 +15,9 @@ export class OfferComponent {
   @Input()
   offer: Offer;
 
-  @Input()
-  referralOfferButtonLabel = 'Click for Info';
-
-  @Input()
-  goBack;
-
   constructor(private loggingService: LoggingService) {}
 
-  public logClick(name) {
+  public logClick(name: string) {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.OfferClick,
