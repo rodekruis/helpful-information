@@ -19,7 +19,7 @@
           style="width: 25%; line-height: 1"
         ></ion-skeleton-text>
       </h2>
-      <div class="introduction--content ion-margin-vertical ion-padding-bottom">
+      <div class="ion-margin-vertical ion-padding-bottom">
         <br />
         <ion-skeleton-text
           animated
@@ -40,7 +40,9 @@
     </div>
     <div *ngIf="!loading">
       <h2>{{ referralPageData.referralPageGreeting }}</h2>
-      <div class="introduction--content ion-margin-vertical ion-padding-bottom">
+      <div
+        class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom"
+      >
         <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
       </div>
     </div>
@@ -148,7 +150,7 @@
 <ion-content *ngIf="!isSupportedRegion()" color="dark" class="ion-padding">
   <div *ngIf="!category" class="ion-margin-bottom ion-padding-bottom">
     <h2 class="text-style--header text-style--size-1">{{ pageHeader }}</h2>
-    <p>{{ pageIntroduction }}</p>
+    <p class="text-style--wrap-newlines">{{ pageIntroduction }}</p>
   </div>
   <ul class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical">
     <li *ngFor="let region of regions" class="tile-grid--item">

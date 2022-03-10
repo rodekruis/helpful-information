@@ -100,6 +100,9 @@ html.plt-mobile ion-app {
 .text-style--size-1 {
   font-size: 1rem;
 }
+.text-style--wrap-newlines {
+  white-space: pre-line;
+}
 
 //
 // Components
