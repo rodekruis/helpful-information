@@ -11,16 +11,9 @@ ion-card {
   &.referral-data-unavailable-card {
     width: 300px;
     margin: 5% auto;
-  }
-}
-
-a {
-  text-decoration: underline;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    color: #3171e0;
+    a {
+      color: #3171e0;
+    }
   }
 }
 

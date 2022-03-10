@@ -53,7 +53,6 @@ html.plt-mobile ion-app {
 // Layout Utilities:
 //
 .list-flat {
-  margin: 0;
   padding: 0;
 
   > li {
@@ -120,6 +119,8 @@ html.plt-mobile ion-app {
 
   display: block;
   width: 100%;
+  min-height: 3em;
+  padding: 0.5em;
 
   border-radius: 0.25rem;
   text-decoration: none;

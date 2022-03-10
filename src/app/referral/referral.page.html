@@ -39,7 +39,7 @@
       </div>
     </div>
     <div *ngIf="!loading">
-      <h2>{{ referralPageData.referralPageGreeting }}</h2>
+      <h2 class="ion-no-margin">{{ referralPageData.referralPageGreeting }}</h2>
       <div
         class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom"
       >
@@ -73,7 +73,7 @@
         </p>
       </div>
       <div *ngIf="category && !subCategory">
-        <ul class="list-flat">
+        <ul class="list-flat ion-margin-vertical">
           <li
             *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
             class="ion-margin-bottom"
