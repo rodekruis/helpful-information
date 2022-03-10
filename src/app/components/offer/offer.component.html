@@ -56,7 +56,15 @@
       <pre class="ion-no-margin">{{ offer.offerDoYouNeedToKnow }}</pre>
     </div>
     <p *ngIf="offer.offerLinks.length">
-      <strong> Website: </strong>
+      <strong>
+        <img
+          src="./assets/icons/external-link.svg"
+          alt=""
+          aria-hidden="true"
+          class="icon icon_small"
+        />
+        Website:
+      </strong>
       &nbsp;
       <a
         *ngFor="let offerLink of offer.offerLinks"
@@ -78,7 +86,15 @@
       >
     </p>
     <p *ngIf="offer.offerNumbers.length">
-      <strong> Phone: </strong>
+      <strong>
+        <img
+          src="./assets/icons/phone.svg"
+          alt=""
+          aria-hidden="true"
+          class="icon icon_small"
+        />
+        Phone:
+      </strong>
       &nbsp;
       <a
         *ngFor="let offerNumber of offer.offerNumbers"
