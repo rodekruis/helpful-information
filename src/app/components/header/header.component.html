@@ -3,7 +3,7 @@
     <ion-button
       *ngIf="backButtonLabel"
       (click)="backClick($event)"
-      class="app-header--back-button ion-no-padding"
+      class="app-header--back-button text-style--header ion-no-padding"
     >
       <!-- Inlined SVG icon: chevron-back-outline from Ionicons v5.5 -->
       <ion-icon
@@ -16,7 +16,7 @@
     </ion-button>
   </ion-buttons>
 
-  <ion-title class="ion-text-center app-header--title">
+  <ion-title class="ion-text-center text-style--header text-style--size-1">
     <ion-text *ngIf="!loading" [title]="title || fallbackTitle">
       {{ title || fallbackTitle }}
     </ion-text>
