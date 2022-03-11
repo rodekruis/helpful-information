@@ -113,6 +113,7 @@ export class SpreadsheetService {
     return {
       offerID: Number(SpreadsheetService.readCellValue(offerRow, 3)),
       offerIcon: SpreadsheetService.readCellValue(offerRow, 5),
+      offerName: '',
       offerDescription: SpreadsheetService.readCellValue(offerRow, 6),
       offerLinks: SpreadsheetService.readCellValue(offerRow, 9)
         .split('\n')

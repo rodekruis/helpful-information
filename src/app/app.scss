@@ -36,13 +36,3 @@
     max-height: 80vh;
   }
 }
-
-// ----------------------------------------------------------------------------
-
-// Set header font-styles
-ion-title,
-ion-card-title,
-.use-font-header {
-  color: var(--ion-color-dark);
-  font-family: var(--ion-font-family-header);
-}

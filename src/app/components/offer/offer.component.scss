@@ -1,69 +1,33 @@
-:host,
-.offer {
-  display: block;
+.offer--float-logo {
+  float: left;
+  margin-right: 1rem;
 
-  &.is-actionable {
-    cursor: pointer;
+  float: inline-start;
+  margin-inline-end: 1rem;
+
+  [dir='rlt'] & {
+    float: right;
+    margin-right: 0;
+    margin-left: 1rem;
   }
 }
 
-.offer--head {
-  display: flex;
-  align-items: flex-start;
-}
-.offer--button {
-  flex: 0 0 auto;
-}
-.offer--summary {
-  flex: 1 1 auto;
-  font-size: 0.9em;
-}
-
-.offer--button {
-  display: flex;
-  width: 150px;
-  height: 150px;
-
-  background: var(--ion-color-secondary);
-  color: var(--ion-color-secondary-contrast);
-}
-.offer--logo {
-  width: 56%;
-  height: auto;
-  max-height: 56%;
-  margin: auto;
-  padding: 5%;
-}
-.offer--description {
-  display: block;
-
-  &.use-overflow-scroll {
-    max-height: 120px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+.offer--details {
+  &::before {
+    content: '';
+    display: block;
+    clear: both;
   }
-}
 
-pre,
-a {
-  line-height: 1.5;
-}
-
-a:link,
-a {
-  color: var(--ion-color-secondary);
-  display: block;
-
-  &:visited {
-    color: var(--ion-color-secondary-shade);
+  strong {
+    display: block;
   }
-}
-
-ion-label {
-  white-space: normal !important;
-}
-
-pre {
-  font-family: var(--ion-font-family-body);
-  white-space: pre-wrap;
+  a {
+    color: var(--ion-color-secondary);
+    display: block;
+  }
+  pre {
+    font-family: var(--ion-font-family-body);
+    white-space: pre-wrap;
+  }
 }

@@ -1,6 +1,7 @@
 export default [
   {
     offerID: 1,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -11,6 +12,7 @@ export default [
   },
   {
     offerID: 2,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -21,6 +23,7 @@ export default [
   },
   {
     offerID: 3,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -31,6 +34,7 @@ export default [
   },
   {
     offerID: 4,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -41,6 +45,7 @@ export default [
   },
   {
     offerID: 5,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -51,6 +56,7 @@ export default [
   },
   {
     offerID: 6,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -61,6 +67,7 @@ export default [
   },
   {
     offerID: 7,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -71,6 +78,7 @@ export default [
   },
   {
     offerID: 8,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -81,6 +89,7 @@ export default [
   },
   {
     offerID: 9,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -91,6 +100,7 @@ export default [
   },
   {
     offerID: 10,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -101,6 +111,7 @@ export default [
   },
   {
     offerID: 11,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -111,6 +122,7 @@ export default [
   },
   {
     offerID: 12,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -121,6 +133,7 @@ export default [
   },
   {
     offerID: 13,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -131,6 +144,7 @@ export default [
   },
   {
     offerID: 14,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -141,6 +155,7 @@ export default [
   },
   {
     offerID: 15,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -151,6 +166,7 @@ export default [
   },
   {
     offerID: 16,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -161,6 +177,7 @@ export default [
   },
   {
     offerID: 17,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
@@ -171,6 +188,7 @@ export default [
   },
   {
     offerID: 18,
+    offerName: 'Offer Ipsum',
     offerIcon:
       'https://www.510.global/wp-content/uploads/2017/07/510-LOGO-WEBSITE-01.png',
     offerDescription:
