@@ -1,4 +1,4 @@
-<div class="offer">
+<div class="offer" *ngIf="offer">
   <div class="text-style--wrap-newlines">
     <span class="logo-badge offer--float-logo">
       <ion-img
@@ -41,7 +41,7 @@
     <p *ngIf="offer.offerLinks.length">
       <strong>
         <img
-          src="./assets/icons/external-link.svg"
+          src="/assets/icons/external-link.svg"
           alt=""
           aria-hidden="true"
           loading="lazy"
@@ -70,7 +70,7 @@
     <p *ngIf="offer.offerNumbers.length">
       <strong>
         <img
-          src="./assets/icons/phone.svg"
+          src="/assets/icons/phone.svg"
           alt=""
           aria-hidden="true"
           loading="lazy"
