@@ -6,6 +6,7 @@ import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';
+import { getFullUrl } from '../shared/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -117,7 +118,8 @@ export class SpreadsheetService {
       offerDescription: SpreadsheetService.readCellValue(offerRow, 6),
       offerLinks: SpreadsheetService.readCellValue(offerRow, 9)
         .split('\n')
-        .filter((_) => _),
+        .filter((_) => _)
+        .map((url) => getFullUrl(url)),
       offerNumbers: SpreadsheetService.readCellValue(offerRow, 7)
         .split('\n')
         .filter((_) => _),
@@ -133,13 +135,17 @@ export class SpreadsheetService {
       offerVisible: SpreadsheetService.readCellValue(offerRow, 4) === 'Show',
       subCategoryID: Number(SpreadsheetService.readCellValue(offerRow, 1)),
       categoryID: Number(SpreadsheetService.readCellValue(offerRow, 2)),
-      findAVaccinationCenter: SpreadsheetService.readCellValue(offerRow, 17),
+      findAVaccinationCenter: getFullUrl(
+        SpreadsheetService.readCellValue(offerRow, 17),
+      ),
       redCrossHelpDesk: SpreadsheetService.readCellValue(offerRow, 18),
       whatToExpect: SpreadsheetService.readCellValue(offerRow, 19),
       furtherInformation: SpreadsheetService.readCellValue(offerRow, 20),
       travelAbroad: SpreadsheetService.readCellValue(offerRow, 21),
-      healthDeclarationDownload: SpreadsheetService.readCellValue(offerRow, 22),
-      faqs: SpreadsheetService.readCellValue(offerRow, 23),
+      healthDeclarationDownload: getFullUrl(
+        SpreadsheetService.readCellValue(offerRow, 22),
+      ),
+      faqs: getFullUrl(SpreadsheetService.readCellValue(offerRow, 23)),
     };
   }
 
