@@ -124,11 +124,13 @@ export class SpreadsheetService {
   private convertOfferRowToOfferObject(offerRow): Offer {
     return {
       offerID: Number(SpreadsheetService.readCellValue(offerRow, 3)),
+      subCategoryID: Number(SpreadsheetService.readCellValue(offerRow, 1)),
+      categoryID: Number(SpreadsheetService.readCellValue(offerRow, 2)),
       offerVisible: SpreadsheetService.isVisible(
         SpreadsheetService.readCellValue(offerRow, 4),
       ),
       offerIcon: SpreadsheetService.readCellValue(offerRow, 5),
-      offerName: '',
+      offerName: SpreadsheetService.readCellValue(offerRow, 16),
       offerDescription: SpreadsheetService.readCellValue(offerRow, 6),
       offerLinks: SpreadsheetService.readCellValue(offerRow, 9)
         .split('\n')
@@ -146,8 +148,6 @@ export class SpreadsheetService {
       offerForWhom: SpreadsheetService.readCellValue(offerRow, 13),
       offerDoYouNeedToKnow: SpreadsheetService.readCellValue(offerRow, 14),
       offerBasicRight: SpreadsheetService.readCellValue(offerRow, 15),
-      subCategoryID: Number(SpreadsheetService.readCellValue(offerRow, 1)),
-      categoryID: Number(SpreadsheetService.readCellValue(offerRow, 2)),
       findAVaccinationCenter: getFullUrl(
         SpreadsheetService.readCellValue(offerRow, 17),
       ),
