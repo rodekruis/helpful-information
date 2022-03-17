@@ -15,6 +15,7 @@ export class SpreadsheetService {
   private spreadsheetURL = environment.google_sheets_api_url;
   private spreadsheetId = {};
   private apiKey = environment.google_sheets_api_key;
+
   private categorySheetName = 'Categories';
   private subCategorySheetName = 'Sub-Categories';
   private offerSheetName = 'Offers';
@@ -28,7 +29,7 @@ export class SpreadsheetService {
     return key < row.length ? row[key].trim() : '';
   }
 
-  loadSheetIds(): void {
+  private loadSheetIds(): void {
     const regions: string[] = environment.regions.trim().split(/\s*,\s*/);
     const spreadsheetIds: string[] = environment.google_sheets_sheet_ids
       .trim()
@@ -39,7 +40,7 @@ export class SpreadsheetService {
     });
   }
 
-  convertCategoryRowToCategoryObject(categoryRow): Category {
+  private convertCategoryRowToCategoryObject(categoryRow): Category {
     return {
       categoryID: Number(SpreadsheetService.readCellValue(categoryRow, 0)),
       categoryName: SpreadsheetService.readCellValue(categoryRow, 1),
@@ -50,7 +51,7 @@ export class SpreadsheetService {
     };
   }
 
-  getCategories(region): Promise<Category[]> {
+  public getCategories(region): Promise<Category[]> {
     return fetch(
       `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
         `/values/${this.categorySheetName}` +
@@ -70,7 +71,9 @@ export class SpreadsheetService {
       });
   }
 
-  convertSubCategoryRowToSubCategoryObject(subCategoryRow): SubCategory {
+  private convertSubCategoryRowToSubCategoryObject(
+    subCategoryRow,
+  ): SubCategory {
     return {
       subCategoryID: Number(
         SpreadsheetService.readCellValue(subCategoryRow, 0),
@@ -87,7 +90,7 @@ export class SpreadsheetService {
     };
   }
 
-  getSubCategories(region): Promise<SubCategory[]> {
+  public getSubCategories(region): Promise<SubCategory[]> {
     return fetch(
       `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
         `/values/${this.subCategorySheetName}` +
@@ -110,7 +113,7 @@ export class SpreadsheetService {
       });
   }
 
-  convertOfferRowToOfferObject(offerRow): Offer {
+  private convertOfferRowToOfferObject(offerRow): Offer {
     return {
       offerID: Number(SpreadsheetService.readCellValue(offerRow, 3)),
       offerIcon: SpreadsheetService.readCellValue(offerRow, 5),
@@ -149,7 +152,7 @@ export class SpreadsheetService {
     };
   }
 
-  getOffers(region): Promise<Offer[]> {
+  public getOffers(region): Promise<Offer[]> {
     return fetch(
       `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
         `/values/${this.offerSheetName}` +
@@ -169,7 +172,7 @@ export class SpreadsheetService {
       });
   }
 
-  convertReferralPageDataRowToReferralPageDataObject(
+  private convertReferralPageDataRowToReferralPageDataObject(
     referralPageDataRows,
   ): ReferralPageData {
     return {
@@ -220,7 +223,7 @@ export class SpreadsheetService {
     };
   }
 
-  getReferralPageData(region): Promise<ReferralPageData> {
+  public async getReferralPageData(region): Promise<ReferralPageData> {
     return fetch(
       `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
         `/values/${this.referralPageSheetName}` +
