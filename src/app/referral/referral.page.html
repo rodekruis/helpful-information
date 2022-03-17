@@ -96,7 +96,10 @@
   <h2 class="ion-no-margin text-style--header text-style--size-1">
     {{ subCategory.subCategoryName }}
   </h2>
-  <p *ngIf="subCategory.subCategoryDescription">
+  <p
+    *ngIf="subCategory.subCategoryDescription"
+    class="text-style--wrap-newlines"
+  >
     {{ subCategory.subCategoryDescription }}
   </p>
 
@@ -124,7 +127,9 @@
             class="logo-badge--image"
           ></ion-img>
         </span>
-        <span class="list-item--content text-style--hide-overflow_4">
+        <span
+          class="list-item--content text-style--hide-overflow_4 text-style--wrap-newlines"
+        >
           <strong>{{ _offer.offerName || '&nbsp;' }}</strong><br />
           {{ _offer.offerDescription }}
         </span>
