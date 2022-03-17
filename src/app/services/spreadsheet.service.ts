@@ -12,6 +12,8 @@ import { getFullUrl } from '../shared/utils';
   providedIn: 'root',
 })
 export class SpreadsheetService {
+  static visibleKey = 'Show';
+
   private spreadsheetURL = environment.google_sheets_api_url;
   private spreadsheetId = {};
   private apiKey = environment.google_sheets_api_key;
@@ -27,6 +29,10 @@ export class SpreadsheetService {
 
   static readCellValue(row, key: number): string {
     return key < row.length ? row[key].trim() : '';
+  }
+
+  static isVisible(value: string): boolean {
+    return value === this.visibleKey;
   }
 
   private loadSheetIds(): void {
@@ -46,8 +52,9 @@ export class SpreadsheetService {
       categoryName: SpreadsheetService.readCellValue(categoryRow, 1),
       categoryIcon: SpreadsheetService.readCellValue(categoryRow, 2),
       categoryDescription: SpreadsheetService.readCellValue(categoryRow, 3),
-      categoryVisible:
-        SpreadsheetService.readCellValue(categoryRow, 4) === 'Show',
+      categoryVisible: SpreadsheetService.isVisible(
+        SpreadsheetService.readCellValue(categoryRow, 4),
+      ),
     };
   }
 
@@ -84,8 +91,9 @@ export class SpreadsheetService {
         subCategoryRow,
         3,
       ),
-      subCategoryVisible:
-        SpreadsheetService.readCellValue(subCategoryRow, 4) === 'Show',
+      subCategoryVisible: SpreadsheetService.isVisible(
+        SpreadsheetService.readCellValue(subCategoryRow, 4),
+      ),
       categoryID: Number(SpreadsheetService.readCellValue(subCategoryRow, 5)),
     };
   }
@@ -116,6 +124,9 @@ export class SpreadsheetService {
   private convertOfferRowToOfferObject(offerRow): Offer {
     return {
       offerID: Number(SpreadsheetService.readCellValue(offerRow, 3)),
+      offerVisible: SpreadsheetService.isVisible(
+        SpreadsheetService.readCellValue(offerRow, 4),
+      ),
       offerIcon: SpreadsheetService.readCellValue(offerRow, 5),
       offerName: '',
       offerDescription: SpreadsheetService.readCellValue(offerRow, 6),
@@ -135,7 +146,6 @@ export class SpreadsheetService {
       offerForWhom: SpreadsheetService.readCellValue(offerRow, 13),
       offerDoYouNeedToKnow: SpreadsheetService.readCellValue(offerRow, 14),
       offerBasicRight: SpreadsheetService.readCellValue(offerRow, 15),
-      offerVisible: SpreadsheetService.readCellValue(offerRow, 4) === 'Show',
       subCategoryID: Number(SpreadsheetService.readCellValue(offerRow, 1)),
       categoryID: Number(SpreadsheetService.readCellValue(offerRow, 2)),
       findAVaccinationCenter: getFullUrl(
