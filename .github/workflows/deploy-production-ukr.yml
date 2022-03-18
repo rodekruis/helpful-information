@@ -48,7 +48,7 @@ jobs:
           NG_USE_SERVICE_WORKER: 'true'
           TXT_APP_NAME: 'Helpful Information'
           TXT_MAIN_PAGE_HEADER: 'The Netherlands Red Cross provides Helpful Information.'
-          TXT_MAIN_PAGE_INTRO: 'Please select your language. \n\n Будь ласка, виберіть свою мову. \n\n Пожалуйста, выберите ваш язык.'
+          TXT_MAIN_PAGE_INTRO: 'We will be online with local information soon. \n\n Незабаром ми будемо онлайн з місцевою інформацією. \n\n Мы скоро будем онлайн с местной информацией.'
           REGIONS: ''
           REGIONS_LABELS: ''
           GOOGLE_SHEETS_API_KEY: ${{ secrets.UKR_GOOGLE_SHEETS_API_KEY }}
