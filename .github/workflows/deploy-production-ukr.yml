@@ -4,9 +4,6 @@
 
 name: 'production UKR: Deploy Azure Static Web App'
 
-env:
-  FORCE_COLOR: true # See: https://github.com/actions/setup-node/issues/317#issuecomment-929694556
-
 on:
   workflow_dispatch:
   push:
@@ -40,6 +37,8 @@ jobs:
 
       - name: Set up Node.js version
         uses: actions/setup-node@v2
+        env:
+          FORCE_COLOR: 0 # See: https://github.com/actions/setup-node/issues/317
         with:
           node-version: '14'
           cache: 'npm'
