@@ -12,7 +12,7 @@ on:
     paths:
       - '!.github/**'
       - '.github/workflows/deploy-staging.yml'
-      - '!.*'
+      - '*'
       - '!*.md'
       - 'src/**'
 
@@ -23,7 +23,7 @@ on:
     paths:
       - '!.github/**'
       - '.github/workflows/deploy-staging.yml'
-      - '!.*'
+      - '*'
       - '!*.md'
       - 'src/**'
 
