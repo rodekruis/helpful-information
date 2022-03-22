@@ -12,11 +12,23 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '!.github/**'
+      - '.github/workflows/deploy-staging.yml'
+      - '!.*'
+      - '!*.md'
+      - 'src/**'
 
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+    paths:
+      - '!.github/**'
+      - '.github/workflows/deploy-staging.yml'
+      - '!.*'
+      - '!*.md'
+      - 'src/**'
 
 jobs:
   build_and_deploy_job:
