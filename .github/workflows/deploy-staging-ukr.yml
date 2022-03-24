@@ -1,0 +1,79 @@
+# More information on Static Web App workflow configurations,
+# See: https://aka.ms/swaworkflowconfig
+# See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+
+name: 'staging UKR: Deploy Azure Static Web App'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '!.github/**'
+      - '.github/workflows/deploy-staging-ukr.yml'
+      - '*'
+      - '!*.md'
+      - 'src/**'
+
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+    paths:
+      - '!.github/**'
+      - '.github/workflows/deploy-staging-ukr.yml'
+      - '*'
+      - '!*.md'
+      - 'src/**'
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v2
+        env:
+          FORCE_COLOR: 0 # See: https://github.com/actions/setup-node/issues/317
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - name: Build And Deploy to Staging
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          skip_deploy_on_missing_secrets: true
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_ROCK_069A8B403 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: 'upload'
+          app_location: '/'
+          output_location: 'www'
+          app_build_command: 'npm run build:production'
+        env:
+          NG_PRODUCTION: 'true'
+          ENV_NAME: 'UKR-Staging'
+          NG_USE_SERVICE_WORKER: 'true'
+          TXT_APP_NAME: 'Helpful Information'
+          TXT_MAIN_PAGE_HEADER: 'The Netherlands Red Cross provides Helpful Information.'
+          TXT_MAIN_PAGE_INTRO: 'Select a region: \n\n Виберіть регіон: \n\n Выберите регион:'
+          REGIONS: 'nl,amsterdam,den-haag,haarlem,rotterdam,test'
+          REGIONS_LABELS: 'The Netherlands,Amsterdam region,Den Haag region,Haarlem region,Rotterdam region,Test'
+          GOOGLE_SHEETS_API_KEY: ${{ secrets.UKR_STAGE_GOOGLE_SHEETS_API_KEY }}
+          GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
+          GOOGLE_SHEETS_SHEET_IDS: '1mRFJEegdZGghXSYCQmhvLMyfiz_9Xn_eF3XmjWGG3YQ,1BOWJYyipXLi_otnLGY8v4CaaUBnKm0vIbN2uXuxC8oc,1PAB1xeIS0VknQMhno1EhY8eUHo1xFoBnR9-bOwWmndE,1xpKylqL-nveV4ixAJFmjqiwAvS7MWcHJqRtCpyeZ_5o,1d3PCQxqueO0WNb5YlExC88g3tHIA_TWM03lWpi666t0,14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04'
+          AI_CONNECTION_STRING: ''
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request for Staging
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_ROCK_069A8B403 }}
+          action: 'close'
