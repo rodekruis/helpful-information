@@ -11,7 +11,7 @@ on:
       - main
     paths:
       - '!.github/**'
-      - '.github/workflows/deploy-staging.yml'
+      - '.github/workflows/deploy-production-ukr.yml'
       - '*'
       - '!*.md'
       - 'src/**'
@@ -22,7 +22,7 @@ on:
       - main
     paths:
       - '!.github/**'
-      - '.github/workflows/deploy-staging.yml'
+      - '.github/workflows/deploy-production-ukr.yml'
       - '*'
       - '!*.md'
       - 'src/**'
