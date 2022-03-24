@@ -5,6 +5,9 @@
   float: inline-start;
   margin-inline-end: 1rem;
 
+  margin-bottom: 1rem;
+  margin-block-end: 1rem;
+
   [dir='rlt'] & {
     float: right;
     margin-right: 0;
