@@ -46,6 +46,9 @@
               },
               {
                 "input": "src/app/app.scss"
+              },
+              {
+                "input": "src/theme/overrides.scss"
               }
             ],
             "scripts": []
