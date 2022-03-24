@@ -17,7 +17,10 @@
   </ion-buttons>
 
   <ion-title class="ion-text-center text-style--header text-style--size-1">
-    <ion-text *ngIf="!loading" [title]="title || fallbackTitle">
+    <ion-text
+      *ngIf="!loading"
+      [title]="title || fallbackTitle"
+    >
       {{ title || fallbackTitle }}
     </ion-text>
     <ion-skeleton-text
@@ -37,7 +40,11 @@
         class="app-header--logo-link"
       >
         <ion-thumbnail>
-          <ion-img [src]="logoUrl" alt="" class="app-header--logo"></ion-img>
+          <ion-img
+            [src]="logoUrl"
+            alt=""
+            class="app-header--logo"
+          ></ion-img>
         </ion-thumbnail>
       </a>
     </ng-container>

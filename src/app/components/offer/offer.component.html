@@ -1,4 +1,7 @@
-<div class="offer" *ngIf="offer">
+<div
+  *ngIf="offer"
+  class="offer"
+>
   <div class="text-style--wrap-newlines">
     <span class="logo-badge offer--float-logo">
       <ion-img
@@ -20,21 +23,30 @@
     {{ offer.offerDescription }}
   </div>
   <div class="offer--details ion-margin-vertical">
-    <div *ngIf="offer.offerOpeningHoursWeekdays" class="ion-margin-vertical">
+    <div
+      *ngIf="offer.offerOpeningHoursWeekdays"
+      class="ion-margin-vertical"
+    >
       <strong>
         Opening Hours
         <span *ngIf="offer.offerOpeningHoursWeekends"> - Weekdays</span>:
       </strong>
       <pre class="ion-no-margin">{{ offer.offerOpeningHoursWeekdays }}</pre>
     </div>
-    <div *ngIf="offer.offerOpeningHoursWeekends" class="ion-margin-vertical">
+    <div
+      *ngIf="offer.offerOpeningHoursWeekends"
+      class="ion-margin-vertical"
+    >
       <strong>
         Opening Hours
         <span *ngIf="offer.offerOpeningHoursWeekends"> - Weekends</span>:
       </strong>
       <pre class="ion-no-margin">{{ offer.offerOpeningHoursWeekends }}</pre>
     </div>
-    <div *ngIf="offer.offerDoYouNeedToKnow" class="ion-margin-vertical">
+    <div
+      *ngIf="offer.offerDoYouNeedToKnow"
+      class="ion-margin-vertical"
+    >
       <strong> What do you need to know? </strong>
       <pre class="ion-no-margin">{{ offer.offerDoYouNeedToKnow }}</pre>
     </div>
@@ -58,7 +70,10 @@
         >{{ offerLink }}</a
       >
     </p>
-    <p *ngIf="offer.offerEmails.length" class="ion-margin-vertical">
+    <p
+      *ngIf="offer.offerEmails.length"
+      class="ion-margin-vertical"
+    >
       <strong> Email: </strong>
       <a
         *ngFor="let offerEmail of offer.offerEmails"
@@ -85,15 +100,24 @@
         >{{ offerNumber }}</a
       >
     </p>
-    <div *ngIf="offer.offerAddress" class="ion-margin-vertical">
+    <div
+      *ngIf="offer.offerAddress"
+      class="ion-margin-vertical"
+    >
       <strong> Address: </strong>
       <pre class="ion-no-margin">{{ offer.offerAddress }}</pre>
     </div>
-    <div *ngIf="offer.offerWhatWillYouNeed" class="ion-margin-vertical">
+    <div
+      *ngIf="offer.offerWhatWillYouNeed"
+      class="ion-margin-vertical"
+    >
       <strong> What will you need? </strong>
       <pre class="ion-no-margin">{{ offer.offerWhatWillYouNeed }}</pre>
     </div>
-    <div *ngIf="offer.offerBasicRight" class="ion-margin-vertical">
+    <div
+      *ngIf="offer.offerBasicRight"
+      class="ion-margin-vertical"
+    >
       <strong> Basic Rights: </strong>
       <pre class="ion-no-margin">{{ offer.offerBasicRight }}</pre>
     </div>
@@ -107,19 +131,31 @@
         >{{ offer.findAVaccinationCenter }}</a
       >
     </p>
-    <div *ngIf="offer.redCrossHelpDesk" class="ion-margin-vertical">
+    <div
+      *ngIf="offer.redCrossHelpDesk"
+      class="ion-margin-vertical"
+    >
       <strong> Red Cross helpdesk: </strong>
       <pre class="ion-no-margin">{{ offer.redCrossHelpDesk }}</pre>
     </div>
-    <div *ngIf="offer.whatToExpect" class="ion-margin-vertical">
+    <div
+      *ngIf="offer.whatToExpect"
+      class="ion-margin-vertical"
+    >
       <strong> What to expect? </strong>
       <pre class="ion-no-margin">{{ offer.whatToExpect }}</pre>
     </div>
-    <div *ngIf="offer.furtherInformation" class="ion-margin-vertical">
+    <div
+      *ngIf="offer.furtherInformation"
+      class="ion-margin-vertical"
+    >
       <strong> Further information: </strong>
       <pre class="ion-no-margin">{{ offer.furtherInformation }}</pre>
     </div>
-    <div *ngIf="offer.travelAbroad" class="ion-margin-vertical">
+    <div
+      *ngIf="offer.travelAbroad"
+      class="ion-margin-vertical"
+    >
       <strong> Travel abroad: </strong>
       <pre class="ion-no-margin">{{ offer.travelAbroad }}</pre>
     </div>

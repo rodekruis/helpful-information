@@ -53,7 +53,10 @@
     <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
   </div>
   <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-vertical">
-    <li *ngFor="let categoryItem of categories" class="tile-grid--item">
+    <li
+      *ngFor="let categoryItem of categories"
+      class="tile-grid--item"
+    >
       <link-tile
         [category]="categoryItem"
         [subCategory]="getNextSubCategory(categoryItem)"
@@ -162,24 +165,40 @@
   <h2>Data Unavailable</h2>
   <p>
     Please reach out to us at:
-    <a href="https://www.rodekruis.nl/" style="color: red"
+    <a
+      href="https://www.rodekruis.nl/"
+      style="color: red"
       >https://www.rodekruis.nl/</a
     >
     <br /><br /><br />
-    <a href="/" onclick="location.reload(true)" style="color: gold">
+    <a
+      href="/"
+      onclick="location.reload(true)"
+      style="color: gold"
+    >
       Try again?
     </a>
   </p>
 </ion-content>
 
 <!-- Main/Root/Regions-list page -->
-<ion-content *ngIf="!isSupportedRegion()" color="dark" class="ion-padding">
-  <div *ngIf="!category" class="ion-margin-bottom ion-padding-bottom">
+<ion-content
+  *ngIf="!isSupportedRegion()"
+  color="dark"
+  class="ion-padding"
+>
+  <div
+    *ngIf="!category"
+    class="ion-margin-bottom ion-padding-bottom"
+  >
     <h2 class="text-style--header text-style--size-1">{{ pageHeader }}</h2>
     <p class="text-style--wrap-newlines">{{ pageIntroduction }}</p>
   </div>
   <ul class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical">
-    <li *ngFor="let region of regions" class="tile-grid--item">
+    <li
+      *ngFor="let region of regions"
+      class="tile-grid--item"
+    >
       <a
         *ngIf="region"
         [routerLink]="['/', region]"
@@ -205,7 +224,10 @@
         rel="noopener noreferrer"
         (click)="logContactClick('tel')"
       >
-        <ion-icon slot="icon-only" name="call"></ion-icon>
+        <ion-icon
+          slot="icon-only"
+          name="call"
+        ></ion-icon>
       </ion-button>
       <ion-button
         *ngIf="referralPageData.referralWhatsAppLink"

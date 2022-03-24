@@ -1,4 +1,9 @@
 <ion-app>
   <ion-router-outlet [animated]="false"></ion-router-outlet>
 </ion-app>
-<div *ngIf="envName" class="env-label">{{ envName | uppercase }}</div>
+<div
+  *ngIf="envName"
+  class="env-label"
+>
+  {{ envName | uppercase }}
+</div>
