@@ -130,7 +130,9 @@
         <span
           class="list-item--content text-style--hide-overflow_4 text-style--wrap-newlines"
         >
-          <strong>{{ _offer.offerName || '&nbsp;' }}</strong><br />
+          <ng-container *ngIf="_offer.offerName">
+            <strong>{{ _offer.offerName || '&nbsp;' }}</strong><br />
+          </ng-container>
           {{ _offer.offerDescription }}
         </span>
       </a>
