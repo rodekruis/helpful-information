@@ -2,6 +2,9 @@
 www
 coverage
 
+# Exception for inline code/styles
+src/index.html
+
 # Don't format generated code
 package*.json
 **/environment.prod.ts
