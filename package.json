@@ -2,8 +2,6 @@
   "name": "helpful-information",
   "homepage": "https://helpfulinformation.redcross.nl/",
   "scripts": {
-    "ionic": "ionic",
-    "ng": "ng",
     "prepare": "husky install",
     "setup": "cp -i .env.example .env && npm run prepare",
     "start": "ng serve",
