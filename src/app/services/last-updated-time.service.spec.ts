@@ -5,7 +5,9 @@ describe('LastUpdatedTimeService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: LastUpdatedTimeService = TestBed.get(LastUpdatedTimeService);
+    const service: LastUpdatedTimeService = TestBed.inject(
+      LastUpdatedTimeService,
+    );
     expect(service).toBeTruthy();
   });
 });

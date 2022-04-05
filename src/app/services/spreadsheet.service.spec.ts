@@ -14,7 +14,7 @@ describe('SpreadsheetService', () => {
   );
 
   it('should be created', () => {
-    const service: SpreadsheetService = TestBed.get(SpreadsheetService);
+    const service: SpreadsheetService = TestBed.inject(SpreadsheetService);
     expect(service).toBeTruthy();
   });
 });
