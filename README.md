@@ -95,7 +95,7 @@ During development, an automated watch-process can be run with:
 ### Libraries/frameworks in use
 
 - [Ionic v5](https://ionicframework.com/docs/)
-- [Angular v9](https://v9.angular.io/docs/)
+- [Angular v10](https://v10.angular.io/docs/)
 
 ---
 
@@ -108,7 +108,7 @@ The web-app can be deployed as a static single-page-app or PWA.
 
       npm run build:production
 
-- This folder can be deployed to any hosting-solution (supporting HTTPS), using [the recommended server configuration](https://v8.angular.io/guide/deployment#server-configuration).
+- This folder can be deployed to any hosting-solution (supporting HTTPS), using [the recommended server configuration](https://v10.angular.io/guide/deployment#server-configuration).
 
 ### Using Azure Static Web Apps
 
