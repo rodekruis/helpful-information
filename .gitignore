@@ -1,4 +1,3 @@
-/.angular/cache
 # (local) Configuration files
 .env
 .env.*
@@ -8,6 +7,7 @@
 # Generated code
 www
 coverage
+.angular/cache/
 
 # Third party code
 node_modules

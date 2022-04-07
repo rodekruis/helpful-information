@@ -1,6 +1,7 @@
 # See .gitignore
 www
 coverage
+.angular/cache/
 
 # Exception for inline code/styles
 src/index.html
