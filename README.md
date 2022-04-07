@@ -94,7 +94,7 @@ During development, an automated watch-process can be run with:
 
 ### Libraries/frameworks in use
 
-- [Ionic v5](https://ionicframework.com/docs/)
+- [Ionic v6](https://ionicframework.com/docs/)
 - [Angular v12](https://v12.angular.io/docs/)
 
 ---
