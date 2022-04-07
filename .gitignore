@@ -1,3 +1,4 @@
+/.angular/cache
 # (local) Configuration files
 .env
 .env.*
