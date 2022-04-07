@@ -35,12 +35,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-          cache: 'npm'
-
       - name: Build And Deploy to Production
         uses: Azure/static-web-apps-deploy@v1
         with:

@@ -1,12 +1,12 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LastUpdatedTimeComponent } from './last-updated-time.component';
 
 describe('LastUpdatedTimeComponent', () => {
   let component: LastUpdatedTimeComponent;
   let fixture: ComponentFixture<LastUpdatedTimeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LastUpdatedTimeComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

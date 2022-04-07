@@ -8,7 +8,7 @@ import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
-  selector: 'link-tile',
+  selector: 'app-link-tile',
   templateUrl: './link-tile.component.html',
   styleUrls: ['./link-tile.component.scss'],
 })

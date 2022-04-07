@@ -12,7 +12,6 @@ import { LoggingService } from './services/logging.service';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot({

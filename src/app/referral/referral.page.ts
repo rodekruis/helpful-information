@@ -21,7 +21,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: 'referral.page.html',
   styleUrls: ['referral.page.scss'],
 })
-export class ReferralPage implements OnInit {
+export class ReferralPageComponent implements OnInit {
   public region: string;
   public regions: string[] = environment.regions.trim().split(/\s*,\s*/);
   public regionsLabels: string[] = environment.regionsLabels

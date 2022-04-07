@@ -7,7 +7,7 @@ import { Offer } from 'src/app/models/offer.model';
 import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
-  selector: 'offer',
+  selector: 'app-offer',
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.scss'],
 })

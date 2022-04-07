@@ -8,7 +8,7 @@ import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
-  selector: 'sub-category',
+  selector: 'app-sub-category',
   templateUrl: './sub-category.component.html',
   styleUrls: ['./sub-category.component.scss'],
 })
