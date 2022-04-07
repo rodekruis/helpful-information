@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { OfferComponent } from 'src/app/components/offer/offer.component';
 import { SubCategoryComponent } from 'src/app/components/sub-category/sub-category.component';
@@ -12,7 +12,7 @@ describe('ReferralPage', () => {
   let component: ReferralPage;
   let fixture: ComponentFixture<ReferralPage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         ReferralPage,
