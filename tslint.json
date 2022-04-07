@@ -3,10 +3,7 @@
   "rulesDirectory": ["codelyzer"],
   "rules": {
     "align": {
-      "options": [
-        "parameters",
-        "statements"
-      ]
+      "options": ["parameters", "statements"]
     },
     "array-type": false,
     "arrow-parens": false,
@@ -21,9 +18,7 @@
     "max-classes-per-file": false,
     "import-spacing": true,
     "indent": {
-      "options": [
-        "spaces"
-      ]
+      "options": ["spaces"]
     },
     "max-line-length": [true, 140],
     "member-access": false,
@@ -57,9 +52,7 @@
     "use-pipe-transform-interface": true,
     "one-variable-per-declaration": false,
     "semicolon": {
-      "options": [
-        "always"
-      ]
+      "options": ["always"]
     },
     "space-before-function-paren": {
       "options": {
@@ -70,11 +63,7 @@
         "named": "never"
       }
     },
-    "component-class-suffix": [
-      true,
-      "Page",
-      "Component"
-    ],
+    "component-class-suffix": [true, "Page", "Component"],
     "typedef-whitespace": {
       "options": [
         {
@@ -95,11 +84,7 @@
     },
     "directive-class-suffix": true,
     "variable-name": {
-      "options": [
-        "ban-keywords",
-        "check-format",
-        "allow-pascal-case"
-      ]
+      "options": ["ban-keywords", "check-format", "allow-pascal-case"]
     },
     "whitespace": {
       "options": [
