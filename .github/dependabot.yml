@@ -10,24 +10,16 @@ updates:
     versioning-strategy: increase-if-necessary
     ignore:
       - dependency-name: '@angular/*'
-        versions: ['>= 8.0.0', '>= 0.800.0']
+        update-types: ['version-update:semver-major']
       - dependency-name: '@angular-devkit/*'
-        versions: ['>= 8.0.0', '>= 0.800.0']
+        update-types: ['version-update:semver-major']
       - dependency-name: '@ionic/angular'
-        versions: ['>= 5.0.0']
+        update-types: ['version-update:semver-major']
       - dependency-name: '@ionic/angular-toolkit'
-        versions: ['>= 3.0.0']
+        update-types: ['version-update:semver-major']
       - dependency-name: '@types/node'
-        versions: ['>= 15.0.0']
-      - dependency-name: codelyzer
-        versions: ['>= 6.0.0']
-      - dependency-name: tslint
-        versions: ['>= 6.0.0']
+        update-types: ['version-update:semver-major']
       - dependency-name: typescript
-        versions: ['>= 3.6.0']
-      - dependency-name: karma
-        versions: ['>= 6.0.0']
+        update-types: ['version-update:semver-minor']
       - dependency-name: rxjs
-        versions: ['>= 6.7.0']
-      - dependency-name: 'zone.js'
-        versions: ['>= v0.11.1']
+        update-types: ['version-update:semver-major']
