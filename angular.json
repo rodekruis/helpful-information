@@ -113,8 +113,7 @@
             "production": {
               "browserTarget": "app:build:production"
             },
-            "ci": {
-            },
+            "ci": {},
             "development": {
               "browserTarget": "app:build:development"
             }
