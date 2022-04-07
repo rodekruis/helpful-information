@@ -6,16 +6,16 @@ import { SubCategoryComponent } from 'src/app/components/sub-category/sub-catego
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
 import { LoggingService } from 'src/app/services/logging.service';
-import { ReferralPage } from './referral.page';
+import { ReferralPageComponent } from './referral.page';
 
-describe('ReferralPage', () => {
-  let component: ReferralPage;
-  let fixture: ComponentFixture<ReferralPage>;
+describe('ReferralPageComponent', () => {
+  let component: ReferralPageComponent;
+  let fixture: ComponentFixture<ReferralPageComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ReferralPage,
+        ReferralPageComponent,
         SubCategoryComponent,
         OfferComponent,
         CategoryFilterPipe,
@@ -32,7 +32,7 @@ describe('ReferralPage', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReferralPage);
+    fixture = TestBed.createComponent(ReferralPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

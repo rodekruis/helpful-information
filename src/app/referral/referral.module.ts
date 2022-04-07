@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ReferralPage } from './referral.page';
+import { ReferralPageComponent } from './referral.page';
 
 @NgModule({
   imports: [
@@ -15,16 +15,16 @@ import { ReferralPage } from './referral.page';
     RouterModule.forChild([
       {
         path: ':region',
-        component: ReferralPage,
+        component: ReferralPageComponent,
       },
       {
         path: '',
-        component: ReferralPage,
+        component: ReferralPageComponent,
       },
     ]),
     SharedModule,
   ],
-  declarations: [ReferralPage],
+  declarations: [ReferralPageComponent],
   providers: [Title],
 })
 export class ReferralPageModule {}

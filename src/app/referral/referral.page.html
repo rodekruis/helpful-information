@@ -57,10 +57,10 @@
       *ngFor="let categoryItem of categories"
       class="tile-grid--item"
     >
-      <link-tile
+      <app-link-tile
         [category]="categoryItem"
         [subCategory]="getNextSubCategory(categoryItem)"
-      ></link-tile>
+      ></app-link-tile>
     </li>
   </ul>
   <br /><br /><br />
@@ -82,10 +82,10 @@
       *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
       class="ion-margin-bottom"
     >
-      <sub-category
+      <app-sub-category
         [subCategory]="subCategoryItem"
         [category]="category"
-      ></sub-category>
+      ></app-sub-category>
     </li>
   </ul>
 </ion-content>
@@ -151,7 +151,7 @@
   color="dark"
   class="ion-padding"
 >
-  <offer [offer]="offer"></offer>
+  <app-offer [offer]="offer"></app-offer>
 
   <app-last-updated-time class="ion-margin-vertical"></app-last-updated-time>
 </ion-content>
