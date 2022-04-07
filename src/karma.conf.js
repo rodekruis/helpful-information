@@ -16,6 +16,12 @@ module.exports = function (config) {
       captureConsole: true,
       clearContext: false,
     },
+    coverageReporter: {
+      dir: require('path').join(__dirname, '../coverage'),
+      subdir: '.',
+      reports: ['html', 'text-summary'],
+      reporters: [{ type: 'html' }, { type: 'text-summary' }],
+    },
     reporters: ['dots', 'progress', 'kjhtml', 'coverage'],
     port: 9876,
     colors: true,
