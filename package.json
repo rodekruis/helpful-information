@@ -45,7 +45,7 @@
     "@ionic/angular-toolkit": "^5.0.3",
     "@types/jasmine": "^4.0.0",
     "@types/jasminewd2": "^2.0.10",
-    "@types/node": "^12.11.1",
+    "@types/node": "^14.x",
     "codelyzer": "^5.1.2",
     "dotenv": "^16.0.0",
     "http-server": "^14.1.0",
