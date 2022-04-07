@@ -40,16 +40,20 @@
             ],
             "styles": [
               {
-                "input": "src/theme/variables.scss"
+                "input": "src/theme/variables.scss",
+                "inject": true
               },
               {
-                "input": "src/global.scss"
+                "input": "src/global.scss",
+                "inject": true
               },
               {
-                "input": "src/app/app.scss"
+                "input": "src/app/app.scss",
+                "inject": true
               },
               {
-                "input": "src/theme/overrides.scss"
+                "input": "src/theme/overrides.scss",
+                "inject": true
               }
             ],
             "scripts": []
@@ -64,7 +68,6 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
