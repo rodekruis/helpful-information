@@ -33,7 +33,7 @@
     "@microsoft/applicationinsights-web": "^2.7.2",
     "rxjs": "^6.6.7",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.5"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.1202.17",
