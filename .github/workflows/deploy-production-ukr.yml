@@ -35,16 +35,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build And Deploy to Production
-        uses: Azure/static-web-apps-deploy@v1
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
         with:
-          skip_deploy_on_missing_secrets: true
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_WATER_04A20F703 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: 'upload'
-          app_location: '/'
-          output_location: 'www'
-          app_build_command: 'npm run build:production'
+          node-version-file: '.node-version'
+          cache: 'npm'
+
+      - name: Install
+        run: 'npm install'
+
+      - name: Build
+        run: 'npm run build:production'
         env:
           NG_PRODUCTION: 'true'
           ENV_NAME: ''
@@ -58,6 +59,19 @@ jobs:
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           GOOGLE_SHEETS_SHEET_IDS: '1oGu63wIaVN_BT9bQ_96_ymJuPxvfpo-ZRQ5V-iKcNgI,13MPoIIIDLCVanSvUNMpYRNDRpTC3li3Yam_e_zpHZ_I,1USJFmdGotSYGlE2ARLYyAetCzgWTlQ7pFwFGKBOhVew,1a4jWde_v3S5RAPEVD85CuwwflMXkyvVbQ0aje46NMyM'
           AI_CONNECTION_STRING: ${{ secrets.UKR_AI_CONNECTION_STRING }}
+
+      - name: Build And Deploy to Production
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          skip_deploy_on_missing_secrets: true
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_WATER_04A20F703 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: 'upload'
+          config_file_location: '/'
+          app_location: 'www'
+          output_location: ''
+          skip_app_build: true
+          skip_api_build: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
