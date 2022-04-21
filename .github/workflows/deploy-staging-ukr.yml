@@ -51,10 +51,10 @@ jobs:
           ENV_NAME: 'UKR-Staging'
           NG_USE_SERVICE_WORKER: 'true'
           TXT_APP_NAME: 'Helpful Information'
-          TXT_MAIN_PAGE_HEADER: 'The Netherlands Red Cross provides Helpful Information.'
-          TXT_MAIN_PAGE_INTRO: 'Select a region: \n\n Виберіть регіон: \n\n Выберите регион:'
+          TXT_MAIN_PAGE_HEADER: 'This website is made to give helpful information to all refugees from Ukraine..'
+          TXT_MAIN_PAGE_INTRO: 'Select a region or look for general information about living in the Netherlands and how to get here.'
           REGIONS: 'nl,amsterdam,den-haag,haarlem,rotterdam,test,informatielijn,whatsapp-helpline,humanitarian-service-points'
-          REGIONS_LABELS: 'The Netherlands,Amsterdam region,Den Haag region,Haarlem region,Rotterdam region,Test,Informatielijn,WhatsApp Helpline,Humanitarian Service Points'
+          REGIONS_LABELS: 'General information,Amsterdam region,Den Haag region,Haarlem region,Rotterdam region,Test,Informatielijn,WhatsApp Helpline,Humanitarian Service Points'
           GOOGLE_SHEETS_API_KEY: ${{ secrets.UKR_STAGE_GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           GOOGLE_SHEETS_SHEET_IDS: '1mRFJEegdZGghXSYCQmhvLMyfiz_9Xn_eF3XmjWGG3YQ,1BOWJYyipXLi_otnLGY8v4CaaUBnKm0vIbN2uXuxC8oc,1PAB1xeIS0VknQMhno1EhY8eUHo1xFoBnR9-bOwWmndE,1xpKylqL-nveV4ixAJFmjqiwAvS7MWcHJqRtCpyeZ_5o,1d3PCQxqueO0WNb5YlExC88g3tHIA_TWM03lWpi666t0,14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE,1mxNG68rAahRxEAsbXvXtNPwze2uAEeGesb1uCmD1m5o'
