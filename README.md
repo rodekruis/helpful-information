@@ -1,6 +1,6 @@
 # Helpful Information
 
-> A (web-)app _People Affected_ can use to lookup useful organizations.
+> A web-app _People Affected_ can use to lookup useful organizations and information.
 
 ---
 
@@ -10,11 +10,53 @@ Latest releases and notable changes are in the [CHANGELOG](CHANGELOG.md).
 
 - [![Tests](https://github.com/rodekruis/helpful-information/actions/workflows/tests.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/tests.yml)
 - NL:
-  - [![staging: Deploy Azure Static Web App](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging.yml)
-  - [![production: Deploy Azure Static Web App](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production.yml)
+  [![staging](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging.yml)
+  [![production](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production.yml)
 - UKR:
-  - [![staging UKR: Deploy Azure Static Web App](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging-ukr.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging-ukr.yml)
-  - [![production UKR: Deploy Azure Static Web App](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production-ukr.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production-ukr.yml)
+  [![staging UKR](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging-ukr.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging-ukr.yml)
+  [![production UKR](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production-ukr.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production-ukr.yml)
+
+---
+
+## How it works
+
+The Helpful Information App (HIA) is a web-app that can show a list of 1 or more "_regions_", each of which is a separate dataset of structured content. This consists of "_Offers_", sorted in "_Categories_" and (optional) "_Sub-Categories_".
+
+The web-app is a pre-build, static web-app that lists links to "regions", which are all separate data-sources contained in Google Sheets 'files'.
+
+The different sheets within these 'files' each have a different data-model. So that their content can be used to display in the web-app.
+
+The contents of these is loaded at runtime by the visitor's browser from the "Google Sheets API".
+
+## How to use
+
+Once the web-app is configured (See [Configuration](#configuration)) and deployed (See [Deployment](#deployment)) its content can be managed via the [Google Sheets interface](https://docs.google.com/spreadsheets).
+
+### Security
+
+> ⚠️ **All content** of the web-app can be controlled by the contents of the Google Sheet in use.
+
+So take appropriate precautions regarding file-ownership and "edit"-permissions of these files and the related Google Accounts.
+
+- Limit the amount of users/Google Accounts that have "edit"-permissions to the 'least possible'
+- Don't share the credentials/passwords of these accounts with multiple people
+- Use a strong password on these Google Accounts
+- Use all possible extra security-features on these Google Accounts, like 2-factor-authentication etc.
+
+### Working with Google Sheets 'files'
+
+> ⚠️ **Everything** is visible on the website on **every** 'save' (so, immediately, most of the times).
+
+- Don't change the _name_ of any sheet
+- Don't change the _name_ or _order_ of columns in any sheet
+- Don't use formatting (bold/italic/underline/fonts/colors); It will not be used.
+- Don't use the "insert link"-feature.  
+  The plain text in a cell should be the full URL.
+
+Optional:
+
+- You can use the toggle in the "_Visible?_"-column to prepare a 'draft' of a row and finally 'publish' by setting it to "_Show_".
+- You can use background-colors to mark/highlight any changes or 'flag issues'; These styles will not be used in the web-app
 
 ---
 
@@ -54,7 +96,7 @@ Some specific information needs to be configured before use:
   Set these different properties in the [`environment.ts`](./src/environments/environment.ts)-file.
 
 - For use in production:  
-  These values need to be set in the [`.env`](.env.example)-file.
+  These values need to be set in the [`.env`](.env.example)-file. Or as ENV-variables via other means.
 
 - For deployments:  
   The ENV-variables defined in the [`.env.example`](.env.example)-file need to be defined in the build-environment according to the specific deployment-tool/service.  
@@ -62,9 +104,7 @@ Some specific information needs to be configured before use:
 
 ### Using the Google Sheets API
 
-The contents of the web-app is loaded at runtime by the visitor's browser from the [Google Sheets API](https://developers.google.com/sheets/api).
-
-- To be able to use that a 'credential' in the shape of an API-key is required.
+- To be able to use the [Google Sheets API](https://developers.google.com/sheets/api) a 'credential' in the shape of an API-key is required.
 - To get an API-key, follow the instructions:  
   <https://developers.google.com/workspace/guides/create-credentials#api-key>
 - Configure the restrictions on the API-key following:  
@@ -120,7 +160,7 @@ To deploy the web-app using [Azure Static Web App service](https://azure.microso
   in: [`staticwebapp.config.json`](staticwebapp.config.json)  
   See documentation about the format in [this example configuration file](https://docs.microsoft.com/en-us/azure/static-web-apps/configuration#example-configuration-file)
 
-### Using static file hosting (i.e. Surge.sh or similar)
+### Using static file hosting (i.e. Surge.sh, GitHub/GitLab Pages or similar)
 
 To deploy the web-app using [Surge.sh](https://surge.sh/) or a similar static-files web-host:
 
