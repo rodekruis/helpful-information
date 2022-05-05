@@ -60,7 +60,7 @@ jobs:
           GOOGLE_SHEETS_SHEET_IDS: '15R9HxX9nMI-6ElqxO91hz9fzfRutc9TAwVpllmLGv2Q,1OANMuGJxGBQ2ba3xVfKvTpD0EGQM-ukUrgRyN9tzMbQ,1ZqizriL_RJ2dCcNVnCj0GM02pqOLWcIF18A4zVigsrU,1mod8O9EgvqpCN3ScyAKkOh34x3OGa-8yIc18K_t1xXU,1m43Tw7CWRUdPjaStq6dOi9yvHSYInP1lWjLetk1PrTI,18qD1PGTK2jTExpVIXXWpjHdpe5KDy7IdcR537CusCLU'
           AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
 
-      - name: Build And Deploy to Production
+      - name: Deploy to Production
         uses: Azure/static-web-apps-deploy@v1
         with:
           skip_deploy_on_missing_secrets: true
