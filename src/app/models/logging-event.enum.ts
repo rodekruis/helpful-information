@@ -1,5 +1,6 @@
 export enum LoggingEventCategory {
   ai = 'AI',
+  sw = 'SW',
   error = 'error',
 }
 
@@ -16,4 +17,6 @@ export enum LoggingEvent {
   MainScreenClick = 'main-screen-button-click',
   OfferClick = 'offer-click',
   SubCategoryClick = 'sub-category-click',
+  SwUpdateAvailable = 'sw-update-available',
+  SwUpdateActivated = 'sw-update-activated',
 }
