@@ -11,11 +11,11 @@ export class LastUpdatedTimeComponent {
 
   constructor(private lastUpdatedTimeService: LastUpdatedTimeService) {
     this.lastUpdatedTimeService.lastUpdatedTime$.subscribe((value) => {
-      this.lastUpdatedTime = this.stripSeconds(value);
+      // Don't act on invalid Date-values:
+      if (Number.isNaN(Date.parse(value))) {
+        return;
+      }
+      this.lastUpdatedTime = value;
     });
-  }
-
-  private stripSeconds(value: string): string {
-    return value.replace(/(\d{1,2}-\d{1,2}-\d{4} \d{1,2}:\d{1,2}):\d+/, '$1');
   }
 }

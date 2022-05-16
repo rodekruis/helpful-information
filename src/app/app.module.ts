@@ -21,7 +21,7 @@ import { LoggingService } from './services/logging.service';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.useServiceWorker && environment.production,
-      registrationStrategy: 'registerWithDelay:3000',
+      registrationStrategy: 'registerWhenStable:3000',
     }),
   ],
   providers: [

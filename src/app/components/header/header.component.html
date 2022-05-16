@@ -1,5 +1,8 @@
 <ion-toolbar color="secondary">
-  <ion-buttons slot="start">
+  <ion-buttons
+    slot="start"
+    style="min-width: 70px"
+  >
     <ion-button
       *ngIf="backButtonLabel"
       (click)="backClick($event)"
@@ -17,17 +20,9 @@
   </ion-buttons>
 
   <ion-title class="ion-text-center text-style--header text-style--size-1">
-    <ion-text
-      *ngIf="!loading"
-      [title]="title || fallbackTitle"
-    >
+    <ion-text [title]="title || fallbackTitle">
       {{ title || fallbackTitle }}
     </ion-text>
-    <ion-skeleton-text
-      *ngIf="loading"
-      [animated]="true"
-      style="width: 70%; line-height: 1; margin: auto"
-    ></ion-skeleton-text>
   </ion-title>
 
   <ion-buttons slot="end">

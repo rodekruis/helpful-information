@@ -60,7 +60,10 @@ jobs:
           GOOGLE_SHEETS_SHEET_IDS: '1mRFJEegdZGghXSYCQmhvLMyfiz_9Xn_eF3XmjWGG3YQ,1BOWJYyipXLi_otnLGY8v4CaaUBnKm0vIbN2uXuxC8oc,1PAB1xeIS0VknQMhno1EhY8eUHo1xFoBnR9-bOwWmndE,1xpKylqL-nveV4ixAJFmjqiwAvS7MWcHJqRtCpyeZ_5o,1d3PCQxqueO0WNb5YlExC88g3tHIA_TWM03lWpi666t0,14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE,1mxNG68rAahRxEAsbXvXtNPwze2uAEeGesb1uCmD1m5o'
           AI_CONNECTION_STRING: ''
 
-      - name: Build And Deploy to Staging
+      - name: Add robots.txt
+        run: 'cp src/robots.private.txt www/robots.txt'
+
+      - name: Deploy to Staging
         uses: Azure/static-web-apps-deploy@v1
         with:
           skip_deploy_on_missing_secrets: true

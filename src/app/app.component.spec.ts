@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, waitForAsync } from '@angular/core/testing';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { Platform } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { LoggingService } from './services/logging.service';
@@ -16,7 +17,10 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [LoggingService, { provide: Platform, useValue: platformSpy }],
+      providers: [{ provide: Platform, useValue: platformSpy }, LoggingService],
+      imports: [
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+      ],
     }).compileComponents();
   }));
 
