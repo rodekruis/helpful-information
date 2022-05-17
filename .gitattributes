@@ -1,0 +1,141 @@
+# See: https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes
+
+# Auto detect text files and perform LF normalization
+# See also: https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
+*  text=auto
+
+# Text files where line endings should be preserved
+*.patch    -text
+
+# Scripts
+*.bash     text eol=lf
+*.sh       text eol=lf
+# These are explicitly Windows files and should use crlf
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+*.ps1      text eol=crlf
+
+## GITATTRIBUTES FOR WEB PROJECTS
+
+*.css             text diff=css
+*.htm             text diff=html
+*.html            text diff=html
+*.ini             text
+*.js              text
+*.json            text
+*.jsx             text
+*.map             text -diff
+*.sass            text
+*.scss            text diff=css
+*.sql             text
+*.ts              text
+*.tsx             text
+*.xml             text diff=html
+*.csv             text
+*.tab             text
+*.tsv             text
+
+# Docker
+Dockerfile        text
+
+# Documentation
+*.pdf             diff=astextplain
+*.md              text diff=markdown
+*.txt             text
+AUTHORS           text
+CHANGELOG         text
+CHANGES           text
+CONTRIBUTING      text
+COPYING           text
+copyright         text
+*COPYRIGHT*       text
+INSTALL           text
+license           text
+LICENSE           text
+NEWS              text
+readme            text
+*README*          text
+TODO              text
+
+# Templates
+*.ejs             text
+*.hbs             text
+*.hbt             text
+*.njk             text
+*.tmpl            text
+*.tpl             text
+*.twig            text
+
+# Configs
+*.conf            text
+*.config          text
+.editorconfig     text
+.env              text
+.gitattributes    text
+.gitconfig        text
+.htaccess         text
+*.lock            text -diff
+package.json      text eol=lf
+package-lock.json text eol=lf
+.prettierrc       text
+*.yaml            text
+*.yml             text
+browserslist      text
+
+# RC files (like .babelrc or .eslintrc)
+*.*rc             text
+
+# Ignore files (like .npmignore or .gitignore)
+*.*ignore         text
+
+# Graphics
+*.ai              binary
+*.bmp             binary
+*.eps             binary
+*.gif             binary
+*.gifv            binary
+*.ico             binary
+*.jng             binary
+*.jp2             binary
+*.jpg             binary
+*.jpeg            binary
+*.jpx             binary
+*.jxr             binary
+*.pdf             binary
+*.png             binary
+*.psb             binary
+*.psd             binary
+*.svg             text diff=html
+*.svgz            binary
+*.tif             binary
+*.tiff            binary
+*.wbmp            binary
+*.webp            binary
+
+# Audio
+*.m4a             binary
+*.mp3             binary
+*.ogg             binary
+
+# Video
+*.avi             binary
+*.mov             binary
+*.mp4             binary
+*.webm            binary
+
+# Archives
+*.7z              binary
+*.gz              binary
+*.tar             binary
+*.zip             binary
+
+# Fonts
+*.ttf             binary
+*.eot             binary
+*.otf             binary
+*.woff            binary
+*.woff2           binary
+
+# Enable syntax highlighting
+*.gitattributes linguist-language=gitattributes
+*.sql           linguist-language=sql
