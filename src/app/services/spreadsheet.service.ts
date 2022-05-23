@@ -260,9 +260,9 @@ export class SpreadsheetService {
       });
   }
 
-  private convertQaRowToObject(row, colMap: ColumnMap): QASet {
+  private convertQaRowToObject(row, colMap: ColumnMap, index: number): QASet {
     return {
-      id: Number(SpreadsheetService.readCellValue(row, colMap.get(QACol.id))),
+      id: index,
       subCategoryID: Number(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.subcategory)),
       ),
@@ -303,7 +303,7 @@ export class SpreadsheetService {
             if (index === 0) {
               return false;
             }
-            return this.convertQaRowToObject(row, qaColumnMap);
+            return this.convertQaRowToObject(row, qaColumnMap, index);
           })
           .filter((row: QASet): boolean => row.isVisible);
       })
