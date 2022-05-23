@@ -32,7 +32,10 @@ export class SpreadsheetService {
   }
 
   static readCellValue(row, key: number): string {
-    return key < row.length ? row[key].trim() : '';
+    if (key < row.length && !!row[key]) {
+      return row[key].trim();
+    }
+    return '';
   }
 
   static isVisible(value: string): boolean {
@@ -288,7 +291,7 @@ export class SpreadsheetService {
     return fetch(this.getSheetUrl(region, SheetName.QandAs))
       .then((response) => response.json())
       .then((response) => {
-        if (!response.values.length) {
+        if (!response || !response.values || !response.values.length) {
           return [];
         }
         const headerRow = response.values[0];
