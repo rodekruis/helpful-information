@@ -20,36 +20,13 @@
 
   <body>
     <style>
-    :root {
-      --app-shell-body-color: #011e60;
-      --app-shell-toolbar-color: #fff
+    html, body { margin: 0; height: 100%; }
+    body { background: linear-gradient(#fff 56px,#011e60 56px, #011e60); }
+    @media (min-width: 500px) {
+      ion-app { margin: 0 auto; overflow: hidden; max-width: 500px; }
     }
-    html, body {
-      margin: 0; height: 100%;
-    }
-    #app-shell {
-      position: absolute; top: 0; right: 0; bottom: 0; left: 0;
-      background: var(--app-shell-body-color); pointer-events: none;
-    }
-    #app-shell div {
-      display: flex; height: 56px; background: var(--app-shell-toolbar-color);
-    }
-    /* Limit the app-viewport to make it look like a 'mobile app' */
-    @media (min-width: 500px) and (min-height: 800px) {
-      body { background: #333; }
-      ion-app, #app-shell {
-        margin: auto auto; border-radius: 0.66em; overflow: hidden;
-        max-width: 500px; min-height: 700px; max-height: 80vh;
-      }
-    }
-    html:not(.hydrated) body {
-      display: block !important;
-    }
+    html:not(.hydrated) body { display: block !important; }
     </style>
-    <div id="app-shell" aria-hidden="true">
-      <div></div>
-    </div>
-
     <app-root></app-root>
     <noscript>This application requires JavaScript to function.</noscript>
   </body>
