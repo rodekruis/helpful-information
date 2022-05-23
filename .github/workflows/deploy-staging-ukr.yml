@@ -50,6 +50,7 @@ jobs:
           NG_PRODUCTION: 'true'
           ENV_NAME: 'UKR-Staging'
           NG_USE_SERVICE_WORKER: 'true'
+          NG_USE_Q_AND_AS: 'true'
           TXT_APP_NAME: 'Helpful Information'
           TXT_MAIN_PAGE_HEADER: 'This website is made to give helpful information to all refugees from Ukraine..'
           TXT_MAIN_PAGE_INTRO: 'Select a region or look for general information about living in the Netherlands and how to get here. \n\n Виберіть регіон або знайдіть загальну інформацію про проживання в Нідерландах і про те, як сюди дістатися. \n\n Выберите регион или найдите общую информацию о жизни в Нидерландах и о том, как сюда добраться.'

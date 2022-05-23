@@ -8,6 +8,7 @@ export const environment = {
   // Configuration/Feature-switches:
   envName: 'development', // (Optional) Label to show which environment is used
   useServiceWorker: false, // Enable 'offline' support
+  useQandAs: true, // Enable 'Q&A'-content type
 
   // Configuration of content
   appName: 'Helpful Information',
