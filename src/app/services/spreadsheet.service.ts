@@ -8,20 +8,20 @@ import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';
 import { getFullUrl } from '../shared/utils';
 
+enum SheetName {
+  page = 'Referral Page',
+  categories = 'Categories',
+  subCategories = 'Sub-Categories',
+  offers = 'Offers',
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class SpreadsheetService {
   static visibleKey = 'Show';
 
-  private spreadsheetURL = environment.google_sheets_api_url;
-  private spreadsheetId = {};
-  private apiKey = environment.google_sheets_api_key;
-
-  private categorySheetName = 'Categories';
-  private subCategorySheetName = 'Sub-Categories';
-  private offerSheetName = 'Offers';
-  private referralPageSheetName = 'Referral Page';
+  private sheetIds = {};
 
   constructor(private loggingService: LoggingService) {
     this.loadSheetIds();
@@ -37,13 +37,17 @@ export class SpreadsheetService {
 
   private loadSheetIds(): void {
     const regions: string[] = environment.regions.trim().split(/\s*,\s*/);
-    const spreadsheetIds: string[] = environment.google_sheets_sheet_ids
+    const googleSheetsIds: string[] = environment.google_sheets_sheet_ids
       .trim()
       .split(/\s*,\s*/);
 
     regions.forEach((_, index) => {
-      this.spreadsheetId[regions[index]] = spreadsheetIds[index];
+      this.sheetIds[regions[index]] = googleSheetsIds[index];
     });
+  }
+
+  private getSheetUrl(region: string, sheetName: SheetName): string {
+    return `${environment.google_sheets_api_url}/${this.sheetIds[region]}/values/${sheetName}?key=${environment.google_sheets_api_key}&alt=json&prettyPrint=false`;
   }
 
   private convertCategoryRowToCategoryObject(categoryRow): Category {
@@ -58,12 +62,8 @@ export class SpreadsheetService {
     };
   }
 
-  public getCategories(region): Promise<Category[]> {
-    return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
-        `/values/${this.categorySheetName}` +
-        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
-    )
+  public getCategories(region: string): Promise<Category[]> {
+    return fetch(this.getSheetUrl(region, SheetName.categories))
       .then((response) => response.json())
       .then((response) => {
         return response.values
@@ -99,11 +99,7 @@ export class SpreadsheetService {
   }
 
   public getSubCategories(region): Promise<SubCategory[]> {
-    return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
-        `/values/${this.subCategorySheetName}` +
-        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
-    )
+    return fetch(this.getSheetUrl(region, SheetName.subCategories))
       .then((response) => response.json())
       .then((response) => {
         return response.values
@@ -163,11 +159,7 @@ export class SpreadsheetService {
   }
 
   public getOffers(region): Promise<Offer[]> {
-    return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
-        `/values/${this.offerSheetName}` +
-        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
-    )
+    return fetch(this.getSheetUrl(region, SheetName.offers))
       .then((response) => response.json())
       .then((response) => {
         return response.values
@@ -233,12 +225,8 @@ export class SpreadsheetService {
     };
   }
 
-  public async getReferralPageData(region): Promise<ReferralPageData> {
-    return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
-        `/values/${this.referralPageSheetName}` +
-        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
-    )
+  public async getReferralPageData(region: string): Promise<ReferralPageData> {
+    return fetch(this.getSheetUrl(region, SheetName.page))
       .then((response) => response.json())
       .then((response) => {
         return this.convertReferralPageDataRowToReferralPageDataObject(
