@@ -15,6 +15,7 @@ import { LogoService } from 'src/app/services/logo.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
 import { environment } from 'src/environments/environment';
+import { QASet } from '../models/qa-set.model';
 
 @Component({
   selector: 'app-referral',
@@ -29,6 +30,7 @@ export class ReferralPageComponent implements OnInit {
     .split(/\s*,\s*/);
 
   public offers: Offer[];
+  public qaSets: QASet[];
   public categories: Category[];
   public subCategories: SubCategory[];
 
@@ -90,6 +92,10 @@ export class ReferralPageComponent implements OnInit {
         this.region,
       );
       this.offers = await this.offersService.getOffers(this.region);
+
+      if (environment.useQandAs) {
+        this.qaSets = await this.offersService.getQAs(this.region);
+      }
 
       this.readQueryParams();
 

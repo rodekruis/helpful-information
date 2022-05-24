@@ -6,7 +6,18 @@ import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';
+import { QACol, QASet } from '../models/qa-set.model';
 import { getFullUrl } from '../shared/utils';
+
+enum SheetName {
+  page = 'Referral Page',
+  categories = 'Categories',
+  subCategories = 'Sub-Categories',
+  offers = 'Offers',
+  QandAs = 'Q&As',
+}
+
+type ColumnMap = Map<string, number>;
 
 @Injectable({
   providedIn: 'root',
@@ -14,21 +25,17 @@ import { getFullUrl } from '../shared/utils';
 export class SpreadsheetService {
   static visibleKey = 'Show';
 
-  private spreadsheetURL = environment.google_sheets_api_url;
-  private spreadsheetId = {};
-  private apiKey = environment.google_sheets_api_key;
-
-  private categorySheetName = 'Categories';
-  private subCategorySheetName = 'Sub-Categories';
-  private offerSheetName = 'Offers';
-  private referralPageSheetName = 'Referral Page';
+  private sheetIds = {};
 
   constructor(private loggingService: LoggingService) {
     this.loadSheetIds();
   }
 
   static readCellValue(row, key: number): string {
-    return key < row.length ? row[key].trim() : '';
+    if (key < row.length && !!row[key]) {
+      return row[key].trim();
+    }
+    return '';
   }
 
   static isVisible(value: string): boolean {
@@ -37,13 +44,32 @@ export class SpreadsheetService {
 
   private loadSheetIds(): void {
     const regions: string[] = environment.regions.trim().split(/\s*,\s*/);
-    const spreadsheetIds: string[] = environment.google_sheets_sheet_ids
+    const googleSheetsIds: string[] = environment.google_sheets_sheet_ids
       .trim()
       .split(/\s*,\s*/);
 
     regions.forEach((_, index) => {
-      this.spreadsheetId[regions[index]] = spreadsheetIds[index];
+      this.sheetIds[regions[index]] = googleSheetsIds[index];
     });
+  }
+
+  private getSheetUrl(region: string, sheetName: SheetName): string {
+    return `${environment.google_sheets_api_url}/${this.sheetIds[region]}/values/${sheetName}?key=${environment.google_sheets_api_key}&alt=json&prettyPrint=false`;
+  }
+
+  private getColumnIndexFromTag(row: string[], tagName: string) {
+    const tag = `#${tagName.toUpperCase()}`;
+    return row.findIndex((headerLabel: string) => {
+      return headerLabel.toUpperCase().indexOf(tag) !== -1;
+    });
+  }
+
+  private createColumnMap(columns: string[], headerRow: string[]): ColumnMap {
+    let colMap: ColumnMap = new Map();
+    columns.forEach((colName: string) => {
+      colMap.set(colName, this.getColumnIndexFromTag(headerRow, colName));
+    });
+    return colMap;
   }
 
   private convertCategoryRowToCategoryObject(categoryRow): Category {
@@ -58,12 +84,8 @@ export class SpreadsheetService {
     };
   }
 
-  public getCategories(region): Promise<Category[]> {
-    return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
-        `/values/${this.categorySheetName}` +
-        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
-    )
+  public getCategories(region: string): Promise<Category[]> {
+    return fetch(this.getSheetUrl(region, SheetName.categories))
       .then((response) => response.json())
       .then((response) => {
         return response.values
@@ -99,11 +121,7 @@ export class SpreadsheetService {
   }
 
   public getSubCategories(region): Promise<SubCategory[]> {
-    return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
-        `/values/${this.subCategorySheetName}` +
-        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
-    )
+    return fetch(this.getSheetUrl(region, SheetName.subCategories))
       .then((response) => response.json())
       .then((response) => {
         return response.values
@@ -163,11 +181,7 @@ export class SpreadsheetService {
   }
 
   public getOffers(region): Promise<Offer[]> {
-    return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
-        `/values/${this.offerSheetName}` +
-        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
-    )
+    return fetch(this.getSheetUrl(region, SheetName.offers))
       .then((response) => response.json())
       .then((response) => {
         return response.values
@@ -233,12 +247,8 @@ export class SpreadsheetService {
     };
   }
 
-  public async getReferralPageData(region): Promise<ReferralPageData> {
-    return fetch(
-      `${this.spreadsheetURL}/${this.spreadsheetId[region]}` +
-        `/values/${this.referralPageSheetName}` +
-        `?key=${this.apiKey}&alt=json&prettyPrint=false`,
-    )
+  public async getReferralPageData(region: string): Promise<ReferralPageData> {
+    return fetch(this.getSheetUrl(region, SheetName.page))
       .then((response) => response.json())
       .then((response) => {
         return this.convertReferralPageDataRowToReferralPageDataObject(
@@ -250,6 +260,61 @@ export class SpreadsheetService {
           this.loggingService.logException(error, SeverityLevel.Critical);
         }
         return new ReferralPageData();
+      });
+  }
+
+  private convertQaRowToObject(row, colMap: ColumnMap, index: number): QASet {
+    return {
+      id: index,
+      subCategoryID: Number(
+        SpreadsheetService.readCellValue(row, colMap.get(QACol.subcategory)),
+      ),
+      categoryID: Number(
+        SpreadsheetService.readCellValue(row, colMap.get(QACol.category)),
+      ),
+      isVisible: SpreadsheetService.isVisible(
+        SpreadsheetService.readCellValue(row, colMap.get(QACol.visible)),
+      ),
+      dateUpdated: new Date(
+        SpreadsheetService.readCellValue(row, colMap.get(QACol.updated)),
+      ),
+      question: String(
+        SpreadsheetService.readCellValue(row, colMap.get(QACol.question)),
+      ),
+      answer: String(
+        SpreadsheetService.readCellValue(row, colMap.get(QACol.answer)),
+      ),
+    };
+  }
+
+  public getQAs(region): Promise<QASet[]> {
+    return fetch(this.getSheetUrl(region, SheetName.QandAs))
+      .then((response) => response.json())
+      .then((response) => {
+        if (!response || !response.values || !response.values.length) {
+          return [];
+        }
+        const headerRow = response.values[0];
+        const qaColumnMap = this.createColumnMap(
+          Object.values(QACol),
+          headerRow,
+        );
+
+        return response.values
+          .map((row, index: number) => {
+            // Skip the header-row
+            if (index === 0) {
+              return false;
+            }
+            return this.convertQaRowToObject(row, qaColumnMap, index);
+          })
+          .filter((row: QASet): boolean => row.isVisible);
+      })
+      .catch((error) => {
+        if (this.loggingService) {
+          this.loggingService.logException(error, SeverityLevel.Critical);
+        }
+        return [];
       });
   }
 }

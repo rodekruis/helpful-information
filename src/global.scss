@@ -123,11 +123,6 @@ html.plt-mobile ion-app {
 // Components
 //
 .action {
-  // v2:
-  // --action--color: #fff;
-  // --action--color-active: #fff;
-  // --action--background-color: #1f3958;
-  // --action--background-color-active: #3a4f6a;
   --action--color: #011e60;
   --action--color-active: #011e60;
   --action--background-color: #fff;
@@ -135,12 +130,12 @@ html.plt-mobile ion-app {
 
   display: block;
   width: 100%;
-  min-height: 3em;
   padding: 0.5em;
 
   border-radius: 0.25rem;
   text-decoration: none;
 
+  &,
   &:link,
   &:visited {
     color: var(--action--color);
@@ -154,11 +149,27 @@ html.plt-mobile ion-app {
   }
 }
 
+.action-dark {
+  --action--color: #fff;
+  --action--color-active: #fff;
+  --action--background-color: #1f3958;
+  --action--background-color-active: #3a4f6a;
+}
+
+.details-trigger {
+  cursor: pointer;
+
+  &.action {
+    display: list-item; // Keep using details/summary ▶/▼ markers
+  }
+}
+
 .sheet--button {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+  min-height: 3em;
   text-align: center;
 }
 
