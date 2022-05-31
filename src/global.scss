@@ -114,6 +114,11 @@ html.plt-mobile ion-app {
   max-height: calc(4 * 1.5em);
   overflow: hidden;
 }
+.text-style--inline-link:visited,
+.text-style--inline-link:link,
+.text-style--inline-link {
+  color: inherit;
+}
 
 .skeleton-text--light {
   --background-rgb: var(--ion-color-dark-contrast-rgb);

@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ConvertUrlsPipe } from '../pipes/convert-urls.pipe';
 import { ReferralPageComponent } from './referral.page';
 
 @NgModule({
@@ -24,7 +25,7 @@ import { ReferralPageComponent } from './referral.page';
     ]),
     SharedModule,
   ],
-  declarations: [ReferralPageComponent],
+  declarations: [ReferralPageComponent, ConvertUrlsPipe],
   providers: [Title],
 })
 export class ReferralPageModule {}
