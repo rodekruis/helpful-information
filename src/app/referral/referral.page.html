@@ -120,7 +120,7 @@
         </summary>
         <p
           class="text-style--wrap-newlines"
-          [innerText]="_qaSet.answer"
+          [innerHTML]="_qaSet.answer|convertUrls"
         ></p>
       </details>
     </li>
