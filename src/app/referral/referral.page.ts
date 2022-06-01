@@ -73,6 +73,25 @@ export class ReferralPageComponent implements OnInit {
     return this.region && this.regions.includes(this.region);
   }
 
+  public hasDataToShow(): boolean {
+    // When environment.useQandAs == false, Offers need to be available
+    // When environment.useQandAs == true, Offers OR Q&A-sets can be empty
+    return (
+      this.categories &&
+      this.categories.some((item) => item.categoryVisible) &&
+      this.subCategories &&
+      this.subCategories.some((item) => item.subCategoryVisible) &&
+      ((environment.useQandAs === false &&
+        this.offers &&
+        this.offers.some((item) => item.offerVisible)) ||
+        (environment.useQandAs &&
+          !(
+            (!this.offers || !this.offers.some((item) => item.offerVisible)) &&
+            (!this.qaSets || !this.qaSets.some((item) => item.isVisible))
+          )))
+    );
+  }
+
   private async loadReferralData() {
     if (this.isSupportedRegion()) {
       this.loading = true;

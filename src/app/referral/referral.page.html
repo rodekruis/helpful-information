@@ -44,7 +44,7 @@
 
 <!-- Region-page = Category-list -->
 <ion-content
-  *ngIf="isSupportedRegion() && !loading && !category && !(categories?.length === 0 || subCategories?.length === 0 || offers?.length === 0)"
+  *ngIf="isSupportedRegion() && !loading && !category && hasDataToShow()"
   color="dark"
   class="ion-padding"
 >
@@ -178,7 +178,7 @@
 
 <!-- Error/404 page -->
 <ion-content
-  *ngIf="isSupportedRegion() && !loading && (categories?.length === 0 || subCategories?.length === 0 || offers?.length === 0)"
+  *ngIf="isSupportedRegion() && !loading && !hasDataToShow()"
   color="dark"
   class="ion-padding"
 >
