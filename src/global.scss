@@ -133,13 +133,45 @@ ion-content.ion-padding {
   color: inherit;
 }
 
-.skeleton-text--light {
-  --background-rgb: var(--ion-color-dark-contrast-rgb);
-}
-
 //
 // Components
 //
+
+@keyframes shine {
+  0% {
+    background-position: -500px 0;
+  }
+  100% {
+    background-position: 500px 0;
+  }
+}
+
+.loading-text {
+  --background-rgb: var(--ion-color-dark-contrast-rgb);
+
+  display: inline-block;
+  width: 100%;
+  line-height: 1;
+  background: linear-gradient(
+    to right,
+    rgba(var(--background-rgb), 0.1) 8%,
+    rgba(var(--background-rgb), 0.4) 18%,
+    rgba(var(--background-rgb), 0.1) 33%
+  );
+  background-size: 1000px 100%;
+  animation-name: shine;
+  animation-duration: 1.3s;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+  &::before {
+    content: ' ';
+    display: inline-block;
+  }
+}
+
 .action {
   --action--color: #011e60;
   --action--color-active: #011e60;
