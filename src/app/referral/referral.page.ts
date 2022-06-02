@@ -134,17 +134,23 @@ export class ReferralPageComponent implements OnInit {
         this.category = this.categories.find(
           (category) => category.categoryID === Number(params.categoryID),
         );
+      } else {
+        this.category = null;
       }
       if ('subCategoryID' in params) {
         this.subCategory = this.subCategories.find(
           (subCategory) =>
             subCategory.subCategoryID === Number(params.subCategoryID),
         );
+      } else {
+        this.subCategory = null;
       }
       if ('offerID' in params) {
         this.offer = this.offers.find(
           (offer) => offer.offerID === Number(params.offerID),
         );
+      } else {
+        this.offer = null;
       }
     });
   }
