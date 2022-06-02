@@ -20,28 +20,29 @@
   </ion-buttons>
 
   <ion-title class="ion-text-center text-style--header text-style--size-1">
-    <ion-text [title]="title || fallbackTitle">
+    <h1
+      [title]="title || fallbackTitle"
+      class="text-style--header text-style--size-1"
+    >
       {{ title || fallbackTitle }}
-    </ion-text>
+    </h1>
   </ion-title>
 
   <ion-buttons slot="end">
-    <ng-container *ngIf="logoUrl">
-      <a
-        href="/"
-        (click)="logoClick($event)"
-        [title]="logoActionLabel"
-        [attr.aria-label]="logoActionLabel"
-        class="app-header--logo-link"
-      >
-        <ion-thumbnail>
-          <ion-img
-            [src]="logoUrl"
-            alt=""
-            class="app-header--logo"
-          ></ion-img>
-        </ion-thumbnail>
-      </a>
-    </ng-container>
+    <a
+      href="/"
+      (click)="logoClick($event)"
+      [title]="logoActionLabel"
+      [attr.aria-label]="logoActionLabel"
+      class="app-header--logo-link"
+    >
+      <ion-thumbnail>
+        <ion-img
+          [src]="logoUrl || 'assets/icons/icon_48.png'"
+          alt=""
+          class="app-header--logo"
+        ></ion-img>
+      </ion-thumbnail>
+    </a>
   </ion-buttons>
 </ion-toolbar>

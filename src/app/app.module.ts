@@ -16,6 +16,7 @@ import { LoggingService } from './services/logging.service';
     BrowserModule,
     IonicModule.forRoot({
       mode: 'md',
+      animated: false,
     }),
     AppRoutingModule,
     HttpClientModule,

@@ -11,7 +11,6 @@ import { ReferralPageData } from 'src/app/models/referral-page-data';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
-import { LogoService } from 'src/app/services/logo.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
 import { environment } from 'src/environments/environment';
@@ -55,7 +54,6 @@ export class ReferralPageComponent implements OnInit {
     private referralPageDataService: ReferralPageDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private titleService: Title,
-    private logoService: LogoService,
   ) {}
 
   ngOnInit() {
@@ -92,6 +90,14 @@ export class ReferralPageComponent implements OnInit {
     );
   }
 
+  public hasContactOptions(): boolean {
+    return (
+      !!this.referralPageData.referralPhoneNumber ||
+      !!this.referralPageData.referralWhatsAppLink ||
+      !!this.referralPageData.referralTelegramLink
+    );
+  }
+
   private async loadReferralData() {
     if (this.isSupportedRegion()) {
       this.loading = true;
@@ -99,8 +105,6 @@ export class ReferralPageComponent implements OnInit {
         await this.referralPageDataService.getReferralPageData(this.region);
 
       this.titleService.setTitle(this.referralPageData.referralPageTitle);
-
-      this.logoService.setLogo(this.referralPageData.referralPageLogo);
 
       this.lastUpdatedTimeService.setLastUpdatedTime(
         this.referralPageData.referralLastUpdatedTime,
@@ -120,27 +124,69 @@ export class ReferralPageComponent implements OnInit {
 
       this.loading = false;
     } else {
+      this.titleService.setTitle(environment.appName);
       this.router.navigate([this.rootHref]);
     }
   }
 
+  private updatePageTitle(
+    categoryName?: string,
+    subCategoryName?: string,
+    offerName?: string,
+  ) {
+    let pageTitle = this.referralPageData.referralPageTitle;
+
+    if (categoryName) {
+      pageTitle += ' : ' + categoryName;
+    }
+
+    if (subCategoryName) {
+      pageTitle += ' / ' + subCategoryName;
+    }
+
+    if (offerName) {
+      pageTitle += ' : ' + offerName;
+    }
+
+    this.titleService.setTitle(pageTitle);
+  }
+
   private readQueryParams() {
     this.route.queryParams.subscribe((params) => {
+      if (!params.length) {
+        this.updatePageTitle();
+      }
       if ('categoryID' in params) {
         this.category = this.categories.find(
           (category) => category.categoryID === Number(params.categoryID),
         );
+        this.updatePageTitle(this.category.categoryName);
+      } else {
+        this.category = null;
       }
       if ('subCategoryID' in params) {
         this.subCategory = this.subCategories.find(
           (subCategory) =>
             subCategory.subCategoryID === Number(params.subCategoryID),
         );
+        this.updatePageTitle(
+          this.category.categoryName,
+          this.subCategory.subCategoryName,
+        );
+      } else {
+        this.subCategory = null;
       }
       if ('offerID' in params) {
         this.offer = this.offers.find(
           (offer) => offer.offerID === Number(params.offerID),
         );
+        this.updatePageTitle(
+          this.category.categoryName,
+          this.subCategory.subCategoryName,
+          this.offer.offerName,
+        );
+      } else {
+        this.offer = null;
       }
     });
   }
@@ -270,7 +316,7 @@ export class ReferralPageComponent implements OnInit {
     this.router.navigate([this.rootHref]);
   }
 
-  logContactClick(type: 'tel' | 'whatsapp') {
+  logContactClick(type: 'tel' | 'whatsapp' | 'telegram') {
     let event = LoggingEvent.FooterContactClick;
 
     if (type === 'whatsapp') {
