@@ -124,16 +124,43 @@ export class ReferralPageComponent implements OnInit {
 
       this.loading = false;
     } else {
+      this.titleService.setTitle(environment.appName);
       this.router.navigate([this.rootHref]);
     }
   }
 
+  private updatePageTitle(
+    categoryName?: string,
+    subCategoryName?: string,
+    offerName?: string,
+  ) {
+    let pageTitle = this.referralPageData.referralPageTitle;
+
+    if (categoryName) {
+      pageTitle += ' : ' + categoryName;
+    }
+
+    if (subCategoryName) {
+      pageTitle += ' / ' + subCategoryName;
+    }
+
+    if (offerName) {
+      pageTitle += ' : ' + offerName;
+    }
+
+    this.titleService.setTitle(pageTitle);
+  }
+
   private readQueryParams() {
     this.route.queryParams.subscribe((params) => {
+      if (!params.length) {
+        this.updatePageTitle();
+      }
       if ('categoryID' in params) {
         this.category = this.categories.find(
           (category) => category.categoryID === Number(params.categoryID),
         );
+        this.updatePageTitle(this.category.categoryName);
       } else {
         this.category = null;
       }
@@ -142,12 +169,21 @@ export class ReferralPageComponent implements OnInit {
           (subCategory) =>
             subCategory.subCategoryID === Number(params.subCategoryID),
         );
+        this.updatePageTitle(
+          this.category.categoryName,
+          this.subCategory.subCategoryName,
+        );
       } else {
         this.subCategory = null;
       }
       if ('offerID' in params) {
         this.offer = this.offers.find(
           (offer) => offer.offerID === Number(params.offerID),
+        );
+        this.updatePageTitle(
+          this.category.categoryName,
+          this.subCategory.subCategoryName,
+          this.offer.offerName,
         );
       } else {
         this.offer = null;
