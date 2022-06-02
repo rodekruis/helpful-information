@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LogoService } from 'src/app/services/logo.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -21,19 +20,15 @@ export class AppHeaderComponent {
   public backAction = new EventEmitter<MouseEvent>();
 
   @Input()
+  public logoUrl: string;
+
+  @Input()
   public logoActionLabel: string;
 
   @Output()
   public logoAction = new EventEmitter<MouseEvent>();
 
   public fallbackTitle = environment.appName;
-  public logoUrl: string;
-
-  constructor(private logoService: LogoService) {
-    this.logoService.logo$.subscribe((url) => {
-      this.logoUrl = url;
-    });
-  }
 
   public backClick($event: MouseEvent) {
     return this.backAction.emit($event);

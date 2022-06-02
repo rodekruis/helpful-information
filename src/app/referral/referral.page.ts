@@ -11,7 +11,6 @@ import { ReferralPageData } from 'src/app/models/referral-page-data';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
-import { LogoService } from 'src/app/services/logo.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
 import { environment } from 'src/environments/environment';
@@ -55,7 +54,6 @@ export class ReferralPageComponent implements OnInit {
     private referralPageDataService: ReferralPageDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private titleService: Title,
-    private logoService: LogoService,
   ) {}
 
   ngOnInit() {
@@ -107,8 +105,6 @@ export class ReferralPageComponent implements OnInit {
         await this.referralPageDataService.getReferralPageData(this.region);
 
       this.titleService.setTitle(this.referralPageData.referralPageTitle);
-
-      this.logoService.setLogo(this.referralPageData.referralPageLogo);
 
       this.lastUpdatedTimeService.setLastUpdatedTime(
         this.referralPageData.referralLastUpdatedTime,

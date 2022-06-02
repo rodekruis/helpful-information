@@ -26,22 +26,20 @@
   </ion-title>
 
   <ion-buttons slot="end">
-    <ng-container *ngIf="logoUrl">
-      <a
-        href="/"
-        (click)="logoClick($event)"
-        [title]="logoActionLabel"
-        [attr.aria-label]="logoActionLabel"
-        class="app-header--logo-link"
-      >
-        <ion-thumbnail>
-          <ion-img
-            [src]="logoUrl"
-            alt=""
-            class="app-header--logo"
-          ></ion-img>
-        </ion-thumbnail>
-      </a>
-    </ng-container>
+    <a
+      href="/"
+      (click)="logoClick($event)"
+      [title]="logoActionLabel"
+      [attr.aria-label]="logoActionLabel"
+      class="app-header--logo-link"
+    >
+      <ion-thumbnail>
+        <ion-img
+          [src]="logoUrl || 'assets/icons/icon_48.png'"
+          alt=""
+          class="app-header--logo"
+        ></ion-img>
+      </ion-thumbnail>
+    </a>
   </ion-buttons>
 </ion-toolbar>

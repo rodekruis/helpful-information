@@ -4,6 +4,7 @@
     [loading]="loading"
     (backAction)="goBack()"
     [backButtonLabel]="referralPageData?.referralBackButtonLabel || ''"
+    [logoUrl]="referralPageData?.referralPageLogo"
     (logoAction)="showRootPage()"
     [logoActionLabel]="referralPageData?.referralMainScreenButtonLabel || ''"
   ></app-header>
