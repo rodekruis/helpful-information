@@ -92,6 +92,14 @@ export class ReferralPageComponent implements OnInit {
     );
   }
 
+  public hasContactOptions(): boolean {
+    return (
+      !!this.referralPageData.referralPhoneNumber ||
+      !!this.referralPageData.referralWhatsAppLink ||
+      !!this.referralPageData.referralTelegramLink
+    );
+  }
+
   private async loadReferralData() {
     if (this.isSupportedRegion()) {
       this.loading = true;
@@ -270,7 +278,7 @@ export class ReferralPageComponent implements OnInit {
     this.router.navigate([this.rootHref]);
   }
 
-  logContactClick(type: 'tel' | 'whatsapp') {
+  logContactClick(type: 'tel' | 'whatsapp' | 'telegram') {
     let event = LoggingEvent.FooterContactClick;
 
     if (type === 'whatsapp') {

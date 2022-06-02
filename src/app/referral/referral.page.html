@@ -231,38 +231,65 @@
   <br /><br /><br />
 </ion-content>
 
-<ion-footer
-  *ngIf="isSupportedRegion() && (!!referralPageData.referralPhoneNumber || !!referralPageData.referralWhatsAppLink)"
-  color="secondary"
+<div
+  class="floating-action-area"
+  *ngIf="isSupportedRegion() && hasContactOptions()"
 >
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button
-        *ngIf="referralPageData.referralPhoneNumber"
-        [href]="'tel:' + referralPageData.referralPhoneNumber"
-        target="_blank"
-        rel="noopener noreferrer"
-        (click)="logContactClick('tel')"
-      >
-        <ion-icon
-          slot="icon-only"
-          name="call"
-        ></ion-icon>
-      </ion-button>
-      <ion-button
-        *ngIf="referralPageData.referralWhatsAppLink"
-        [href]="referralPageData.referralWhatsAppLink"
-        target="_blank"
-        rel="noopener noreferrer"
-        (click)="logContactClick('whatsapp')"
-      >
-        <ion-img
-          src="assets/icons/whatsapp.png"
-          alt="WhatsApp"
-          loading="lazy"
-          style="width: 50px; height: 50px"
-        ></ion-img>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
+  <span
+    class="contact-button"
+    *ngIf="referralPageData.referralPhoneNumber"
+  >
+    <a
+      [href]="'tel:' + referralPageData.referralPhoneNumber"
+      target="_blank"
+      rel="noopener noreferrer"
+      (click)="logContactClick('tel')"
+      class="contact-button--link"
+    >
+      <img
+        src="assets/icons/contact_phone.png"
+        alt="Phone"
+        loading="lazy"
+        class="contact-button--logo"
+      />
+    </a>
+  </span>
+  <span
+    class="contact-button"
+    *ngIf="referralPageData.referralWhatsAppLink"
+  >
+    <a
+      [href]="referralPageData.referralWhatsAppLink"
+      target="_blank"
+      rel="noopener noreferrer"
+      (click)="logContactClick('whatsapp')"
+      class="contact-button--link"
+    >
+      <img
+        src="assets/icons/contact_whatsapp.png"
+        alt="WhatsApp"
+        loading="lazy"
+        class="contact-button--logo"
+      />
+    </a>
+  </span>
+  <span
+    class="contact-button"
+    *ngIf="referralPageData.referralTelegramLink"
+  >
+    <a
+      [href]="referralPageData.referralTelegramLink"
+      target="_blank"
+      rel="noopener noreferrer"
+      (click)="logContactClick('telegram')"
+      class="contact-button--link"
+    >
+      <img
+        src="assets/icons/contact_telegram.png"
+        alt="WhatsApp"
+        loading="lazy"
+        class="contact-button--logo"
+      />
+    </a>
+  </span>
+</div>

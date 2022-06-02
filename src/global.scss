@@ -53,6 +53,12 @@ html.plt-mobile ion-app {
   user-select: auto;
 }
 
+// Always reserve space to scroll (and to show floating-action-area)
+ion-content.ion-padding-vertical,
+ion-content.ion-padding {
+  --padding-bottom: 25vh;
+}
+
 //
 // Layout Utilities:
 //
@@ -90,6 +96,13 @@ html.plt-mobile ion-app {
       flex: 0 0 33%;
     }
   }
+}
+
+// Floating Action Button (bottom-right)
+.floating-action-area {
+  position: fixed;
+  right: 0;
+  bottom: 1rem;
 }
 
 //
@@ -210,4 +223,39 @@ html.plt-mobile ion-app {
     width: 100%;
     height: 100%;
   }
+}
+
+.contact-button {
+  display: block;
+  line-height: 1;
+
+  .contact-button--link {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    background: white;
+    border-radius: 48px 0 0 48px;
+    overflow: hidden;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+    border: 2px solid transparent;
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.9);
+    }
+    &:focus {
+      border-color: gold;
+    }
+  }
+
+  .contact-button--logo {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 48px;
+    max-height: 48px;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+.contact-button + .contact-button {
+  margin-top: 0.5rem;
 }

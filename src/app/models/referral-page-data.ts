@@ -7,6 +7,7 @@ export class ReferralPageData {
   referralMainScreenButtonLabel?: string;
   referralPhoneNumber?: string;
   referralWhatsAppLink?: string;
+  referralTelegramLink?: string;
   referralLastUpdatedTime?: string;
   referralOfferButtonLabel?: string;
   referralSubCategoryButtonLabel?: string;

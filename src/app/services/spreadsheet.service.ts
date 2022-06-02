@@ -32,7 +32,7 @@ export class SpreadsheetService {
   }
 
   static readCellValue(row, key: number): string {
-    if (key < row.length && !!row[key]) {
+    if (!!row && !!row[key] && key < row.length) {
       return row[key].trim();
     }
     return '';
@@ -230,6 +230,10 @@ export class SpreadsheetService {
       ),
       referralWhatsAppLink: SpreadsheetService.readCellValue(
         referralPageDataRows[8],
+        1,
+      ),
+      referralTelegramLink: SpreadsheetService.readCellValue(
+        referralPageDataRows[12],
         1,
       ),
       referralLastUpdatedTime: SpreadsheetService.readCellValue(
