@@ -108,6 +108,14 @@
         <summary class="details-trigger action action-dark">
           <strong>{{ _qaSet.question }}</strong>
         </summary>
+        <p *ngIf="_qaSet.dateUpdated">
+          <small>
+            {{ referralPageData.labelLastUpdated || 'Last updated:' }}
+            <time [attr.datetime]="_qaSet.dateUpdated|date:'yyyy-MM-dd'"
+              >{{ _qaSet.dateUpdated|date:"d-MM-''YY" }}</time
+            >
+          </small>
+        </p>
         <p
           class="text-style--wrap-newlines"
           [innerHTML]="_qaSet.answer|convertUrls"

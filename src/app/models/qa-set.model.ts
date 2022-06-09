@@ -3,7 +3,7 @@ export class QASet {
   categoryID: number;
   subCategoryID: number;
   isVisible: boolean;
-  dateUpdated: Date | string;
+  dateUpdated: Date | null;
   question: string;
   answer: string;
 }
