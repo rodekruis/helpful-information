@@ -278,13 +278,40 @@ export class SpreadsheetService {
       dateUpdated: getDateFromString(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.updated)),
       ),
+      slug: String(
+        SpreadsheetService.readCellValue(row, colMap.get(QACol.slug)),
+      ),
+      parentSlug: String(
+        SpreadsheetService.readCellValue(row, colMap.get(QACol.parent)),
+      ),
       question: String(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.question)),
       ),
       answer: String(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.answer)),
       ),
+      children: [],
     };
+  }
+
+  private addToParentQuestion(
+    element: QASet,
+    _index: number,
+    all: QASet[],
+  ): QASet | false {
+    if (!element.parentSlug) {
+      return element;
+    }
+
+    const parentRow = all.find((row) => row.slug === element.parentSlug);
+
+    if (!!parentRow && element.isVisible) {
+      // Add this question to its parents' collection:
+      parentRow.children.push(element);
+    }
+
+    // Remove self from total collection of Questions:
+    return false;
   }
 
   public getQAs(region): Promise<QASet[]> {
@@ -308,6 +335,7 @@ export class SpreadsheetService {
             }
             return this.convertQaRowToObject(row, qaColumnMap, index);
           })
+          .map(this.addToParentQuestion)
           .filter(
             (row: QASet): boolean =>
               row.isVisible && !!row.question && !!row.answer,

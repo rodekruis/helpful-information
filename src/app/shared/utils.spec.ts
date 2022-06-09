@@ -1,12 +1,55 @@
-import { getDateFromString } from './utils';
+import { getDateFromString, getFullUrl } from './utils';
+
+describe('Utils - getFullUrl', () => {
+  it('should return a full URL for valid values', () => {
+    const testValues = [
+      'http://example.org',
+      'https://example.org',
+      'example.org',
+      'test.example.org',
+      '1234567',
+    ];
+    const testOutputs = [
+      'http://example.org',
+      'https://example.org',
+      'https://example.org',
+      'https://test.example.org',
+      'https://1234567',
+    ];
+
+    testValues.forEach((value, index) => {
+      const output = getFullUrl(value);
+      expect(output).toEqual(testOutputs[index]);
+    });
+  });
+
+  it('should return unchanged for invalid URLs/values', () => {
+    const testValues = ['', '123456', 'test', 'x.test', undefined, null];
+
+    testValues.forEach((value, index) => {
+      const output = getFullUrl(value);
+      expect(output).toEqual(testValues[index]);
+    });
+  });
+});
 
 describe('Utils - getDateFromString', () => {
   it('should return a Date for valid strings', () => {
-    const testValues = ['1970-01-01', '2000-12-31', '2020-02-29'];
+    const testValues = [
+      '1955-11-05',
+      '1970-01-01',
+      '2000-12-31',
+      '2015-11-26',
+      '2020-02-29',
+      '2035-04-05',
+    ];
     const testOutputs = [
+      new Date('1955-11-05T00:00:00.000Z'),
       new Date('1970-01-01T00:00:00.000Z'),
       new Date('2000-12-31T00:00:00.000Z'),
+      new Date('2015-11-26T00:00:00.000Z'),
       new Date('2020-02-29T00:00:00.000Z'),
+      new Date('2035-04-05T00:00:00.000Z'),
     ];
 
     testValues.forEach((value, index) => {
