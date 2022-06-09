@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 
 @Component({
@@ -7,6 +7,9 @@ import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.servi
   styleUrls: ['./last-updated-time.component.scss'],
 })
 export class LastUpdatedTimeComponent {
+  @Input()
+  public label: string;
+
   public lastUpdatedTime: string;
 
   constructor(private lastUpdatedTimeService: LastUpdatedTimeService) {

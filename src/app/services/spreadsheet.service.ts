@@ -7,7 +7,7 @@ import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';
 import { QACol, QASet } from '../models/qa-set.model';
-import { getFullUrl } from '../shared/utils';
+import { getDateFromString, getFullUrl } from '../shared/utils';
 
 enum SheetName {
   page = 'Referral Page',
@@ -240,12 +240,8 @@ export class SpreadsheetService {
         referralPageDataRows[9],
         1,
       ),
-      referralOfferButtonLabel: SpreadsheetService.readCellValue(
+      labelLastUpdated: SpreadsheetService.readCellValue(
         referralPageDataRows[10],
-        1,
-      ),
-      referralSubCategoryButtonLabel: SpreadsheetService.readCellValue(
-        referralPageDataRows[11],
         1,
       ),
     };
@@ -279,7 +275,7 @@ export class SpreadsheetService {
       isVisible: SpreadsheetService.isVisible(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.visible)),
       ),
-      dateUpdated: new Date(
+      dateUpdated: getDateFromString(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.updated)),
       ),
       question: String(
@@ -312,7 +308,10 @@ export class SpreadsheetService {
             }
             return this.convertQaRowToObject(row, qaColumnMap, index);
           })
-          .filter((row: QASet): boolean => row.isVisible);
+          .filter(
+            (row: QASet): boolean =>
+              row.isVisible && !!row.question && !!row.answer,
+          );
       })
       .catch((error) => {
         if (this.loggingService) {
