@@ -4,8 +4,11 @@ export class QASet {
   subCategoryID: number;
   isVisible: boolean;
   dateUpdated: Date | null;
+  slug?: string;
+  parentSlug?: string;
   question: string;
   answer: string;
+  children: QASet[];
 }
 
 // These string-values should be used (somewhere) in the cells of the first row of the Q&As-sheet
@@ -17,6 +20,8 @@ export enum QACol {
   category = 'CATEGORY',
   visible = 'VISIBLE',
   updated = 'UPDATED',
+  slug = 'SLUG',
+  parent = 'PARENT',
   question = 'QUESTION',
   answer = 'ANSWER',
 }

@@ -63,7 +63,7 @@ ion-content.ion-padding {
 // Layout Utilities:
 //
 .list-flat {
-  padding: 0;
+  padding-left: 0;
 
   > li {
     list-style: none;
@@ -206,7 +206,7 @@ ion-content.ion-padding {
   --action--background-color-active: #3a4f6a;
 }
 
-.details-trigger {
+details summary {
   cursor: pointer;
 
   &.action {

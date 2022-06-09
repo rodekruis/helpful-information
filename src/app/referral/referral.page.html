@@ -104,22 +104,58 @@
       *ngFor="let _qaSet of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
       class="ion-margin-bottom"
     >
-      <details>
-        <summary class="details-trigger action action-dark">
-          <strong>{{ _qaSet.question }}</strong>
-        </summary>
-        <p *ngIf="_qaSet.dateUpdated">
+      <ng-template
+        #lastUpdatedLine
+        let-date="date"
+      >
+        <p *ngIf="date">
           <small>
             {{ referralPageData.labelLastUpdated || 'Last updated:' }}
-            <time [attr.datetime]="_qaSet.dateUpdated|date:'yyyy-MM-dd'"
-              >{{ _qaSet.dateUpdated|date:"d-MM-''YY" }}</time
-            >
+            <time [attr.datetime]="date|date:'yyyy-MM-dd'">
+              {{ date|date:"d-MM-''YY" }}
+            </time>
           </small>
         </p>
+      </ng-template>
+      <ng-template
+        #answerBlock
+        let-answer="answer"
+      >
         <p
           class="text-style--wrap-newlines"
-          [innerHTML]="_qaSet.answer|convertUrls"
+          [innerHTML]="answer|convertUrls"
         ></p>
+      </ng-template>
+
+      <details>
+        <summary class="action action-dark">
+          <strong>{{ _qaSet.question }}</strong>
+        </summary>
+        <ng-container
+          *ngTemplateOutlet="lastUpdatedLine; context:{ date: _qaSet.dateUpdated }"
+        ></ng-container>
+        <ng-container
+          *ngTemplateOutlet="answerBlock; context:{ answer: _qaSet.answer }"
+        ></ng-container>
+        <ul
+          *ngIf="_qaSet.children.length"
+          class="ion-padding"
+        >
+          <li
+            *ngFor="let subQaSet of _qaSet.children"
+            class="ion-margin-bottom"
+          >
+            <details>
+              <summary class="action">{{ subQaSet.question }}</summary>
+              <ng-container
+                *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
+              ></ng-container>
+              <ng-container
+                *ngTemplateOutlet="answerBlock; context:{ answer: subQaSet.answer }"
+              ></ng-container>
+            </details>
+          </li>
+        </ul>
       </details>
     </li>
   </ul>
