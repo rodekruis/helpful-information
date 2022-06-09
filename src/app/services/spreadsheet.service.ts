@@ -308,7 +308,10 @@ export class SpreadsheetService {
             }
             return this.convertQaRowToObject(row, qaColumnMap, index);
           })
-          .filter((row: QASet): boolean => row.isVisible);
+          .filter(
+            (row: QASet): boolean =>
+              row.isVisible && !!row.question && !!row.answer,
+          );
       })
       .catch((error) => {
         if (this.loggingService) {
