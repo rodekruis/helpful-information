@@ -2,5 +2,10 @@
   *ngIf="lastUpdatedTime"
   class="ion-text-center"
 >
-  <small>Last updated: {{ lastUpdatedTime | date: 'd-M-YYYY HH:mm' }}</small>
+  <small>
+    {{ label || 'Last updated:' }}
+    <time [attr.datetime]="lastUpdatedTime | date: 'YYYY-MM-ddTHH:mm:ss'">{{
+      lastUpdatedTime | date: 'd-M-YYYY HH:mm'
+    }}</time>
+  </small>
 </div>
