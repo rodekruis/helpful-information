@@ -1,4 +1,37 @@
-import { getDateFromString } from './utils';
+import { getDateFromString, getFullUrl } from './utils';
+
+describe('Utils - getFullUrl', () => {
+  it('should return a full URL for valid values', () => {
+    const testValues = [
+      'http://example.org',
+      'https://example.org',
+      'example.org',
+      'test.example.org',
+      '1234567',
+    ];
+    const testOutputs = [
+      'http://example.org',
+      'https://example.org',
+      'https://example.org',
+      'https://test.example.org',
+      'https://1234567',
+    ];
+
+    testValues.forEach((value, index) => {
+      const output = getFullUrl(value);
+      expect(output).toEqual(testOutputs[index]);
+    });
+  });
+
+  it('should return unchanged for invalid URLs/values', () => {
+    const testValues = ['', '123456', 'test', 'x.test', undefined, null];
+
+    testValues.forEach((value, index) => {
+      const output = getFullUrl(value);
+      expect(output).toEqual(testValues[index]);
+    });
+  });
+});
 
 describe('Utils - getDateFromString', () => {
   it('should return a Date for valid strings', () => {
