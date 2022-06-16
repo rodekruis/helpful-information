@@ -7,10 +7,6 @@
 @import '~@ionic/angular/css/padding.css';
 // @import '~@ionic/angular/css/float-elements.css';
 // @import '~@ionic/angular/css/text-alignment.css';
-// Include only one used from above...
-.ion-text-center {
-  text-align: center !important;
-}
 // @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
@@ -101,13 +97,26 @@ ion-content.ion-padding {
 // Floating Action Button (bottom-right)
 .floating-action-area {
   position: fixed;
-  right: 0;
-  bottom: 1rem;
+
+  &.is_in-page {
+    position: absolute;
+  }
+  &.is_top-right {
+    right: 0;
+    top: 1rem;
+  }
+  &.is_bottom-right {
+    right: 0;
+    bottom: 1rem;
+  }
 }
 
 //
 // Text Style Utilities:
 //
+.text-style--center {
+  text-align: center !important;
+}
 .text-style--header {
   font-family: var(--ion-font-family-header);
   font-weight: bold;
@@ -131,6 +140,10 @@ ion-content.ion-padding {
 .text-style--inline-link:link,
 .text-style--inline-link {
   color: inherit;
+
+  &.is_minimal {
+    text-decoration-style: dotted;
+  }
 }
 
 //
@@ -196,6 +209,30 @@ ion-content.ion-padding {
   &:focus {
     color: var(--action--color-active);
     background-color: var(--action--background-color-active);
+    outline-color: initial;
+    outline-offset: 2px;
+    outline-width: 4px;
+    outline-style: solid;
+  }
+  &:focus {
+    outline-color: var(--action--background-color-active);
+  }
+
+  &.is_attention {
+    color: black;
+    background-color: gold;
+
+    &:hover,
+    &:focus {
+      outline-color: gold;
+    }
+  }
+
+  &.is_round {
+    line-height: 1;
+    border-radius: 50%;
+    min-width: 2rem;
+    min-height: 2rem;
   }
 }
 

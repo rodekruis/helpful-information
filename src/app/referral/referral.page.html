@@ -1,12 +1,34 @@
+<ng-template
+  #lastUpdatedLine
+  let-date="date"
+>
+  <small *ngIf="date">
+    {{ referralPageData.labelLastUpdated }}
+    <time [attr.datetime]="date|date:'yyyy-MM-dd'">
+      {{ date|date:"d-MM-''YY" }}
+    </time>
+  </small>
+</ng-template>
+
+<ng-template
+  #answerBlock
+  let-answer="answer"
+>
+  <p
+    class="text-style--wrap-newlines"
+    [innerHTML]="answer|convertUrls"
+  ></p>
+</ng-template>
+
 <ion-header>
   <app-header
     [title]="referralPageData?.referralPageTitle"
     [loading]="loading"
     (backAction)="goBack()"
-    [backButtonLabel]="referralPageData?.referralBackButtonLabel || ''"
+    [backButtonLabel]="referralPageData?.referralBackButtonLabel"
     [logoUrl]="referralPageData?.referralPageLogo"
     (logoAction)="showRootPage()"
-    [logoActionLabel]="referralPageData?.referralMainScreenButtonLabel || ''"
+    [logoActionLabel]="referralPageData?.referralMainScreenButtonLabel"
   ></app-header>
 </ion-header>
 
@@ -34,10 +56,29 @@
 
 <!-- Region-page = Category-list -->
 <ion-content
-  *ngIf="isSupportedRegion() && !loading && !category && hasDataToShow()"
+  *ngIf="isSupportedRegion() && !loading && !showHighlights && !category && hasDataToShow()"
   color="dark"
   class="ion-padding"
 >
+  <div
+    *ngIf="useQandAs && qaHighlights.length"
+    class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+  >
+    <a
+      routerLink="."
+      [queryParams]="{ highlights: 'show' }"
+      queryParamsHandling="merge"
+      routerLinkActive
+      #qaHightlightsToggle="routerLinkActive"
+      [hidden]="qaHightlightsToggle.isActive"
+      [attr.title]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
+      [attr.aria-label]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
+      class="action is_round is_attention text-style--center"
+    >
+      <strong>!</strong>
+    </a>
+  </div>
+
   <h2 class="ion-no-margin">{{ referralPageData.referralPageGreeting }}</h2>
   <div class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom">
     <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
@@ -104,36 +145,15 @@
       *ngFor="let _qaSet of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
       class="ion-margin-bottom"
     >
-      <ng-template
-        #lastUpdatedLine
-        let-date="date"
-      >
-        <p *ngIf="date">
-          <small>
-            {{ referralPageData.labelLastUpdated || 'Last updated:' }}
-            <time [attr.datetime]="date|date:'yyyy-MM-dd'">
-              {{ date|date:"d-MM-''YY" }}
-            </time>
-          </small>
-        </p>
-      </ng-template>
-      <ng-template
-        #answerBlock
-        let-answer="answer"
-      >
-        <p
-          class="text-style--wrap-newlines"
-          [innerHTML]="answer|convertUrls"
-        ></p>
-      </ng-template>
-
       <details>
         <summary class="action action-dark">
           <strong>{{ _qaSet.question }}</strong>
         </summary>
-        <ng-container
-          *ngTemplateOutlet="lastUpdatedLine; context:{ date: _qaSet.dateUpdated }"
-        ></ng-container>
+        <p *ngIf="_qaSet.dateUpdated">
+          <ng-container
+            *ngTemplateOutlet="lastUpdatedLine; context:{ date: _qaSet.dateUpdated }"
+          ></ng-container>
+        </p>
         <ng-container
           *ngTemplateOutlet="answerBlock; context:{ answer: _qaSet.answer }"
         ></ng-container>
@@ -147,9 +167,11 @@
           >
             <details>
               <summary class="action">{{ subQaSet.question }}</summary>
-              <ng-container
-                *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
-              ></ng-container>
+              <p *ngIf="subQaSet.dateUpdated">
+                <ng-container
+                  *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
+                ></ng-container>
+              </p>
               <ng-container
                 *ngTemplateOutlet="answerBlock; context:{ answer: subQaSet.answer }"
               ></ng-container>
@@ -200,6 +222,102 @@
     [label]="referralPageData.labelLastUpdated"
     class="ion-margin-vertical"
   ></app-last-updated-time>
+</ion-content>
+
+<!-- List-page = Search-results/Q&A-Highlights-list -->
+<ion-content
+  *ngIf="isSupportedRegion() && !loading && showHighlights"
+  color="dark"
+  class="ion-padding"
+>
+  <div
+    class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+  >
+    <a
+      routerLink="."
+      [queryParams]="{ highlights: null }"
+      queryParamsHandling="merge"
+      [attr.title]="referralPageData?.referralBackButtonLabel"
+      [attr.aria-label]="referralPageData?.referralBackButtonLabel"
+      class="action is_round text-style--center"
+    >
+      <strong>&times;</strong>
+    </a>
+  </div>
+  <h2 class="ion-no-margin text-style--header text-style--size-1">
+    {{ referralPageData?.labelHighlightsPageTitle }}
+  </h2>
+
+  <p *ngIf="!qaHighlights.length">
+    {{ referralPageData?.labelHighlightsItemsZero }}
+  </p>
+
+  <p *ngIf="qaHighlights.length">
+    {{ referralPageData?.labelHighlightsItemsCount }}
+    <strong>{{ qaHighlights.length }}</strong>
+  </p>
+
+  <ol
+    *ngIf="qaHighlights.length"
+    class="ion-margin-vertical ion-padding-start"
+  >
+    <li
+      *ngFor="let item of qaHighlights"
+      class="ion-padding-bottom"
+    >
+      <p>
+        <a
+          [routerLink]="['.']"
+          [queryParams]="{
+            categoryID: item.categoryID
+          }"
+          queryParamsHandling=""
+          class="text-style--inline-link is_minimal"
+          >{{ item.categoryName }}</a
+        ><strong>&nbsp;/ </strong>
+        <a
+          [routerLink]="['.']"
+          [queryParams]="{
+            categoryID: item.categoryID,
+            subCategoryID: item.subCategoryID
+          }"
+          queryParamsHandling=""
+          class="text-style--inline-link is_minimal"
+          >{{ item.subCategoryName }}</a
+        ><strong>&nbsp;: </strong><br />
+        <ng-container
+          *ngTemplateOutlet="lastUpdatedLine; context:{ date: item.dateUpdated }"
+        ></ng-container>
+      </p>
+      <details>
+        <summary class="action action-dark">{{ item.question }}</summary>
+        <ng-container
+          *ngTemplateOutlet="answerBlock; context:{ answer: item.answer }"
+        ></ng-container>
+        <ul
+          *ngIf="item.children.length"
+          class="ion-padding"
+        >
+          <li
+            *ngFor="let subQaSet of item.children"
+            class="ion-margin-bottom"
+          >
+            <details>
+              <summary class="action">{{ subQaSet.question }}</summary>
+              <p *ngIf="subQaSet.dateUpdated">
+                <ng-container
+                  *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
+                ></ng-container>
+              </p>
+              <ng-container
+                *ngTemplateOutlet="answerBlock; context:{ answer: subQaSet.answer }"
+              ></ng-container>
+            </details>
+          </li>
+        </ul>
+      </details>
+    </li>
+  </ol>
 </ion-content>
 
 <!-- Offer-detail page -->
@@ -272,7 +390,7 @@
 </ion-content>
 
 <div
-  class="floating-action-area"
+  class="floating-action-area is_bottom-right"
   *ngIf="isSupportedRegion() && hasContactOptions()"
 >
   <span

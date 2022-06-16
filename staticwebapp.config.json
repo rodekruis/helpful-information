@@ -19,17 +19,11 @@
       "headers": {
         "Cache-Control": "must-revalidate, no-transform, max-age=2592000"
       }
-    },
-    {
-      "route": "/svg/*.svg",
-      "headers": {
-        "Cache-Control": "no-transform, max-age=31536000"
-      }
     }
   ],
   "navigationFallback": {
     "rewrite": "index.html",
-    "exclude": ["/assets/*", "/svg/*"]
+    "exclude": ["/assets/*"]
   },
   "responseOverrides": {
     "404": {

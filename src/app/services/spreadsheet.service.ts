@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 import { Offer } from 'src/app/models/offer.model';
-import { ReferralPageData } from 'src/app/models/referral-page-data';
+import {
+  PageDataFallback,
+  ReferralPageData,
+} from 'src/app/models/referral-page-data';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
@@ -24,6 +27,7 @@ type ColumnMap = Map<string, number>;
 })
 export class SpreadsheetService {
   static visibleKey = 'Show';
+  static booleanTrueKey = 'Yes';
 
   private sheetIds = {};
 
@@ -40,6 +44,10 @@ export class SpreadsheetService {
 
   static isVisible(value: string): boolean {
     return value === this.visibleKey;
+  }
+
+  static isBoolean(value: string): boolean {
+    return value === this.booleanTrueKey;
   }
 
   private loadSheetIds(): void {
@@ -70,6 +78,24 @@ export class SpreadsheetService {
       colMap.set(colName, this.getColumnIndexFromTag(headerRow, colName));
     });
     return colMap;
+  }
+
+  static getCategoryName(
+    id: Category['categoryID'],
+    collection: Category[],
+  ): string {
+    if (!collection) return '';
+    const category = collection.find((item) => item.categoryID === id);
+    return category ? category.categoryName : '';
+  }
+
+  static getSubCategoryName(
+    id: SubCategory['subCategoryID'],
+    collection: SubCategory[],
+  ): string {
+    if (!collection) return '';
+    const subCategory = collection.find((item) => item.subCategoryID === id);
+    return subCategory ? subCategory.subCategoryName : '';
   }
 
   private convertCategoryRowToCategoryObject(categoryRow): Category {
@@ -216,14 +242,12 @@ export class SpreadsheetService {
         referralPageDataRows[4],
         1,
       ),
-      referralBackButtonLabel: SpreadsheetService.readCellValue(
-        referralPageDataRows[5],
-        1,
-      ),
-      referralMainScreenButtonLabel: SpreadsheetService.readCellValue(
-        referralPageDataRows[6],
-        1,
-      ),
+      referralBackButtonLabel:
+        SpreadsheetService.readCellValue(referralPageDataRows[5], 1) ||
+        PageDataFallback.referralBackButtonLabel,
+      referralMainScreenButtonLabel:
+        SpreadsheetService.readCellValue(referralPageDataRows[6], 1) ||
+        PageDataFallback.referralMainScreenButtonLabel,
       referralPhoneNumber: SpreadsheetService.readCellValue(
         referralPageDataRows[7],
         1,
@@ -240,10 +264,18 @@ export class SpreadsheetService {
         referralPageDataRows[9],
         1,
       ),
-      labelLastUpdated: SpreadsheetService.readCellValue(
-        referralPageDataRows[10],
-        1,
-      ),
+      labelLastUpdated:
+        SpreadsheetService.readCellValue(referralPageDataRows[10], 1) ||
+        PageDataFallback.labelLastUpdated,
+      labelHighlightsPageTitle:
+        SpreadsheetService.readCellValue(referralPageDataRows[14], 1) ||
+        PageDataFallback.labelHighlightsPageTitle,
+      labelHighlightsItemsZero:
+        SpreadsheetService.readCellValue(referralPageDataRows[15], 1) ||
+        PageDataFallback.labelHighlightsItemsZero,
+      labelHighlightsItemsCount:
+        SpreadsheetService.readCellValue(referralPageDataRows[16], 1) ||
+        PageDataFallback.labelHighlightsItemsCount,
     };
   }
 
@@ -274,6 +306,9 @@ export class SpreadsheetService {
       ),
       isVisible: SpreadsheetService.isVisible(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.visible)),
+      ),
+      isHighlight: SpreadsheetService.isBoolean(
+        SpreadsheetService.readCellValue(row, colMap.get(QACol.highlight)),
       ),
       dateUpdated: getDateFromString(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.updated)),
