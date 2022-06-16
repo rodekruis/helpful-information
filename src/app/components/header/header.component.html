@@ -32,8 +32,8 @@
     <a
       href="/"
       (click)="logoClick($event)"
-      [title]="logoActionLabel"
-      [attr.aria-label]="logoActionLabel"
+      [title]="logoActionLabel || fallbackActionLabel"
+      [attr.aria-label]="logoActionLabel || fallbackActionLabel"
       class="app-header--logo-link"
     >
       <ion-thumbnail>

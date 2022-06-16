@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { PageDataFallback } from 'src/app/models/referral-page-data';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -30,6 +31,7 @@ export class AppHeaderComponent {
 
   public fallbackTitle = environment.appName;
   public fallbackLogoUrl = environment.appLogoUrl;
+  public fallbackActionLabel = PageDataFallback.referralMainScreenButtonLabel;
 
   public backClick($event: MouseEvent) {
     return this.backAction.emit($event);
