@@ -104,7 +104,7 @@ export class ReferralPageComponent implements OnInit {
       this.referralPageData =
         await this.referralPageDataService.getReferralPageData(this.region);
 
-      this.titleService.setTitle(this.referralPageData.referralPageTitle);
+      this.updatePageTitle(this.referralPageData.referralPageTitle);
 
       this.lastUpdatedTimeService.setLastUpdatedTime(
         this.referralPageData.referralLastUpdatedTime,
@@ -124,43 +124,55 @@ export class ReferralPageComponent implements OnInit {
 
       this.loading = false;
     } else {
-      this.titleService.setTitle(environment.appName);
+      this.updatePageTitle(environment.appName);
       this.router.navigate([this.rootHref]);
     }
   }
 
   private updatePageTitle(
+    root: string | null,
     categoryName?: string,
     subCategoryName?: string,
     offerName?: string,
   ) {
-    let pageTitle = this.referralPageData.referralPageTitle;
+    let title = '';
+
+    if (root) {
+      title = root;
+    }
 
     if (categoryName) {
-      pageTitle += ' : ' + categoryName;
+      title += ' : ' + categoryName;
     }
 
     if (subCategoryName) {
-      pageTitle += ' / ' + subCategoryName;
+      title += ' / ' + subCategoryName;
     }
 
     if (offerName) {
-      pageTitle += ' : ' + offerName;
+      title += ' : ' + offerName;
     }
 
-    this.titleService.setTitle(pageTitle);
+    if (!!environment.envName) {
+      title += ` [ ${environment.envName} ]`;
+    }
+
+    this.titleService.setTitle(title);
   }
 
   private readQueryParams() {
     this.route.queryParams.subscribe((params) => {
       if (!params.length) {
-        this.updatePageTitle();
+        this.updatePageTitle(this.referralPageData.referralPageTitle);
       }
       if ('categoryID' in params) {
         this.category = this.categories.find(
           (category) => category.categoryID === Number(params.categoryID),
         );
-        this.updatePageTitle(this.category.categoryName);
+        this.updatePageTitle(
+          this.referralPageData.referralPageTitle,
+          this.category.categoryName,
+        );
       } else {
         this.category = null;
       }
@@ -170,6 +182,7 @@ export class ReferralPageComponent implements OnInit {
             subCategory.subCategoryID === Number(params.subCategoryID),
         );
         this.updatePageTitle(
+          this.referralPageData.referralPageTitle,
           this.category.categoryName,
           this.subCategory.subCategoryName,
         );
@@ -181,6 +194,7 @@ export class ReferralPageComponent implements OnInit {
           (offer) => offer.offerID === Number(params.offerID),
         );
         this.updatePageTitle(
+          this.referralPageData.referralPageTitle,
           this.category.categoryName,
           this.subCategory.subCategoryName,
           this.offer.offerName,

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import {
   LoggingEvent,
@@ -16,12 +15,9 @@ export class AppComponent {
   public envName: string = environment.envName;
 
   constructor(
-    private platform: Platform,
     private loggingService: LoggingService,
     private swUpdates: SwUpdate,
   ) {
-    this.initializeApp();
-
     this.loggingService.logPageView('app');
 
     this.swUpdates.versionUpdates.subscribe((evt) => {
@@ -91,14 +87,6 @@ export class AppComponent {
         },
       );
       document.location.reload();
-    });
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      if (!!this.envName) {
-        document.title += ` [ ${this.envName} ]`;
-      }
     });
   }
 }
