@@ -1,3 +1,25 @@
+<ng-template
+  #lastUpdatedLine
+  let-date="date"
+>
+  <small *ngIf="date">
+    {{ referralPageData.labelLastUpdated }}
+    <time [attr.datetime]="date|date:'yyyy-MM-dd'">
+      {{ date|date:"d-MM-''YY" }}
+    </time>
+  </small>
+</ng-template>
+
+<ng-template
+  #answerBlock
+  let-answer="answer"
+>
+  <p
+    class="text-style--wrap-newlines"
+    [innerHTML]="answer|convertUrls"
+  ></p>
+</ng-template>
+
 <ion-header>
   <app-header
     [title]="referralPageData?.referralPageTitle"
@@ -104,36 +126,15 @@
       *ngFor="let _qaSet of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
       class="ion-margin-bottom"
     >
-      <ng-template
-        #lastUpdatedLine
-        let-date="date"
-      >
-        <p *ngIf="date">
-          <small>
-            {{ referralPageData.labelLastUpdated || 'Last updated:' }}
-            <time [attr.datetime]="date|date:'yyyy-MM-dd'">
-              {{ date|date:"d-MM-''YY" }}
-            </time>
-          </small>
-        </p>
-      </ng-template>
-      <ng-template
-        #answerBlock
-        let-answer="answer"
-      >
-        <p
-          class="text-style--wrap-newlines"
-          [innerHTML]="answer|convertUrls"
-        ></p>
-      </ng-template>
-
       <details>
         <summary class="action action-dark">
           <strong>{{ _qaSet.question }}</strong>
         </summary>
-        <ng-container
-          *ngTemplateOutlet="lastUpdatedLine; context:{ date: _qaSet.dateUpdated }"
-        ></ng-container>
+        <p *ngIf="_qaSet.dateUpdated">
+          <ng-container
+            *ngTemplateOutlet="lastUpdatedLine; context:{ date: _qaSet.dateUpdated }"
+          ></ng-container>
+        </p>
         <ng-container
           *ngTemplateOutlet="answerBlock; context:{ answer: _qaSet.answer }"
         ></ng-container>
@@ -147,9 +148,11 @@
           >
             <details>
               <summary class="action">{{ subQaSet.question }}</summary>
-              <ng-container
-                *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
-              ></ng-container>
+              <p *ngIf="subQaSet.dateUpdated">
+                <ng-container
+                  *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
+                ></ng-container>
+              </p>
               <ng-container
                 *ngTemplateOutlet="answerBlock; context:{ answer: subQaSet.answer }"
               ></ng-container>
