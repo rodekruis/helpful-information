@@ -97,8 +97,10 @@ ion-content.ion-padding {
 // Floating Action Button (bottom-right)
 .floating-action-area {
   position: fixed;
-  right: 0;
-  bottom: 1rem;
+  &.is_bottom-right {
+    right: 0;
+    bottom: 1rem;
+  }
 }
 
 //
