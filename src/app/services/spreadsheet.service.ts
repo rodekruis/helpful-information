@@ -27,6 +27,7 @@ type ColumnMap = Map<string, number>;
 })
 export class SpreadsheetService {
   static visibleKey = 'Show';
+  static booleanTrueKey = 'Yes';
 
   private sheetIds = {};
 
@@ -43,6 +44,10 @@ export class SpreadsheetService {
 
   static isVisible(value: string): boolean {
     return value === this.visibleKey;
+  }
+
+  static isBoolean(value: string): boolean {
+    return value === this.booleanTrueKey;
   }
 
   private loadSheetIds(): void {
@@ -73,6 +78,24 @@ export class SpreadsheetService {
       colMap.set(colName, this.getColumnIndexFromTag(headerRow, colName));
     });
     return colMap;
+  }
+
+  static getCategoryName(
+    id: Category['categoryID'],
+    collection: Category[],
+  ): string {
+    if (!collection) return '';
+    const category = collection.find((item) => item.categoryID === id);
+    return category ? category.categoryName : '';
+  }
+
+  static getSubCategoryName(
+    id: SubCategory['subCategoryID'],
+    collection: SubCategory[],
+  ): string {
+    if (!collection) return '';
+    const subCategory = collection.find((item) => item.subCategoryID === id);
+    return subCategory ? subCategory.subCategoryName : '';
   }
 
   private convertCategoryRowToCategoryObject(categoryRow): Category {
@@ -244,6 +267,15 @@ export class SpreadsheetService {
       labelLastUpdated:
         SpreadsheetService.readCellValue(referralPageDataRows[10], 1) ||
         PageDataFallback.labelLastUpdated,
+      labelHighlightsPageTitle:
+        SpreadsheetService.readCellValue(referralPageDataRows[14], 1) ||
+        PageDataFallback.labelHighlightsPageTitle,
+      labelHighlightsItemsZero:
+        SpreadsheetService.readCellValue(referralPageDataRows[15], 1) ||
+        PageDataFallback.labelHighlightsItemsZero,
+      labelHighlightsItemsCount:
+        SpreadsheetService.readCellValue(referralPageDataRows[16], 1) ||
+        PageDataFallback.labelHighlightsItemsCount,
     };
   }
 
@@ -274,6 +306,9 @@ export class SpreadsheetService {
       ),
       isVisible: SpreadsheetService.isVisible(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.visible)),
+      ),
+      isHighlight: SpreadsheetService.isBoolean(
+        SpreadsheetService.readCellValue(row, colMap.get(QACol.highlight)),
       ),
       dateUpdated: getDateFromString(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.updated)),

@@ -1,8 +1,11 @@
 export class QASet {
   id: number;
   categoryID: number;
+  categoryName?: string;
   subCategoryID: number;
+  subCategoryName?: string;
   isVisible: boolean;
+  isHighlight: boolean;
   dateUpdated: Date | null;
   slug?: string;
   parentSlug?: string;
@@ -19,6 +22,7 @@ export enum QACol {
   subcategory = 'SUBCATEGORY',
   category = 'CATEGORY',
   visible = 'VISIBLE',
+  highlight = 'HIGHLIGHT',
   updated = 'UPDATED',
   slug = 'SLUG',
   parent = 'PARENT',

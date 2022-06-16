@@ -15,6 +15,7 @@ import { OffersService } from 'src/app/services/offers.service';
 import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
 import { environment } from 'src/environments/environment';
 import { QASet } from '../models/qa-set.model';
+import { SpreadsheetService } from '../services/spreadsheet.service';
 
 @Component({
   selector: 'app-referral',
@@ -30,6 +31,7 @@ export class ReferralPageComponent implements OnInit {
 
   public offers: Offer[];
   public qaSets: QASet[];
+  public qaHighlights: QASet[];
   public categories: Category[];
   public subCategories: SubCategory[];
 
@@ -42,6 +44,8 @@ export class ReferralPageComponent implements OnInit {
   public readonly rootHref: string = '/';
 
   public loading = false;
+  public useQandAs = environment.useQandAs;
+  public showHighlights = false;
 
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
@@ -61,6 +65,11 @@ export class ReferralPageComponent implements OnInit {
       this.region = params.region;
       this.loadReferralData();
     });
+    if (environment.useQandAs) {
+      this.route.queryParams.subscribe((queryParams) => {
+        this.showHighlights = !!queryParams.highlights;
+      });
+    }
   }
 
   public getRegionHref() {
@@ -118,6 +127,7 @@ export class ReferralPageComponent implements OnInit {
 
       if (environment.useQandAs) {
         this.qaSets = await this.offersService.getQAs(this.region);
+        this.qaHighlights = this.createHighlights(this.qaSets);
       }
 
       this.readQueryParams();
@@ -127,6 +137,46 @@ export class ReferralPageComponent implements OnInit {
       this.updatePageTitle(environment.appName);
       this.router.navigate([this.rootHref]);
     }
+  }
+
+  private createHighlights(qaSets: QASet[]): QASet[] {
+    return qaSets
+      .filter((item) => item.isHighlight && item.isVisible)
+      .sort((a, b) => {
+        if (!a.dateUpdated || !b.dateUpdated) {
+          return 0;
+        }
+        return a.dateUpdated.getTime() - b.dateUpdated.getTime();
+      })
+      .map((qaSet) => this.addParentCategoryNames(qaSet))
+      .map((item) => {
+        if (!item.children) {
+          return item;
+        }
+        const highlightedChildren = item.children.filter(
+          (child) => child.isHighlight,
+        );
+        // If only a few children are highlighted include those
+        // If NO children are highlighted include all
+        if (highlightedChildren.length) {
+          item.children = highlightedChildren;
+        }
+        return item;
+      });
+  }
+
+  private addParentCategoryNames(entity: Offer): Offer;
+  private addParentCategoryNames(entity: QASet): QASet;
+  private addParentCategoryNames(entity: QASet | Offer): QASet | Offer {
+    entity.categoryName = SpreadsheetService.getCategoryName(
+      entity.categoryID,
+      this.categories,
+    );
+    entity.subCategoryName = SpreadsheetService.getSubCategoryName(
+      entity.subCategoryID,
+      this.subCategories,
+    );
+    return entity;
   }
 
   private updatePageTitle(

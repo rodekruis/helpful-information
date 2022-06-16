@@ -15,7 +15,9 @@ export class Offer {
   offerBasicRight?: string;
   offerVisible: boolean;
   subCategoryID: number;
+  subCategoryName?: string;
   categoryID: number;
+  categoryName?: string;
   findAVaccinationCenter?: string;
   redCrossHelpDesk?: string;
   whatToExpect?: string;
