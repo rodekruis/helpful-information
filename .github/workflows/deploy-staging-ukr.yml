@@ -56,6 +56,10 @@ jobs:
           TXT_MAIN_PAGE_INTRO: 'As a Red Cross aid worker, you can use this FAQ for communicating answers to questions by refugees from Ukraine. \n\n Please select your FAQ language below:'
           REGIONS: 'en,nl'
           REGIONS_LABELS: 'FAQ English,FAQ Nederlands'
+          TXT_ERROR_HEADER: 'Data Unavailable'
+          TXT_ERROR_MESSAGE: 'Reach out to us at: '
+          TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
+          TXT_ERROR_RETRY: 'Try again?'
           GOOGLE_SHEETS_API_KEY: ${{ secrets.UKR_STAGE_GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           GOOGLE_SHEETS_SHEET_IDS: '14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE'

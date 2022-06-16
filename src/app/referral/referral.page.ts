@@ -49,6 +49,10 @@ export class ReferralPageComponent implements OnInit {
 
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
+  public errorHeader = environment.errorHeader;
+  public errorMessage = environment.errorMessage;
+  public errorContactUrl = environment.errorContactUrl;
+  public errorRetry = environment.errorRetry;
 
   constructor(
     public offersService: OffersService,
