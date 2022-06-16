@@ -7,10 +7,6 @@
 @import '~@ionic/angular/css/padding.css';
 // @import '~@ionic/angular/css/float-elements.css';
 // @import '~@ionic/angular/css/text-alignment.css';
-// Include only one used from above...
-.ion-text-center {
-  text-align: center !important;
-}
 // @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
@@ -108,6 +104,9 @@ ion-content.ion-padding {
 //
 // Text Style Utilities:
 //
+.text-style--center {
+  text-align: center !important;
+}
 .text-style--header {
   font-family: var(--ion-font-family-header);
   font-weight: bold;
