@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 import { Offer } from 'src/app/models/offer.model';
-import { ReferralPageData } from 'src/app/models/referral-page-data';
+import {
+  PageDataFallback,
+  ReferralPageData,
+} from 'src/app/models/referral-page-data';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
@@ -216,14 +219,12 @@ export class SpreadsheetService {
         referralPageDataRows[4],
         1,
       ),
-      referralBackButtonLabel: SpreadsheetService.readCellValue(
-        referralPageDataRows[5],
-        1,
-      ),
-      referralMainScreenButtonLabel: SpreadsheetService.readCellValue(
-        referralPageDataRows[6],
-        1,
-      ),
+      referralBackButtonLabel:
+        SpreadsheetService.readCellValue(referralPageDataRows[5], 1) ||
+        PageDataFallback.referralBackButtonLabel,
+      referralMainScreenButtonLabel:
+        SpreadsheetService.readCellValue(referralPageDataRows[6], 1) ||
+        PageDataFallback.referralMainScreenButtonLabel,
       referralPhoneNumber: SpreadsheetService.readCellValue(
         referralPageDataRows[7],
         1,
@@ -240,10 +241,9 @@ export class SpreadsheetService {
         referralPageDataRows[9],
         1,
       ),
-      labelLastUpdated: SpreadsheetService.readCellValue(
-        referralPageDataRows[10],
-        1,
-      ),
+      labelLastUpdated:
+        SpreadsheetService.readCellValue(referralPageDataRows[10], 1) ||
+        PageDataFallback.labelLastUpdated,
     };
   }
 

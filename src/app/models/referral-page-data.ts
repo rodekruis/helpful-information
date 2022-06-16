@@ -11,3 +11,9 @@ export class ReferralPageData {
   referralLastUpdatedTime?: string;
   labelLastUpdated?: string;
 }
+
+export enum PageDataFallback {
+  referralBackButtonLabel = 'Back',
+  referralMainScreenButtonLabel = 'Main screen',
+  labelLastUpdated = 'Last updated:',
+}
