@@ -12,8 +12,13 @@ export const environment = {
 
   // Configuration of content
   appName: 'Helpful Information',
+  appLogoUrl: 'assets/icons/icon_48.png',
   mainPageHeader: 'The Red Cross provides helpful information.',
   mainPageIntroduction: 'Please choose a language/region.',
+  errorHeader: 'Data unavailable',
+  errorMessage: 'Contact us at: ',
+  errorContactUrl: 'https://github.com/rodekruis/helpfulinformation',
+  errorRetry: 'Try again?',
 
   // Regions: (A comnma-separated list of URL paths/slugs)
   regions: '',

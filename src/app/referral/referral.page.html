@@ -340,13 +340,15 @@
   color="dark"
   class="ion-padding"
 >
-  <h2>Data Unavailable</h2>
+  <h2>{{ errorHeader }}</h2>
   <p>
-    Please reach out to us at:
+    {{ errorMessage }}
     <a
-      href="https://www.rodekruis.nl/"
+      [href]="errorContactUrl"
+      target="_blank"
+      rel="noopener noreferrer"
       style="color: red"
-      >https://www.rodekruis.nl/</a
+      >{{ errorContactUrl }}</a
     >
     <br /><br /><br />
     <a
@@ -354,7 +356,7 @@
       onclick="location.reload(true)"
       style="color: gold"
     >
-      Try again?
+      {{ errorRetry }}
     </a>
   </p>
 </ion-content>
@@ -370,7 +372,10 @@
     class="ion-margin-bottom ion-padding-bottom"
   >
     <h2 class="text-style--header text-style--size-1">{{ pageHeader }}</h2>
-    <p class="text-style--wrap-newlines">{{ pageIntroduction }}</p>
+    <p
+      class="text-style--wrap-newlines"
+      [innerHTML]="pageIntroduction"
+    ></p>
   </div>
   <ul class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical">
     <li

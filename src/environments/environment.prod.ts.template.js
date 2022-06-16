@@ -11,8 +11,13 @@ export const environment = {
 
   // Configuration of content
   appName: '${process.env.TXT_APP_NAME || ''}',
+  appLogoUrl: '${process.env.TXT_APP_LOGO_URL || ''}',
   mainPageHeader: '${process.env.TXT_MAIN_PAGE_HEADER || ''}',
   mainPageIntroduction: '${process.env.TXT_MAIN_PAGE_INTRO || ''}',
+  errorHeader: '${process.env.TXT_ERROR_HEADER || ''}',
+  errorMessage: '${process.env.TXT_ERROR_MESSAGE || ''}',
+  errorContactUrl: '${process.env.TXT_ERROR_CONTACT_URL || ''}',
+  errorRetry: '${process.env.TXT_ERROR_RETRY || ''}',
 
   // Regions:
   regions: '${process.env.REGIONS || ''}',

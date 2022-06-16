@@ -32,13 +32,14 @@
     <a
       href="/"
       (click)="logoClick($event)"
-      [title]="logoActionLabel"
-      [attr.aria-label]="logoActionLabel"
+      [title]="logoActionLabel || fallbackActionLabel"
+      [attr.aria-label]="logoActionLabel || fallbackActionLabel"
       class="app-header--logo-link"
     >
       <ion-thumbnail>
         <ion-img
-          [src]="logoUrl || 'assets/icons/icon_48.png'"
+          *ngIf="logoUrl || fallbackLogoUrl"
+          [src]="logoUrl || fallbackLogoUrl"
           alt=""
           class="app-header--logo"
         ></ion-img>
