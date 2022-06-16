@@ -52,6 +52,7 @@ jobs:
           NG_USE_SERVICE_WORKER: 'true'
           NG_USE_Q_AND_AS: 'true'
           TXT_APP_NAME: 'Helpful Information'
+          TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
           TXT_MAIN_PAGE_HEADER: 'The Netherlands Red Cross provides Helpful Information.'
           TXT_MAIN_PAGE_INTRO: 'Please choose a location.'
           TXT_ERROR_HEADER: 'Data Unavailable'

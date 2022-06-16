@@ -11,6 +11,7 @@ export const environment = {
 
   // Configuration of content
   appName: '${process.env.TXT_APP_NAME || ''}',
+  appLogoUrl: '${process.env.TXT_APP_LOGO_URL || ''}',
   mainPageHeader: '${process.env.TXT_MAIN_PAGE_HEADER || ''}',
   mainPageIntroduction: '${process.env.TXT_MAIN_PAGE_INTRO || ''}',
   errorHeader: '${process.env.TXT_ERROR_HEADER || ''}',

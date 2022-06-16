@@ -29,6 +29,7 @@ export class AppHeaderComponent {
   public logoAction = new EventEmitter<MouseEvent>();
 
   public fallbackTitle = environment.appName;
+  public fallbackLogoUrl = environment.appLogoUrl;
 
   public backClick($event: MouseEvent) {
     return this.backAction.emit($event);

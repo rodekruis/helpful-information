@@ -38,7 +38,8 @@
     >
       <ion-thumbnail>
         <ion-img
-          [src]="logoUrl || 'assets/icons/icon_48.png'"
+          *ngIf="logoUrl || fallbackLogoUrl"
+          [src]="logoUrl || fallbackLogoUrl"
           alt=""
           class="app-header--logo"
         ></ion-img>
