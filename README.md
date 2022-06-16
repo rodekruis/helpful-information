@@ -135,6 +135,7 @@ During development, an automated watch-process can be run with:
 ### Libraries/frameworks in use
 
 - [Ionic v6](https://ionicframework.com/docs/v6/)
+  > ⚠️ The [`Ionicons`](https://ionic.io/ionicons) icon-set is NOT included in the final build, so cannot be used 'by default'. Icons can be added manually.
 - [Angular v13](https://v13.angular.io/docs/)
 
 ---
