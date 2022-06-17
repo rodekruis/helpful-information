@@ -50,19 +50,20 @@ jobs:
           NG_PRODUCTION: 'true'
           ENV_NAME: ''
           NG_USE_SERVICE_WORKER: 'true'
-          TXT_APP_NAME: 'Helpful Information'
+          NG_USE_Q_AND_AS: 'true'
+          TXT_APP_NAME: 'HIA Vraagbaak Ukraïne'
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
-          TXT_MAIN_PAGE_HEADER: 'This website is made to give helpful information to all refugees from Ukraine.'
-          TXT_MAIN_PAGE_INTRO: 'Select a region or look for general information about living in the Netherlands and how to get here. \n\n Виберіть регіон або знайдіть загальну інформацію про проживання в Нідерландах і про те, як сюди дістатися. \n\n Выберите регион или найдите общую информацию о жизни в Нидерландах и о том, как сюда добраться.'
+          TXT_MAIN_PAGE_HEADER: 'This web app is made to give helpful information (HIA) about frequently asked questions (FAQ) from refugees from Ukraine.'
+          TXT_MAIN_PAGE_INTRO: 'As a Red Cross aid worker, you can use this web app to communicate answers to questions you receive from refugees from Ukraine. \n\n If you are a refugee from Ukraine, you can use this web app to look for more information to possible questions you have. If you cannot find an answer to your question, please send a (voice)message to our <a href="https://wa.me/31648158053" target="_blank" rel="noopener noreferrer">WhatsApp helpdesk +31 6 48 15 80 53</a> or check: <a href="https://www.refugeehelp.nl/get-help"  target="_blank" rel="noopener noreferrer">https://www.refugeehelp.nl/get-help</a> \n\n Please select your FAQ language below: \n\n NB! De Nederlandse versie wordt zo snel mogelijk ge-upload.'
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
           TXT_ERROR_RETRY: 'Try again?'
-          REGIONS: 'nl,amsterdam,haarlem,rotterdam'
-          REGIONS_LABELS: 'General information,Amsterdam region,Haarlem region,Rotterdam region'
+          REGIONS: 'en,nl'
+          REGIONS_LABELS: 'English,Nederlands'
+          GOOGLE_SHEETS_SHEET_IDS: '14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE'
           GOOGLE_SHEETS_API_KEY: ${{ secrets.UKR_GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
-          GOOGLE_SHEETS_SHEET_IDS: '1oGu63wIaVN_BT9bQ_96_ymJuPxvfpo-ZRQ5V-iKcNgI,13MPoIIIDLCVanSvUNMpYRNDRpTC3li3Yam_e_zpHZ_I,1USJFmdGotSYGlE2ARLYyAetCzgWTlQ7pFwFGKBOhVew,1a4jWde_v3S5RAPEVD85CuwwflMXkyvVbQ0aje46NMyM'
           AI_CONNECTION_STRING: ${{ secrets.UKR_AI_CONNECTION_STRING }}
 
       - name: Add robots.txt
