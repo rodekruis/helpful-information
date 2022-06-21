@@ -51,7 +51,7 @@ jobs:
           ENV_NAME: 'UKR-Staging'
           NG_USE_SERVICE_WORKER: 'true'
           NG_USE_Q_AND_AS: 'true'
-          TXT_APP_NAME: 'HIA Vraagbaak Ukraïne'
+          TXT_APP_NAME: 'Vraagbaak Ukraine'
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
           TXT_MAIN_PAGE_HEADER: 'This web app is made to give helpful information (HIA) about frequently asked questions (FAQ) from refugees from Ukraine.'
           TXT_MAIN_PAGE_INTRO: 'As a Red Cross aid worker, you can use this web app to communicate answers to questions you receive from refugees from Ukraine. \n\n If you are a refugee from Ukraine, you can use this web app to look for more information to possible questions you have. If you cannot find an answer to your question, please send a (voice)message to our <a href="https://wa.me/31648158053" target="_blank" rel="noopener noreferrer">WhatsApp helpdesk +31 6 48 15 80 53</a> or check: <a href="https://www.refugeehelp.nl/get-help"  target="_blank" rel="noopener noreferrer">https://www.refugeehelp.nl/get-help</a> \n\n Please select your FAQ language below: \n\n NB! De Nederlandse versie wordt zo snel mogelijk ge-upload.'
