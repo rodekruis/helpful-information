@@ -69,6 +69,9 @@ jobs:
       - name: Add robots.txt
         run: 'cp src/robots.public.txt www/robots.txt'
 
+      - name: Add Google Site Verification code
+        run: 'echo "google-site-verification: google14ff151bbe1f8dd2.html" > www/google14ff151bbe1f8dd2.html'
+
       - name: Deploy to Production
         uses: Azure/static-web-apps-deploy@v1
         with:
