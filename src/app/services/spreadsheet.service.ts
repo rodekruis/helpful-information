@@ -52,7 +52,7 @@ export class SpreadsheetService {
 
   private loadSheetIds(): void {
     const regions: string[] = environment.regions.trim().split(/\s*,\s*/);
-    const googleSheetsIds: string[] = environment.google_sheets_sheet_ids
+    const googleSheetsIds: string[] = environment.regionsSheetIds
       .trim()
       .split(/\s*,\s*/);
 

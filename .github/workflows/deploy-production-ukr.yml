@@ -42,7 +42,9 @@ jobs:
           cache: 'npm'
 
       - name: Install
-        run: 'npm ci --no-optional --no-fund --no-audit'
+        env:
+          HUSKY: 0
+        run: 'npm ci --omit=optional --no-fund --no-audit'
 
       - name: Build
         run: 'npm run build:production'
@@ -61,7 +63,7 @@ jobs:
           TXT_ERROR_RETRY: 'Try again?'
           REGIONS: 'en,nl'
           REGIONS_LABELS: 'English,Nederlands'
-          GOOGLE_SHEETS_SHEET_IDS: '14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE'
+          REGIONS_SHEET_IDS: '14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE'
           GOOGLE_SHEETS_API_KEY: ${{ secrets.UKR_GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ${{ secrets.UKR_AI_CONNECTION_STRING }}
