@@ -22,12 +22,12 @@ export const environment = {
   // Regions:
   regions: '${process.env.REGIONS || ''}',
   regionsLabels: '${process.env.REGIONS_LABELS || ''}',
+  regionsSheetIds: '${process.env.REGIONS_SHEET_IDS || ''}',
 
   // Third-party tokens:
   // Google Sheets API:
   google_sheets_api_key: '${process.env.GOOGLE_SHEETS_API_KEY || ''}',
   google_sheets_api_url: '${process.env.GOOGLE_SHEETS_API_URL || ''}',
-  google_sheets_sheet_ids: '${process.env.GOOGLE_SHEETS_SHEET_IDS || ''}',
 
   // Application Insights
   appInsightsConnectionString: '${process.env.AI_CONNECTION_STRING || ''}',

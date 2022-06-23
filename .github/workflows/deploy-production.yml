@@ -64,7 +64,7 @@ jobs:
           REGIONS_LABELS: 'COVID19 Vaccinations,Amsterdam,Utrecht,Almere / Lelystad,Den Haag,Rotterdam'
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
-          GOOGLE_SHEETS_SHEET_IDS: '15R9HxX9nMI-6ElqxO91hz9fzfRutc9TAwVpllmLGv2Q,1OANMuGJxGBQ2ba3xVfKvTpD0EGQM-ukUrgRyN9tzMbQ,1ZqizriL_RJ2dCcNVnCj0GM02pqOLWcIF18A4zVigsrU,1mod8O9EgvqpCN3ScyAKkOh34x3OGa-8yIc18K_t1xXU,1m43Tw7CWRUdPjaStq6dOi9yvHSYInP1lWjLetk1PrTI,18qD1PGTK2jTExpVIXXWpjHdpe5KDy7IdcR537CusCLU'
+          REGIONS_SHEET_IDS: '15R9HxX9nMI-6ElqxO91hz9fzfRutc9TAwVpllmLGv2Q,1OANMuGJxGBQ2ba3xVfKvTpD0EGQM-ukUrgRyN9tzMbQ,1ZqizriL_RJ2dCcNVnCj0GM02pqOLWcIF18A4zVigsrU,1mod8O9EgvqpCN3ScyAKkOh34x3OGa-8yIc18K_t1xXU,1m43Tw7CWRUdPjaStq6dOi9yvHSYInP1lWjLetk1PrTI,18qD1PGTK2jTExpVIXXWpjHdpe5KDy7IdcR537CusCLU'
           AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
 
       - name: Add robots.txt

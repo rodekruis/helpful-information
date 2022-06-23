@@ -24,13 +24,14 @@ export const environment = {
   regions: '',
   // Regions Labels: (A comnma-separated list of human-readable text-strings)
   regionsLabels: '',
+  // Regions Google Sheet IDs, corresponding to the above defined regions
+  regionsSheetIds: '',
 
   // Third-party tokens:
 
   // Google Sheets API:
   google_sheets_api_key: '',
   google_sheets_api_url: '',
-  google_sheets_sheet_ids: '',
 
   // Application Insights:
   appInsightsConnectionString: '',
