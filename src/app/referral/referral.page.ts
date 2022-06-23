@@ -144,7 +144,9 @@ export class ReferralPageComponent implements OnInit {
   }
 
   private createHighlights(qaSets: QASet[]): QASet[] {
-    return qaSets
+    // Create a deep copy of the Q&A set:
+    const items = qaSets.map((item) => ({ ...item }));
+    return items
       .filter((item) => item.isHighlight && item.isVisible)
       .sort((a, b) => {
         if (!a.dateUpdated || !b.dateUpdated) {

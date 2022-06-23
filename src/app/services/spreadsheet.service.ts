@@ -341,6 +341,7 @@ export class SpreadsheetService {
     const parentRow = all.find((row) => row.slug === element.parentSlug);
 
     if (!!parentRow && element.isVisible) {
+      delete element.children;
       // Add this question to its parents' collection:
       parentRow.children.push(element);
     }
