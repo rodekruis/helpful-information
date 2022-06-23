@@ -33,7 +33,9 @@ jobs:
           cache: 'npm'
 
       - name: Install
-        run: npm ci --no-optional --no-fund --no-audit
+        env:
+          HUSKY: 0
+        run: npm ci --omit=optional --no-fund --no-audit
 
       - name: Run Tests
         run: npm test
