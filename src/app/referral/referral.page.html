@@ -93,6 +93,20 @@
         [subCategory]="getNextSubCategory(categoryItem)"
       ></app-link-tile>
     </li>
+    <li
+      *ngIf="(categories.length % 3) <= 1"
+      class="tile-grid--item"
+      aria-hidden="true"
+    >
+      <!-- filler-item for empty spot at 2nd-in-a-row -->
+    </li>
+    <li
+      *ngIf="(categories.length % 3) <= 2"
+      class="tile-grid--item"
+      aria-hidden="true"
+    >
+      <!-- filler-item for empty spot at 3rd-in-a-row -->
+    </li>
   </ul>
   <br /><br /><br />
 </ion-content>
@@ -389,6 +403,13 @@
       >
         <span>{{ regionsLabels[regions.indexOf(region)] }}</span>
       </a>
+    </li>
+    <li
+      *ngIf="(regions.length % 2) === 1"
+      aria-hidden="true"
+      class="tile-grid--item"
+    >
+      <!-- filler-item for empty spot at 2nd-in-a-row -->
     </li>
   </ul>
   <br /><br /><br />

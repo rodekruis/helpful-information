@@ -87,16 +87,17 @@ ion-content.ion-padding {
     padding-left: var(--column-gap);
     padding-right: var(--column-gap);
     margin-bottom: 1rem;
+    min-width: 150px; // To always fit 2 items for narrow viewports
   }
 
   &.tile-grid_base-2 {
     .tile-grid--item {
-      flex: 0 0 50%;
+      flex: 1 0 50%;
     }
   }
   &.tile-grid_base-3 {
     .tile-grid--item {
-      flex: 0 0 33%;
+      flex: 1 0 33%;
     }
   }
 }
