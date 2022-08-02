@@ -32,448 +32,433 @@
   ></app-header>
 </ion-header>
 
-<!-- Loading-placeholder -->
 <ion-content
-  *ngIf="isSupportedRegion() && loading"
   color="dark"
   class="ion-padding"
 >
-  <h2>
-    <span
-      class="loading-text"
-      style="width: 33%"
-    ></span>
-  </h2>
-  <div class="ion-margin-vertical ion-padding-bottom">
-    <span class="loading-text"></span>
-    <span class="loading-text"></span>
-    <span
-      class="loading-text"
-      style="width: 75%"
-    ></span>
-  </div>
-</ion-content>
+  <!-- Loading-placeholder -->
+  <ng-container *ngIf="isSupportedRegion() && loading">
+    <h2>
+      <span
+        class="loading-text"
+        style="width: 33%"
+      ></span>
+    </h2>
+    <div class="ion-margin-vertical ion-padding-bottom">
+      <span class="loading-text"></span>
+      <span class="loading-text"></span>
+      <span
+        class="loading-text"
+        style="width: 75%"
+      ></span>
+    </div>
+  </ng-container>
 
-<!-- Region-page = Category-list -->
-<ion-content
-  *ngIf="isSupportedRegion() && !loading && !showHighlights && !category && hasDataToShow()"
-  color="dark"
-  class="ion-padding"
->
-  <div
-    *ngIf="useQandAs && qaHighlights.length"
-    class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+  <!-- Region-page = Category-list -->
+  <ng-container
+    *ngIf="isSupportedRegion() && !loading && !showHighlights && !category && hasDataToShow()"
   >
-    <a
-      routerLink="."
-      [queryParams]="{ highlights: 'show' }"
-      queryParamsHandling="merge"
-      routerLinkActive
-      #qaHightlightsToggle="routerLinkActive"
-      [hidden]="qaHightlightsToggle.isActive"
-      [attr.title]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
-      [attr.aria-label]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
-      class="action is_round is_attention text-style--center"
-    >
-      <strong>!</strong>
-    </a>
-  </div>
-
-  <h2 class="ion-no-margin">{{ referralPageData.referralPageGreeting }}</h2>
-  <div class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom">
-    <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
-  </div>
-  <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-vertical">
-    <li
-      *ngFor="let categoryItem of categories"
-      class="tile-grid--item"
-    >
-      <app-link-tile
-        [category]="categoryItem"
-        [subCategory]="getNextSubCategory(categoryItem)"
-      ></app-link-tile>
-    </li>
-    <li
-      *ngIf="(categories.length % 3) <= 1"
-      class="tile-grid--item"
-      aria-hidden="true"
-    >
-      <!-- filler-item for empty spot at 2nd-in-a-row -->
-    </li>
-    <li
-      *ngIf="(categories.length % 3) <= 2"
-      class="tile-grid--item"
-      aria-hidden="true"
-    >
-      <!-- filler-item for empty spot at 3rd-in-a-row -->
-    </li>
-  </ul>
-  <br /><br /><br />
-</ion-content>
-
-<!-- Category-page = Sub-Category-list -->
-<ion-content
-  *ngIf="isSupportedRegion() && !loading && category && !subCategory"
-  color="dark"
-  class="ion-padding"
->
-  <h2 class="ion-no-margin text-style--header text-style--size-1">
-    {{ category.categoryName }}
-  </h2>
-  <p *ngIf="category.categoryDescription">{{ category.categoryDescription }}</p>
-
-  <ul class="list-flat ion-margin-vertical">
-    <li
-      *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
-      class="ion-margin-bottom"
-    >
-      <app-sub-category
-        [subCategory]="subCategoryItem"
-        [category]="category"
-      ></app-sub-category>
-    </li>
-  </ul>
-</ion-content>
-
-<!-- Sub-Category-page = Offer-list/Q&A-list -->
-<ion-content
-  *ngIf="isSupportedRegion() && !loading && category && subCategory && !offer"
-  color="dark"
-  class="ion-padding"
->
-  <h2 class="ion-no-margin text-style--header text-style--size-1">
-    {{ subCategory.subCategoryName }}
-  </h2>
-  <p
-    *ngIf="subCategory.subCategoryDescription"
-    class="text-style--wrap-newlines"
-  >
-    {{ subCategory.subCategoryDescription }}
-  </p>
-
-  <ul
-    *ngIf="qaSets && (qaSets | categoryFilter: category | subCategoryFilter: subCategory).length"
-    class="list-flat ion-margin-vertical"
-  >
-    <li
-      *ngFor="let _qaSet of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
-      class="ion-margin-bottom"
-    >
-      <details>
-        <summary class="action action-dark">
-          <strong>{{ _qaSet.question }}</strong>
-        </summary>
-        <p *ngIf="_qaSet.dateUpdated">
-          <ng-container
-            *ngTemplateOutlet="lastUpdatedLine; context:{ date: _qaSet.dateUpdated }"
-          ></ng-container>
-        </p>
-        <ng-container
-          *ngTemplateOutlet="answerBlock; context:{ answer: _qaSet.answer }"
-        ></ng-container>
-        <ul
-          *ngIf="_qaSet.children.length"
-          class="ion-padding"
-        >
-          <li
-            *ngFor="let subQaSet of _qaSet.children"
-            class="ion-margin-bottom"
-          >
-            <details>
-              <summary class="action">{{ subQaSet.question }}</summary>
-              <p *ngIf="subQaSet.dateUpdated">
-                <ng-container
-                  *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
-                ></ng-container>
-              </p>
-              <ng-container
-                *ngTemplateOutlet="answerBlock; context:{ answer: subQaSet.answer }"
-              ></ng-container>
-            </details>
-          </li>
-        </ul>
-      </details>
-    </li>
-  </ul>
-
-  <ul class="list-flat ion-margin-vertical">
-    <li
-      *ngFor="let _offer of offers | categoryFilter: category | subCategoryFilter: subCategory"
-      class="ion-margin-bottom"
+    <div
+      *ngIf="useQandAs && qaHighlights.length"
+      class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
     >
       <a
-        [routerLink]="['.']"
-        [queryParams]="{
+        routerLink="."
+        [queryParams]="{ highlights: 'show' }"
+        queryParamsHandling="merge"
+        routerLinkActive
+        #qaHightlightsToggle="routerLinkActive"
+        [hidden]="qaHightlightsToggle.isActive"
+        [attr.title]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
+        [attr.aria-label]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
+        class="action is_round is_attention text-style--center"
+      >
+        <strong>!</strong>
+      </a>
+    </div>
+
+    <h2 class="ion-no-margin">{{ referralPageData.referralPageGreeting }}</h2>
+    <div
+      class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom"
+    >
+      <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
+    </div>
+    <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-vertical">
+      <li
+        *ngFor="let categoryItem of categories"
+        class="tile-grid--item"
+      >
+        <app-link-tile
+          [category]="categoryItem"
+          [subCategory]="getNextSubCategory(categoryItem)"
+        ></app-link-tile>
+      </li>
+      <li
+        *ngIf="(categories.length % 3) <= 1"
+        class="tile-grid--item"
+        aria-hidden="true"
+      >
+        <!-- filler-item for empty spot at 2nd-in-a-row -->
+      </li>
+      <li
+        *ngIf="(categories.length % 3) <= 2"
+        class="tile-grid--item"
+        aria-hidden="true"
+      >
+        <!-- filler-item for empty spot at 3rd-in-a-row -->
+      </li>
+    </ul>
+    <br /><br /><br />
+  </ng-container>
+
+  <!-- Category-page = Sub-Category-list -->
+  <ng-container
+    *ngIf="isSupportedRegion() && !loading && category && !subCategory"
+  >
+    <h2 class="ion-no-margin text-style--header text-style--size-1">
+      {{ category.categoryName }}
+    </h2>
+    <p *ngIf="category.categoryDescription">
+      {{ category.categoryDescription }}
+    </p>
+
+    <ul class="list-flat ion-margin-vertical">
+      <li
+        *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
+        class="ion-margin-bottom"
+      >
+        <app-sub-category
+          [subCategory]="subCategoryItem"
+          [category]="category"
+        ></app-sub-category>
+      </li>
+    </ul>
+  </ng-container>
+
+  <!-- Sub-Category-page = Offer-list/Q&A-list -->
+  <ng-container
+    *ngIf="isSupportedRegion() && !loading && category && subCategory && !offer"
+  >
+    <h2 class="ion-no-margin text-style--header text-style--size-1">
+      {{ subCategory.subCategoryName }}
+    </h2>
+    <p
+      *ngIf="subCategory.subCategoryDescription"
+      class="text-style--wrap-newlines"
+    >
+      {{ subCategory.subCategoryDescription }}
+    </p>
+
+    <ul
+      *ngIf="qaSets && (qaSets | categoryFilter: category | subCategoryFilter: subCategory).length"
+      class="list-flat ion-margin-vertical"
+    >
+      <li
+        *ngFor="let _qaSet of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
+        class="ion-margin-bottom"
+      >
+        <details>
+          <summary class="action action-dark">
+            <strong>{{ _qaSet.question }}</strong>
+          </summary>
+          <p *ngIf="_qaSet.dateUpdated">
+            <ng-container
+              *ngTemplateOutlet="lastUpdatedLine; context:{ date: _qaSet.dateUpdated }"
+            ></ng-container>
+          </p>
+          <ng-container
+            *ngTemplateOutlet="answerBlock; context:{ answer: _qaSet.answer }"
+          ></ng-container>
+          <ul
+            *ngIf="_qaSet.children.length"
+            class="ion-padding"
+          >
+            <li
+              *ngFor="let subQaSet of _qaSet.children"
+              class="ion-margin-bottom"
+            >
+              <details>
+                <summary class="action">{{ subQaSet.question }}</summary>
+                <p *ngIf="subQaSet.dateUpdated">
+                  <ng-container
+                    *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
+                  ></ng-container>
+                </p>
+                <ng-container
+                  *ngTemplateOutlet="answerBlock; context:{ answer: subQaSet.answer }"
+                ></ng-container>
+              </details>
+            </li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+
+    <ul class="list-flat ion-margin-vertical">
+      <li
+        *ngFor="let _offer of offers | categoryFilter: category | subCategoryFilter: subCategory"
+        class="ion-margin-bottom"
+      >
+        <a
+          [routerLink]="['.']"
+          [queryParams]="{
                 categoryID: _offer.categoryID,
                 subCategoryID: _offer.subCategoryID,
                 offerID: _offer.offerID
               }"
-        (click)="clickOffer(_offer)"
-        class="action list-item"
-      >
-        <span class="logo-badge list-item--icon">
-          <ion-img
-            [title]="_offer.offerIcon"
-            [src]="_offer.offerIcon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'"
-            alt=""
-            loading="lazy"
-            class="logo-badge--image"
-          ></ion-img>
-        </span>
-        <span
-          class="list-item--content text-style--hide-overflow_4 text-style--wrap-newlines"
+          (click)="clickOffer(_offer)"
+          class="action list-item"
         >
-          <ng-container *ngIf="_offer.offerName">
-            <strong>{{ _offer.offerName || '&nbsp;' }}</strong><br />
-          </ng-container>
-          {{ _offer.offerDescription }}
-        </span>
+          <span class="logo-badge list-item--icon">
+            <ion-img
+              [title]="_offer.offerIcon"
+              [src]="_offer.offerIcon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'"
+              alt=""
+              loading="lazy"
+              class="logo-badge--image"
+            ></ion-img>
+          </span>
+          <span
+            class="list-item--content text-style--hide-overflow_4 text-style--wrap-newlines"
+          >
+            <ng-container *ngIf="_offer.offerName">
+              <strong>{{ _offer.offerName || '&nbsp;' }}</strong><br />
+            </ng-container>
+            {{ _offer.offerDescription }}
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <app-last-updated-time
+      [label]="referralPageData.labelLastUpdated"
+      class="ion-margin-vertical"
+    ></app-last-updated-time>
+  </ng-container>
+
+  <!-- List-page = Search-results/Q&A-Highlights-list -->
+  <ng-container *ngIf="isSupportedRegion() && !loading && showHighlights">
+    <div
+      class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+    >
+      <a
+        routerLink="."
+        [queryParams]="{ highlights: null }"
+        queryParamsHandling="merge"
+        [attr.title]="referralPageData?.referralBackButtonLabel"
+        [attr.aria-label]="referralPageData?.referralBackButtonLabel"
+        class="action is_round text-style--center"
+      >
+        <strong>&times;</strong>
       </a>
-    </li>
-  </ul>
+    </div>
+    <h2 class="ion-no-margin text-style--header text-style--size-1">
+      {{ referralPageData?.labelHighlightsPageTitle }}
+    </h2>
 
-  <app-last-updated-time
-    [label]="referralPageData.labelLastUpdated"
-    class="ion-margin-vertical"
-  ></app-last-updated-time>
-</ion-content>
+    <p *ngIf="!qaHighlights.length">
+      {{ referralPageData?.labelHighlightsItemsZero }}
+    </p>
 
-<!-- List-page = Search-results/Q&A-Highlights-list -->
-<ion-content
-  *ngIf="isSupportedRegion() && !loading && showHighlights"
-  color="dark"
-  class="ion-padding"
->
-  <div
-    class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
-  >
-    <a
-      routerLink="."
-      [queryParams]="{ highlights: null }"
-      queryParamsHandling="merge"
-      [attr.title]="referralPageData?.referralBackButtonLabel"
-      [attr.aria-label]="referralPageData?.referralBackButtonLabel"
-      class="action is_round text-style--center"
+    <p *ngIf="qaHighlights.length">
+      {{ referralPageData?.labelHighlightsItemsCount }}
+      <strong>{{ qaHighlights.length }}</strong>
+    </p>
+
+    <ol
+      *ngIf="qaHighlights.length"
+      class="ion-margin-vertical ion-padding-start"
     >
-      <strong>&times;</strong>
-    </a>
-  </div>
-  <h2 class="ion-no-margin text-style--header text-style--size-1">
-    {{ referralPageData?.labelHighlightsPageTitle }}
-  </h2>
-
-  <p *ngIf="!qaHighlights.length">
-    {{ referralPageData?.labelHighlightsItemsZero }}
-  </p>
-
-  <p *ngIf="qaHighlights.length">
-    {{ referralPageData?.labelHighlightsItemsCount }}
-    <strong>{{ qaHighlights.length }}</strong>
-  </p>
-
-  <ol
-    *ngIf="qaHighlights.length"
-    class="ion-margin-vertical ion-padding-start"
-  >
-    <li
-      *ngFor="let item of qaHighlights"
-      class="ion-padding-bottom"
-    >
-      <p>
-        <a
-          [routerLink]="['.']"
-          [queryParams]="{
+      <li
+        *ngFor="let item of qaHighlights"
+        class="ion-padding-bottom"
+      >
+        <p>
+          <a
+            [routerLink]="['.']"
+            [queryParams]="{
             categoryID: item.categoryID
           }"
-          queryParamsHandling=""
-          class="text-style--inline-link is_minimal"
-          >{{ item.categoryName }}</a
-        ><strong>&nbsp;/ </strong>
-        <a
-          [routerLink]="['.']"
-          [queryParams]="{
+            queryParamsHandling=""
+            class="text-style--inline-link is_minimal"
+            >{{ item.categoryName }}</a
+          ><strong>&nbsp;/ </strong>
+          <a
+            [routerLink]="['.']"
+            [queryParams]="{
             categoryID: item.categoryID,
             subCategoryID: item.subCategoryID
           }"
-          queryParamsHandling=""
-          class="text-style--inline-link is_minimal"
-          >{{ item.subCategoryName }}</a
-        ><strong>&nbsp;: </strong><br />
-        <ng-container
-          *ngTemplateOutlet="lastUpdatedLine; context:{ date: item.dateUpdated }"
-        ></ng-container>
-      </p>
-      <details>
-        <summary class="action action-dark">{{ item.question }}</summary>
-        <ng-container
-          *ngTemplateOutlet="answerBlock; context:{ answer: item.answer }"
-        ></ng-container>
-        <ul
-          *ngIf="item.children.length"
-          class="ion-padding"
-        >
-          <li
-            *ngFor="let subQaSet of item.children"
-            class="ion-margin-bottom"
+            queryParamsHandling=""
+            class="text-style--inline-link is_minimal"
+            >{{ item.subCategoryName }}</a
+          ><strong>&nbsp;: </strong><br />
+          <ng-container
+            *ngTemplateOutlet="lastUpdatedLine; context:{ date: item.dateUpdated }"
+          ></ng-container>
+        </p>
+        <details>
+          <summary class="action action-dark">{{ item.question }}</summary>
+          <ng-container
+            *ngTemplateOutlet="answerBlock; context:{ answer: item.answer }"
+          ></ng-container>
+          <ul
+            *ngIf="item.children.length"
+            class="ion-padding"
           >
-            <details>
-              <summary class="action">{{ subQaSet.question }}</summary>
-              <p *ngIf="subQaSet.dateUpdated">
+            <li
+              *ngFor="let subQaSet of item.children"
+              class="ion-margin-bottom"
+            >
+              <details>
+                <summary class="action">{{ subQaSet.question }}</summary>
+                <p *ngIf="subQaSet.dateUpdated">
+                  <ng-container
+                    *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
+                  ></ng-container>
+                </p>
                 <ng-container
-                  *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
+                  *ngTemplateOutlet="answerBlock; context:{ answer: subQaSet.answer }"
                 ></ng-container>
-              </p>
-              <ng-container
-                *ngTemplateOutlet="answerBlock; context:{ answer: subQaSet.answer }"
-              ></ng-container>
-            </details>
-          </li>
-        </ul>
-      </details>
-    </li>
-  </ol>
-</ion-content>
+              </details>
+            </li>
+          </ul>
+        </details>
+      </li>
+    </ol>
+  </ng-container>
 
-<!-- Offer-detail page -->
-<ion-content
-  *ngIf="isSupportedRegion() && !loading && category && subCategory && offer"
-  color="dark"
-  class="ion-padding"
->
-  <app-offer [offer]="offer"></app-offer>
-
-  <app-last-updated-time
-    [label]="referralPageData.labelLastUpdated"
-    class="ion-margin-vertical"
-  ></app-last-updated-time>
-</ion-content>
-
-<!-- Error/404 page -->
-<ion-content
-  *ngIf="isSupportedRegion() && !loading && !hasDataToShow()"
-  color="dark"
-  class="ion-padding"
->
-  <h2>{{ errorHeader }}</h2>
-  <p>
-    {{ errorMessage }}
-    <a
-      [href]="errorContactUrl"
-      target="_blank"
-      rel="noopener noreferrer"
-      style="color: red"
-      >{{ errorContactUrl }}</a
-    >
-    <br /><br /><br />
-    <a
-      href="/"
-      onclick="location.reload(true)"
-      style="color: gold"
-    >
-      {{ errorRetry }}
-    </a>
-  </p>
-</ion-content>
-
-<!-- Main/Root/Regions-list page -->
-<ion-content
-  *ngIf="!isSupportedRegion()"
-  color="dark"
-  class="ion-padding"
->
-  <div
-    *ngIf="!category"
-    class="ion-margin-bottom ion-padding-bottom"
+  <!-- Offer-detail page -->
+  <ng-container
+    *ngIf="isSupportedRegion() && !loading && category && subCategory && offer"
   >
-    <h2 class="text-style--header text-style--size-1">{{ pageHeader }}</h2>
-    <p
-      class="text-style--wrap-newlines"
-      [innerHTML]="pageIntroduction"
-    ></p>
-  </div>
-  <ul class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical">
-    <li
-      *ngFor="let region of regions"
-      class="tile-grid--item"
+    <app-offer [offer]="offer"></app-offer>
+
+    <app-last-updated-time
+      [label]="referralPageData.labelLastUpdated"
+      class="ion-margin-vertical"
+    ></app-last-updated-time>
+  </ng-container>
+
+  <!-- Error/404 page -->
+  <ng-container *ngIf="isSupportedRegion() && !loading && !hasDataToShow()">
+    <h2>{{ errorHeader }}</h2>
+    <p>
+      {{ errorMessage }}
+      <a
+        [href]="errorContactUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="color: red"
+        >{{ errorContactUrl }}</a
+      >
+      <br /><br /><br />
+      <a
+        href="/"
+        onclick="location.reload(true)"
+        style="color: gold"
+      >
+        {{ errorRetry }}
+      </a>
+    </p>
+  </ng-container>
+
+  <!-- Main/Root/Regions-list page -->
+  <ng-container *ngIf="!isSupportedRegion()">
+    <div
+      *ngIf="!category"
+      class="ion-margin-bottom ion-padding-bottom"
+    >
+      <h2 class="text-style--header text-style--size-1">{{ pageHeader }}</h2>
+      <p
+        class="text-style--wrap-newlines"
+        [innerHTML]="pageIntroduction"
+      ></p>
+    </div>
+    <ul class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical">
+      <li
+        *ngFor="let region of regions"
+        class="tile-grid--item"
+      >
+        <a
+          *ngIf="region"
+          [routerLink]="['/', region]"
+          class="sheet--button action text-style--header text-style--size-1"
+        >
+          <span>{{ regionsLabels[regions.indexOf(region)] }}</span>
+        </a>
+      </li>
+      <li
+        *ngIf="(regions.length % 2) === 1"
+        aria-hidden="true"
+        class="tile-grid--item"
+      >
+        <!-- filler-item for empty spot at 2nd-in-a-row -->
+      </li>
+    </ul>
+    <br /><br /><br />
+  </ng-container>
+
+  <div
+    class="floating-action-area is_bottom-right"
+    *ngIf="isSupportedRegion() && hasContactOptions()"
+  >
+    <span
+      class="contact-button"
+      *ngIf="referralPageData.referralPhoneNumber"
     >
       <a
-        *ngIf="region"
-        [routerLink]="['/', region]"
-        class="sheet--button action text-style--header text-style--size-1"
+        [href]="'tel:' + referralPageData.referralPhoneNumber"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="logContactClick('tel')"
+        class="contact-button--link"
       >
-        <span>{{ regionsLabels[regions.indexOf(region)] }}</span>
+        <img
+          src="assets/icons/contact_phone.png"
+          alt="Phone"
+          loading="lazy"
+          class="contact-button--logo"
+        />
       </a>
-    </li>
-    <li
-      *ngIf="(regions.length % 2) === 1"
-      aria-hidden="true"
-      class="tile-grid--item"
+    </span>
+    <span
+      class="contact-button"
+      *ngIf="referralPageData.referralWhatsAppLink"
     >
-      <!-- filler-item for empty spot at 2nd-in-a-row -->
-    </li>
-  </ul>
-  <br /><br /><br />
+      <a
+        [href]="referralPageData.referralWhatsAppLink"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="logContactClick('whatsapp')"
+        class="contact-button--link"
+      >
+        <img
+          src="assets/icons/contact_whatsapp.png"
+          alt="WhatsApp"
+          loading="lazy"
+          class="contact-button--logo"
+        />
+      </a>
+    </span>
+    <span
+      class="contact-button"
+      *ngIf="referralPageData.referralTelegramLink"
+    >
+      <a
+        [href]="referralPageData.referralTelegramLink"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="logContactClick('telegram')"
+        class="contact-button--link"
+      >
+        <img
+          src="assets/icons/contact_telegram.png"
+          alt="WhatsApp"
+          loading="lazy"
+          class="contact-button--logo"
+        />
+      </a>
+    </span>
+  </div>
 </ion-content>
-
-<div
-  class="floating-action-area is_bottom-right"
-  *ngIf="isSupportedRegion() && hasContactOptions()"
->
-  <span
-    class="contact-button"
-    *ngIf="referralPageData.referralPhoneNumber"
-  >
-    <a
-      [href]="'tel:' + referralPageData.referralPhoneNumber"
-      target="_blank"
-      rel="noopener noreferrer"
-      (click)="logContactClick('tel')"
-      class="contact-button--link"
-    >
-      <img
-        src="assets/icons/contact_phone.png"
-        alt="Phone"
-        loading="lazy"
-        class="contact-button--logo"
-      />
-    </a>
-  </span>
-  <span
-    class="contact-button"
-    *ngIf="referralPageData.referralWhatsAppLink"
-  >
-    <a
-      [href]="referralPageData.referralWhatsAppLink"
-      target="_blank"
-      rel="noopener noreferrer"
-      (click)="logContactClick('whatsapp')"
-      class="contact-button--link"
-    >
-      <img
-        src="assets/icons/contact_whatsapp.png"
-        alt="WhatsApp"
-        loading="lazy"
-        class="contact-button--logo"
-      />
-    </a>
-  </span>
-  <span
-    class="contact-button"
-    *ngIf="referralPageData.referralTelegramLink"
-  >
-    <a
-      [href]="referralPageData.referralTelegramLink"
-      target="_blank"
-      rel="noopener noreferrer"
-      (click)="logContactClick('telegram')"
-      class="contact-button--link"
-    >
-      <img
-        src="assets/icons/contact_telegram.png"
-        alt="WhatsApp"
-        loading="lazy"
-        class="contact-button--logo"
-      />
-    </a>
-  </span>
-</div>
