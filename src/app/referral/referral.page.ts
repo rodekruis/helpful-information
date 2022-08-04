@@ -55,7 +55,7 @@ export class ReferralPageComponent implements OnInit {
   public errorRetry = environment.errorRetry;
 
   constructor(
-    public offersService: OffersService,
+    private offersService: OffersService,
     private route: ActivatedRoute,
     private router: Router,
     private loggingService: LoggingService,
@@ -221,43 +221,82 @@ export class ReferralPageComponent implements OnInit {
       if (!params.length) {
         this.updatePageTitle(this.referralPageData.referralPageTitle);
       }
+      let categoryName: string;
+      let subCategoryName: string;
+      let offerName: string;
+
       if ('categoryID' in params) {
         this.category = this.categories.find(
           (category) => category.categoryID === Number(params.categoryID),
         );
-        this.updatePageTitle(
-          this.referralPageData.referralPageTitle,
-          this.category.categoryName,
-        );
+        if (!this.category) {
+          this.loggingService.logEvent(
+            LoggingEventCategory.error,
+            LoggingEvent.NotFoundCategory,
+            {
+              categoryID: params.categoryID,
+            },
+          );
+        }
+        if (!!this.category && !!this.category.categoryName) {
+          categoryName = this.category.categoryName;
+        }
       } else {
         this.category = null;
       }
       if ('subCategoryID' in params) {
         this.subCategory = this.subCategories.find(
           (subCategory) =>
-            subCategory.subCategoryID === Number(params.subCategoryID),
+            subCategory.subCategoryID === Number(params.subCategoryID) &&
+            subCategory.categoryID === Number(params.categoryID),
         );
-        this.updatePageTitle(
-          this.referralPageData.referralPageTitle,
-          this.category.categoryName,
-          this.subCategory.subCategoryName,
-        );
+        if (!this.subCategory) {
+          this.loggingService.logEvent(
+            LoggingEventCategory.error,
+            LoggingEvent.NotFoundSubCategory,
+            {
+              subCategoryID: params.subCategoryID,
+              categoryID: params.categoryID,
+            },
+          );
+        }
+
+        if (!!this.subCategory && !!this.subCategory.subCategoryName) {
+          subCategoryName = this.subCategory.subCategoryName;
+        }
       } else {
         this.subCategory = null;
       }
       if ('offerID' in params) {
         this.offer = this.offers.find(
-          (offer) => offer.offerID === Number(params.offerID),
+          (offer) =>
+            offer.offerID === Number(params.offerID) &&
+            offer.categoryID === Number(params.categoryID) &&
+            offer.subCategoryID === Number(params.subCategoryID),
         );
-        this.updatePageTitle(
-          this.referralPageData.referralPageTitle,
-          this.category.categoryName,
-          this.subCategory.subCategoryName,
-          this.offer.offerName,
-        );
+        if (!this.offer) {
+          this.loggingService.logEvent(
+            LoggingEventCategory.error,
+            LoggingEvent.NotFoundOffer,
+            {
+              offerID: params.offerID,
+              subCategoryID: params.subCategoryID,
+              categoryID: params.categoryID,
+            },
+          );
+        }
+        if (!!this.offer && !!this.offer.offerName) {
+          offerName = this.offer.offerName;
+        }
       } else {
         this.offer = null;
       }
+      this.updatePageTitle(
+        this.referralPageData.referralPageTitle,
+        categoryName,
+        subCategoryName,
+        offerName,
+      );
     });
   }
 

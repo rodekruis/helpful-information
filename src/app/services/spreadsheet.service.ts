@@ -9,6 +9,10 @@ import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';
+import {
+  LoggingEvent,
+  LoggingEventCategory,
+} from '../models/logging-event.enum';
 import { QACol, QASet } from '../models/qa-set.model';
 import { getDateFromString, getFullUrl } from '../shared/utils';
 
@@ -31,7 +35,7 @@ export class SpreadsheetService {
 
   private sheetIds = {};
 
-  constructor(private loggingService: LoggingService) {
+  constructor(private loggingService?: LoggingService) {
     this.loadSheetIds();
   }
 
@@ -340,7 +344,39 @@ export class SpreadsheetService {
 
     const parentRow = all.find((row) => row.slug === element.parentSlug);
 
-    if (!!parentRow && element.isVisible) {
+    // When defined parentRow is missing, treat as a 'normal' question
+    if (!parentRow) {
+      if (this.loggingService) {
+        this.loggingService.logEvent(
+          LoggingEventCategory.error,
+          LoggingEvent.NotFoundParentQuestion,
+          {
+            row: element.id,
+            slug: element.slug,
+            parentSlug: element.parentSlug,
+          },
+        );
+      }
+      return element;
+    }
+
+    // When pointing to itself, treat as a 'normal' question
+    if (parentRow === element) {
+      if (this.loggingService) {
+        this.loggingService.logEvent(
+          LoggingEventCategory.error,
+          LoggingEvent.NotFoundParentQuestionIsSelf,
+          {
+            row: element.id,
+            slug: element.slug,
+            parentSlug: element.parentSlug,
+          },
+        );
+      }
+      return element;
+    }
+
+    if (!!parentRow.children && element.isVisible) {
       delete element.children;
       // Add this question to its parents' collection:
       parentRow.children.push(element);
@@ -371,7 +407,9 @@ export class SpreadsheetService {
             }
             return this.convertQaRowToObject(row, qaColumnMap, index);
           })
-          .map(this.addToParentQuestion)
+          .map((item: QASet, index: number, all: QASet[]) =>
+            this.addToParentQuestion(item, index, all),
+          )
           .filter(
             (row: QASet): boolean =>
               row.isVisible && !!row.question && !!row.answer,
