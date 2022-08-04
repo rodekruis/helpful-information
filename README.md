@@ -257,6 +257,43 @@ classDiagram
 
 ---
 
+## Features
+
+### Build level configuration
+
+See the options in the [`.env.example`](.env.example)-file.
+
+### Sheet level configuration
+
+See the options in the "Referral Page"-sheet
+
+### (Sub-)Category features
+
+Each (Sub-)Category:
+
+- can have a name/description/icon.
+- can be hidden by setting the "**Visible?**"-column to `Hide`.
+
+### Offers/Q&As hierarchy
+
+### Offer features
+
+Each Offer
+
+- needs to have a `Category ID` and a `Sub-Category ID` set.
+- can be hidden by setting the "**Visible?**"-column to `Hide`.
+
+### Q&A features
+
+Each Q&A-set
+
+- needs to have a `Category ID` and a `Sub-Category ID` set.
+- can be hidden by setting the "**Visible?**"-column to `Hide`.
+- can be shown as a Sub-Question by setting the `Parent`-column to the Slug of another Question.
+- can be shown in the Highlighted-overview by setting the "**Highlighted?**"-column to `Yes`.
+
+---
+
 ## Deployment
 
 The web-app can be deployed as a static single-page-app or PWA.
