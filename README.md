@@ -136,7 +136,157 @@ During development, an automated watch-process can be run with:
 
 - [Ionic v6](https://ionicframework.com/docs/v6/)
   > ⚠️ The [`Ionicons`](https://ionic.io/ionicons) icon-set is NOT included in the final build, so cannot be used 'by default'. Icons can be added manually.
-- [Angular v13](https://v13.angular.io/docs/)
+- [Angular v14](https://v14.angular.io/docs/)
+
+---
+
+## Data Model
+
+Based on the date fetched from the Google Sheets, an internal data-structure is build. This is used to render the interface.
+
+The following are _illustrations_ only, to help get an overview, it might not be up-to-date with the actual code.
+
+### Data Model (internal)
+
+> The code below can be easily edited/previewed using the [Mermaid.live](https://mermaid.live) editor.
+
+```mermaid
+%%{ init:{ 'theme':'base', 'themeVariables':{'lineColor':'blue'} }}%%
+
+classDiagram
+  class App {
+    ENV
+    regions
+    regionLabels
+    regionSheetIds
+  }
+
+  class Region {
+    slug
+    label
+    googleSheetId
+  }
+
+  class Category {
+    int categoryID
+    bool isVisible
+    icon
+    description
+  }
+
+  class SubCategory {
+    int subCategoryID
+    bool isVisible
+    icon
+    description
+  }
+
+  class Offer {
+    int offerId
+    bool isVisible
+    offerName
+    icon
+    + ...many more properties
+  }
+
+  class QASet {
+    int id
+    int subCategoryID
+    int categoryID
+    bool isVisible
+    slug
+    parentSlug
+    question
+    answer
+    Date updated
+    bool isHighlight
+    array~QASet~ children
+  }
+
+  direction LR
+    App -- "1..*" Region
+    Region -- "1..*" Category
+    Category -- "0..*" SubCategory
+    SubCategory -- "0..*" Offer
+    SubCategory -- "0..*" QASet
+    QASet -- "0..*" QASet : children
+```
+
+### Data Model (external)
+
+> The code below can be easily edited/previewed using the [Mermaid.live](https://mermaid.live) editor.
+
+```mermaid
+%%{ init:{ 'theme':'base', 'themeVariables':{'lineColor':'blue'} }}%%
+
+classDiagram
+  class GoogleSheet {
+    string id
+  }
+  class ReferralPage {
+    Key-Value pairs;
+    based on row/column-index
+  }
+
+  class Help {
+    Documentation only
+  }
+  class Options {
+    Only for uses in the Sheet itself
+  }
+
+  direction TB
+    GoogleSheet -- "1" ReferralPage
+    GoogleSheet .. "1" Help
+    GoogleSheet .. "1" Options
+
+    GoogleSheet -- "1" Categories
+    GoogleSheet -- "1" SubCategories
+    GoogleSheet -- "1" Offers
+    GoogleSheet -- "1" Q_and_As
+
+    Categories : rows []
+    SubCategories : rows []
+    Offers : rows []
+    Q_and_As : rows []
+```
+
+---
+
+## Features
+
+### Build level configuration
+
+See the options in the [`.env.example`](.env.example)-file.
+
+### Sheet level configuration
+
+See the options in the "Referral Page"-sheet
+
+### (Sub-)Category features
+
+Each (Sub-)Category:
+
+- can have a name/description/icon.
+- can be hidden by setting the "**Visible?**"-column to `Hide`.
+
+### Offers/Q&As hierarchy
+
+### Offer features
+
+Each Offer
+
+- needs to have a `Category ID` and a `Sub-Category ID` set.
+- can be hidden by setting the "**Visible?**"-column to `Hide`.
+
+### Q&A features
+
+Each Q&A-set
+
+- needs to have a `Category ID` and a `Sub-Category ID` set.
+- can be hidden by setting the "**Visible?**"-column to `Hide`.
+- can be shown as a Sub-Question by setting the `Parent`-column to the Slug of another Question.
+- can be shown in the Highlighted-overview by setting the "**Highlighted?**"-column to `Yes`.
 
 ---
 
@@ -163,7 +313,7 @@ To deploy the web-app using [Azure Static Web App service](https://azure.microso
 
 ### Using static file hosting (i.e. Surge.sh, GitHub/GitLab Pages or similar)
 
-To deploy the web-app using [Surge.sh](https://surge.sh/) or a similar static-files web-host:
+To deploy the web-app using or a static-files web-host, see options at: <https://www.jamstackdeploy.com/>
 
 Configure and build a 'production'-build of the web-app following the steps [defined at "Deployment"](#deployment).
 
