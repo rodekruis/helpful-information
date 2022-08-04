@@ -18,6 +18,8 @@ export enum LoggingEvent {
   NotFoundCategory = 'not-found-category',
   NotFoundSubCategory = 'not-found-sub-category',
   NotFoundOffer = 'not-found-offer',
+  NotFoundParentQuestion = 'not-found-parent-question',
+  NotFoundParentQuestionIsSelf = 'not-found-parent-question-is-self',
   OfferClick = 'offer-click',
   SubCategoryClick = 'sub-category-click',
   SwUpdateAvailable = 'sw-update-available',
