@@ -148,9 +148,7 @@ The following are _illustrations_ only, to help get an overview, it might not be
 
 ### Data Model (internal)
 
-![Data Model (internal)](https://mermaid.ink/svg/pako:eNqlU1FrpDAQ_itDYBHuttJ79a10C1coLVdhn3yJZtYdLibeJHIsYn_7aaJbly2lcA_izDef3_hlJr2orEKRic2mBzLksx4Sf8QGkywppcNkO-d7ySRLjS7J-kSTwXurLU8s3WEywDBsNoUpTKWlczuSNcumMAAhh7u2hX5KAR6e9zFgrMkat06eZIn6AsmPiP5RBWyY9BfF11BeRJ3u6hjpSSKGtbW1xlnhSuBeeqwtnxYJMh6qGXvcRay0VgO5PTkarc-8ypoYKXQVU-spAhfqeVd-1MC9w__f4-VwQF6r2wmIVj_WDYRn2Vy1-Q5pmjbSnKCxjNCybZE94fW5_7rL0a-bkvrU3leP9X2CrWQ0Pj_nfzp0i38Aadxf5BjvRl3oWjW-Lk3_pPqox8fP3zDL01v48zeojqTV2GHlTBFjNbWAp9f4xbSvNzdQiB9p-q0Q87bF2rx56_JiOhLOgw-U20hZLURkrTdkTQxT_ZwSnERKHMdVEbKzT7EVDXIjSY3XPMytEOFGFyIbQyX5dyEKM4y8eJQPirxlkR2kdrgVsvM2P5lKZJ47XEjzDZ9Zwz8_8mN-)
-
-The image above is preview of the code below using the [Mermaid.live](https://mermaid.live) editor.
+> The code below can be easily edited/previewed using the [Mermaid.live](https://mermaid.live) editor.
 
 ```mermaid
 %%{ init:{ 'theme':'base', 'themeVariables':{'lineColor':'blue'} }}%%
@@ -216,9 +214,7 @@ classDiagram
 
 ### Data Model (external)
 
-![Data Model (external)](https://mermaid.ink/svg/pako:eNqNkstOwzAQRX9lZKnKpgGxDStoEUgsChR1g1E1jSephWNHtiOoovw7zos-EBW7eOb43jvx1Cw1gljCJpNaaukTqCHyWyooSiDaoKNoOhRWaCVuFLkoCYySmmZGGdtxqqKoAWiayYRrrlOFzs0l5hYLrgG6M9wbkytabok81G0ZwHkrdQ5StMdmj75QRtaiesKcRvaRdvEKgxOUKK277qttRAFGgzWfl6lRVaFjqQV9DYp7zQdS5ag1N2lVkPboZbhqtNqdBFiUbceN_CIQkBkLlSMHUkP4I9BPIr0jlR24CWkp7XRfb_vbh4PHMXB2xdnRiL-xi4sBa1OfaQ85e-c_nGboKTdWkjsDLavNv7hFFmKfA57XqMX65ifSXhWS9pEcvL33nSPL02bvc1odxfd1NmUF2QKlCEvcvRZn3bpyloRPgfaDM66bwFWlCHZ3QnpjWZKhcjRlWHmz3OmUJd5WNELD7g5U8w1dawfd)
-
-The image above is preview of the code below using the [Mermaid.live](https://mermaid.live) editor.
+> The code below can be easily edited/previewed using the [Mermaid.live](https://mermaid.live) editor.
 
 ```mermaid
 %%{ init:{ 'theme':'base', 'themeVariables':{'lineColor':'blue'} }}%%
