@@ -136,7 +136,7 @@ During development, an automated watch-process can be run with:
 
 - [Ionic v6](https://ionicframework.com/docs/v6/)
   > ⚠️ The [`Ionicons`](https://ionic.io/ionicons) icon-set is NOT included in the final build, so cannot be used 'by default'. Icons can be added manually.
-- [Angular v13](https://v13.angular.io/docs/)
+- [Angular v14](https://v14.angular.io/docs/)
 
 ---
 
@@ -163,7 +163,7 @@ To deploy the web-app using [Azure Static Web App service](https://azure.microso
 
 ### Using static file hosting (i.e. Surge.sh, GitHub/GitLab Pages or similar)
 
-To deploy the web-app using [Surge.sh](https://surge.sh/) or a similar static-files web-host:
+To deploy the web-app using or a static-files web-host, see options at: <https://www.jamstackdeploy.com/>
 
 Configure and build a 'production'-build of the web-app following the steps [defined at "Deployment"](#deployment).
 
