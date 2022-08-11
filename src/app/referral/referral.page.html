@@ -214,7 +214,8 @@
               [title]="_offer.offerIcon"
               [src]="_offer.offerIcon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'"
               alt=""
-              loading="lazy"
+              [attr.loading]="'lazy'"
+              [attr.decoding]="'async'"
               class="logo-badge--image"
             ></ion-img>
           </span>
@@ -418,6 +419,7 @@
           src="assets/icons/contact_phone.png"
           alt="Phone"
           loading="lazy"
+          decoding="async"
           class="contact-button--logo"
         />
       </a>
@@ -437,6 +439,7 @@
           src="assets/icons/contact_whatsapp.png"
           alt="WhatsApp"
           loading="lazy"
+          decoding="async"
           class="contact-button--logo"
         />
       </a>
@@ -456,6 +459,7 @@
           src="assets/icons/contact_telegram.png"
           alt="WhatsApp"
           loading="lazy"
+          decoding="async"
           class="contact-button--logo"
         />
       </a>
