@@ -85,15 +85,8 @@
               "serviceWorker": true,
               "ngswConfigPath": "src/ngsw-config.json"
             },
-            "ci": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "progress": false
-            },
+            "ci": {},
+            "test": {},
             "development": {}
           },
           "defaultConfiguration": "production"
@@ -108,6 +101,7 @@
               "browserTarget": "app:build:production"
             },
             "ci": {},
+            "test": {},
             "development": {
               "browserTarget": "app:build:development"
             }
@@ -148,12 +142,30 @@
             "browsers": "Chrome"
           },
           "configurations": {
+            "production": {},
             "ci": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ],
               "progress": false,
               "watch": false,
               "browsers": "ChromeHeadless"
+            },
+            "test": {},
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ],
+              "watch": true
             }
-          }
+          },
+          "defaultConfiguration": "ci"
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",

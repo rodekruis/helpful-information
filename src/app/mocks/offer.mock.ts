@@ -1,3 +1,5 @@
+import { Offer } from '../models/offer.model';
+
 export default {
   offerID: 1,
   offerIcon: 'Mock Offer Icon',
@@ -15,4 +17,4 @@ export default {
   offerVisible: true,
   subCategoryID: 1,
   categoryID: 1,
-};
+} as Offer;

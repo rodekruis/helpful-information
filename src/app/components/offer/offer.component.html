@@ -10,7 +10,8 @@
           'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
         "
         alt=""
-        loading="lazy"
+        [attr.loading]="'lazy'"
+        [attr.decoding]="'async'"
         class="logo-badge--image"
       ></ion-img>
     </span>
@@ -57,6 +58,7 @@
           alt=""
           aria-hidden="true"
           loading="lazy"
+          decoding="async"
           class="icon icon_small"
         />
         Website:
@@ -89,6 +91,7 @@
           alt=""
           aria-hidden="true"
           loading="lazy"
+          decoding="async"
           class="icon icon_small"
         />
         Phone:
