@@ -1,3 +1,5 @@
+import { SubCategory } from '../models/sub-category.model';
+
 export default {
   subCategoryID: 1,
   subCategoryName: 'Mock SubCategory Name',
@@ -5,4 +7,4 @@ export default {
   subCategoryDescription: 'Mock SubCategory Description',
   subCategoryVisible: true,
   categoryID: 1,
-};
+} as SubCategory;

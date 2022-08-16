@@ -14,7 +14,7 @@
     "start:production": "npm run build:production && npm run serve:production",
     "pretest": "npm run lint",
     "test": "ng test --configuration=ci",
-    "test:watch": "ng test",
+    "test:watch": "ng test --configuration=development",
     "lint": "npm run lint:syntax && ng lint",
     "lint:syntax": "prettier --check \"**/*.{md,js,json,ts,scss,html}\"",
     "fix:syntax": "npm run lint:syntax -- --write"

@@ -40,4 +40,12 @@ describe('ReferralPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render 1 (visible) test-region', () => {
+    const listItems = fixture.debugElement.nativeElement.querySelectorAll(
+      'li:not([aria-hidden])',
+    );
+
+    expect(listItems.length).toEqual(1);
+  });
 });
