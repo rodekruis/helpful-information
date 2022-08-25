@@ -1,15 +1,3 @@
-<ng-template
-  #lastUpdatedLine
-  let-date="date"
->
-  <small *ngIf="date">
-    {{ referralPageData.labelLastUpdated }}
-    <time [attr.datetime]="date|date:'yyyy-MM-dd'">
-      {{ date|date:"d-MM-''YY" }}
-    </time>
-  </small>
-</ng-template>
-
 <ion-header>
   <app-header
     [title]="referralPageData?.referralPageTitle"
@@ -223,44 +211,10 @@
       <strong>{{ qaHighlights.length }}</strong>
     </p>
 
-    <ol
-      *ngIf="qaHighlights.length"
-      class="ion-margin-vertical ion-padding-start"
-    >
-      <li
-        *ngFor="let item of qaHighlights"
-        class="ion-padding-bottom"
-      >
-        <p>
-          <a
-            [routerLink]="['.']"
-            [queryParams]="{
-              categoryID: item.categoryID
-            }"
-            queryParamsHandling=""
-            class="text-style--inline-link is_minimal"
-            >{{ item.categoryName }}</a
-          ><strong>&nbsp;/ </strong>
-          <a
-            [routerLink]="['.']"
-            [queryParams]="{
-              categoryID: item.categoryID,
-              subCategoryID: item.subCategoryID
-            }"
-            queryParamsHandling=""
-            class="text-style--inline-link is_minimal"
-            >{{ item.subCategoryName }}</a
-          ><strong>&nbsp;: </strong><br />
-          <ng-container
-            *ngTemplateOutlet="lastUpdatedLine; context:{ date: item.dateUpdated }"
-          ></ng-container>
-        </p>
-        <app-q-a-set
-          [qaSet]="item"
-          [showParentDateUpdated]="false"
-        ></app-q-a-set>
-      </li>
-    </ol>
+    <app-q-a-set-list
+      [list]="qaHighlights"
+      class="ion-margin-vertical"
+    ></app-q-a-set-list>
   </ng-container>
 
   <!-- Offer-detail page -->
