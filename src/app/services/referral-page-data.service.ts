@@ -6,9 +6,12 @@ import { SpreadsheetService } from './spreadsheet.service';
   providedIn: 'root',
 })
 export class ReferralPageDataService {
+  public data: ReferralPageData;
+
   constructor(private spreadsheetService: SpreadsheetService) {}
 
-  getReferralPageData(region): Promise<ReferralPageData> {
-    return this.spreadsheetService.getReferralPageData(region);
+  public async getReferralPageData(region: string): Promise<ReferralPageData> {
+    this.data = await this.spreadsheetService.getReferralPageData(region);
+    return this.data;
   }
 }

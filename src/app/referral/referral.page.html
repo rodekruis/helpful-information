@@ -10,16 +10,6 @@
   </small>
 </ng-template>
 
-<ng-template
-  #answerBlock
-  let-answer="answer"
->
-  <p
-    class="text-style--wrap-newlines"
-    [innerHTML]="answer|convertUrls"
-  ></p>
-</ng-template>
-
 <ion-header>
   <app-header
     [title]="referralPageData?.referralPageTitle"
@@ -157,40 +147,7 @@
         *ngFor="let _qaSet of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
         class="ion-margin-bottom"
       >
-        <details>
-          <summary class="action action-dark">
-            <strong>{{ _qaSet.question }}</strong>
-          </summary>
-          <p *ngIf="_qaSet.dateUpdated">
-            <ng-container
-              *ngTemplateOutlet="lastUpdatedLine; context:{ date: _qaSet.dateUpdated }"
-            ></ng-container>
-          </p>
-          <ng-container
-            *ngTemplateOutlet="answerBlock; context:{ answer: _qaSet.answer }"
-          ></ng-container>
-          <ul
-            *ngIf="_qaSet.children.length"
-            class="ion-padding"
-          >
-            <li
-              *ngFor="let subQaSet of _qaSet.children"
-              class="ion-margin-bottom"
-            >
-              <details>
-                <summary class="action">{{ subQaSet.question }}</summary>
-                <p *ngIf="subQaSet.dateUpdated">
-                  <ng-container
-                    *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
-                  ></ng-container>
-                </p>
-                <ng-container
-                  *ngTemplateOutlet="answerBlock; context:{ answer: subQaSet.answer }"
-                ></ng-container>
-              </details>
-            </li>
-          </ul>
-        </details>
+        <app-q-a-set [qaSet]="_qaSet"></app-q-a-set>
       </li>
     </ul>
 
@@ -278,8 +235,8 @@
           <a
             [routerLink]="['.']"
             [queryParams]="{
-            categoryID: item.categoryID
-          }"
+              categoryID: item.categoryID
+            }"
             queryParamsHandling=""
             class="text-style--inline-link is_minimal"
             >{{ item.categoryName }}</a
@@ -287,9 +244,9 @@
           <a
             [routerLink]="['.']"
             [queryParams]="{
-            categoryID: item.categoryID,
-            subCategoryID: item.subCategoryID
-          }"
+              categoryID: item.categoryID,
+              subCategoryID: item.subCategoryID
+            }"
             queryParamsHandling=""
             class="text-style--inline-link is_minimal"
             >{{ item.subCategoryName }}</a
@@ -298,33 +255,10 @@
             *ngTemplateOutlet="lastUpdatedLine; context:{ date: item.dateUpdated }"
           ></ng-container>
         </p>
-        <details>
-          <summary class="action action-dark">{{ item.question }}</summary>
-          <ng-container
-            *ngTemplateOutlet="answerBlock; context:{ answer: item.answer }"
-          ></ng-container>
-          <ul
-            *ngIf="item.children.length"
-            class="ion-padding"
-          >
-            <li
-              *ngFor="let subQaSet of item.children"
-              class="ion-margin-bottom"
-            >
-              <details>
-                <summary class="action">{{ subQaSet.question }}</summary>
-                <p *ngIf="subQaSet.dateUpdated">
-                  <ng-container
-                    *ngTemplateOutlet="lastUpdatedLine; context:{ date: subQaSet.dateUpdated }"
-                  ></ng-container>
-                </p>
-                <ng-container
-                  *ngTemplateOutlet="answerBlock; context:{ answer: subQaSet.answer }"
-                ></ng-container>
-              </details>
-            </li>
-          </ul>
-        </details>
+        <app-q-a-set
+          [qaSet]="item"
+          [showParentDateUpdated]="false"
+        ></app-q-a-set>
       </li>
     </ol>
   </ng-container>
