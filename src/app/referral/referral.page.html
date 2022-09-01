@@ -34,13 +34,14 @@
 
   <!-- Region-page = Category-list -->
   <ng-container
-    *ngIf="isSupportedRegion() && !loading && !showHighlights && !category && hasDataToShow()"
+    *ngIf="isSupportedRegion() && !loading && !showHighlights && !showSearch && !category && hasDataToShow()"
   >
     <div
-      *ngIf="useQandAs && qaHighlights.length"
+      *ngIf="useQandAs"
       class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
     >
       <a
+        *ngIf="useQandAs && qaHighlights.length"
         routerLink="."
         [queryParams]="{ highlights: 'show' }"
         queryParamsHandling="merge"
@@ -52,6 +53,21 @@
         class="action is_round is_attention text-style--center"
       >
         <strong>!</strong>
+      </a>
+      &nbsp;
+      <a
+        *ngIf="useQandAs && useQandASearch"
+        routerLink="."
+        [queryParams]="{ search: 'show' }"
+        queryParamsHandling="merge"
+        routerLinkActive
+        #qaSearchToggle="routerLinkActive"
+        [hidden]="qaSearchToggle.isActive"
+        [attr.title]="referralPageData?.labelSearchPageTitle"
+        [attr.aria-label]="referralPageData?.labelSearchPageTitle"
+        class="action is_round is_attention text-style--center"
+      >
+        <strong>🔍</strong>
       </a>
     </div>
 
@@ -182,7 +198,7 @@
     ></app-last-updated-time>
   </ng-container>
 
-  <!-- List-page = Search-results/Q&A-Highlights-list -->
+  <!-- Q&A-Highlights-page = Q&A-list -->
   <ng-container *ngIf="isSupportedRegion() && !loading && showHighlights">
     <div
       class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
@@ -198,6 +214,7 @@
         <strong>&times;</strong>
       </a>
     </div>
+
     <h2 class="ion-no-margin text-style--header text-style--size-1">
       {{ referralPageData?.labelHighlightsPageTitle }}
     </h2>
@@ -213,6 +230,39 @@
 
     <app-q-a-set-list
       [list]="qaHighlights"
+      class="ion-margin-vertical"
+    ></app-q-a-set-list>
+  </ng-container>
+
+  <!-- Search-page = Q&A-list -->
+  <ng-container *ngIf="isSupportedRegion() && !loading && showSearch">
+    <div
+      class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+    >
+      <a
+        routerLink="."
+        [queryParams]="{ search: null, q: null }"
+        queryParamsHandling="merge"
+        [attr.title]="referralPageData?.referralBackButtonLabel"
+        [attr.aria-label]="referralPageData?.referralBackButtonLabel"
+        class="action is_round text-style--center"
+      >
+        <strong>&times;</strong>
+      </a>
+    </div>
+
+    <h2 class="ion-no-margin text-style--header text-style--size-1">
+      {{ referralPageData?.labelSearchPageTitle }}
+    </h2>
+
+    <p>
+      {{ referralPageData?.labelSearchResultsCount }}
+      <strong>{{ searchResults.length }}</strong>
+    </p>
+
+    <app-q-a-set-list
+      [list]="searchResults"
+      [showDateUpdatedOutsideQuestion]="false"
       class="ion-margin-vertical"
     ></app-q-a-set-list>
   </ng-container>

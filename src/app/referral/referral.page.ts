@@ -47,6 +47,11 @@ export class ReferralPageComponent implements OnInit {
   public useQandAs = environment.useQandAs;
   public showHighlights = false;
 
+  public useQandASearch = environment.useQandASearch;
+  public showSearch = false;
+  public searchQuery: string;
+  public searchResults: QASet[] = [];
+
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
   public errorHeader = environment.errorHeader;
@@ -72,6 +77,11 @@ export class ReferralPageComponent implements OnInit {
     if (environment.useQandAs) {
       this.route.queryParams.subscribe((queryParams) => {
         this.showHighlights = !!queryParams.highlights;
+
+        if (environment.useQandASearch) {
+          this.showSearch = !!queryParams.search;
+          this.searchQuery = queryParams.q;
+        }
       });
     }
   }
@@ -130,7 +140,9 @@ export class ReferralPageComponent implements OnInit {
       this.offers = await this.offersService.getOffers(this.region);
 
       if (environment.useQandAs) {
-        this.qaSets = await this.offersService.getQAs(this.region);
+        this.qaSets = (await this.offersService.getQAs(this.region)).map(
+          (qaSet) => this.addParentCategoryNames(qaSet),
+        );
         this.qaHighlights = this.createHighlights(this.qaSets);
       }
 
@@ -154,7 +166,6 @@ export class ReferralPageComponent implements OnInit {
         }
         return a.dateUpdated.getTime() - b.dateUpdated.getTime();
       })
-      .map((qaSet) => this.addParentCategoryNames(qaSet))
       .map((item) => {
         if (!item.children) {
           return item;
@@ -391,6 +402,13 @@ export class ReferralPageComponent implements OnInit {
       this.loggingService.logEvent(
         LoggingEventCategory.ai,
         LoggingEvent.BackFromHighlights,
+        this.getLogProperties(true),
+      );
+      this.router.navigate([this.getRegionHref()]);
+    } else if (this.showSearch) {
+      this.loggingService.logEvent(
+        LoggingEventCategory.ai,
+        LoggingEvent.BackFromSearch,
         this.getLogProperties(true),
       );
       this.router.navigate([this.getRegionHref()]);

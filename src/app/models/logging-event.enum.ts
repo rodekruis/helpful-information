@@ -12,6 +12,7 @@ export enum LoggingEvent {
   BackFromSubCategory = 'back-from-sub-category',
   BackFromOffer = 'back-from-offer',
   BackFromHighlights = 'back-from-highlights',
+  BackFromSearch = 'back-from-search',
   CategoryClick = 'category-click',
   FooterContactClick = 'footer-contact-click',
   FooterWhatsAppClick = 'footer-whatsapp-click',
