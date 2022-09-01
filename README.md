@@ -138,6 +138,17 @@ During development, an automated watch-process can be run with:
   > ⚠️ The [`Ionicons`](https://ionic.io/ionicons) icon-set is NOT included in the final build, so cannot be used 'by default'. Icons can be added manually.
 - [Angular v14](https://v14.angular.io/docs/)
 
+### Updating dependencies
+
+Most (development-)dependencies in this repository are monitored by the GitHub [Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/about-dependabot-version-updates) service, too keep them up-to-date.  
+Unfortunately most individual dependencies are 'linked' to related dependencies that need to stay 'in sync'.
+
+To update all Angular and ESLint related dependencies, run:
+
+```sh
+npx ng update @angular/core @angular/cli @angular-eslint/schematics
+```
+
 ---
 
 ## Data Model
