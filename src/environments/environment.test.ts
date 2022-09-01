@@ -7,6 +7,7 @@ export const environment = {
   envName: 'test',
   useServiceWorker: true,
   useQandAs: true,
+  useQandASearch: true,
 
   // Configuration of content
   appName: 'HIA-test',

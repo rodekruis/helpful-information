@@ -1,0 +1,18 @@
+<form
+  role="search"
+  #ngForm
+  (ngSubmit)="doSubmit()"
+>
+  <input
+    type="search"
+    name="q"
+    [(ngModel)]="searchQuery"
+  />
+
+  <button
+    type="submit"
+    class="action action-dark"
+  >
+    <strong>{{ actionLabel || 'Search' }}</strong>
+  </button>
+</form>

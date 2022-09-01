@@ -10,25 +10,37 @@ import { SubCategoryComponent } from 'src/app/components/sub-category/sub-catego
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
 import { LinkTileComponent } from '../components/link-tile/link-tile.component';
+import { QASetListComponent } from '../components/q-a-set-list/q-a-set-list.component';
+import { QASetComponent } from '../components/q-a-set/q-a-set.component';
+import { SearchInputComponent } from '../components/search-input/search-input.component';
+import { ConvertUrlsPipe } from '../pipes/convert-urls.pipe';
 
 @NgModule({
   declarations: [
-    LinkTileComponent,
-    SubCategoryComponent,
-    OfferComponent,
     AppHeaderComponent,
-    LastUpdatedTimeComponent,
     CategoryFilterPipe,
+    ConvertUrlsPipe,
+    LastUpdatedTimeComponent,
+    LinkTileComponent,
+    OfferComponent,
+    QASetComponent,
+    QASetListComponent,
+    SearchInputComponent,
+    SubCategoryComponent,
     SubCategoryFilterPipe,
   ],
   imports: [CommonModule, IonicModule, FormsModule, RouterModule],
   exports: [
-    LinkTileComponent,
-    SubCategoryComponent,
-    OfferComponent,
     AppHeaderComponent,
-    LastUpdatedTimeComponent,
     CategoryFilterPipe,
+    ConvertUrlsPipe,
+    LastUpdatedTimeComponent,
+    LinkTileComponent,
+    OfferComponent,
+    QASetComponent,
+    QASetListComponent,
+    SearchInputComponent,
+    SubCategoryComponent,
     SubCategoryFilterPipe,
   ],
 })

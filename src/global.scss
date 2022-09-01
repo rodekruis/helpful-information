@@ -256,14 +256,6 @@ img[decoding='async'] {
   --action--background-color-active: #3a4f6a;
 }
 
-details summary {
-  cursor: pointer;
-
-  &.action {
-    display: list-item; // Keep using details/summary ▶/▼ markers
-  }
-}
-
 .sheet--button {
   display: flex;
   justify-content: center;

@@ -1,0 +1,55 @@
+<ng-template
+  #lastUpdatedLine
+  let-date="date"
+>
+  <small *ngIf="date">
+    {{ labelLastUpdated }}
+    <time [attr.datetime]="date | date: 'yyyy-MM-dd'">
+      {{ date | date: "d-MM-''YY" }}
+    </time>
+  </small>
+</ng-template>
+
+<ol
+  *ngIf="list.length"
+  class="ion-padding-start"
+>
+  <li
+    *ngFor="let item of list"
+    class="ion-padding-bottom"
+  >
+    <p>
+      <a
+        [routerLink]="['.']"
+        [queryParams]="{
+          categoryID: item.categoryID
+        }"
+        queryParamsHandling=""
+        class="text-style--inline-link is_minimal"
+        >{{ item.categoryName }}</a
+      ><strong>&nbsp;/ </strong>
+      <a
+        [routerLink]="['.']"
+        [queryParams]="{
+          categoryID: item.categoryID,
+          subCategoryID: item.subCategoryID
+        }"
+        queryParamsHandling=""
+        class="text-style--inline-link is_minimal"
+        >{{ item.subCategoryName }}</a
+      ><strong>&nbsp;: </strong><br />
+      <ng-container *ngIf="showDateUpdatedOutsideQuestion">
+        <ng-container
+          *ngTemplateOutlet="
+            lastUpdatedLine;
+            context: { date: item.dateUpdated }
+          "
+        ></ng-container>
+      </ng-container>
+    </p>
+    <app-q-a-set
+      [qaSet]="item"
+      [showParentDateUpdated]="!showDateUpdatedOutsideQuestion || false"
+    ></app-q-a-set>
+  </li>
+</ol>

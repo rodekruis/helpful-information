@@ -1,0 +1,7 @@
+details summary {
+  cursor: pointer;
+
+  &.action {
+    display: list-item; // Keep using details/summary ▶/▼ markers
+  }
+}

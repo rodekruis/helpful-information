@@ -13,6 +13,9 @@ export class ReferralPageData {
   labelHighlightsPageTitle?: string;
   labelHighlightsItemsZero?: string;
   labelHighlightsItemsCount?: string;
+  labelSearchPageTitle?: string;
+  labelSearchAction?: string;
+  labelSearchResultsCount?: string;
 }
 
 export enum PageDataFallback {
@@ -22,4 +25,7 @@ export enum PageDataFallback {
   labelHighlightsPageTitle = 'Highlights',
   labelHighlightsItemsZero = 'No highlighted items.',
   labelHighlightsItemsCount = 'Highlighted items:',
+  labelSearchPageTitle = "Search Q&A's",
+  labelSearchAction = 'Search',
+  labelSearchResultsCount = 'Found results:',
 }

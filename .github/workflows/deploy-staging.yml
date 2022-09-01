@@ -53,6 +53,7 @@ jobs:
           ENV_NAME: 'staging'
           NG_USE_SERVICE_WORKER: 'true'
           NG_USE_Q_AND_AS: 'true'
+          NG_USE_Q_AND_A_SEARCH: 'true'
           TXT_APP_NAME: 'Helpful Information'
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
           TXT_MAIN_PAGE_HEADER: 'The Netherlands Red Cross provides Helpful Information.'
