@@ -255,7 +255,14 @@
       {{ referralPageData?.labelSearchPageTitle }}
     </h2>
 
-    <p>
+    <app-search-input
+      [(searchQuery)]="searchQuery"
+      (doSearch)="performSearch($event)"
+      [actionLabel]="referralPageData?.labelSearchAction"
+      class="ion-margin-vertical"
+    ></app-search-input>
+
+    <p *ngIf="!!searchQuery">
       {{ referralPageData?.labelSearchResultsCount }}
       <strong>{{ searchResults.length }}</strong>
     </p>

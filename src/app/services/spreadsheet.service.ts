@@ -283,6 +283,9 @@ export class SpreadsheetService {
       labelSearchPageTitle:
         SpreadsheetService.readCellValue(referralPageDataRows[19], 1) ||
         PageDataFallback.labelSearchPageTitle,
+      labelSearchAction:
+        SpreadsheetService.readCellValue(referralPageDataRows[20], 1) ||
+        PageDataFallback.labelSearchAction,
       labelSearchResultsCount:
         SpreadsheetService.readCellValue(referralPageDataRows[21], 1) ||
         PageDataFallback.labelSearchResultsCount,

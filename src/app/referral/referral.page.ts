@@ -80,7 +80,11 @@ export class ReferralPageComponent implements OnInit {
 
         if (environment.useQandASearch) {
           this.showSearch = !!queryParams.search;
-          this.searchQuery = queryParams.q;
+          this.searchQuery = !!queryParams.q ? queryParams.q : '';
+
+          if (!this.searchQuery) {
+            this.searchResults = [];
+          }
         }
       });
     }
@@ -308,6 +312,10 @@ export class ReferralPageComponent implements OnInit {
         subCategoryName,
         offerName,
       );
+
+      if ('q' in params) {
+        this.performSearch(params.q);
+      }
     });
   }
 
@@ -462,5 +470,34 @@ export class ReferralPageComponent implements OnInit {
       event,
       this.getLogProperties(true),
     );
+  }
+
+  private sanitizeSearchQuery(rawValue: string): string {
+    if (!rawValue) {
+      return '';
+    }
+
+    let safeValue = rawValue.replace(/[?.+*]*/g, '').trim();
+
+    return safeValue && safeValue.length > 1 ? safeValue : '';
+  }
+
+  public performSearch(rawQuery: string): void {
+    const safeQuery = this.sanitizeSearchQuery(rawQuery);
+
+    this.router.navigate([this.getRegionHref()], {
+      queryParams: { q: safeQuery },
+      queryParamsHandling: 'merge',
+    });
+
+    if (!this.qaSets || !safeQuery) {
+      this.searchResults = [];
+      return;
+    }
+
+    this.searchResults = this.qaSets.filter((item) => {
+      const regEx = new RegExp(safeQuery, 'i');
+      return regEx.test(item.question) || regEx.test(item.answer);
+    });
   }
 }
