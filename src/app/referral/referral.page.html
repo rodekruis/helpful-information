@@ -52,7 +52,7 @@
         [attr.aria-label]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
         class="action is_round is_attention text-style--center"
       >
-        <strong>!</strong>
+        <strong aria-hidden="true">!</strong>
       </a>
       &nbsp;
       <a
@@ -67,7 +67,11 @@
         [attr.aria-label]="referralPageData?.labelSearchPageTitle"
         class="action is_round is_attention text-style--center"
       >
-        <strong>🔍</strong>
+        <strong
+          style="transform: translate(10%, -25%); display: inline-block"
+          aria-hidden="true"
+          >⌕</strong
+        >
       </a>
     </div>
 
@@ -211,7 +215,7 @@
         [attr.aria-label]="referralPageData?.referralBackButtonLabel"
         class="action is_round text-style--center"
       >
-        <strong>&times;</strong>
+        <strong aria-hidden="true">&times;</strong>
       </a>
     </div>
 
@@ -247,7 +251,7 @@
         [attr.aria-label]="referralPageData?.referralBackButtonLabel"
         class="action is_round text-style--center"
       >
-        <strong>&times;</strong>
+        <strong aria-hidden="true">&times;</strong>
       </a>
     </div>
 
