@@ -8,6 +8,7 @@ export const environment = {
   envName: '${process.env.ENV_NAME || ''}',
   useServiceWorker: ${process.env.NG_USE_SERVICE_WORKER === 'true' || true},
   useQandAs: ${process.env.NG_USE_Q_AND_AS === 'true' || false},
+  useQandASearch: ${process.env.NG_USE_Q_AND_A_SEARCH === 'true' || false},
 
   // Configuration of content
   appName: '${process.env.TXT_APP_NAME || ''}',

@@ -9,6 +9,7 @@ export const environment = {
   envName: 'development', // (Optional) Label to show which environment is used
   useServiceWorker: false, // Enable 'offline' support
   useQandAs: true, // Enable 'Q&A'-content type
+  useQandASearch: true, // Enable Search-feature for Q&As
 
   // Configuration of content
   appName: 'Helpful Information',
