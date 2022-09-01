@@ -387,6 +387,13 @@ export class ReferralPageComponent implements OnInit {
       );
       this.category = null;
       this.router.navigate([this.getRegionHref()]);
+    } else if (this.showHighlights) {
+      this.loggingService.logEvent(
+        LoggingEventCategory.ai,
+        LoggingEvent.BackFromHighlights,
+        this.getLogProperties(true),
+      );
+      this.router.navigate([this.getRegionHref()]);
     } else {
       this.loggingService.logEvent(
         LoggingEventCategory.ai,
