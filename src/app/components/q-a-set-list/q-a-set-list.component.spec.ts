@@ -10,6 +10,9 @@ import { ReferralPageDataService } from 'src/app/services/referral-page-data.ser
 import { SharedModule } from 'src/app/shared/shared.module';
 import { QASetListComponent } from './q-a-set-list.component';
 
+const testDate = new Date('2022-02-22');
+const testDateFormatted = "22-02-'22";
+
 const mockList = [
   {
     ...mockQASet1,
@@ -77,7 +80,7 @@ describe('QASetListComponent', () => {
 
     const listItems = fixture.nativeElement.querySelectorAll('ol > li');
 
-    expect(listItems.length).toEqual(testList.length);
+    expect(listItems.length).toBe(testList.length);
   });
 
   it("should show links to the Q&As' (sub-)category", () => {
@@ -88,10 +91,48 @@ describe('QASetListComponent', () => {
 
     const linkItems = fixture.nativeElement.querySelectorAll('a');
 
-    expect(linkItems.length).toEqual(2);
+    expect(linkItems.length).toBe(2);
     expect(linkItems[0].href).toContain(`categoryID=${testList[0].categoryID}`);
     expect(linkItems[1].href).toContain(
       `subCategoryID=${testList[0].subCategoryID}`,
     );
+  });
+
+  it('should show the "last updated" date INSIDE the question, not OUTSIDE', () => {
+    const testQASet = mockQASet1;
+    testQASet.dateUpdated = testDate;
+    component.list = [testQASet];
+    component.showDateUpdatedOutsideQuestion = false;
+
+    fixture.detectChanges();
+
+    const timeElementsInside =
+      fixture.nativeElement.querySelectorAll('app-q-a-set time');
+    const timeElementsOutside = fixture.nativeElement.querySelectorAll(
+      'time:not(app-q-a-set time)',
+    );
+
+    expect(timeElementsInside.length).toBe(1);
+    expect(timeElementsOutside.length).toBe(0);
+    expect(timeElementsInside[0].textContent).toContain(testDateFormatted);
+  });
+
+  it('should show the "last updated" date OUTSIDE the question, not INSIDE', () => {
+    const testQASet = mockQASet1;
+    testQASet.dateUpdated = testDate;
+    component.list = [testQASet];
+    component.showDateUpdatedOutsideQuestion = true;
+
+    fixture.detectChanges();
+
+    const timeElementsInside =
+      fixture.nativeElement.querySelectorAll('app-q-a-set time');
+    const timeElementsOutside = fixture.nativeElement.querySelectorAll(
+      'time:not(app-q-a-set time)',
+    );
+
+    expect(timeElementsInside.length).toBe(0);
+    expect(timeElementsOutside.length).toBe(1);
+    expect(timeElementsOutside[0].textContent).toContain(testDateFormatted);
   });
 });

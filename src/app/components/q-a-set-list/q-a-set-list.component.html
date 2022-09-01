@@ -38,13 +38,18 @@
         class="text-style--inline-link is_minimal"
         >{{ item.subCategoryName }}</a
       ><strong>&nbsp;: </strong><br />
-      <ng-container
-        *ngTemplateOutlet="lastUpdatedLine; context: { date: item.dateUpdated }"
-      ></ng-container>
+      <ng-container *ngIf="showDateUpdatedOutsideQuestion">
+        <ng-container
+          *ngTemplateOutlet="
+            lastUpdatedLine;
+            context: { date: item.dateUpdated }
+          "
+        ></ng-container>
+      </ng-container>
     </p>
     <app-q-a-set
       [qaSet]="item"
-      [showParentDateUpdated]="false"
+      [showParentDateUpdated]="!showDateUpdatedOutsideQuestion || false"
     ></app-q-a-set>
   </li>
 </ol>

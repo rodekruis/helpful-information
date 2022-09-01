@@ -59,7 +59,7 @@ describe('QASetComponent', () => {
 
     const subQuestionItems = fixture.nativeElement.querySelectorAll('li');
 
-    expect(subQuestionItems.length).toEqual(
+    expect(subQuestionItems.length).toBe(
       mockQASet2with1SubQuestion.children.length,
     );
   });
@@ -73,7 +73,7 @@ describe('QASetComponent', () => {
 
     const timeElements = fixture.nativeElement.querySelectorAll('time');
 
-    expect(timeElements.length).toEqual(1);
+    expect(timeElements.length).toBe(1);
     expect(timeElements[0].textContent).toContain(testDateFormatted);
   });
 
@@ -87,7 +87,7 @@ describe('QASetComponent', () => {
 
     const timeElements = fixture.nativeElement.querySelectorAll('time');
 
-    expect(timeElements.length).toEqual(0);
+    expect(timeElements.length).toBe(0);
   });
 
   it('should NOT show the "last updated" date, when no date available', () => {
@@ -99,7 +99,7 @@ describe('QASetComponent', () => {
 
     const timeElements = fixture.nativeElement.querySelectorAll('time');
 
-    expect(timeElements.length).toEqual(0);
+    expect(timeElements.length).toBe(0);
   });
 
   it('should show the "last updated" date of a sub-question', () => {
@@ -110,10 +110,11 @@ describe('QASetComponent', () => {
 
     fixture.detectChanges();
 
-    const timeElements = fixture.nativeElement.querySelectorAll('time');
+    const timeElements =
+      fixture.nativeElement.querySelectorAll('li details time');
 
-    expect(timeElements.length).toEqual(2);
-    expect(timeElements[1].textContent).toContain(testDateFormatted);
+    expect(timeElements.length).toBe(1);
+    expect(timeElements[0].textContent).toContain(testDateFormatted);
   });
 
   it('should contain clickable links, when answer contains plain-text (absolute) URL', () => {
@@ -128,7 +129,7 @@ describe('QASetComponent', () => {
       'a[rel="noopener noreferrer"]',
     );
 
-    expect(linkElements.length).toEqual(2);
+    expect(linkElements.length).toBe(2);
     expect(linkElements[0].href).toContain('http://www.example.org/');
     expect(linkElements[1].href).toContain('https://example.net/');
   });

@@ -11,6 +11,9 @@ export class QASetListComponent {
   @Input()
   list: QASet[];
 
+  @Input()
+  public showDateUpdatedOutsideQuestion = true;
+
   public labelLastUpdated: string;
 
   constructor(pageDataService: ReferralPageDataService) {
