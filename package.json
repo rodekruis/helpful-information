@@ -28,7 +28,7 @@
     "@angular/platform-browser-dynamic": "^14.2.1",
     "@angular/router": "^14.2.1",
     "@angular/service-worker": "^14.2.1",
-    "@ionic/angular": "^6.2.5",
+    "@ionic/angular": "^6.2.6",
     "@ionic/cli": "^6.20.1",
     "@microsoft/applicationinsights-web": "^2.8.7",
     "linkify-it": "^4.0.1",
