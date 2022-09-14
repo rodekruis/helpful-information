@@ -10,7 +10,8 @@ export class ConvertUrlsPipe implements PipeTransform {
   constructor(private domSanitizer: DomSanitizer) {}
 
   transform(value: string): string {
-    const allLinks = LinkifyIt().add('ftp:', null).match(value);
+    const linkifyIt = LinkifyIt().add('ftp:', null);
+    const allLinks = linkifyIt.match(value);
 
     if (!allLinks) {
       return value;
