@@ -47,6 +47,7 @@
 //
 a {
   color: inherit;
+  -webkit-touch-callout: initial; // Enable "tap-and-hold" on links on mobile/touch/iOS
 }
 
 // Workaround for touch-screen laptops
@@ -70,6 +71,15 @@ img[decoding='async'] {
 //
 // Layout Utilities:
 //
+.layout--float-end {
+  float: right !important;
+
+  [dir='rtl'] &,
+  :host-context([dir='rtl']) & {
+    float: left !important;
+  }
+}
+
 .list-flat {
   padding-left: 0;
 
@@ -112,7 +122,7 @@ img[decoding='async'] {
   position: fixed;
 
   &.is_in-page {
-    position: absolute;
+    position: relative;
   }
   &.is_top-right {
     right: 0;
@@ -122,6 +132,26 @@ img[decoding='async'] {
     right: 0;
     bottom: 1rem;
   }
+}
+
+//
+// Misc. Style Utilities
+//
+.focus--minimal:focus-visible {
+  outline-width: 1px;
+  outline-style: dashed;
+}
+@keyframes focus-fade-out {
+  0% {
+    outline: 1px dashed currentColor;
+    outline-offset: 2px;
+  }
+  100% {
+    outline-color: transparent;
+  }
+}
+.focus--fade-out:focus-visible {
+  animation: focus-fade-out 1s 0s 1 forwards;
 }
 
 //
@@ -266,7 +296,7 @@ img[decoding='async'] {
 }
 
 .icon {
-  &.icon_small {
+  &.is_small {
     width: 0.8125em;
     height: 0.8125em;
     margin-inline-end: 0.25em;

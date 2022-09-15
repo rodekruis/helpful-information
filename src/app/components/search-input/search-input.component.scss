@@ -3,6 +3,9 @@
 
   --search-input--text: var(--ion-color-light-contrast, black);
   --search-input--background: var(--ion-color-light, white);
+
+  --search-input--action-text: var(--ion-color-light, white);
+  --search-input--action-background: var(--ion-color-light-contrast, black);
 }
 
 form {
@@ -31,5 +34,10 @@ input[type='search'] {
 }
 
 button[type='submit'] {
-  flex: 1 0 20%;
+  flex: 0 0 20%;
+
+  --action--color: var(--search-input--action-text);
+  --action--color-active: var(--search-input--action-text);
+  --action--background-color: var(--search-input--action-background);
+  --action--background-color-active: var(--search-input--action-background);
 }

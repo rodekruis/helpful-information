@@ -477,7 +477,7 @@ export class ReferralPageComponent implements OnInit {
       return '';
     }
 
-    let safeValue = rawValue.replace(/[?.+*]*/g, '').trim();
+    let safeValue = rawValue.replace(/[?.]*/g, '').trim();
 
     return safeValue && safeValue.length > 1 ? safeValue : '';
   }
@@ -499,5 +499,12 @@ export class ReferralPageComponent implements OnInit {
       const regEx = new RegExp(safeQuery, 'i');
       return regEx.test(item.question) || regEx.test(item.answer);
     });
+
+    if (this.searchResults.length > 1) {
+      const resultFrame = document.getElementById('search-results');
+      if (resultFrame) {
+        resultFrame.focus();
+      }
+    }
   }
 }

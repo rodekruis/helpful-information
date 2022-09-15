@@ -7,12 +7,16 @@
     type="search"
     name="q"
     [(ngModel)]="searchQuery"
+    enterkeyhint="search"
+    class="text-style--size-1"
   />
 
   <button
     type="submit"
-    class="action action-dark"
+    class="action text-style--header text-style--size-1"
   >
-    <strong>{{ actionLabel || 'Search' }}</strong>
+    <strong>
+      {{ actionLabel || 'Search' }}
+    </strong>
   </button>
 </form>

@@ -38,7 +38,7 @@
   >
     <div
       *ngIf="useQandAs"
-      class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+      class="floating-action-area is_in-page layout--float-end ion-margin-start"
     >
       <a
         *ngIf="useQandAs && qaHighlights.length"
@@ -50,13 +50,12 @@
         [hidden]="qaHightlightsToggle.isActive"
         [attr.title]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
         [attr.aria-label]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
-        class="action is_round is_attention text-style--center"
+        class="action is_round is_attention text-style--center ion-margin-bottom"
       >
         <strong aria-hidden="true">!</strong>
       </a>
-      &nbsp;
       <a
-        *ngIf="useQandAs && useQandASearch"
+        *ngIf="useQandAs && useQandASearch && qaSets.length"
         routerLink="."
         [queryParams]="{ search: 'show' }"
         queryParamsHandling="merge"
@@ -65,13 +64,16 @@
         [hidden]="qaSearchToggle.isActive"
         [attr.title]="referralPageData?.labelSearchPageTitle"
         [attr.aria-label]="referralPageData?.labelSearchPageTitle"
-        class="action is_round is_attention text-style--center"
+        class="action is_round is_attention text-style--center ion-margin-bottom"
       >
-        <strong
-          style="transform: translate(10%, -25%); display: inline-block"
+        <img
+          src="/assets/icons/search.svg"
+          alt=""
           aria-hidden="true"
-          >⌕</strong
-        >
+          loading="lazy"
+          decoding="async"
+          style="display: block"
+        />
       </a>
     </div>
 
@@ -205,7 +207,7 @@
   <!-- Q&A-Highlights-page = Q&A-list -->
   <ng-container *ngIf="isSupportedRegion() && !loading && showHighlights">
     <div
-      class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+      class="floating-action-area is_in-page layout--float-end ion-margin-start"
     >
       <a
         routerLink="."
@@ -241,7 +243,7 @@
   <!-- Search-page = Q&A-list -->
   <ng-container *ngIf="isSupportedRegion() && !loading && showSearch">
     <div
-      class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+      class="floating-action-area is_in-page layout--float-end ion-margin-start"
     >
       <a
         routerLink="."
@@ -266,16 +268,22 @@
       class="ion-margin-vertical"
     ></app-search-input>
 
-    <p *ngIf="!!searchQuery">
-      {{ referralPageData?.labelSearchResultsCount }}
-      <strong>{{ searchResults.length }}</strong>
-    </p>
+    <div
+      id="search-results"
+      [tabindex]="-1"
+      class="focus--minimal focus--fade-out"
+    >
+      <p *ngIf="!!searchQuery">
+        {{ referralPageData?.labelSearchResultsCount }}
+        <strong>{{ searchResults.length }}</strong>
+      </p>
 
-    <app-q-a-set-list
-      [list]="searchResults"
-      [showDateUpdatedOutsideQuestion]="false"
-      class="ion-margin-vertical"
-    ></app-q-a-set-list>
+      <app-q-a-set-list
+        [list]="searchResults"
+        [showDateUpdatedOutsideQuestion]="false"
+        class="ion-margin-vertical"
+      ></app-q-a-set-list>
+    </div>
   </ng-container>
 
   <!-- Offer-detail page -->
