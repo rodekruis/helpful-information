@@ -70,6 +70,15 @@ img[decoding='async'] {
 //
 // Layout Utilities:
 //
+.layout--float-end {
+  float: right !important;
+
+  [dir='rtl'] &,
+  :host-context([dir='rtl']) & {
+    float: left !important;
+  }
+}
+
 .list-flat {
   padding-left: 0;
 
@@ -112,7 +121,7 @@ img[decoding='async'] {
   position: fixed;
 
   &.is_in-page {
-    position: absolute;
+    position: relative;
   }
   &.is_top-right {
     right: 0;

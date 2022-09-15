@@ -38,7 +38,7 @@
   >
     <div
       *ngIf="useQandAs"
-      class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+      class="floating-action-area is_in-page layout--float-end ion-margin-start"
     >
       <a
         *ngIf="useQandAs && qaHighlights.length"
@@ -205,7 +205,7 @@
   <!-- Q&A-Highlights-page = Q&A-list -->
   <ng-container *ngIf="isSupportedRegion() && !loading && showHighlights">
     <div
-      class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+      class="floating-action-area is_in-page layout--float-end ion-margin-start"
     >
       <a
         routerLink="."
@@ -241,7 +241,7 @@
   <!-- Search-page = Q&A-list -->
   <ng-container *ngIf="isSupportedRegion() && !loading && showSearch">
     <div
-      class="floating-action-area is_in-page is_top-right ion-padding-horizontal"
+      class="floating-action-area is_in-page layout--float-end ion-margin-start"
     >
       <a
         routerLink="."
