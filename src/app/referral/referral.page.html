@@ -56,7 +56,7 @@
       </a>
       &nbsp;
       <a
-        *ngIf="useQandAs && useQandASearch"
+        *ngIf="useQandAs && useQandASearch && qaSets.length"
         routerLink="."
         [queryParams]="{ search: 'show' }"
         queryParamsHandling="merge"
