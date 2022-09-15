@@ -47,6 +47,7 @@
 //
 a {
   color: inherit;
+  -webkit-touch-callout: initial; // Enable "tap-and-hold" on links on mobile/touch/iOS
 }
 
 // Workaround for touch-screen laptops
