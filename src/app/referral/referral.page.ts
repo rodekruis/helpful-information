@@ -477,7 +477,7 @@ export class ReferralPageComponent implements OnInit {
       return '';
     }
 
-    let safeValue = rawValue.replace(/[?.+*]*/g, '').trim();
+    let safeValue = rawValue.replace(/[?.]*/g, '').trim();
 
     return safeValue && safeValue.length > 1 ? safeValue : '';
   }
