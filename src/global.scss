@@ -134,6 +134,26 @@ img[decoding='async'] {
 }
 
 //
+// Misc. Style Utilities
+//
+.focus--minimal:focus-visible {
+  outline-width: 1px;
+  outline-style: dashed;
+}
+@keyframes focus-fade-out {
+  0% {
+    outline: 1px dashed currentColor;
+    outline-offset: 2px;
+  }
+  100% {
+    outline-color: transparent;
+  }
+}
+.focus--fade-out:focus-visible {
+  animation: focus-fade-out 1s 0s 1 forwards;
+}
+
+//
 // Text Style Utilities:
 //
 .text-style--center {

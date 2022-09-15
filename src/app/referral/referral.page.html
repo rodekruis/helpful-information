@@ -266,16 +266,22 @@
       class="ion-margin-vertical"
     ></app-search-input>
 
-    <p *ngIf="!!searchQuery">
-      {{ referralPageData?.labelSearchResultsCount }}
-      <strong>{{ searchResults.length }}</strong>
-    </p>
+    <div
+      id="search-results"
+      [tabindex]="-1"
+      class="focus--minimal focus--fade-out"
+    >
+      <p *ngIf="!!searchQuery">
+        {{ referralPageData?.labelSearchResultsCount }}
+        <strong>{{ searchResults.length }}</strong>
+      </p>
 
-    <app-q-a-set-list
-      [list]="searchResults"
-      [showDateUpdatedOutsideQuestion]="false"
-      class="ion-margin-vertical"
-    ></app-q-a-set-list>
+      <app-q-a-set-list
+        [list]="searchResults"
+        [showDateUpdatedOutsideQuestion]="false"
+        class="ion-margin-vertical"
+      ></app-q-a-set-list>
+    </div>
   </ng-container>
 
   <!-- Offer-detail page -->
