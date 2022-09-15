@@ -50,11 +50,10 @@
         [hidden]="qaHightlightsToggle.isActive"
         [attr.title]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
         [attr.aria-label]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
-        class="action is_round is_attention text-style--center"
+        class="action is_round is_attention text-style--center ion-margin-bottom"
       >
         <strong aria-hidden="true">!</strong>
       </a>
-      &nbsp;
       <a
         *ngIf="useQandAs && useQandASearch && qaSets.length"
         routerLink="."
@@ -65,7 +64,7 @@
         [hidden]="qaSearchToggle.isActive"
         [attr.title]="referralPageData?.labelSearchPageTitle"
         [attr.aria-label]="referralPageData?.labelSearchPageTitle"
-        class="action is_round is_attention text-style--center"
+        class="action is_round is_attention text-style--center ion-margin-bottom"
       >
         <img
           src="/assets/icons/search.svg"
