@@ -434,6 +434,7 @@ export class ReferralPageComponent implements OnInit {
     const logParams: { [key: string]: any } = { isBack };
     if (this.offer) {
       logParams.offerID = this.offer.offerID;
+      logParams.offerName = this.offer.offerName ? this.offer.offerName : '';
     }
     if (this.subCategory) {
       logParams.subCategoryID = this.subCategory.subCategoryID;
