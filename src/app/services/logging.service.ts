@@ -27,9 +27,10 @@ export class LoggingService {
       config: {
         connectionString: environment.appInsightsConnectionString,
         disableCookiesUsage: true,
-        enableAutoRouteTracking: true,
         isStorageUseDisabled: true,
         enableSessionStorageBuffer: true,
+        autoTrackPageVisitTime: true,
+        enableAutoRouteTracking: true,
       },
     });
 
