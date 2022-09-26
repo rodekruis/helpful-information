@@ -20,7 +20,7 @@ export class OfferComponent {
   public logClick(name: string) {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
-      LoggingEvent.OfferClick,
+      LoggingEvent.OfferDetailClick,
       { name },
     );
   }
