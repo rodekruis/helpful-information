@@ -23,6 +23,7 @@ export enum LoggingEvent {
   NotFoundParentQuestion = 'not-found-parent-question',
   NotFoundParentQuestionIsSelf = 'not-found-parent-question-is-self',
   OfferClick = 'offer-click',
+  OfferDetailClick = 'offer-detail-click',
   SubCategoryClick = 'sub-category-click',
   SwUpdateAvailable = 'sw-update-available',
   SwUpdateActivated = 'sw-update-activated',
