@@ -15,6 +15,7 @@ import { OffersService } from 'src/app/services/offers.service';
 import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
 import { environment } from 'src/environments/environment';
 import { QASet } from '../models/qa-set.model';
+import { SearchService } from '../services/search.service';
 import { SpreadsheetService } from '../services/spreadsheet.service';
 
 @Component({
@@ -67,6 +68,7 @@ export class ReferralPageComponent implements OnInit {
     private referralPageDataService: ReferralPageDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private titleService: Title,
+    private searchService: SearchService,
   ) {}
 
   ngOnInit() {
@@ -74,17 +76,13 @@ export class ReferralPageComponent implements OnInit {
       this.region = params.region;
       this.loadReferralData();
     });
-    if (environment.useQandAs) {
+    if (this.useQandAs) {
       this.route.queryParams.subscribe((queryParams) => {
         this.showHighlights = !!queryParams.highlights;
 
-        if (environment.useQandASearch) {
+        if (this.useQandASearch) {
           this.showSearch = !!queryParams.search;
           this.searchQuery = !!queryParams.q ? queryParams.q : '';
-
-          if (!this.searchQuery) {
-            this.searchResults = [];
-          }
         }
       });
     }
@@ -106,10 +104,10 @@ export class ReferralPageComponent implements OnInit {
       this.categories.some((item) => item.categoryVisible) &&
       this.subCategories &&
       this.subCategories.some((item) => item.subCategoryVisible) &&
-      ((environment.useQandAs === false &&
+      ((this.useQandAs === false &&
         this.offers &&
         this.offers.some((item) => item.offerVisible)) ||
-        (environment.useQandAs &&
+        (this.useQandAs &&
           !(
             (!this.offers || !this.offers.some((item) => item.offerVisible)) &&
             (!this.qaSets || !this.qaSets.some((item) => item.isVisible))
@@ -143,11 +141,14 @@ export class ReferralPageComponent implements OnInit {
       );
       this.offers = await this.offersService.getOffers(this.region);
 
-      if (environment.useQandAs) {
+      if (this.useQandAs) {
         this.qaSets = (await this.offersService.getQAs(this.region)).map(
           (qaSet) => this.addParentCategoryNames(qaSet),
         );
         this.qaHighlights = this.createHighlights(this.qaSets);
+      }
+      if (this.useQandASearch) {
+        this.searchService.setSource(this.qaSets);
       }
 
       this.readQueryParams();
@@ -473,33 +474,15 @@ export class ReferralPageComponent implements OnInit {
     );
   }
 
-  private sanitizeSearchQuery(rawValue: string): string {
-    if (!rawValue) {
-      return '';
-    }
-
-    let safeValue = rawValue.replace(/[?.]*/g, '').trim();
-
-    return safeValue && safeValue.length > 1 ? safeValue : '';
-  }
-
   public performSearch(rawQuery: string): void {
-    const safeQuery = this.sanitizeSearchQuery(rawQuery);
+    const safeQuery = this.searchService.sanitizeSearchQuery(rawQuery);
 
     this.router.navigate([this.getRegionHref()], {
       queryParams: { q: safeQuery },
       queryParamsHandling: 'merge',
     });
 
-    if (!this.qaSets || !safeQuery) {
-      this.searchResults = [];
-      return;
-    }
-
-    this.searchResults = this.qaSets.filter((item) => {
-      const regEx = new RegExp(safeQuery, 'i');
-      return regEx.test(item.question) || regEx.test(item.answer);
-    });
+    this.searchResults = this.searchService.query(safeQuery);
 
     if (this.searchResults.length > 1) {
       const resultFrame = document.getElementById('search-results');
