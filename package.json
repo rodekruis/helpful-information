@@ -29,7 +29,7 @@
     "@angular/router": "^14.2.3",
     "@angular/service-worker": "^14.2.3",
     "@ionic/angular": "^6.2.8",
-    "@ionic/cli": "^6.20.1",
+    "@ionic/cli": "^6.20.3",
     "@microsoft/applicationinsights-web": "^2.8.7",
     "linkify-it": "^4.0.1",
     "rxjs": "^6.6.7",
