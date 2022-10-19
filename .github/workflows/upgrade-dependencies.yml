@@ -41,7 +41,13 @@ jobs:
           npm outdated || true
 
       - name: Upgrade dependencies
-        run: npx ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          npx ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits
+
+      - name: Fix syntax
+        run: npm run fix:syntax
 
       - name: Run Tests
         run: npm test
