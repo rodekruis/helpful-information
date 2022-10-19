@@ -59,8 +59,8 @@ jobs:
         env:
           HUSKY: 0
         run: |
-          git add -A
-          git commit -m "Upgrade (Angular-)dependencies -- By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}"
+          git add -A || true
+          git commit -m "Upgrade (Angular-)dependencies -- By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}" || true
           git push
 
       - name: Create PR with new version(s)
