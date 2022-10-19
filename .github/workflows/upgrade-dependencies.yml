@@ -10,7 +10,7 @@ on:
     branches:
       - main
   schedule:
-    - '20 4 * * SUN'
+    - cron: '20 4 * * SUN'
 
 env:
   WORKFLOW_RUN_URL: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
