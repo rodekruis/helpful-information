@@ -1,0 +1,59 @@
+# More information on Static Web App workflow configurations,
+# See: https://aka.ms/swaworkflowconfig
+# See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+
+name: 'Upgrade (Angular-)Dependencies'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  schedule:
+    - '20 4 * * SUN'
+
+env:
+  WORKFLOW_RUN_URL: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install
+        env:
+          HUSKY: 0
+        run: npm ci --omit=optional --no-fund --no-audit
+
+      - name: Verify environment/tools
+        run: |
+          node --version
+          npm --version
+          npx ng version
+          npm outdated
+
+      - name: Upgrade dependencies
+        run: npx ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Save updated version
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          # See: https://github.com/stefanzweifel/git-auto-commit-action#readme
+          commit_message: 'Upgrade (Angular-)dependencies -- By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}'
+          branch: auto-upgrade-dependencies
+          create_branch: true
+
+      - name: Create PR with new version(s)
+        if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        run: gh pr create --fill --label 'dependencies'
