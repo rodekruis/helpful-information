@@ -16,7 +16,7 @@ env:
   WORKFLOW_RUN_URL: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
 
 jobs:
-  test:
+  auto_upgrade_dependencies:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,7 +38,7 @@ jobs:
           node --version
           npm --version
           npx ng version
-          npm outdated
+          npm outdated || true
 
       - name: Upgrade dependencies
         run: npx ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits
