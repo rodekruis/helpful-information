@@ -19,6 +19,10 @@ jobs:
   auto_upgrade_dependencies:
     runs-on: ubuntu-latest
 
+    permissions:
+      actions: read
+      pull-requests: write
+
     steps:
       - uses: actions/checkout@v3
 
@@ -64,4 +68,6 @@ jobs:
           git push
 
       - name: Create PR with new version(s)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh pr create --fill --label 'dependencies'
