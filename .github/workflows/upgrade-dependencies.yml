@@ -21,6 +21,7 @@ jobs:
 
     permissions:
       actions: read
+      contents: write
       pull-requests: write
 
     steps:
@@ -59,15 +60,12 @@ jobs:
       - name: Run Tests
         run: npm test
 
-      - name: Save updated version
+      - name: Save updated version(s) and create PR
         env:
           HUSKY: 0
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git add -A || true
           git commit -m "Upgrade (Angular-)dependencies -- By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}" || true
-          git push
-
-      - name: Create PR with new version(s)
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr create --fill --label 'dependencies'
+          git push --set-upstream origin auto-upgrade-dependencies --force
+          gh pr create --title 'Upgrade (Angular-)dependencies' --body 'By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}' --label 'dependencies'
