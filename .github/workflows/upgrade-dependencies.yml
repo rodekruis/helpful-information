@@ -6,14 +6,12 @@ name: 'Upgrade (Angular-)Dependencies'
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
   schedule:
     - cron: '20 4 * * SUN'
 
 env:
   WORKFLOW_RUN_URL: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+  WORKFLOW_NEW_PR_URL: '${{ github.server_url }}/${{ github.repository }}/pull/new/auto-upgrade-dependencies'
 
 jobs:
   auto_upgrade_dependencies:
@@ -67,4 +65,5 @@ jobs:
           git add -A || true
           git commit -m "${{ env.UPGRADE_ISSUE_TITLE }} -- ${{ env.UPGRADE_ISSUE_BODY }}" || true
           git push --set-upstream origin auto-upgrade-dependencies --force
-          gh issue create --title '${{ env.UPGRADE_ISSUE_TITLE }}' --body '${{ env.UPGRADE_ISSUE_BODY }}' --label 'dependencies'
+          gh issue create --title '${{ env.UPGRADE_ISSUE_TITLE }}' --body '${{ env.UPGRADE_ISSUE_BODY }} -- ${{ env.WORKFLOW_NEW_PR_URL }}' --label 'dependencies'
+          echo "Create a new PR with these changes: ${{ env.WORKFLOW_NEW_PR_URL }}" >> $GITHUB_STEP_SUMMARY
