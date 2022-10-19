@@ -19,6 +19,10 @@ jobs:
   auto_upgrade_dependencies:
     runs-on: ubuntu-latest
 
+    permissions:
+      actions: read
+      pull-requests: write
+
     steps:
       - uses: actions/checkout@v3
 
@@ -40,20 +44,30 @@ jobs:
           npx ng version
           npm outdated || true
 
+      - name: Prepare git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -B auto-upgrade-dependencies
+
       - name: Upgrade dependencies
         run: npx ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits
+
+      - name: Fix syntax
+        run: npm run fix:syntax
 
       - name: Run Tests
         run: npm test
 
       - name: Save updated version
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          # See: https://github.com/stefanzweifel/git-auto-commit-action#readme
-          commit_message: 'Upgrade (Angular-)dependencies -- By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}'
-          branch: auto-upgrade-dependencies
-          create_branch: true
+        env:
+          HUSKY: 0
+        run: |
+          git add -A || true
+          git commit -m "Upgrade (Angular-)dependencies -- By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}" || true
+          git push
 
       - name: Create PR with new version(s)
-        if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh pr create --fill --label 'dependencies'
