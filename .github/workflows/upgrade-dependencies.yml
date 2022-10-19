@@ -22,7 +22,7 @@ jobs:
     permissions:
       actions: read
       contents: write
-      pull-requests: write
+      issues: write
 
     steps:
       - uses: actions/checkout@v3
@@ -57,15 +57,14 @@ jobs:
       - name: Fix syntax
         run: npm run fix:syntax
 
-      - name: Run Tests
-        run: npm test
-
       - name: Save updated version(s) and create PR
         env:
           HUSKY: 0
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPGRADE_ISSUE_TITLE: 'Upgrade (Angular-)dependencies'
+          UPGRADE_ISSUE_BODY: 'By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}'
         run: |
           git add -A || true
-          git commit -m "Upgrade (Angular-)dependencies -- By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}" || true
+          git commit -m "${{ env.UPGRADE_ISSUE_TITLE }} -- ${{ env.UPGRADE_ISSUE_BODY }}" || true
           git push --set-upstream origin auto-upgrade-dependencies --force
-          gh pr create --title 'Upgrade (Angular-)dependencies' --body 'By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}' --label 'dependencies'
+          gh issue create --title '${{ env.UPGRADE_ISSUE_TITLE }}' --body '${{ env.UPGRADE_ISSUE_BODY }}' --label 'dependencies'
