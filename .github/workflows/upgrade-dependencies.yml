@@ -68,4 +68,4 @@ jobs:
           git add -A || true
           git commit -m "Upgrade (Angular-)dependencies -- By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}" || true
           git push --set-upstream origin auto-upgrade-dependencies
-          gh pr create --fill --label 'dependencies'
+          gh pr create --title 'Upgrade (Angular-)dependencies' --body 'By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}' --label 'dependencies'
