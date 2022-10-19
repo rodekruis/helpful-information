@@ -61,6 +61,7 @@ jobs:
         run: |
           git add -A
           git commit -m "Upgrade (Angular-)dependencies -- By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}"
+          git push
 
       - name: Create PR with new version(s)
         run: gh pr create --fill --label 'dependencies'
