@@ -47,16 +47,17 @@ So take appropriate precautions regarding file-ownership and "edit"-permissions 
 
 > ⚠️ **Everything** is visible on the website on **every** 'save' (so, immediately, most of the times).
 
-- Don't change the _name_ of any sheet
-- Don't change the _name_ or _order_ of columns in any sheet
+- Don't change the _name_ of any sheet.
+- Don't change the _`#tag`s_ in the columns-headers in any sheet, the name/label/heading can be changed/translated.
 - Don't use formatting (bold/italic/underline/fonts/colors); It will not be used.
 - Don't use the "insert link"-feature.  
   The plain text in a cell should be the full URL.
 
 Optional:
 
+- All header-rows can be reordered, as long as their `#tag`s remain.
 - You can use the toggle in the "_Visible?_"-column to prepare a 'draft' of a row and finally 'publish' by setting it to "_Show_".
-- You can use background-colors to mark/highlight any changes or 'flag issues'; These styles will not be used in the web-app
+- You can use background-colors to mark/highlight any changes or 'flag issues'; These styles will not be used in the web-app.
 
 ---
 
