@@ -61,9 +61,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           UPGRADE_ISSUE_TITLE: 'Upgrade (Angular-)dependencies'
           UPGRADE_ISSUE_BODY: 'By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}'
+          UPGRADE_PR_CTA: 'Create a new PR with these changes: ${{ env.WORKFLOW_NEW_PR_URL }}'
         run: |
           git add -A || true
           git commit -m "${{ env.UPGRADE_ISSUE_TITLE }} -- ${{ env.UPGRADE_ISSUE_BODY }}" || true
           git push --set-upstream origin auto-upgrade-dependencies --force
-          gh issue create --title '${{ env.UPGRADE_ISSUE_TITLE }}' --body '${{ env.UPGRADE_ISSUE_BODY }} -- ${{ env.WORKFLOW_NEW_PR_URL }}' --label 'dependencies'
-          echo "Create a new PR with these changes: ${{ env.WORKFLOW_NEW_PR_URL }}" >> $GITHUB_STEP_SUMMARY
+          gh issue create --title '${{ env.UPGRADE_ISSUE_TITLE }}' --body '${{ env.UPGRADE_PR_CTA }}' --label 'dependencies'
+          echo "${{ env.UPGRADE_PR_CTA }}" >> $GITHUB_STEP_SUMMARY
