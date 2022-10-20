@@ -15,6 +15,7 @@
     "pretest": "npm run lint",
     "test": "ng test --configuration=ci",
     "test:watch": "ng test --configuration=development",
+    "upgrade:angular": "ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits",
     "lint": "npm run lint:syntax && ng lint",
     "lint:syntax": "prettier --check \"**/*.{md,js,json,ts,scss,html}\"",
     "fix:syntax": "npm run lint:syntax -- --write"

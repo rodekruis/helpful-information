@@ -50,7 +50,7 @@ jobs:
           git checkout -B auto-upgrade-dependencies
 
       - name: Upgrade dependencies
-        run: npx ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits
+        run: npm run upgrade:angular
 
       - name: Fix syntax
         run: npm run fix:syntax
