@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
-import { Offer } from 'src/app/models/offer.model';
+import { Offer, OfferCol } from 'src/app/models/offer.model';
 import {
   PageDataFallback,
   ReferralPageData,
@@ -169,44 +169,106 @@ export class SpreadsheetService {
       });
   }
 
-  private convertOfferRowToOfferObject(offerRow): Offer {
+  private convertOfferRowToOfferObject(row: any[], colMap: ColumnMap): Offer {
     return {
-      offerID: Number(SpreadsheetService.readCellValue(offerRow, 3)),
-      subCategoryID: Number(SpreadsheetService.readCellValue(offerRow, 1)),
-      categoryID: Number(SpreadsheetService.readCellValue(offerRow, 2)),
-      offerVisible: SpreadsheetService.isVisible(
-        SpreadsheetService.readCellValue(offerRow, 4),
+      offerID: Number(
+        SpreadsheetService.readCellValue(row, colMap.get(OfferCol.id)),
       ),
-      offerIcon: SpreadsheetService.readCellValue(offerRow, 5),
-      offerName: SpreadsheetService.readCellValue(offerRow, 16),
-      offerDescription: SpreadsheetService.readCellValue(offerRow, 6),
-      offerLinks: SpreadsheetService.readCellValue(offerRow, 9)
+      subCategoryID: Number(
+        SpreadsheetService.readCellValue(row, colMap.get(OfferCol.subCategory)),
+      ),
+      categoryID: Number(
+        SpreadsheetService.readCellValue(row, colMap.get(OfferCol.category)),
+      ),
+      offerVisible: SpreadsheetService.isVisible(
+        SpreadsheetService.readCellValue(row, colMap.get(OfferCol.visible)),
+      ),
+      offerIcon: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.icon),
+      ),
+      offerName: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.name),
+      ),
+      offerDescription: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.description),
+      ),
+      offerLinks: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.webUrls),
+      )
         .split('\n')
         .filter((_) => _)
         .map((url) => getFullUrl(url)),
-      offerNumbers: SpreadsheetService.readCellValue(offerRow, 7)
+      offerNumbers: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.phoneNumbers),
+      )
         .split('\n')
         .filter((_) => _),
-      offerEmails: SpreadsheetService.readCellValue(offerRow, 8)
+      offerEmails: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.emails),
+      )
         .split('\n')
         .filter((_) => _),
-      offerAddress: SpreadsheetService.readCellValue(offerRow, 10),
-      offerOpeningHoursWeekdays: SpreadsheetService.readCellValue(offerRow, 11),
-      offerOpeningHoursWeekends: SpreadsheetService.readCellValue(offerRow, 12),
-      offerForWhom: SpreadsheetService.readCellValue(offerRow, 13),
-      offerDoYouNeedToKnow: SpreadsheetService.readCellValue(offerRow, 14),
-      offerBasicRight: SpreadsheetService.readCellValue(offerRow, 15),
+      offerAddress: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.address),
+      ),
+      offerOpeningHoursWeekdays: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.openWeek),
+      ),
+      offerOpeningHoursWeekends: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.openWeekend),
+      ),
+      offerForWhom: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.for),
+      ),
+      offerDoYouNeedToKnow: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.needToKnow),
+      ),
+      offerBasicRight: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.rights),
+      ),
       findAVaccinationCenter: getFullUrl(
-        SpreadsheetService.readCellValue(offerRow, 17),
+        SpreadsheetService.readCellValue(
+          row,
+          colMap.get(OfferCol.vaccinationUrl),
+        ),
       ),
-      redCrossHelpDesk: SpreadsheetService.readCellValue(offerRow, 18),
-      whatToExpect: SpreadsheetService.readCellValue(offerRow, 19),
-      furtherInformation: SpreadsheetService.readCellValue(offerRow, 20),
-      travelAbroad: SpreadsheetService.readCellValue(offerRow, 21),
+      redCrossHelpDesk: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.helpDesk),
+      ),
+      whatToExpect: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.toExpect),
+      ),
+      furtherInformation: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.moreInfo),
+      ),
+      travelAbroad: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.travelAbroad),
+      ),
       healthDeclarationDownload: getFullUrl(
-        SpreadsheetService.readCellValue(offerRow, 22),
+        SpreadsheetService.readCellValue(
+          row,
+          colMap.get(OfferCol.healthDownload),
+        ),
       ),
-      faqs: getFullUrl(SpreadsheetService.readCellValue(offerRow, 23)),
+      faqs: getFullUrl(
+        SpreadsheetService.readCellValue(row, colMap.get(OfferCol.faqUrl)),
+      ),
     };
   }
 
@@ -214,8 +276,17 @@ export class SpreadsheetService {
     return fetch(this.getSheetUrl(region, SheetName.offers))
       .then((response) => response.json())
       .then((response) => {
+        const headerRow = response.values[0];
+        const offerColumnMap = this.createColumnMap(
+          Object.values(OfferCol),
+          headerRow,
+        );
+
         return response.values
-          .map(this.convertOfferRowToOfferObject)
+          .slice(1) // Remove header-row
+          .map((row: any[]) =>
+            this.convertOfferRowToOfferObject(row, offerColumnMap),
+          )
           .filter((offer: Offer): boolean => offer.offerVisible);
       })
       .catch((error) => {
@@ -409,13 +480,10 @@ export class SpreadsheetService {
         );
 
         return response.values
-          .map((row, index: number) => {
-            // Skip the header-row
-            if (index === 0) {
-              return false;
-            }
-            return this.convertQaRowToObject(row, qaColumnMap, index);
-          })
+          .slice(1) // Remove header-row
+          .map((row: any[], index: number) =>
+            this.convertQaRowToObject(row, qaColumnMap, index),
+          )
           .map((item: QASet, index: number, all: QASet[]) =>
             this.addToParentQuestion(item, index, all),
           )
