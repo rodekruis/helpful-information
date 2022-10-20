@@ -6,7 +6,7 @@ import {
   ReferralPageData,
 } from 'src/app/models/referral-page-data';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
-import { SubCategory } from 'src/app/models/sub-category.model';
+import { SubCategory, SubCategoryCol } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';
 import {
@@ -154,22 +154,37 @@ export class SpreadsheetService {
   }
 
   private convertSubCategoryRowToSubCategoryObject(
-    subCategoryRow,
+    row: any[],
+    colMap: ColumnMap,
   ): SubCategory {
     return {
       subCategoryID: Number(
-        SpreadsheetService.readCellValue(subCategoryRow, 0),
+        SpreadsheetService.readCellValue(row, colMap.get(SubCategoryCol.id)),
       ),
-      subCategoryName: SpreadsheetService.readCellValue(subCategoryRow, 1),
-      subCategoryIcon: SpreadsheetService.readCellValue(subCategoryRow, 2),
+      subCategoryName: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(SubCategoryCol.name),
+      ),
+      subCategoryIcon: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(SubCategoryCol.icon),
+      ),
       subCategoryDescription: SpreadsheetService.readCellValue(
-        subCategoryRow,
-        3,
+        row,
+        colMap.get(SubCategoryCol.description),
       ),
       subCategoryVisible: SpreadsheetService.isVisible(
-        SpreadsheetService.readCellValue(subCategoryRow, 4),
+        SpreadsheetService.readCellValue(
+          row,
+          colMap.get(SubCategoryCol.visible),
+        ),
       ),
-      categoryID: Number(SpreadsheetService.readCellValue(subCategoryRow, 5)),
+      categoryID: Number(
+        SpreadsheetService.readCellValue(
+          row,
+          colMap.get(SubCategoryCol.category),
+        ),
+      ),
     };
   }
 
@@ -177,8 +192,20 @@ export class SpreadsheetService {
     return fetch(this.getSheetUrl(region, SheetName.subCategories))
       .then((response) => response.json())
       .then((response) => {
+        const headerRow = response.values[0];
+        const subCategoryColumnMap = this.createColumnMap(
+          Object.values(SubCategoryCol),
+          headerRow,
+        );
+
         return response.values
-          .map(this.convertSubCategoryRowToSubCategoryObject)
+          .slice(1) // Remove header-row
+          .map((row: any[]) =>
+            this.convertSubCategoryRowToSubCategoryObject(
+              row,
+              subCategoryColumnMap,
+            ),
+          )
           .filter(
             (subCategory: SubCategory): boolean =>
               subCategory.subCategoryVisible,
