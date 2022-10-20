@@ -26,7 +26,7 @@ The web-app is a pre-build, static web-app that lists links to "regions", which 
 
 The different sheets within these 'files' each have a different data-model. So that their content can be used to display in the web-app.
 
-The contents of these is loaded at runtime by the visitor's browser from the "Google Sheets API".
+The contents of these sheets is loaded at runtime by the visitor's browser from the "Google Sheets API".
 
 ## How to use
 
@@ -146,9 +146,7 @@ Unfortunately most individual dependencies are 'linked' to related dependencies 
 
 To update all Angular and ESLint related dependencies, run:
 
-```sh
-npx ng update @angular/core @angular/cli @angular-eslint/schematics
-```
+    npm run upgrade:angular
 
 ---
 
@@ -255,12 +253,12 @@ classDiagram
     GoogleSheet -- "1" Categories
     GoogleSheet -- "1" SubCategories
     GoogleSheet -- "1" Offers
-    GoogleSheet -- "1" Q_and_As
+    GoogleSheet -- "1" Q_As
 
     Categories : rows []
     SubCategories : rows []
     Offers : rows []
-    Q_and_As : rows []
+    Q_As : rows []
 ```
 
 ---
@@ -282,8 +280,6 @@ Each (Sub-)Category:
 - can have a name/description/icon.
 - can be hidden by setting the "**Visible?**"-column to `Hide`.
 
-### Offers/Q&As hierarchy
-
 ### Offer features
 
 Each Offer
@@ -298,7 +294,23 @@ Each Q&A-set
 - needs to have a `Category ID` and a `Sub-Category ID` set.
 - can be hidden by setting the "**Visible?**"-column to `Hide`.
 - can be shown as a Sub-Question by setting the `Parent`-column to the Slug of another Question.
-- can be shown in the Highlighted-overview by setting the "**Highlighted?**"-column to `Yes`.
+- can have a "(last) updated"-date set, to indicate its 'freshness'
+
+#### Highlighted-overview ("Recent changes")
+
+- Each Q&A-set can be shown in the Highlighted-overview by setting the "**Highlighted?**"-column to `Yes`.
+- All these sets will be shown with their Category/Sub-Category-context (with links).
+- Their "(last) updated"-date is shown prominently, for easy scanning/spotting "what's new?"
+
+#### Search
+
+Using the search-input Q&A-sets can be filtered to match 1 or more keywords to the `Question` OR the `Answer` values of a Q&A-set.
+
+- Keywords are case-insensitive, so `Help` will match `help`, `HELP` or `HeLp`
+- Some special characters will be ignored, like `+`, `*`, `[`, `]`, `(`, `)`, etc. Periods (`.`) can be included in keywords to match URLs
+- Each keyword needs to be separated by spaces (not `,` or `;`, etc.)
+- To include spaces in a keyword, surround with: `"` (double quotes)  
+  For example: `help "Red Cross"` will match `help` or `Red Cross`
 
 ---
 
