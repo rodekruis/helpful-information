@@ -16,6 +16,7 @@ export enum LoggingEvent {
   CategoryClick = 'category-click',
   FooterContactClick = 'footer-contact-click',
   FooterWhatsAppClick = 'footer-whatsapp-click',
+  FooterTelegramClick = 'footer-telegram-click',
   MainScreenClick = 'main-screen-button-click',
   NotFoundCategory = 'not-found-category',
   NotFoundSubCategory = 'not-found-sub-category',

@@ -467,6 +467,10 @@ export class ReferralPageComponent implements OnInit {
       event = LoggingEvent.FooterWhatsAppClick;
     }
 
+    if (type === 'telegram') {
+      event = LoggingEvent.FooterTelegramClick;
+    }
+
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       event,
