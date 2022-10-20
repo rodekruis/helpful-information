@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Category } from 'src/app/models/category.model';
+import { Category, CategoryCol } from 'src/app/models/category.model';
 import { Offer, OfferCol } from 'src/app/models/offer.model';
 import {
   PageDataFallback,
@@ -102,14 +102,28 @@ export class SpreadsheetService {
     return subCategory ? subCategory.subCategoryName : '';
   }
 
-  private convertCategoryRowToCategoryObject(categoryRow): Category {
+  private convertCategoryRowToCategoryObject(
+    row: any[],
+    colMap: ColumnMap,
+  ): Category {
     return {
-      categoryID: Number(SpreadsheetService.readCellValue(categoryRow, 0)),
-      categoryName: SpreadsheetService.readCellValue(categoryRow, 1),
-      categoryIcon: SpreadsheetService.readCellValue(categoryRow, 2),
-      categoryDescription: SpreadsheetService.readCellValue(categoryRow, 3),
+      categoryID: Number(
+        SpreadsheetService.readCellValue(row, colMap.get(CategoryCol.id)),
+      ),
+      categoryName: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(CategoryCol.name),
+      ),
+      categoryIcon: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(CategoryCol.icon),
+      ),
+      categoryDescription: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(CategoryCol.description),
+      ),
       categoryVisible: SpreadsheetService.isVisible(
-        SpreadsheetService.readCellValue(categoryRow, 4),
+        SpreadsheetService.readCellValue(row, colMap.get(CategoryCol.visible)),
       ),
     };
   }
@@ -118,8 +132,17 @@ export class SpreadsheetService {
     return fetch(this.getSheetUrl(region, SheetName.categories))
       .then((response) => response.json())
       .then((response) => {
+        const headerRow = response.values[0];
+        const categoriesColumnMap = this.createColumnMap(
+          Object.values(CategoryCol),
+          headerRow,
+        );
+
         return response.values
-          .map(this.convertCategoryRowToCategoryObject)
+          .slice(1) // Remove header-row
+          .map((row: any[]) =>
+            this.convertCategoryRowToCategoryObject(row, categoriesColumnMap),
+          )
           .filter((category: Category): boolean => category.categoryVisible);
       })
       .catch((error) => {
