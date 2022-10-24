@@ -17,7 +17,7 @@
     "test:watch": "ng test --configuration=development",
     "upgrade:angular": "ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits",
     "lint": "npm run lint:syntax && ng lint",
-    "lint:syntax": "prettier --check \"**/*.{md,js,json,ts,scss,html}\"",
+    "lint:syntax": "prettier --check \"**/*.{md,yml,js,json,ts,scss,html}\"",
     "fix:syntax": "npm run lint:syntax -- --write"
   },
   "private": true,
@@ -73,6 +73,6 @@
     "typescript": "~4.6.3"
   },
   "lint-staged": {
-    "*.{md,js,json,ts,scss,html}": "prettier --write"
+    "*.{md,yml,js,json,ts,scss,html}": "prettier --write"
   }
 }
