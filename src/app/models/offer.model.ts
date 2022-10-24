@@ -26,3 +26,31 @@ export class Offer {
   healthDeclarationDownload?: string;
   faqs?: string;
 }
+
+// These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
+// For example: "Phone-number(s) (1 digits-only number per line) #PHONENUMBERS"
+export enum OfferCol {
+  id = 'ID',
+  subCategory = 'SUBCATEGORY',
+  category = 'CATEGORY',
+  visible = 'VISIBLE',
+  icon = 'ICON',
+  description = 'DESCRIPTION',
+  phoneNumbers = 'PHONENUMBERS',
+  emails = 'EMAILS',
+  webUrls = 'WEBURLS',
+  address = 'ADDRESS',
+  openWeek = 'OPENWEEK',
+  openWeekend = 'OPENWEEKEND',
+  for = 'FOR',
+  needToKnow = 'NEEDTOKNOW',
+  rights = 'RIGHTS',
+  name = 'NAME',
+  vaccinationUrl = 'VACCINATIONURL',
+  helpDesk = 'HELPDESK',
+  toExpect = 'TOEXPECT',
+  moreInfo = 'MOREINFO',
+  travelAbroad = 'TRAVELABROAD',
+  healthDownload = 'HEALTHDOWNLOAD',
+  faqUrl = 'FAQURL',
+}

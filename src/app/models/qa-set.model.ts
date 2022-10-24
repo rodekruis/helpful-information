@@ -14,9 +14,8 @@ export class QASet {
   children: QASet[];
 }
 
-// These string-values should be used (somewhere) in the cells of the first row of the Q&As-sheet
-// In the form of a 'hashtag', like: "The answer (can be multi-line text) #ANSWER"
-// To support/enable some explanation/translation in the header-row for editors and to keep freedom in the column-order
+// These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
+// For example: "Unique URL-part (no spaces or special characters) #SLUG"
 export enum QACol {
   id = 'ID',
   subcategory = 'SUBCATEGORY',
