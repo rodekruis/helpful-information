@@ -6,6 +6,8 @@ export class Category {
   categoryVisible: boolean;
 }
 
+// These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
+// For example: "Category Icon (can be any URL) #ICON"
 export enum CategoryCol {
   id = 'ID',
   name = 'NAME',

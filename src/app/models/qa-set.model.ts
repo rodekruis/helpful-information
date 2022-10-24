@@ -14,6 +14,8 @@ export class QASet {
   children: QASet[];
 }
 
+// These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
+// For example: "Unique URL-part (no spaces or special characters) #SLUG"
 export enum QACol {
   id = 'ID',
   subcategory = 'SUBCATEGORY',

@@ -7,6 +7,8 @@ export class SubCategory {
   categoryID: number;
 }
 
+// These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
+// For example: "Sub-Category Description (can be multiple lines) #DESCRIPTION"
 export enum SubCategoryCol {
   id = 'ID',
   name = 'NAME',

@@ -27,6 +27,8 @@ export class Offer {
   faqs?: string;
 }
 
+// These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
+// For example: "Phone-number(s) (1 digits-only number per line) #PHONENUMBERS"
 export enum OfferCol {
   id = 'ID',
   subCategory = 'SUBCATEGORY',
