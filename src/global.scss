@@ -160,6 +160,10 @@ img[decoding='async'] {
 .text-style--center {
   text-align: center !important;
 }
+.text-style--end {
+  text-align: right !important;
+  text-align: end !important;
+}
 .text-style--header {
   font-family: var(--ion-font-family-header);
   font-weight: bold;
@@ -271,11 +275,20 @@ img[decoding='async'] {
     }
   }
 
+  &.is_inline {
+    display: inline-block;
+    width: auto;
+  }
+
   &.is_round {
     line-height: 1;
     border-radius: 50%;
     min-width: 2rem;
     min-height: 2rem;
+
+    &.is_inline {
+      border-radius: 1rem;
+    }
   }
 }
 

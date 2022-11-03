@@ -10,6 +10,7 @@ export class ReferralPageData {
   referralTelegramLink?: string;
   referralLastUpdatedTime?: string;
   labelLastUpdated?: string;
+  labelHighlightsButton?: string;
   labelHighlightsPageTitle?: string;
   labelHighlightsItemsZero?: string;
   labelHighlightsItemsCount?: string;
@@ -22,6 +23,7 @@ export enum PageDataFallback {
   referralBackButtonLabel = 'Back',
   referralMainScreenButtonLabel = 'Main screen',
   labelLastUpdated = 'Last updated:',
+  labelHighlightsButton = '!',
   labelHighlightsPageTitle = 'Highlights',
   labelHighlightsItemsZero = 'No highlighted items.',
   labelHighlightsItemsCount = 'Highlighted items:',
