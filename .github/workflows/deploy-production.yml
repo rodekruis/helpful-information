@@ -2,7 +2,7 @@
 # See: https://aka.ms/swaworkflowconfig
 # See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
-name: 'production: Deploy Azure Static Web App'
+name: 'production: Deploy Azure'
 
 on:
   workflow_dispatch:
@@ -32,6 +32,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    environment: 'production'
     steps:
       - uses: actions/checkout@v3
 
@@ -60,7 +61,8 @@ jobs:
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
           TXT_ERROR_RETRY: 'Try again?'
-          REGIONS: 'covid-vaccinations,
+          REGIONS: '
+            covid-vaccinations,
             amsterdam,
             utrecht,
             almere-lelystad,
@@ -68,7 +70,8 @@ jobs:
             rotterdam,
             nijmegen,
             eindhoven'
-          REGIONS_LABELS: 'COVID19 Vaccinations,
+          REGIONS_LABELS: '
+            COVID19 Vaccinations,
             Amsterdam,
             Utrecht,
             Almere / Lelystad,
@@ -78,7 +81,8 @@ jobs:
             Eindhoven'
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
-          REGIONS_SHEET_IDS: '15R9HxX9nMI-6ElqxO91hz9fzfRutc9TAwVpllmLGv2Q,
+          REGIONS_SHEET_IDS: '
+            15R9HxX9nMI-6ElqxO91hz9fzfRutc9TAwVpllmLGv2Q,
             1OANMuGJxGBQ2ba3xVfKvTpD0EGQM-ukUrgRyN9tzMbQ,
             1ZqizriL_RJ2dCcNVnCj0GM02pqOLWcIF18A4zVigsrU,
             1mod8O9EgvqpCN3ScyAKkOh34x3OGa-8yIc18K_t1xXU,
