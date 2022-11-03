@@ -2,7 +2,7 @@
 # See: https://aka.ms/swaworkflowconfig
 # See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
-name: 'staging UKR: Deploy Azure Static Web App'
+name: 'staging FAQ: Deploy Azure'
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
       - main
     paths:
       - '!.github/**'
-      - '.github/workflows/deploy-staging-ukr.yml'
+      - '.github/workflows/deploy-staging-faq.yml'
       - '*'
       - '!*.md'
       - 'src/**'
@@ -22,7 +22,7 @@ on:
       - main
     paths:
       - '!.github/**'
-      - '.github/workflows/deploy-staging-ukr.yml'
+      - '.github/workflows/deploy-staging-faq.yml'
       - '*'
       - '!*.md'
       - 'src/**'
@@ -32,6 +32,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    environment: 'staging-faq'
     steps:
       - uses: actions/checkout@v3
 
@@ -50,31 +51,37 @@ jobs:
         run: 'npm run build:production'
         env:
           NG_PRODUCTION: 'true'
-          ENV_NAME: 'UKR-Staging'
+          ENV_NAME: 'FAQ-Staging'
           NG_USE_SERVICE_WORKER: 'true'
           NG_USE_Q_AND_AS: 'true'
           NG_USE_Q_AND_A_SEARCH: 'true'
-          TXT_APP_NAME: 'Vraagbaak Ukraine'
+          TXT_APP_NAME: 'FAQ / Vraagbaak'
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
-          TXT_MAIN_PAGE_HEADER: 'This web app is made to give helpful information (HIA) about frequently asked questions (FAQ) from refugees from Ukraine.'
-          TXT_MAIN_PAGE_INTRO: 'As a Red Cross aid worker, you can use this web app to communicate answers to questions you receive from refugees from Ukraine. \n\n If you are a refugee from Ukraine, you can check: <a href="https://www.refugeehelp.nl/get-help"  target="_blank" rel="noopener noreferrer">https://www.refugeehelp.nl/get-help</a> for the most recent information. \n\n Please select your FAQ language below:'
+          TXT_MAIN_PAGE_HEADER: 'This web app is made to give helpful information (HIA) about frequently asked questions (FAQ).'
+          TXT_MAIN_PAGE_INTRO: 'As a Red Cross aid worker, you can use this web app to communicate answers to questions you receive. \n\n If you are a refugee from Ukraine, you can check: <a href="https://www.refugeehelp.nl/get-help"  target="_blank" rel="noopener noreferrer">https://www.refugeehelp.nl/get-help</a> for the most recent information. \n\n Please select your FAQ below:'
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
           TXT_ERROR_RETRY: 'Try again?'
-          REGIONS: 'en,
-            nl,
-            test,
-            opvang'
-          REGIONS_LABELS: 'English,
-            Nederlands,
-            Test,
-            Opvang'
-          REGIONS_SHEET_IDS: '14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
+          REGIONS: '
+            ukraine-en,
+            oekraine-nl,
+            opvang-en,
+            opvang-nl,
+            test'
+          REGIONS_LABELS: '
+            Ukraine: English,
+            Ukraine: Nederlands,
+            Opvang: English,
+            Opvang: Nederlands,
+            Test/Example'
+          REGIONS_SHEET_IDS: '
+            14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
             1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE,
-            10SIJdAQSd6loqCyzwK409QS_01Fgp8P4aqoDO8iBvhY,
-            1wJ4pfB3l7t16igivt_LkGYmaqZ0hiRsR7_giJUjen-s'
-          GOOGLE_SHEETS_API_KEY: ${{ secrets.UKR_STAGE_GOOGLE_SHEETS_API_KEY }}
+            15yXp_w0chnFRwIfvY6uRgs7TwzxwuBz9iz-dgDFHsbs,
+            1wJ4pfB3l7t16igivt_LkGYmaqZ0hiRsR7_giJUjen-s,
+            10SIJdAQSd6loqCyzwK409QS_01Fgp8P4aqoDO8iBvhY'
+          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ''
 
@@ -101,6 +108,7 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
+    environment: 'staging-faq'
     steps:
       - name: Close Pull Request for Staging
         uses: Azure/static-web-apps-deploy@v1
