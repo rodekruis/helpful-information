@@ -301,6 +301,7 @@ Each Q&A-set
 - Each Q&A-set can be shown in the Highlighted-overview by setting the "**Highlighted?**"-column to `Yes`.
 - All these sets will be shown with their Category/Sub-Category-context (with links).
 - Their "(last) updated"-date is shown prominently, for easy scanning/spotting "what's new?"
+- The sets with a "(last) updated"-date will be shown with the "most recent"-date first, those _without_ a date are shown after, in the order they appear in the sheet.
 
 #### Search
 

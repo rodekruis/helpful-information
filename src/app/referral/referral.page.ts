@@ -166,10 +166,16 @@ export class ReferralPageComponent implements OnInit {
     return items
       .filter((item) => item.isHighlight && item.isVisible)
       .sort((a, b) => {
-        if (!a.dateUpdated || !b.dateUpdated) {
+        if (a.dateUpdated && !b.dateUpdated) {
+          return -1;
+        }
+        if (!a.dateUpdated && b.dateUpdated) {
+          return 1;
+        }
+        if (!a.dateUpdated && !b.dateUpdated) {
           return 0;
         }
-        return a.dateUpdated.getTime() - b.dateUpdated.getTime();
+        return b.dateUpdated.getTime() - a.dateUpdated.getTime();
       })
       .map((item) => {
         if (!item.children) {
