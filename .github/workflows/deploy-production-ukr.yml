@@ -2,7 +2,7 @@
 # See: https://aka.ms/swaworkflowconfig
 # See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
-name: 'production UKR: Deploy Azure Static Web App'
+name: 'production UKR: Deploy Azure'
 
 on:
   workflow_dispatch:
@@ -32,6 +32,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    environment: 'production-ukr'
     steps:
       - uses: actions/checkout@v3
 
@@ -61,15 +62,18 @@ jobs:
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
           TXT_ERROR_RETRY: 'Try again?'
-          REGIONS: 'en,
+          REGIONS: '
+            en,
             nl'
-          REGIONS_LABELS: 'English,
+          REGIONS_LABELS: '
+            English,
             Nederlands'
-          REGIONS_SHEET_IDS: '14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
+          REGIONS_SHEET_IDS: '
+            14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
             1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE'
-          GOOGLE_SHEETS_API_KEY: ${{ secrets.UKR_GOOGLE_SHEETS_API_KEY }}
+          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
-          AI_CONNECTION_STRING: ${{ secrets.UKR_AI_CONNECTION_STRING }}
+          AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
 
       - name: Add robots.txt
         run: 'cp src/robots.public.txt www/robots.txt'
@@ -94,6 +98,7 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
+    environment: 'production-ukr'
     steps:
       - name: Close Pull Request for Production
         uses: Azure/static-web-apps-deploy@v1
