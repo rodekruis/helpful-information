@@ -54,7 +54,7 @@
     "@types/linkify-it": "^3.0.2",
     "@types/node": "^16.x",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.1",
     "dotenv": "^16.0.3",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
