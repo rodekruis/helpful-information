@@ -38,7 +38,7 @@
   >
     <div
       *ngIf="useQandAs"
-      class="floating-action-area is_in-page layout--float-end ion-margin-start"
+      class="floating-action-area is_in-page layout--float-end text-style--end ion-margin-start"
     >
       <a
         *ngIf="useQandAs && qaHighlights.length"
@@ -50,10 +50,20 @@
         [hidden]="qaHightlightsToggle.isActive"
         [attr.title]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
         [attr.aria-label]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
-        class="action is_round is_attention text-style--center ion-margin-bottom"
+        class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
       >
-        <strong aria-hidden="true">!</strong>
+        <strong>
+          <small *ngIf="referralPageData?.labelHighlightsButton.length > 1">
+            {{ referralPageData?.labelHighlightsButton }}
+          </small>
+          <ng-container
+            *ngIf="referralPageData?.labelHighlightsButton.length === 1"
+          >
+            {{ referralPageData?.labelHighlightsButton }}
+          </ng-container>
+        </strong>
       </a>
+      <br *ngIf="useQandAs && useQandASearch && qaSets.length" />
       <a
         *ngIf="useQandAs && useQandASearch && qaSets.length"
         routerLink="."
@@ -64,7 +74,7 @@
         [hidden]="qaSearchToggle.isActive"
         [attr.title]="referralPageData?.labelSearchPageTitle"
         [attr.aria-label]="referralPageData?.labelSearchPageTitle"
-        class="action is_round is_attention text-style--center ion-margin-bottom"
+        class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
       >
         <img
           src="/assets/icons/search.svg"

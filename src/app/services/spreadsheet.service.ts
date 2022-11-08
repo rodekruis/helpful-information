@@ -392,6 +392,9 @@ export class SpreadsheetService {
       labelLastUpdated:
         SpreadsheetService.readCellValue(referralPageDataRows[10], 1) ||
         PageDataFallback.labelLastUpdated,
+      labelHighlightsButton:
+        SpreadsheetService.readCellValue(referralPageDataRows[17], 1) ||
+        PageDataFallback.labelHighlightsButton,
       labelHighlightsPageTitle:
         SpreadsheetService.readCellValue(referralPageDataRows[14], 1) ||
         PageDataFallback.labelHighlightsPageTitle,
