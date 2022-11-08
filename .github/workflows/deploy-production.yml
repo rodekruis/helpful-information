@@ -61,7 +61,7 @@ jobs:
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
           TXT_ERROR_RETRY: 'Try again?'
-          REGIONS: '
+          REGIONS: >-
             covid-vaccinations,
             amsterdam,
             utrecht,
@@ -69,8 +69,8 @@ jobs:
             den-haag,
             rotterdam,
             nijmegen,
-            eindhoven'
-          REGIONS_LABELS: '
+            eindhoven
+          REGIONS_LABELS: >-
             COVID19 Vaccinations,
             Amsterdam,
             Utrecht,
@@ -78,10 +78,8 @@ jobs:
             Den Haag,
             Rotterdam,
             Nijmegen,
-            Eindhoven'
-          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
-          GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
-          REGIONS_SHEET_IDS: '
+            Eindhoven
+          REGIONS_SHEET_IDS: >-
             15R9HxX9nMI-6ElqxO91hz9fzfRutc9TAwVpllmLGv2Q,
             1OANMuGJxGBQ2ba3xVfKvTpD0EGQM-ukUrgRyN9tzMbQ,
             1ZqizriL_RJ2dCcNVnCj0GM02pqOLWcIF18A4zVigsrU,
@@ -89,7 +87,9 @@ jobs:
             1m43Tw7CWRUdPjaStq6dOi9yvHSYInP1lWjLetk1PrTI,
             18qD1PGTK2jTExpVIXXWpjHdpe5KDy7IdcR537CusCLU,
             1lWUjA8_sqmY7JRmYOBWn3wfRk2whR-2soZ8qfn_Fdaw,
-            1OhMLlM6NFD7GkoQEYMP4lnI0FKd__PKdPvYw0x57l8k'
+            1OhMLlM6NFD7GkoQEYMP4lnI0FKd__PKdPvYw0x57l8k
+          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
+          GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
 
       - name: Add robots.txt

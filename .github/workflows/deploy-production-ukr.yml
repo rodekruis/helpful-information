@@ -62,15 +62,15 @@ jobs:
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
           TXT_ERROR_RETRY: 'Try again?'
-          REGIONS: '
+          REGIONS: >-
             en,
-            nl'
-          REGIONS_LABELS: '
+            nl
+          REGIONS_LABELS: >-
             English,
-            Nederlands'
-          REGIONS_SHEET_IDS: '
+            Nederlands
+          REGIONS_SHEET_IDS: >-
             14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
-            1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE'
+            1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
