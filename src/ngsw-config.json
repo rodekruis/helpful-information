@@ -25,5 +25,18 @@
         "files": ["/assets/**"]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "googleSheetsApi",
+      "version": 4,
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 42,
+        "maxAge": "7d",
+        "timeout": "8s"
+      },
+      "urls": ["https://sheets.googleapis.com/v4/spreadsheets/*"]
+    }
   ]
 }
