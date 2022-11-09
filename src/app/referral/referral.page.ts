@@ -124,40 +124,39 @@ export class ReferralPageComponent implements OnInit {
   }
 
   private async loadReferralData() {
-    if (this.isSupportedRegion()) {
-      this.loading = true;
-      this.referralPageData =
-        await this.referralPageDataService.getReferralPageData(this.region);
-
-      this.updatePageTitle(this.referralPageData.referralPageTitle);
-
-      this.lastUpdatedTimeService.setLastUpdatedTime(
-        this.referralPageData.referralLastUpdatedTime,
-      );
-
-      this.categories = await this.offersService.getCategories(this.region);
-      this.subCategories = await this.offersService.getSubCategories(
-        this.region,
-      );
-      this.offers = await this.offersService.getOffers(this.region);
-
-      if (this.useQandAs) {
-        this.qaSets = (await this.offersService.getQAs(this.region)).map(
-          (qaSet) => this.addParentCategoryNames(qaSet),
-        );
-        this.qaHighlights = this.createHighlights(this.qaSets);
-      }
-      if (this.useQandASearch) {
-        this.searchService.setSource(this.qaSets);
-      }
-
-      this.readQueryParams();
-
-      this.loading = false;
-    } else {
+    if (!this.isSupportedRegion()) {
       this.updatePageTitle(environment.appName);
       this.router.navigate([this.rootHref]);
+      return;
     }
+
+    this.loading = true;
+    this.referralPageData =
+      await this.referralPageDataService.getReferralPageData(this.region);
+
+    this.updatePageTitle(this.referralPageData.referralPageTitle);
+
+    this.lastUpdatedTimeService.setLastUpdatedTime(
+      this.referralPageData.referralLastUpdatedTime,
+    );
+
+    this.categories = await this.offersService.getCategories(this.region);
+    this.subCategories = await this.offersService.getSubCategories(this.region);
+    this.offers = await this.offersService.getOffers(this.region);
+
+    if (this.useQandAs) {
+      this.qaSets = (await this.offersService.getQAs(this.region)).map(
+        (qaSet) => this.addParentCategoryNames(qaSet),
+      );
+      this.qaHighlights = this.createHighlights(this.qaSets);
+    }
+    if (this.useQandASearch) {
+      this.searchService.setSource(this.qaSets);
+    }
+
+    this.readQueryParams();
+
+    this.loading = false;
   }
 
   private createHighlights(qaSets: QASet[]): QASet[] {
