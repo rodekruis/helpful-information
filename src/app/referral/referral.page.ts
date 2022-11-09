@@ -486,7 +486,7 @@ export class ReferralPageComponent implements OnInit {
   public performSearch(rawQuery: string): void {
     const safeQuery = this.searchService.sanitizeSearchQuery(rawQuery);
 
-    this.router.navigate([this.getRegionHref()], {
+    this.router.navigate([], {
       queryParams: { q: safeQuery },
       queryParamsHandling: 'merge',
     });
