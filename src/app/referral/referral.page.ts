@@ -25,10 +25,8 @@ import { SpreadsheetService } from '../services/spreadsheet.service';
 })
 export class ReferralPageComponent implements OnInit {
   public region: string;
-  public regions: string[] = environment.regions.trim().split(/\s*,\s*/);
-  public regionsLabels: string[] = environment.regionsLabels
-    .trim()
-    .split(/\s*,\s*/);
+  public regions: string[];
+  public regionsLabels: string[];
 
   public offers: Offer[];
   public qaSets: QASet[];
@@ -69,13 +67,15 @@ export class ReferralPageComponent implements OnInit {
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private titleService: Title,
     private searchService: SearchService,
-  ) {}
+  ) {
+    this.region = this.route.snapshot.params.region;
+    this.regions = environment.regions.trim().split(/\s*,\s*/);
+    this.regionsLabels = environment.regionsLabels.trim().split(/\s*,\s*/);
+  }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.region = params.region;
-      this.loadReferralData();
-    });
+    this.loadReferralData();
+
     if (this.useQandAs) {
       this.route.queryParams.subscribe((queryParams) => {
         this.showHighlights = !!queryParams.highlights;
