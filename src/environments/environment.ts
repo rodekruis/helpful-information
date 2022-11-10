@@ -8,6 +8,7 @@ export const environment = {
   // Configuration/Feature-switches:
   envName: 'development', // (Optional) Label to show which environment is used
   useServiceWorker: false, // Enable 'offline' support
+  useUrlSlugs: true, // Enable URL-slugs-instead-of-IDs for all content types
   useQandAs: true, // Enable 'Q&A'-content type
   useQandASearch: true, // Enable Search-feature for Q&As
 
