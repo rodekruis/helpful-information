@@ -68,26 +68,29 @@ export class ReferralPageComponent implements OnInit {
     private titleService: Title,
     private searchService: SearchService,
   ) {
-    this.region = this.route.snapshot.params.region;
     this.regions = environment.regions.trim().split(/\s*,\s*/);
     this.regionsLabels = environment.regionsLabels.trim().split(/\s*,\s*/);
 
-    this.showHighlights =
-      this.useQandAs && this.route.snapshot.data.showHighlights;
-    this.showSearch =
-      this.useQandASearch && this.route.snapshot.data.showSearch;
+    this.route.params.subscribe((params: Params) => {
+      this.region = params.region;
+    });
+    this.route.data.subscribe((data: Params) => {
+      this.showHighlights = this.useQandAs && data.showHighlights;
+      this.showSearch = this.useQandASearch && data.showSearch;
+    });
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      this.upgradeLegacyUrls(queryParams);
+    });
   }
 
-  ngOnInit() {
-    this.upgradeLegacyUrls(this.route.snapshot.queryParams);
-
+  async ngOnInit() {
     if (!this.isSupportedRegion()) {
       this.updatePageTitle(environment.appName);
       this.router.navigate([this.rootHref]);
       return;
     }
 
-    this.loadReferralData();
+    await this.loadReferralData();
 
     this.route.queryParams.subscribe((queryParams: Params) => {
       this.handleQueryParams(queryParams);
