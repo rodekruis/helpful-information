@@ -15,15 +15,6 @@ import { ReferralPageComponent } from './referral.page';
     FormsModule,
     RouterModule.forChild([
       {
-        path: ':region',
-        pathMatch: 'prefix',
-        component: ReferralPageComponent,
-        data: {
-          showSearch: false,
-          showHighlights: false,
-        },
-      },
-      {
         path: ':region/highlights',
         canActivate: [() => environment.useQandAs],
         component: ReferralPageComponent,
@@ -39,6 +30,15 @@ import { ReferralPageComponent } from './referral.page';
         component: ReferralPageComponent,
         data: {
           showSearch: true,
+        },
+      },
+      {
+        path: ':region',
+        pathMatch: 'prefix',
+        component: ReferralPageComponent,
+        data: {
+          showSearch: false,
+          showHighlights: false,
         },
       },
       {
