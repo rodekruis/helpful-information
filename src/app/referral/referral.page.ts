@@ -153,7 +153,7 @@ export class ReferralPageComponent implements OnInit {
       );
       this.qaHighlights = this.createHighlights(this.qaSets);
     }
-    if (this.useQandASearch) {
+    if (this.useQandAs && this.useQandASearch) {
       this.searchService.setSource(this.qaSets);
     }
 
