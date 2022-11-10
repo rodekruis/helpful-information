@@ -12,11 +12,16 @@ export const environment = {
   useQandAs: true, // Enable 'Q&A'-content type
   useQandASearch: true, // Enable Search-feature for Q&As
 
+  apiDataValidFor: 0.5 * 60, // Time in seconds to reuse API-data before fetching again
+
   // Configuration of content
   appName: 'Helpful Information',
-  appLogoUrl: '',
+  appLogoUrl:
+    "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚧</text></svg>",
   mainPageHeader: 'The Red Cross provides helpful information.',
-  mainPageIntroduction: 'Please choose a language/region.',
+  mainPageIntroduction:
+    '... \n\n <b>Test</b>: <img src="/favicon.ico"/> \n\n Link: <a href="https://helpfulinformation.redcross.nl/"  target="_blank" rel="noopener noreferrer">HIA production</a> \n\n Please select your region:',
+
   errorHeader: 'Data unavailable',
   errorMessage: 'Contact us at: ',
   errorContactUrl: 'https://github.com/rodekruis/helpfulinformation',
