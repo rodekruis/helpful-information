@@ -48,11 +48,11 @@
         class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
       >
         <strong>
-          <small *ngIf="referralPageData?.labelHighlightsButton.length > 1">
+          <small *ngIf="referralPageData?.labelHighlightsButton?.length > 1">
             {{ referralPageData?.labelHighlightsButton }}
           </small>
           <ng-container
-            *ngIf="referralPageData?.labelHighlightsButton.length === 1"
+            *ngIf="referralPageData?.labelHighlightsButton?.length === 1"
           >
             {{ referralPageData?.labelHighlightsButton }}
           </ng-container>
