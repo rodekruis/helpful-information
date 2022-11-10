@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { environment } from 'src/environments/environment';
 import { ReferralPageComponent } from './referral.page';
 
 @NgModule({
@@ -15,10 +16,34 @@ import { ReferralPageComponent } from './referral.page';
     RouterModule.forChild([
       {
         path: ':region',
+        pathMatch: 'prefix',
         component: ReferralPageComponent,
+        data: {
+          showSearch: false,
+          showHighlights: false,
+        },
+      },
+      {
+        path: ':region/highlights',
+        canActivate: [() => environment.useQandAs],
+        component: ReferralPageComponent,
+        data: {
+          showHighlights: true,
+        },
+      },
+      {
+        path: ':region/search',
+        canActivate: [
+          () => environment.useQandAs && environment.useQandASearch,
+        ],
+        component: ReferralPageComponent,
+        data: {
+          showSearch: true,
+        },
       },
       {
         path: '',
+        pathMatch: 'full',
         component: ReferralPageComponent,
       },
     ]),

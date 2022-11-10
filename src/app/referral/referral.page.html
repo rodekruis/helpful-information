@@ -41,13 +41,8 @@
       class="floating-action-area is_in-page layout--float-end text-style--end ion-margin-start"
     >
       <a
-        *ngIf="useQandAs && qaHighlights.length"
-        routerLink="."
-        [queryParams]="{ highlights: 'show' }"
-        queryParamsHandling="merge"
-        routerLinkActive
-        #qaHightlightsToggle="routerLinkActive"
-        [hidden]="qaHightlightsToggle.isActive"
+        *ngIf="useQandAs && qaHighlights.length > 0"
+        [routerLink]="[getRegionHref(), 'highlights']"
         [attr.title]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
         [attr.aria-label]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
         class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
@@ -66,12 +61,7 @@
       <br *ngIf="useQandAs && useQandASearch && qaSets.length" />
       <a
         *ngIf="useQandAs && useQandASearch && qaSets.length"
-        routerLink="."
-        [queryParams]="{ search: 'show' }"
-        queryParamsHandling="merge"
-        routerLinkActive
-        #qaSearchToggle="routerLinkActive"
-        [hidden]="qaSearchToggle.isActive"
+        [routerLink]="[getRegionHref(), 'search']"
         [attr.title]="referralPageData?.labelSearchPageTitle"
         [attr.aria-label]="referralPageData?.labelSearchPageTitle"
         class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
@@ -220,9 +210,7 @@
       class="floating-action-area is_in-page layout--float-end ion-margin-start"
     >
       <a
-        routerLink="."
-        [queryParams]="{ highlights: null }"
-        queryParamsHandling="merge"
+        [routerLink]="[getRegionHref()]"
         [attr.title]="referralPageData?.referralBackButtonLabel"
         [attr.aria-label]="referralPageData?.referralBackButtonLabel"
         class="action is_round text-style--center"
@@ -257,8 +245,8 @@
       class="floating-action-area is_in-page layout--float-end ion-margin-start"
     >
       <a
-        routerLink="."
-        [queryParams]="{ search: null, q: null }"
+        [routerLink]="[getRegionHref()]"
+        [queryParams]="{ q: null }"
         queryParamsHandling="merge"
         [attr.title]="referralPageData?.referralBackButtonLabel"
         [attr.aria-label]="referralPageData?.referralBackButtonLabel"

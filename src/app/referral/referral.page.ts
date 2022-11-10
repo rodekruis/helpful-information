@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import {
   LoggingEvent,
@@ -44,10 +44,10 @@ export class ReferralPageComponent implements OnInit {
 
   public loading = false;
   public useQandAs = environment.useQandAs;
-  public showHighlights = false;
+  public showHighlights: boolean;
 
   public useQandASearch = environment.useQandASearch;
-  public showSearch = false;
+  public showSearch: boolean;
   public searchQuery: string;
   public searchResults: QASet[] = [];
 
@@ -71,21 +71,21 @@ export class ReferralPageComponent implements OnInit {
     this.region = this.route.snapshot.params.region;
     this.regions = environment.regions.trim().split(/\s*,\s*/);
     this.regionsLabels = environment.regionsLabels.trim().split(/\s*,\s*/);
+
+    this.showHighlights =
+      this.useQandAs && this.route.snapshot.data.showHighlights;
+    this.showSearch =
+      this.useQandASearch && this.route.snapshot.data.showSearch;
   }
 
   ngOnInit() {
+    this.upgradeLegacyUrls(this.route.snapshot.queryParams);
+
     this.loadReferralData();
 
-    if (this.useQandAs) {
-      this.route.queryParams.subscribe((queryParams) => {
-        this.showHighlights = !!queryParams.highlights;
-
-        if (this.useQandASearch) {
-          this.showSearch = !!queryParams.search;
-          this.searchQuery = !!queryParams.q ? queryParams.q : '';
-        }
-      });
-    }
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      this.handleQueryParams(queryParams);
+    });
   }
 
   public getRegionHref() {
@@ -153,8 +153,6 @@ export class ReferralPageComponent implements OnInit {
     if (this.useQandASearch) {
       this.searchService.setSource(this.qaSets);
     }
-
-    this.readQueryParams();
 
     this.loading = false;
   }
@@ -237,92 +235,96 @@ export class ReferralPageComponent implements OnInit {
     this.titleService.setTitle(title);
   }
 
-  private readQueryParams() {
-    this.route.queryParams.subscribe((params) => {
-      if (!params.length) {
-        this.updatePageTitle(this.referralPageData.referralPageTitle);
-      }
-      let categoryName: string;
-      let subCategoryName: string;
-      let offerName: string;
+  private handleQueryParams(params: Params) {
+    if (!Object.keys(params).length) {
+      this.updatePageTitle(this.referralPageData.referralPageTitle);
+    }
 
-      if ('categoryID' in params) {
-        this.category = this.categories.find(
-          (category) => category.categoryID === Number(params.categoryID),
-        );
-        if (!this.category) {
-          this.loggingService.logEvent(
-            LoggingEventCategory.error,
-            LoggingEvent.NotFoundCategory,
-            {
-              categoryID: params.categoryID,
-            },
-          );
-        }
-        if (!!this.category && !!this.category.categoryName) {
-          categoryName = this.category.categoryName;
-        }
-      } else {
-        this.category = null;
-      }
-      if ('subCategoryID' in params) {
-        this.subCategory = this.subCategories.find(
-          (subCategory) =>
-            subCategory.subCategoryID === Number(params.subCategoryID) &&
-            subCategory.categoryID === Number(params.categoryID),
-        );
-        if (!this.subCategory) {
-          this.loggingService.logEvent(
-            LoggingEventCategory.error,
-            LoggingEvent.NotFoundSubCategory,
-            {
-              subCategoryID: params.subCategoryID,
-              categoryID: params.categoryID,
-            },
-          );
-        }
+    let categoryName: string;
+    let subCategoryName: string;
+    let offerName: string;
 
-        if (!!this.subCategory && !!this.subCategory.subCategoryName) {
-          subCategoryName = this.subCategory.subCategoryName;
-        }
-      } else {
-        this.subCategory = null;
-      }
-      if ('offerID' in params) {
-        this.offer = this.offers.find(
-          (offer) =>
-            offer.offerID === Number(params.offerID) &&
-            offer.categoryID === Number(params.categoryID) &&
-            offer.subCategoryID === Number(params.subCategoryID),
-        );
-        if (!this.offer) {
-          this.loggingService.logEvent(
-            LoggingEventCategory.error,
-            LoggingEvent.NotFoundOffer,
-            {
-              offerID: params.offerID,
-              subCategoryID: params.subCategoryID,
-              categoryID: params.categoryID,
-            },
-          );
-        }
-        if (!!this.offer && !!this.offer.offerName) {
-          offerName = this.offer.offerName;
-        }
-      } else {
-        this.offer = null;
-      }
-      this.updatePageTitle(
-        this.referralPageData.referralPageTitle,
-        categoryName,
-        subCategoryName,
-        offerName,
+    if (!!params.categoryID) {
+      this.category = this.categories.find(
+        (category) => category.categoryID === Number(params.categoryID),
       );
+      if (!this.category) {
+        this.loggingService.logEvent(
+          LoggingEventCategory.error,
+          LoggingEvent.NotFoundCategory,
+          {
+            categoryID: params.categoryID,
+          },
+        );
+      }
+      if (!!this.category && !!this.category.categoryName) {
+        categoryName = this.category.categoryName;
+      }
+    } else {
+      this.category = null;
+    }
+    if (!!params.subCategoryID) {
+      this.subCategory = this.subCategories.find(
+        (subCategory) =>
+          subCategory.subCategoryID === Number(params.subCategoryID) &&
+          subCategory.categoryID === Number(params.categoryID),
+      );
+      if (!this.subCategory) {
+        this.loggingService.logEvent(
+          LoggingEventCategory.error,
+          LoggingEvent.NotFoundSubCategory,
+          {
+            subCategoryID: params.subCategoryID,
+            categoryID: params.categoryID,
+          },
+        );
+      }
 
-      if ('q' in params) {
+      if (!!this.subCategory && !!this.subCategory.subCategoryName) {
+        subCategoryName = this.subCategory.subCategoryName;
+      }
+    } else {
+      this.subCategory = null;
+    }
+    if (!!params.offerID) {
+      this.offer = this.offers.find(
+        (offer) =>
+          offer.offerID === Number(params.offerID) &&
+          offer.categoryID === Number(params.categoryID) &&
+          offer.subCategoryID === Number(params.subCategoryID),
+      );
+      if (!this.offer) {
+        this.loggingService.logEvent(
+          LoggingEventCategory.error,
+          LoggingEvent.NotFoundOffer,
+          {
+            offerID: params.offerID,
+            subCategoryID: params.subCategoryID,
+            categoryID: params.categoryID,
+          },
+        );
+      }
+      if (!!this.offer && !!this.offer.offerName) {
+        offerName = this.offer.offerName;
+      }
+    } else {
+      this.offer = null;
+    }
+
+    this.updatePageTitle(
+      this.referralPageData.referralPageTitle,
+      categoryName,
+      subCategoryName,
+      offerName,
+    );
+
+    if (this.useQandAs && this.useQandASearch) {
+      this.searchQuery = !!params.q ? params.q : '';
+
+      if (!!params.q) {
         this.performSearch(params.q);
       }
-    });
+    }
   }
 
   public getNextSubCategory(category: Category) {
@@ -498,6 +500,24 @@ export class ReferralPageComponent implements OnInit {
       if (resultFrame) {
         resultFrame.focus();
       }
+    }
+  }
+
+  /**
+   * To support possible bookmarks of the old, query-style URLs
+   */
+  private upgradeLegacyUrls(queryParams: Params) {
+    if (this.useQandAs && !!queryParams.highlights) {
+      this.router.navigate([this.getRegionHref(), 'highlights']);
+    }
+    if (this.useQandASearch && !!queryParams.search) {
+      this.router.navigate([this.getRegionHref(), 'search'], {
+        queryParamsHandling: 'merge',
+        queryParams: {
+          search: null,
+          q: !!queryParams.q ? queryParams.q : null,
+        },
+      });
     }
   }
 }
