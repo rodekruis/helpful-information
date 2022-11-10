@@ -81,6 +81,12 @@ export class ReferralPageComponent implements OnInit {
   ngOnInit() {
     this.upgradeLegacyUrls(this.route.snapshot.queryParams);
 
+    if (!this.isSupportedRegion()) {
+      this.updatePageTitle(environment.appName);
+      this.router.navigate([this.rootHref]);
+      return;
+    }
+
     this.loadReferralData();
 
     this.route.queryParams.subscribe((queryParams: Params) => {
@@ -124,12 +130,6 @@ export class ReferralPageComponent implements OnInit {
   }
 
   private async loadReferralData() {
-    if (!this.isSupportedRegion()) {
-      this.updatePageTitle(environment.appName);
-      this.router.navigate([this.rootHref]);
-      return;
-    }
-
     this.loading = true;
     this.referralPageData =
       await this.referralPageDataService.getReferralPageData(this.region);
