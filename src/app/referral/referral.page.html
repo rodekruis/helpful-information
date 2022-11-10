@@ -245,6 +245,7 @@
     </p>
 
     <app-q-a-set-list
+      [baseUrl]="getRegionHref()"
       [list]="qaHighlights"
       class="ion-margin-vertical"
     ></app-q-a-set-list>
@@ -289,6 +290,7 @@
       </p>
 
       <app-q-a-set-list
+        [baseUrl]="getRegionHref()"
         [list]="searchResults"
         [showDateUpdatedOutsideQuestion]="false"
         class="ion-margin-vertical"

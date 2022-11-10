@@ -12,6 +12,9 @@ export class QASetListComponent {
   list: QASet[];
 
   @Input()
+  public baseUrl: string = '';
+
+  @Input()
   public showDateUpdatedOutsideQuestion = true;
 
   public labelLastUpdated: string;

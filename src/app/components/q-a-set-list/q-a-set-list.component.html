@@ -20,7 +20,7 @@
   >
     <p>
       <a
-        [routerLink]="['.']"
+        [routerLink]="[baseUrl]"
         [queryParams]="{
           categoryID: item.categoryID
         }"
@@ -29,7 +29,7 @@
         >{{ item.categoryName }}</a
       ><strong>&nbsp;/ </strong>
       <a
-        [routerLink]="['.']"
+        [routerLink]="[baseUrl]"
         [queryParams]="{
           categoryID: item.categoryID,
           subCategoryID: item.subCategoryID
