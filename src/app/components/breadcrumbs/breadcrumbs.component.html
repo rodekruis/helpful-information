@@ -1,0 +1,21 @@
+<a
+  *ngIf="item?.categoryID"
+  [routerLink]="[baseUrl]"
+  [queryParams]="{
+    categoryID: item?.categoryID
+  }"
+  queryParamsHandling=""
+  class="text-style--inline-link is_minimal"
+  >{{ item?.categoryName || item?.categoryID }}</a
+><strong *ngIf="item?.subCategoryID">&nbsp;/ </strong>
+<a
+  *ngIf="item?.subCategoryID"
+  [routerLink]="[baseUrl]"
+  [queryParams]="{
+    categoryID: item?.categoryID,
+    subCategoryID: item?.subCategoryID
+  }"
+  queryParamsHandling=""
+  class="text-style--inline-link is_minimal"
+  >{{ item?.subCategoryName || item?.subCategoryID }}</a
+><strong>&nbsp;: </strong>

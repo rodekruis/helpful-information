@@ -9,6 +9,7 @@ import { OfferComponent } from 'src/app/components/offer/offer.component';
 import { SubCategoryComponent } from 'src/app/components/sub-category/sub-category.component';
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
+import { BreadcrumbsComponent } from '../components/breadcrumbs/breadcrumbs.component';
 import { LinkTileComponent } from '../components/link-tile/link-tile.component';
 import { QASetListComponent } from '../components/q-a-set-list/q-a-set-list.component';
 import { QASetComponent } from '../components/q-a-set/q-a-set.component';
@@ -18,6 +19,7 @@ import { ConvertUrlsPipe } from '../pipes/convert-urls.pipe';
 @NgModule({
   declarations: [
     AppHeaderComponent,
+    BreadcrumbsComponent,
     CategoryFilterPipe,
     ConvertUrlsPipe,
     LastUpdatedTimeComponent,
@@ -32,6 +34,7 @@ import { ConvertUrlsPipe } from '../pipes/convert-urls.pipe';
   imports: [CommonModule, IonicModule, FormsModule, RouterModule],
   exports: [
     AppHeaderComponent,
+    BreadcrumbsComponent,
     CategoryFilterPipe,
     ConvertUrlsPipe,
     LastUpdatedTimeComponent,

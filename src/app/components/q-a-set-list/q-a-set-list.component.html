@@ -19,25 +19,11 @@
     class="ion-padding-bottom"
   >
     <p>
-      <a
-        [routerLink]="[baseUrl]"
-        [queryParams]="{
-          categoryID: item.categoryID
-        }"
-        queryParamsHandling=""
-        class="text-style--inline-link is_minimal"
-        >{{ item.categoryName }}</a
-      ><strong>&nbsp;/ </strong>
-      <a
-        [routerLink]="[baseUrl]"
-        [queryParams]="{
-          categoryID: item.categoryID,
-          subCategoryID: item.subCategoryID
-        }"
-        queryParamsHandling=""
-        class="text-style--inline-link is_minimal"
-        >{{ item.subCategoryName }}</a
-      ><strong>&nbsp;: </strong><br />
+      <app-breadcrumbs
+        [baseUrl]="baseUrl"
+        [item]="item"
+        style="display: block"
+      ></app-breadcrumbs>
       <ng-container *ngIf="showDateUpdatedOutsideQuestion">
         <ng-container
           *ngTemplateOutlet="
