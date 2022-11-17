@@ -10,8 +10,6 @@ export const environment = {
   useQandAs: true,
   useQandASearch: true,
 
-  apiDataValidFor: 0,
-
   // Configuration of content
   appName: 'HIA-test',
   appLogoUrl: '',

@@ -12,8 +12,6 @@ export const environment = {
   useQandAs: true, // Enable 'Q&A'-content type
   useQandASearch: true, // Enable Search-feature for Q&As
 
-  apiDataValidFor: 0.5 * 60, // Time in seconds to reuse API-data before fetching again
-
   // Configuration of content
   appName: 'Helpful Information',
   appLogoUrl:

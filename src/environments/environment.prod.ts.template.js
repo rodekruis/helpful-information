@@ -11,8 +11,6 @@ export const environment = {
   useQandAs: ${process.env.NG_USE_Q_AND_AS === 'true' || false},
   useQandASearch: ${process.env.NG_USE_Q_AND_A_SEARCH === 'true' || false},
 
-  apiDataValidFor: 5 * 60,
-
   // Configuration of content
   appName: '${process.env.TXT_APP_NAME || ''}',
   appLogoUrl: '${process.env.TXT_APP_LOGO_URL || ''}',
