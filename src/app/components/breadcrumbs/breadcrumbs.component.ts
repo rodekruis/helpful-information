@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { QASet } from 'src/app/models/qa-set.model';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -11,7 +10,12 @@ export class BreadcrumbsComponent {
   public baseUrl: string = '';
 
   @Input()
-  item: QASet;
+  item: {
+    categoryID?: number;
+    categoryName?: string;
+    subCategoryID?: number;
+    subCategoryName?: string;
+  };
 
   constructor() {}
 }
