@@ -10,22 +10,14 @@ on:
     branches:
       - main
     paths:
-      - '!.github/**'
       - '.github/workflows/deploy-production-ukr.yml'
-      - '*'
-      - '!*.md'
-      - 'src/**'
 
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
     paths:
-      - '!.github/**'
       - '.github/workflows/deploy-production-ukr.yml'
-      - '*'
-      - '!*.md'
-      - 'src/**'
 
 jobs:
   build_and_deploy_job:
@@ -36,50 +28,37 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: '.node-version'
-          cache: 'npm'
+      - name: Build output
+        run: 'mkdir www'
 
-      - name: Install
-        env:
-          HUSKY: 0
-        run: 'npm ci --omit=optional --no-fund --no-audit'
+      - name: Create redirect
+        run: |-
+          cat <<EOF > www/index.html
+          <!DOCTYPE html>
+          <title>Redirecting...</title>
+          <meta http-equiv="refresh" content="3;url=https://helpfulinformation-faq.redcross.nl/">
+          <script>if (new RegExp(/helpfulinformation-ukr/).test(location.href)) location.href=location.href.replace('-ukr','-faq')</script>
+          <a href="https://helpfulinformation-faq.redcross.nl/">Site moved, please update bookmarks/links.</a>
+          EOF
 
-      - name: Build
-        run: 'npm run build:production'
-        env:
-          NG_PRODUCTION: 'true'
-          ENV_NAME: ''
-          NG_USE_SERVICE_WORKER: 'true'
-          NG_USE_Q_AND_AS: 'true'
-          TXT_APP_NAME: 'Vraagbaak Ukraine'
-          TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
-          TXT_MAIN_PAGE_HEADER: 'This web app is made to give helpful information (HIA) about frequently asked questions (FAQ) from refugees from Ukraine.'
-          TXT_MAIN_PAGE_INTRO: 'As a Red Cross aid worker, you can use this web app to communicate answers to questions you receive from refugees from Ukraine. \n\n If you are a refugee from Ukraine, you can check: <a href="https://www.refugeehelp.nl/get-help"  target="_blank" rel="noopener noreferrer">https://www.refugeehelp.nl/get-help</a> for the most recent information. \n\n Please select your FAQ language below:'
-          TXT_ERROR_HEADER: 'Data Unavailable'
-          TXT_ERROR_MESSAGE: 'Reach out to us at: '
-          TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
-          TXT_ERROR_RETRY: 'Try again?'
-          REGIONS: >-
-            en,
-            nl
-          REGIONS_LABELS: >-
-            English,
-            Nederlands
-          REGIONS_SHEET_IDS: >-
-            14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
-            1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE
-          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
-          GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
-          AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
+          cat www/index.html
 
       - name: Add robots.txt
-        run: 'cp src/robots.public.txt www/robots.txt'
+        run: |-
+          cp src/robots.private.txt www/robots.txt
+
+          cat www/robots.txt
 
       - name: Add Google Site Verification code
         run: 'echo "google-site-verification: google14ff151bbe1f8dd2.html" > www/google14ff151bbe1f8dd2.html'
+
+      - name: Create config
+        run: |
+          cat <<EOF > staticwebapp.config.json
+          { "navigationFallback": { "rewrite":"index.html", "exclude": ["/assets/*"] }, "responseOverrides": { "404": { "redirect": "/" } } }
+          EOF
+
+          cat staticwebapp.config.json
 
       - name: Deploy to Production
         uses: Azure/static-web-apps-deploy@v1
