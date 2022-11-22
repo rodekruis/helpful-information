@@ -26,28 +26,8 @@ jobs:
     name: Build and Deploy Job
     environment: 'production-ukr'
     steps:
-      - uses: actions/checkout@v3
-
       - name: Build output
         run: 'mkdir www'
-
-      - name: Create redirect
-        run: |-
-          cat <<EOF > www/index.html
-          <!DOCTYPE html>
-          <title>Redirecting...</title>
-          <meta http-equiv="refresh" content="3;url=https://helpfulinformation-faq.redcross.nl/">
-          <script>if (new RegExp(/helpfulinformation-ukr/).test(location.href)) location.href=location.href.replace('-ukr','-faq')</script>
-          <a href="https://helpfulinformation-faq.redcross.nl/">Site moved, please update bookmarks/links.</a>
-          EOF
-
-          cat www/index.html
-
-      - name: Add robots.txt
-        run: |-
-          cp src/robots.private.txt www/robots.txt
-
-          cat www/robots.txt
 
       - name: Add Google Site Verification code
         run: 'echo "google-site-verification: google14ff151bbe1f8dd2.html" > www/google14ff151bbe1f8dd2.html'
@@ -55,7 +35,15 @@ jobs:
       - name: Create config
         run: |
           cat <<EOF > staticwebapp.config.json
-          { "routes": [{ "route": "/*", "redirect": "https://helpfulinformaton-faq.redcross.nl/", "statusCode": 301 }], "navigationFallback": { "rewrite":"index.html" }, "responseOverrides": { "404": { "redirect": "/" } } }
+          {
+          "routes": [
+            { "route": "/nl", "redirect": "https://helpfulinformation-faq.redcross.nl/oekraine", "statusCode": 301 },
+            { "route": "/en", "redirect": "https://helpfulinformation-faq.redcross.nl/ukraine", "statusCode": 301 },
+            { "route": "/*", "redirect": "https://helpfulinformation-faq.redcross.nl/", "statusCode": 301 }
+          ],
+          "navigationFallback": { "rewrite":"index.html" },
+          "responseOverrides": { "404": { "redirect": "/" } }
+          }
           EOF
 
           cat staticwebapp.config.json
