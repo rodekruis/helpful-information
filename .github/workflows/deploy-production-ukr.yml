@@ -55,7 +55,7 @@ jobs:
       - name: Create config
         run: |
           cat <<EOF > staticwebapp.config.json
-          { "navigationFallback": { "rewrite":"index.html", "exclude": ["/assets/*"] }, "responseOverrides": { "404": { "redirect": "/" } } }
+          { "routes": [{ "route": "/*", "redirect": "https://helpfulinformaton-faq.redcross.nl/", "statusCode": 301 }], "navigationFallback": { "rewrite":"index.html" }, "responseOverrides": { "404": { "redirect": "/" } } }
           EOF
 
           cat staticwebapp.config.json
