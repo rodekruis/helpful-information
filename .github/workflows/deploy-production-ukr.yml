@@ -66,10 +66,16 @@ jobs:
           cat <<EOF > staticwebapp.config.json
           {
           "routes": [
+            { "route": "/ngsw.json", "statusCode": 404 },
             { "route": "/", "redirect": "https://helpfulinformation-faq.redcross.nl/", "statusCode": 301 }
           ],
-          "navigationFallback": { "rewrite":"index.html" },
-          "responseOverrides": { "404": { "redirect": "/" } }
+          "navigationFallback": {
+            "rewrite": "index.html",
+            "exclude": ["/ngsw.json"]
+          },
+          "responseOverrides": {
+            "404": { "rewrite": "/" }
+          }
           }
           EOF
 
