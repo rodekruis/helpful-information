@@ -142,6 +142,9 @@ export class ReferralPageComponent implements OnInit {
     this.lastUpdatedTimeService.setLastUpdatedTime(
       this.referralPageData.referralLastUpdatedTime,
     );
+    this.lastUpdatedTimeService.setLastUpdatedLabel(
+      this.referralPageData.labelLastUpdated,
+    );
 
     this.categories = await this.offersService.getCategories(this.region);
     this.subCategories = await this.offersService.getSubCategories(this.region);

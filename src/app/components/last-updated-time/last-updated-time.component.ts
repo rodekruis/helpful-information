@@ -20,5 +20,8 @@ export class LastUpdatedTimeComponent {
       }
       this.lastUpdatedTime = value;
     });
+    this.lastUpdatedTimeService.lastUpdatedLabel$.subscribe((value) => {
+      this.label = value;
+    });
   }
 }
