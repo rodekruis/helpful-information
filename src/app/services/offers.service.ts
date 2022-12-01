@@ -31,52 +31,64 @@ export class OffersService {
   constructor(private spreadsheetService: SpreadsheetService) {}
 
   private needsCaching(name: CacheName, region: string): boolean {
-    return !this.cache || !this.cache[name] || !this.isSameRegion(name, region);
+    return (
+      !this.cache ||
+      !this.cache[name] ||
+      !this.isSameRegion(name, region) ||
+      !this.cache[name].data
+    );
   }
 
   private isSameRegion(name: CacheName, region: string): boolean {
     return this.cache[name].region === region;
   }
 
-  private resetCache(name: CacheName, region: string) {
+  private setCache(name: CacheName, region: string, data: any) {
     this.cache[name] = {
       region: region,
-      data: null,
+      data: data,
     };
   }
 
   public async getCategories(region: string): Promise<Category[]> {
     if (this.needsCaching(CacheName.categories, region)) {
-      this.resetCache(CacheName.categories, region);
-      this.cache[CacheName.categories].data =
-        await this.spreadsheetService.getCategories(region);
+      this.setCache(
+        CacheName.categories,
+        region,
+        await this.spreadsheetService.getCategories(region),
+      );
     }
     return this.cache[CacheName.categories].data;
   }
 
   public async getSubCategories(region: string): Promise<SubCategory[]> {
     if (this.needsCaching(CacheName.subCategories, region)) {
-      this.resetCache(CacheName.subCategories, region);
-      this.cache[CacheName.subCategories].data =
-        await this.spreadsheetService.getSubCategories(region);
+      this.setCache(
+        CacheName.subCategories,
+        region,
+        await this.spreadsheetService.getSubCategories(region),
+      );
     }
     return this.cache[CacheName.subCategories].data;
   }
 
   public async getOffers(region: string): Promise<Offer[]> {
     if (this.needsCaching(CacheName.offers, region)) {
-      this.resetCache(CacheName.offers, region);
-      this.cache[CacheName.offers].data =
-        await this.spreadsheetService.getOffers(region);
+      this.setCache(
+        CacheName.offers,
+        region,
+        await this.spreadsheetService.getOffers(region),
+      );
     }
     return this.cache[CacheName.offers].data;
   }
 
   public async getQAs(region: string): Promise<QASet[]> {
     if (this.needsCaching(CacheName.qaSets, region)) {
-      this.resetCache(CacheName.qaSets, region);
-      this.cache[CacheName.qaSets].data = await this.spreadsheetService.getQAs(
+      this.setCache(
+        CacheName.qaSets,
         region,
+        await this.spreadsheetService.getQAs(region),
       );
     }
     return this.cache[CacheName.qaSets].data;
