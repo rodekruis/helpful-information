@@ -16,7 +16,6 @@ import { ReferralPageDataService } from 'src/app/services/referral-page-data.ser
 import { environment } from 'src/environments/environment';
 import { QASet } from '../models/qa-set.model';
 import { SearchService } from '../services/search.service';
-import { SpreadsheetService } from '../services/spreadsheet.service';
 
 @Component({
   selector: 'app-referral',
@@ -151,9 +150,7 @@ export class ReferralPageComponent implements OnInit {
     this.offers = await this.offersService.getOffers(this.region);
 
     if (this.useQandAs) {
-      this.qaSets = (await this.offersService.getQAs(this.region)).map(
-        (qaSet) => this.addParentCategoryNames(qaSet),
-      );
+      this.qaSets = await this.offersService.getQAs(this.region);
       this.qaHighlights = this.createHighlights(this.qaSets);
     }
     if (this.useQandAs && this.useQandASearch) {
@@ -194,20 +191,6 @@ export class ReferralPageComponent implements OnInit {
         }
         return item;
       });
-  }
-
-  private addParentCategoryNames(entity: Offer): Offer;
-  private addParentCategoryNames(entity: QASet): QASet;
-  private addParentCategoryNames(entity: QASet | Offer): QASet | Offer {
-    entity.categoryName = SpreadsheetService.getCategoryName(
-      entity.categoryID,
-      this.categories,
-    );
-    entity.subCategoryName = SpreadsheetService.getSubCategoryName(
-      entity.subCategoryID,
-      this.subCategories,
-    );
-    return entity;
   }
 
   private updatePageTitle(

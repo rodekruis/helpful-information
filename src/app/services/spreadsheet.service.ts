@@ -102,6 +102,32 @@ export class SpreadsheetService {
     return subCategory ? subCategory.subCategoryName : '';
   }
 
+  static addParentCategoryNames(
+    entity: Offer,
+    categories: Category[],
+    subCategories: SubCategory[],
+  ): Offer;
+  static addParentCategoryNames(
+    entity: QASet,
+    categories: Category[],
+    subCategories: SubCategory[],
+  ): QASet;
+  static addParentCategoryNames(
+    entity: Offer | QASet,
+    categories: Category[],
+    subCategories: SubCategory[],
+  ): Offer | QASet {
+    entity.categoryName = SpreadsheetService.getCategoryName(
+      entity.categoryID,
+      categories,
+    );
+    entity.subCategoryName = SpreadsheetService.getSubCategoryName(
+      entity.subCategoryID,
+      subCategories,
+    );
+    return entity;
+  }
+
   private convertCategoryRowToCategoryObject(
     row: any[],
     colMap: ColumnMap,

@@ -80,7 +80,13 @@ export class OffersService {
         await this.spreadsheetService.getOffers(region),
       );
     }
-    return this.cache[CacheName.offers].data;
+    return this.cache[CacheName.offers].data.map((offer: Offer) =>
+      SpreadsheetService.addParentCategoryNames(
+        offer,
+        this.cache[CacheName.categories].data,
+        this.cache[CacheName.subCategories].data,
+      ),
+    );
   }
 
   public async getQAs(region: string): Promise<QASet[]> {
@@ -91,6 +97,12 @@ export class OffersService {
         await this.spreadsheetService.getQAs(region),
       );
     }
-    return this.cache[CacheName.qaSets].data;
+    return this.cache[CacheName.qaSets].data.map((qaSet: QASet) =>
+      SpreadsheetService.addParentCategoryNames(
+        qaSet,
+        this.cache[CacheName.categories].data,
+        this.cache[CacheName.subCategories].data,
+      ),
+    );
   }
 }
