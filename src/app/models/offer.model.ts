@@ -1,5 +1,6 @@
 export class Offer {
   offerID: number;
+  slug?: string;
   offerIcon: string;
   offerName?: string;
   offerDescription: string;
@@ -15,8 +16,10 @@ export class Offer {
   offerBasicRight?: string;
   offerVisible: boolean;
   subCategoryID: number;
+  subCategorySlug?: string;
   subCategoryName?: string;
   categoryID: number;
+  categorySlug?: string;
   categoryName?: string;
   findAVaccinationCenter?: string;
   redCrossHelpDesk?: string;
@@ -31,6 +34,7 @@ export class Offer {
 // For example: "Phone-number(s) (1 digits-only number per line) #PHONENUMBERS"
 export enum OfferCol {
   id = 'ID',
+  slug = 'SLUG',
   subCategory = 'SUBCATEGORY',
   category = 'CATEGORY',
   visible = 'VISIBLE',

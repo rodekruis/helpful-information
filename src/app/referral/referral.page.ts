@@ -233,7 +233,7 @@ export class ReferralPageComponent implements OnInit {
     let subCategoryName: string;
     let offerName: string;
 
-    if (!!params.categoryID) {
+    if (!!params.categoryID && this.categories) {
       this.category = this.categories.find(
         (category) => category.categoryID === Number(params.categoryID),
       );
@@ -252,7 +252,7 @@ export class ReferralPageComponent implements OnInit {
     } else {
       this.category = null;
     }
-    if (!!params.subCategoryID) {
+    if (!!params.subCategoryID && this.subCategories) {
       this.subCategory = this.subCategories.find(
         (subCategory) =>
           subCategory.subCategoryID === Number(params.subCategoryID) &&
@@ -275,7 +275,7 @@ export class ReferralPageComponent implements OnInit {
     } else {
       this.subCategory = null;
     }
-    if (!!params.offerID) {
+    if (!!params.offerID && this.offers) {
       this.offer = this.offers.find(
         (offer) =>
           offer.offerID === Number(params.offerID) &&

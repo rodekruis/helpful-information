@@ -8,29 +8,39 @@ import {
 } from 'src/app/models/logging-event.enum';
 import { Offer } from 'src/app/models/offer.model';
 import { LoggingService } from 'src/app/services/logging.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-offer',
-  templateUrl: './offer.component.html',
-  styleUrls: ['./offer.component.scss'],
+  selector: 'app-offer-link',
+  templateUrl: './offer-link.component.html',
+  styleUrls: ['./offer-link.component.scss'],
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule],
   providers: [LoggingService],
 })
-export class OfferComponent {
+export class OfferLinkComponent {
+  public useUrlSlugs = environment.useUrlSlugs;
+
   @Input()
   public offer: Offer;
 
   constructor(private loggingService?: LoggingService) {}
 
-  public logDetailClick(name: string) {
+  public click(offer: Offer) {
     if (!this.loggingService) {
       return;
     }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
-      LoggingEvent.OfferDetailClick,
-      { name },
+      LoggingEvent.OfferClick,
+      {
+        categoryID: offer.categoryID,
+        category: offer.categoryName,
+        subCategoryID: offer.subCategoryID,
+        subCategory: offer.subCategoryName,
+        offerID: offer.offerID,
+        offerName: offer.offerName ? offer.offerName : '',
+      },
     );
   }
 }

@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
+import { CategoryPageComponent } from '../pages/category/category.page';
+import { OfferPageComponent } from '../pages/offer/offer.page';
+import { SubCategoryPageComponent } from '../pages/sub-category/sub-category.page';
 import { ReferralPageComponent } from './referral.page';
 
 @NgModule({
@@ -13,6 +16,9 @@ import { ReferralPageComponent } from './referral.page';
     IonicModule,
     CommonModule,
     FormsModule,
+    CategoryPageComponent,
+    SubCategoryPageComponent,
+    OfferPageComponent,
     RouterModule.forChild([
       {
         path: ':region/highlights',
@@ -40,6 +46,32 @@ import { ReferralPageComponent } from './referral.page';
           showSearch: false,
           showHighlights: false,
         },
+        children: [
+          {
+            path: ':categorySlug/:subCategorySlug/:offerSlug',
+            canActivate: [() => environment.useUrlSlugs],
+            loadComponent: () =>
+              import('../pages/offer/offer.page').then(
+                (mod) => mod.OfferPageComponent,
+              ),
+          },
+          {
+            path: ':categorySlug/:subCategorySlug',
+            canActivate: [() => environment.useUrlSlugs],
+            loadComponent: () =>
+              import('../pages/sub-category/sub-category.page').then(
+                (mod) => mod.SubCategoryPageComponent,
+              ),
+          },
+          {
+            path: ':categorySlug',
+            canActivate: [() => environment.useUrlSlugs],
+            loadComponent: () =>
+              import('../pages/category/category.page').then(
+                (mod) => mod.CategoryPageComponent,
+              ),
+          },
+        ],
       },
       {
         path: '',

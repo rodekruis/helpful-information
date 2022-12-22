@@ -73,6 +73,10 @@ export class OffersService {
   }
 
   public async getOffers(region: string): Promise<Offer[]> {
+    // Load 'requirements'...
+    this.getCategories(region);
+    this.getSubCategories(region);
+
     if (this.needsCaching(CacheName.offers, region)) {
       this.setCache(
         CacheName.offers,
@@ -81,7 +85,7 @@ export class OffersService {
       );
     }
     return this.cache[CacheName.offers].data.map((offer: Offer) =>
-      SpreadsheetService.addParentCategoryNames(
+      SpreadsheetService.addParentCategoryDetails(
         offer,
         this.cache[CacheName.categories].data,
         this.cache[CacheName.subCategories].data,
@@ -90,6 +94,10 @@ export class OffersService {
   }
 
   public async getQAs(region: string): Promise<QASet[]> {
+    // Load 'requirements'...
+    this.getCategories(region);
+    this.getSubCategories(region);
+
     if (this.needsCaching(CacheName.qaSets, region)) {
       this.setCache(
         CacheName.qaSets,
@@ -98,7 +106,7 @@ export class OffersService {
       );
     }
     return this.cache[CacheName.qaSets].data.map((qaSet: QASet) =>
-      SpreadsheetService.addParentCategoryNames(
+      SpreadsheetService.addParentCategoryDetails(
         qaSet,
         this.cache[CacheName.categories].data,
         this.cache[CacheName.subCategories].data,

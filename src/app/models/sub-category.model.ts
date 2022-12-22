@@ -1,5 +1,6 @@
 export class SubCategory {
   subCategoryID: number;
+  slug?: string;
   subCategoryName: string;
   subCategoryIcon: string;
   subCategoryDescription?: string;
@@ -11,6 +12,7 @@ export class SubCategory {
 // For example: "Sub-Category Description (can be multiple lines) #DESCRIPTION"
 export enum SubCategoryCol {
   id = 'ID',
+  slug = 'SLUG',
   name = 'NAME',
   icon = 'ICON',
   description = 'DESCRIPTION',

@@ -27,4 +27,8 @@ export class QASetComponent {
       this.labelLastUpdated = pageDataService.data.labelLastUpdated;
     }
   }
+
+  public isActive(slug: string): boolean {
+    return window.location.hash === `#${slug}`;
+  }
 }

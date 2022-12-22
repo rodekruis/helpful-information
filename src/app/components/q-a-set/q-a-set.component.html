@@ -20,7 +20,10 @@
   ></p>
 </ng-template>
 
-<details>
+<details
+  [id]="qaSet.slug"
+  [open]="isActive(qaSet.slug)"
+>
   <summary class="action action-dark">
     {{ qaSet.question }}
   </summary>

@@ -5,8 +5,6 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AppHeaderComponent } from 'src/app/components/header/header.component';
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
-import { OfferComponent } from 'src/app/components/offer/offer.component';
-import { SubCategoryComponent } from 'src/app/components/sub-category/sub-category.component';
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
 import { BreadcrumbsComponent } from '../components/breadcrumbs/breadcrumbs.component';
@@ -19,31 +17,31 @@ import { ConvertUrlsPipe } from '../pipes/convert-urls.pipe';
 @NgModule({
   declarations: [
     AppHeaderComponent,
-    BreadcrumbsComponent,
     CategoryFilterPipe,
     ConvertUrlsPipe,
     LastUpdatedTimeComponent,
     LinkTileComponent,
-    OfferComponent,
     QASetComponent,
     QASetListComponent,
     SearchInputComponent,
-    SubCategoryComponent,
     SubCategoryFilterPipe,
   ],
-  imports: [CommonModule, IonicModule, FormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    IonicModule,
+    FormsModule,
+    RouterModule,
+    BreadcrumbsComponent,
+  ],
   exports: [
     AppHeaderComponent,
-    BreadcrumbsComponent,
     CategoryFilterPipe,
     ConvertUrlsPipe,
     LastUpdatedTimeComponent,
     LinkTileComponent,
-    OfferComponent,
     QASetComponent,
     QASetListComponent,
     SearchInputComponent,
-    SubCategoryComponent,
     SubCategoryFilterPipe,
   ],
 })

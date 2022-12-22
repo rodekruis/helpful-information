@@ -1,0 +1,17 @@
+<app-breadcrumbs
+  [baseUrl]="'/' + region"
+  [item]="offer"
+  style="display: block"
+>
+</app-breadcrumbs>
+<hr
+  style="border-bottom: 1px dotted currentColor"
+  class="ion-margin-vertical"
+/>
+
+<app-offer [offer]="offer"></app-offer>
+
+<app-last-updated-time
+  [label]="referralPageData?.labelLastUpdated"
+  class="ion-margin-vertical"
+></app-last-updated-time>

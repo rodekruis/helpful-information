@@ -115,93 +115,22 @@
   <ng-container
     *ngIf="isSupportedRegion() && !loading && category && !subCategory"
   >
-    <h2 class="ion-no-margin text-style--header text-style--size-1">
-      {{ category.categoryName }}
-    </h2>
-    <p *ngIf="category.categoryDescription">
-      {{ category.categoryDescription }}
-    </p>
-
-    <ul class="list-flat ion-margin-vertical">
-      <li
-        *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
-        class="ion-margin-bottom"
-      >
-        <app-sub-category
-          [subCategory]="subCategoryItem"
-          [category]="category"
-        ></app-sub-category>
-      </li>
-    </ul>
+    <app-category-page
+      [category]="category"
+      [subCategories]="subCategories|categoryFilter:category"
+    ></app-category-page>
   </ng-container>
 
   <!-- Sub-Category-page = Offer-list/Q&A-list -->
   <ng-container
     *ngIf="isSupportedRegion() && !loading && category && subCategory && !offer"
   >
-    <h2 class="ion-no-margin text-style--header text-style--size-1">
-      {{ subCategory.subCategoryName }}
-    </h2>
-    <p
-      *ngIf="subCategory.subCategoryDescription"
-      class="text-style--wrap-newlines"
-    >
-      {{ subCategory.subCategoryDescription }}
-    </p>
-
-    <ul
-      *ngIf="qaSets && (qaSets | categoryFilter: category | subCategoryFilter: subCategory).length"
-      class="list-flat ion-margin-vertical"
-    >
-      <li
-        *ngFor="let _qaSet of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
-        class="ion-margin-bottom"
-      >
-        <app-q-a-set [qaSet]="_qaSet"></app-q-a-set>
-      </li>
-    </ul>
-
-    <ul class="list-flat ion-margin-vertical">
-      <li
-        *ngFor="let _offer of offers | categoryFilter: category | subCategoryFilter: subCategory"
-        class="ion-margin-bottom"
-      >
-        <a
-          [routerLink]="['.']"
-          [queryParams]="{
-                categoryID: _offer.categoryID,
-                subCategoryID: _offer.subCategoryID,
-                offerID: _offer.offerID
-              }"
-          (click)="clickOffer(_offer)"
-          class="action list-item"
-        >
-          <span class="logo-badge list-item--icon">
-            <ion-img
-              [title]="_offer.offerIcon"
-              [src]="_offer.offerIcon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'"
-              alt=""
-              [attr.loading]="'lazy'"
-              [attr.decoding]="'async'"
-              class="logo-badge--image"
-            ></ion-img>
-          </span>
-          <span
-            class="list-item--content text-style--hide-overflow_4 text-style--wrap-newlines"
-          >
-            <ng-container *ngIf="_offer.offerName">
-              <strong>{{ _offer.offerName || '&nbsp;' }}</strong><br />
-            </ng-container>
-            {{ _offer.offerDescription }}
-          </span>
-        </a>
-      </li>
-    </ul>
-
-    <app-last-updated-time
-      [label]="referralPageData.labelLastUpdated"
-      class="ion-margin-vertical"
-    ></app-last-updated-time>
+    <app-sub-category-page
+      [category]="category"
+      [subCategories]="subCategories|categoryFilter:category"
+      [offers]="offers"
+      [qaSets]="qaSets"
+    ></app-sub-category-page>
   </ng-container>
 
   <!-- Q&A-Highlights-page = Q&A-list -->
@@ -291,12 +220,7 @@
   <ng-container
     *ngIf="isSupportedRegion() && !loading && category && subCategory && offer"
   >
-    <app-offer [offer]="offer"></app-offer>
-
-    <app-last-updated-time
-      [label]="referralPageData.labelLastUpdated"
-      class="ion-margin-vertical"
-    ></app-last-updated-time>
+    <app-offer-page [offer]="offer"></app-offer-page>
   </ng-container>
 
   <!-- Error/404 page -->

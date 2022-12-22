@@ -1,30 +1,31 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import mockOffer from 'src/app/mocks/offer.mock';
+import { IonicModule } from '@ionic/angular';
 import { LoggingService } from 'src/app/services/logging.service';
-import { OfferComponent } from './offer.component';
+import { SubCategoryPageComponent } from './sub-category.page';
 
-describe('OfferComponent', () => {
-  let component: OfferComponent;
-  let fixture: ComponentFixture<OfferComponent>;
+describe('SubCategoryPageComponent', () => {
+  let component: SubCategoryPageComponent;
+  let fixture: ComponentFixture<SubCategoryPageComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        IonicModule.forRoot(),
+        RouterTestingModule,
+        SubCategoryPageComponent,
+      ],
       providers: [
         {
           provide: LoggingService,
         },
       ],
     }).compileComponents();
-  }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(OfferComponent);
+    fixture = TestBed.createComponent(SubCategoryPageComponent);
     component = fixture.componentInstance;
-    component.offer = mockOffer;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

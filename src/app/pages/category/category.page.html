@@ -1,0 +1,27 @@
+<h2
+  *ngIf="category?.categoryName"
+  class="ion-no-margin text-style--header text-style--size-1"
+>
+  {{ category?.categoryName }}
+</h2>
+<p
+  *ngIf="category?.categoryDescription"
+  class="ion-margin-vertical"
+>
+  {{ category?.categoryDescription }}
+</p>
+
+<ul
+  *ngIf="subCategories?.length"
+  class="list-flat ion-margin-vertical"
+>
+  <li
+    *ngFor="let subCategoryItem of subCategories"
+    class="ion-margin-bottom"
+  >
+    <app-sub-category-link
+      [category]="category"
+      [subCategory]="subCategoryItem"
+    ></app-sub-category-link>
+  </li>
+</ul>

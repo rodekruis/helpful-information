@@ -1,13 +1,15 @@
 export class QASet {
   id: number;
   categoryID: number;
+  categorySlug?: string;
   categoryName?: string;
   subCategoryID: number;
+  subCategorySlug?: string;
   subCategoryName?: string;
   isVisible: boolean;
   isHighlight: boolean;
   dateUpdated: Date | null;
-  slug?: string;
+  slug: string;
   parentSlug?: string;
   question: string;
   answer: string;

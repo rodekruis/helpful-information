@@ -14,7 +14,8 @@ import {
   LoggingEventCategory,
 } from '../models/logging-event.enum';
 import { QACol, QASet } from '../models/qa-set.model';
-import { getDateFromString, getFullUrl } from '../shared/utils';
+import { SlugPrefix } from '../models/slug-prefix.enum';
+import { createSlug, getDateFromString, getFullUrl } from '../shared/utils';
 
 enum SheetName {
   page = 'Referral Page',
@@ -84,47 +85,55 @@ export class SpreadsheetService {
     return colMap;
   }
 
-  static getCategoryName(
+  static getCategory(
     id: Category['categoryID'],
     collection: Category[],
-  ): string {
-    if (!collection) return '';
+  ): Category | null {
+    if (!collection) return null;
     const category = collection.find((item) => item.categoryID === id);
-    return category ? category.categoryName : '';
+    return category ? category : null;
   }
 
-  static getSubCategoryName(
+  static getSubCategory(
     id: SubCategory['subCategoryID'],
     collection: SubCategory[],
-  ): string {
-    if (!collection) return '';
+  ): SubCategory | null {
+    if (!collection) return null;
     const subCategory = collection.find((item) => item.subCategoryID === id);
-    return subCategory ? subCategory.subCategoryName : '';
+    return subCategory ? subCategory : null;
   }
 
-  static addParentCategoryNames(
+  static addParentCategoryDetails(
     entity: Offer,
     categories: Category[],
     subCategories: SubCategory[],
   ): Offer;
-  static addParentCategoryNames(
+  static addParentCategoryDetails(
     entity: QASet,
     categories: Category[],
     subCategories: SubCategory[],
   ): QASet;
-  static addParentCategoryNames(
+  static addParentCategoryDetails(
     entity: Offer | QASet,
     categories: Category[],
     subCategories: SubCategory[],
   ): Offer | QASet {
-    entity.categoryName = SpreadsheetService.getCategoryName(
+    const category = SpreadsheetService.getCategory(
       entity.categoryID,
       categories,
     );
-    entity.subCategoryName = SpreadsheetService.getSubCategoryName(
+    entity.categoryName = category.categoryName ? category.categoryName : '';
+    entity.categorySlug = category.slug ? category.slug : '';
+
+    const subCategory = SpreadsheetService.getSubCategory(
       entity.subCategoryID,
       subCategories,
     );
+    entity.subCategoryName = subCategory.subCategoryName
+      ? subCategory.subCategoryName
+      : '';
+    entity.subCategorySlug = subCategory.slug ? subCategory.slug : '';
+
     return entity;
   }
 
@@ -132,9 +141,15 @@ export class SpreadsheetService {
     row: any[],
     colMap: ColumnMap,
   ): Category {
+    const id = Number(
+      SpreadsheetService.readCellValue(row, colMap.get(CategoryCol.id)),
+    );
     return {
-      categoryID: Number(
-        SpreadsheetService.readCellValue(row, colMap.get(CategoryCol.id)),
+      categoryID: id,
+      slug: createSlug(
+        SpreadsheetService.readCellValue(row, colMap.get(CategoryCol.slug)),
+        id,
+        SlugPrefix.category,
       ),
       categoryName: SpreadsheetService.readCellValue(
         row,
@@ -183,9 +198,15 @@ export class SpreadsheetService {
     row: any[],
     colMap: ColumnMap,
   ): SubCategory {
+    const id = Number(
+      SpreadsheetService.readCellValue(row, colMap.get(SubCategoryCol.id)),
+    );
     return {
-      subCategoryID: Number(
-        SpreadsheetService.readCellValue(row, colMap.get(SubCategoryCol.id)),
+      subCategoryID: id,
+      slug: createSlug(
+        SpreadsheetService.readCellValue(row, colMap.get(SubCategoryCol.slug)),
+        id,
+        SlugPrefix.subCategory,
       ),
       subCategoryName: SpreadsheetService.readCellValue(
         row,
@@ -246,9 +267,15 @@ export class SpreadsheetService {
   }
 
   private convertOfferRowToOfferObject(row: any[], colMap: ColumnMap): Offer {
+    const id = Number(
+      SpreadsheetService.readCellValue(row, colMap.get(OfferCol.id)),
+    );
     return {
-      offerID: Number(
-        SpreadsheetService.readCellValue(row, colMap.get(OfferCol.id)),
+      offerID: id,
+      slug: createSlug(
+        SpreadsheetService.readCellValue(row, colMap.get(OfferCol.slug)),
+        id,
+        SlugPrefix.offer,
       ),
       subCategoryID: Number(
         SpreadsheetService.readCellValue(row, colMap.get(OfferCol.subCategory)),
@@ -476,8 +503,10 @@ export class SpreadsheetService {
       dateUpdated: getDateFromString(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.updated)),
       ),
-      slug: String(
+      slug: createSlug(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.slug)),
+        index,
+        SlugPrefix.qaSet,
       ),
       parentSlug: String(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.parent)),

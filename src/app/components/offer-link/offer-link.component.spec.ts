@@ -1,17 +1,23 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BreadcrumbsComponent } from './breadcrumbs.component';
+import { LoggingService } from 'src/app/services/logging.service';
+import { OfferLinkComponent } from './offer-link.component';
 
-describe('BreadcrumbsComponent', () => {
-  let component: BreadcrumbsComponent;
-  let fixture: ComponentFixture<BreadcrumbsComponent>;
+describe('OfferLinkComponent', () => {
+  let component: OfferLinkComponent;
+  let fixture: ComponentFixture<OfferLinkComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
+      providers: [
+        {
+          provide: LoggingService,
+        },
+      ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(BreadcrumbsComponent);
+    fixture = TestBed.createComponent(OfferLinkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
