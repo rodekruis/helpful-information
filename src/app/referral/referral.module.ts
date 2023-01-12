@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { CategoryLinkComponent } from '../components/category-link/category-link.component';
 import { CategoryPageComponent } from '../pages/category/category.page';
 import { OfferPageComponent } from '../pages/offer/offer.page';
+import { RegionPageComponent } from '../pages/region/region.page';
 import { SubCategoryPageComponent } from '../pages/sub-category/sub-category.page';
 import { ReferralPageComponent } from './referral.page';
 
@@ -17,6 +18,7 @@ import { ReferralPageComponent } from './referral.page';
     IonicModule,
     CommonModule,
     FormsModule,
+    RegionPageComponent,
     CategoryLinkComponent,
     CategoryPageComponent,
     SubCategoryPageComponent,
@@ -71,6 +73,15 @@ import { ReferralPageComponent } from './referral.page';
             loadComponent: () =>
               import('../pages/category/category.page').then(
                 (mod) => mod.CategoryPageComponent,
+              ),
+          },
+          {
+            path: '',
+            pathMatch: 'prefix',
+            canActivate: [() => environment.useUrlSlugs],
+            loadComponent: () =>
+              import('../pages/region/region.page').then(
+                (mod) => mod.RegionPageComponent,
               ),
           },
         ],

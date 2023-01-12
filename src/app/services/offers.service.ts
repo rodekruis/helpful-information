@@ -72,6 +72,19 @@ export class OffersService {
     return this.cache[CacheName.subCategories].data;
   }
 
+  public getOnlyChildSubCategory(
+    category: Category,
+    subCategories: SubCategory[],
+  ): SubCategory | null {
+    if (!subCategories || !subCategories.length) {
+      return null;
+    }
+    subCategories = subCategories.filter((subCategory: SubCategory) => {
+      return subCategory.categoryID === category.categoryID;
+    });
+    return subCategories.length === 1 ? subCategories[0] : null;
+  }
+
   public async getOffers(region: string): Promise<Offer[]> {
     // Load 'requirements'...
     this.getCategories(region);

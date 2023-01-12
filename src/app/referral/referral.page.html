@@ -32,9 +32,8 @@
     </div>
   </ng-container>
 
-  <!-- Region-page = Category-list -->
   <ng-container
-    *ngIf="isSupportedRegion() && !loading && !showHighlights && !showSearch && !category && hasDataToShow()"
+    *ngIf="isSupportedRegion() && !loading && !showHighlights && !showSearch && !category && !subCategory && hasDataToShow()"
   >
     <div
       *ngIf="useQandAs"
@@ -76,44 +75,22 @@
         />
       </a>
     </div>
+  </ng-container>
 
-    <h2 class="ion-no-margin">{{ referralPageData.referralPageGreeting }}</h2>
-    <div
-      class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom"
-    >
-      <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
-    </div>
-    <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-vertical">
-      <li
-        *ngFor="let categoryItem of categories"
-        class="tile-grid--item"
-      >
-        <app-category-link
-          [category]="categoryItem"
-          [subCategory]="getNextSubCategory(categoryItem)"
-        ></app-category-link>
-      </li>
-      <li
-        *ngIf="(categories.length % 3) <= 1"
-        class="tile-grid--item"
-        aria-hidden="true"
-      >
-        <!-- filler-item for empty spot at 2nd-in-a-row -->
-      </li>
-      <li
-        *ngIf="(categories.length % 3) <= 2"
-        class="tile-grid--item"
-        aria-hidden="true"
-      >
-        <!-- filler-item for empty spot at 3rd-in-a-row -->
-      </li>
-    </ul>
-    <br /><br /><br />
+  <router-outlet
+    *ngIf="isSupportedRegion() && !loading && useUrlSlugs"
+  ></router-outlet>
+
+  <!-- Region-page = Category-list -->
+  <ng-container
+    *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && !showHighlights && !showSearch && !category && !subCategory && hasDataToShow()"
+  >
+    <app-region-page></app-region-page>
   </ng-container>
 
   <!-- Category-page = Sub-Category-list -->
   <ng-container
-    *ngIf="isSupportedRegion() && !loading && category && !subCategory"
+    *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && category && !subCategory"
   >
     <app-category-page
       [category]="category"
@@ -123,7 +100,7 @@
 
   <!-- Sub-Category-page = Offer-list/Q&A-list -->
   <ng-container
-    *ngIf="isSupportedRegion() && !loading && category && subCategory && !offer"
+    *ngIf="isSupportedRegion() && !loading  && !useUrlSlugs && category && subCategory && !offer"
   >
     <app-sub-category-page
       [category]="category"
@@ -218,7 +195,7 @@
 
   <!-- Offer-detail page -->
   <ng-container
-    *ngIf="isSupportedRegion() && !loading && category && subCategory && offer"
+    *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && category && subCategory && offer"
   >
     <app-offer-page [offer]="offer"></app-offer-page>
   </ng-container>

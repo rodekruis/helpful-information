@@ -41,6 +41,7 @@ export class ReferralPageComponent implements OnInit {
 
   public readonly rootHref: string = '/';
 
+  public useUrlSlugs = environment.useUrlSlugs;
   public loading = false;
   public useQandAs = environment.useQandAs;
   public showHighlights: boolean;
