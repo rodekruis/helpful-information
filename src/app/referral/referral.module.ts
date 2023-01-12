@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
+import { CategoryLinkComponent } from '../components/category-link/category-link.component';
 import { CategoryPageComponent } from '../pages/category/category.page';
 import { OfferPageComponent } from '../pages/offer/offer.page';
 import { SubCategoryPageComponent } from '../pages/sub-category/sub-category.page';
@@ -16,6 +17,7 @@ import { ReferralPageComponent } from './referral.page';
     IonicModule,
     CommonModule,
     FormsModule,
+    CategoryLinkComponent,
     CategoryPageComponent,
     SubCategoryPageComponent,
     OfferPageComponent,

@@ -1,9 +1,17 @@
 <a
-  [routerLink]="['./']"
-  [queryParams]="{
-    categoryID: category.categoryID,
-    subCategoryID: subCategory ? subCategory.subCategoryID : null
-  }"
+  [routerLink]="
+    useUrlSlugs
+      ? ['./', category.slug, subCategory ? subCategory.slug : '']
+      : ['./']
+  "
+  [queryParams]="
+    useUrlSlugs
+      ? null
+      : {
+          categoryID: category.categoryID,
+          subCategoryID: subCategory ? subCategory.subCategoryID : null
+        }
+  "
   class="link-tile action"
   (click)="click(category)"
 >

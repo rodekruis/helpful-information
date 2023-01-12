@@ -88,10 +88,10 @@
         *ngFor="let categoryItem of categories"
         class="tile-grid--item"
       >
-        <app-link-tile
+        <app-category-link
           [category]="categoryItem"
           [subCategory]="getNextSubCategory(categoryItem)"
-        ></app-link-tile>
+        ></app-category-link>
       </li>
       <li
         *ngIf="(categories.length % 3) <= 1"

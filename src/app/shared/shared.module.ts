@@ -8,7 +8,6 @@ import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/l
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
 import { BreadcrumbsComponent } from '../components/breadcrumbs/breadcrumbs.component';
-import { LinkTileComponent } from '../components/link-tile/link-tile.component';
 import { QASetListComponent } from '../components/q-a-set-list/q-a-set-list.component';
 import { QASetComponent } from '../components/q-a-set/q-a-set.component';
 import { SearchInputComponent } from '../components/search-input/search-input.component';
@@ -20,7 +19,6 @@ import { ConvertUrlsPipe } from '../pipes/convert-urls.pipe';
     CategoryFilterPipe,
     ConvertUrlsPipe,
     LastUpdatedTimeComponent,
-    LinkTileComponent,
     QASetComponent,
     QASetListComponent,
     SearchInputComponent,
@@ -38,7 +36,6 @@ import { ConvertUrlsPipe } from '../pipes/convert-urls.pipe';
     CategoryFilterPipe,
     ConvertUrlsPipe,
     LastUpdatedTimeComponent,
-    LinkTileComponent,
     QASetComponent,
     QASetListComponent,
     SearchInputComponent,
