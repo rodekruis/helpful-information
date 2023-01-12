@@ -87,8 +87,8 @@ export class OffersService {
 
   public async getOffers(region: string): Promise<Offer[]> {
     // Load 'requirements'...
-    this.getCategories(region);
-    this.getSubCategories(region);
+    await this.getCategories(region);
+    await this.getSubCategories(region);
 
     if (this.needsCaching(CacheName.offers, region)) {
       this.setCache(
@@ -108,8 +108,8 @@ export class OffersService {
 
   public async getQAs(region: string): Promise<QASet[]> {
     // Load 'requirements'...
-    this.getCategories(region);
-    this.getSubCategories(region);
+    await this.getCategories(region);
+    await this.getSubCategories(region);
 
     if (this.needsCaching(CacheName.qaSets, region)) {
       this.setCache(
