@@ -7,7 +7,6 @@ import { OfferComponent } from 'src/app/components/offer/offer.component';
 import { Category } from 'src/app/models/category.model';
 import { Offer } from 'src/app/models/offer.model';
 import { QASet } from 'src/app/models/qa-set.model';
-import { ReferralPageData } from 'src/app/models/referral-page-data';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { OffersService } from 'src/app/services/offers.service';
@@ -46,8 +45,6 @@ export class OfferPageComponent implements OnInit {
   @Input()
   public qaSets: QASet[];
 
-  public referralPageData: ReferralPageData;
-
   @Input()
   public offer: Offer;
 
@@ -70,8 +67,6 @@ export class OfferPageComponent implements OnInit {
     }
 
     if (!this.region) return;
-
-    console.log('handleRouteParams: ', params);
 
     let offerSlug = params.offerSlug;
     let legacyOfferID = getLegacyID(offerSlug, SlugPrefix.offer);
