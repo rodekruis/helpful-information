@@ -1,7 +1,9 @@
 <a
   [routerLink]="
     useUrlSlugs
-      ? ['./', category.slug, subCategory ? subCategory.slug : '']
+      ? subCategory
+        ? ['./', category.slug, subCategory.slug]
+        : ['./', category.slug]
       : ['./']
   "
   [queryParams]="
