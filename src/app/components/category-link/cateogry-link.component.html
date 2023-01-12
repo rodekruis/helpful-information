@@ -1,8 +1,8 @@
 <a
   [routerLink]="
     useUrlSlugs
-      ? subCategory
-        ? ['./', category.slug, subCategory.slug]
+      ? onlyChildSubCategory
+        ? ['./', category.slug, onlyChildSubCategory.slug]
         : ['./', category.slug]
       : ['./']
   "
@@ -11,7 +11,9 @@
       ? null
       : {
           categoryID: category.categoryID,
-          subCategoryID: subCategory ? subCategory.subCategoryID : null
+          subCategoryID: onlyChildSubCategory
+            ? onlyChildSubCategory.subCategoryID
+            : null
         }
   "
   class="link-tile action"

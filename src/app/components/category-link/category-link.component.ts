@@ -24,7 +24,7 @@ export class CategoryLinkComponent {
   category: Category;
 
   @Input()
-  subCategory: SubCategory;
+  onlyChildSubCategory: SubCategory;
 
   constructor(private loggingService: LoggingService) {}
 
