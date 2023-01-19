@@ -1,12 +1,12 @@
 <ion-header>
   <app-header
-    [title]="regionData?.referralPageTitle"
+    [title]="regionData?.pageTitle"
     [loading]="loading"
     (backAction)="goBack()"
-    [backButtonLabel]="regionData?.referralBackButtonLabel"
-    [logoUrl]="regionData?.referralPageLogo"
+    [backButtonLabel]="regionData?.labelBackButton"
+    [logoUrl]="regionData?.pageLogo"
     (logoAction)="showRootPage()"
-    [logoActionLabel]="regionData?.referralMainScreenButtonLabel"
+    [logoActionLabel]="regionData?.labelMainScreenButton"
   ></app-header>
 </ion-header>
 
@@ -130,10 +130,10 @@
   >
     <span
       class="contact-button"
-      *ngIf="regionData.referralPhoneNumber"
+      *ngIf="regionData.contactPhoneNumber"
     >
       <a
-        [href]="'tel:' + regionData.referralPhoneNumber"
+        [href]="'tel:' + regionData.contactPhoneNumber"
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('tel')"
@@ -150,10 +150,10 @@
     </span>
     <span
       class="contact-button"
-      *ngIf="regionData.referralWhatsAppLink"
+      *ngIf="regionData.contactWhatsAppLink"
     >
       <a
-        [href]="regionData.referralWhatsAppLink"
+        [href]="regionData.contactWhatsAppLink"
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('whatsapp')"
@@ -170,10 +170,10 @@
     </span>
     <span
       class="contact-button"
-      *ngIf="regionData.referralTelegramLink"
+      *ngIf="regionData.contactTelegramLink"
     >
       <a
-        [href]="regionData.referralTelegramLink"
+        [href]="regionData.contactTelegramLink"
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('telegram')"

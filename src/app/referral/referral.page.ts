@@ -7,7 +7,7 @@ import {
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
 import { Offer } from 'src/app/models/offer.model';
-import { RegionData } from 'src/app/models/referral-page-data';
+import { RegionData } from 'src/app/models/region-data';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
@@ -115,9 +115,9 @@ export class ReferralPageComponent implements OnInit {
 
   public hasContactOptions(): boolean {
     return (
-      !!this.regionData.referralPhoneNumber ||
-      !!this.regionData.referralWhatsAppLink ||
-      !!this.regionData.referralTelegramLink
+      !!this.regionData.contactPhoneNumber ||
+      !!this.regionData.contactWhatsAppLink ||
+      !!this.regionData.contactTelegramLink
     );
   }
 
@@ -125,10 +125,10 @@ export class ReferralPageComponent implements OnInit {
     this.loading = true;
     this.regionData = await this.regionDataService.getData(this.region);
 
-    this.updatePageTitle(this.regionData.referralPageTitle);
+    this.updatePageTitle(this.regionData.pageTitle);
 
     this.lastUpdatedTimeService.setLastUpdatedTime(
-      this.regionData.referralLastUpdatedTime,
+      this.regionData.lastUpdatedTime,
     );
     this.lastUpdatedTimeService.setLastUpdatedLabel(
       this.regionData.labelLastUpdated,
@@ -178,7 +178,7 @@ export class ReferralPageComponent implements OnInit {
 
   private handleQueryParams(params: Params) {
     if (!Object.keys(params).length) {
-      this.updatePageTitle(this.regionData.referralPageTitle);
+      this.updatePageTitle(this.regionData.pageTitle);
     }
 
     let categoryName: string;
@@ -253,7 +253,7 @@ export class ReferralPageComponent implements OnInit {
     }
 
     this.updatePageTitle(
-      this.regionData.referralPageTitle,
+      this.regionData.pageTitle,
       categoryName,
       subCategoryName,
       offerName,

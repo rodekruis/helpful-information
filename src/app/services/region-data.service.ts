@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RegionData } from 'src/app/models/referral-page-data';
+import { RegionData } from 'src/app/models/region-data';
 import { SpreadsheetService } from './spreadsheet.service';
 
 @Injectable({

@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Category, CategoryCol } from 'src/app/models/category.model';
 import { Offer, OfferCol } from 'src/app/models/offer.model';
-import {
-  PageDataFallback,
-  RegionData,
-} from 'src/app/models/referral-page-data';
+import { PageDataFallback, RegionData } from 'src/app/models/region-data';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory, SubCategoryCol } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
@@ -404,41 +401,35 @@ export class SpreadsheetService {
     referralPageDataRows: any[],
   ): RegionData {
     return {
-      referralPageLogo: SpreadsheetService.readCellValue(
-        referralPageDataRows[1],
-        1,
-      ),
-      referralPageTitle: SpreadsheetService.readCellValue(
-        referralPageDataRows[2],
-        1,
-      ),
-      referralPageGreeting: SpreadsheetService.readCellValue(
+      pageLogo: SpreadsheetService.readCellValue(referralPageDataRows[1], 1),
+      pageTitle: SpreadsheetService.readCellValue(referralPageDataRows[2], 1),
+      pageGreeting: SpreadsheetService.readCellValue(
         referralPageDataRows[3],
         1,
       ),
-      referralPageInstructions: SpreadsheetService.readCellValue(
+      pageInstructions: SpreadsheetService.readCellValue(
         referralPageDataRows[4],
         1,
       ),
-      referralBackButtonLabel:
+      labelBackButton:
         SpreadsheetService.readCellValue(referralPageDataRows[5], 1) ||
-        PageDataFallback.referralBackButtonLabel,
-      referralMainScreenButtonLabel:
+        PageDataFallback.labelBackButton,
+      labelMainScreenButton:
         SpreadsheetService.readCellValue(referralPageDataRows[6], 1) ||
-        PageDataFallback.referralMainScreenButtonLabel,
-      referralPhoneNumber: SpreadsheetService.readCellValue(
+        PageDataFallback.labelMainScreenButton,
+      contactPhoneNumber: SpreadsheetService.readCellValue(
         referralPageDataRows[7],
         1,
       ),
-      referralWhatsAppLink: SpreadsheetService.readCellValue(
+      contactWhatsAppLink: SpreadsheetService.readCellValue(
         referralPageDataRows[8],
         1,
       ),
-      referralTelegramLink: SpreadsheetService.readCellValue(
+      contactTelegramLink: SpreadsheetService.readCellValue(
         referralPageDataRows[12],
         1,
       ),
-      referralLastUpdatedTime: SpreadsheetService.readCellValue(
+      lastUpdatedTime: SpreadsheetService.readCellValue(
         referralPageDataRows[9],
         1,
       ),

@@ -4,7 +4,7 @@ import {
   mockQASet1,
   mockQASet2with1SubQuestion,
 } from 'src/app/mocks/q-a-set.mock';
-import { PageDataFallback } from 'src/app/models/referral-page-data';
+import { PageDataFallback } from 'src/app/models/region-data';
 import { ConvertUrlsPipe } from 'src/app/pipes/convert-urls.pipe';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';

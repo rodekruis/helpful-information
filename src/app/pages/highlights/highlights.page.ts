@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, RouterModule } from '@angular/router';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { QASet } from 'src/app/models/qa-set.model';
-import { RegionData } from 'src/app/models/referral-page-data';
+import { RegionData } from 'src/app/models/region-data';
 import { OffersService } from 'src/app/services/offers.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 

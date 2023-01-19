@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, RouterModule } from '@angular/router';
 import { CategoryLinkComponent } from 'src/app/components/category-link/category-link.component';
 import { Category } from 'src/app/models/category.model';
 import { QASet } from 'src/app/models/qa-set.model';
-import { RegionData } from 'src/app/models/referral-page-data';
+import { RegionData } from 'src/app/models/region-data';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { OffersService } from 'src/app/services/offers.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
