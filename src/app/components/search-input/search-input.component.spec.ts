@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { SearchInputComponent } from './search-input.component';
 
 describe('SearchInputComponent', () => {
@@ -8,10 +6,7 @@ describe('SearchInputComponent', () => {
   let fixture: ComponentFixture<SearchInputComponent>;
 
   beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [SearchInputComponent],
-      imports: [IonicModule.forRoot(), FormsModule],
-    }).compileComponents();
+    TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(SearchInputComponent);
     component = fixture.componentInstance;
