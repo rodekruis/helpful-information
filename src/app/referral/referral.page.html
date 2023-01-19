@@ -33,15 +33,8 @@
   </ng-container>
 
   <router-outlet
-    *ngIf="isSupportedRegion() && !loading && useUrlSlugs"
+    *ngIf="isSupportedRegion() && !loading && (useUrlSlugs || useQandAs || useQandASearch)"
   ></router-outlet>
-
-  <!-- Region-page = Category-list -->
-  <ng-container
-    *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && !category && !subCategory && hasDataToShow()"
-  >
-    <app-region-page></app-region-page>
-  </ng-container>
 
   <!-- Category-page = Sub-Category-list -->
   <ng-container

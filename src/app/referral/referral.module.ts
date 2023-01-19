@@ -80,7 +80,6 @@ import { ReferralPageComponent } from './referral.page';
           {
             path: '',
             pathMatch: 'prefix',
-            canActivate: [() => environment.useUrlSlugs],
             loadComponent: () =>
               import('../pages/region/region.page').then(
                 (mod) => mod.RegionPageComponent,
