@@ -48,6 +48,9 @@ export class RegionPageComponent implements OnInit {
       this.subCategories = await this.offersService.getSubCategories(
         this.region,
       );
+
+      this.qaSets = await this.offersService.getQAs(this.region);
+      this.qaHighlights = await this.offersService.getHighlights(this.region);
     });
   }
 

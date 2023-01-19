@@ -29,7 +29,6 @@ export class ReferralPageComponent implements OnInit {
 
   public offers: Offer[];
   public qaSets: QASet[];
-  public qaHighlights: QASet[];
   public categories: Category[];
   public subCategories: SubCategory[];
 

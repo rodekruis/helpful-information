@@ -1,3 +1,42 @@
+<div
+  *ngIf="useQandAs"
+  class="floating-action-area is_in-page layout--float-end text-style--end ion-margin-start"
+>
+  <a
+    *ngIf="useQandAs && qaHighlights?.length > 0"
+    [routerLink]="['highlights']"
+    [attr.title]="regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length"
+    [attr.aria-label]="regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length"
+    class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
+  >
+    <strong>
+      <small *ngIf="regionData?.labelHighlightsButton?.length > 1">
+        {{ regionData?.labelHighlightsButton }}
+      </small>
+      <ng-container *ngIf="regionData?.labelHighlightsButton?.length === 1">
+        {{ regionData?.labelHighlightsButton }}
+      </ng-container>
+    </strong>
+  </a>
+  <br *ngIf="useQandAs && useQandASearch && qaSets?.length" />
+  <a
+    *ngIf="useQandAs && useQandASearch && qaSets?.length"
+    [routerLink]="['search']"
+    [attr.title]="regionData?.labelSearchPageTitle"
+    [attr.aria-label]="regionData?.labelSearchPageTitle"
+    class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
+  >
+    <img
+      src="/assets/icons/search.svg"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      decoding="async"
+      style="display: block"
+    />
+  </a>
+</div>
+
 <h2 class="ion-no-margin">{{ regionData?.referralPageGreeting }}</h2>
 
 <p class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom">

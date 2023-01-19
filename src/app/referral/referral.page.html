@@ -32,51 +32,6 @@
     </div>
   </ng-container>
 
-  <ng-container
-    *ngIf="isSupportedRegion() && !loading && !showSearch && !category && !subCategory && hasDataToShow()"
-  >
-    <div
-      *ngIf="useQandAs"
-      class="floating-action-area is_in-page layout--float-end text-style--end ion-margin-start"
-    >
-      <a
-        *ngIf="useQandAs && qaHighlights.length > 0"
-        [routerLink]="[getRegionHref(), 'highlights']"
-        [attr.title]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
-        [attr.aria-label]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
-        class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
-      >
-        <strong>
-          <small *ngIf="referralPageData?.labelHighlightsButton?.length > 1">
-            {{ referralPageData?.labelHighlightsButton }}
-          </small>
-          <ng-container
-            *ngIf="referralPageData?.labelHighlightsButton?.length === 1"
-          >
-            {{ referralPageData?.labelHighlightsButton }}
-          </ng-container>
-        </strong>
-      </a>
-      <br *ngIf="useQandAs && useQandASearch && qaSets.length" />
-      <a
-        *ngIf="useQandAs && useQandASearch && qaSets.length"
-        [routerLink]="[getRegionHref(), 'search']"
-        [attr.title]="referralPageData?.labelSearchPageTitle"
-        [attr.aria-label]="referralPageData?.labelSearchPageTitle"
-        class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
-      >
-        <img
-          src="/assets/icons/search.svg"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          style="display: block"
-        />
-      </a>
-    </div>
-  </ng-container>
-
   <router-outlet
     *ngIf="isSupportedRegion() && !loading && useUrlSlugs"
   ></router-outlet>
