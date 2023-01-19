@@ -11,7 +11,6 @@ import { QASetComponent } from '../q-a-set/q-a-set.component';
   styleUrls: ['./q-a-set-list.component.scss'],
   standalone: true,
   imports: [CommonModule, BreadcrumbsComponent, QASetComponent],
-  providers: [ReferralPageDataService],
 })
 export class QASetListComponent {
   @Input()

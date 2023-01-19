@@ -10,7 +10,6 @@ import { ReferralPageDataService } from 'src/app/services/referral-page-data.ser
   styleUrls: ['./q-a-set.component.scss'],
   standalone: true,
   imports: [CommonModule, ConvertUrlsPipe],
-  providers: [ReferralPageDataService],
 })
 export class QASetComponent {
   @Input()

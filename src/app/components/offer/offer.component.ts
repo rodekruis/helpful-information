@@ -15,7 +15,6 @@ import { LoggingService } from 'src/app/services/logging.service';
   styleUrls: ['./offer.component.scss'],
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule],
-  providers: [LoggingService],
 })
 export class OfferComponent {
   @Input()

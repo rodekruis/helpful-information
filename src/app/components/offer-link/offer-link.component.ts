@@ -16,7 +16,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./offer-link.component.scss'],
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule],
-  providers: [LoggingService],
 })
 export class OfferLinkComponent {
   public useUrlSlugs = environment.useUrlSlugs;
