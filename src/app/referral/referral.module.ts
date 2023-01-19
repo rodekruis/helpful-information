@@ -29,22 +29,9 @@ import { ReferralPageComponent } from './referral.page';
     HighlightsPageComponent,
     RouterModule.forChild([
       {
-        path: ':region/search',
-        canActivate: [
-          () => environment.useQandAs && environment.useQandASearch,
-        ],
-        component: ReferralPageComponent,
-        data: {
-          showSearch: true,
-        },
-      },
-      {
         path: ':region',
         pathMatch: 'prefix',
         component: ReferralPageComponent,
-        data: {
-          showSearch: false,
-        },
         children: [
           {
             path: 'highlights',
@@ -53,6 +40,17 @@ import { ReferralPageComponent } from './referral.page';
             loadComponent: () =>
               import('../pages/highlights/highlights.page').then(
                 (mod) => mod.HighlightsPageComponent,
+              ),
+          },
+          {
+            path: 'search',
+            pathMatch: 'prefix',
+            canActivate: [
+              () => environment.useQandAs && environment.useQandASearch,
+            ],
+            loadComponent: () =>
+              import('../pages/search/search.page').then(
+                (mod) => mod.SearchPageComponent,
               ),
           },
           {

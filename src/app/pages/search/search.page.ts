@@ -1,0 +1,93 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
+import { SearchInputComponent } from 'src/app/components/search-input/search-input.component';
+import { QASet } from 'src/app/models/qa-set.model';
+import { ReferralPageData } from 'src/app/models/referral-page-data';
+import { OffersService } from 'src/app/services/offers.service';
+import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { SearchService } from 'src/app/services/search.service';
+
+@Component({
+  selector: 'app-search-page',
+  templateUrl: './search.page.html',
+  styleUrls: ['./search.page.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    QASetListComponent,
+    SearchInputComponent,
+  ],
+})
+export class SearchPageComponent implements OnInit {
+  public region: string;
+  public regionData: ReferralPageData;
+  public qaSets: QASet[];
+  public searchQuery: string;
+  public searchResults: QASet[];
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private regionDataService: ReferralPageDataService,
+    private offersService: OffersService,
+    private searchService: SearchService,
+  ) {}
+
+  async ngOnInit() {
+    this.route.params.subscribe(async (params: Params) => {
+      this.handleRouteParams(params);
+    });
+  }
+
+  private async handleRouteParams(params: Params) {
+    this.region = params.region;
+
+    if (!this.region && this.route.snapshot.parent) {
+      this.region = this.route.snapshot.parent.params.region;
+    }
+
+    if (!this.region) return;
+
+    this.regionData = await this.regionDataService.getReferralPageData(
+      this.region,
+    );
+
+    if (!this.qaSets) {
+      this.qaSets = await this.offersService.getQAs(this.region);
+    }
+    this.searchService.setSource(this.qaSets);
+
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      this.handleQueryParams(queryParams);
+    });
+  }
+
+  private handleQueryParams(params: Params) {
+    this.searchQuery = !!params.q ? params.q : '';
+
+    if (!!params.q) {
+      this.performSearch(params.q);
+    }
+  }
+
+  public performSearch(rawQuery: string): void {
+    const safeQuery = this.searchService.sanitizeSearchQuery(rawQuery);
+
+    this.router.navigate([], {
+      queryParams: { q: safeQuery },
+      queryParamsHandling: 'merge',
+    });
+
+    this.searchResults = this.searchService.query(safeQuery);
+
+    if (this.searchResults.length > 1) {
+      const resultFrame = document.getElementById('search-results');
+      if (resultFrame) {
+        resultFrame.focus();
+      }
+    }
+  }
+}

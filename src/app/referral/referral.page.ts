@@ -15,7 +15,6 @@ import { OffersService } from 'src/app/services/offers.service';
 import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
 import { environment } from 'src/environments/environment';
 import { QASet } from '../models/qa-set.model';
-import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-referral',
@@ -45,9 +44,6 @@ export class ReferralPageComponent implements OnInit {
   public useQandAs = environment.useQandAs;
 
   public useQandASearch = environment.useQandASearch;
-  public showSearch: boolean;
-  public searchQuery: string;
-  public searchResults: QASet[] = [];
 
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
@@ -64,16 +60,12 @@ export class ReferralPageComponent implements OnInit {
     private referralPageDataService: ReferralPageDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private titleService: Title,
-    private searchService: SearchService,
   ) {
     this.regions = environment.regions.trim().split(/\s*,\s*/);
     this.regionsLabels = environment.regionsLabels.trim().split(/\s*,\s*/);
 
     this.route.params.subscribe((params: Params) => {
       this.region = params.region;
-    });
-    this.route.data.subscribe((data: Params) => {
-      this.showSearch = this.useQandASearch && data.showSearch;
     });
     this.route.queryParams.subscribe((queryParams: Params) => {
       this.upgradeLegacyUrls(queryParams);
@@ -149,9 +141,6 @@ export class ReferralPageComponent implements OnInit {
 
     if (this.useQandAs) {
       this.qaSets = await this.offersService.getQAs(this.region);
-    }
-    if (this.useQandAs && this.useQandASearch) {
-      this.searchService.setSource(this.qaSets);
     }
 
     this.loading = false;
@@ -270,14 +259,6 @@ export class ReferralPageComponent implements OnInit {
       subCategoryName,
       offerName,
     );
-
-    if (this.useQandAs && this.useQandASearch) {
-      this.searchQuery = !!params.q ? params.q : '';
-
-      if (!!params.q) {
-        this.performSearch(params.q);
-      }
-    }
   }
 
   public getNextSubCategory(category: Category) {
@@ -367,13 +348,6 @@ export class ReferralPageComponent implements OnInit {
       );
       this.category = null;
       this.router.navigate([this.getRegionHref()]);
-    } else if (this.showSearch) {
-      this.loggingService.logEvent(
-        LoggingEventCategory.ai,
-        LoggingEvent.BackFromSearch,
-        this.getLogProperties(true),
-      );
-      this.router.navigate([this.getRegionHref()]);
     } else {
       this.loggingService.logEvent(
         LoggingEventCategory.ai,
@@ -429,24 +403,6 @@ export class ReferralPageComponent implements OnInit {
       event,
       this.getLogProperties(true),
     );
-  }
-
-  public performSearch(rawQuery: string): void {
-    const safeQuery = this.searchService.sanitizeSearchQuery(rawQuery);
-
-    this.router.navigate([], {
-      queryParams: { q: safeQuery },
-      queryParamsHandling: 'merge',
-    });
-
-    this.searchResults = this.searchService.query(safeQuery);
-
-    if (this.searchResults.length > 1) {
-      const resultFrame = document.getElementById('search-results');
-      if (resultFrame) {
-        resultFrame.focus();
-      }
-    }
   }
 
   /**

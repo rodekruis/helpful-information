@@ -1,0 +1,42 @@
+<div class="floating-action-area is_in-page layout--float-end ion-margin-start">
+  <a
+    [routerLink]="['../']"
+    [queryParams]="{ q: null }"
+    queryParamsHandling="merge"
+    [attr.title]="regionData?.referralBackButtonLabel"
+    [attr.aria-label]="regionData?.referralBackButtonLabel"
+    class="action is_round text-style--center"
+  >
+    <strong aria-hidden="true">&times;</strong>
+  </a>
+</div>
+
+<h2 class="ion-no-margin text-style--header text-style--size-1">
+  {{ regionData?.labelSearchPageTitle }}
+</h2>
+
+<app-search-input
+  [(searchQuery)]="searchQuery"
+  (doSearch)="performSearch($event)"
+  [actionLabel]="regionData?.labelSearchAction"
+  class="ion-margin-vertical"
+></app-search-input>
+
+<section
+  *ngIf="!!searchQuery"
+  id="search-results"
+  [tabindex]="-1"
+  class="focus--minimal focus--fade-out"
+>
+  <p *ngIf="!!searchQuery">
+    {{ regionData?.labelSearchResultsCount }}
+    <strong>{{ searchResults?.length }}</strong>
+  </p>
+
+  <app-q-a-set-list
+    [baseUrl]="'../'"
+    [list]="searchResults"
+    [showDateUpdatedOutsideQuestion]="false"
+    class="ion-margin-vertical"
+  ></app-q-a-set-list>
+</section>
