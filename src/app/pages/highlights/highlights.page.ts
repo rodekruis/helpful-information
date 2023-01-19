@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, RouterModule } from '@angular/router';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { QASet } from 'src/app/models/qa-set.model';
-import { ReferralPageData } from 'src/app/models/referral-page-data';
+import { RegionData } from 'src/app/models/referral-page-data';
 import { OffersService } from 'src/app/services/offers.service';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 
 @Component({
   selector: 'app-highlights-page',
@@ -16,12 +16,12 @@ import { ReferralPageDataService } from 'src/app/services/referral-page-data.ser
 })
 export class HighlightsPageComponent implements OnInit {
   public region: string;
-  public regionData: ReferralPageData;
+  public regionData: RegionData;
   public qaHighlights: QASet[];
 
   constructor(
     private route: ActivatedRoute,
-    private regionDataService: ReferralPageDataService,
+    private regionDataService: RegionDataService,
     private offersService: OffersService,
   ) {}
 
@@ -35,9 +35,7 @@ export class HighlightsPageComponent implements OnInit {
 
       if (!this.region) return;
 
-      this.regionData = await this.regionDataService.getReferralPageData(
-        this.region,
-      );
+      this.regionData = await this.regionDataService.getData(this.region);
 
       if (!this.qaHighlights) {
         this.qaHighlights = await this.offersService.getHighlights(this.region);

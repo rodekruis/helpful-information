@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { QASet } from 'src/app/models/qa-set.model';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
 import { QASetComponent } from '../q-a-set/q-a-set.component';
 
@@ -24,7 +24,7 @@ export class QASetListComponent {
 
   public labelLastUpdated: string;
 
-  constructor(pageDataService: ReferralPageDataService) {
+  constructor(pageDataService: RegionDataService) {
     if (
       !!pageDataService &&
       !!pageDataService.data &&

@@ -7,12 +7,12 @@ import {
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
 import { Offer } from 'src/app/models/offer.model';
-import { ReferralPageData } from 'src/app/models/referral-page-data';
+import { RegionData } from 'src/app/models/referral-page-data';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 import { environment } from 'src/environments/environment';
 import { QASet } from '../models/qa-set.model';
 
@@ -35,7 +35,7 @@ export class ReferralPageComponent implements OnInit {
   public subCategory: SubCategory;
   public offer: Offer;
 
-  public referralPageData: ReferralPageData = {};
+  public regionData: RegionData = {};
 
   public readonly rootHref: string = '/';
 
@@ -57,7 +57,7 @@ export class ReferralPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private loggingService: LoggingService,
-    private referralPageDataService: ReferralPageDataService,
+    private regionDataService: RegionDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private titleService: Title,
   ) {
@@ -115,24 +115,23 @@ export class ReferralPageComponent implements OnInit {
 
   public hasContactOptions(): boolean {
     return (
-      !!this.referralPageData.referralPhoneNumber ||
-      !!this.referralPageData.referralWhatsAppLink ||
-      !!this.referralPageData.referralTelegramLink
+      !!this.regionData.referralPhoneNumber ||
+      !!this.regionData.referralWhatsAppLink ||
+      !!this.regionData.referralTelegramLink
     );
   }
 
   private async loadReferralData() {
     this.loading = true;
-    this.referralPageData =
-      await this.referralPageDataService.getReferralPageData(this.region);
+    this.regionData = await this.regionDataService.getData(this.region);
 
-    this.updatePageTitle(this.referralPageData.referralPageTitle);
+    this.updatePageTitle(this.regionData.referralPageTitle);
 
     this.lastUpdatedTimeService.setLastUpdatedTime(
-      this.referralPageData.referralLastUpdatedTime,
+      this.regionData.referralLastUpdatedTime,
     );
     this.lastUpdatedTimeService.setLastUpdatedLabel(
-      this.referralPageData.labelLastUpdated,
+      this.regionData.labelLastUpdated,
     );
 
     this.categories = await this.offersService.getCategories(this.region);
@@ -179,7 +178,7 @@ export class ReferralPageComponent implements OnInit {
 
   private handleQueryParams(params: Params) {
     if (!Object.keys(params).length) {
-      this.updatePageTitle(this.referralPageData.referralPageTitle);
+      this.updatePageTitle(this.regionData.referralPageTitle);
     }
 
     let categoryName: string;
@@ -254,7 +253,7 @@ export class ReferralPageComponent implements OnInit {
     }
 
     this.updatePageTitle(
-      this.referralPageData.referralPageTitle,
+      this.regionData.referralPageTitle,
       categoryName,
       subCategoryName,
       offerName,

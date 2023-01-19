@@ -7,7 +7,7 @@ import {
 } from 'src/app/mocks/q-a-set.mock';
 import { PageDataFallback } from 'src/app/models/referral-page-data';
 import { LoggingService } from 'src/app/services/logging.service';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 import { environment } from 'src/environments/environment';
 import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
 import { QASetComponent } from '../q-a-set/q-a-set.component';
@@ -53,7 +53,7 @@ describe('QASetListComponent', () => {
       ],
       providers: [
         {
-          provide: ReferralPageDataService,
+          provide: RegionDataService,
           useValue: {
             data: {
               labelLastUpdated: PageDataFallback.labelLastUpdated,

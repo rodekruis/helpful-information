@@ -1,4 +1,4 @@
-export class ReferralPageData {
+export class RegionData {
   referralPageLogo?: string;
   referralPageTitle?: string;
   referralPageGreeting?: string;

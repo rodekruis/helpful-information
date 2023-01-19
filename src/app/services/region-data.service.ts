@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ReferralPageData } from 'src/app/models/referral-page-data';
+import { RegionData } from 'src/app/models/referral-page-data';
 import { SpreadsheetService } from './spreadsheet.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ReferralPageDataService {
+export class RegionDataService {
   private cacheRegion: string;
-  public data: ReferralPageData;
+  public data: RegionData;
 
   constructor(private spreadsheetService: SpreadsheetService) {}
 
@@ -20,7 +20,7 @@ export class ReferralPageDataService {
     this.data = null;
   }
 
-  public async getReferralPageData(region: string): Promise<ReferralPageData> {
+  public async getData(region: string): Promise<RegionData> {
     if (!this.data || !this.isSameRegion(region)) {
       this.resetCache(region);
       this.data = await this.spreadsheetService.getReferralPageData(region);

@@ -4,9 +4,9 @@ import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { SearchInputComponent } from 'src/app/components/search-input/search-input.component';
 import { QASet } from 'src/app/models/qa-set.model';
-import { ReferralPageData } from 'src/app/models/referral-page-data';
+import { RegionData } from 'src/app/models/referral-page-data';
 import { OffersService } from 'src/app/services/offers.service';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 import { SearchService } from 'src/app/services/search.service';
 
 @Component({
@@ -23,7 +23,7 @@ import { SearchService } from 'src/app/services/search.service';
 })
 export class SearchPageComponent implements OnInit {
   public region: string;
-  public regionData: ReferralPageData;
+  public regionData: RegionData;
   public qaSets: QASet[];
   public searchQuery: string;
   public searchResults: QASet[];
@@ -31,7 +31,7 @@ export class SearchPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private regionDataService: ReferralPageDataService,
+    private regionDataService: RegionDataService,
     private offersService: OffersService,
     private searchService: SearchService,
   ) {}
@@ -51,9 +51,7 @@ export class SearchPageComponent implements OnInit {
 
     if (!this.region) return;
 
-    this.regionData = await this.regionDataService.getReferralPageData(
-      this.region,
-    );
+    this.regionData = await this.regionDataService.getData(this.region);
 
     if (!this.qaSets) {
       this.qaSets = await this.offersService.getQAs(this.region);

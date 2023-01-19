@@ -3,7 +3,7 @@ import { Category, CategoryCol } from 'src/app/models/category.model';
 import { Offer, OfferCol } from 'src/app/models/offer.model';
 import {
   PageDataFallback,
-  ReferralPageData,
+  RegionData,
 } from 'src/app/models/referral-page-data';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory, SubCategoryCol } from 'src/app/models/sub-category.model';
@@ -400,9 +400,9 @@ export class SpreadsheetService {
       });
   }
 
-  private convertReferralPageDataRowToReferralPageDataObject(
-    referralPageDataRows,
-  ): ReferralPageData {
+  private convertReferralPageRowToRegionData(
+    referralPageDataRows: any[],
+  ): RegionData {
     return {
       referralPageLogo: SpreadsheetService.readCellValue(
         referralPageDataRows[1],
@@ -469,19 +469,17 @@ export class SpreadsheetService {
     };
   }
 
-  public async getReferralPageData(region: string): Promise<ReferralPageData> {
+  public async getReferralPageData(region: string): Promise<RegionData> {
     return fetch(this.getSheetUrl(region, SheetName.page))
       .then((response) => response.json())
       .then((response) => {
-        return this.convertReferralPageDataRowToReferralPageDataObject(
-          response.values,
-        );
+        return this.convertReferralPageRowToRegionData(response.values);
       })
       .catch((error) => {
         if (this.loggingService) {
           this.loggingService.logException(error, SeverityLevel.Critical);
         }
-        return new ReferralPageData();
+        return new RegionData();
       });
   }
 

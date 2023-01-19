@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { QASet } from 'src/app/models/qa-set.model';
 import { ConvertUrlsPipe } from 'src/app/pipes/convert-urls.pipe';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 
 @Component({
   selector: 'app-q-a-set',
@@ -20,7 +20,7 @@ export class QASetComponent {
 
   public labelLastUpdated: string;
 
-  constructor(pageDataService: ReferralPageDataService) {
+  constructor(pageDataService: RegionDataService) {
     if (
       !!pageDataService &&
       !!pageDataService.data &&

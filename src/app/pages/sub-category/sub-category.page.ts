@@ -6,7 +6,6 @@ import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import { Category } from 'src/app/models/category.model';
 import { Offer } from 'src/app/models/offer.model';
 import { QASet } from 'src/app/models/qa-set.model';
-import { ReferralPageData } from 'src/app/models/referral-page-data';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { OffersService } from 'src/app/services/offers.service';
@@ -44,8 +43,6 @@ export class SubCategoryPageComponent implements OnInit {
   public offers: Offer[];
   @Input()
   public qaSets: QASet[];
-
-  public referralPageData: ReferralPageData;
 
   constructor(
     private route: ActivatedRoute,

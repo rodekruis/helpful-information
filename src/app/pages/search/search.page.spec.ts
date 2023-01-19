@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 import { SearchPageComponent } from './search.page';
 
 describe('SearchPageComponent', () => {
@@ -14,7 +14,7 @@ describe('SearchPageComponent', () => {
       imports: [RouterTestingModule],
       providers: [
         {
-          provide: ReferralPageDataService,
+          provide: RegionDataService,
         },
         {
           provide: OffersService,

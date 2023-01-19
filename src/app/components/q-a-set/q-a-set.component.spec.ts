@@ -7,7 +7,7 @@ import {
 import { PageDataFallback } from 'src/app/models/referral-page-data';
 import { ConvertUrlsPipe } from 'src/app/pipes/convert-urls.pipe';
 import { LoggingService } from 'src/app/services/logging.service';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 import { QASetComponent } from './q-a-set.component';
 
 const testDate = new Date('2022-02-22');
@@ -22,7 +22,7 @@ describe('QASetComponent', () => {
       imports: [CommonModule, ConvertUrlsPipe],
       providers: [
         {
-          provide: ReferralPageDataService,
+          provide: RegionDataService,
           useValue: {
             data: {
               labelLastUpdated: PageDataFallback.labelLastUpdated,
