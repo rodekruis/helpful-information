@@ -302,22 +302,6 @@ export class ReferralPageComponent implements OnInit {
     });
   }
 
-  public clickOffer(offer: Offer, isBack: boolean = false) {
-    this.offer = offer;
-    this.loggingService.logEvent(
-      LoggingEventCategory.ai,
-      LoggingEvent.OfferClick,
-      this.getLogProperties(isBack),
-    );
-    this.router.navigate([this.getRegionHref()], {
-      queryParams: {
-        categoryID: this.category.categoryID,
-        subCategoryID: this.subCategory.subCategoryID,
-        offerID: this.offer.offerID,
-      },
-    });
-  }
-
   goBack() {
     if (this.offer) {
       this.loggingService.logEvent(
