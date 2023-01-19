@@ -1,0 +1,27 @@
+<div class="floating-action-area is_in-page layout--float-end ion-margin-start">
+  <a
+    [routerLink]="['../']"
+    [attr.title]="regionData?.referralBackButtonLabel"
+    [attr.aria-label]="regionData?.referralBackButtonLabel"
+    class="action is_round text-style--center"
+  >
+    <strong aria-hidden="true">&times;</strong>
+  </a>
+</div>
+
+<h2 class="ion-no-margin text-style--header text-style--size-1">
+  {{ regionData?.labelHighlightsPageTitle }}
+</h2>
+
+<p *ngIf="!qaHighlights?.length">{{ regionData?.labelHighlightsItemsZero }}</p>
+
+<p *ngIf="qaHighlights?.length">
+  {{ regionData?.labelHighlightsItemsCount }}
+  <strong>{{ qaHighlights?.length }}</strong>
+</p>
+
+<app-q-a-set-list
+  [baseUrl]="'../'"
+  [list]="qaHighlights"
+  class="ion-margin-vertical"
+></app-q-a-set-list>

@@ -33,7 +33,7 @@
   </ng-container>
 
   <ng-container
-    *ngIf="isSupportedRegion() && !loading && !showHighlights && !showSearch && !category && !subCategory && hasDataToShow()"
+    *ngIf="isSupportedRegion() && !loading && !showSearch && !category && !subCategory && hasDataToShow()"
   >
     <div
       *ngIf="useQandAs"
@@ -83,7 +83,7 @@
 
   <!-- Region-page = Category-list -->
   <ng-container
-    *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && !showHighlights && !showSearch && !category && !subCategory && hasDataToShow()"
+    *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && !showSearch && !category && !subCategory && hasDataToShow()"
   >
     <app-region-page></app-region-page>
   </ng-container>
@@ -108,41 +108,6 @@
       [offers]="offers"
       [qaSets]="qaSets"
     ></app-sub-category-page>
-  </ng-container>
-
-  <!-- Q&A-Highlights-page = Q&A-list -->
-  <ng-container *ngIf="isSupportedRegion() && !loading && showHighlights">
-    <div
-      class="floating-action-area is_in-page layout--float-end ion-margin-start"
-    >
-      <a
-        [routerLink]="[getRegionHref()]"
-        [attr.title]="referralPageData?.referralBackButtonLabel"
-        [attr.aria-label]="referralPageData?.referralBackButtonLabel"
-        class="action is_round text-style--center"
-      >
-        <strong aria-hidden="true">&times;</strong>
-      </a>
-    </div>
-
-    <h2 class="ion-no-margin text-style--header text-style--size-1">
-      {{ referralPageData?.labelHighlightsPageTitle }}
-    </h2>
-
-    <p *ngIf="!qaHighlights.length">
-      {{ referralPageData?.labelHighlightsItemsZero }}
-    </p>
-
-    <p *ngIf="qaHighlights.length">
-      {{ referralPageData?.labelHighlightsItemsCount }}
-      <strong>{{ qaHighlights.length }}</strong>
-    </p>
-
-    <app-q-a-set-list
-      [baseUrl]="getRegionHref()"
-      [list]="qaHighlights"
-      class="ion-margin-vertical"
-    ></app-q-a-set-list>
   </ng-container>
 
   <!-- Search-page = Q&A-list -->

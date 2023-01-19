@@ -44,7 +44,6 @@ export class ReferralPageComponent implements OnInit {
   public useUrlSlugs = environment.useUrlSlugs;
   public loading = false;
   public useQandAs = environment.useQandAs;
-  public showHighlights: boolean;
 
   public useQandASearch = environment.useQandASearch;
   public showSearch: boolean;
@@ -75,7 +74,6 @@ export class ReferralPageComponent implements OnInit {
       this.region = params.region;
     });
     this.route.data.subscribe((data: Params) => {
-      this.showHighlights = this.useQandAs && data.showHighlights;
       this.showSearch = this.useQandASearch && data.showSearch;
     });
     this.route.queryParams.subscribe((queryParams: Params) => {
@@ -152,7 +150,6 @@ export class ReferralPageComponent implements OnInit {
 
     if (this.useQandAs) {
       this.qaSets = await this.offersService.getQAs(this.region);
-      this.qaHighlights = await this.offersService.getHighlights(this.region);
     }
     if (this.useQandAs && this.useQandASearch) {
       this.searchService.setSource(this.qaSets);
@@ -370,13 +367,6 @@ export class ReferralPageComponent implements OnInit {
         this.getLogProperties(true),
       );
       this.category = null;
-      this.router.navigate([this.getRegionHref()]);
-    } else if (this.showHighlights) {
-      this.loggingService.logEvent(
-        LoggingEventCategory.ai,
-        LoggingEvent.BackFromHighlights,
-        this.getLogProperties(true),
-      );
       this.router.navigate([this.getRegionHref()]);
     } else if (this.showSearch) {
       this.loggingService.logEvent(
