@@ -90,10 +90,7 @@
 
   <!-- Main/Root/Regions-list page -->
   <ng-container *ngIf="!isSupportedRegion()">
-    <div
-      *ngIf="!category"
-      class="ion-margin-bottom ion-padding-bottom"
-    >
+    <div class="ion-margin-bottom ion-padding-bottom">
       <h2 class="text-style--header text-style--size-1">{{ pageHeader }}</h2>
       <p
         class="text-style--wrap-newlines"
@@ -102,7 +99,7 @@
     </div>
     <ul class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical">
       <li
-        *ngFor="let region of regions"
+        *ngFor="let region of regions; index as index;"
         class="tile-grid--item"
       >
         <a
@@ -110,7 +107,7 @@
           [routerLink]="['/', region]"
           class="sheet--button action text-style--header text-style--size-1"
         >
-          <span>{{ regionsLabels[regions.indexOf(region)] }}</span>
+          <span>{{ regionsLabels[index] }}</span>
         </a>
       </li>
       <li
