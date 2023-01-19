@@ -33,7 +33,7 @@
   </ng-container>
 
   <router-outlet
-    *ngIf="isSupportedRegion() && !loading && (useUrlSlugs || useQandAs || useQandASearch)"
+    *ngIf="isSupportedRegion() && !loading && (useUrlSlugs || (!useUrlSlugs && !category && !subCategory))"
   ></router-outlet>
 
   <!-- Category-page = Sub-Category-list -->
