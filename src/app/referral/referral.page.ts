@@ -152,46 +152,13 @@ export class ReferralPageComponent implements OnInit {
 
     if (this.useQandAs) {
       this.qaSets = await this.offersService.getQAs(this.region);
-      this.qaHighlights = this.createHighlights(this.qaSets);
+      this.qaHighlights = await this.offersService.getHighlights(this.region);
     }
     if (this.useQandAs && this.useQandASearch) {
       this.searchService.setSource(this.qaSets);
     }
 
     this.loading = false;
-  }
-
-  private createHighlights(qaSets: QASet[]): QASet[] {
-    // Create a deep copy of the Q&A set:
-    const items = qaSets.map((item) => ({ ...item }));
-    return items
-      .filter((item) => item.isHighlight && item.isVisible)
-      .sort((a, b) => {
-        if (a.dateUpdated && !b.dateUpdated) {
-          return -1;
-        }
-        if (!a.dateUpdated && b.dateUpdated) {
-          return 1;
-        }
-        if (!a.dateUpdated && !b.dateUpdated) {
-          return 0;
-        }
-        return b.dateUpdated.getTime() - a.dateUpdated.getTime();
-      })
-      .map((item) => {
-        if (!item.children) {
-          return item;
-        }
-        const highlightedChildren = item.children.filter(
-          (child) => child.isHighlight,
-        );
-        // If only a few children are highlighted include those
-        // If NO children are highlighted include all
-        if (highlightedChildren.length) {
-          item.children = highlightedChildren;
-        }
-        return item;
-      });
   }
 
   private updatePageTitle(
