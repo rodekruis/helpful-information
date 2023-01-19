@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { OfferComponent } from 'src/app/components/offer/offer.component';
 import { Category } from 'src/app/models/category.model';
@@ -22,7 +21,6 @@ import { getLegacyID } from 'src/app/shared/utils';
     CommonModule,
     RouterModule,
     SharedModule,
-    IonicModule,
     BreadcrumbsComponent,
     OfferComponent,
   ],

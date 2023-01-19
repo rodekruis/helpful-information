@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
@@ -7,8 +8,9 @@ import {
 import { PageDataFallback } from 'src/app/models/referral-page-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
+import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
+import { QASetComponent } from '../q-a-set/q-a-set.component';
 import { QASetListComponent } from './q-a-set-list.component';
 
 const testDate = new Date('2022-02-22');
@@ -43,8 +45,12 @@ describe('QASetListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [QASetListComponent],
-      imports: [SharedModule, RouterTestingModule],
+      imports: [
+        CommonModule,
+        RouterTestingModule,
+        BreadcrumbsComponent,
+        QASetComponent,
+      ],
       providers: [
         {
           provide: ReferralPageDataService,

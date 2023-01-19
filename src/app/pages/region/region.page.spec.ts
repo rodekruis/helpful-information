@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IonicModule } from '@ionic/angular';
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
@@ -13,11 +12,7 @@ describe('RegionPageComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CategoryFilterPipe],
-      imports: [
-        IonicModule.forRoot(),
-        RouterTestingModule,
-        RegionPageComponent,
-      ],
+      imports: [RouterTestingModule],
       providers: [
         {
           provide: OffersService,

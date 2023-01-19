@@ -5,6 +5,7 @@ import * as LinkifyIt from 'linkify-it';
 @Pipe({
   name: 'convertUrls',
   pure: true,
+  standalone: true,
 })
 export class ConvertUrlsPipe implements PipeTransform {
   constructor(private domSanitizer: DomSanitizer) {}

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { CategoryLinkComponent } from '../components/category-link/category-link.component';
+import { QASetListComponent } from '../components/q-a-set-list/q-a-set-list.component';
 import { CategoryPageComponent } from '../pages/category/category.page';
 import { OfferPageComponent } from '../pages/offer/offer.page';
 import { RegionPageComponent } from '../pages/region/region.page';
@@ -23,6 +24,7 @@ import { ReferralPageComponent } from './referral.page';
     CategoryPageComponent,
     SubCategoryPageComponent,
     OfferPageComponent,
+    QASetListComponent,
     RouterModule.forChild([
       {
         path: ':region/highlights',
