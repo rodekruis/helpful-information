@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SubCategoryLinkComponent } from 'src/app/components/sub-category-link/sub-category-link.component';
 import { Category } from 'src/app/models/category.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
@@ -29,6 +29,7 @@ export class CategoryPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private offersService: OffersService,
   ) {}
 
@@ -77,6 +78,13 @@ export class CategoryPageComponent implements OnInit {
           return subCategory.categoryID === this.category.categoryID;
         });
       }
+    }
+
+    // Upgrade ID-based slug(s) to real slug(s)
+    if (categorySlug !== this.category.slug) {
+      this.router.navigate([this.region, this.category.slug], {
+        replaceUrl: true,
+      });
     }
   }
 }

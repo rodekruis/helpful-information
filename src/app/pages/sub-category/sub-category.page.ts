@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, RouterModule } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { OfferLinkComponent } from 'src/app/components/offer-link/offer-link.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import { Category } from 'src/app/models/category.model';
@@ -46,6 +46,7 @@ export class SubCategoryPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private offersService: OffersService,
   ) {}
 
@@ -120,6 +121,16 @@ export class SubCategoryPageComponent implements OnInit {
 
     if (environment.useQandAs && !this.qaSets) {
       this.qaSets = await this.offersService.getQAs(this.region);
+    }
+
+    // Upgrade ID-based slug(s) to real slug(s)
+    if (subCategorySlug !== this.subCategory.slug) {
+      this.router.navigate(
+        [this.region, this.category.slug, this.subCategory.slug],
+        {
+          replaceUrl: true,
+        },
+      );
     }
   }
 }

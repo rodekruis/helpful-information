@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, RouterModule } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { OfferComponent } from 'src/app/components/offer/offer.component';
 import { Category } from 'src/app/models/category.model';
@@ -48,6 +48,7 @@ export class OfferPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private offersService: OffersService,
   ) {}
 
@@ -77,6 +78,21 @@ export class OfferPageComponent implements OnInit {
       this.offer = this.offers.find((offer: Offer) => {
         return offer.slug === offerSlug || offer.offerID === legacyOfferID;
       });
+    }
+
+    // Upgrade ID-based slug(s) to real slug(s)
+    if (offerSlug !== this.offer.slug) {
+      this.router.navigate(
+        [
+          this.region,
+          this.offer.categorySlug,
+          this.offer.subCategorySlug,
+          this.offer.slug,
+        ],
+        {
+          replaceUrl: true,
+        },
+      );
     }
   }
 }
