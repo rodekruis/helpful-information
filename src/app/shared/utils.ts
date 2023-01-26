@@ -65,3 +65,7 @@ export const getLegacyID = (
   }
   return null;
 };
+
+export const getParentPath = (fullPath: string): string => {
+  return fullPath.split('/').slice(0, -1).join('/');
+};

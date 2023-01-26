@@ -15,6 +15,7 @@ import { OffersService } from 'src/app/services/offers.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { environment } from 'src/environments/environment';
 import { QASet } from '../models/qa-set.model';
+import { getParentPath } from '../shared/utils';
 
 @Component({
   selector: 'app-referral',
@@ -293,7 +294,11 @@ export class ReferralPageComponent implements OnInit {
     });
   }
 
-  goBack() {
+  public goBack() {
+    if (this.useUrlSlugs) {
+      this.router.navigateByUrl(getParentPath(window.location.pathname));
+      return;
+    }
     if (this.offer) {
       this.loggingService.logEvent(
         LoggingEventCategory.ai,
