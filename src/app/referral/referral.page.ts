@@ -260,23 +260,14 @@ export class ReferralPageComponent implements OnInit {
     );
   }
 
-  public getNextSubCategory(category: Category) {
-    const subCategories: SubCategory[] = this.subCategories.filter(
-      (subCategory: SubCategory) => {
-        return subCategory.categoryID === category.categoryID;
-      },
-    );
-    return subCategories.length === 1 ? subCategories[0] : null;
-  }
-
-  public clickCategory(category: Category, isBack: boolean = false) {
+  public clickCategory(category: Category) {
     this.category = category;
-    this.subCategory = isBack ? null : this.getNextSubCategory(category);
+    this.subCategory = null;
     this.offer = null;
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.CategoryClick,
-      this.getLogProperties(isBack),
+      this.getLogProperties(true),
     );
     this.router.navigate([this.getRegionHref()], {
       queryParams: {
@@ -286,13 +277,13 @@ export class ReferralPageComponent implements OnInit {
     });
   }
 
-  public clickSubCategory(subCategory: SubCategory, isBack: boolean = false) {
+  public clickSubCategory(subCategory: SubCategory) {
     this.subCategory = subCategory;
     this.offer = null;
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.SubCategoryClick,
-      this.getLogProperties(isBack),
+      this.getLogProperties(true),
     );
     this.router.navigate([this.getRegionHref()], {
       queryParams: {
@@ -309,14 +300,19 @@ export class ReferralPageComponent implements OnInit {
         LoggingEvent.BackFromOffer,
         this.getLogProperties(true),
       );
-      this.clickSubCategory(this.subCategory, true);
+      this.clickSubCategory(this.subCategory);
     } else if (this.subCategory) {
       this.loggingService.logEvent(
         LoggingEventCategory.ai,
         LoggingEvent.BackFromSubCategory,
         this.getLogProperties(true),
       );
-      if (this.getNextSubCategory(this.category)) {
+      if (
+        this.offersService.getOnlyChildSubCategory(
+          this.category,
+          this.subCategories,
+        )
+      ) {
         this.category = null;
         this.subCategory = null;
         this.router.navigate([this.getRegionHref()]);
