@@ -15,7 +15,8 @@ import { OffersService } from 'src/app/services/offers.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { environment } from 'src/environments/environment';
 import { QASet } from '../models/qa-set.model';
-import { getParentPath } from '../shared/utils';
+import { SlugPrefix } from '../models/slug-prefix.enum';
+import { createSlug, getParentPath } from '../shared/utils';
 
 @Component({
   selector: 'app-referral',
@@ -394,15 +395,42 @@ export class ReferralPageComponent implements OnInit {
    */
   private upgradeLegacyUrls(queryParams: Params) {
     if (this.useQandAs && !!queryParams.highlights) {
-      this.router.navigate([this.getRegionHref(), 'highlights']);
+      this.router.navigate([this.getRegionHref(), 'highlights'], {
+        replaceUrl: true,
+      });
     }
     if (this.useQandASearch && !!queryParams.search) {
       this.router.navigate([this.getRegionHref(), 'search'], {
+        replaceUrl: true,
         queryParamsHandling: 'merge',
         queryParams: {
           search: null,
           q: !!queryParams.q ? queryParams.q : null,
         },
+      });
+    }
+    if (
+      this.useUrlSlugs &&
+      (!!queryParams.categoryID ||
+        !!queryParams.subCategoryID ||
+        !!queryParams.offerID)
+    ) {
+      let upgradedUrl = this.getRegionHref();
+      if (!!queryParams.categoryID) {
+        upgradedUrl +=
+          '/' + createSlug('', queryParams.categoryID, SlugPrefix.category);
+      }
+      if (!!queryParams.subCategoryID) {
+        upgradedUrl +=
+          '/' +
+          createSlug('', queryParams.subCategoryID, SlugPrefix.subCategory);
+      }
+      if (!!queryParams.offerID) {
+        upgradedUrl +=
+          '/' + createSlug('', queryParams.offerID, SlugPrefix.offer);
+      }
+      this.router.navigateByUrl(upgradedUrl, {
+        replaceUrl: true,
       });
     }
   }
