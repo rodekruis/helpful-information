@@ -237,7 +237,7 @@ export class ReferralPageComponent implements OnInit {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.CategoryClick,
-      this.getLogProperties(true),
+      this.getLogProperties(),
     );
     this.router.navigate([this.getRegionHref()], {
       queryParams: {
@@ -253,7 +253,7 @@ export class ReferralPageComponent implements OnInit {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.SubCategoryClick,
-      this.getLogProperties(true),
+      this.getLogProperties(),
     );
     this.router.navigate([this.getRegionHref()], {
       queryParams: {
@@ -272,14 +272,14 @@ export class ReferralPageComponent implements OnInit {
       this.loggingService.logEvent(
         LoggingEventCategory.ai,
         LoggingEvent.BackFromOffer,
-        this.getLogProperties(true),
+        this.getLogProperties(),
       );
       this.clickSubCategory(this.subCategory);
     } else if (this.subCategory) {
       this.loggingService.logEvent(
         LoggingEventCategory.ai,
         LoggingEvent.BackFromSubCategory,
-        this.getLogProperties(true),
+        this.getLogProperties(),
       );
       if (
         this.offersService.getOnlyChildSubCategory(
@@ -297,7 +297,7 @@ export class ReferralPageComponent implements OnInit {
       this.loggingService.logEvent(
         LoggingEventCategory.ai,
         LoggingEvent.BackFromCategory,
-        this.getLogProperties(true),
+        this.getLogProperties(),
       );
       this.category = null;
       this.router.navigate([this.getRegionHref()]);
@@ -305,14 +305,16 @@ export class ReferralPageComponent implements OnInit {
       this.loggingService.logEvent(
         LoggingEventCategory.ai,
         LoggingEvent.BackFromRegion,
-        this.getLogProperties(true),
+        this.getLogProperties(),
       );
       this.router.navigate([this.rootHref]);
     }
   }
 
-  getLogProperties(isBack: boolean) {
-    const logParams: { [key: string]: any } = { isBack };
+  getLogProperties() {
+    const logParams: { [key: string]: any } = {
+      isBack: true,
+    };
     if (this.offer) {
       logParams.offerID = this.offer.offerID;
       logParams.offerSlug = this.offer.slug ? this.offer.slug : '';
@@ -337,7 +339,7 @@ export class ReferralPageComponent implements OnInit {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.MainScreenClick,
-      this.getLogProperties(true),
+      this.getLogProperties(),
     );
     this.category = null;
     this.subCategory = null;
@@ -359,7 +361,7 @@ export class ReferralPageComponent implements OnInit {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       event,
-      this.getLogProperties(true),
+      this.getLogProperties(),
     );
   }
 
