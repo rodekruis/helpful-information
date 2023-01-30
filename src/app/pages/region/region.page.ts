@@ -7,6 +7,7 @@ import { QASet } from 'src/app/models/qa-set.model';
 import { RegionData } from 'src/app/models/region-data';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { OffersService } from 'src/app/services/offers.service';
+import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { environment } from 'src/environments/environment';
 
@@ -32,6 +33,7 @@ export class RegionPageComponent implements OnInit {
     private route: ActivatedRoute,
     private regionDataService: RegionDataService,
     private offersService: OffersService,
+    private pageMeta: PageMetaService,
   ) {}
 
   async ngOnInit() {
@@ -41,6 +43,10 @@ export class RegionPageComponent implements OnInit {
       if (!this.region) return;
 
       this.regionData = await this.regionDataService.getData(this.region);
+
+      this.pageMeta.setTitle({
+        region: this.regionData.pageTitle,
+      });
 
       this.categories = await this.offersService.getCategories(this.region);
       this.subCategories = await this.offersService.getSubCategories(

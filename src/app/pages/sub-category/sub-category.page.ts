@@ -9,6 +9,7 @@ import { QASet } from 'src/app/models/qa-set.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { OffersService } from 'src/app/services/offers.service';
+import { PageMetaService } from 'src/app/services/page-meta.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { getLegacyID } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
@@ -48,6 +49,7 @@ export class SubCategoryPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private offersService: OffersService,
+    private pageMeta: PageMetaService,
   ) {}
 
   ngOnInit() {
@@ -122,6 +124,11 @@ export class SubCategoryPageComponent implements OnInit {
     if (environment.useQandAs && !this.qaSets) {
       this.qaSets = await this.offersService.getQAs(this.region);
     }
+
+    this.pageMeta.setTitle({
+      subCategoryName: this.subCategory.subCategoryName,
+      categoryName: this.category.categoryName,
+    });
 
     // Upgrade ID-based slug(s) to real slug(s)
     if (subCategorySlug !== this.subCategory.slug) {

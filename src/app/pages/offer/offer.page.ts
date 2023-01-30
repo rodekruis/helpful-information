@@ -9,6 +9,7 @@ import { QASet } from 'src/app/models/qa-set.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { OffersService } from 'src/app/services/offers.service';
+import { PageMetaService } from 'src/app/services/page-meta.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { getLegacyID } from 'src/app/shared/utils';
 
@@ -50,6 +51,7 @@ export class OfferPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private offersService: OffersService,
+    private pageMeta: PageMetaService,
   ) {}
 
   ngOnInit() {
@@ -79,6 +81,12 @@ export class OfferPageComponent implements OnInit {
         return offer.slug === offerSlug || offer.offerID === legacyOfferID;
       });
     }
+
+    this.pageMeta.setTitle({
+      offerName: this.offer.offerName ? this.offer.offerName : '',
+      subCategoryName: this.offer.subCategoryName,
+      categoryName: this.offer.categoryName,
+    });
 
     // Upgrade ID-based slug(s) to real slug(s)
     if (offerSlug !== this.offer.slug) {

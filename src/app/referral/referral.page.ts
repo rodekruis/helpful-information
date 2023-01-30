@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import {
@@ -16,6 +15,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
 import { environment } from 'src/environments/environment';
 import { QASet } from '../models/qa-set.model';
 import { SlugPrefix } from '../models/slug-prefix.enum';
+import { PageMetaService } from '../services/page-meta.service';
 import { createSlug, getParentPath } from '../shared/utils';
 
 @Component({
@@ -61,13 +61,17 @@ export class ReferralPageComponent implements OnInit {
     private loggingService: LoggingService,
     private regionDataService: RegionDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
-    private titleService: Title,
+    private pageMeta: PageMetaService,
   ) {
     this.regions = environment.regions.trim().split(/\s*,\s*/);
     this.regionsLabels = environment.regionsLabels.trim().split(/\s*,\s*/);
 
     this.route.params.subscribe((params: Params) => {
       this.region = params.region;
+
+      if (!this.isSupportedRegion()) {
+        this.pageMeta.setTitle({ override: environment.appName });
+      }
     });
     this.route.queryParams.subscribe((queryParams: Params) => {
       this.upgradeLegacyUrls(queryParams);
@@ -76,7 +80,7 @@ export class ReferralPageComponent implements OnInit {
 
   async ngOnInit() {
     if (!this.isSupportedRegion()) {
-      this.updatePageTitle(environment.appName);
+      this.pageMeta.setTitle({ override: environment.appName });
       this.router.navigate([this.rootHref]);
       return;
     }
@@ -127,7 +131,7 @@ export class ReferralPageComponent implements OnInit {
     this.loading = true;
     this.regionData = await this.regionDataService.getData(this.region);
 
-    this.updatePageTitle(this.regionData.pageTitle);
+    this.pageMeta.setTitle({ region: this.regionData.pageTitle });
 
     this.lastUpdatedTimeService.setLastUpdatedTime(
       this.regionData.lastUpdatedTime,
@@ -147,40 +151,9 @@ export class ReferralPageComponent implements OnInit {
     this.loading = false;
   }
 
-  private updatePageTitle(
-    root: string | null,
-    categoryName?: string,
-    subCategoryName?: string,
-    offerName?: string,
-  ) {
-    let title = '';
-
-    if (root) {
-      title = root;
-    }
-
-    if (categoryName) {
-      title += ' : ' + categoryName;
-    }
-
-    if (subCategoryName) {
-      title += ' / ' + subCategoryName;
-    }
-
-    if (offerName) {
-      title += ' : ' + offerName;
-    }
-
-    if (!!environment.envName) {
-      title += ` [ ${environment.envName} ]`;
-    }
-
-    this.titleService.setTitle(title);
-  }
-
   private handleQueryParams(params: Params) {
     if (!Object.keys(params).length) {
-      this.updatePageTitle(this.regionData.pageTitle);
+      this.pageMeta.setTitle({ region: this.regionData.pageTitle });
     }
 
     let categoryName: string;
@@ -254,12 +227,7 @@ export class ReferralPageComponent implements OnInit {
       this.offer = null;
     }
 
-    this.updatePageTitle(
-      this.regionData.pageTitle,
-      categoryName,
-      subCategoryName,
-      offerName,
-    );
+    this.pageMeta.setTitle({ offerName, subCategoryName, categoryName });
   }
 
   public clickCategory(category: Category) {

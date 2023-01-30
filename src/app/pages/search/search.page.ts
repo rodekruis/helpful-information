@@ -6,6 +6,7 @@ import { SearchInputComponent } from 'src/app/components/search-input/search-inp
 import { QASet } from 'src/app/models/qa-set.model';
 import { RegionData } from 'src/app/models/region-data';
 import { OffersService } from 'src/app/services/offers.service';
+import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { SearchService } from 'src/app/services/search.service';
 
@@ -34,6 +35,7 @@ export class SearchPageComponent implements OnInit {
     private regionDataService: RegionDataService,
     private offersService: OffersService,
     private searchService: SearchService,
+    private pageMeta: PageMetaService,
   ) {}
 
   async ngOnInit() {
@@ -52,6 +54,10 @@ export class SearchPageComponent implements OnInit {
     if (!this.region) return;
 
     this.regionData = await this.regionDataService.getData(this.region);
+
+    this.pageMeta.setTitle({
+      override: `${this.regionData?.labelSearchPageTitle} - ${this.regionData?.pageTitle}`,
+    });
 
     if (!this.qaSets) {
       this.qaSets = await this.offersService.getQAs(this.region);
@@ -82,6 +88,10 @@ export class SearchPageComponent implements OnInit {
     this.searchResults = this.searchService.query(safeQuery);
 
     if (this.searchResults.length > 1) {
+      this.pageMeta.setTitle({
+        override: `${this.regionData?.labelSearchPageTitle} (${this.searchResults.length}) - ${this.regionData?.pageTitle}`,
+      });
+
       const resultFrame = document.getElementById('search-results');
       if (resultFrame) {
         resultFrame.focus();

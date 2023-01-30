@@ -6,6 +6,7 @@ import { Category } from 'src/app/models/category.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { OffersService } from 'src/app/services/offers.service';
+import { PageMetaService } from 'src/app/services/page-meta.service';
 import { getLegacyID } from 'src/app/shared/utils';
 
 @Component({
@@ -31,6 +32,7 @@ export class CategoryPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private offersService: OffersService,
+    private pageMeta: PageMetaService,
   ) {}
 
   async ngOnInit() {
@@ -79,6 +81,10 @@ export class CategoryPageComponent implements OnInit {
         });
       }
     }
+
+    this.pageMeta.setTitle({
+      categoryName: this.category.categoryName,
+    });
 
     // Upgrade ID-based slug(s) to real slug(s)
     if (categorySlug !== this.category.slug) {
