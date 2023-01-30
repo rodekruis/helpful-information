@@ -34,6 +34,7 @@ export class CategoryLinkComponent {
       LoggingEvent.CategoryClick,
       {
         categoryID: category.categoryID,
+        categorySlug: category.slug ? category.slug : '',
         category: category.categoryName,
       },
     );

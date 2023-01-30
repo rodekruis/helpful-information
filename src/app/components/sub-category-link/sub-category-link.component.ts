@@ -37,8 +37,10 @@ export class SubCategoryLinkComponent {
       LoggingEvent.SubCategoryClick,
       {
         categoryID: this.category.categoryID,
+        categorySlug: this.category.slug ? this.category.slug : '',
         category: this.category.categoryName,
         subCategoryID: this.subCategory.subCategoryID,
+        subCategorySlug: this.subCategory.slug ? this.subCategory.slug : '',
         subCategory: this.subCategory.subCategoryName,
       },
     );

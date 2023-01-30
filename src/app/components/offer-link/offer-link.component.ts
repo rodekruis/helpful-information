@@ -34,10 +34,13 @@ export class OfferLinkComponent {
       LoggingEvent.OfferClick,
       {
         categoryID: offer.categoryID,
+        categorySlug: offer.categorySlug ? offer.categorySlug : '',
         category: offer.categoryName,
         subCategoryID: offer.subCategoryID,
+        subCategorySlug: offer.subCategorySlug ? offer.subCategorySlug : '',
         subCategory: offer.subCategoryName,
         offerID: offer.offerID,
+        offerSlug: offer.slug ? offer.slug : '',
         offerName: offer.offerName ? offer.offerName : '',
       },
     );
