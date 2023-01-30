@@ -119,17 +119,20 @@ export class SpreadsheetService {
       entity.categoryID,
       categories,
     );
-    entity.categoryName = category.categoryName ? category.categoryName : '';
-    entity.categorySlug = category.slug ? category.slug : '';
+    entity.categoryName =
+      category && category.categoryName ? category.categoryName : '';
+    entity.categorySlug = category && category.slug ? category.slug : '';
 
     const subCategory = SpreadsheetService.getSubCategory(
       entity.subCategoryID,
       subCategories,
     );
-    entity.subCategoryName = subCategory.subCategoryName
-      ? subCategory.subCategoryName
-      : '';
-    entity.subCategorySlug = subCategory.slug ? subCategory.slug : '';
+    entity.subCategoryName =
+      subCategory && subCategory.subCategoryName
+        ? subCategory.subCategoryName
+        : '';
+    entity.subCategorySlug =
+      subCategory && subCategory.slug ? subCategory.slug : '';
 
     return entity;
   }
