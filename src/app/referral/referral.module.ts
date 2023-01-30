@@ -88,8 +88,7 @@ import { ReferralPageComponent } from './referral.page';
         ],
       },
       {
-        path: '',
-        pathMatch: 'full',
+        path: '**',
         component: ReferralPageComponent,
       },
     ]),
