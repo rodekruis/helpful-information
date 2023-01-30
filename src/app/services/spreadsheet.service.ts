@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Category, CategoryCol } from 'src/app/models/category.model';
 import { Offer, OfferCol } from 'src/app/models/offer.model';
-import { PageDataFallback, RegionData } from 'src/app/models/region-data';
+import { RegionData, RegionDataFallback } from 'src/app/models/region-data';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory, SubCategoryCol } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
@@ -416,10 +416,10 @@ export class SpreadsheetService {
       ),
       labelBackButton:
         SpreadsheetService.readCellValue(referralPageDataRows[5], 1) ||
-        PageDataFallback.labelBackButton,
+        RegionDataFallback.labelBackButton,
       labelMainScreenButton:
         SpreadsheetService.readCellValue(referralPageDataRows[6], 1) ||
-        PageDataFallback.labelMainScreenButton,
+        RegionDataFallback.labelMainScreenButton,
       contactPhoneNumber: SpreadsheetService.readCellValue(
         referralPageDataRows[7],
         1,
@@ -438,28 +438,28 @@ export class SpreadsheetService {
       ),
       labelLastUpdated:
         SpreadsheetService.readCellValue(referralPageDataRows[10], 1) ||
-        PageDataFallback.labelLastUpdated,
+        RegionDataFallback.labelLastUpdated,
       labelHighlightsButton:
         SpreadsheetService.readCellValue(referralPageDataRows[17], 1) ||
-        PageDataFallback.labelHighlightsButton,
+        RegionDataFallback.labelHighlightsButton,
       labelHighlightsPageTitle:
         SpreadsheetService.readCellValue(referralPageDataRows[14], 1) ||
-        PageDataFallback.labelHighlightsPageTitle,
+        RegionDataFallback.labelHighlightsPageTitle,
       labelHighlightsItemsZero:
         SpreadsheetService.readCellValue(referralPageDataRows[15], 1) ||
-        PageDataFallback.labelHighlightsItemsZero,
+        RegionDataFallback.labelHighlightsItemsZero,
       labelHighlightsItemsCount:
         SpreadsheetService.readCellValue(referralPageDataRows[16], 1) ||
-        PageDataFallback.labelHighlightsItemsCount,
+        RegionDataFallback.labelHighlightsItemsCount,
       labelSearchPageTitle:
         SpreadsheetService.readCellValue(referralPageDataRows[19], 1) ||
-        PageDataFallback.labelSearchPageTitle,
+        RegionDataFallback.labelSearchPageTitle,
       labelSearchAction:
         SpreadsheetService.readCellValue(referralPageDataRows[20], 1) ||
-        PageDataFallback.labelSearchAction,
+        RegionDataFallback.labelSearchAction,
       labelSearchResultsCount:
         SpreadsheetService.readCellValue(referralPageDataRows[21], 1) ||
-        PageDataFallback.labelSearchResultsCount,
+        RegionDataFallback.labelSearchResultsCount,
     };
   }
 

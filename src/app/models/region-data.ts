@@ -19,7 +19,7 @@ export class RegionData {
   pageTitle?: string;
 }
 
-export enum PageDataFallback {
+export enum RegionDataFallback {
   labelBackButton = 'Back',
   labelHighlightsButton = '!',
   labelHighlightsItemsCount = 'Highlighted items:',

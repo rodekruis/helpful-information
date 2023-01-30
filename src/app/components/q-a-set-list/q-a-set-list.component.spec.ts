@@ -5,7 +5,7 @@ import {
   mockQASet1,
   mockQASet2with1SubQuestion,
 } from 'src/app/mocks/q-a-set.mock';
-import { PageDataFallback } from 'src/app/models/region-data';
+import { RegionDataFallback } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { environment } from 'src/environments/environment';
@@ -56,7 +56,7 @@ describe('QASetListComponent', () => {
           provide: RegionDataService,
           useValue: {
             data: {
-              labelLastUpdated: PageDataFallback.labelLastUpdated,
+              labelLastUpdated: RegionDataFallback.labelLastUpdated,
             },
           },
         },

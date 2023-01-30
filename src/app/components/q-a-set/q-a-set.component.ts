@@ -20,13 +20,13 @@ export class QASetComponent {
 
   public labelLastUpdated: string;
 
-  constructor(pageDataService: RegionDataService) {
+  constructor(regionDataService: RegionDataService) {
     if (
-      !!pageDataService &&
-      !!pageDataService.data &&
-      !!pageDataService.data.labelLastUpdated
+      !!regionDataService &&
+      !!regionDataService.data &&
+      !!regionDataService.data.labelLastUpdated
     ) {
-      this.labelLastUpdated = pageDataService.data.labelLastUpdated;
+      this.labelLastUpdated = regionDataService.data.labelLastUpdated;
     }
   }
 

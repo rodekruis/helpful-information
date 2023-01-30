@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PageDataFallback } from 'src/app/models/region-data';
+import { RegionDataFallback } from 'src/app/models/region-data';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -31,7 +31,7 @@ export class AppHeaderComponent {
 
   public fallbackTitle = environment.appName;
   public fallbackLogoUrl = environment.appLogoUrl;
-  public fallbackActionLabel = PageDataFallback.labelMainScreenButton;
+  public fallbackActionLabel = RegionDataFallback.labelMainScreenButton;
 
   public backClick($event: MouseEvent) {
     return this.backAction.emit($event);
