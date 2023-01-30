@@ -179,6 +179,7 @@ classDiagram
 
   class Category {
     int categoryID
+    slug
     bool isVisible
     icon
     description
@@ -186,6 +187,7 @@ classDiagram
 
   class SubCategory {
     int subCategoryID
+    slug
     bool isVisible
     icon
     description
@@ -193,6 +195,7 @@ classDiagram
 
   class Offer {
     int offerId
+    slug
     bool isVisible
     offerName
     icon
