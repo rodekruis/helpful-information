@@ -68,18 +68,24 @@ jobs:
             oekraine,
             shelter,
             opvang,
+            turkey-syria,
+            turkije-syrie,
             test
           REGIONS_LABELS: >-
             Ukraine (EN),
             Oekraïne (NL),
             Shelter (EN),
             Opvang (NL),
+            Turkey-Syria Earthquake (EN),
+            Turkije-Syrië Aardbeving (NL),
             Test/Example
           REGIONS_SHEET_IDS: >-
             14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
             1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE,
             15yXp_w0chnFRwIfvY6uRgs7TwzxwuBz9iz-dgDFHsbs,
             1wJ4pfB3l7t16igivt_LkGYmaqZ0hiRsR7_giJUjen-s,
+            1d4vUbvj4KhTj0ZQ_J4RizE3wn0JFjvr9SainTkhyRu8,
+            1Rvs49NVJ8iN1Bl-0YUdJwaYF6LqltcC1RovO4UbpV20,
             10SIJdAQSd6loqCyzwK409QS_01Fgp8P4aqoDO8iBvhY
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
