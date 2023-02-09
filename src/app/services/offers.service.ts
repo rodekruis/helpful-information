@@ -94,7 +94,7 @@ export class OffersService {
     return foundCategory;
   }
 
-  public async getSubCategories(region: string): Promise<SubCategory[]> {
+  public async getAllSubCategories(region: string): Promise<SubCategory[]> {
     if (this.needsCaching(CacheName.subCategories, region)) {
       let subCategories = await this.spreadsheetService.getSubCategories(
         region,
@@ -118,7 +118,7 @@ export class OffersService {
     subCategoryID?: number;
     subCategorySlug?: string;
   }): Promise<SubCategory | undefined> {
-    const subCategories = await this.getSubCategories(query.region);
+    const subCategories = await this.getAllSubCategories(query.region);
 
     const foundSubCategory = subCategories.find((subCategory) => {
       const subCategoryMatches =
@@ -157,7 +157,7 @@ export class OffersService {
   public async getOffers(region: string): Promise<Offer[]> {
     if (this.needsCaching(CacheName.offers, region)) {
       const categories = await this.getCategories(region);
-      const subCategories = await this.getSubCategories(region);
+      const subCategories = await this.getAllSubCategories(region);
 
       let offers = await this.spreadsheetService.getOffers(region);
       offers = offers.map((offer: Offer) => {
@@ -211,7 +211,7 @@ export class OffersService {
   public async getQAs(region: string): Promise<QASet[]> {
     if (this.needsCaching(CacheName.qaSets, region)) {
       const categories = await this.getCategories(region);
-      const subCategories = await this.getSubCategories(region);
+      const subCategories = await this.getAllSubCategories(region);
 
       let qaSets = await this.spreadsheetService.getQAs(region);
       qaSets = qaSets.map((qaSet: QASet) => {

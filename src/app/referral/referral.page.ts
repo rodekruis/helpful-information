@@ -141,7 +141,9 @@ export class ReferralPageComponent implements OnInit {
     );
 
     this.categories = await this.offersService.getCategories(this.region);
-    this.subCategories = await this.offersService.getSubCategories(this.region);
+    this.subCategories = await this.offersService.getAllSubCategories(
+      this.region,
+    );
     this.offers = await this.offersService.getOffers(this.region);
 
     if (this.useQandAs) {

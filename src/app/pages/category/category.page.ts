@@ -61,7 +61,7 @@ export class CategoryPageComponent implements OnInit {
     }
 
     if (!this.subCategories) {
-      this.subCategories = await this.offersService.getSubCategories(
+      this.subCategories = await this.offersService.getAllSubCategories(
         this.region,
       );
 

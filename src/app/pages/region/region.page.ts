@@ -49,7 +49,7 @@ export class RegionPageComponent implements OnInit {
       });
 
       this.categories = await this.offersService.getCategories(this.region);
-      this.subCategories = await this.offersService.getSubCategories(
+      this.subCategories = await this.offersService.getAllSubCategories(
         this.region,
       );
 
