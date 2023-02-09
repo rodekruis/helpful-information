@@ -3,11 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { OfferComponent } from 'src/app/components/offer/offer.component';
-import { Category } from 'src/app/models/category.model';
 import { Offer } from 'src/app/models/offer.model';
-import { QASet } from 'src/app/models/qa-set.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
-import { SubCategory } from 'src/app/models/sub-category.model';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -28,21 +25,6 @@ import { getLegacyID } from 'src/app/shared/utils';
 })
 export class OfferPageComponent implements OnInit {
   public region: string;
-
-  @Input()
-  public category: Category;
-
-  @Input()
-  public subCategory: SubCategory;
-
-  @Input()
-  public categories: Category[];
-  @Input()
-  public subCategories: SubCategory[];
-  @Input()
-  public offers: Offer[];
-  @Input()
-  public qaSets: QASet[];
 
   @Input()
   public offer: Offer;
@@ -69,17 +51,27 @@ export class OfferPageComponent implements OnInit {
 
     if (!this.region) return;
 
-    let offerSlug = params.offerSlug;
-    let legacyOfferID = getLegacyID(offerSlug, SlugPrefix.offer);
-
-    if (!this.offers) {
-      this.offers = await this.offersService.getOffers(this.region);
-    }
-
     if (!this.offer) {
-      this.offer = this.offers.find((offer: Offer) => {
-        return offer.slug === offerSlug || offer.offerID === legacyOfferID;
+      this.offer = await this.offersService.findOffer({
+        region: this.region,
+        categoryID: getLegacyID(params.categorySlug, SlugPrefix.category),
+        categorySlug: params.categorySlug,
+        subCategoryID: getLegacyID(
+          params.subCategorySlug,
+          SlugPrefix.subCategory,
+        ),
+        subCategorySlug: params.subCategorySlug,
+        offerID: getLegacyID(params.offerSlug, SlugPrefix.offer),
+        offerSlug: params.offerSlug,
       });
+    }
+    if (!this.offer) {
+      this.router.navigate([
+        this.region,
+        params.categorySlug,
+        params.subCategorySlug,
+      ]);
+      return;
     }
 
     this.pageMeta.setTitle({
@@ -89,7 +81,7 @@ export class OfferPageComponent implements OnInit {
     });
 
     // Upgrade ID-based slug(s) to real slug(s)
-    if (offerSlug !== this.offer.slug) {
+    if (params.offerSlug !== this.offer.slug) {
       this.router.navigate(
         [
           this.region,

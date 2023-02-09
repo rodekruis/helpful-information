@@ -100,29 +100,18 @@ export class SpreadsheetService {
     return subCategory ? subCategory : null;
   }
 
-  static addParentCategoryDetails(
+  static addParentSubCategoryDetails(
     entity: Offer,
-    categories: Category[],
     subCategories: SubCategory[],
   ): Offer;
-  static addParentCategoryDetails(
+  static addParentSubCategoryDetails(
     entity: QASet,
-    categories: Category[],
     subCategories: SubCategory[],
   ): QASet;
-  static addParentCategoryDetails(
+  static addParentSubCategoryDetails(
     entity: Offer | QASet,
-    categories: Category[],
     subCategories: SubCategory[],
   ): Offer | QASet {
-    const category = SpreadsheetService.getCategory(
-      entity.categoryID,
-      categories,
-    );
-    entity.categoryName =
-      category && category.categoryName ? category.categoryName : '';
-    entity.categorySlug = category && category.slug ? category.slug : '';
-
     const subCategory = SpreadsheetService.getSubCategory(
       entity.subCategoryID,
       subCategories,
@@ -133,6 +122,27 @@ export class SpreadsheetService {
         : '';
     entity.subCategorySlug =
       subCategory && subCategory.slug ? subCategory.slug : '';
+
+    return entity;
+  }
+
+  static addParentCategoryDetails(
+    entity: SubCategory,
+    categories: Category[],
+  ): SubCategory;
+  static addParentCategoryDetails(entity: Offer, categories: Category[]): Offer;
+  static addParentCategoryDetails(entity: QASet, categories: Category[]): QASet;
+  static addParentCategoryDetails(
+    entity: SubCategory | Offer | QASet,
+    categories: Category[],
+  ): SubCategory | Offer | QASet {
+    const category = SpreadsheetService.getCategory(
+      entity.categoryID,
+      categories,
+    );
+    entity.categoryName =
+      category && category.categoryName ? category.categoryName : '';
+    entity.categorySlug = category && category.slug ? category.slug : '';
 
     return entity;
   }

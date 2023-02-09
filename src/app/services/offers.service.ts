@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 import { Offer } from 'src/app/models/offer.model';
 import { SubCategory } from 'src/app/models/sub-category.model';
+import {
+  LoggingEvent,
+  LoggingEventCategory,
+} from '../models/logging-event.enum';
 import { QASet } from '../models/qa-set.model';
+import { LoggingService } from './logging.service';
 import { SpreadsheetService } from './spreadsheet.service';
 
 const enum CacheName {
@@ -28,7 +33,10 @@ export class OffersService {
     [CacheName.qaSets]: null,
   };
 
-  constructor(private spreadsheetService: SpreadsheetService) {}
+  constructor(
+    private spreadsheetService: SpreadsheetService,
+    private loggingService: LoggingService,
+  ) {}
 
   private needsCaching(name: CacheName, region: string): boolean {
     return (
@@ -86,45 +94,76 @@ export class OffersService {
   }
 
   public async getOffers(region: string): Promise<Offer[]> {
-    // Load 'requirements'...
-    await this.getCategories(region);
-    await this.getSubCategories(region);
-
     if (this.needsCaching(CacheName.offers, region)) {
-      this.setCache(
-        CacheName.offers,
-        region,
-        await this.spreadsheetService.getOffers(region),
+      const categories = await this.getCategories(region);
+      const subCategories = await this.getSubCategories(region);
+
+      let offers = await this.spreadsheetService.getOffers(region);
+      offers = offers.map((offer: Offer) => {
+        offer = SpreadsheetService.addParentCategoryDetails(offer, categories);
+        offer = SpreadsheetService.addParentSubCategoryDetails(
+          offer,
+          subCategories,
+        );
+        return offer;
+      });
+
+      this.setCache(CacheName.offers, region, offers);
+    }
+    return this.cache[CacheName.offers].data;
+  }
+
+  public async findOffer(query: {
+    region: string;
+    categoryID?: number;
+    categorySlug?: string;
+    subCategoryID?: number;
+    subCategorySlug?: string;
+    offerID?: number;
+    offerSlug?: string;
+  }): Promise<Offer | undefined> {
+    const offers = await this.getOffers(query.region);
+
+    const foundOffer = offers.find((offer: Offer) => {
+      const offerMatches =
+        offer.slug === query.offerSlug || offer.offerID === query.offerID;
+      const subCategoryMatches =
+        offer.subCategorySlug === query.subCategorySlug ||
+        offer.subCategoryID === query.subCategoryID;
+      const categoryMatches =
+        offer.categorySlug === query.categorySlug ||
+        offer.categoryID === query.categoryID;
+
+      return offerMatches && subCategoryMatches && categoryMatches;
+    });
+    if (!foundOffer) {
+      this.loggingService.logEvent(
+        LoggingEventCategory.error,
+        LoggingEvent.NotFoundOffer,
+        query,
       );
     }
-    return this.cache[CacheName.offers].data.map((offer: Offer) =>
-      SpreadsheetService.addParentCategoryDetails(
-        offer,
-        this.cache[CacheName.categories].data,
-        this.cache[CacheName.subCategories].data,
-      ),
-    );
+    return foundOffer;
   }
 
   public async getQAs(region: string): Promise<QASet[]> {
-    // Load 'requirements'...
-    await this.getCategories(region);
-    await this.getSubCategories(region);
-
     if (this.needsCaching(CacheName.qaSets, region)) {
-      this.setCache(
-        CacheName.qaSets,
-        region,
-        await this.spreadsheetService.getQAs(region),
-      );
+      const categories = await this.getCategories(region);
+      const subCategories = await this.getSubCategories(region);
+
+      let qaSets = await this.spreadsheetService.getQAs(region);
+      qaSets = qaSets.map((qaSet: QASet) => {
+        qaSet = SpreadsheetService.addParentCategoryDetails(qaSet, categories);
+        qaSet = SpreadsheetService.addParentSubCategoryDetails(
+          qaSet,
+          subCategories,
+        );
+        return qaSet;
+      });
+
+      this.setCache(CacheName.qaSets, region, qaSets);
     }
-    return this.cache[CacheName.qaSets].data.map((qaSet: QASet) =>
-      SpreadsheetService.addParentCategoryDetails(
-        qaSet,
-        this.cache[CacheName.categories].data,
-        this.cache[CacheName.subCategories].data,
-      ),
-    );
+    return this.cache[CacheName.qaSets].data;
   }
 
   public async getHighlights(region: string): Promise<QASet[]> {
