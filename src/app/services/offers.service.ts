@@ -69,6 +69,31 @@ export class OffersService {
     return this.cache[CacheName.categories].data;
   }
 
+  public async findCategory(query: {
+    region: string;
+    categoryID?: number;
+    categorySlug?: string;
+  }): Promise<Category | undefined> {
+    const categories = await this.getCategories(query.region);
+
+    const foundCategory = categories.find((category) => {
+      const categoryMatches =
+        category.slug === query.categorySlug ||
+        category.categoryID === query.categoryID;
+
+      return categoryMatches;
+    });
+
+    if (!foundCategory) {
+      this.loggingService.logEvent(
+        LoggingEventCategory.error,
+        LoggingEvent.NotFoundCategory,
+        query,
+      );
+    }
+    return foundCategory;
+  }
+
   public async getSubCategories(region: string): Promise<SubCategory[]> {
     if (this.needsCaching(CacheName.subCategories, region)) {
       let subCategories = await this.spreadsheetService.getSubCategories(

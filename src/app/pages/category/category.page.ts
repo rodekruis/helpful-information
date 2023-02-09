@@ -23,9 +23,6 @@ export class CategoryPageComponent implements OnInit {
   public category: Category;
 
   @Input()
-  public categories: Category[];
-
-  @Input()
   public subCategories: SubCategory[];
 
   constructor(
@@ -42,9 +39,6 @@ export class CategoryPageComponent implements OnInit {
   }
 
   private async handleRouteParams(params: Params) {
-    let categorySlug = params.categorySlug;
-    let legacyCategoryID = getLegacyID(categorySlug, SlugPrefix.category);
-
     this.region = params.region;
 
     if (!this.region && this.route.snapshot.parent) {
@@ -53,22 +47,18 @@ export class CategoryPageComponent implements OnInit {
 
     if (!this.region) return;
 
-    if (!this.categories) {
-      this.categories = await this.offersService.getCategories(this.region);
-    }
-
-    if (!this.categories) return;
-
     if (!this.category) {
-      this.category = this.categories.find((category) => {
-        return (
-          category.slug === categorySlug ||
-          category.categoryID === legacyCategoryID
-        );
+      this.category = await this.offersService.findCategory({
+        region: this.region,
+        categoryID: getLegacyID(params.categorySlug, SlugPrefix.category),
+        categorySlug: params.categorySlug,
       });
     }
 
-    if (!this.category) return;
+    if (!this.category) {
+      this.router.navigate([this.region]);
+      return;
+    }
 
     if (!this.subCategories) {
       this.subCategories = await this.offersService.getSubCategories(
@@ -87,7 +77,7 @@ export class CategoryPageComponent implements OnInit {
     });
 
     // Upgrade ID-based slug(s) to real slug(s)
-    if (categorySlug !== this.category.slug) {
+    if (params.categorySlug !== this.category.slug) {
       this.router.navigate([this.region, this.category.slug], {
         replaceUrl: true,
       });

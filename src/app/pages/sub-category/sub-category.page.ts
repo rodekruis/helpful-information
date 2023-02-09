@@ -37,9 +37,6 @@ export class SubCategoryPageComponent implements OnInit {
   public subCategory: SubCategory;
 
   @Input()
-  public categories: Category[];
-
-  @Input()
   public offers: Offer[];
   @Input()
   public qaSets: QASet[];
@@ -58,9 +55,6 @@ export class SubCategoryPageComponent implements OnInit {
   }
 
   private async handleRouteParams(params: Params) {
-    let categorySlug = params.categorySlug;
-    let legacyCategoryID = getLegacyID(categorySlug, SlugPrefix.category);
-
     this.region = params.region;
 
     if (!this.region && this.route.snapshot.parent) {
@@ -69,22 +63,18 @@ export class SubCategoryPageComponent implements OnInit {
 
     if (!this.region) return;
 
-    if (!this.categories) {
-      this.categories = await this.offersService.getCategories(this.region);
-    }
-
-    if (!this.categories) return;
-
     if (!this.category) {
-      this.category = this.categories.find((category) => {
-        return (
-          category.slug === categorySlug ||
-          category.categoryID === legacyCategoryID
-        );
+      this.category = await this.offersService.findCategory({
+        region: this.region,
+        categoryID: getLegacyID(params.categorySlug, SlugPrefix.category),
+        categorySlug: params.categorySlug,
       });
     }
 
-    if (!this.category) return;
+    if (!this.category) {
+      this.router.navigate([this.region]);
+      return;
+    }
 
     if (!this.subCategory) {
       this.subCategory = await this.offersService.findSubCategory({
