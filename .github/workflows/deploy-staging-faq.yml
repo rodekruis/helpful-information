@@ -68,7 +68,7 @@ jobs:
             oekraine,
             shelter,
             opvang,
-            turkey-syria,
+            turkiye-syria,
             turkije-syrie,
             test
           REGIONS_LABELS: >-
@@ -76,7 +76,7 @@ jobs:
             Oekraïne (NL),
             Shelter (EN),
             Opvang (NL),
-            Turkey-Syria Earthquake (EN),
+            Türkiye-Syria Earthquake (EN),
             Turkije-Syrië Aardbeving (NL),
             Test/Example
           REGIONS_SHEET_IDS: >-
