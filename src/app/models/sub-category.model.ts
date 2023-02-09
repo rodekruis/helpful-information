@@ -6,6 +6,8 @@ export class SubCategory {
   subCategoryDescription?: string;
   subCategoryVisible: boolean;
   categoryID: number;
+  categorySlug?: string;
+  categoryName?: string;
 }
 
 // These labels should be used anywhere in the sheets' column-header, prefixed with a `#`

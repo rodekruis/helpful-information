@@ -71,13 +71,49 @@ export class OffersService {
 
   public async getSubCategories(region: string): Promise<SubCategory[]> {
     if (this.needsCaching(CacheName.subCategories, region)) {
-      this.setCache(
-        CacheName.subCategories,
+      let subCategories = await this.spreadsheetService.getSubCategories(
         region,
-        await this.spreadsheetService.getSubCategories(region),
       );
+      subCategories = subCategories.map((subCategory: SubCategory) => {
+        return SpreadsheetService.addParentCategoryDetails(
+          subCategory,
+          this.cache[CacheName.categories].data,
+        );
+      });
+
+      this.setCache(CacheName.subCategories, region, subCategories);
     }
     return this.cache[CacheName.subCategories].data;
+  }
+
+  public async findSubCategory(query: {
+    region: string;
+    categoryID?: number;
+    categorySlug?: string;
+    subCategoryID?: number;
+    subCategorySlug?: string;
+  }): Promise<SubCategory | undefined> {
+    const subCategories = await this.getSubCategories(query.region);
+
+    const foundSubCategory = subCategories.find((subCategory) => {
+      const subCategoryMatches =
+        subCategory.slug === query.subCategorySlug ||
+        subCategory.subCategoryID === query.subCategoryID;
+      const categoryMatches =
+        subCategory.categorySlug === query.categorySlug ||
+        subCategory.categoryID === query.categoryID;
+
+      return subCategoryMatches && categoryMatches;
+    });
+
+    if (!foundSubCategory) {
+      this.loggingService.logEvent(
+        LoggingEventCategory.error,
+        LoggingEvent.NotFoundSubCategory,
+        query,
+      );
+    }
+    return foundSubCategory;
   }
 
   public getOnlyChildSubCategory(
@@ -136,6 +172,7 @@ export class OffersService {
 
       return offerMatches && subCategoryMatches && categoryMatches;
     });
+
     if (!foundOffer) {
       this.loggingService.logEvent(
         LoggingEventCategory.error,

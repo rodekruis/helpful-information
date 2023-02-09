@@ -38,8 +38,7 @@ export class SubCategoryPageComponent implements OnInit {
 
   @Input()
   public categories: Category[];
-  @Input()
-  public subCategories: SubCategory[];
+
   @Input()
   public offers: Offer[];
   @Input()
@@ -61,12 +60,6 @@ export class SubCategoryPageComponent implements OnInit {
   private async handleRouteParams(params: Params) {
     let categorySlug = params.categorySlug;
     let legacyCategoryID = getLegacyID(categorySlug, SlugPrefix.category);
-
-    let subCategorySlug = params.subCategorySlug;
-    let legacySubCategoryID = getLegacyID(
-      subCategorySlug,
-      SlugPrefix.subCategory,
-    );
 
     this.region = params.region;
 
@@ -93,29 +86,23 @@ export class SubCategoryPageComponent implements OnInit {
 
     if (!this.category) return;
 
-    if (!this.subCategories) {
-      this.subCategories = await this.offersService.getSubCategories(
-        this.region,
-      );
-
-      if (this.subCategories) {
-        this.subCategories = this.subCategories.filter((subCategory) => {
-          return subCategory.categoryID === this.category.categoryID;
-        });
-      }
-    }
-    if (!this.subCategories) return;
-
     if (!this.subCategory) {
-      this.subCategory = this.subCategories.find((subCategory) => {
-        return (
-          subCategory.slug === subCategorySlug ||
-          subCategory.subCategoryID === legacySubCategoryID
-        );
+      this.subCategory = await this.offersService.findSubCategory({
+        region: this.region,
+        categoryID: this.category.categoryID,
+        categorySlug: this.category.slug,
+        subCategorySlug: params.subCategorySlug,
+        subCategoryID: getLegacyID(
+          params.subCategorySlug,
+          SlugPrefix.subCategory,
+        ),
       });
     }
 
-    if (!this.subCategory) return;
+    if (!this.subCategory) {
+      this.router.navigate([this.region, this.category.slug]);
+      return;
+    }
 
     if (!this.offers) {
       this.offers = await this.offersService.getOffers(this.region);
@@ -131,7 +118,7 @@ export class SubCategoryPageComponent implements OnInit {
     });
 
     // Upgrade ID-based slug(s) to real slug(s)
-    if (subCategorySlug !== this.subCategory.slug) {
+    if (params.subCategorySlug !== this.subCategory.slug) {
       this.router.navigate(
         [this.region, this.category.slug, this.subCategory.slug],
         {
