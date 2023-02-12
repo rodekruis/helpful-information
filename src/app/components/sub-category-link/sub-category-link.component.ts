@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Category } from 'src/app/models/category.model';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -23,9 +22,6 @@ export class SubCategoryLinkComponent {
   @Input()
   subCategory: SubCategory;
 
-  @Input()
-  category: Category;
-
   constructor(private loggingService?: LoggingService) {}
 
   public click() {
@@ -36,9 +32,11 @@ export class SubCategoryLinkComponent {
       LoggingEventCategory.ai,
       LoggingEvent.SubCategoryClick,
       {
-        categoryID: this.category.categoryID,
-        categorySlug: this.category.slug ? this.category.slug : '',
-        category: this.category.categoryName,
+        categoryID: this.subCategory.categoryID,
+        categorySlug: this.subCategory.categorySlug
+          ? this.subCategory.categorySlug
+          : '',
+        category: this.subCategory.categoryName,
         subCategoryID: this.subCategory.subCategoryID,
         subCategorySlug: this.subCategory.slug ? this.subCategory.slug : '',
         subCategory: this.subCategory.subCategoryName,
