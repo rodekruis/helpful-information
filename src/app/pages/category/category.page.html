@@ -12,11 +12,11 @@
 </p>
 
 <ul
-  *ngIf="subCategories?.length"
+  *ngIf="subCategories && subCategories?.length && (subCategories|categoryFilter:category)?.length"
   class="list-flat ion-margin-vertical"
 >
   <li
-    *ngFor="let subCategoryItem of subCategories"
+    *ngFor="let subCategoryItem of subCategories|categoryFilter:category"
     class="ion-margin-bottom"
   >
     <app-sub-category-link

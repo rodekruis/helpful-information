@@ -9,9 +9,10 @@ import { Offer } from 'src/app/models/offer.model';
 import { QASet } from 'src/app/models/qa-set.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
+import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
+import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { getLegacyID } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
@@ -23,10 +24,11 @@ import { environment } from 'src/environments/environment';
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule,
     OfferLinkComponent,
     QASetComponent,
     LastUpdatedTimeComponent,
+    CategoryFilterPipe,
+    SubCategoryFilterPipe,
   ],
 })
 export class SubCategoryPageComponent implements OnInit {

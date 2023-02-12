@@ -5,6 +5,7 @@ import { SubCategoryLinkComponent } from 'src/app/components/sub-category-link/s
 import { Category } from 'src/app/models/category.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
+import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { getLegacyID } from 'src/app/shared/utils';
@@ -14,7 +15,7 @@ import { getLegacyID } from 'src/app/shared/utils';
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.scss'],
   standalone: true,
-  imports: [CommonModule, SubCategoryLinkComponent],
+  imports: [CommonModule, SubCategoryLinkComponent, CategoryFilterPipe],
 })
 export class CategoryPageComponent implements OnInit {
   private region: string;
@@ -64,12 +65,6 @@ export class CategoryPageComponent implements OnInit {
       this.subCategories = await this.offersService.getAllSubCategories(
         this.region,
       );
-
-      if (this.subCategories) {
-        this.subCategories = this.subCategories.filter((subCategory) => {
-          return subCategory.categoryID === this.category.categoryID;
-        });
-      }
     }
 
     this.pageMeta.setTitle({

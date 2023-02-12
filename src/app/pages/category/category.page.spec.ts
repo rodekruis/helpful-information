@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { CategoryPageComponent } from './category.page';
@@ -11,7 +10,6 @@ describe('CategoryPageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CategoryFilterPipe],
       imports: [RouterTestingModule],
       providers: [
         {

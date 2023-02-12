@@ -40,10 +40,7 @@
   <ng-container
     *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && category && !subCategory"
   >
-    <app-category-page
-      [category]="category"
-      [subCategories]="subCategories|categoryFilter:category"
-    ></app-category-page>
+    <app-category-page [category]="category"></app-category-page>
   </ng-container>
 
   <!-- Sub-Category-page = Offer-list/Q&A-list -->
