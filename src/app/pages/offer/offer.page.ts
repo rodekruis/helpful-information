@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
+import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferComponent } from 'src/app/components/offer/offer.component';
 import { Offer } from 'src/app/models/offer.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
@@ -21,6 +22,7 @@ import { getLegacyID } from 'src/app/shared/utils';
     SharedModule,
     BreadcrumbsComponent,
     OfferComponent,
+    LastUpdatedTimeComponent,
   ],
 })
 export class OfferPageComponent implements OnInit {

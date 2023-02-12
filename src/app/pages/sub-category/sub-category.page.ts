@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferLinkComponent } from 'src/app/components/offer-link/offer-link.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import { Category } from 'src/app/models/category.model';
@@ -25,6 +26,7 @@ import { environment } from 'src/environments/environment';
     SharedModule,
     OfferLinkComponent,
     QASetComponent,
+    LastUpdatedTimeComponent,
   ],
 })
 export class SubCategoryPageComponent implements OnInit {
