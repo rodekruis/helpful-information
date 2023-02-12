@@ -9,7 +9,7 @@
 </p>
 
 <ul
-  *ngIf="qaSets && (qaSets | categoryFilter: category | subCategoryFilter: subCategory).length"
+  *ngIf="useQandAs && qaSets && qaSets?.length && (qaSets | categoryFilter: category | subCategoryFilter: subCategory)?.length"
   class="list-flat ion-margin-vertical"
 >
   <li
@@ -20,7 +20,10 @@
   </li>
 </ul>
 
-<ul class="list-flat ion-margin-vertical">
+<ul
+  *ngIf="offers && offers?.length"
+  class="list-flat ion-margin-vertical"
+>
   <li
     *ngFor="let offerItem of offers | categoryFilter: category | subCategoryFilter: subCategory"
     class="ion-margin-bottom"

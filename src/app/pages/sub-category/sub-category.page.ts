@@ -32,6 +32,8 @@ import { environment } from 'src/environments/environment';
 export class SubCategoryPageComponent implements OnInit {
   private region: string;
 
+  public useQandAs = environment.useQandAs;
+
   @Input()
   public category: Category;
 
