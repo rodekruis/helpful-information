@@ -1,0 +1,85 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    ["Key", "Value", "Example value", "", "SOURCE", "TRANSLATION (auto)"],
+    [
+      "Logo URL",
+      "https://raw.githubusercontent.com/rodekruis/helpful-information/main/src/assets/icons/red_cross.png"
+    ],
+    [
+      "App/Site Name/title",
+      "Test/Example",
+      "",
+      "",
+      "Test/Example",
+      "Test/Voorbeeld"
+    ],
+    ["Greeting/Heading", "Hello!", "", "", "Hello!", "Hallo!"],
+    [
+      "Introduction text",
+      "This website is made to give helpful information...\n\nMultiple lines of text,\ncan be used."
+    ],
+    ["Label: Back Button", "Up", "\"Back\", \"Previous\"", "", "Back", "Rug"],
+    [
+      "Label: Main Screen Button/Logo",
+      "Main Screen",
+      "\"Main\", \"Home\", \"Start\"",
+      "",
+      "Main Screen",
+      "Hoofdscherm"
+    ],
+    ["Contact: Phone-number", "+31100000000", "+31100000000", "", "", "-"],
+    [
+      "Contact: WhatsApp URL",
+      "https://wa.me/31600000000?text=I%20have%20a%20question%20about:",
+      "https://wa.me/31600000000",
+      "",
+      "",
+      "-"
+    ],
+    ["Last Updated Time", "2022-11-10T10:17:44.070Z"],
+    [
+      "Label: \"Last updated\"",
+      "Last changed:",
+      "\"Last updated:\" or \"Up to date since:\"",
+      "",
+      "Last changed:",
+      "Laatst gewijzigd:"
+    ],
+    ["-"],
+    [
+      "Contact: Telegram URL",
+      "https://telegram.me/username",
+      "https://telegram.me/username",
+      "",
+      "",
+      "-"
+    ],
+    [],
+    [
+      "Label: Highlights - title",
+      "Recent changes",
+      "\"Recent changes\" or \"Latest updates\""
+    ],
+    [
+      "Label: Highlights - \"no items\"",
+      "No recent changes.",
+      "\"No recent changes.\" or \"No updates.\""
+    ],
+    [
+      "Label: Highlights - \"items changed: N\"",
+      "Items with changes:",
+      "\"Items with changes:\" or \"Recently changed items:\" or \"Updated items:\""
+    ],
+    [
+      "Label: Highlights - CTA",
+      "New! New!",
+      "\"Changes\", \"Updates\" or \"New!\""
+    ],
+    [],
+    ["Label: Search - page title", "Search page", "\"Search\", \"Find\""],
+    ["Label: Search - button action", "Find"],
+    ["Label: Search - items", "Results:", "\"Search results:\", \"Found:\""]
+  ]
+}

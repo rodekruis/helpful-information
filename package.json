@@ -15,6 +15,7 @@
     "pretest": "npm run lint",
     "test": "ng test --configuration=ci",
     "test:watch": "ng test --configuration=development",
+    "serve:local-data": "npx http-server ./data/ --port=3001 --cors='*' -i=false -c=-1 --ext=json",
     "upgrade:angular": "ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits",
     "lint": "npm run lint:syntax && ng lint",
     "lint:syntax": "prettier --check \"**/*.{md,yml,js,json,ts,scss,html}\"",

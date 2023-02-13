@@ -117,6 +117,27 @@ Some specific information needs to be configured before use:
 
 As part of the installed dev-dependencies, we use [Prettier](https://prettier.io/) to format our code and [husky](https://typicode.github.io/husky/#/?id=faq) to automate that when using Git.
 
+### Local API
+
+To use a local API, without the need for any Google account/credentials.
+
+1. Update the local [`environment.ts`](src/environments/environment.ts)-file with:
+
+   ```ts
+       regions: 'test-local-1',
+       regionsLabels: 'Test Local 1',
+       regionsSheetIds: 'test-sheet-id-1',
+
+       google_sheets_api_key: '<can be anything, will be ignored>';
+       google_sheets_api_url: 'http://localhost:3001',
+   ```
+
+2. Run (in a separate process/terminal):
+
+   npm run serve:local-data
+
+3. Adjust the JSON-files in the [`data`](data/)-directory to try out different content.
+
 ### Testing
 
 Automated tests are configured and can be run (once) with:
