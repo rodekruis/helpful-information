@@ -24,19 +24,25 @@
 
           The URL can only contain: lowercase "a-z", 0-9, separated by "-" characters.
 
-6.  Repeat step 2 - 4 for "**Sub-Categories**"-sheet
-7.  Copy cell from previous sheet
-8.  Paste "Data-validation only" on Slug-column (except column-header)
+6.  Set conditional formatting to highlight non-unique slugs:
 
-9.  Repeat step 2 - 4 for "**Offers**"-sheet
-10. Copy cell from previous sheet
-11. Paste "Data-validation only" on Slug-column (except column-header)
+    - Range: (CHANGE COLUMN-LETTER "C"!)
 
-12. Repeat step 2 - 4 for "**Q&As**"-sheet
-13. Copy cell from previous sheet
-14. Paste "Data-validation only" on Slug-column (except column-header)
+          Categories!C2:C98
 
-15. Override ALL Slug-column-header(s) with other header and set to: (from Formula-bar!)
+    - Custom Formula: (CHANGE COLUMN-LETTER "C"!)
+
+          =COUNTIF($C$2:$C2;$C2)>1
+
+    - Set cell-style/format to "warning"/"red"
+
+7.  Repeat step 2 - 6 for "**Sub-Categories**"-sheet
+
+8.  Repeat step 2 - 4 for "**Offers**"-sheet
+
+9.  Repeat step 2 - 4 for "**Q&As**"-sheet
+
+10. Override ALL Slug-column-header(s) with other header and set to: (from Formula-bar!)
 
     ```txt
 
