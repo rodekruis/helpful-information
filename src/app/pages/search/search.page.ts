@@ -23,7 +23,7 @@ import { SearchService } from 'src/app/services/search.service';
   ],
 })
 export class SearchPageComponent implements OnInit {
-  public region: string;
+  private region: string;
   public regionData: RegionData;
   public qaSets: QASet[];
   public searchQuery: string;

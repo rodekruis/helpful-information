@@ -44,6 +44,7 @@ export class SubCategoryPageComponent implements OnInit {
 
   @Input()
   public offers: Offer[];
+
   @Input()
   public qaSets: QASet[];
 

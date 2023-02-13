@@ -39,7 +39,7 @@ export class ReferralPageComponent implements OnInit {
 
   public regionData: RegionData = {};
 
-  public readonly rootHref: string = '/';
+  private readonly rootHref = '/';
 
   public loading = false;
 

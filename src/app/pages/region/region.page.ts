@@ -22,10 +22,10 @@ export class RegionPageComponent implements OnInit {
   public useQandAs = environment.useQandAs;
   public useQandASearch = environment.useQandASearch;
 
-  public region: string;
+  private region: string;
   public regionData: RegionData;
   public categories: Category[];
-  public subCategories: SubCategory[];
+  private subCategories: SubCategory[];
   public qaSets: QASet[];
   public qaHighlights: QASet[];
 
