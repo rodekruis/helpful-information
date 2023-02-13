@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
   standalone: true,
   imports: [CommonModule, RouterModule, CategoryLinkComponent],
 })
-export class RegionPageComponent implements OnInit {
+export default class RegionPageComponent implements OnInit {
   public useQandAs = environment.useQandAs;
   public useQandASearch = environment.useQandASearch;
 

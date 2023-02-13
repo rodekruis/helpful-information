@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
-import { RegionPageComponent } from './region.page';
+import RegionPageComponent from './region.page';
 
 describe('RegionPageComponent', () => {
   let component: RegionPageComponent;

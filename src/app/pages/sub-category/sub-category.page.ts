@@ -31,7 +31,7 @@ import { environment } from 'src/environments/environment';
     SubCategoryFilterPipe,
   ],
 })
-export class SubCategoryPageComponent implements OnInit {
+export default class SubCategoryPageComponent implements OnInit {
   private region: string;
 
   public useQandAs = environment.useQandAs;

@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import { SearchPageComponent } from './search.page';
+import SearchPageComponent from './search.page';
 
 describe('SearchPageComponent', () => {
   let component: SearchPageComponent;

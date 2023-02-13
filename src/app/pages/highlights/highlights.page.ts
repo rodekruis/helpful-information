@@ -15,7 +15,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   standalone: true,
   imports: [CommonModule, RouterModule, QASetListComponent],
 })
-export class HighlightsPageComponent implements OnInit {
+export default class HighlightsPageComponent implements OnInit {
   private region: string;
   public regionData: RegionData;
   public qaHighlights: QASet[];

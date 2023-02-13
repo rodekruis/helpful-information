@@ -22,7 +22,7 @@ import { SearchService } from 'src/app/services/search.service';
     SearchInputComponent,
   ],
 })
-export class SearchPageComponent implements OnInit {
+export default class SearchPageComponent implements OnInit {
   private region: string;
   public regionData: RegionData;
   public qaSets: QASet[];

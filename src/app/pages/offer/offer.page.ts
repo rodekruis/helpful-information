@@ -25,7 +25,7 @@ import { getLegacyID } from 'src/app/shared/utils';
     LastUpdatedTimeComponent,
   ],
 })
-export class OfferPageComponent implements OnInit {
+export default class OfferPageComponent implements OnInit {
   public region: string;
 
   @Input()

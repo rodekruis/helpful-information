@@ -17,7 +17,7 @@ import { getLegacyID } from 'src/app/shared/utils';
   standalone: true,
   imports: [CommonModule, SubCategoryLinkComponent, CategoryFilterPipe],
 })
-export class CategoryPageComponent implements OnInit {
+export default class CategoryPageComponent implements OnInit {
   private region: string;
 
   @Input()

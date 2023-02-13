@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import { HighlightsPageComponent } from './highlights.page';
+import HighlightsPageComponent from './highlights.page';
 
 describe('HighlightsPageComponent', () => {
   let component: HighlightsPageComponent;
