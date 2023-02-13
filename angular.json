@@ -170,7 +170,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
@@ -178,7 +181,10 @@
   },
   "cli": {
     "analytics": false,
-    "schematicCollections": ["@ionic/angular-toolkit", "@schematics/angular"]
+    "schematicCollections": [
+      "@ionic/angular-toolkit",
+      "@schematics/angular"
+    ]
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
@@ -186,6 +192,12 @@
     },
     "@ionic/angular-toolkit:page": {
       "styleext": "scss"
+    },
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
     }
   }
 }
