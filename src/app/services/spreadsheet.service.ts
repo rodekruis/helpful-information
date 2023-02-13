@@ -31,13 +31,13 @@ export class SpreadsheetService {
   static visibleKey = 'Show';
   static booleanTrueKey = 'Yes';
 
-  private sheetIds = {};
+  private sheetIds: { [key: string]: string } = {};
 
   constructor(private loggingService?: LoggingService) {
     this.loadSheetIds();
   }
 
-  static readCellValue(row, key: number): string {
+  static readCellValue(row: string[], key: number): string {
     if (!!row && !!row[key] && key < row.length) {
       return row[key].trim();
     }
@@ -58,7 +58,7 @@ export class SpreadsheetService {
       .trim()
       .split(/\s*,\s*/);
 
-    regions.forEach((_, index) => {
+    regions.forEach((_, index: number) => {
       this.sheetIds[regions[index]] = googleSheetsIds[index];
     });
   }
@@ -148,7 +148,7 @@ export class SpreadsheetService {
   }
 
   private convertCategoryRowToCategoryObject(
-    row: any[],
+    row: string[],
     colMap: ColumnMap,
   ): Category {
     const id = Number(
@@ -205,7 +205,7 @@ export class SpreadsheetService {
   }
 
   private convertSubCategoryRowToSubCategoryObject(
-    row: any[],
+    row: string[],
     colMap: ColumnMap,
   ): SubCategory {
     const id = Number(
@@ -245,7 +245,7 @@ export class SpreadsheetService {
     };
   }
 
-  public getSubCategories(region): Promise<SubCategory[]> {
+  public getSubCategories(region: string): Promise<SubCategory[]> {
     return fetch(this.getSheetUrl(region, SheetName.subCategories))
       .then((response) => response.json())
       .then((response) => {
@@ -276,7 +276,10 @@ export class SpreadsheetService {
       });
   }
 
-  private convertOfferRowToOfferObject(row: any[], colMap: ColumnMap): Offer {
+  private convertOfferRowToOfferObject(
+    row: string[],
+    colMap: ColumnMap,
+  ): Offer {
     const id = Number(
       SpreadsheetService.readCellValue(row, colMap.get(OfferCol.id)),
     );
@@ -385,7 +388,7 @@ export class SpreadsheetService {
     };
   }
 
-  public getOffers(region): Promise<Offer[]> {
+  public getOffers(region: string): Promise<Offer[]> {
     return fetch(this.getSheetUrl(region, SheetName.offers))
       .then((response) => response.json())
       .then((response) => {
@@ -411,7 +414,7 @@ export class SpreadsheetService {
   }
 
   private convertReferralPageRowToRegionData(
-    referralPageDataRows: any[],
+    referralPageDataRows: string[][],
   ): RegionData {
     return {
       pageLogo: SpreadsheetService.readCellValue(referralPageDataRows[1], 1),
@@ -487,7 +490,11 @@ export class SpreadsheetService {
       });
   }
 
-  private convertQaRowToObject(row, colMap: ColumnMap, index: number): QASet {
+  private convertQaRowToObject(
+    row: string[],
+    colMap: ColumnMap,
+    index: number,
+  ): QASet {
     return {
       id: index,
       subCategoryID: Number(
@@ -576,7 +583,7 @@ export class SpreadsheetService {
     return false;
   }
 
-  public getQAs(region): Promise<QASet[]> {
+  public getQAs(region: string): Promise<QASet[]> {
     return fetch(this.getSheetUrl(region, SheetName.QandAs))
       .then((response) => response.json())
       .then((response) => {
@@ -591,7 +598,7 @@ export class SpreadsheetService {
 
         return response.values
           .slice(1) // Remove header-row
-          .map((row: any[], index: number) =>
+          .map((row: string[], index: number) =>
             this.convertQaRowToObject(row, qaColumnMap, index),
           )
           .map((item: QASet, index: number, all: QASet[]) =>
