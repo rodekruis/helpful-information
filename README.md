@@ -73,7 +73,7 @@ Optional:
 
         fnm use
 
-- Install dependencies (from this folder):
+- Install dependencies (from this directory):
 
       npm install
 
@@ -323,11 +323,11 @@ Using the search-input Q&A-sets can be filtered to match 1 or more keywords to t
 The web-app can be deployed as a static single-page-app or PWA.
 
 - Make sure the `.env`-configuration is prepared. See: [`.env.example`](.env.example)
-- To generate a folder(`www`) with all HTML, JS, JSON and SVG assets, run:
+- To generate a directory(`www`) with all HTML, JS, JSON and SVG assets, run:
 
       npm run build:production
 
-- This folder can be deployed to any hosting-solution (supporting HTTPS), using [the recommended server configuration](https://v13.angular.io/guide/deployment#server-configuration).
+- This directory can be deployed to any hosting-solution (supporting HTTPS), using [the recommended server configuration](https://v13.angular.io/guide/deployment#server-configuration).
 
 ### Using Azure Static Web Apps
 
