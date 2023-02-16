@@ -30,7 +30,7 @@
     "@angular/platform-browser-dynamic": "^15.1.4",
     "@angular/router": "^15.1.4",
     "@angular/service-worker": "^15.1.4",
-    "@ionic/angular": "^6.5.3",
+    "@ionic/angular": "^6.5.4",
     "@ionic/cli": "^6.20.8",
     "@microsoft/applicationinsights-web": "^2.8.10",
     "linkify-it": "^4.0.1",
