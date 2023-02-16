@@ -1,4 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -10,14 +13,19 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-offer',
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.scss'],
+  standalone: true,
+  imports: [CommonModule, IonicModule, RouterModule],
 })
 export class OfferComponent {
   @Input()
-  offer: Offer;
+  public offer: Offer;
 
-  constructor(private loggingService: LoggingService) {}
+  constructor(private loggingService?: LoggingService) {}
 
-  public logClick(name: string) {
+  public logDetailClick(name: string) {
+    if (!this.loggingService) {
+      return;
+    }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.OfferDetailClick,

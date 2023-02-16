@@ -1,3 +1,5 @@
+import { SlugPrefix } from '../models/slug-prefix.enum';
+
 export const getFullUrl = (value: string): string => {
   if (
     value &&
@@ -21,4 +23,49 @@ export const getDateFromString = (value: string): Date | null => {
   } catch {
     return null;
   }
+};
+
+/**
+ * Create a slug based on input-`value`, or a fallback
+ */
+export const createSlug = (
+  value: string,
+  identifier: number | string,
+  prefix?: SlugPrefix | string,
+): string => {
+  if (value && value.length > 0) {
+    return value;
+  }
+  let slug = String(identifier);
+
+  if (prefix && identifier) {
+    slug = prefix + '-' + slug;
+  }
+
+  return slug;
+};
+
+export const getLegacyID = (
+  slug: string,
+  prefix: SlugPrefix | string,
+): number | null => {
+  if (!slug) {
+    return null;
+  }
+
+  if (!prefix || !prefix.match(/[a-z]+/)) {
+    return null;
+  }
+  const matched = slug.match(new RegExp('' + prefix + '-([0-9]+)', 'i'));
+
+  if (matched) {
+    const fallbackID = Number(matched[1]);
+
+    return !isNaN(fallbackID) ? fallbackID : null;
+  }
+  return null;
+};
+
+export const getParentPath = (fullPath: string): string => {
+  return fullPath.split('/').slice(0, -1).join('/');
 };

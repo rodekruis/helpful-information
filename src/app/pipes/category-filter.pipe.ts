@@ -6,6 +6,7 @@ import { QASet } from '../models/qa-set.model';
 
 @Pipe({
   name: 'categoryFilter',
+  standalone: true,
 })
 export class CategoryFilterPipe implements PipeTransform {
   transform(

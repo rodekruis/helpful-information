@@ -19,7 +19,7 @@ export class SearchService {
   }
 
   public query(rawQuery: string): QASet[] {
-    let results = [];
+    let results: QASet[] = [];
     let safeQuery = this.sanitizeSearchQuery(rawQuery);
     safeQuery = safeQuery.replace(/[.]/g, '\\.'); // Escape the actual "." character to use as-is
 

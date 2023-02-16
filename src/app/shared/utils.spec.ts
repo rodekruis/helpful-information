@@ -1,4 +1,4 @@
-import { getDateFromString, getFullUrl } from './utils';
+import { getDateFromString, getFullUrl, getParentPath } from './utils';
 
 describe('Utils - getFullUrl', () => {
   it('should return a full URL for valid values', () => {
@@ -29,6 +29,34 @@ describe('Utils - getFullUrl', () => {
     testValues.forEach((value, index) => {
       const output = getFullUrl(value);
       expect(output).toEqual(testValues[index]);
+    });
+  });
+});
+
+describe('Utils - getParentPath', () => {
+  it('should return the path of the parent folder', () => {
+    const testValues = [
+      '/',
+      '/sub-folder',
+      '/parent-folder/sub-folder',
+      '/parent-folder/sub-folder?q=test',
+      '/parent-folder/sub-folder#test',
+      '/parent-folder/parent-sub-folder/sub-folder',
+      '/parent-folder/parent-sub-folder/sub-folder?q=test#test',
+    ];
+    const testOutputs = [
+      '',
+      '',
+      '/parent-folder',
+      '/parent-folder',
+      '/parent-folder',
+      '/parent-folder/parent-sub-folder',
+      '/parent-folder/parent-sub-folder',
+    ];
+
+    testValues.forEach((value, index) => {
+      const output = getParentPath(value);
+      expect(output).toEqual(testOutputs[index]);
     });
   });
 });

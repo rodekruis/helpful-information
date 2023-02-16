@@ -1,13 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { QASet } from 'src/app/models/qa-set.model';
 import { ConvertUrlsPipe } from 'src/app/pipes/convert-urls.pipe';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 
 @Component({
   selector: 'app-q-a-set',
   templateUrl: './q-a-set.component.html',
   styleUrls: ['./q-a-set.component.scss'],
-  providers: [ConvertUrlsPipe],
+  standalone: true,
+  imports: [CommonModule, ConvertUrlsPipe],
 })
 export class QASetComponent {
   @Input()
@@ -18,13 +20,17 @@ export class QASetComponent {
 
   public labelLastUpdated: string;
 
-  constructor(pageDataService: ReferralPageDataService) {
+  constructor(regionDataService: RegionDataService) {
     if (
-      !!pageDataService &&
-      !!pageDataService.data &&
-      !!pageDataService.data.labelLastUpdated
+      !!regionDataService &&
+      !!regionDataService.data &&
+      !!regionDataService.data.labelLastUpdated
     ) {
-      this.labelLastUpdated = pageDataService.data.labelLastUpdated;
+      this.labelLastUpdated = regionDataService.data.labelLastUpdated;
     }
+  }
+
+  public isActive(slug: string): boolean {
+    return window.location.hash === `#${slug}`;
   }
 }

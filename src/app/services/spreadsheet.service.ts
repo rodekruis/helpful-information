@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Category, CategoryCol } from 'src/app/models/category.model';
 import { Offer, OfferCol } from 'src/app/models/offer.model';
-import {
-  PageDataFallback,
-  ReferralPageData,
-} from 'src/app/models/referral-page-data';
+import { RegionData, RegionDataFallback } from 'src/app/models/region-data';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory, SubCategoryCol } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
@@ -14,7 +11,8 @@ import {
   LoggingEventCategory,
 } from '../models/logging-event.enum';
 import { QACol, QASet } from '../models/qa-set.model';
-import { getDateFromString, getFullUrl } from '../shared/utils';
+import { SlugPrefix } from '../models/slug-prefix.enum';
+import { createSlug, getDateFromString, getFullUrl } from '../shared/utils';
 
 enum SheetName {
   page = 'Referral Page',
@@ -33,13 +31,13 @@ export class SpreadsheetService {
   static visibleKey = 'Show';
   static booleanTrueKey = 'Yes';
 
-  private sheetIds = {};
+  private sheetIds: { [key: string]: string } = {};
 
   constructor(private loggingService?: LoggingService) {
     this.loadSheetIds();
   }
 
-  static readCellValue(row, key: number): string {
+  static readCellValue(row: string[], key: number): string {
     if (!!row && !!row[key] && key < row.length) {
       return row[key].trim();
     }
@@ -60,7 +58,7 @@ export class SpreadsheetService {
       .trim()
       .split(/\s*,\s*/);
 
-    regions.forEach((_, index) => {
+    regions.forEach((_, index: number) => {
       this.sheetIds[regions[index]] = googleSheetsIds[index];
     });
   }
@@ -84,31 +82,84 @@ export class SpreadsheetService {
     return colMap;
   }
 
-  static getCategoryName(
+  static getCategory(
     id: Category['categoryID'],
     collection: Category[],
-  ): string {
-    if (!collection) return '';
+  ): Category | null {
+    if (!collection) return null;
     const category = collection.find((item) => item.categoryID === id);
-    return category ? category.categoryName : '';
+    return category ? category : null;
   }
 
-  static getSubCategoryName(
+  static getSubCategory(
     id: SubCategory['subCategoryID'],
     collection: SubCategory[],
-  ): string {
-    if (!collection) return '';
+  ): SubCategory | null {
+    if (!collection) return null;
     const subCategory = collection.find((item) => item.subCategoryID === id);
-    return subCategory ? subCategory.subCategoryName : '';
+    return subCategory ? subCategory : null;
+  }
+
+  static addParentSubCategoryDetails(
+    entity: Offer,
+    subCategories: SubCategory[],
+  ): Offer;
+  static addParentSubCategoryDetails(
+    entity: QASet,
+    subCategories: SubCategory[],
+  ): QASet;
+  static addParentSubCategoryDetails(
+    entity: Offer | QASet,
+    subCategories: SubCategory[],
+  ): Offer | QASet {
+    const subCategory = SpreadsheetService.getSubCategory(
+      entity.subCategoryID,
+      subCategories,
+    );
+    entity.subCategoryName =
+      subCategory && subCategory.subCategoryName
+        ? subCategory.subCategoryName
+        : '';
+    entity.subCategorySlug =
+      subCategory && subCategory.slug ? subCategory.slug : '';
+
+    return entity;
+  }
+
+  static addParentCategoryDetails(
+    entity: SubCategory,
+    categories: Category[],
+  ): SubCategory;
+  static addParentCategoryDetails(entity: Offer, categories: Category[]): Offer;
+  static addParentCategoryDetails(entity: QASet, categories: Category[]): QASet;
+  static addParentCategoryDetails(
+    entity: SubCategory | Offer | QASet,
+    categories: Category[],
+  ): SubCategory | Offer | QASet {
+    const category = SpreadsheetService.getCategory(
+      entity.categoryID,
+      categories,
+    );
+    entity.categoryName =
+      category && category.categoryName ? category.categoryName : '';
+    entity.categorySlug = category && category.slug ? category.slug : '';
+
+    return entity;
   }
 
   private convertCategoryRowToCategoryObject(
-    row: any[],
+    row: string[],
     colMap: ColumnMap,
   ): Category {
+    const id = Number(
+      SpreadsheetService.readCellValue(row, colMap.get(CategoryCol.id)),
+    );
     return {
-      categoryID: Number(
-        SpreadsheetService.readCellValue(row, colMap.get(CategoryCol.id)),
+      categoryID: id,
+      slug: createSlug(
+        SpreadsheetService.readCellValue(row, colMap.get(CategoryCol.slug)),
+        id,
+        SlugPrefix.category,
       ),
       categoryName: SpreadsheetService.readCellValue(
         row,
@@ -154,12 +205,18 @@ export class SpreadsheetService {
   }
 
   private convertSubCategoryRowToSubCategoryObject(
-    row: any[],
+    row: string[],
     colMap: ColumnMap,
   ): SubCategory {
+    const id = Number(
+      SpreadsheetService.readCellValue(row, colMap.get(SubCategoryCol.id)),
+    );
     return {
-      subCategoryID: Number(
-        SpreadsheetService.readCellValue(row, colMap.get(SubCategoryCol.id)),
+      subCategoryID: id,
+      slug: createSlug(
+        SpreadsheetService.readCellValue(row, colMap.get(SubCategoryCol.slug)),
+        id,
+        SlugPrefix.subCategory,
       ),
       subCategoryName: SpreadsheetService.readCellValue(
         row,
@@ -188,7 +245,7 @@ export class SpreadsheetService {
     };
   }
 
-  public getSubCategories(region): Promise<SubCategory[]> {
+  public getSubCategories(region: string): Promise<SubCategory[]> {
     return fetch(this.getSheetUrl(region, SheetName.subCategories))
       .then((response) => response.json())
       .then((response) => {
@@ -219,10 +276,19 @@ export class SpreadsheetService {
       });
   }
 
-  private convertOfferRowToOfferObject(row: any[], colMap: ColumnMap): Offer {
+  private convertOfferRowToOfferObject(
+    row: string[],
+    colMap: ColumnMap,
+  ): Offer {
+    const id = Number(
+      SpreadsheetService.readCellValue(row, colMap.get(OfferCol.id)),
+    );
     return {
-      offerID: Number(
-        SpreadsheetService.readCellValue(row, colMap.get(OfferCol.id)),
+      offerID: id,
+      slug: createSlug(
+        SpreadsheetService.readCellValue(row, colMap.get(OfferCol.slug)),
+        id,
+        SlugPrefix.offer,
       ),
       subCategoryID: Number(
         SpreadsheetService.readCellValue(row, colMap.get(OfferCol.subCategory)),
@@ -322,7 +388,7 @@ export class SpreadsheetService {
     };
   }
 
-  public getOffers(region): Promise<Offer[]> {
+  public getOffers(region: string): Promise<Offer[]> {
     return fetch(this.getSheetUrl(region, SheetName.offers))
       .then((response) => response.json())
       .then((response) => {
@@ -347,92 +413,88 @@ export class SpreadsheetService {
       });
   }
 
-  private convertReferralPageDataRowToReferralPageDataObject(
-    referralPageDataRows,
-  ): ReferralPageData {
+  private convertReferralPageRowToRegionData(
+    referralPageDataRows: string[][],
+  ): RegionData {
     return {
-      referralPageLogo: SpreadsheetService.readCellValue(
-        referralPageDataRows[1],
-        1,
-      ),
-      referralPageTitle: SpreadsheetService.readCellValue(
-        referralPageDataRows[2],
-        1,
-      ),
-      referralPageGreeting: SpreadsheetService.readCellValue(
+      pageLogo: SpreadsheetService.readCellValue(referralPageDataRows[1], 1),
+      pageTitle: SpreadsheetService.readCellValue(referralPageDataRows[2], 1),
+      pageGreeting: SpreadsheetService.readCellValue(
         referralPageDataRows[3],
         1,
       ),
-      referralPageInstructions: SpreadsheetService.readCellValue(
+      pageInstructions: SpreadsheetService.readCellValue(
         referralPageDataRows[4],
         1,
       ),
-      referralBackButtonLabel:
+      labelBackButton:
         SpreadsheetService.readCellValue(referralPageDataRows[5], 1) ||
-        PageDataFallback.referralBackButtonLabel,
-      referralMainScreenButtonLabel:
+        RegionDataFallback.labelBackButton,
+      labelMainScreenButton:
         SpreadsheetService.readCellValue(referralPageDataRows[6], 1) ||
-        PageDataFallback.referralMainScreenButtonLabel,
-      referralPhoneNumber: SpreadsheetService.readCellValue(
+        RegionDataFallback.labelMainScreenButton,
+      contactPhoneNumber: SpreadsheetService.readCellValue(
         referralPageDataRows[7],
         1,
       ),
-      referralWhatsAppLink: SpreadsheetService.readCellValue(
+      contactWhatsAppLink: SpreadsheetService.readCellValue(
         referralPageDataRows[8],
         1,
       ),
-      referralTelegramLink: SpreadsheetService.readCellValue(
+      contactTelegramLink: SpreadsheetService.readCellValue(
         referralPageDataRows[12],
         1,
       ),
-      referralLastUpdatedTime: SpreadsheetService.readCellValue(
+      lastUpdatedTime: SpreadsheetService.readCellValue(
         referralPageDataRows[9],
         1,
       ),
       labelLastUpdated:
         SpreadsheetService.readCellValue(referralPageDataRows[10], 1) ||
-        PageDataFallback.labelLastUpdated,
+        RegionDataFallback.labelLastUpdated,
       labelHighlightsButton:
         SpreadsheetService.readCellValue(referralPageDataRows[17], 1) ||
-        PageDataFallback.labelHighlightsButton,
+        RegionDataFallback.labelHighlightsButton,
       labelHighlightsPageTitle:
         SpreadsheetService.readCellValue(referralPageDataRows[14], 1) ||
-        PageDataFallback.labelHighlightsPageTitle,
+        RegionDataFallback.labelHighlightsPageTitle,
       labelHighlightsItemsZero:
         SpreadsheetService.readCellValue(referralPageDataRows[15], 1) ||
-        PageDataFallback.labelHighlightsItemsZero,
+        RegionDataFallback.labelHighlightsItemsZero,
       labelHighlightsItemsCount:
         SpreadsheetService.readCellValue(referralPageDataRows[16], 1) ||
-        PageDataFallback.labelHighlightsItemsCount,
+        RegionDataFallback.labelHighlightsItemsCount,
       labelSearchPageTitle:
         SpreadsheetService.readCellValue(referralPageDataRows[19], 1) ||
-        PageDataFallback.labelSearchPageTitle,
+        RegionDataFallback.labelSearchPageTitle,
       labelSearchAction:
         SpreadsheetService.readCellValue(referralPageDataRows[20], 1) ||
-        PageDataFallback.labelSearchAction,
+        RegionDataFallback.labelSearchAction,
       labelSearchResultsCount:
         SpreadsheetService.readCellValue(referralPageDataRows[21], 1) ||
-        PageDataFallback.labelSearchResultsCount,
+        RegionDataFallback.labelSearchResultsCount,
     };
   }
 
-  public async getReferralPageData(region: string): Promise<ReferralPageData> {
+  public async getReferralPageData(region: string): Promise<RegionData> {
     return fetch(this.getSheetUrl(region, SheetName.page))
       .then((response) => response.json())
       .then((response) => {
-        return this.convertReferralPageDataRowToReferralPageDataObject(
-          response.values,
-        );
+        return this.convertReferralPageRowToRegionData(response.values);
       })
       .catch((error) => {
         if (this.loggingService) {
           this.loggingService.logException(error, SeverityLevel.Critical);
         }
-        return new ReferralPageData();
+        return new RegionData();
       });
   }
 
-  private convertQaRowToObject(row, colMap: ColumnMap, index: number): QASet {
+  private convertQaRowToObject(
+    row: string[],
+    colMap: ColumnMap,
+    index: number,
+  ): QASet {
     return {
       id: index,
       subCategoryID: Number(
@@ -450,8 +512,10 @@ export class SpreadsheetService {
       dateUpdated: getDateFromString(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.updated)),
       ),
-      slug: String(
+      slug: createSlug(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.slug)),
+        index,
+        SlugPrefix.qaSet,
       ),
       parentSlug: String(
         SpreadsheetService.readCellValue(row, colMap.get(QACol.parent)),
@@ -519,7 +583,7 @@ export class SpreadsheetService {
     return false;
   }
 
-  public getQAs(region): Promise<QASet[]> {
+  public getQAs(region: string): Promise<QASet[]> {
     return fetch(this.getSheetUrl(region, SheetName.QandAs))
       .then((response) => response.json())
       .then((response) => {
@@ -534,7 +598,7 @@ export class SpreadsheetService {
 
         return response.values
           .slice(1) // Remove header-row
-          .map((row: any[], index: number) =>
+          .map((row: string[], index: number) =>
             this.convertQaRowToObject(row, qaColumnMap, index),
           )
           .map((item: QASet, index: number, all: QASet[]) =>

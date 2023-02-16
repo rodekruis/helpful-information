@@ -9,6 +9,7 @@ export const mockQASet1: QASet = {
   isHighlight: true,
   question: 'Question A',
   answer: 'Answer A',
+  slug: 'question-1',
   children: [],
 };
 
@@ -32,7 +33,7 @@ export const mockQASet2with1SubQuestion: QASet = {
       isHighlight: false,
       question: 'SubQuestion B-1',
       answer: 'Answer B-1',
-      slug: '',
+      slug: 'question-3',
       parentSlug: 'mock-question-b',
       children: [],
     },

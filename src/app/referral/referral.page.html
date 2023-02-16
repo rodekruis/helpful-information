@@ -1,12 +1,12 @@
 <ion-header>
   <app-header
-    [title]="referralPageData?.referralPageTitle"
+    [title]="regionData?.pageTitle"
     [loading]="loading"
     (backAction)="goBack()"
-    [backButtonLabel]="referralPageData?.referralBackButtonLabel"
-    [logoUrl]="referralPageData?.referralPageLogo"
+    [backButtonLabel]="regionData?.labelBackButton"
+    [logoUrl]="regionData?.pageLogo"
     (logoAction)="showRootPage()"
-    [logoActionLabel]="referralPageData?.referralMainScreenButtonLabel"
+    [logoActionLabel]="regionData?.labelMainScreenButton"
   ></app-header>
 </ion-header>
 
@@ -32,280 +32,34 @@
     </div>
   </ng-container>
 
-  <!-- Region-page = Category-list -->
-  <ng-container
-    *ngIf="isSupportedRegion() && !loading && !showHighlights && !showSearch && !category && hasDataToShow()"
-  >
-    <div
-      *ngIf="useQandAs"
-      class="floating-action-area is_in-page layout--float-end text-style--end ion-margin-start"
-    >
-      <a
-        *ngIf="useQandAs && qaHighlights.length"
-        routerLink="."
-        [queryParams]="{ highlights: 'show' }"
-        queryParamsHandling="merge"
-        routerLinkActive
-        #qaHightlightsToggle="routerLinkActive"
-        [hidden]="qaHightlightsToggle.isActive"
-        [attr.title]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
-        [attr.aria-label]="referralPageData?.labelHighlightsItemsCount + ' ' + qaHighlights.length"
-        class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
-      >
-        <strong>
-          <small *ngIf="referralPageData?.labelHighlightsButton.length > 1">
-            {{ referralPageData?.labelHighlightsButton }}
-          </small>
-          <ng-container
-            *ngIf="referralPageData?.labelHighlightsButton.length === 1"
-          >
-            {{ referralPageData?.labelHighlightsButton }}
-          </ng-container>
-        </strong>
-      </a>
-      <br *ngIf="useQandAs && useQandASearch && qaSets.length" />
-      <a
-        *ngIf="useQandAs && useQandASearch && qaSets.length"
-        routerLink="."
-        [queryParams]="{ search: 'show' }"
-        queryParamsHandling="merge"
-        routerLinkActive
-        #qaSearchToggle="routerLinkActive"
-        [hidden]="qaSearchToggle.isActive"
-        [attr.title]="referralPageData?.labelSearchPageTitle"
-        [attr.aria-label]="referralPageData?.labelSearchPageTitle"
-        class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
-      >
-        <img
-          src="/assets/icons/search.svg"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          style="display: block"
-        />
-      </a>
-    </div>
-
-    <h2 class="ion-no-margin">{{ referralPageData.referralPageGreeting }}</h2>
-    <div
-      class="text-style--wrap-newlines ion-margin-vertical ion-padding-bottom"
-    >
-      <ion-text> {{ referralPageData.referralPageInstructions }} </ion-text>
-    </div>
-    <ul class="list-flat tile-grid tile-grid_base-3 ion-margin-vertical">
-      <li
-        *ngFor="let categoryItem of categories"
-        class="tile-grid--item"
-      >
-        <app-link-tile
-          [category]="categoryItem"
-          [subCategory]="getNextSubCategory(categoryItem)"
-        ></app-link-tile>
-      </li>
-      <li
-        *ngIf="(categories.length % 3) <= 1"
-        class="tile-grid--item"
-        aria-hidden="true"
-      >
-        <!-- filler-item for empty spot at 2nd-in-a-row -->
-      </li>
-      <li
-        *ngIf="(categories.length % 3) <= 2"
-        class="tile-grid--item"
-        aria-hidden="true"
-      >
-        <!-- filler-item for empty spot at 3rd-in-a-row -->
-      </li>
-    </ul>
-    <br /><br /><br />
-  </ng-container>
+  <router-outlet
+    *ngIf="isSupportedRegion() && !loading && (useUrlSlugs || (!useUrlSlugs && !category && !subCategory))"
+  ></router-outlet>
 
   <!-- Category-page = Sub-Category-list -->
   <ng-container
-    *ngIf="isSupportedRegion() && !loading && category && !subCategory"
+    *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && category && !subCategory"
   >
-    <h2 class="ion-no-margin text-style--header text-style--size-1">
-      {{ category.categoryName }}
-    </h2>
-    <p *ngIf="category.categoryDescription">
-      {{ category.categoryDescription }}
-    </p>
-
-    <ul class="list-flat ion-margin-vertical">
-      <li
-        *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
-        class="ion-margin-bottom"
-      >
-        <app-sub-category
-          [subCategory]="subCategoryItem"
-          [category]="category"
-        ></app-sub-category>
-      </li>
-    </ul>
+    <app-category-page [category]="category"></app-category-page>
   </ng-container>
 
   <!-- Sub-Category-page = Offer-list/Q&A-list -->
   <ng-container
-    *ngIf="isSupportedRegion() && !loading && category && subCategory && !offer"
+    *ngIf="isSupportedRegion() && !loading  && !useUrlSlugs && category && subCategory && !offer"
   >
-    <h2 class="ion-no-margin text-style--header text-style--size-1">
-      {{ subCategory.subCategoryName }}
-    </h2>
-    <p
-      *ngIf="subCategory.subCategoryDescription"
-      class="text-style--wrap-newlines"
-    >
-      {{ subCategory.subCategoryDescription }}
-    </p>
-
-    <ul
-      *ngIf="qaSets && (qaSets | categoryFilter: category | subCategoryFilter: subCategory).length"
-      class="list-flat ion-margin-vertical"
-    >
-      <li
-        *ngFor="let _qaSet of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
-        class="ion-margin-bottom"
-      >
-        <app-q-a-set [qaSet]="_qaSet"></app-q-a-set>
-      </li>
-    </ul>
-
-    <ul class="list-flat ion-margin-vertical">
-      <li
-        *ngFor="let _offer of offers | categoryFilter: category | subCategoryFilter: subCategory"
-        class="ion-margin-bottom"
-      >
-        <a
-          [routerLink]="['.']"
-          [queryParams]="{
-                categoryID: _offer.categoryID,
-                subCategoryID: _offer.subCategoryID,
-                offerID: _offer.offerID
-              }"
-          (click)="clickOffer(_offer)"
-          class="action list-item"
-        >
-          <span class="logo-badge list-item--icon">
-            <ion-img
-              [title]="_offer.offerIcon"
-              [src]="_offer.offerIcon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'"
-              alt=""
-              [attr.loading]="'lazy'"
-              [attr.decoding]="'async'"
-              class="logo-badge--image"
-            ></ion-img>
-          </span>
-          <span
-            class="list-item--content text-style--hide-overflow_4 text-style--wrap-newlines"
-          >
-            <ng-container *ngIf="_offer.offerName">
-              <strong>{{ _offer.offerName || '&nbsp;' }}</strong><br />
-            </ng-container>
-            {{ _offer.offerDescription }}
-          </span>
-        </a>
-      </li>
-    </ul>
-
-    <app-last-updated-time
-      [label]="referralPageData.labelLastUpdated"
-      class="ion-margin-vertical"
-    ></app-last-updated-time>
-  </ng-container>
-
-  <!-- Q&A-Highlights-page = Q&A-list -->
-  <ng-container *ngIf="isSupportedRegion() && !loading && showHighlights">
-    <div
-      class="floating-action-area is_in-page layout--float-end ion-margin-start"
-    >
-      <a
-        routerLink="."
-        [queryParams]="{ highlights: null }"
-        queryParamsHandling="merge"
-        [attr.title]="referralPageData?.referralBackButtonLabel"
-        [attr.aria-label]="referralPageData?.referralBackButtonLabel"
-        class="action is_round text-style--center"
-      >
-        <strong aria-hidden="true">&times;</strong>
-      </a>
-    </div>
-
-    <h2 class="ion-no-margin text-style--header text-style--size-1">
-      {{ referralPageData?.labelHighlightsPageTitle }}
-    </h2>
-
-    <p *ngIf="!qaHighlights.length">
-      {{ referralPageData?.labelHighlightsItemsZero }}
-    </p>
-
-    <p *ngIf="qaHighlights.length">
-      {{ referralPageData?.labelHighlightsItemsCount }}
-      <strong>{{ qaHighlights.length }}</strong>
-    </p>
-
-    <app-q-a-set-list
-      [list]="qaHighlights"
-      class="ion-margin-vertical"
-    ></app-q-a-set-list>
-  </ng-container>
-
-  <!-- Search-page = Q&A-list -->
-  <ng-container *ngIf="isSupportedRegion() && !loading && showSearch">
-    <div
-      class="floating-action-area is_in-page layout--float-end ion-margin-start"
-    >
-      <a
-        routerLink="."
-        [queryParams]="{ search: null, q: null }"
-        queryParamsHandling="merge"
-        [attr.title]="referralPageData?.referralBackButtonLabel"
-        [attr.aria-label]="referralPageData?.referralBackButtonLabel"
-        class="action is_round text-style--center"
-      >
-        <strong aria-hidden="true">&times;</strong>
-      </a>
-    </div>
-
-    <h2 class="ion-no-margin text-style--header text-style--size-1">
-      {{ referralPageData?.labelSearchPageTitle }}
-    </h2>
-
-    <app-search-input
-      [(searchQuery)]="searchQuery"
-      (doSearch)="performSearch($event)"
-      [actionLabel]="referralPageData?.labelSearchAction"
-      class="ion-margin-vertical"
-    ></app-search-input>
-
-    <div
-      id="search-results"
-      [tabindex]="-1"
-      class="focus--minimal focus--fade-out"
-    >
-      <p *ngIf="!!searchQuery">
-        {{ referralPageData?.labelSearchResultsCount }}
-        <strong>{{ searchResults.length }}</strong>
-      </p>
-
-      <app-q-a-set-list
-        [list]="searchResults"
-        [showDateUpdatedOutsideQuestion]="false"
-        class="ion-margin-vertical"
-      ></app-q-a-set-list>
-    </div>
+    <app-sub-category-page
+      [category]="category"
+      [subCategory]="subCategory"
+      [offers]="offers"
+      [qaSets]="qaSets"
+    ></app-sub-category-page>
   </ng-container>
 
   <!-- Offer-detail page -->
   <ng-container
-    *ngIf="isSupportedRegion() && !loading && category && subCategory && offer"
+    *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && category && subCategory && offer"
   >
-    <app-offer [offer]="offer"></app-offer>
-
-    <app-last-updated-time
-      [label]="referralPageData.labelLastUpdated"
-      class="ion-margin-vertical"
-    ></app-last-updated-time>
+    <app-offer-page [offer]="offer"></app-offer-page>
   </ng-container>
 
   <!-- Error/404 page -->
@@ -333,10 +87,7 @@
 
   <!-- Main/Root/Regions-list page -->
   <ng-container *ngIf="!isSupportedRegion()">
-    <div
-      *ngIf="!category"
-      class="ion-margin-bottom ion-padding-bottom"
-    >
+    <div class="ion-margin-bottom ion-padding-bottom">
       <h2 class="text-style--header text-style--size-1">{{ pageHeader }}</h2>
       <p
         class="text-style--wrap-newlines"
@@ -345,7 +96,7 @@
     </div>
     <ul class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical">
       <li
-        *ngFor="let region of regions"
+        *ngFor="let region of regions; index as index;"
         class="tile-grid--item"
       >
         <a
@@ -353,7 +104,7 @@
           [routerLink]="['/', region]"
           class="sheet--button action text-style--header text-style--size-1"
         >
-          <span>{{ regionsLabels[regions.indexOf(region)] }}</span>
+          <span>{{ regionsLabels[index] }}</span>
         </a>
       </li>
       <li
@@ -373,10 +124,10 @@
   >
     <span
       class="contact-button"
-      *ngIf="referralPageData.referralPhoneNumber"
+      *ngIf="regionData.contactPhoneNumber"
     >
       <a
-        [href]="'tel:' + referralPageData.referralPhoneNumber"
+        [href]="'tel:' + regionData.contactPhoneNumber"
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('tel')"
@@ -387,16 +138,18 @@
           alt="Phone"
           loading="lazy"
           decoding="async"
+          width="48"
+          height="48"
           class="contact-button--logo"
         />
       </a>
     </span>
     <span
       class="contact-button"
-      *ngIf="referralPageData.referralWhatsAppLink"
+      *ngIf="regionData.contactWhatsAppLink"
     >
       <a
-        [href]="referralPageData.referralWhatsAppLink"
+        [href]="regionData.contactWhatsAppLink"
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('whatsapp')"
@@ -407,16 +160,18 @@
           alt="WhatsApp"
           loading="lazy"
           decoding="async"
+          width="48"
+          height="48"
           class="contact-button--logo"
         />
       </a>
     </span>
     <span
       class="contact-button"
-      *ngIf="referralPageData.referralTelegramLink"
+      *ngIf="regionData.contactTelegramLink"
     >
       <a
-        [href]="referralPageData.referralTelegramLink"
+        [href]="regionData.contactTelegramLink"
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('telegram')"
@@ -427,6 +182,8 @@
           alt="WhatsApp"
           loading="lazy"
           decoding="async"
+          width="48"
+          height="48"
           class="contact-button--logo"
         />
       </a>

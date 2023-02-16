@@ -4,6 +4,12 @@
 !.env.example
 **/*.prod.ts
 
+# Local test data
+# Any sheet-data used in local development can be ignored:
+data/**/values/*.json
+# Only the example/test data will be included:
+!data/test-sheet-id-1/values/*.json
+
 # Generated code
 www
 coverage

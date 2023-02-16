@@ -1,0 +1,37 @@
+<a
+  [routerLink]="useUrlSlugs ? ['./', offer?.slug] : ['./']"
+  [queryParams]="
+    useUrlSlugs
+      ? null
+      : {
+          categoryID: offer?.categoryID,
+          subCategoryID: offer?.subCategoryID,
+          offerID: offer?.offerID
+        }
+  "
+  (click)="click(offer)"
+  class="action list-item"
+>
+  <span class="logo-badge list-item--icon">
+    <ion-img
+      [src]="
+        offer?.offerIcon ||
+        'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+      "
+      alt=""
+      [attr.aria-hidden]="true"
+      [attr.loading]="'lazy'"
+      [attr.decoding]="'async'"
+      class="logo-badge--image"
+    ></ion-img>
+  </span>
+  <span
+    class="list-item--content text-style--hide-overflow_4 text-style--wrap-newlines"
+  >
+    <ng-container *ngIf="offer?.offerName">
+      <strong>{{ offer?.offerName || '&nbsp;' }}</strong
+      ><br />
+    </ng-container>
+    {{ offer?.offerDescription }}
+  </span>
+</a>

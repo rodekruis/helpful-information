@@ -5,6 +5,7 @@ import { QASet } from '../models/qa-set.model';
 
 @Pipe({
   name: 'subCategoryFilter',
+  standalone: true,
 })
 export class SubCategoryFilterPipe implements PipeTransform {
   transform(items: Array<Offer | QASet>, subCategory: SubCategory): any {

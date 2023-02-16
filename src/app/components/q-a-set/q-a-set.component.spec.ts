@@ -1,14 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
 } from 'src/app/mocks/q-a-set.mock';
-import { PageDataFallback } from 'src/app/models/referral-page-data';
+import { RegionDataFallback } from 'src/app/models/region-data';
 import { ConvertUrlsPipe } from 'src/app/pipes/convert-urls.pipe';
 import { LoggingService } from 'src/app/services/logging.service';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { RegionDataService } from 'src/app/services/region-data.service';
 import { QASetComponent } from './q-a-set.component';
 
 const testDate = new Date('2022-02-22');
@@ -20,14 +19,13 @@ describe('QASetComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [QASetComponent],
-      imports: [IonicModule.forRoot(), SharedModule],
+      imports: [CommonModule, ConvertUrlsPipe],
       providers: [
         {
-          provide: ReferralPageDataService,
+          provide: RegionDataService,
           useValue: {
             data: {
-              labelLastUpdated: PageDataFallback.labelLastUpdated,
+              labelLastUpdated: RegionDataFallback.labelLastUpdated,
             },
           },
         },

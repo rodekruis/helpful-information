@@ -8,14 +8,18 @@ export const environment = {
   // Configuration/Feature-switches:
   envName: 'development', // (Optional) Label to show which environment is used
   useServiceWorker: false, // Enable 'offline' support
+  useUrlSlugs: true, // Enable URL-slugs-instead-of-IDs for all content types
   useQandAs: true, // Enable 'Q&A'-content type
   useQandASearch: true, // Enable Search-feature for Q&As
 
   // Configuration of content
   appName: 'Helpful Information',
-  appLogoUrl: '',
+  appLogoUrl:
+    "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚧</text></svg>",
   mainPageHeader: 'The Red Cross provides helpful information.',
-  mainPageIntroduction: 'Please choose a language/region.',
+  mainPageIntroduction:
+    'Intro test-content: \n\n <b>Image:</b> <img src="/favicon.ico" alt=""/> \n\n <b>Link:</b> <a href="https://github.com/rodekruis/helpful-information" target="_blank" rel="noopener noreferrer">helpful-information on GitHub</a> \n\n Please select your region:',
+
   errorHeader: 'Data unavailable',
   errorMessage: 'Contact us at: ',
   errorContactUrl: 'https://github.com/rodekruis/helpfulinformation',

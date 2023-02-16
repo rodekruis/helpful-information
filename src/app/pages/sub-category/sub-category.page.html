@@ -1,0 +1,35 @@
+<h2 class="ion-no-margin text-style--header text-style--size-1">
+  {{ subCategory?.subCategoryName }}
+</h2>
+<p
+  *ngIf="subCategory?.subCategoryDescription"
+  class="text-style--wrap-newlines"
+>
+  {{ subCategory?.subCategoryDescription }}
+</p>
+
+<ul
+  *ngIf="useQandAs && qaSets && qaSets?.length && (qaSets | categoryFilter: category | subCategoryFilter: subCategory)?.length"
+  class="list-flat ion-margin-vertical"
+>
+  <li
+    *ngFor="let qaSetItem of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
+    class="ion-margin-bottom"
+  >
+    <app-q-a-set [qaSet]="qaSetItem"></app-q-a-set>
+  </li>
+</ul>
+
+<ul
+  *ngIf="offers && offers?.length"
+  class="list-flat ion-margin-vertical"
+>
+  <li
+    *ngFor="let offerItem of offers | categoryFilter: category | subCategoryFilter: subCategory"
+    class="ion-margin-bottom"
+  >
+    <app-offer-link [offer]="offerItem"></app-offer-link>
+  </li>
+</ul>
+
+<app-last-updated-time class="ion-margin-vertical"></app-last-updated-time>

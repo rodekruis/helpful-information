@@ -1,0 +1,57 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "\nSelect parent Category",
+      "Parent Category ID\n#CATEGORY",
+      "Sub-Category ID\n#ID",
+      "Sub-Category Name\n#NAME",
+      "Unique URL (only \"a-z 0-9\" or \"-\")\n#SLUG",
+      "Visible?\n#VISIBLE",
+      "Sub-Category Description\n#DESCRIPTION",
+      "Sub-Category Icon\n#ICON"
+    ],
+    [
+      "Category Alpha",
+      "1",
+      "1",
+      "Sub-Category",
+      "sub-category",
+      "Show",
+      "The description of this sub-category.",
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100' height='50' x='0' y='0' fill='%23ddd'%3E%3C/rect%3E%3C/svg%3E"
+    ],
+    [
+      "Category Alpha",
+      "1",
+      "2",
+      "Another Sub-Category",
+      "another-sub-category",
+      "Show",
+      "Another description of this sub-category",
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 100'%3E%3Crect width='50' height='100' x='0' y='0' fill='%23ddd'%3E%3C/rect%3E%3C/svg%3E"
+    ],
+    ["Empty", "3", "3", "Empty", "empty", "Show"],
+    [
+      "Single Level",
+      "4",
+      "4",
+      "Single Level",
+      "single-level",
+      "Show",
+      "This sub-category has only 1 offer/question"
+    ],
+    [
+      "Q&As",
+      "5",
+      "5",
+      "Q&As",
+      "q-and-a-s",
+      "Show",
+      "A category for Q&As",
+      "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⁉️</text></svg>"
+    ],
+    []
+  ]
+}

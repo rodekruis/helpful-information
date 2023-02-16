@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { mockQASet1, mockQASet2with1SubQuestion } from '../mocks/q-a-set.mock';
+import { QASet } from '../models/qa-set.model';
 import { SearchService } from './search.service';
 
 describe('SearchService', () => {
@@ -49,7 +50,7 @@ describe('SearchService', () => {
   it('should return no results, when empty source is provided', () => {
     // Arrange
     const testQuery = 'test';
-    const source = [];
+    const source: QASet[] = [];
 
     // Act
     service.setSource(source);

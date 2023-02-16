@@ -73,7 +73,7 @@ Optional:
 
         fnm use
 
-- Install dependencies (from this folder):
+- Install dependencies (from this directory):
 
       npm install
 
@@ -117,6 +117,27 @@ Some specific information needs to be configured before use:
 
 As part of the installed dev-dependencies, we use [Prettier](https://prettier.io/) to format our code and [husky](https://typicode.github.io/husky/#/?id=faq) to automate that when using Git.
 
+### Local API
+
+To use a local API, without the need for any Google account/credentials.
+
+1. Update the local [`environment.ts`](src/environments/environment.ts)-file with:
+
+   ```ts
+       regions: 'test-local-1',
+       regionsLabels: 'Test Local 1',
+       regionsSheetIds: 'test-sheet-id-1',
+
+       google_sheets_api_key: '<can be anything, will be ignored>';
+       google_sheets_api_url: 'http://localhost:3001',
+   ```
+
+2. Run (in a separate process/terminal):
+
+   npm run serve:local-data
+
+3. Adjust the JSON-files in the [`data`](data/)-directory to try out different content.
+
 ### Testing
 
 Automated tests are configured and can be run (once) with:
@@ -137,7 +158,7 @@ During development, an automated watch-process can be run with:
 
 - [Ionic v6](https://ionicframework.com/docs/v6/)
   > ⚠️ The [`Ionicons`](https://ionic.io/ionicons) icon-set is NOT included in the final build, so cannot be used 'by default'. Icons can be added manually.
-- [Angular v14](https://v14.angular.io/docs/)
+- [Angular v15](https://v15.angular.io/docs/)
 
 ### Updating dependencies
 
@@ -179,6 +200,7 @@ classDiagram
 
   class Category {
     int categoryID
+    slug
     bool isVisible
     icon
     description
@@ -186,6 +208,7 @@ classDiagram
 
   class SubCategory {
     int subCategoryID
+    slug
     bool isVisible
     icon
     description
@@ -193,6 +216,7 @@ classDiagram
 
   class Offer {
     int offerId
+    slug
     bool isVisible
     offerName
     icon
@@ -320,11 +344,11 @@ Using the search-input Q&A-sets can be filtered to match 1 or more keywords to t
 The web-app can be deployed as a static single-page-app or PWA.
 
 - Make sure the `.env`-configuration is prepared. See: [`.env.example`](.env.example)
-- To generate a folder(`www`) with all HTML, JS, JSON and SVG assets, run:
+- To generate a directory(`www`) with all HTML, JS, JSON and SVG assets, run:
 
       npm run build:production
 
-- This folder can be deployed to any hosting-solution (supporting HTTPS), using [the recommended server configuration](https://v13.angular.io/guide/deployment#server-configuration).
+- This directory can be deployed to any hosting-solution (supporting HTTPS), using [the recommended server configuration](https://v13.angular.io/guide/deployment#server-configuration).
 
 ### Using Azure Static Web Apps
 

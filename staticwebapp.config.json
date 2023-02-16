@@ -1,6 +1,5 @@
 {
-  "_schema": "https://json.schemastore.org/staticwebapp.config.json",
-  "_docs": "https://docs.microsoft.com/en-us/azure/static-web-apps/configuration",
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
   "routes": [
     {
       "route": "/*.js",
@@ -21,6 +20,7 @@
       }
     }
   ],
+  "trailingSlash": "auto",
   "navigationFallback": {
     "rewrite": "index.html",
     "exclude": ["/assets/*"]

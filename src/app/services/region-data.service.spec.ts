@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { LoggingService } from './logging.service';
-import { ReferralPageDataService } from './referral-page-data.service';
+import { RegionDataService } from './region-data.service';
 import { SpreadsheetService } from './spreadsheet.service';
 
-describe('ReferralPageDataService', () => {
+describe('RegionDataService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       providers: [
@@ -18,9 +18,7 @@ describe('ReferralPageDataService', () => {
   );
 
   it('should be created', () => {
-    const service: ReferralPageDataService = TestBed.inject(
-      ReferralPageDataService,
-    );
+    const service: RegionDataService = TestBed.inject(RegionDataService);
     expect(service).toBeTruthy();
   });
 });

@@ -1,13 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
 } from 'src/app/mocks/q-a-set.mock';
-import { PageDataFallback } from 'src/app/models/referral-page-data';
+import { RegionDataFallback } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
-import { ReferralPageDataService } from 'src/app/services/referral-page-data.service';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { RegionDataService } from 'src/app/services/region-data.service';
+import { environment } from 'src/environments/environment';
+import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
+import { QASetComponent } from '../q-a-set/q-a-set.component';
 import { QASetListComponent } from './q-a-set-list.component';
 
 const testDate = new Date('2022-02-22');
@@ -42,14 +45,18 @@ describe('QASetListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [QASetListComponent],
-      imports: [SharedModule, RouterTestingModule],
+      imports: [
+        CommonModule,
+        RouterTestingModule,
+        BreadcrumbsComponent,
+        QASetComponent,
+      ],
       providers: [
         {
-          provide: ReferralPageDataService,
+          provide: RegionDataService,
           useValue: {
             data: {
-              labelLastUpdated: PageDataFallback.labelLastUpdated,
+              labelLastUpdated: RegionDataFallback.labelLastUpdated,
             },
           },
         },
@@ -92,10 +99,19 @@ describe('QASetListComponent', () => {
     const linkItems = fixture.nativeElement.querySelectorAll('a');
 
     expect(linkItems.length).toBe(2);
-    expect(linkItems[0].href).toContain(`categoryID=${testList[0].categoryID}`);
-    expect(linkItems[1].href).toContain(
-      `subCategoryID=${testList[0].subCategoryID}`,
-    );
+    if (environment.useUrlSlugs) {
+      expect(linkItems[0].href).toContain(testList[0].categorySlug);
+      expect(linkItems[1].href).toContain(
+        `${testList[0].categorySlug}/${testList[0].subCategorySlug}`,
+      );
+    } else {
+      expect(linkItems[0].href).toContain(
+        `categoryID=${testList[0].categoryID}`,
+      );
+      expect(linkItems[1].href).toContain(
+        `subCategoryID=${testList[0].subCategoryID}`,
+      );
+    }
   });
 
   it('should show the "last updated" date INSIDE the question, not OUTSIDE', () => {
