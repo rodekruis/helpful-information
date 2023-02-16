@@ -6,11 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [Unreleased](https://github.com/rodekruis/helpful-information/compare/47de0e585662f56aa24bc95d9e092711d059be97...main)
+## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v23.02.0...main)
 
 ---
 
-## 2022-10-24
+## 2023-02-16: [v23.02](https://github.com/rodekruis/helpful-information/releases/tag/v23.02.0)
+
+### Changed
+
+- Upgrade to Angular v15
+- Use URL-slugs in URLs/routing instead of (Sub-)Category/Offer-IDs. See [#200](https://github.com/rodekruis/helpful-information/issues/200)
+
+## 2022-10-24: [v22.11](https://github.com/rodekruis/helpful-information/releases/tag/v22.11.0)
 
 ### Changed
 
