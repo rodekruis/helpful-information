@@ -37,7 +37,7 @@
       "Show",
       "the-servicename",
       "The Servicename",
-      "Provides this specific service.\nDescribed with multiple lines of text.\nAnd more description even.\n\nAnd more. And more.\nEven more?",
+      "Provides this specific service.\nDescribed with multiple lines of text.\nWith __Mark__**Down** and/or <b>HTML</b> content:\n- lists\n- plain URL-links\n- [links](https://example.org)\n - - -\n# No level-1 Headings here\n...\n### Level 3+ Headings only here\n...\n",
       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 100'%3E%3Crect width='150' height='100' x='0' y='0' fill='%23ddd'%3E%3C/rect%3E%3C/svg%3E",
       "+0 (0) 00 - 000 00 00\n'+0 (0) 0 - 00 00 00 00",
       "info@example.com\nmore-info@something-specific.example.org",

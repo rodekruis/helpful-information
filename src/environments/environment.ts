@@ -18,7 +18,21 @@ export const environment = {
     "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚧</text></svg>",
   mainPageHeader: 'The Red Cross provides helpful information.',
   mainPageIntroduction:
-    'Intro test-content: \n\n <b>Image:</b> <img src="/favicon.ico" alt=""/> \n\n <b>Link:</b> <a href="https://github.com/rodekruis/helpful-information" target="_blank" rel="noopener noreferrer">helpful-information on GitHub</a> \n\n Please select your region:',
+    'Intro test-content: \n\n' +
+    '<b>Image:</b> <img src="/favicon.ico" alt=""/> \n\n' +
+    ' <b>Link:</b> <a href="https://github.com/rodekruis/helpful-information" target="_blank" rel="noopener noreferrer">helpful-information on GitHub</a> \n\n ' +
+    'Markdown content: \n\n' +
+    '_inline_ **styles** and [links](https://example.org) : \n\n' +
+    '### Level 3 headings down only? \n\n' +
+    'Section content... \n\n' +
+    '--- \n\n' +
+    '- bullet \n' +
+    '- lists \n' +
+    '\n' +
+    '1. numbered \n' +
+    '1. lists \n' +
+    '\n - - - \n\n' +
+    'Please select your region:',
 
   errorHeader: 'Data unavailable',
   errorMessage: 'Contact us at: ',
