@@ -35,4 +35,29 @@ describe('ConvertUrlsPipe', () => {
       });
     },
   ));
+
+  it('prevents dangarous HTML in content', inject(
+    [DomSanitizer],
+    (domSanitizer: DomSanitizer) => {
+      const pipe = new ConvertUrlsPipe(domSanitizer);
+      const testValues = [
+        'test <a href="https://evil.example.com/" target="_self">innocent link</a>',
+        'abc <script> alert(1) <' + '/script> def',
+      ];
+      const testContainer: HTMLDivElement = document.createElement('div');
+
+      testValues.forEach((testValue) => {
+        const output = pipe.transform(testValue);
+        // eslint-disable-next-line no-unsanitized/property -- Allow only in test-scenario
+        testContainer.innerHTML = output;
+
+        const outputLinks = testContainer.querySelectorAll('a');
+        if (outputLinks.length > 0) {
+          expect(outputLinks[0].target).toBe('_blank');
+        } else {
+          expect(output).toContain(testValue);
+        }
+      });
+    },
+  ));
 });

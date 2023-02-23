@@ -114,6 +114,33 @@
       "temporary-service",
       "[Draft] Temporary Service",
       "Draft service"
+    ],
+    [
+      "Another Sub-Category",
+      "2",
+      "1",
+      "4",
+      "Show",
+      "evil-service",
+      "Evil Service",
+      "A row in the sheet containing 'evil' content.",
+      "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-size=%2290%22>👿</text></svg>",
+      "",
+      "evil@evil.example.net",
+      "javascript:alert('evil! link #WEBURLS');\nhttps://innocent.example.org\"></a><a href=\"http://evil.example.net/\">http://innocent.example.org</a><a href=\"\n<script>alert('evil! script #WEBURLS');<\\/script>",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "javascript:alert('evil #VACCINATIONURL!');",
+      "",
+      "",
+      "",
+      "",
+      "javascript:alert('evil #HEALTHDOWNLOAD!');",
+      "javascript:alert('evil #FAQURL!');"
     ]
   ]
 }
