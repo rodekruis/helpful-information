@@ -24,6 +24,7 @@ describe('ConvertUrlsPipe', () => {
 
       testValues.forEach((testValue) => {
         const output = pipe.transform(testValue);
+        // eslint-disable-next-line no-unsanitized/property -- Allow only in test-scenario
         testContainer.innerHTML = output;
 
         const outputLinks = testContainer.querySelectorAll('a');
