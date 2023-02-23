@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ngxMarkdownModuleFactory } from 'src/app/app.module';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
@@ -50,6 +51,7 @@ describe('QASetListComponent', () => {
         RouterTestingModule,
         BreadcrumbsComponent,
         QASetComponent,
+        ngxMarkdownModuleFactory(),
       ],
       providers: [
         {

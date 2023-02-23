@@ -1,12 +1,14 @@
 <h2 class="ion-no-margin text-style--header text-style--size-1">
   {{ subCategory?.subCategoryName }}
 </h2>
-<p
+
+<div
   *ngIf="subCategory?.subCategoryDescription"
-  class="text-style--wrap-newlines"
->
-  {{ subCategory?.subCategoryDescription }}
-</p>
+  markdown
+  [data]="subCategory?.subCategoryDescription"
+  [inline]="false"
+  class="ion-margin-vertical"
+></div>
 
 <ul
   *ngIf="useQandAs && qaSets && qaSets?.length && (qaSets | categoryFilter: category | subCategoryFilter: subCategory)?.length"

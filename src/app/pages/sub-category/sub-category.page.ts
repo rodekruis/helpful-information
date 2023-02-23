@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferLinkComponent } from 'src/app/components/offer-link/offer-link.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
@@ -29,6 +30,7 @@ import { environment } from 'src/environments/environment';
     LastUpdatedTimeComponent,
     CategoryFilterPipe,
     SubCategoryFilterPipe,
+    MarkdownModule,
   ],
 })
 export default class SubCategoryPageComponent implements OnInit {

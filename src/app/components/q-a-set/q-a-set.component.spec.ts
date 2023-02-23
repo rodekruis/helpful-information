@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ngxMarkdownModuleFactory } from 'src/app/app.module';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
@@ -18,7 +19,7 @@ describe('QASetComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule],
+      imports: [CommonModule, ngxMarkdownModuleFactory()],
       providers: [
         {
           provide: RegionDataService,
@@ -111,7 +112,7 @@ describe('QASetComponent', () => {
     expect(timeElements[0].textContent).toContain(testDateFormatted);
   });
 
-  xit('should contain clickable links, when answer contains plain-text (absolute) URL', () => {
+  it('should contain clickable links, when answer contains plain-text (absolute) URL', () => {
     const testQASet = mockQASet1;
     testQASet.answer =
       'Answer with URL: www.example.org Test-link: https://example.net/';
