@@ -51,7 +51,7 @@
       <strong> What do you need to know? </strong>
       <pre class="ion-no-margin">{{ offer.offerDoYouNeedToKnow }}</pre>
     </div>
-    <p *ngIf="offer.offerLinks.length">
+    <p *ngIf="offer.offerLinks?.length">
       <strong>
         <img
           src="/assets/icons/external-link.svg"
@@ -63,28 +63,30 @@
         />
         Website:
       </strong>
-      <a
-        *ngFor="let offerLink of offer.offerLinks"
-        [href]="offerLink"
-        (click)="logDetailClick('website')"
-        target="_blank"
-        rel="noopener noreferrer"
-        >{{ offerLink }}</a
-      >
+      <ng-container *ngFor="let offerLink of offer.offerLinks">
+        <a
+          [href]="offerLink"
+          (click)="logDetailClick('website')"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ offerLink }}</a
+        ><br />
+      </ng-container>
     </p>
     <p
-      *ngIf="offer.offerEmails.length"
+      *ngIf="offer.offerEmails?.length"
       class="ion-margin-vertical"
     >
       <strong> Email: </strong>
-      <a
-        *ngFor="let offerEmail of offer.offerEmails"
-        href="mailto:{{ offerEmail }}?subject=Sent via Helpful Information"
-        (click)="logDetailClick('email')"
-        >{{ offerEmail }}</a
-      >
+      <ng-container *ngFor="let offerEmail of offer.offerEmails">
+        <a
+          href="mailto:{{ offerEmail }}?subject=Sent via Helpful Information"
+          (click)="logDetailClick('email')"
+          >{{ offerEmail }}</a
+        ><br />
+      </ng-container>
     </p>
-    <p *ngIf="offer.offerNumbers.length">
+    <p *ngIf="offer.offerNumbers?.length">
       <strong>
         <img
           src="/assets/icons/phone.svg"
@@ -96,12 +98,13 @@
         />
         Phone:
       </strong>
-      <a
-        *ngFor="let offerNumber of offer.offerNumbers"
-        href="tel:{{ offerNumber }}"
-        (click)="logDetailClick('phone')"
-        >{{ offerNumber }}</a
-      >
+      <ng-container *ngFor="let offerNumber of offer.offerNumbers">
+        <a
+          href="tel:{{ offerNumber }}"
+          (click)="logDetailClick('phone')"
+          >{{ offerNumber }}</a
+        ><br />
+      </ng-container>
     </p>
     <div
       *ngIf="offer.offerAddress"
