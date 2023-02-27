@@ -9,6 +9,7 @@
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
+      "plugins": ["no-loops"],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
@@ -55,7 +56,8 @@
         "regexp/prefer-quantifier": ["error"],
         "regexp/sort-alternatives": ["error"],
         "regexp/sort-character-class-elements": ["error"],
-        "regexp/use-ignore-case": ["error"]
+        "regexp/use-ignore-case": ["error"],
+        "no-loops/no-loops": ["error"]
       }
     },
     {
