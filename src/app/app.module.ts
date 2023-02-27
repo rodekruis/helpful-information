@@ -31,7 +31,7 @@ export function markedOptionsFactory(): MarkedOptions {
 
   renderer.html = (html: string): string => {
     return html.replaceAll(
-      /(href=)/gi,
+      /(?<raw_a_link>href=)/gi,
       ` target="_blank" rel="noopener noreferer" $1`,
     );
   };

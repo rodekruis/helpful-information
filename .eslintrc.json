@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/eslintrc",
   "root": true,
   "ignorePatterns": ["projects/**/*", "coverage", "www"],
   "overrides": [
@@ -12,6 +13,7 @@
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:no-unsanitized/DOM",
+        "plugin:regexp/recommended",
         "prettier"
       ],
       "rules": {
@@ -30,7 +32,30 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "regexp/letter-case": [
+          "error",
+          {
+            "caseInsensitive": "lowercase",
+            "unicodeEscape": "lowercase",
+            "hexadecimalEscape": "lowercase",
+            "controlEscape": "uppercase"
+          }
+        ],
+        "regexp/no-contradiction-with-assertion": ["error"],
+        "regexp/no-control-character": ["error"],
+        "regexp/no-extra-lookaround-assertions": ["error"],
+        "regexp/no-misleading-capturing-group": ["error"],
+        "regexp/no-misleading-unicode-character": ["error"],
+        "regexp/no-missing-g-flag": ["error"],
+        "regexp/prefer-escape-replacement-dollar-char": ["error"],
+        "regexp/prefer-named-backreference": ["error"],
+        "regexp/prefer-named-capture-group": ["error"],
+        "regexp/prefer-named-replacement": ["error"],
+        "regexp/prefer-quantifier": ["error"],
+        "regexp/sort-alternatives": ["error"],
+        "regexp/sort-character-class-elements": ["error"],
+        "regexp/use-ignore-case": ["error"]
       }
     },
     {

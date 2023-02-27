@@ -48,7 +48,7 @@ export class LoggingService {
 
   private getBaseUrl(): string {
     return document.referrer
-      ? document.referrer.match(/:\/\/(.[^/]+)/)[1]
+      ? document.referrer.match(/:\/\/(?<hostname>.[^/]+)/)[1]
       : null;
   }
 
