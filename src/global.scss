@@ -87,6 +87,11 @@ img[decoding='async'] {
     list-style: none;
   }
 }
+.list-inline {
+  > li {
+    display: inline;
+  }
+}
 
 .tile-grid {
   --column-gap: 0.25rem;

@@ -20,7 +20,7 @@ export class BreadcrumbsComponent {
   public baseUrl: string = '';
 
   @Input()
-  item:
+  public item:
     | {
         categoryID?: number;
         categorySlug?: string;

@@ -87,7 +87,8 @@ describe('QASetListComponent', () => {
 
     fixture.detectChanges();
 
-    const listItems = fixture.nativeElement.querySelectorAll('ol > li');
+    const listItems =
+      fixture.nativeElement.querySelectorAll('ol[role=list] > li');
 
     expect(listItems.length).toBe(testList.length);
   });
