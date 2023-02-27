@@ -34,15 +34,16 @@ export class AppComponent {
             },
           );
 
-          this.swUpdates.activateUpdate().then(
-            (activated) => {
+          this.swUpdates
+            .activateUpdate()
+            .then((activated) => {
               console.log(
                 'ServiceWorker: activateUpdate: ',
                 activated,
                 evt.latestVersion.hash,
               );
               if (!activated) {
-                return;
+                throw new Error('ServiceWorker: activateUpdate failed.');
               }
               this.loggingService.logEvent(
                 LoggingEventCategory.sw,
@@ -52,16 +53,16 @@ export class AppComponent {
                 },
               );
               document.location.reload();
-            },
-            (error) => {
+              return activated;
+            })
+            .catch((error) => {
               console.error('ServiceWorker: activateUpdate: ', error);
               this.loggingService.logEvent(
                 LoggingEventCategory.error,
                 LoggingEvent.error,
                 { name: 'ServiceWorker: activateUpdate error' },
               );
-            },
-          );
+            });
           break;
         case 'VERSION_INSTALLATION_FAILED':
           console.warn(

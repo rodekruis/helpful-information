@@ -10,10 +10,11 @@ module.exports = {
         project: ['tsconfig.json'],
         createDefaultProgram: true,
       },
-      plugins: ['no-loops', 'jasmine'],
+      plugins: ['no-loops', 'promise', 'jasmine'],
       extends: [
         'plugin:@angular-eslint/recommended',
         'plugin:@angular-eslint/template/process-inline-templates',
+        'plugin:promise/recommended',
         'plugin:no-unsanitized/DOM',
         'plugin:regexp/recommended',
         'plugin:jasmine/recommended',
