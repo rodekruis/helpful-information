@@ -8,6 +8,7 @@ describe('LastUpdatedTimeService', () => {
     const service: LastUpdatedTimeService = TestBed.inject(
       LastUpdatedTimeService,
     );
+
     expect(service).toBeTruthy();
   });
 });

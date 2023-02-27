@@ -19,6 +19,7 @@ describe('Utils - getFullUrl', () => {
 
     testValues.forEach((value, index) => {
       const output = getFullUrl(value);
+
       expect(output).toEqual(testOutputs[index]);
     });
   });
@@ -28,6 +29,7 @@ describe('Utils - getFullUrl', () => {
 
     testValues.forEach((value, index) => {
       const output = getFullUrl(value);
+
       expect(output).toEqual(testValues[index]);
     });
   });
@@ -56,6 +58,7 @@ describe('Utils - getParentPath', () => {
 
     testValues.forEach((value, index) => {
       const output = getParentPath(value);
+
       expect(output).toEqual(testOutputs[index]);
     });
   });
@@ -82,6 +85,7 @@ describe('Utils - getDateFromString', () => {
 
     testValues.forEach((value, index) => {
       const output = getDateFromString(value);
+
       expect(output).toEqual(testOutputs[index]);
     });
   });
@@ -100,6 +104,7 @@ describe('Utils - getDateFromString', () => {
 
     testValues.forEach((value) => {
       const output = getDateFromString(value);
+
       expect(output).toBeNull();
     });
   });

@@ -9,12 +9,13 @@
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
-      "plugins": ["no-loops"],
+      "plugins": ["no-loops", "jasmine"],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:no-unsanitized/DOM",
         "plugin:regexp/recommended",
+        "plugin:jasmine/recommended",
         "prettier"
       ],
       "rules": {

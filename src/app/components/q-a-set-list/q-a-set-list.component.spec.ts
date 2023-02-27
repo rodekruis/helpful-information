@@ -111,6 +111,7 @@ describe('QASetListComponent', () => {
       expect(linkItems[0].href).toContain(
         `categoryID=${testList[0].categoryID}`,
       );
+
       expect(linkItems[1].href).toContain(
         `subCategoryID=${testList[0].subCategoryID}`,
       );

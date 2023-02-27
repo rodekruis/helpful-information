@@ -19,6 +19,7 @@ describe('OffersService', () => {
 
   it('should be created', () => {
     const service: OffersService = TestBed.inject(OffersService);
+
     expect(service).toBeTruthy();
   });
 });

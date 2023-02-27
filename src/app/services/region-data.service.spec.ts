@@ -19,6 +19,7 @@ describe('RegionDataService', () => {
 
   it('should be created', () => {
     const service: RegionDataService = TestBed.inject(RegionDataService);
+
     expect(service).toBeTruthy();
   });
 });
