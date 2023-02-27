@@ -29,6 +29,13 @@ export function markedOptionsFactory(): MarkedOptions {
     }">${text}</a>`;
   };
 
+  renderer.html = (html: string): string => {
+    return html.replaceAll(
+      /(href=)/gi,
+      ` target="_blank" rel="noopener noreferer" $1`,
+    );
+  };
+
   return {
     renderer: renderer,
     gfm: true,
