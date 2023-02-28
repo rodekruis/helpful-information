@@ -7,7 +7,7 @@ name: 'Upgrade (Angular-)Dependencies'
 on:
   workflow_dispatch:
   schedule:
-    - cron: '20 4 * * SUN'
+    - cron: '10 5 * * SUN'
 
 env:
   WORKFLOW_RUN_URL: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
@@ -28,7 +28,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version-file: '.node-version'
           cache: 'npm'
 
       - name: Install
@@ -53,7 +53,7 @@ jobs:
         run: npm run upgrade:angular
 
       - name: Fix syntax
-        run: npm run fix:syntax
+        run: npm run fix
 
       - name: Save updated version(s) and create PR
         env:
@@ -63,8 +63,8 @@ jobs:
           UPGRADE_ISSUE_BODY: 'By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}'
           UPGRADE_PR_CTA: 'Create a new PR with these changes: ${{ env.WORKFLOW_NEW_PR_URL }}'
         run: |
-          git add -A || true
-          git commit -m "${{ env.UPGRADE_ISSUE_TITLE }} -- ${{ env.UPGRADE_ISSUE_BODY }}" || true
+          git add -A
+          git commit -m "${{ env.UPGRADE_ISSUE_TITLE }} -- ${{ env.UPGRADE_ISSUE_BODY }}"
           git push --set-upstream origin auto-upgrade-dependencies --force
           gh issue create --title '${{ env.UPGRADE_ISSUE_TITLE }}' --body '${{ env.UPGRADE_PR_CTA }} -- ${{ env.UPGRADE_ISSUE_BODY }}' --label 'dependencies'
           echo "${{ env.UPGRADE_PR_CTA }}" >> $GITHUB_STEP_SUMMARY
