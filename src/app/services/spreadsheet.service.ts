@@ -354,7 +354,7 @@ export class SpreadsheetService {
         row,
         colMap.get(OfferCol.rights),
       ),
-      furtherInformation: SpreadsheetService.readCellValue(
+      moreInfo: SpreadsheetService.readCellValue(
         row,
         colMap.get(OfferCol.moreInfo),
       ),

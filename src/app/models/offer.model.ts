@@ -20,7 +20,7 @@ export class Offer {
   categoryID: number;
   categorySlug?: string;
   categoryName?: string;
-  furtherInformation?: string;
+  moreInfo?: string;
 }
 
 // These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
