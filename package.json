@@ -59,7 +59,7 @@
     "@types/marked": "^4.0.8",
     "@types/node": "^16.x",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
-    "@typescript-eslint/parser": "^5.53.0",
+    "@typescript-eslint/parser": "^5.54.0",
     "confusing-browser-globals": "^1.0.11",
     "dotenv": "^16.0.3",
     "eslint": "^8.35.0",
