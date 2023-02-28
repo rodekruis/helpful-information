@@ -139,18 +139,6 @@
       ></p>
     </div>
     <div
-      *ngIf="offer.offerWhatWillYouNeed"
-      class="ion-margin-vertical"
-    >
-      <strong> What will you need? </strong>
-      <p
-        markdown
-        [data]="offer.offerWhatWillYouNeed"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
-    </div>
-    <div
       *ngIf="offer.offerBasicRight"
       class="ion-margin-vertical"
     >
@@ -158,40 +146,6 @@
       <p
         markdown
         [data]="offer.offerBasicRight"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
-    </div>
-    <p *ngIf="offer.findAVaccinationCenter">
-      <strong> Find a vaccination center: </strong>
-      <a
-        [href]="offer.findAVaccinationCenter"
-        (click)="logDetailClick('findAVaccinationCenter')"
-        target="_blank"
-        rel="noopener noreferrer"
-        >{{ offer.findAVaccinationCenter }}</a
-      >
-    </p>
-    <div
-      *ngIf="offer.redCrossHelpDesk"
-      class="ion-margin-vertical"
-    >
-      <strong> Red Cross helpdesk: </strong>
-      <p
-        markdown
-        [data]="offer.redCrossHelpDesk"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
-    </div>
-    <div
-      *ngIf="offer.whatToExpect"
-      class="ion-margin-vertical"
-    >
-      <strong> What to expect? </strong>
-      <p
-        markdown
-        [data]="offer.whatToExpect"
         [inline]="true"
         class="ion-no-margin ion-margin-bottom"
       ></p>
@@ -208,37 +162,5 @@
         class="ion-no-margin ion-margin-bottom"
       ></p>
     </div>
-    <div
-      *ngIf="offer.travelAbroad"
-      class="ion-margin-vertical"
-    >
-      <strong> Travel abroad: </strong>
-      <p
-        markdown
-        [data]="offer.travelAbroad"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
-    </div>
-    <p *ngIf="offer.healthDeclarationDownload">
-      <strong> Health declaration download: </strong>
-      <a
-        [href]="offer.healthDeclarationDownload"
-        (click)="logDetailClick('healthDeclarationDownload')"
-        target="_blank"
-        rel="noopener noreferrer"
-        >{{ offer.healthDeclarationDownload }}</a
-      >
-    </p>
-    <p *ngIf="offer.faqs">
-      <strong> FAQs: </strong>
-      <a
-        [href]="offer.faqs"
-        (click)="logDetailClick('faqs')"
-        target="_blank"
-        rel="noopener noreferrer"
-        >{{ offer.faqs }}</a
-      >
-    </p>
   </div>
 </div>

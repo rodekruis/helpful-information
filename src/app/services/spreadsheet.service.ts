@@ -354,36 +354,9 @@ export class SpreadsheetService {
         row,
         colMap.get(OfferCol.rights),
       ),
-      findAVaccinationCenter: getFullUrl(
-        SpreadsheetService.readCellValue(
-          row,
-          colMap.get(OfferCol.vaccinationUrl),
-        ),
-      ),
-      redCrossHelpDesk: SpreadsheetService.readCellValue(
-        row,
-        colMap.get(OfferCol.helpDesk),
-      ),
-      whatToExpect: SpreadsheetService.readCellValue(
-        row,
-        colMap.get(OfferCol.toExpect),
-      ),
       furtherInformation: SpreadsheetService.readCellValue(
         row,
         colMap.get(OfferCol.moreInfo),
-      ),
-      travelAbroad: SpreadsheetService.readCellValue(
-        row,
-        colMap.get(OfferCol.travelAbroad),
-      ),
-      healthDeclarationDownload: getFullUrl(
-        SpreadsheetService.readCellValue(
-          row,
-          colMap.get(OfferCol.healthDownload),
-        ),
-      ),
-      faqs: getFullUrl(
-        SpreadsheetService.readCellValue(row, colMap.get(OfferCol.faqUrl)),
       ),
     };
   }
