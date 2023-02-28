@@ -21,7 +21,7 @@ export class SearchService {
   public query(rawQuery: string): QASet[] {
     let results: QASet[] = [];
     let safeQuery = this.sanitizeSearchQuery(rawQuery);
-    safeQuery = safeQuery.replace(/\./g, '\\.'); // Escape the actual "." character to use as-is
+    safeQuery = safeQuery.replaceAll('.', '\\.'); // Escape the actual "." character to use as-is
 
     if (!this.source || !safeQuery) {
       return results;
@@ -29,7 +29,7 @@ export class SearchService {
 
     const queryParts = safeQuery
       .split(/\s|(?<quoted_group>"[^"]*")/) // Split on spaces, but ignore spaces inside double-quote pairs. See: https://jex.im/regulex/
-      .map((keyword) => (keyword ? keyword.replace(/"/g, '') : '').trim()) // Remove double-quotes
+      .map((keyword) => (keyword ? keyword.replaceAll('"', '') : '').trim()) // Remove double-quotes
       .filter((keyword) => !!keyword); // Remove (now) empty keywords
 
     results = this.source.filter((item) => {
