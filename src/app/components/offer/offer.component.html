@@ -15,9 +15,10 @@
         class="logo-badge--image"
       ></ion-img>
     </span>
+
     <h2
       *ngIf="offer.offerName"
-      class="ion-no-margin text-style--header text-style--size-1"
+      class="text-style--header text-style--size-1"
     >
       {{ offer.offerName }}
     </h2>
@@ -28,15 +29,16 @@
       [inline]="false"
     ></div>
   </div>
+
   <div class="offer--details ion-margin-vertical">
     <div
       *ngIf="offer.offerOpeningHoursWeekdays"
       class="ion-margin-vertical"
     >
-      <strong>
+      <h3 class="ion-no-margin ion-margin-top text-style--size-1">
         Opening Hours
         <span *ngIf="offer.offerOpeningHoursWeekends"> - Weekdays</span>:
-      </strong>
+      </h3>
       <p
         markdown
         [data]="offer.offerOpeningHoursWeekdays"
@@ -48,10 +50,10 @@
       *ngIf="offer.offerOpeningHoursWeekends"
       class="ion-margin-vertical"
     >
-      <strong>
+      <h3 class="ion-no-margin ion-margin-top text-style--size-1">
         Opening Hours
         <span *ngIf="offer.offerOpeningHoursWeekends"> - Weekends</span>:
-      </strong>
+      </h3>
       <p
         markdown
         [data]="offer.offerOpeningHoursWeekends"
@@ -59,20 +61,24 @@
         class="ion-no-margin ion-margin-bottom"
       ></p>
     </div>
+
     <div
       *ngIf="offer.offerDoYouNeedToKnow"
       class="ion-margin-vertical"
     >
-      <strong> What do you need to know? </strong>
-      <p
+      <h3 class="ion-no-margin ion-margin-top text-style--size-1">
+        What do you need to know?
+      </h3>
+      <div
         markdown
         [data]="offer.offerDoYouNeedToKnow"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
+        [inline]="false"
+        class="ion-margin-bottom"
+      ></div>
     </div>
-    <p *ngIf="offer.offerLinks?.length">
-      <strong>
+
+    <div *ngIf="offer.offerLinks?.length">
+      <h3 class="ion-no-margin ion-margin-top text-style--size-1">
         <img
           src="/assets/icons/external-link.svg"
           alt=""
@@ -82,32 +88,41 @@
           class="icon is_small"
         />
         Website:
-      </strong>
-      <ng-container *ngFor="let offerLink of offer.offerLinks">
-        <a
-          [href]="offerLink"
-          (click)="logDetailClick('website')"
-          target="_blank"
-          rel="noopener noreferrer"
-          >{{ offerLink }}</a
-        ><br />
-      </ng-container>
-    </p>
-    <p
+      </h3>
+      <p class="ion-no-margin ion-margin-bottom">
+        <ng-container *ngFor="let offerLink of offer.offerLinks">
+          <a
+            [href]="offerLink"
+            (click)="logDetailClick('website')"
+            target="_blank"
+            rel="noopener noreferrer"
+            >{{ offerLink }}</a
+          ><br />
+        </ng-container>
+      </p>
+    </div>
+
+    <div
       *ngIf="offer.offerEmails?.length"
       class="ion-margin-vertical"
     >
-      <strong> Email: </strong>
-      <ng-container *ngFor="let offerEmail of offer.offerEmails">
-        <a
-          href="mailto:{{ offerEmail }}?subject=Sent via Helpful Information"
-          (click)="logDetailClick('email')"
-          >{{ offerEmail }}</a
-        ><br />
-      </ng-container>
-    </p>
-    <p *ngIf="offer.offerNumbers?.length">
-      <strong>
+      <h3 class="ion-no-margin ion-margin-top text-style--size-1">
+        <span aria-hidden="true">@&nbsp;</span>
+        E-mail:
+      </h3>
+      <p class="ion-no-margin ion-margin-bottom">
+        <ng-container *ngFor="let offerEmail of offer.offerEmails">
+          <a
+            href="mailto:{{ offerEmail }}?subject=Sent via Helpful Information"
+            (click)="logDetailClick('email')"
+            >{{ offerEmail }}</a
+          ><br />
+        </ng-container>
+      </p>
+    </div>
+
+    <ng-container *ngIf="offer.offerNumbers?.length">
+      <h3 class="ion-no-margin ion-margin-top text-style--size-1">
         <img
           src="/assets/icons/phone.svg"
           alt=""
@@ -117,128 +132,56 @@
           class="icon is_small"
         />
         Phone:
-      </strong>
-      <ng-container *ngFor="let offerNumber of offer.offerNumbers">
-        <a
-          href="tel:{{ offerNumber }}"
-          (click)="logDetailClick('phone')"
-          >{{ offerNumber }}</a
-        ><br />
-      </ng-container>
-    </p>
+      </h3>
+      <p class="ion-no-margin ion-margin-bottom">
+        <ng-container *ngFor="let offerNumber of offer.offerNumbers">
+          <a
+            href="tel:{{ offerNumber }}"
+            (click)="logDetailClick('phone')"
+            >{{ offerNumber }}</a
+          ><br />
+        </ng-container>
+      </p>
+    </ng-container>
+
     <div
       *ngIf="offer.offerAddress"
       class="ion-margin-vertical"
     >
-      <strong> Address: </strong>
-      <p
+      <h3 class="ion-no-margin ion-margin-top text-style--size-1">Address:</h3>
+      <div
         markdown
         [data]="offer.offerAddress"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
+        [inline]="false"
+        class="ion-margin-bottom"
+      ></div>
     </div>
-    <div
-      *ngIf="offer.offerWhatWillYouNeed"
-      class="ion-margin-vertical"
-    >
-      <strong> What will you need? </strong>
-      <p
-        markdown
-        [data]="offer.offerWhatWillYouNeed"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
-    </div>
+
     <div
       *ngIf="offer.offerBasicRight"
       class="ion-margin-vertical"
     >
-      <strong> Basic Rights: </strong>
-      <p
+      <h3 class="ion-no-margin ion-margin-top text-style--size-1">
+        Basic Rights:
+      </h3>
+      <div
         markdown
         [data]="offer.offerBasicRight"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
+        [inline]="false"
+        class="ion-margin-bottom"
+      ></div>
     </div>
-    <p *ngIf="offer.findAVaccinationCenter">
-      <strong> Find a vaccination center: </strong>
-      <a
-        [href]="offer.findAVaccinationCenter"
-        (click)="logDetailClick('findAVaccinationCenter')"
-        target="_blank"
-        rel="noopener noreferrer"
-        >{{ offer.findAVaccinationCenter }}</a
-      >
-    </p>
+
     <div
-      *ngIf="offer.redCrossHelpDesk"
+      *ngIf="offer.moreInfo"
       class="ion-margin-vertical"
     >
-      <strong> Red Cross helpdesk: </strong>
-      <p
+      <div
         markdown
-        [data]="offer.redCrossHelpDesk"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
+        [data]="offer.moreInfo"
+        [inline]="false"
+        class="ion-margin-bottom"
+      ></div>
     </div>
-    <div
-      *ngIf="offer.whatToExpect"
-      class="ion-margin-vertical"
-    >
-      <strong> What to expect? </strong>
-      <p
-        markdown
-        [data]="offer.whatToExpect"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
-    </div>
-    <div
-      *ngIf="offer.furtherInformation"
-      class="ion-margin-vertical"
-    >
-      <strong> Further information: </strong>
-      <p
-        markdown
-        [data]="offer.furtherInformation"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
-    </div>
-    <div
-      *ngIf="offer.travelAbroad"
-      class="ion-margin-vertical"
-    >
-      <strong> Travel abroad: </strong>
-      <p
-        markdown
-        [data]="offer.travelAbroad"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
-    </div>
-    <p *ngIf="offer.healthDeclarationDownload">
-      <strong> Health declaration download: </strong>
-      <a
-        [href]="offer.healthDeclarationDownload"
-        (click)="logDetailClick('healthDeclarationDownload')"
-        target="_blank"
-        rel="noopener noreferrer"
-        >{{ offer.healthDeclarationDownload }}</a
-      >
-    </p>
-    <p *ngIf="offer.faqs">
-      <strong> FAQs: </strong>
-      <a
-        [href]="offer.faqs"
-        (click)="logDetailClick('faqs')"
-        target="_blank"
-        rel="noopener noreferrer"
-        >{{ offer.faqs }}</a
-      >
-    </p>
   </div>
 </div>

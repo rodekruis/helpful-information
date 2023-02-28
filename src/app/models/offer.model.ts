@@ -12,7 +12,6 @@ export class Offer {
   offerOpeningHoursWeekends?: string;
   offerForWhom?: string;
   offerDoYouNeedToKnow?: string;
-  offerWhatWillYouNeed?: string;
   offerBasicRight?: string;
   offerVisible: boolean;
   subCategoryID: number;
@@ -21,13 +20,7 @@ export class Offer {
   categoryID: number;
   categorySlug?: string;
   categoryName?: string;
-  findAVaccinationCenter?: string;
-  redCrossHelpDesk?: string;
-  whatToExpect?: string;
-  furtherInformation?: string;
-  travelAbroad?: string;
-  healthDeclarationDownload?: string;
-  faqs?: string;
+  moreInfo?: string;
 }
 
 // These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
@@ -50,11 +43,5 @@ export enum OfferCol {
   needToKnow = 'NEEDTOKNOW',
   rights = 'RIGHTS',
   name = 'NAME',
-  vaccinationUrl = 'VACCINATIONURL',
-  helpDesk = 'HELPDESK',
-  toExpect = 'TOEXPECT',
   moreInfo = 'MOREINFO',
-  travelAbroad = 'TRAVELABROAD',
-  healthDownload = 'HEALTHDOWNLOAD',
-  faqUrl = 'FAQURL',
 }
