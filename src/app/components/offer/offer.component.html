@@ -106,7 +106,10 @@
       *ngIf="offer.offerEmails?.length"
       class="ion-margin-vertical"
     >
-      <h3 class="ion-no-margin ion-margin-top text-style--size-1">Email:</h3>
+      <h3 class="ion-no-margin ion-margin-top text-style--size-1">
+        <span aria-hidden="true">@&nbsp;</span>
+        E-mail:
+      </h3>
       <p class="ion-no-margin ion-margin-bottom">
         <ng-container *ngFor="let offerEmail of offer.offerEmails">
           <a
