@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -15,7 +16,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './offer-link.component.html',
   styleUrls: ['./offer-link.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule],
+  imports: [CommonModule, IonicModule, RouterModule, MarkdownModule],
 })
 export class OfferLinkComponent {
   public useUrlSlugs = environment.useUrlSlugs;

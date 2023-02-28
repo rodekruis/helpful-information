@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
 import { SubCategoryLinkComponent } from 'src/app/components/sub-category-link/sub-category-link.component';
 import { Category } from 'src/app/models/category.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
@@ -15,7 +16,12 @@ import { getLegacyID } from 'src/app/shared/utils';
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.scss'],
   standalone: true,
-  imports: [CommonModule, SubCategoryLinkComponent, CategoryFilterPipe],
+  imports: [
+    CommonModule,
+    SubCategoryLinkComponent,
+    CategoryFilterPipe,
+    MarkdownModule,
+  ],
 })
 export default class CategoryPageComponent implements OnInit {
   private region: string;

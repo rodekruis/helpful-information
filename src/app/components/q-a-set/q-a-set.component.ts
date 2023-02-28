@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { MarkdownModule } from 'ngx-markdown';
 import { QASet } from 'src/app/models/qa-set.model';
-import { ConvertUrlsPipe } from 'src/app/pipes/convert-urls.pipe';
 import { RegionDataService } from 'src/app/services/region-data.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   templateUrl: './q-a-set.component.html',
   styleUrls: ['./q-a-set.component.scss'],
   standalone: true,
-  imports: [CommonModule, ConvertUrlsPipe],
+  imports: [CommonModule, MarkdownModule],
 })
 export class QASetComponent {
   @Input()

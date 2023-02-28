@@ -29,7 +29,7 @@
       "Another Sub-Category",
       "another-sub-category",
       "Show",
-      "Another description of this sub-category",
+      "Another description of this sub-category\n\nWith __Mark__**Down** and/or <b>HTML</b> content:\n- lists\n- plain URL-links\n- [links](https://example.org)\n - - -\n# No level-1 Headings here\n...\n#### Level 3+ Headings only here\n...\n",
       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 100'%3E%3Crect width='50' height='100' x='0' y='0' fill='%23ddd'%3E%3C/rect%3E%3C/svg%3E"
     ],
     ["Empty", "3", "3", "Empty", "empty", "Show"],

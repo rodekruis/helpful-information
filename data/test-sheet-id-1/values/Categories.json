@@ -23,7 +23,7 @@
       "Category Bravo",
       "category-bravo",
       "Show",
-      "Another Category",
+      "Another Category\n\nWith __Mark__**Down** and/or <b>HTML</b> content:\n- lists\n- plain URL-links\n- [links](https://example.org)\n - - -\n# No level-1 Headings here\n...\n#### Level 3+ Headings only here\n...\n",
       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Cg fill='%23da121a'%3E%3Cpath d='M185 33h129v439H185z'/%3E%3Cpath d='M25 193h449v117H25z'/%3E%3C/g%3E%3C/svg%3E%0A"
     ],
     ["3", "Empty", "empty", "Show"],

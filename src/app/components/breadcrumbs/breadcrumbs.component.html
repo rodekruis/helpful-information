@@ -1,33 +1,43 @@
-<a
-  *ngIf="item?.categoryID"
-  [routerLink]="useUrlSlugs ? [baseUrl, item?.categorySlug] : [baseUrl]"
-  [queryParams]="
-    useUrlSlugs
-      ? null
-      : {
-          categoryID: item?.categoryID
-        }
-  "
-  queryParamsHandling=""
-  class="text-style--inline-link is_minimal"
-  >{{ item?.categoryName || item?.categoryID }}</a
-><strong *ngIf="item?.subCategoryID">&nbsp;/ </strong>
-<a
-  *ngIf="item?.subCategoryID"
-  [routerLink]="
-    useUrlSlugs
-      ? [baseUrl, item?.categorySlug, item?.subCategorySlug]
-      : [baseUrl]
-  "
-  [queryParams]="
-    useUrlSlugs
-      ? null
-      : {
-          categoryID: item?.categoryID,
-          subCategoryID: item?.subCategoryID
-        }
-  "
-  queryParamsHandling=""
-  class="text-style--inline-link is_minimal"
-  >{{ item?.subCategoryName || item?.subCategoryID }}</a
-><strong>&nbsp;: </strong>
+<nav aria-label="Breadcrumbs">
+  <ol class="list-flat list-inline ion-no-margin">
+    <li>
+      <a
+        *ngIf="item?.categoryID"
+        [routerLink]="useUrlSlugs ? [baseUrl, item?.categorySlug] : [baseUrl]"
+        [queryParams]="
+          useUrlSlugs
+            ? null
+            : {
+                categoryID: item?.categoryID
+              }
+        "
+        queryParamsHandling=""
+        class="text-style--inline-link is_minimal"
+        >{{ item?.categoryName || item?.categoryID }}</a
+      >
+    </li>
+    <li *ngIf="item?.subCategoryID">
+      <strong aria-hidden="true">&nbsp;/ </strong>
+      <a
+        *ngIf="item?.subCategoryID"
+        [routerLink]="
+          useUrlSlugs
+            ? [baseUrl, item?.categorySlug, item?.subCategorySlug]
+            : [baseUrl]
+        "
+        [queryParams]="
+          useUrlSlugs
+            ? null
+            : {
+                categoryID: item?.categoryID,
+                subCategoryID: item?.subCategoryID
+              }
+        "
+        queryParamsHandling=""
+        class="text-style--inline-link is_minimal"
+        >{{ item?.subCategoryName || item?.subCategoryID }}</a
+      >
+      <strong aria-hidden="true">&nbsp;: </strong>
+    </li>
+  </ol>
+</nav>

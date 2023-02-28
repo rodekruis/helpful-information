@@ -17,6 +17,7 @@ export class ErrorHandlerService extends ErrorHandler {
   }
 
   private getOriginalError(error: any) {
+    // eslint-disable-next-line no-loops/no-loops
     while (error && error.originalError) {
       error = error.originalError;
     }

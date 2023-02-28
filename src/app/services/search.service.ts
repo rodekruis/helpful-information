@@ -21,15 +21,15 @@ export class SearchService {
   public query(rawQuery: string): QASet[] {
     let results: QASet[] = [];
     let safeQuery = this.sanitizeSearchQuery(rawQuery);
-    safeQuery = safeQuery.replace(/[.]/g, '\\.'); // Escape the actual "." character to use as-is
+    safeQuery = safeQuery.replaceAll('.', '\\.'); // Escape the actual "." character to use as-is
 
     if (!this.source || !safeQuery) {
       return results;
     }
 
     const queryParts = safeQuery
-      .split(/\s+(?=(?:[^"]*\"[^"]*\")*[^"]*$)/g) // Split on spaces, but ignore spaces inside double-quote pairs. See: https://jex.im/regulex/
-      .map((keyword) => keyword.replace(/"/g, '').trim()) // Remove double-quotes
+      .split(/\s|(?<quoted_group>"[^"]*")/) // Split on spaces, but ignore spaces inside double-quote pairs. See: https://jex.im/regulex/
+      .map((keyword) => (keyword ? keyword.replaceAll('"', '') : '').trim()) // Remove double-quotes
       .filter((keyword) => !!keyword); // Remove (now) empty keywords
 
     results = this.source.filter((item) => {
@@ -49,9 +49,9 @@ export class SearchService {
     }
 
     // Remove special RegEx characters: (except the ".")
-    let safeValue = rawValue.replace(/[*+?^${}()|[\]\\]/g, ' ').trim();
+    let safeValue = rawValue.replaceAll(/[$()*+?[\\\]^{|}]/g, ' ').trim();
     // Collapse all whitespace-characters into 1 space
-    safeValue = safeValue.replace(/[\s]+/g, ' ');
+    safeValue = safeValue.replaceAll(/\s+/g, ' ');
 
     return safeValue && safeValue.length > 1 ? safeValue : '';
   }

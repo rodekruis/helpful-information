@@ -4,12 +4,14 @@
 >
   {{ category?.categoryName }}
 </h2>
-<p
+
+<div
   *ngIf="category?.categoryDescription"
+  markdown
+  [data]="category?.categoryDescription"
+  [inline]="false"
   class="ion-margin-vertical"
->
-  {{ category?.categoryDescription }}
-</p>
+></div>
 
 <ul
   *ngIf="subCategories && subCategories?.length && (subCategories|categoryFilter:category)?.length"

@@ -37,7 +37,7 @@
       "Show",
       "the-servicename",
       "The Servicename",
-      "Provides this specific service.\nDescribed with multiple lines of text.\nAnd more description even.\n\nAnd more. And more.\nEven more?",
+      "Provides this specific service.\nDescribed with multiple lines of text.\nWith __Mark__**Down** and/or <b>HTML</b> content:\n- lists\n- plain URL-links\n- [links](https://example.org)\n - - -\n# No level-1 Headings here\n...\n### Level 3+ Headings only here\n...\n",
       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 100'%3E%3Crect width='150' height='100' x='0' y='0' fill='%23ddd'%3E%3C/rect%3E%3C/svg%3E",
       "+0 (0) 00 - 000 00 00\n'+0 (0) 0 - 00 00 00 00",
       "info@example.com\nmore-info@something-specific.example.org",
@@ -114,6 +114,33 @@
       "temporary-service",
       "[Draft] Temporary Service",
       "Draft service"
+    ],
+    [
+      "Another Sub-Category",
+      "2",
+      "1",
+      "4",
+      "Show",
+      "evil-service",
+      "Evil Service",
+      "A row in the sheet containing 'evil' content.",
+      "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-size=%2290%22>👿</text></svg>",
+      "",
+      "evil@evil.example.net",
+      "javascript:alert('evil! link #WEBURLS');\nhttps://innocent.example.org\"></a><a href=\"http://evil.example.net/\">http://innocent.example.org</a><a href=\"\n<script>alert('evil! script #WEBURLS');<\\/script>",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "javascript:alert('evil #VACCINATIONURL!');",
+      "",
+      "",
+      "",
+      "",
+      "javascript:alert('evil #HEALTHDOWNLOAD!');",
+      "javascript:alert('evil #FAQURL!');"
     ]
   ]
 }

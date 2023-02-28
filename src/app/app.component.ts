@@ -34,15 +34,24 @@ export class AppComponent {
             },
           );
 
-          this.swUpdates.activateUpdate().then(
-            (activated) => {
+          this.swUpdates
+            .activateUpdate()
+            .then((activated) => {
               console.log(
                 'ServiceWorker: activateUpdate: ',
                 activated,
                 evt.latestVersion.hash,
               );
               if (!activated) {
-                return;
+                this.loggingService.logEvent(
+                  LoggingEventCategory.sw,
+                  LoggingEvent.SwUpdateNotActivated,
+                  {
+                    name: evt.latestVersion.hash,
+                  },
+                );
+
+                return activated;
               }
               this.loggingService.logEvent(
                 LoggingEventCategory.sw,
@@ -52,14 +61,23 @@ export class AppComponent {
                 },
               );
               document.location.reload();
-            },
-            (error) => {
+              return activated;
+            })
+            .catch((error) => {
               console.error('ServiceWorker: activateUpdate: ', error);
               this.loggingService.logEvent(
                 LoggingEventCategory.error,
                 LoggingEvent.error,
                 { name: 'ServiceWorker: activateUpdate error' },
               );
+            });
+          break;
+        case 'NO_NEW_VERSION_DETECTED':
+          this.loggingService.logEvent(
+            LoggingEventCategory.sw,
+            LoggingEvent.SwUpdateNotAvailable,
+            {
+              name: evt.version.hash,
             },
           );
           break;

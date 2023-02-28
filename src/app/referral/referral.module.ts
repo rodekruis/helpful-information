@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { MarkdownModule } from 'ngx-markdown';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { CategoryLinkComponent } from '../components/category-link/category-link.component';
@@ -76,6 +77,7 @@ import { ReferralPageComponent } from './referral.page';
       },
     ]),
     SharedModule,
+    MarkdownModule.forChild(),
   ],
   declarations: [ReferralPageComponent],
   providers: [Title],

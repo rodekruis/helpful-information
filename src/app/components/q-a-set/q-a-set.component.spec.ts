@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ngxMarkdownModuleFactory } from 'src/app/app.module';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
 } from 'src/app/mocks/q-a-set.mock';
 import { RegionDataFallback } from 'src/app/models/region-data';
-import { ConvertUrlsPipe } from 'src/app/pipes/convert-urls.pipe';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { QASetComponent } from './q-a-set.component';
@@ -19,7 +19,7 @@ describe('QASetComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule, ConvertUrlsPipe],
+      imports: [CommonModule, ngxMarkdownModuleFactory()],
       providers: [
         {
           provide: RegionDataService,
@@ -28,9 +28,6 @@ describe('QASetComponent', () => {
               labelLastUpdated: RegionDataFallback.labelLastUpdated,
             },
           },
-        },
-        {
-          provide: ConvertUrlsPipe,
         },
         {
           provide: LoggingService,

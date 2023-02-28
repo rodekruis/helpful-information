@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ngxMarkdownModuleFactory } from 'src/app/app.module';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
@@ -50,6 +51,7 @@ describe('QASetListComponent', () => {
         RouterTestingModule,
         BreadcrumbsComponent,
         QASetComponent,
+        ngxMarkdownModuleFactory(),
       ],
       providers: [
         {
@@ -85,7 +87,8 @@ describe('QASetListComponent', () => {
 
     fixture.detectChanges();
 
-    const listItems = fixture.nativeElement.querySelectorAll('ol > li');
+    const listItems =
+      fixture.nativeElement.querySelectorAll('ol[role=list] > li');
 
     expect(listItems.length).toBe(testList.length);
   });
@@ -108,6 +111,7 @@ describe('QASetListComponent', () => {
       expect(linkItems[0].href).toContain(
         `categoryID=${testList[0].categoryID}`,
       );
+
       expect(linkItems[1].href).toContain(
         `subCategoryID=${testList[0].subCategoryID}`,
       );

@@ -1,12 +1,14 @@
 <h2 class="ion-no-margin text-style--header text-style--size-1">
   {{ subCategory?.subCategoryName }}
 </h2>
-<p
+
+<div
   *ngIf="subCategory?.subCategoryDescription"
-  class="text-style--wrap-newlines"
->
-  {{ subCategory?.subCategoryDescription }}
-</p>
+  markdown
+  [data]="subCategory?.subCategoryDescription"
+  [inline]="false"
+  class="ion-margin-vertical"
+></div>
 
 <ul
   *ngIf="useQandAs && qaSets && qaSets?.length && (qaSets | categoryFilter: category | subCategoryFilter: subCategory)?.length"
@@ -21,7 +23,7 @@
 </ul>
 
 <ul
-  *ngIf="offers && offers?.length"
+  *ngIf="offers && (offers | categoryFilter: category | subCategoryFilter: subCategory)?.length"
   class="list-flat ion-margin-vertical"
 >
   <li
@@ -31,5 +33,7 @@
     <app-offer-link [offer]="offerItem"></app-offer-link>
   </li>
 </ul>
+
+<br />
 
 <app-last-updated-time class="ion-margin-vertical"></app-last-updated-time>

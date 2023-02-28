@@ -49,7 +49,7 @@ So take appropriate precautions regarding file-ownership and "edit"-permissions 
 
 - Don't change the _name_ of any sheet.
 - Don't change the _`#tag`s_ in the columns-headers in any sheet, the name/label/heading can be changed/translated.
-- Don't use formatting (bold/italic/underline/fonts/colors); It will not be used.
+- Don't use formatting-tools in Google Sheets (bold/italic/underline/fonts/colors); It will not be used.
 - Don't use the "insert link"-feature.  
   The plain text in a cell should be the full URL.
 
@@ -58,6 +58,12 @@ Optional:
 - All header-rows can be reordered, as long as their `#tag`s remain.
 - You can use the toggle in the "_Visible?_"-column to prepare a 'draft' of a row and finally 'publish' by setting it to "_Show_".
 - You can use background-colors to mark/highlight any changes or 'flag issues'; These styles will not be used in the web-app.
+
+#### Text formatting
+
+To support (some) formatting and structuring in some (multi-line) fields, the [Markdown-syntax](https://en.wikipedia.org/wiki/Markdown) can be used.
+
+An explanation of (a lot of) the features of this syntax can be found in the [Markdown Guide Cheat Sheet](https://www.markdownguide.org/cheat-sheet/). Not _everything_ beyond the "Basic Syntax" is supported in all fields.
 
 ---
 
@@ -159,6 +165,7 @@ During development, an automated watch-process can be run with:
 - [Ionic v6](https://ionicframework.com/docs/v6/)
   > ⚠️ The [`Ionicons`](https://ionic.io/ionicons) icon-set is NOT included in the final build, so cannot be used 'by default'. Icons can be added manually.
 - [Angular v15](https://v15.angular.io/docs/)
+- [`ngx-markdown`](https://www.npmjs.com/package/ngx-markdown) is used to process Markdown-content into HTML. _No_ optional dependencies are included/used.
 
 ### Updating dependencies
 
@@ -301,7 +308,9 @@ See the options in the "Referral Page"-sheet
 
 Each (Sub-)Category:
 
-- can have a name/description/icon.
+- can have a (single line) name
+- can have a multi-line description, [Markdown syntax](#text-formatting) can be used for structure/formatting.
+- can have an (absolute/relative/data-) URL for an icon
 - can be hidden by setting the "**Visible?**"-column to `Hide`.
 
 ### Offer features
@@ -310,15 +319,18 @@ Each Offer
 
 - needs to have a `Category ID` and a `Sub-Category ID` set.
 - can be hidden by setting the "**Visible?**"-column to `Hide`.
+- can have some multi-line fields, [Markdown syntax](#text-formatting) can be used for structure/formatting in those.
 
 ### Q&A features
 
 Each Q&A-set
 
 - needs to have a `Category ID` and a `Sub-Category ID` set.
+- needs to have an `Answer` value
 - can be hidden by setting the "**Visible?**"-column to `Hide`.
 - can be shown as a Sub-Question by setting the `Parent`-column to the Slug of another Question.
 - can have a "(last) updated"-date set, to indicate its 'freshness'
+- can have a multi-line `Answer`, [Markdown syntax](#text-formatting) can be used for structure/formatting.
 
 #### Highlighted-overview ("Recent changes")
 

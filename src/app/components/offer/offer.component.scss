@@ -22,15 +22,10 @@
     clear: both;
   }
 
-  strong,
-  a {
+  strong {
     display: block;
   }
   a {
     color: var(--ion-color-secondary);
-  }
-  pre {
-    font-family: var(--ion-font-family-body);
-    white-space: pre-wrap;
   }
 }

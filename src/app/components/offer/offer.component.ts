@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -14,7 +15,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule],
+  imports: [CommonModule, IonicModule, RouterModule, MarkdownModule],
 })
 export class OfferComponent {
   @Input()

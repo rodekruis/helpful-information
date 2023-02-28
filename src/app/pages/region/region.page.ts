@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, RouterModule } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
 import { CategoryLinkComponent } from 'src/app/components/category-link/category-link.component';
 import { Category } from 'src/app/models/category.model';
 import { QASet } from 'src/app/models/qa-set.model';
@@ -16,7 +17,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './region.page.html',
   styleUrls: ['./region.page.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, CategoryLinkComponent],
+  imports: [CommonModule, RouterModule, CategoryLinkComponent, MarkdownModule],
 })
 export default class RegionPageComponent implements OnInit {
   public useQandAs = environment.useQandAs;

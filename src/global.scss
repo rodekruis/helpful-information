@@ -87,6 +87,11 @@ img[decoding='async'] {
     list-style: none;
   }
 }
+.list-inline {
+  > li {
+    display: inline;
+  }
+}
 
 .tile-grid {
   --column-gap: 0.25rem;
@@ -171,9 +176,6 @@ img[decoding='async'] {
 }
 .text-style--size-1 {
   font-size: 1rem;
-}
-.text-style--wrap-newlines {
-  white-space: pre-line;
 }
 .text-style--hide-overflow_4 {
   display: -webkit-box;
@@ -375,4 +377,22 @@ img[decoding='async'] {
 
 .contact-button + .contact-button {
   margin-top: 0.5rem;
+}
+
+/**
+  Markdown generated HTML overrides
+*/
+[markdown],
+.markdown {
+  ol,
+  ul {
+    padding-inline-start: 1em;
+  }
+  table {
+    width: 100%;
+  }
+  th,
+  td {
+    padding: 0.25em;
+  }
 }

@@ -26,7 +26,7 @@
       "test-parent-1",
       "",
       "A question to test with.",
-      "A short and <b>concise</b> answer.\n\nWith some conditions, or extra context.\nMaybe:\n- https://example.org/see-this-link-for-more-info\n- Or this one: <https://this.example.org/>\n- Or another one: <https://this.example.org/>\n\n",
+      "A short and concise answer.\n\nWith __Mark__**Down** and/or <b>HTML</b> content:\n\n- https://example.org/see-this-link-for-more-info\n- Or this one: www.example.org\n- Or another one: <https://this.example.org/>\n\n1. numbered lists\n1. [links](https://example.org \"with tooltips\")\n- - -\n# No level-1 Headings here\n...\n#### Level 3+ Headings only here\n...\n",
       "2022-05-20"
     ],
     [
@@ -218,7 +218,7 @@
       "",
       "",
       "Test",
-      "If you want to do a sugestions, send us email via:\nhia@example.org\n\nWith the contents of:\n- The location\n– opening "
+      "If you want to do a sugestions, send us email via:\nhia@example.org\n\nWith the contents of:\n- The location\n- opening \n\n"
     ]
   ]
 }

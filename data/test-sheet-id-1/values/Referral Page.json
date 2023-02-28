@@ -18,7 +18,7 @@
     ["Greeting/Heading", "Hello!", "", "", "Hello!", "Hallo!"],
     [
       "Introduction text",
-      "This website is made to give helpful information...\n\nMultiple lines of text,\ncan be used."
+      "This website is made to give helpful information...\n\nMultiple lines of text,\ncan be used.\nWith __Mark__**Down** and/or <b>HTML</b> content:\n- lists\n- plain URL-links\n- [links](https://example.org)\n - - -\n# No level-1 Headings here\n...\n### Level 3+ Headings only here\n...\n"
     ],
     ["Label: Back Button", "Up", "\"Back\", \"Previous\"", "", "Back", "Rug"],
     [

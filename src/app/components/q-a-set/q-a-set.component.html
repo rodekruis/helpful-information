@@ -14,10 +14,11 @@
   #answerBlock
   let-answer="answer"
 >
-  <p
-    class="text-style--wrap-newlines"
-    [innerHTML]="answer | convertUrls"
-  ></p>
+  <div
+    markdown
+    [data]="answer"
+    [inline]="false"
+  ></div>
 </ng-template>
 
 <details
