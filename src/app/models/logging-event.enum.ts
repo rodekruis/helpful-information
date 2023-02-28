@@ -26,6 +26,8 @@ export enum LoggingEvent {
   OfferClick = 'offer-click',
   OfferDetailClick = 'offer-detail-click',
   SubCategoryClick = 'sub-category-click',
-  SwUpdateAvailable = 'sw-update-available',
   SwUpdateActivated = 'sw-update-activated',
+  SwUpdateAvailable = 'sw-update-available',
+  SwUpdateNotActivated = 'sw-update-not-activated',
+  SwUpdateNotAvailable = 'sw-update-not-available',
 }

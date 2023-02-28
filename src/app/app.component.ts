@@ -43,7 +43,15 @@ export class AppComponent {
                 evt.latestVersion.hash,
               );
               if (!activated) {
-                throw new Error('ServiceWorker: activateUpdate failed.');
+                this.loggingService.logEvent(
+                  LoggingEventCategory.sw,
+                  LoggingEvent.SwUpdateNotActivated,
+                  {
+                    name: evt.latestVersion.hash,
+                  },
+                );
+
+                return activated;
               }
               this.loggingService.logEvent(
                 LoggingEventCategory.sw,
@@ -63,6 +71,15 @@ export class AppComponent {
                 { name: 'ServiceWorker: activateUpdate error' },
               );
             });
+          break;
+        case 'NO_NEW_VERSION_DETECTED':
+          this.loggingService.logEvent(
+            LoggingEventCategory.sw,
+            LoggingEvent.SwUpdateNotAvailable,
+            {
+              name: evt.version.hash,
+            },
+          );
           break;
         case 'VERSION_INSTALLATION_FAILED':
           console.warn(
