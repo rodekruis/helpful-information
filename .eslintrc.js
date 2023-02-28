@@ -38,6 +38,7 @@ module.exports = {
           },
         ],
         'no-restricted-globals': ['error'].concat(restrictedGlobals),
+        'promise/no-multiple-resolved': ['error'],
         'regexp/letter-case': [
           'error',
           {
