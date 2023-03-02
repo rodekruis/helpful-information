@@ -82,6 +82,13 @@ export default class OfferPageComponent implements OnInit {
       categoryName: this.offer.categoryName,
     });
 
+    this.pageMeta.setCanonicalUrl({
+      region: this.region,
+      categorySlug: this.offer.categorySlug,
+      subCategorySlug: this.offer.subCategorySlug,
+      offerSlug: this.offer.slug,
+    });
+
     // Upgrade ID-based slug(s) to real slug(s)
     if (params.offerSlug !== this.offer.slug) {
       this.router.navigate(

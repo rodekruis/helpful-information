@@ -77,6 +77,11 @@ export default class CategoryPageComponent implements OnInit {
       categoryName: this.category.categoryName,
     });
 
+    this.pageMeta.setCanonicalUrl({
+      region: this.region,
+      categorySlug: this.category.slug,
+    });
+
     // Upgrade ID-based slug(s) to real slug(s)
     if (params.categorySlug !== this.category.slug) {
       this.router.navigate([this.region, this.category.slug], {
