@@ -58,6 +58,9 @@ export default class SearchPageComponent implements OnInit {
     this.pageMeta.setTitle({
       override: `${this.regionData?.labelSearchPageTitle} - ${this.regionData?.pageTitle}`,
     });
+    this.pageMeta.setCanonicalUrl({
+      override: this.region + '/search',
+    });
 
     if (!this.qaSets) {
       this.qaSets = await this.offersService.getQAs(this.region);

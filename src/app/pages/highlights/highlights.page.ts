@@ -52,6 +52,9 @@ export default class HighlightsPageComponent implements OnInit {
       this.pageMeta.setTitle({
         override: `${highlightsPageTitle} - ${this.regionData?.pageTitle}`,
       });
+      this.pageMeta.setCanonicalUrl({
+        override: this.region + '/highlights',
+      });
     });
   }
 }

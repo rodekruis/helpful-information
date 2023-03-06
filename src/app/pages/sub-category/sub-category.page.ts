@@ -113,13 +113,19 @@ export default class SubCategoryPageComponent implements OnInit {
 
     this.pageMeta.setTitle({
       subCategoryName: this.subCategory.subCategoryName,
-      categoryName: this.category.categoryName,
+      categoryName: this.subCategory.categoryName,
+    });
+
+    this.pageMeta.setCanonicalUrl({
+      region: this.region,
+      categorySlug: this.subCategory.categorySlug,
+      subCategorySlug: this.subCategory.slug,
     });
 
     // Upgrade ID-based slug(s) to real slug(s)
     if (params.subCategorySlug !== this.subCategory.slug) {
       this.router.navigate(
-        [this.region, this.category.slug, this.subCategory.slug],
+        [this.region, this.subCategory.categorySlug, this.subCategory.slug],
         {
           replaceUrl: true,
         },

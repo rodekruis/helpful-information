@@ -49,6 +49,10 @@ export default class RegionPageComponent implements OnInit {
         region: this.regionData.pageTitle,
       });
 
+      this.pageMeta.setCanonicalUrl({
+        region: this.region,
+      });
+
       this.categories = await this.offersService.getCategories(this.region);
       this.subCategories = await this.offersService.getAllSubCategories(
         this.region,

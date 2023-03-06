@@ -71,6 +71,7 @@ export class ReferralPageComponent implements OnInit {
 
       if (!this.isSupportedRegion()) {
         this.pageMeta.setTitle({ override: environment.appName });
+        this.pageMeta.setCanonicalUrl({});
       }
     });
     this.route.queryParams.subscribe((queryParams: Params) => {
@@ -81,6 +82,7 @@ export class ReferralPageComponent implements OnInit {
   async ngOnInit() {
     if (!this.isSupportedRegion()) {
       this.pageMeta.setTitle({ override: environment.appName });
+      this.pageMeta.setCanonicalUrl({});
       this.router.navigate([this.rootHref]);
       return;
     }
