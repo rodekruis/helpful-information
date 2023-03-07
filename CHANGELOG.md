@@ -6,7 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v23.02.0...main)
+## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v23.03.0...main)
+
+---
+
+## 2023-03-07: [v23.03](https://github.com/rodekruis/helpful-information/releases/tag/v23.03.0)
+
+### Changed
+
+- Use Markdown-syntax for multiple field/properties. See [#318](https://github.com/rodekruis/helpful-information/issues/318)
+
+### Removed
+
+- COVID-related fiels/properties. See [#623](https://github.com/rodekruis/helpful-information/issues/623)
 
 ---
 
@@ -16,6 +28,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Upgrade to Angular v15
 - Use URL-slugs in URLs/routing instead of (Sub-)Category/Offer-IDs. See [#200](https://github.com/rodekruis/helpful-information/issues/200)
+
+---
 
 ## 2022-10-24: [v22.11](https://github.com/rodekruis/helpful-information/releases/tag/v22.11.0)
 
