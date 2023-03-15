@@ -1,6 +1,9 @@
 # Helpful Information
 
-> A web-app _People Affected_ can use to lookup useful organizations and information.
+A web-app _People Affected_ can use to lookup useful organizations and information.
+
+> ⚠️  
+> To quickly create a new instance, follow the Guide: [How to set up an instance (quickly)](./docs/Guide-How_to_set_up_an_instance.md)
 
 ---
 

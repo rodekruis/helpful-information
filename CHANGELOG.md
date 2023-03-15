@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 
-- COVID-related fiels/properties. See [#623](https://github.com/rodekruis/helpful-information/issues/623)
+- COVID-related fields/properties. See [#623](https://github.com/rodekruis/helpful-information/issues/623)
 
 ---
 
