@@ -64,45 +64,58 @@ jobs:
             We do not share your personal details.\n
             \n
             Find information for local services like legal support, health, and shelter.\n
+          TXT_MAIN_PAGE_NOTICE: '<div class="d-center">⚠️ **Scheduled maintenance**: `16:00`-`16:05` </div>'
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
           TXT_ERROR_RETRY: 'Try again?'
           REGIONS: >-
-            sandbox,
+            example,
+            ,
             amsterdam,
+            utrecht,
             almere,
             lelystad,
             den-haag,
+            rotterdam,
+            nijmegen,
+            eindhoven,
             friesland,
             groningen,
-            rotterdam,
             ,
             ,
             template-region,
             test
           REGIONS_LABELS: >-
-            SandBox,
-            Amsterdam,
-            Almere,
-            Lelystad,
-            Den Haag,
-            Friesland,
-            Groningen,
-            Rotterdam,
+            Example/Demo 🟡,
+            ,
+            Amsterdam 🟢,
+            Utrecht 🟢,
+            Almere 🟢,
+            Lelystad 🟢,
+            Den Haag 🟢,
+            Rotterdam 🟢,
+            Nijmegen 🟢,
+            Eindhoven 🟢,
+            Friesland 🟡,
+            Groningen 🟡,
             ,
             ,
             Template REGION,
-            Test/Example
+            Test/Example 🚧
           REGIONS_SHEET_IDS: >-
-            1NGRjvXdGvugPMiVUoBQguUIb148FsqCU22Y2SAL1t1Q,
-            18V7f3sjOTscwr0J8rHkYNFfyP7gF-kKUU4P12KBJv9c,
-            1YGmCKnWS2AV9S0RGnWWNiT_cdrYLTs1otEZEDWYmevo,
+            1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8,
+            ,
+            1OANMuGJxGBQ2ba3xVfKvTpD0EGQM-ukUrgRyN9tzMbQ,
+            1ZqizriL_RJ2dCcNVnCj0GM02pqOLWcIF18A4zVigsrU,
+            1mod8O9EgvqpCN3ScyAKkOh34x3OGa-8yIc18K_t1xXU,
             1ASaVCURxA7vLmc3Vp5NvoEkR58Mc53R35jTVp7GkxM0,
-            1o6lvU8VPgwQYcQc7hY4zOP3MscRXwQgM2TddWshbr5U,
+            1m43Tw7CWRUdPjaStq6dOi9yvHSYInP1lWjLetk1PrTI,
+            18qD1PGTK2jTExpVIXXWpjHdpe5KDy7IdcR537CusCLU,
+            1lWUjA8_sqmY7JRmYOBWn3wfRk2whR-2soZ8qfn_Fdaw,
+            1OhMLlM6NFD7GkoQEYMP4lnI0FKd__PKdPvYw0x57l8k,
             136iThtEhGoMMVFeuMJZdVSGDKFE6XyCcMWfHRhngGjI,
             1OYsax_AuIsMriumhyERFOqXDMlxwY74fZgMDYlpC2mE,
-            1uDPvbPp7hp7DpUKTDNIpLYFSHSRyC2_aLYKHm9tH_us,
             ,
             ,
             1ofqQbXgJdZbOAXBF4wJ1kEPpqRaMMqlOP5J-AhcwwFI,

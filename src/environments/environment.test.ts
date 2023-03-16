@@ -15,6 +15,7 @@ export const environment = {
   appLogoUrl: '',
   mainPageHeader: 'We test Helpful Information.',
   mainPageIntroduction: 'Select a region:',
+  mainPageNotification: '',
   errorHeader: 'Error',
   errorMessage: 'Message',
   errorContactUrl: 'https://example.org/contact',
