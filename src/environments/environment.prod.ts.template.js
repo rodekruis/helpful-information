@@ -16,6 +16,7 @@ export const environment = {
   appLogoUrl: '${process.env.TXT_APP_LOGO_URL || ''}',
   mainPageHeader: '${process.env.TXT_MAIN_PAGE_HEADER || ''}',
   mainPageIntroduction: '${process.env.TXT_MAIN_PAGE_INTRO || ''}',
+  mainPageNotification: '${process.env.TXT_MAIN_PAGE_NOTICE || ''}',
   errorHeader: '${process.env.TXT_ERROR_HEADER || ''}',
   errorMessage: '${process.env.TXT_ERROR_MESSAGE || ''}',
   errorContactUrl: '${process.env.TXT_ERROR_CONTACT_URL || ''}',

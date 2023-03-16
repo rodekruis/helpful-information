@@ -49,6 +49,7 @@ export class ReferralPageComponent implements OnInit {
 
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
+  public pageNotification = environment.mainPageNotification;
   public errorHeader = environment.errorHeader;
   public errorMessage = environment.errorMessage;
   public errorContactUrl = environment.errorContactUrl;
@@ -127,6 +128,13 @@ export class ReferralPageComponent implements OnInit {
       !!this.regionData.contactWhatsAppLink ||
       !!this.regionData.contactTelegramLink
     );
+  }
+
+  public getNotificationContent(): string {
+    if (!!this.regionData.pageNotification) {
+      return this.regionData.pageNotification;
+    }
+    return environment.mainPageNotification;
   }
 
   private async loadReferralData() {

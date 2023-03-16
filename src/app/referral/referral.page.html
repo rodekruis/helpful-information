@@ -121,7 +121,7 @@
 
   <div
     class="floating-action-area is_bottom-right"
-    *ngIf="isSupportedRegion() && hasContactOptions()"
+    *ngIf="isSupportedRegion() && hasContactOptions() && !getNotificationContent()"
   >
     <span
       class="contact-button"
@@ -191,3 +191,12 @@
     </span>
   </div>
 </ion-content>
+<ion-footer *ngIf="!!getNotificationContent()">
+  <div class="notification-bar ion-padding">
+    <div
+      markdown
+      [data]="getNotificationContent()"
+      [inline]="true"
+    ></div>
+  </div>
+</ion-footer>

@@ -400,6 +400,10 @@ export class SpreadsheetService {
         referralPageDataRows[4],
         1,
       ),
+      pageNotification: SpreadsheetService.readCellValue(
+        referralPageDataRows[11],
+        1,
+      ),
       labelBackButton:
         SpreadsheetService.readCellValue(referralPageDataRows[5], 1) ||
         RegionDataFallback.labelBackButton,

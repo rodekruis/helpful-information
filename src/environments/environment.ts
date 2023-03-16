@@ -34,6 +34,7 @@ export const environment = {
     '1. lists \n' +
     '\n - - - \n\n' +
     'Please select your region:',
+  mainPageNotification: '',
 
   errorHeader: 'Data unavailable',
   errorMessage: 'Contact us at: ',

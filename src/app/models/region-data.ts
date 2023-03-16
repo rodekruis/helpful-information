@@ -16,6 +16,7 @@ export class RegionData {
   pageGreeting?: string;
   pageInstructions?: string;
   pageLogo?: string;
+  pageNotification?: string;
   pageTitle?: string;
 }
 
