@@ -71,15 +71,21 @@ jobs:
             opvang,
             turkiye-syria,
             turkije-syrie,
+            jrncs-hotline,
+            ,
+            example,
             test
           REGIONS_LABELS: >-
-            Ukraine (EN),
-            Oekraïne (NL),
-            Shelter (EN),
-            Opvang (NL),
-            Türkiye-Syria Earthquake (EN),
-            Turkije-Syrië Aardbeving (NL),
-            Test/Example
+            Ukraine (EN) 🟢,
+            Oekraïne (NL) 🟢,
+            Shelter (EN) 🟢,
+            Opvang (NL) 🟢,
+            Türkiye-Syria Earthquake (EN) 🟢,
+            Turkije-Syrië Aardbeving (NL) 🟢,
+            JRNCS Hotline,
+            ,
+            Example/Demo 🟡,
+            Test/Example 🟡
           REGIONS_SHEET_IDS: >-
             14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
             1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE,
@@ -87,6 +93,9 @@ jobs:
             1wJ4pfB3l7t16igivt_LkGYmaqZ0hiRsR7_giJUjen-s,
             1d4vUbvj4KhTj0ZQ_J4RizE3wn0JFjvr9SainTkhyRu8,
             1Rvs49NVJ8iN1Bl-0YUdJwaYF6LqltcC1RovO4UbpV20,
+            14dv2jpXouk-XjBZpcts32_kth3dun8VZK0KPcGk274s,
+            ,
+            1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8,
             10SIJdAQSd6loqCyzwK409QS_01Fgp8P4aqoDO8iBvhY
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
