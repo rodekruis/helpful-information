@@ -24,15 +24,17 @@ export function markedOptionsFactory(): MarkedOptions {
   };
 
   renderer.link = (href: string, title: string, text: string): string => {
-    return `<a href="${href}" target="_blank" rel="noopener noreferrer" ${
-      title ? ` title="${title}"` : ''
-    }">${text}</a>`;
+    const isExternal = !href.startsWith('/');
+    return `<a href="${href}"
+     ${isExternal ? `target="_blank" rel="external noopener noreferrer"` : ''}
+     ${title ? ` title="${title}"` : ''}
+     >${text}</a>`;
   };
 
   renderer.html = (html: string): string => {
     return html.replaceAll(
-      /(?<raw_a_link>href=)/gi,
-      ` target="_blank" rel="noopener noreferer" $1`,
+      /(?<raw_a_href>href=[\s"']*(?:http|\/\/))/gi,
+      ` target="_blank" rel="external noopener noreferrer" $<raw_a_href>`,
     );
   };
 

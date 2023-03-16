@@ -112,7 +112,7 @@ describe('QASetComponent', () => {
     expect(timeElements[0].textContent).toContain(testDateFormatted);
   });
 
-  it('should contain clickable links, when answer contains plain-text (absolute) URL', () => {
+  it('should contain clickable links that open a new window, when answer contains plain-text (absolute) URL', () => {
     const testQASet = mockQASet1;
     testQASet.answer =
       'Answer with URL: www.example.org Test-link: https://example.net/';
@@ -120,12 +120,69 @@ describe('QASetComponent', () => {
 
     fixture.detectChanges();
 
-    const linkElements = fixture.nativeElement.querySelectorAll(
-      'a[rel="noopener noreferrer"]',
-    );
+    const linkElements = fixture.nativeElement.querySelectorAll('a[href]');
 
     expect(linkElements.length).toBe(2);
+    linkElements.forEach((link: HTMLAnchorElement) => {
+      expect(link.href).toMatch(/^http/);
+      expect(link.target).toBe('_blank');
+      expect(link.rel).toContain('external');
+      expect(link.rel).toContain('noreferrer');
+      expect(link.rel).toContain('noopener');
+    });
+
     expect(linkElements[0].href).toContain('http://www.example.org/');
     expect(linkElements[1].href).toContain('https://example.net/');
+  });
+
+  it('should contain (safe) clickable links that open a new window, when answer contains HTML-links', () => {
+    const testQASet = mockQASet1;
+    testQASet.answer =
+      'Answer with HTML-link: <a href="http://evil.example.net/">https://innocent.example.org</a>' +
+      'Evil link: <a \nhref=//evil.example.net>link</a>' +
+      'Evil link: <a\thref= //evil.example.net>link</a>' +
+      'Evil link: <a href=//evil.example.net target="_self">link</a>' +
+      // 'Evil link: <a target="_self" href="//evil.example.net">link</a>' + // This circumvents the addition of target attribute :(
+      // 'Evil link: <a rel="opener" href="//evil.example.net">link</a>' + // This circumvents the addition of rel attribute :(
+      '';
+    component.qaSet = testQASet;
+
+    fixture.detectChanges();
+
+    const linkElements = fixture.nativeElement.querySelectorAll('a[href]');
+
+    expect(linkElements.length).toBe(4);
+    linkElements.forEach((link: HTMLAnchorElement) => {
+      expect(link.target).toBe('_blank');
+      expect(link.rel).toContain('external');
+      expect(link.rel).toContain('noreferrer');
+      expect(link.rel).toContain('noopener');
+    });
+  });
+
+  it('should contain clickable links that open in same window, when answer contains local/relative links', () => {
+    const testQASet = mockQASet1;
+    testQASet.answer =
+      'Answer with:\n' +
+      'a local HTML-link: <a href= /test>local test</a> \n' +
+      'a local Markdown-link: [local test](/test) \n' +
+      'an external HTML-link: <a href= https://example.org/test>external test</a> \n' +
+      'an external Markdown-link: [external test](https://example.org/test) \n';
+    component.qaSet = testQASet;
+
+    fixture.detectChanges();
+
+    const linkElements = fixture.nativeElement.querySelectorAll('a[href]');
+
+    expect(linkElements.length).toBe(4);
+
+    expect(linkElements[0].rel).toBe('');
+    expect(linkElements[0].target).toBe('');
+    expect(linkElements[1].rel).toBe('');
+    expect(linkElements[1].target).toBe('');
+    expect(linkElements[2].rel).toContain('external');
+    expect(linkElements[2].target).toBe('_blank');
+    expect(linkElements[3].rel).toContain('external');
+    expect(linkElements[3].target).toBe('_blank');
   });
 });
