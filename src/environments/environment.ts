@@ -20,9 +20,10 @@ export const environment = {
   mainPageIntroduction:
     'Intro test-content: \n\n' +
     '<b>Image:</b> <img src="/favicon.ico" alt=""/> \n\n' +
-    ' <b>Link:</b> <a href="https://github.com/rodekruis/helpful-information" target="_blank" rel="noopener noreferrer">helpful-information on GitHub</a> \n\n ' +
+    ' <b>Link:</b> <a href="https://github.com/rodekruis/helpful-information">helpful-information on GitHub</a> \n\n ' +
+    ' <b>Internal:</b> <a href="/test">Test</a> \n\n ' +
     'Markdown content: \n\n' +
-    '_inline_ **styles** and [links](https://example.org) : \n\n' +
+    '_inline_ **styles** and [external links](https://example.org) or [internal links](/test) \n\n' +
     '### Level 3 headings down only? \n\n' +
     'Section content... \n\n' +
     '--- \n\n' +
