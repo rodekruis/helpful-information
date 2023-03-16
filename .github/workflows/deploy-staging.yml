@@ -64,6 +64,7 @@ jobs:
             We do not share your personal details.\n
             \n
             Find information for local services like legal support, health, and shelter.\n
+          TXT_MAIN_PAGE_NOTICE: '<div class="d-center">⚠️ **Scheduled maintenance**: `16:00`-`16:05` </div>'
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
