@@ -59,7 +59,7 @@ jobs:
           TXT_APP_NAME: 'FAQ / Vraagbaak'
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
           TXT_MAIN_PAGE_HEADER: 'This web app is made to give helpful information (HIA) about frequently asked questions (FAQ).'
-          TXT_MAIN_PAGE_INTRO: 'As a Red Cross aid worker, you can use this web app to communicate answers to questions you receive. \n\n If you are a refugee from Ukraine, you can check: <a href="https://www.refugeehelp.nl/get-help"  target="_blank" rel="noopener noreferrer">https://www.refugeehelp.nl/get-help</a> for the most recent information. \n\n Please select your FAQ below:'
+          TXT_MAIN_PAGE_INTRO: 'Please select your FAQ below:'
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
