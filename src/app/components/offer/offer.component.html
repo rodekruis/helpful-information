@@ -35,7 +35,7 @@
       *ngIf="offer.offerOpeningHoursWeekdays"
       class="ion-margin-vertical"
     >
-      <h3 class="ion-no-margin ion-margin-top text-style--size-2">
+      <h3 class="no-margin-bottom text-style--size-2">
         Opening Hours
         <span *ngIf="offer.offerOpeningHoursWeekends"> - Weekdays</span>:
       </h3>
@@ -50,7 +50,7 @@
       *ngIf="offer.offerOpeningHoursWeekends"
       class="ion-margin-vertical"
     >
-      <h3 class="ion-no-margin ion-margin-top text-style--size-2">
+      <h3 class="no-margin-bottom text-style--size-2">
         Opening Hours
         <span *ngIf="offer.offerOpeningHoursWeekends"> - Weekends</span>:
       </h3>
@@ -66,7 +66,7 @@
       *ngIf="offer.offerDoYouNeedToKnow"
       class="ion-margin-vertical"
     >
-      <h3 class="ion-no-margin ion-margin-top text-style--size-2">
+      <h3 class="no-margin-bottom text-style--size-2">
         What do you need to know?
       </h3>
       <div
@@ -78,7 +78,7 @@
     </div>
 
     <div *ngIf="offer.offerLinks?.length">
-      <h3 class="ion-no-margin ion-margin-top text-style--size-2">
+      <h3 class="no-margin-bottom text-style--size-2">
         <img
           src="/assets/icons/external-link.svg"
           alt=""
@@ -106,7 +106,7 @@
       *ngIf="offer.offerEmails?.length"
       class="ion-margin-vertical"
     >
-      <h3 class="ion-no-margin ion-margin-top text-style--size-2">
+      <h3 class="no-margin-bottom text-style--size-2">
         <span aria-hidden="true">@&nbsp;</span>
         E-mail:
       </h3>
@@ -122,7 +122,7 @@
     </div>
 
     <ng-container *ngIf="offer.offerNumbers?.length">
-      <h3 class="ion-no-margin ion-margin-top text-style--size-2">
+      <h3 class="no-margin-bottom text-style--size-2">
         <img
           src="/assets/icons/phone.svg"
           alt=""
@@ -148,7 +148,7 @@
       *ngIf="offer.offerAddress"
       class="ion-margin-vertical"
     >
-      <h3 class="ion-no-margin ion-margin-top text-style--size-2">Address:</h3>
+      <h3 class="no-margin-bottom text-style--size-2">Address:</h3>
       <div
         markdown
         [data]="offer.offerAddress"
@@ -161,9 +161,7 @@
       *ngIf="offer.offerBasicRight"
       class="ion-margin-vertical"
     >
-      <h3 class="ion-no-margin ion-margin-top text-style--size-2">
-        Basic Rights:
-      </h3>
+      <h3 class="no-margin-bottom text-style--size-2">Basic Rights:</h3>
       <div
         markdown
         [data]="offer.offerBasicRight"
