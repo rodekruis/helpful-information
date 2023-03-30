@@ -255,10 +255,10 @@ img[decoding='async'] {
 }
 
 .action {
-  --action--color: #011e60;
-  --action--color-active: #011e60;
-  --action--background-color: #fff;
-  --action--background-color-active: #efefef;
+  --action--color: #fff;
+  --action--color-active: #fff;
+  --action--background-color: #1f3958;
+  --action--background-color-active: #3a4f6a;
 
   display: block;
   width: 100%;
@@ -312,13 +312,6 @@ img[decoding='async'] {
       border-radius: 1rem;
     }
   }
-}
-
-.action-dark {
-  --action--color: #fff;
-  --action--color-active: #fff;
-  --action--background-color: #1f3958;
-  --action--background-color-active: #3a4f6a;
 }
 
 .sheet--button {
