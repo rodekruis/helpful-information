@@ -25,15 +25,19 @@
       class="logo-badge--image"
     ></ion-img>
   </span>
-  <span class="list-item--content text-style--hide-overflow_4">
+  <span
+    class="list-item--content text-style--hide-overflow_5 text-style--size-08"
+  >
     <ng-container *ngIf="offer?.offerName">
-      <strong>{{ offer?.offerName || '&nbsp;' }}</strong
+      <strong class="text-style--size-1">{{
+        offer?.offerName || '&nbsp;'
+      }}</strong
       ><br />
     </ng-container>
     <span
       *ngIf="offer?.offerDescription"
       markdown
-      [data]="offer?.offerDescription | slice : 0 : 142"
+      [data]="offer?.offerDescription | slice : 0 : 200"
       [inline]="true"
     ></span>
   </span>

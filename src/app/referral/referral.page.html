@@ -16,12 +16,12 @@
 >
   <!-- Loading-placeholder -->
   <ng-container *ngIf="isSupportedRegion() && loading">
-    <h2>
+    <div class="ion-margin-vertical text-style--size-2">
       <span
         class="loading-text"
         style="width: 33%"
       ></span>
-    </h2>
+    </div>
     <div class="ion-margin-vertical ion-padding-bottom">
       <span class="loading-text"></span>
       <span class="loading-text"></span>
@@ -88,7 +88,7 @@
   <!-- Main/Root/Regions-list page -->
   <ng-container *ngIf="!isSupportedRegion()">
     <div class="ion-margin-bottom ion-padding-bottom">
-      <h2 class="text-style--header text-style--size-1">{{ pageHeader }}</h2>
+      <h2 class="text-style--header text-style--size-2">{{ pageHeader }}</h2>
       <div
         markdown
         [data]="pageIntroduction"
@@ -103,7 +103,7 @@
         <a
           *ngIf="region"
           [routerLink]="['/', region]"
-          class="sheet--button action text-style--header text-style--size-1"
+          class="sheet--button action text-style--header text-style--size-08"
         >
           <span>{{ regionsLabels[index] }}</span>
         </a>
