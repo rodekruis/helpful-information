@@ -9,6 +9,7 @@ import {
 } from 'src/app/models/logging-event.enum';
 import { Offer } from 'src/app/models/offer.model';
 import { LoggingService } from 'src/app/services/logging.service';
+import { formatPhoneNumberAsUrl } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-offer',
@@ -20,6 +21,8 @@ import { LoggingService } from 'src/app/services/logging.service';
 export class OfferComponent {
   @Input()
   public offer: Offer;
+
+  public formatPhoneNumberAsUrl = formatPhoneNumberAsUrl;
 
   constructor(private loggingService?: LoggingService) {}
 

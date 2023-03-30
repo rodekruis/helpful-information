@@ -69,3 +69,19 @@ export const getLegacyID = (
 export const getParentPath = (fullPath: string): string => {
   return fullPath.split('/').slice(0, -1).join('/');
 };
+
+export const formatPhoneNumberAsUrl = (rawNumber: string): string => {
+  const firstNumber = rawNumber.match(/\d/);
+  const phoneNumberStart = firstNumber ? firstNumber.index : 0;
+
+  const rawTrimmedAtStart = rawNumber.substring(phoneNumberStart);
+
+  const firstNonNumber = rawTrimmedAtStart.match(/[a-z]/i);
+  const phoneNumberEnd = firstNonNumber ? firstNonNumber.index : undefined;
+
+  const phoneNumber = rawTrimmedAtStart.substring(0, phoneNumberEnd);
+
+  const onlyDigits = phoneNumber.replaceAll(/\D/g, '');
+
+  return 'tel:' + onlyDigits;
+};
