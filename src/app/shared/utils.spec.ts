@@ -1,4 +1,9 @@
-import { getDateFromString, getFullUrl, getParentPath } from './utils';
+import {
+  formatPhoneNumberAsUrl,
+  getDateFromString,
+  getFullUrl,
+  getParentPath,
+} from './utils';
 
 describe('Utils - getFullUrl', () => {
   it('should return a full URL for valid values', () => {
@@ -106,6 +111,41 @@ describe('Utils - getDateFromString', () => {
       const output = getDateFromString(value);
 
       expect(output).toBeNull();
+    });
+  });
+});
+
+describe('Utils - formatPhoneNumberAsUrl', () => {
+  it('should return a tel-URL for each input-value', () => {
+    const testValues = [
+      '1234567890',
+      '123 456 78 90',
+      '(123) (45) 67890 1234567890',
+      '123456 or 9876543',
+      '123456(0987654321 for mobile)',
+      'WhatsApp: 1234567890 Signal: 0987654321',
+      '',
+      'none',
+      'nr 2',
+      '- 1234567890 - 0987654321',
+    ];
+    const testOutputs = [
+      'tel:1234567890',
+      'tel:1234567890',
+      'tel:12345678901234567890',
+      'tel:123456',
+      'tel:1234560987654321',
+      'tel:1234567890',
+      'tel:',
+      'tel:',
+      'tel:2',
+      'tel:12345678900987654321',
+    ];
+
+    testValues.forEach((value, index) => {
+      const output = formatPhoneNumberAsUrl(value);
+
+      expect(output).toEqual(testOutputs[index]);
     });
   });
 });

@@ -136,7 +136,7 @@
       <p class="ion-no-margin ion-margin-bottom">
         <ng-container *ngFor="let offerNumber of offer.offerNumbers">
           <a
-            href="tel:{{ offerNumber }}"
+            [href]="formatPhoneNumberAsUrl(offerNumber)"
             (click)="logDetailClick('phone')"
             >{{ offerNumber }}</a
           ><br />
