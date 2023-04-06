@@ -11,7 +11,6 @@ export default {
   offerAddress: 'Mock Offer Address',
   offerOpeningHoursWeekdays: 'Mock Offer Opening Hours Weekdays',
   offerOpeningHoursWeekends: 'Mock Offer Opening Hours Weekends',
-  offerForWhom: 'Mock Offer For Whom',
   offerDoYouNeedToKnow: 'Mock Offer What do you need to know',
   offerBasicRight: 'Mock Offer Basic Right',
   offerVisible: true,

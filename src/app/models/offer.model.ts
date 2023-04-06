@@ -10,7 +10,6 @@ export class Offer {
   offerAddress?: string;
   offerOpeningHoursWeekdays?: string;
   offerOpeningHoursWeekends?: string;
-  offerForWhom?: string;
   offerDoYouNeedToKnow?: string;
   offerBasicRight?: string;
   offerVisible: boolean;
@@ -39,7 +38,6 @@ export enum OfferCol {
   address = 'ADDRESS',
   openWeek = 'OPENWEEK',
   openWeekend = 'OPENWEEKEND',
-  for = 'FOR',
   needToKnow = 'NEEDTOKNOW',
   rights = 'RIGHTS',
   name = 'NAME',

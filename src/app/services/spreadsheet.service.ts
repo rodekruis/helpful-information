@@ -350,10 +350,6 @@ export class SpreadsheetService {
         row,
         colMap.get(OfferCol.openWeekend),
       ),
-      offerForWhom: SpreadsheetService.readCellValue(
-        row,
-        colMap.get(OfferCol.for),
-      ),
       offerDoYouNeedToKnow: SpreadsheetService.readCellValue(
         row,
         colMap.get(OfferCol.needToKnow),
