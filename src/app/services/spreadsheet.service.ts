@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Category, CategoryCol } from 'src/app/models/category.model';
 import { Offer, OfferCol } from 'src/app/models/offer.model';
-import { RegionData, RegionDataFallback } from 'src/app/models/region-data';
+import {
+  RegionCol,
+  RegionData,
+  RegionDataFallback,
+  RegionDataKey,
+} from 'src/app/models/region-data';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SubCategory, SubCategoryCol } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
@@ -22,7 +27,7 @@ enum SheetName {
   QandAs = 'Q&As',
 }
 
-type ColumnMap = Map<string, number>;
+type KeyMap = Map<string, number>;
 
 @Injectable({
   providedIn: 'root',
@@ -67,19 +72,25 @@ export class SpreadsheetService {
     return `${environment.google_sheets_api_url}/${this.sheetIds[region]}/values/${sheetName}?key=${environment.google_sheets_api_key}&alt=json&prettyPrint=false`;
   }
 
-  private getColumnIndexFromTag(row: string[], tagName: string) {
+  private getIndexOfTag(collection: string[], tagName: string) {
     const tag = `#${tagName.toUpperCase()}`;
-    return row.findIndex((headerLabel: string) => {
-      return headerLabel.toUpperCase().indexOf(tag) !== -1;
+    return collection.findIndex((value: string) => {
+      return value.toUpperCase().indexOf(tag) !== -1;
     });
   }
 
-  private createColumnMap(columns: string[], headerRow: string[]): ColumnMap {
-    let colMap: ColumnMap = new Map();
-    columns.forEach((colName: string) => {
-      colMap.set(colName, this.getColumnIndexFromTag(headerRow, colName));
+  private createKeyMap(collection: string[], keys: string[]): KeyMap {
+    let keyMap: KeyMap = new Map();
+    collection.forEach((keyName: string) => {
+      keyMap.set(keyName, this.getIndexOfTag(keys, keyName));
     });
-    return colMap;
+    return keyMap;
+  }
+
+  private createKeysCollection(rows: string[][], colMap: KeyMap): string[] {
+    return rows.map((row) => {
+      return SpreadsheetService.readCellValue(row, colMap.get(RegionCol.key));
+    });
   }
 
   static getCategory(
@@ -149,7 +160,7 @@ export class SpreadsheetService {
 
   private convertCategoryRowToCategoryObject(
     row: string[],
-    colMap: ColumnMap,
+    colMap: KeyMap,
   ): Category {
     const id = Number(
       SpreadsheetService.readCellValue(row, colMap.get(CategoryCol.id)),
@@ -184,7 +195,7 @@ export class SpreadsheetService {
       .then((response) => response.json())
       .then((response) => {
         const headerRow = response.values[0];
-        const categoriesColumnMap = this.createColumnMap(
+        const categoriesColumnMap = this.createKeyMap(
           Object.values(CategoryCol),
           headerRow,
         );
@@ -206,7 +217,7 @@ export class SpreadsheetService {
 
   private convertSubCategoryRowToSubCategoryObject(
     row: string[],
-    colMap: ColumnMap,
+    colMap: KeyMap,
   ): SubCategory {
     const id = Number(
       SpreadsheetService.readCellValue(row, colMap.get(SubCategoryCol.id)),
@@ -250,7 +261,7 @@ export class SpreadsheetService {
       .then((response) => response.json())
       .then((response) => {
         const headerRow = response.values[0];
-        const subCategoryColumnMap = this.createColumnMap(
+        const subCategoryColumnMap = this.createKeyMap(
           Object.values(SubCategoryCol),
           headerRow,
         );
@@ -276,10 +287,7 @@ export class SpreadsheetService {
       });
   }
 
-  private convertOfferRowToOfferObject(
-    row: string[],
-    colMap: ColumnMap,
-  ): Offer {
+  private convertOfferRowToOfferObject(row: string[], colMap: KeyMap): Offer {
     const id = Number(
       SpreadsheetService.readCellValue(row, colMap.get(OfferCol.id)),
     );
@@ -366,7 +374,7 @@ export class SpreadsheetService {
       .then((response) => response.json())
       .then((response) => {
         const headerRow = response.values[0];
-        const offerColumnMap = this.createColumnMap(
+        const offerColumnMap = this.createKeyMap(
           Object.values(OfferCol),
           headerRow,
         );
@@ -386,78 +394,180 @@ export class SpreadsheetService {
       });
   }
 
-  private convertReferralPageRowToRegionData(
-    referralPageDataRows: string[][],
+  private convertConfigSheetToRegionData(
+    sheetRows: string[][],
+    valueCol: number,
+    rowMap: KeyMap,
   ): RegionData {
-    return {
-      pageLogo: SpreadsheetService.readCellValue(referralPageDataRows[1], 1),
-      pageTitle: SpreadsheetService.readCellValue(referralPageDataRows[2], 1),
-      pageGreeting: SpreadsheetService.readCellValue(
-        referralPageDataRows[3],
-        1,
-      ),
-      pageInstructions: SpreadsheetService.readCellValue(
-        referralPageDataRows[4],
-        1,
-      ),
-      pageNotification: SpreadsheetService.readCellValue(
-        referralPageDataRows[11],
-        1,
-      ),
-      labelBackButton:
-        SpreadsheetService.readCellValue(referralPageDataRows[5], 1) ||
-        RegionDataFallback.labelBackButton,
-      labelMainScreenButton:
-        SpreadsheetService.readCellValue(referralPageDataRows[6], 1) ||
-        RegionDataFallback.labelMainScreenButton,
-      contactPhoneNumber: SpreadsheetService.readCellValue(
-        referralPageDataRows[7],
-        1,
-      ),
-      contactWhatsAppLink: SpreadsheetService.readCellValue(
-        referralPageDataRows[8],
-        1,
-      ),
-      contactTelegramLink: SpreadsheetService.readCellValue(
-        referralPageDataRows[12],
-        1,
-      ),
-      lastUpdatedTime: SpreadsheetService.readCellValue(
-        referralPageDataRows[9],
-        1,
-      ),
-      labelLastUpdated:
-        SpreadsheetService.readCellValue(referralPageDataRows[10], 1) ||
-        RegionDataFallback.labelLastUpdated,
-      labelHighlightsButton:
-        SpreadsheetService.readCellValue(referralPageDataRows[17], 1) ||
-        RegionDataFallback.labelHighlightsButton,
-      labelHighlightsPageTitle:
-        SpreadsheetService.readCellValue(referralPageDataRows[14], 1) ||
-        RegionDataFallback.labelHighlightsPageTitle,
-      labelHighlightsItemsZero:
-        SpreadsheetService.readCellValue(referralPageDataRows[15], 1) ||
-        RegionDataFallback.labelHighlightsItemsZero,
-      labelHighlightsItemsCount:
-        SpreadsheetService.readCellValue(referralPageDataRows[16], 1) ||
-        RegionDataFallback.labelHighlightsItemsCount,
-      labelSearchPageTitle:
-        SpreadsheetService.readCellValue(referralPageDataRows[19], 1) ||
-        RegionDataFallback.labelSearchPageTitle,
-      labelSearchAction:
-        SpreadsheetService.readCellValue(referralPageDataRows[20], 1) ||
-        RegionDataFallback.labelSearchAction,
-      labelSearchResultsCount:
-        SpreadsheetService.readCellValue(referralPageDataRows[21], 1) ||
-        RegionDataFallback.labelSearchResultsCount,
+    const sharedData = {
+      rows: sheetRows,
+      rowMap: rowMap,
+      valueCol: valueCol,
     };
+
+    return {
+      pageLogo: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.logo,
+        1,
+      ),
+      pageTitle: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.name,
+        2,
+      ),
+      pageGreeting: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.mainHeading,
+        3,
+      ),
+      pageInstructions: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.mainIntro,
+        4,
+      ),
+      pageNotification: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.mainNotification,
+        11,
+      ),
+      labelBackButton: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.navBack,
+        5,
+        RegionDataFallback.labelBackButton,
+      ),
+      labelMainScreenButton: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.navMain,
+        6,
+        RegionDataFallback.labelMainScreenButton,
+      ),
+      contactPhoneNumber: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.contactTel,
+        7,
+      ),
+      contactWhatsAppLink: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.contactWhatsApp,
+        8,
+      ),
+      contactTelegramLink: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.contactTelegram,
+        12,
+      ),
+      lastUpdatedTime: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.timestampLastUpdated,
+        9,
+      ),
+      labelLastUpdated: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.labelLastUpdated,
+        10,
+        RegionDataFallback.labelLastUpdated,
+      ),
+      labelHighlightsButton: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.highlightsCta,
+        17,
+        RegionDataFallback.labelHighlightsButton,
+      ),
+      labelHighlightsPageTitle: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.highlightsTitle,
+        14,
+        RegionDataFallback.labelHighlightsPageTitle,
+      ),
+      labelHighlightsItemsZero: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.highlightsItemsZero,
+        15,
+        RegionDataFallback.labelHighlightsItemsZero,
+      ),
+      labelHighlightsItemsCount: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.highlightsItems,
+        16,
+        RegionDataFallback.labelHighlightsItemsCount,
+      ),
+      labelSearchPageTitle: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.searchTitle,
+        19,
+        RegionDataFallback.labelSearchPageTitle,
+      ),
+      labelSearchAction: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.searchCta,
+        20,
+        RegionDataFallback.labelSearchAction,
+      ),
+      labelSearchResultsCount: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.searchItems,
+        21,
+        RegionDataFallback.labelSearchResultsCount,
+      ),
+    };
+  }
+
+  private getConfigValueOrFallback(
+    baseData: {
+      rows: string[][];
+      rowMap: KeyMap;
+      valueCol: number;
+    },
+    key: RegionDataKey,
+    fallbackIndex: number = -1,
+    fallbackValue?: RegionDataFallback,
+  ): string {
+    let value = SpreadsheetService.readCellValue(
+      baseData.rows[
+        this.getIndexOrFallback(baseData.rowMap.get(key), fallbackIndex)
+      ],
+      baseData.valueCol,
+    );
+
+    if (value === '' && !!fallbackValue) {
+      return fallbackValue;
+    }
+
+    return value;
+  }
+
+  private getIndexOrFallback(index: number, fallback: number): number {
+    return !!index && index !== -1 ? index : fallback;
   }
 
   public async getReferralPageData(region: string): Promise<RegionData> {
     return fetch(this.getSheetUrl(region, SheetName.page))
       .then((response) => response.json())
-      .then((response) => {
-        return this.convertReferralPageRowToRegionData(response.values);
+      .then((response: { values: string[][] }) => {
+        const regionRows = response.values;
+        const headerRow = regionRows[0];
+        const regionColumnMap = this.createKeyMap(
+          Object.values(RegionCol),
+          headerRow,
+        );
+        const valueCol = this.getIndexOrFallback(
+          regionColumnMap.get(RegionCol.value),
+          1,
+        );
+
+        const keysCol = this.createKeysCollection(regionRows, regionColumnMap);
+        const regionRowMap = this.createKeyMap(
+          keysCol,
+          Object.values(RegionDataKey),
+        );
+
+        return this.convertConfigSheetToRegionData(
+          regionRows,
+          valueCol,
+          regionRowMap,
+        );
       })
       .catch((error) => {
         if (this.loggingService) {
@@ -469,7 +579,7 @@ export class SpreadsheetService {
 
   private convertQaRowToObject(
     row: string[],
-    colMap: ColumnMap,
+    colMap: KeyMap,
     index: number,
   ): QASet {
     return {
@@ -568,10 +678,7 @@ export class SpreadsheetService {
           return [];
         }
         const headerRow = response.values[0];
-        const qaColumnMap = this.createColumnMap(
-          Object.values(QACol),
-          headerRow,
-        );
+        const qaColumnMap = this.createKeyMap(Object.values(QACol), headerRow);
 
         return response.values
           .slice(1) // Remove header-row

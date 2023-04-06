@@ -2,84 +2,86 @@
   "range": "",
   "majorDimension": "ROWS",
   "values": [
-    ["Key", "Value", "Example value", "", "SOURCE", "TRANSLATION (auto)"],
+    ["#KEY", "#VALUE", "#EXAMPLE value"],
     [
-      "Logo URL",
+      "Logo URL\n#logo",
       "https://raw.githubusercontent.com/rodekruis/helpful-information/main/src/assets/icons/red_cross.png"
     ],
+    ["App/Site Name/title\n#name", "Test/Example"],
+    ["Greeting/Heading\n#main.heading", "Hello!", "", "", "Hello!", "Hallo!"],
     [
-      "App/Site Name/title",
-      "Test/Example",
-      "",
-      "",
-      "Test/Example",
-      "Test/Voorbeeld"
-    ],
-    ["Greeting/Heading", "Hello!", "", "", "Hello!", "Hallo!"],
-    [
-      "Introduction text",
+      "Introduction text\n#main.intro",
       "This website is made to give helpful information...\n\nMultiple lines of text,\ncan be used.\nWith __Mark__**Down** and/or <b>HTML</b> content:\n- lists\n- plain URL-links\n- [links](https://example.org)\n - - -\n# No level-1 Headings here\n...\n### Level 3+ Headings only here\n...\n"
     ],
-    ["Label: Back Button", "Up", "\"Back\", \"Previous\"", "", "Back", "Rug"],
+    ["Label: Back Button\n#nav.back", "Back", "\"Back\", \"Previous\""],
     [
-      "Label: Main Screen Button/Logo",
+      "Label: Main Screen Button/Logo\n#nav.main",
       "Main Screen",
-      "\"Main\", \"Home\", \"Start\"",
-      "",
-      "Main Screen",
-      "Hoofdscherm"
+      "\"Main\", \"Home\", \"Start\""
     ],
-    ["Contact: Phone-number", "+31100000000", "+31100000000", "", "", "-"],
+    ["Contact: Phone-number\n#contact.tel", "+31100000000", "+31100000000"],
     [
-      "Contact: WhatsApp URL",
+      "Contact: WhatsApp URL\n#contact.whatsapp",
       "https://wa.me/31600000000?text=I%20have%20a%20question%20about:",
-      "https://wa.me/31600000000",
-      "",
-      "",
-      "-"
+      "https://wa.me/31600000000"
     ],
-    ["Last Updated Time", "2022-11-10T10:17:44.070Z"],
+    ["Last Updated Time\n#timestamp.last-updated", "2023-04-06T09:47:26.058Z"],
     [
-      "Label: \"Last updated\"",
+      "Label: \"Last updated\"\n#label.last-updated",
       "Last changed:",
-      "\"Last updated:\" or \"Up to date since:\"",
-      "",
-      "Last changed:",
-      "Laatst gewijzigd:"
+      "\"Last updated:\" or \"Up to date since:\""
     ],
-    ["-"],
     [
-      "Contact: Telegram URL",
+      "Notification text\n#main.notification",
+      "<div class=\"d-center\">⚠️ **Scheduled maintenance**: `16:00`-`16:05` </div>",
+      "\"**Warning** Please [contact us](/contact)\" or \"HSP **closed** from `8:00`-`11:00`\""
+    ],
+    [
+      "Contact: Telegram URL\n#contact.telegram",
       "https://telegram.me/username",
-      "https://telegram.me/username",
-      "",
-      "",
-      "-"
+      "https://telegram.me/username"
     ],
     [],
     [
-      "Label: Highlights - title",
+      "Label: Highlights - title\n#highlights.title",
       "Recent changes",
       "\"Recent changes\" or \"Latest updates\""
     ],
     [
-      "Label: Highlights - \"no items\"",
+      "Label: Highlights - \"no items\"\n#highlights.items.0",
       "No recent changes.",
       "\"No recent changes.\" or \"No updates.\""
     ],
     [
-      "Label: Highlights - \"items changed: N\"",
+      "Label: Highlights - \"items changed: N\"\n#highlights.items",
       "Items with changes:",
       "\"Items with changes:\" or \"Recently changed items:\" or \"Updated items:\""
     ],
     [
-      "Label: Highlights - CTA",
+      "Label: Highlights - CTA\n#highlights.cta",
       "New! New!",
       "\"Changes\", \"Updates\" or \"New!\""
     ],
     [],
-    ["Label: Search - page title", "Search page", "\"Search\", \"Find\""],
-    ["Label: Search - button action", "Find"],
-    ["Label: Search - items", "Results:", "\"Search results:\", \"Found:\""]
+    [
+      "Label: Search - page title\n#search.title",
+      "Search page",
+      "\"Search\", \"Find\""
+    ],
+    [
+      "Label: Search - button action\n#search.cta",
+      "Find",
+      "\"Search\", \"Find\", \"Go\", \"Look up\""
+    ],
+    [
+      "Label: Search - items\n#search.items",
+      "Results:",
+      "\"Search results:\", \"Found:\""
+    ],
+    [
+      "Label: Search - \"no items\"\n#search.items.0",
+      "",
+      "\"No results.\", \"Nothing found.\""
+    ]
   ]
 }
