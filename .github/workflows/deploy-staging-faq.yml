@@ -75,8 +75,6 @@ jobs:
             ,
             jrncs-hotline,
             ,
-            ocw-project,
-            ,
             example,
             test
           REGIONS_LABELS: >-
@@ -90,8 +88,6 @@ jobs:
             ,
             JRNCS Hotline,
             ,
-            OCW Project,
-            ,
             Example/Demo 🟡,
             Test/Example 🟡
           REGIONS_SHEET_IDS: >-
@@ -104,8 +100,6 @@ jobs:
             ,
             ,
             14dv2jpXouk-XjBZpcts32_kth3dun8VZK0KPcGk274s,
-            ,
-            1cHeyiaYPaIP2tiYjSduQAKOJhcFYZAMHFQwF4Vp8PGI,
             ,
             1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8,
             10SIJdAQSd6loqCyzwK409QS_01Fgp8P4aqoDO8iBvhY
