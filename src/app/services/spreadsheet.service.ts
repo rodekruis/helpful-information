@@ -354,10 +354,6 @@ export class SpreadsheetService {
         row,
         colMap.get(OfferCol.needToKnow),
       ),
-      offerBasicRight: SpreadsheetService.readCellValue(
-        row,
-        colMap.get(OfferCol.rights),
-      ),
       moreInfo: SpreadsheetService.readCellValue(
         row,
         colMap.get(OfferCol.moreInfo),
