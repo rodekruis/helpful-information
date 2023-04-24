@@ -58,7 +58,7 @@ So take appropriate precautions regarding file-ownership and "edit"-permissions 
 
 Optional:
 
-- All header-rows can be reordered, as long as their `#tag`s remain.
+- All columns can be reordered, as long as their `#tag`s remain in their header-cell.
 - You can use the toggle in the "_Visible?_"-column to prepare a 'draft' of a row and finally 'publish' by setting it to "_Show_".
 - You can use background-colors to mark/highlight any changes or 'flag issues'; These styles will not be used in the web-app.
 
@@ -115,8 +115,7 @@ Some specific information needs to be configured before use:
 ### Using the Google Sheets API
 
 - To be able to use the [Google Sheets API](https://developers.google.com/sheets/api) a 'credential' in the shape of an API-key is required.
-- To get an API-key, follow the instructions:  
-  <https://developers.google.com/workspace/guides/create-credentials#api-key>
+- To get an API-key, follow the instructions: [Guide: How to set-up an instance / Create a Google Sheets API-key](docs/Guide-How_to_set_up_an_instance.md#create-a-google-sheets-api-key)
 - Configure the restrictions on the API-key following:  
   <https://cloud.google.com/docs/authentication/api-keys#adding_http_restrictions>  
   Make sure to include _only_ the domains/referrers that will be used.  
@@ -183,7 +182,7 @@ To update all Angular and ESLint related dependencies, run:
 
 ## Data Model
 
-Based on the date fetched from the Google Sheets, an internal data-structure is build. This is used to render the interface.
+Based on the data fetched from the Google Sheets, an internal data-structure is build. This is used to render the interface.
 
 The following are _illustrations_ only, to help get an overview, it might not be up-to-date with the actual code.
 
@@ -302,15 +301,26 @@ classDiagram
 
 See the options in the [`.env.example`](.env.example)-file.
 
+Each Instance:
+
+- can have 1 or multiple Sheet(s), each:
+  - has a unique URL-slug (`[a-z0-9._-]`)
+  - has a human-readable (short) label (can contain capitals, spaces, numbers, emoji, etc.)
+  - has a `Google Spreadsheet ID`, a 44-character string (from: `https://docs.google.com/spreadsheets/d/`**`___SPREADSHEET_ID___`**`/edit?usp=sharing`)
+
 ### Sheet level configuration
 
-See the options in the "Referral Page"-sheet
+See the options in the "Referral Page"-sheet:
+
+- it has a `#KEY`-column with all available properties(Using `#tag.sub-tag`s, from [`RegionDataKey`](./src/app/models/region-data.ts)) and `#VALUE`-column with their current value.
 
 ### (Sub-)Category features
 
 Each (Sub-)Category:
 
 - can have a (single line) name
+- can have a URL-slug (`[a-z0-9._-]`);  
+  This _needs_ to be unique within all Categories; For each Sub-Category it needs to be unique within its parent Category _only_.
 - can have a multi-line description, [Markdown syntax](#text-formatting) can be used for structure/formatting.
 - can have an (absolute/relative/data-) URL for an icon
 - can be hidden by setting the "**Visible?**"-column to `Hide`.
@@ -320,6 +330,8 @@ Each (Sub-)Category:
 Each Offer
 
 - needs to have a `Category ID` and a `Sub-Category ID` set.
+- can have a URL-slug (`[a-z0-9._-]`);  
+  This _needs_ to be unique within its parent Sub-Category _only_.
 - can be hidden by setting the "**Visible?**"-column to `Hide`.
 - can have some multi-line fields, [Markdown syntax](#text-formatting) can be used for structure/formatting in those.
 
@@ -329,6 +341,8 @@ Each Q&A-set
 
 - needs to have a `Category ID` and a `Sub-Category ID` set.
 - needs to have an `Answer` value
+- can have a URL-slug (`[a-z0-9._-]`);  
+  This _needs_ to be unique within all Q&A-sets.
 - can be hidden by setting the "**Visible?**"-column to `Hide`.
 - can be shown as a Sub-Question by setting the `Parent`-column to the Slug of another Question.
 - can have a "(last) updated"-date set, to indicate its 'freshness'
@@ -380,7 +394,7 @@ To deploy the web-app using or a static-files web-host, see options at: <https:/
 
 Configure and build a 'production'-build of the web-app following the steps [defined at "Deployment"](#deployment).
 
-Follow one of these ['guides' from Surge](https://surge.sh/help/#:~:text=Guides)
+Follow one of these ['guides' from Surge](https://surge.sh/help/#:~:text=Guides).
 
 ---
 
