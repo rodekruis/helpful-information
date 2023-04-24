@@ -268,8 +268,7 @@ classDiagram
     string id
   }
   class ReferralPage {
-    Key-Value pairs;
-    based on row/column-index
+    Key-Value rows [];
   }
 
   class Help {

@@ -82,6 +82,38 @@
       "Label: Search - \"no items\"\n#search.items.0",
       "",
       "\"No results.\", \"Nothing found.\""
+    ],
+    [],
+    [
+      "Label: Offer - Address\n#offer.address",
+      "Adres",
+      "\"Address\", \"Location\""
+    ],
+    [
+      "Label: Offer - Phone\n#offer.phone",
+      "Telefoon",
+      "\"Phone\", \"Phone-numbers\""
+    ],
+    ["Label: Offer - E-mail\n#offer.email", "Elektronische post", "\"E-mail\""],
+    [
+      "Label: Offer - Website\n#offer.website",
+      "URLs",
+      "\"Website\", \"Online:"
+    ],
+    [
+      "Label: Offer - Open - Weekdays\n#offer.open.week",
+      "Open Ma-Vr",
+      "\"Opening Hours - Weekdays\", \"Open Mo-Vr\", \"Accessibility\""
+    ],
+    [
+      "Label: Offer - Open - Weekend\n#offer.open.weekend",
+      "Open Weekend",
+      "\"Opening Hours - Weekends\", \"Open Sa-Su\""
+    ],
+    [
+      "Label: Offer - Need to Know\n#offer.need-to-know",
+      "Need to Know",
+      "\"First Things First\", \"What do you need to know?\""
     ]
   ]
 }

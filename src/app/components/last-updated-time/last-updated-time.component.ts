@@ -1,5 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RegionDataFallback } from 'src/app/models/region-data';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.servi
 })
 export class LastUpdatedTimeComponent {
   @Input()
-  public label: string;
+  public label: string = RegionDataFallback.labelLastUpdated;
 
   public lastUpdatedTime: string;
 
@@ -23,6 +24,7 @@ export class LastUpdatedTimeComponent {
       }
       this.lastUpdatedTime = value;
     });
+
     this.lastUpdatedTimeService.lastUpdatedLabel$.subscribe((value) => {
       this.label = value;
     });

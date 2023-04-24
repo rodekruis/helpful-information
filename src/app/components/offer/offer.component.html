@@ -36,8 +36,7 @@
       class="ion-margin-vertical"
     >
       <h3 class="no-margin-bottom text-style--size-2">
-        Opening Hours
-        <span *ngIf="offer.offerOpeningHoursWeekends"> - Weekdays</span>:
+        {{ regionData?.labelOfferOpenWeek }}
       </h3>
       <p
         markdown
@@ -51,8 +50,7 @@
       class="ion-margin-vertical"
     >
       <h3 class="no-margin-bottom text-style--size-2">
-        Opening Hours
-        <span *ngIf="offer.offerOpeningHoursWeekends"> - Weekends</span>:
+        {{ regionData?.labelOfferOpenWeekend }}
       </h3>
       <p
         markdown
@@ -67,7 +65,7 @@
       class="ion-margin-vertical"
     >
       <h3 class="no-margin-bottom text-style--size-2">
-        What do you need to know?
+        {{ regionData?.labelOfferNeedToKnow }}
       </h3>
       <div
         markdown
@@ -87,7 +85,7 @@
           decoding="async"
           class="icon is_small"
         />
-        Website:
+        {{ regionData?.labelOfferWebsite }}
       </h3>
       <p class="ion-no-margin ion-margin-bottom">
         <ng-container *ngFor="let offerLink of offer.offerLinks">
@@ -108,7 +106,7 @@
     >
       <h3 class="no-margin-bottom text-style--size-2">
         <span aria-hidden="true">@&nbsp;</span>
-        E-mail:
+        {{ regionData?.labelOfferEmail }}
       </h3>
       <p class="ion-no-margin ion-margin-bottom">
         <ng-container *ngFor="let offerEmail of offer.offerEmails">
@@ -131,7 +129,7 @@
           decoding="async"
           class="icon is_small"
         />
-        Phone:
+        {{ regionData?.labelOfferPhone }}
       </h3>
       <p class="ion-no-margin ion-margin-bottom">
         <ng-container *ngFor="let offerNumber of offer.offerNumbers">
@@ -148,7 +146,9 @@
       *ngIf="offer.offerAddress"
       class="ion-margin-vertical"
     >
-      <h3 class="no-margin-bottom text-style--size-2">Address:</h3>
+      <h3 class="no-margin-bottom text-style--size-2">
+        {{ regionData?.labelOfferAddress }}
+      </h3>
       <div
         markdown
         [data]="offer.offerAddress"

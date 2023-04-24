@@ -5,9 +5,11 @@ import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferComponent } from 'src/app/components/offer/offer.component';
 import { Offer } from 'src/app/models/offer.model';
+import { RegionData } from 'src/app/models/region-data';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { getLegacyID } from 'src/app/shared/utils';
 
@@ -27,6 +29,7 @@ import { getLegacyID } from 'src/app/shared/utils';
 })
 export default class OfferPageComponent implements OnInit {
   public region: string;
+  public regionData: RegionData;
 
   @Input()
   public offer: Offer;
@@ -34,6 +37,7 @@ export default class OfferPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private regionDataService: RegionDataService,
     private offersService: OffersService,
     private pageMeta: PageMetaService,
   ) {}
@@ -52,6 +56,8 @@ export default class OfferPageComponent implements OnInit {
     }
 
     if (!this.region) return;
+
+    this.regionData = await this.regionDataService.getData(this.region);
 
     if (!this.offer) {
       this.offer = await this.offersService.findOffer({

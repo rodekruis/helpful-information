@@ -461,6 +461,48 @@ export class SpreadsheetService {
         10,
         RegionDataFallback.labelLastUpdated,
       ),
+      labelOfferAddress: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.offerAddress,
+        -1,
+        RegionDataFallback.labelOfferAddress,
+      ),
+      labelOfferEmail: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.offerEmail,
+        -1,
+        RegionDataFallback.labelOfferEmail,
+      ),
+      labelOfferNeedToKnow: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.offerNeedToKnow,
+        -1,
+        RegionDataFallback.labelOfferNeedToKnow,
+      ),
+      labelOfferOpenWeek: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.offerOpenWeek,
+        -1,
+        RegionDataFallback.labelOfferOpenWeek,
+      ),
+      labelOfferOpenWeekend: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.offerOpenWeekend,
+        -1,
+        RegionDataFallback.labelOfferOpenWeekend,
+      ),
+      labelOfferPhone: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.offerPhone,
+        -1,
+        RegionDataFallback.labelOfferPhone,
+      ),
+      labelOfferWebsite: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.offerWebsite,
+        -1,
+        RegionDataFallback.labelOfferWebsite,
+      ),
       labelHighlightsButton: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.highlightsCta,
