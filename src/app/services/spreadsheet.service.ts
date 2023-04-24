@@ -79,10 +79,10 @@ export class SpreadsheetService {
     });
   }
 
-  private createKeyMap(collection: string[], keys: string[]): KeyMap {
+  private createKeyMap(keys: string[], collection: string[]): KeyMap {
     let keyMap: KeyMap = new Map();
-    collection.forEach((keyName: string) => {
-      keyMap.set(keyName, this.getIndexOfTag(keys, keyName));
+    keys.forEach((keyName: string) => {
+      keyMap.set(keyName, this.getIndexOfTag(collection, keyName));
     });
     return keyMap;
   }
@@ -593,8 +593,8 @@ export class SpreadsheetService {
 
         const keysCol = this.createKeysCollection(regionRows, regionColumnMap);
         const regionRowMap = this.createKeyMap(
-          keysCol,
           Object.values(RegionDataKey),
+          keysCol,
         );
 
         return this.convertConfigSheetToRegionData(
