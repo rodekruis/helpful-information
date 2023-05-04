@@ -26,7 +26,8 @@ form {
   background: var(--search-input--background);
   border: 0;
   border-radius: 0.25em;
-  padding: 0.25em 0.5em;
+  padding-block: 0.25em;
+  padding-inline: 0.5em;
 
   &:focus {
     outline-color: var(--search-input--background);

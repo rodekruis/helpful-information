@@ -398,6 +398,16 @@ export class SpreadsheetService {
     };
 
     return {
+      localeDirection: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.localeDirection,
+        -1,
+      ),
+      localeLanguage: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.localeLanguage,
+        -1,
+      ),
       pageLogo: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.logo,

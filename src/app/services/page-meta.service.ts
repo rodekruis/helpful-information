@@ -16,6 +16,14 @@ export class PageMetaService {
     private location: Location,
   ) {}
 
+  public setDirection(direction: string = 'auto') {
+    this.dom.documentElement.dir = direction;
+  }
+
+  public setLanguage(language: string = '') {
+    this.dom.documentElement.lang = language;
+  }
+
   public setTitle(parts: {
     offerName?: string;
     subCategoryName?: string;

@@ -39,6 +39,9 @@ export default class HighlightsPageComponent implements OnInit {
 
       this.regionData = await this.regionDataService.getData(this.region);
 
+      this.pageMeta.setDirection(this.regionData.localeDirection);
+      this.pageMeta.setLanguage(this.regionData.localeLanguage);
+
       if (!this.qaHighlights) {
         this.qaHighlights = await this.offersService.getHighlights(this.region);
       }

@@ -4,6 +4,16 @@
   "values": [
     ["#KEY", "#VALUE", "#EXAMPLE value"],
     [
+      "Text direction (Left-to-Right or Right-to-Left)\n#locale.dir",
+      "ltr",
+      "\"ltr\" or \"rtl\" or \"auto\""
+    ],
+    [
+      "Default language\n#locale.language",
+      "en",
+      "One of \"nl\" or \"en\" or \"pt-BR\""
+    ],
+    [
       "Logo URL\n#logo",
       "https://raw.githubusercontent.com/rodekruis/helpful-information/main/src/assets/icons/red_cross.png"
     ],

@@ -59,6 +59,9 @@ export default class OfferPageComponent implements OnInit {
 
     this.regionData = await this.regionDataService.getData(this.region);
 
+    this.pageMeta.setDirection(this.regionData.localeDirection);
+    this.pageMeta.setLanguage(this.regionData.localeLanguage);
+
     if (!this.offer) {
       this.offer = await this.offersService.findOffer({
         region: this.region,

@@ -20,6 +20,8 @@ export class RegionData {
   labelSearchPageTitle?: string;
   labelSearchResultsCount?: string;
   lastUpdatedTime?: string;
+  localeDirection?: string;
+  localeLanguage?: string;
   pageGreeting?: string;
   pageInstructions?: string;
   pageLogo?: string;
@@ -45,6 +47,8 @@ export enum RegionDataKey {
   highlightsItemsZero = 'highlights.items.0',
   highlightsTitle = 'highlights.title',
   labelLastUpdated = 'label.last-updated',
+  localeDirection = 'locale.dir',
+  localeLanguage = 'locale.language',
   logo = 'logo',
   mainHeading = 'main.heading',
   mainIntro = 'main.intro',

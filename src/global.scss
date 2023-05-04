@@ -76,16 +76,11 @@ img[decoding='async'] {
 }
 
 .layout--float-end {
-  float: right !important;
-
-  [dir='rtl'] &,
-  :host-context([dir='rtl']) & {
-    float: left !important;
-  }
+  float: inline-end;
 }
 
 .list-flat {
-  padding-left: 0;
+  padding-inline-start: 0;
 
   > li {
     list-style: none;
@@ -104,12 +99,12 @@ img[decoding='async'] {
   flex-flow: row wrap;
   justify-content: flex-start;
   align-content: flex-start;
-  margin-left: calc(-2 * var(--column-gap));
-  margin-right: calc(-2 * var(--column-gap));
+  margin-inline-start: calc(-2 * var(--column-gap));
+  margin-inline-end: calc(-2 * var(--column-gap));
 
   .tile-grid--item {
-    padding-left: var(--column-gap);
-    padding-right: var(--column-gap);
+    padding-inline-start: var(--column-gap);
+    padding-inline-end: var(--column-gap);
     margin-bottom: 1rem;
     min-width: 150px; // To always fit 2 items for narrow viewports
   }
@@ -126,19 +121,15 @@ img[decoding='async'] {
   }
 }
 
-// Floating Action Button (bottom-right)
+// Floating Action Button (bottom-end)
 .floating-action-area {
   position: fixed;
 
   &.is_in-page {
     position: relative;
   }
-  &.is_top-right {
-    right: 0;
-    top: 1rem;
-  }
-  &.is_bottom-right {
-    right: 0;
+  &.is_bottom-end {
+    inset-inline-end: 0;
     bottom: 1rem;
   }
 }
@@ -360,7 +351,8 @@ img[decoding='async'] {
 
   .contact-button--link {
     display: inline-block;
-    padding: 0.3rem 0.6rem;
+    padding-block: 0.3rem;
+    padding-inline: 0.6rem;
     background: white;
     border-radius: 48px 0 0 48px;
     overflow: hidden;
@@ -394,8 +386,8 @@ img[decoding='async'] {
   font-size: 85%;
   color: var(--ion-color-black);
   background-color: var(--ion-color-secondary);
-  border-top-right-radius: 0.25rem;
-  border-top-left-radius: 0.25rem;
+  border-start-start-radius: 0.25rem;
+  border-start-end-radius: 0.25rem;
 
   // Utility class to use in (Markdown)content
   .d-flex {
