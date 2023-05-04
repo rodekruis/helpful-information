@@ -3,7 +3,7 @@
   class="text-style--center"
 >
   <small>
-    {{ label || 'Last updated:' }}
+    {{ label }}
     <time [attr.datetime]="lastUpdatedTime | date : 'YYYY-MM-ddTHH:mm:ss'">{{
       lastUpdatedTime | date : 'd-M-YYYY HH:mm'
     }}</time>

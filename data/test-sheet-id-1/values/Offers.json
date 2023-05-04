@@ -18,9 +18,7 @@
       "Address\n#ADDRESS",
       "Opening Hours Weekdays\n#OPENWEEK",
       "Opening Hours Weekends\n#OPENWEEKEND",
-      "For whom?\n#FOR",
       "What do you need to know?\n#NEEDTOKNOW",
-      "Basic Right\n#RIGHTS",
       "Further information\n#MOREINFO"
     ],
     [
@@ -39,8 +37,6 @@
       "The Address\nStreetname 00\nBuildingname\nCity\n\nSidenote with multiple lines\nabout this address.",
       "24/7",
       "24/7",
-      "Everyone",
-      "Can be multi-\nline\n(Markdown) content.",
       "Can be multi-\nline\n(Markdown) content.",
       "### Custom heading\n\nCan be multi-\nline\n(**Mark**_down_) content.\n\n"
     ],
@@ -60,9 +56,8 @@
       "Short Address\nStreetname 00, City",
       "24/7",
       "24/7",
-      "Everyone",
       " ",
-      "Can be multi-\nline\n(Markdown) content."
+      " "
     ],
     [
       "Sub-Category",
@@ -79,8 +74,7 @@
       "https://very-long.example.org/url/with/a/long-and-complicated/addres/link.html",
       "Short Address\nStreetname 00, City",
       "24/7",
-      "24/7",
-      "Everyone"
+      "24/7"
     ],
     [
       "Single Level",
@@ -116,8 +110,6 @@
       "",
       "evil@evil.example.net",
       "javascript:alert('evil! link #WEBURLS');\nhttps://innocent.example.org\"></a><a href=\"http://evil.example.net/\">http://innocent.example.org</a><a href=\"\n<script>alert('evil! script #WEBURLS');<\\/script>",
-      "",
-      "",
       "",
       "",
       "",
