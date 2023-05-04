@@ -55,6 +55,9 @@ export default class SearchPageComponent implements OnInit {
 
     this.regionData = await this.regionDataService.getData(this.region);
 
+    this.pageMeta.setDirection(this.regionData.localeDirection);
+    this.pageMeta.setLanguage(this.regionData.localeLanguage);
+
     this.pageMeta.setTitle({
       override: `${this.regionData?.labelSearchPageTitle} - ${this.regionData?.pageTitle}`,
     });

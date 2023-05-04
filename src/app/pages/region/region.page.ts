@@ -45,6 +45,9 @@ export default class RegionPageComponent implements OnInit {
 
       this.regionData = await this.regionDataService.getData(this.region);
 
+      this.pageMeta.setDirection(this.regionData.localeDirection);
+      this.pageMeta.setLanguage(this.regionData.localeLanguage);
+
       this.pageMeta.setTitle({
         region: this.regionData.pageTitle,
       });

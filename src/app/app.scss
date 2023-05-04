@@ -17,7 +17,7 @@
 }
 .env-label--name {
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   bottom: 0;
   padding: 1em;
   font: 100% / 1 monospace;

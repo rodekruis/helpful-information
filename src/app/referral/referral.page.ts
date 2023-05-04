@@ -71,6 +71,8 @@ export class ReferralPageComponent implements OnInit {
       this.region = params.region;
 
       if (!this.isSupportedRegion()) {
+        this.pageMeta.setDirection('');
+        this.pageMeta.setLanguage('');
         this.pageMeta.setTitle({ override: environment.appName });
         this.pageMeta.setCanonicalUrl({});
       }
@@ -82,6 +84,8 @@ export class ReferralPageComponent implements OnInit {
 
   async ngOnInit() {
     if (!this.isSupportedRegion()) {
+      this.pageMeta.setDirection('');
+      this.pageMeta.setLanguage('');
       this.pageMeta.setTitle({ override: environment.appName });
       this.pageMeta.setCanonicalUrl({});
       this.router.navigate([this.rootHref]);
@@ -141,6 +145,8 @@ export class ReferralPageComponent implements OnInit {
     this.loading = true;
     this.regionData = await this.regionDataService.getData(this.region);
 
+    this.pageMeta.setDirection(this.regionData.localeDirection);
+    this.pageMeta.setLanguage(this.regionData.localeLanguage);
     this.pageMeta.setTitle({ region: this.regionData.pageTitle });
 
     this.lastUpdatedTimeService.setLastUpdatedTime(
