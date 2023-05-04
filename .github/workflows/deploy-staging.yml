@@ -47,6 +47,9 @@ jobs:
           HUSKY: 0
         run: 'npm ci --omit=optional --no-fund --no-audit'
 
+      - name: Set/override favicon.ico
+        run: 'cp --force src/favicon.green.ico src/favicon.ico'
+
       - name: Build
         run: 'npm run build:production'
         env:
@@ -64,6 +67,10 @@ jobs:
             We do not share your personal details.\n
             \n
             Find information for local services like legal support, health, and shelter.\n
+            \n
+            `[ 🟢 = production-data ]`\n
+            `[ 🟡 = staging-data ]`\n
+            `[ 🚧 = development-data ]`\n
           TXT_MAIN_PAGE_NOTICE: '<div class="d-center">⚠️ **Scheduled maintenance**: `16:00`-`16:05` </div>'
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
@@ -123,9 +130,6 @@ jobs:
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ''
-
-      - name: Set/override favicon.ico
-        run: 'cp --force src/favicon.green.ico www/favicon.ico'
 
       - name: Set/override robots.txt
         run: 'cp src/robots.private.txt www/robots.txt'
