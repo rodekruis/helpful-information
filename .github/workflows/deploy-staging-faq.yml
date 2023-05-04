@@ -47,6 +47,9 @@ jobs:
           HUSKY: 0
         run: 'npm ci --omit=optional --no-fund --no-audit'
 
+      - name: Set/override favicon.ico
+        run: 'cp --force src/favicon.gold.ico src/favicon.ico'
+
       - name: Build
         run: 'npm run build:production'
         env:
@@ -59,7 +62,12 @@ jobs:
           TXT_APP_NAME: 'FAQ / Vraagbaak'
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
           TXT_MAIN_PAGE_HEADER: 'This web app is made to give helpful information (HIA) about frequently asked questions (FAQ).'
-          TXT_MAIN_PAGE_INTRO: 'Please select your FAQ below:'
+          TXT_MAIN_PAGE_INTRO: >-
+            Please select your FAQ below:\n
+            \n
+            `[ 🟢 = production-data ]`\n
+            `[ 🟡 = staging-data ]`\n
+            `[ 🚧 = development-data ]`\n
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
@@ -86,10 +94,10 @@ jobs:
             Turkije-Syrië Aardbeving (NL) 🟢,
             ,
             ,
-            JRNCS Hotline,
+            JRNCS Hotline 🟡,
             ,
             Example/Demo 🟡,
-            Test/Example 🟡
+            Test/Example 🚧
           REGIONS_SHEET_IDS: >-
             14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
             1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE,
@@ -106,9 +114,6 @@ jobs:
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ''
-
-      - name: Set/override favicon.ico
-        run: 'cp --force src/favicon.gold.ico www/favicon.ico'
 
       - name: Set/override robots.txt
         run: 'cp src/robots.private.txt www/robots.txt'
