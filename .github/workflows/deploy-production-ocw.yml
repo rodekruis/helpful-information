@@ -56,8 +56,8 @@ jobs:
           NG_USE_URL_SLUGS: 'true'
           NG_USE_Q_AND_AS: 'true'
           NG_USE_Q_AND_A_SEARCH: 'true'
-          TXT_APP_NAME: 'Schoolmaaltijden FAQ'
-          TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
+          TXT_APP_NAME: 'Vragen over Schoolmaaltijden'
+          TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/OCWLogo2.svg'
           TXT_MAIN_PAGE_HEADER: ''
           TXT_MAIN_PAGE_INTRO: ''
           TXT_ERROR_HEADER: 'Data Unavailable'
@@ -84,7 +84,10 @@ jobs:
           AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
 
       - name: Add robots.txt
-        run: 'cp src/robots.private.txt www/robots.txt'
+        run: 'cp src/robots.public.txt www/robots.txt'
+
+      - name: Add favicon.ico
+        run: 'echo "AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWYe8BCaD/oAqh//8Kof//CqH//wqh//8Kof//CqH/9gmg/98JoP+9CaD/fgmg/wsAAAAAAAAAAAAAAAAAAAAAAAAAAAmg/ywJoP95CaD/lQmg/6UJoP+8CqH/2Qqh/+wKof/4CqH//wqh//8JoP8sAAAAAAAAAAAAAAAAIyPeLSMj3o8jI95NAAAAAAAAAAAAAAAAAAAAABZh7gIWYe4KCaD/FQmg/8sKof//CaD/jgAAAAAAAAAAIyPeCCMj3pkkJN//IyPeqiMj3gsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJoP89CqH//wmh/9wJoP8BAAAAACMj3kUkJN//JCTe/CMj3hT///9A////PQAAAAAAAAAAAAAAAAAAAAAAAAAACJ//CAqh//MKof/8CaD/FyIi3xgjI97uJCTf/yMj3nkjI94B////Uf////7///8jAAAAAAAAAAAAAAAAAAAAAAAAAAAJoP+6CqH//wmg/10jI95oJCTf/yMj3uIjI94RAAAAAJKS7wH////i////zwAAAAAAAAAAAAAAAAAAAAAAAAAACaD/cAqh//8JoP/DIyPesCQk3/8jI95sAAAAAAAAAAAAAAAA////UP////3///8cCqD/Iwmg/zIMoP8SAAAAAAmg/0IKof//CqH/7yQk3/IkJN/4IyPeMQAAAAAjI94NAAAAAP///wb////y////awmg/2sKof/9CaD/wQig/wEJoP9ECqH//wmg/+wkJN/8JCTf/iMj3ikiIt4JIyPe3SMj3s6Rke8R////pf///6kKoP9BCqH//wqh//4JoP96CaD/7gqh//8JoP+nIyPevSQk3/8jI97xIyPesCQk3/8kJN70IyPeHf///0r////FhND/Fgmg/9wKof//CqH//wqh//8JoP/yCaD/NiMj3wkjI9/qJCTf/yQk3/8jI9/+IyPeTwAAAAD///8r////9P///wsJn/8ECaD/ggmg/6wJoP98CaD/LgAAAAAAAAAAIyPfAyMj3lYjI995IyPeHiMj3gIAAAAA////df////7////h////AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///4v////+/////P///ywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///90////2////7D///9OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////MP///7L///+Y////VgAAAAAAAAAAAAAAAAAAAAAAAAAA8AcAAPwDAADv8QAAx/kAAM/5AACd+QAAnPwAAD78AAA+zAAAMkgAAANBAACHZwAA/z8AAP4/AAD/PwAA/z8AAA==" | base64 --decode > www/favicon.ico'
 
       - name: Add Google Site Verification code
         run: 'echo "google-site-verification: google14ff151bbe1f8dd2.html" > www/google14ff151bbe1f8dd2.html'
