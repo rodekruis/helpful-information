@@ -135,6 +135,16 @@ img[decoding='async'] {
 }
 
 //
+// Accessibility (A11y) Utilities
+//
+// Directionality
+.directional_swap-horizontal {
+  [dir='rtl'] & {
+    transform: rotate(180deg);
+  }
+}
+
+//
 // Misc. Style Utilities
 //
 .focus--minimal:focus-visible {
@@ -161,13 +171,16 @@ img[decoding='async'] {
   text-align: center !important;
 }
 .text-style--end {
-  text-align: right !important;
   text-align: end !important;
 }
 .text-style--header {
   font-family: var(--ion-font-family-header);
   font-weight: bold;
   letter-spacing: 0.08em;
+
+  [dir='rtl'] & {
+    letter-spacing: 0;
+  }
 }
 .text-style--size-08 {
   font-size: 0.875rem;
