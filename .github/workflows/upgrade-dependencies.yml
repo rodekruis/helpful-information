@@ -1,5 +1,3 @@
-# More information on Static Web App workflow configurations,
-# See: https://aka.ms/swaworkflowconfig
 # See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
 name: 'Upgrade (Angular-)Dependencies'
@@ -10,8 +8,8 @@ on:
     - cron: '10 5 * * SUN'
 
 env:
-  WORKFLOW_RUN_URL: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
-  WORKFLOW_NEW_PR_URL: '${{ github.server_url }}/${{ github.repository }}/pull/new/auto-upgrade-dependencies'
+  WORKFLOW_BRANCH: auto-upgrade-dependencies
+  WORKFLOW_RUN_SIGNATURE: 'By GitHub Action: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
 
 jobs:
   auto_upgrade_dependencies:
@@ -47,7 +45,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git checkout -B auto-upgrade-dependencies
+          git checkout -B ${{ env.WORKFLOW_BRANCH }}
 
       - name: Upgrade dependencies
         run: npm run upgrade:angular
@@ -55,16 +53,19 @@ jobs:
       - name: Fix syntax
         run: npm run fix
 
-      - name: Save updated version(s) and create PR
+      - name: Save updated version(s) and/or syntax changes
         env:
           HUSKY: 0
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          UPGRADE_ISSUE_TITLE: 'Upgrade (Angular-)dependencies'
-          UPGRADE_ISSUE_BODY: 'By GitHub Action: ${{ env.WORKFLOW_RUN_URL }}'
-          UPGRADE_PR_CTA: 'Create a new PR with these changes: ${{ env.WORKFLOW_NEW_PR_URL }}'
         run: |
-          git add -A
-          git commit -m "${{ env.UPGRADE_ISSUE_TITLE }} -- ${{ env.UPGRADE_ISSUE_BODY }}"
-          git push --set-upstream origin auto-upgrade-dependencies --force
-          gh issue create --title '${{ env.UPGRADE_ISSUE_TITLE }}' --body '${{ env.UPGRADE_PR_CTA }} -- ${{ env.UPGRADE_ISSUE_BODY }}' --label 'dependencies'
-          echo "${{ env.UPGRADE_PR_CTA }}" >> $GITHUB_STEP_SUMMARY
+          git diff --quiet || (git add --all && git commit -m "fix: Syntax-issues after (Angular-)dependencies upgrade(s) -- ${{ env.WORKFLOW_RUN_SIGNATURE }}")
+
+      - name: Create PR/Issue
+        if: ${{ success() }}
+        env:
+          HUSKY: 0
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_NEW_PR_URL: '${{ github.server_url }}/${{ github.repository }}/pull/new/${{ env.WORKFLOW_BRANCH }}'
+        run: |
+          git push --set-upstream origin ${{ env.WORKFLOW_BRANCH }} --force
+          gh issue create --title 'Upgrade (Angular-)dependencies (automated)' --body 'Create a new PR with these changes: ${{ env.WORKFLOW_NEW_PR_URL }} -- ${{ env.WORKFLOW_RUN_SIGNATURE }}' --label 'dependencies'
