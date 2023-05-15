@@ -194,6 +194,11 @@ export class SpreadsheetService {
     return fetch(this.getSheetUrl(region, SheetName.categories))
       .then((response) => response.json())
       .then((response) => {
+        if (!response || !response.values || !response.values.length) {
+          throw new Error(
+            `Error: ${LoggingEvent.NotFoundSheetRows} - Sheet: ${SheetName.categories}`,
+          );
+        }
         const headerRow = response.values[0];
         const categoriesColumnMap = this.createKeyMap(
           Object.values(CategoryCol),
@@ -260,6 +265,11 @@ export class SpreadsheetService {
     return fetch(this.getSheetUrl(region, SheetName.subCategories))
       .then((response) => response.json())
       .then((response) => {
+        if (!response || !response.values || !response.values.length) {
+          throw new Error(
+            `Error: ${LoggingEvent.NotFoundSheetRows} - Sheet: ${SheetName.subCategories}`,
+          );
+        }
         const headerRow = response.values[0];
         const subCategoryColumnMap = this.createKeyMap(
           Object.values(SubCategoryCol),
@@ -365,6 +375,11 @@ export class SpreadsheetService {
     return fetch(this.getSheetUrl(region, SheetName.offers))
       .then((response) => response.json())
       .then((response) => {
+        if (!response || !response.values || !response.values.length) {
+          throw new Error(
+            `Error: ${LoggingEvent.NotFoundSheetRows} - Sheet: ${SheetName.offers}`,
+          );
+        }
         const headerRow = response.values[0];
         const offerColumnMap = this.createKeyMap(
           Object.values(OfferCol),
@@ -590,6 +605,11 @@ export class SpreadsheetService {
     return fetch(this.getSheetUrl(region, SheetName.page))
       .then((response) => response.json())
       .then((response: { values: string[][] }) => {
+        if (!response || !response.values || !response.values.length) {
+          throw new Error(
+            `Error: ${LoggingEvent.NotFoundSheetRows} - Sheet: ${SheetName.page}`,
+          );
+        }
         const regionRows = response.values;
         const headerRow = regionRows[0];
         const regionColumnMap = this.createKeyMap(
@@ -719,7 +739,9 @@ export class SpreadsheetService {
       .then((response) => response.json())
       .then((response) => {
         if (!response || !response.values || !response.values.length) {
-          return [];
+          throw new Error(
+            `Error: ${LoggingEvent.NotFoundSheetRows} - Sheet: ${SheetName.QandAs}`,
+          );
         }
         const headerRow = response.values[0];
         const qaColumnMap = this.createKeyMap(Object.values(QACol), headerRow);

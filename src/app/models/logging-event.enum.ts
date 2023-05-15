@@ -18,6 +18,7 @@ export enum LoggingEvent {
   FooterWhatsAppClick = 'footer-whatsapp-click',
   FooterTelegramClick = 'footer-telegram-click',
   MainScreenClick = 'main-screen-button-click',
+  NotFoundSheetRows = 'not-found-sheet-rows',
   NotFoundCategory = 'not-found-category',
   NotFoundSubCategory = 'not-found-sub-category',
   NotFoundOffer = 'not-found-offer',
