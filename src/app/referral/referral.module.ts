@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { CategoryLinkComponent } from '../components/category-link/category-link.component';
 import { QASetListComponent } from '../components/q-a-set-list/q-a-set-list.component';
+import { TranslationOptionsComponent } from '../components/translation-options/translation-options.component';
 import CategoryPageComponent from '../pages/category/category.page';
 import HighlightsPageComponent from '../pages/highlights/highlights.page';
 import OfferPageComponent from '../pages/offer/offer.page';
@@ -28,6 +29,7 @@ import { ReferralPageComponent } from './referral.page';
     OfferPageComponent,
     QASetListComponent,
     HighlightsPageComponent,
+    TranslationOptionsComponent,
     RouterModule.forChild([
       {
         path: ':region',

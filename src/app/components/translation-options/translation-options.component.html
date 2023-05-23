@@ -1,0 +1,46 @@
+<details class="language-switcher">
+  <summary class="language-switcher--toggle">
+    <!-- See Source: /src/assets/icons/globe.svg -->
+    <img
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cg fill='none' stroke='%23fff' stroke-miterlimit='10' stroke-width='32'%3E%3Cpath d='M256 48a208 208 0 1 0 0 416 208 208 0 0 0 0-416z'/%3E%3Cpath d='M256 48c-58 0-113 93-113 208s55 208 113 208 113-93 113-208S314 48 256 48z'/%3E%3Cpath d='M256 48v416m208-208H48'/%3E%3Cpath miterlimit='0' stroke-linecap='round' stroke-linejoin='round' d='M117 117a240 240 0 0 0 277 0m1 278a240 240 0 0 0-277 0'/%3E%3C/g%3E%3C/svg%3E"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      decoding="async"
+      style="
+        display: inline-block;
+        vertical-align: middle;
+        width: 1rem;
+        height: 1rem;
+      "
+    />&nbsp;
+    <strong translate="no">
+      <small>{{ getCurrentLanguageLabel() }}</small>
+    </strong>
+  </summary>
+  <div
+    class="language-switcher--contents text-area--light floating-box ion-padding"
+  >
+    <ul
+      *ngIf="languageOptions?.length"
+      class="ion-no-margin list-flat"
+    >
+      <li *ngFor="let targetLanguage of languageOptions">
+        <a
+          *ngIf="targetLanguage.key !== sourceLanguage"
+          href="https://translate.google.com/translate?sl={{
+            sourceLanguage
+          }}&tl={{ targetLanguage.key }}&u={{ getCurrentUrl() }}"
+          rel="alternate"
+          [hreflang]="targetLanguage.key"
+          translate="no"
+          ><strong>{{ targetLanguage.label }}</strong></a
+        >
+      </li>
+    </ul>
+
+    <hr style="border-top: 1px solid currentColor" />
+
+    <small>{{ labelTranslationsGoogle }}</small>
+  </div>
+</details>

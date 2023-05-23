@@ -1,0 +1,22 @@
+.language-switcher {
+  position: relative;
+}
+.language-switcher--toggle {
+  cursor: pointer;
+}
+.language-switcher--contents {
+  position: absolute;
+  z-index: 10;
+  inset-block-start: 100%;
+  inset-inline-end: 0;
+
+  min-width: 12rem;
+  max-width: 20rem;
+}
+
+li {
+  line-height: 2;
+}
+li a {
+  display: block;
+}

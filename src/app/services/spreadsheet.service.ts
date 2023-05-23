@@ -401,6 +401,29 @@ export class SpreadsheetService {
       });
   }
 
+  private createLocaleAlternatives(
+    input: string,
+  ): RegionData['localeAlternatives'] | null {
+    if (!input) {
+      return null;
+    }
+
+    const localeSets = input.split(',');
+
+    return localeSets.map((set) => {
+      const localeSet = set.split(':');
+
+      if (localeSet.length !== 2) {
+        return null;
+      }
+
+      return {
+        key: !!localeSet[0] ? localeSet[0].trim() : '',
+        label: !!localeSet[1] ? localeSet[1].trim() : '',
+      };
+    });
+  }
+
   private convertConfigSheetToRegionData(
     sheetRows: string[][],
     valueCol: number,
@@ -422,6 +445,13 @@ export class SpreadsheetService {
         sharedData,
         RegionDataKey.localeLanguage,
         -1,
+      ),
+      localeAlternatives: this.createLocaleAlternatives(
+        this.getConfigValueOrFallback(
+          sharedData,
+          RegionDataKey.localeAlternatives,
+          -1,
+        ),
       ),
       pageLogo: this.getConfigValueOrFallback(
         sharedData,
@@ -569,6 +599,12 @@ export class SpreadsheetService {
         RegionDataKey.searchItems,
         21,
         RegionDataFallback.labelSearchResultsCount,
+      ),
+      labelTranslationsGoogle: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.translationsGoogle,
+        -1,
+        RegionDataFallback.translationsGoogle,
       ),
     };
   }

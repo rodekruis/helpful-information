@@ -19,9 +19,14 @@ export class RegionData {
   labelSearchAction?: string;
   labelSearchPageTitle?: string;
   labelSearchResultsCount?: string;
+  labelTranslationsGoogle?: any;
   lastUpdatedTime?: string;
   localeDirection?: string;
   localeLanguage?: string;
+  localeAlternatives?: {
+    key: string;
+    label: string;
+  }[];
   pageGreeting?: string;
   pageInstructions?: string;
   pageLogo?: string;
@@ -49,6 +54,7 @@ export enum RegionDataKey {
   labelLastUpdated = 'label.last-updated',
   localeDirection = 'locale.dir',
   localeLanguage = 'locale.language',
+  localeAlternatives = 'locale.alternatives',
   logo = 'logo',
   mainHeading = 'main.heading',
   mainIntro = 'main.intro',
@@ -67,6 +73,7 @@ export enum RegionDataKey {
   searchItems = 'search.items',
   searchItemsZero = 'search.items.0',
   searchTitle = 'search.title',
+  translationsGoogle = 'label.translations-via-google',
   timestampLastUpdated = 'timestamp.last-updated',
 }
 
@@ -88,4 +95,5 @@ export enum RegionDataFallback {
   labelSearchAction = 'Search',
   labelSearchPageTitle = "Search Q&A's",
   labelSearchResultsCount = 'Found results:',
+  translationsGoogle = 'Use Google Translate to use in:',
 }

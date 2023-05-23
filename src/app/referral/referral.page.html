@@ -14,6 +14,18 @@
   color="dark"
   class="ion-padding"
 >
+  <div
+    *ngIf="isSupportedRegion() && !loading && hasDataToShow && regionData?.localeAlternatives"
+    class="layout--float-end ion-margin-bottom"
+  >
+    <app-translation-options
+      [sourceLanguage]="regionData.localeLanguage"
+      [languageOptions]="regionData.localeAlternatives"
+      [labelTranslationsGoogle]="regionData?.labelTranslationsGoogle"
+    >
+    </app-translation-options>
+  </div>
+
   <!-- Loading-placeholder -->
   <ng-container *ngIf="isSupportedRegion() && loading">
     <div class="ion-margin-vertical text-style--size-2">
@@ -116,7 +128,6 @@
         <!-- filler-item for empty spot at 2nd-in-a-row -->
       </li>
     </ul>
-    <br /><br /><br />
   </ng-container>
 
   <div
@@ -192,7 +203,7 @@
   </div>
 </ion-content>
 <ion-footer *ngIf="!!getNotificationContent()">
-  <div class="notification-bar ion-padding">
+  <div class="notification-bar text-area--light ion-padding">
     <div
       markdown
       [data]="getNotificationContent()"

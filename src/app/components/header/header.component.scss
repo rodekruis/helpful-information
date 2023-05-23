@@ -14,3 +14,10 @@
 .app-header--logo {
   object-fit: contain;
 }
+
+// Work-around to position contents in a predictable position
+ion-popover::part(content) {
+  left: auto !important;
+  top: 56px !important;
+  inset-inline-end: 0 !important;
+}
