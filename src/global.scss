@@ -447,3 +447,15 @@ img[decoding='async'] {
     padding: 0.25em;
   }
 }
+
+/**
+  Overrides for Google Translate (in-page)
+*/
+body[style*='margin-top: 56px;'] {
+  margin-top: 0 !important;
+  background-position-y: 56px;
+
+  ion-app {
+    top: 56px;
+  }
+}
