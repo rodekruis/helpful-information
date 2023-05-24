@@ -38,12 +38,12 @@
       <h3 class="no-margin-bottom text-style--size-2">
         {{ regionData?.labelOfferOpenWeek }}
       </h3>
-      <p
+      <div
         markdown
         [data]="offer.offerOpeningHoursWeekdays"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
+        [inline]="false"
+        class="ion-margin-bottom"
+      ></div>
     </div>
     <div
       *ngIf="offer.offerOpeningHoursWeekends"
@@ -52,12 +52,12 @@
       <h3 class="no-margin-bottom text-style--size-2">
         {{ regionData?.labelOfferOpenWeekend }}
       </h3>
-      <p
+      <div
         markdown
         [data]="offer.offerOpeningHoursWeekends"
-        [inline]="true"
-        class="ion-no-margin ion-margin-bottom"
-      ></p>
+        [inline]="false"
+        class="ion-margin-bottom"
+      ></div>
     </div>
 
     <div
