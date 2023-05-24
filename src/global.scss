@@ -76,7 +76,13 @@ img[decoding='async'] {
 }
 
 .layout--float-end {
+  float: right;
   float: inline-end;
+
+  [dir='rtl'] & {
+    float: left;
+    float: inline-end;
+  }
 }
 
 .list-flat {
