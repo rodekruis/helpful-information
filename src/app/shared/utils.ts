@@ -71,7 +71,7 @@ export const getParentPath = (fullPath: string): string => {
 };
 
 export const formatPhoneNumberAsUrl = (rawNumber: string): string => {
-  const firstNumber = rawNumber.match(/\d/);
+  const firstNumber = rawNumber.match(/[\d+]/);
   const phoneNumberStart = firstNumber ? firstNumber.index : 0;
 
   const rawTrimmedAtStart = rawNumber.substring(phoneNumberStart);
@@ -81,7 +81,7 @@ export const formatPhoneNumberAsUrl = (rawNumber: string): string => {
 
   const phoneNumber = rawTrimmedAtStart.substring(0, phoneNumberEnd);
 
-  const onlyDigits = phoneNumber.replaceAll(/\D/g, '');
+  const onlyDigits = phoneNumber.replaceAll(/[^\d+]/g, '');
 
   return 'tel:' + onlyDigits;
 };
