@@ -119,6 +119,7 @@ describe('Utils - formatPhoneNumberAsUrl', () => {
   it('should return a tel-URL for each input-value', () => {
     const testValues = [
       '1234567890',
+      '+1234567890',
       '123 456 78 90',
       '(123) (45) 67890 1234567890',
       '123456 or 9876543',
@@ -131,6 +132,7 @@ describe('Utils - formatPhoneNumberAsUrl', () => {
     ];
     const testOutputs = [
       'tel:1234567890',
+      'tel:+1234567890',
       'tel:1234567890',
       'tel:12345678901234567890',
       'tel:123456',
