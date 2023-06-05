@@ -94,6 +94,11 @@ jobs:
       - name: Add Google Site Verification code
         run: 'echo "google-site-verification: google14ff151bbe1f8dd2.html" > www/google14ff151bbe1f8dd2.html'
 
+      - name: Set ennvironment-specific configuration
+        # Prefix existing header-settings with iframe-exception for Twilio Flex:
+        run: |
+          sed --in-place --expression '/Content-Security-Policy/s/default-src/frame-ancestors https:\/\/flex.twilio.com; default-src/gi' staticwebapp.config.json
+
       - name: Deploy to Production
         uses: Azure/static-web-apps-deploy@v1
         with:
