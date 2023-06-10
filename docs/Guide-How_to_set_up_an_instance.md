@@ -33,8 +33,8 @@ This guide will help you set up an instance of a [Helpful Information App](https
   - [ ] (optional) These editors can already start adding/changing content in this sheet from this point forward.
 
 - [ ] [Choose what public URL the web-app will be available on.](#choose-a-public-url)
-
 - [ ] [Create the GitHub-repository](#create-a-github-repository) of your instance.
+- [ ] Go to Settings > Pages and select Source: Github Actions
 - [ ] Git clone your repository locally and add HIA submodule 
 ```
 git submodule add --name helpful-information https://github.com/rodekruis/helpful-information.git 
@@ -42,7 +42,6 @@ git add *
 git commit -m "add submodule"
 git push
 ```
-- [ ] Go to Settings > Pages and select Source: Github Actions
 - [ ] [Create a Google Sheets API-key](#create-a-google-sheets-api-key)  
        To let the web-app access the sheet in the visitors' browser and to comply with Google's terms of service.
 
@@ -81,13 +80,6 @@ git push
    3. Select "API-key" from the list, wait for the key to be generated
    4. In the pop-up, click the "**Edit API key**"-link
    5. Give it a recognizable name. Make sure to include its 'scope', i.e. "production" or "local-dev", to know which key is responsible for what.
-   6. Select "**HTTP referrers (web sites)**" from the "_Application restrictions_"-list.  
-      Add (all) the public URL(s) under "_Website Restrictions_".  
-      For example:
-      - `https://rodekruis.github.io/<repository-name>/*`
-      - or `https://<custom-domain-name>.example.org/*`
-      - Include `https://*.translate.goog/*` to enable use of Google Translate by people affected.
-   7. Set "_API restrictions_" to "**Restrict key**" and Select the "_Google Sheets API_" from the list
    8. Save all changes/settings
 
 ---
@@ -123,60 +115,59 @@ A GitHub Repository will hold all code and configuration of your instance.
 
 This is the link/URL you'll communicate to the people affected.
 
-#### **Solution 1**: Custom domain-name
-
-- **URL**: `https://<specific-domain-name>.test`
-- Needs to be available.
-- Separate registration-process.
-- Not free.
-
-#### **Solution 2**: Custom sub-domain-name
-
-- **URL**: `https://<specific-sub-domain>.example.org`
-- Needs access to 'parent' organizations' domain-name.
-
-#### **Solution 3**: Shared hosting-service
-
-- **URL**: `https://<specific-sub-domain>.<service-domain>`
-- Depending on service, for options, see [helpful-information / Deployment](https://github.com/rodekruis/helpful-information#deployment)
-
-#### **Solution 4**: Custom GitHub-organization
+#### **Solution 1 (default)**: Custom GitHub-organization
 
 - **URL**: `https://<organization-name>.github.io/<specific-name>`
 - Fast to set-up.
 - 1 extra account/entity to create.
 - No additional services/fees.
 
-#### **Solution 5**: In `rodekruis`' GitHub-organization
+#### **Solution 2**: In `rodekruis`' GitHub-organization
 
 - **URL**: `https://rodekruis.github.io/<specific-name>`
 - Fast to set-up.
 - No additional accounts/services/fees.
 
+#### **Solution 3**: Custom domain-name
+
+- **URL**: `https://<specific-domain-name>.test`
+- Needs to be available.
+- Separate registration-process.
+- Not free.
+
+#### **Solution 4**: Custom sub-domain-name
+
+- **URL**: `https://<specific-sub-domain>.example.org`
+- Needs access to 'parent' organizations' domain-name.
+
+#### **Solution 5**: Shared hosting-service
+
+- **URL**: `https://<specific-sub-domain>.<service-domain>`
+- Depending on service, for options, see [helpful-information / Deployment](https://github.com/rodekruis/helpful-information#deployment)
+
 ---
 
 ### Configure instance settings
 
-Some features can be enabled/disabled for each instance and the language/tone of the text used needs to be appropriate for the intended people affected.
+If you deploy using GitHub Pages (default):
+- [ ] Configure the following variables in `workflows/deploy-github-pages.yml`:
+  - [ ] `TXT_APP_NAME`: the name of your app
+  - [ ] `TXT_APP_LOGO_URL`: URL to the logo of your app
+  - [ ] `TXT_MAIN_PAGE_HEADER`: title displayed on landing page
+  - [ ] `TXT_MAIN_PAGE_INTRO`: introduction text displayed on landing page
+  - [ ] `REGIONS`: URL-slugs of main options on landing page, each corresponding to a separate Google Spreadsheet; add additional lines for each required.
+  - [ ] `REGIONS_LABELS`: names of the main options displayed on landing page
+  - [ ] `REGIONS_SHEET_IDS`: The `Google Spreadsheet ID` that you noted down previsouly
+- [ ] Add the `GOOGLE_SHEETS_API_KEY` in the repository's Secrets > Actions
 
+If you deploy with another method
 - [ ] Choose a deployment-method
-
-  - To use Google Pages, continue with the file: `.github/workflows/deploy-github-pages.yml`
   - To use Azure Static Web Apps, continue with the file: `.github/workflows/deploy-azure-static-web-apps.yml`
   - To use a different hosting/deployment service: `.github/workflows/deploy-example.yml`
-
 - [ ] Give each item its appropriate value.  
        See each item and its description in: [.env.example](https://github.com/rodekruis/helpful-information/blob/main/.env.example).  
        Look for each capitalized `key` in the `env`-set in the "Build"-step.
-
-- [ ] Define all `REGION`'s URL-slugs, labels and "Google Spreadsheet ID" (created earlier)
-- [ ] Define the `GOOGLE_SHEETS_API_KEY` value in the repository's "Secrets and variables" collection.  
-       See: `<your-repository-url>`**`/settings/secrets/actions/new`**
-
-### Deploy using GitHub Pages
-
-- [ ] In the workflow-file `.github/workflows/deploy-github-pages.yml`, at the "Add static version of region(s)"-step:  
-       Add additional lines for each required `REGION` URL-slug.
+       
 
 ### Deploy using Azure Static Web Apps
 
