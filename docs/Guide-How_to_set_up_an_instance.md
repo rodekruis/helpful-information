@@ -17,7 +17,7 @@ This guide will help you set up an instance of a [Helpful Information App](https
 - A Google Account (or [create one](#create-a-google-account))
 - A GitHub Account (or [create one](#create-a-github-account))
 - (optional) A GitHub Organization (or [create one](#create-a-github-organization))
-- A static file hosting solution/service (see options: [helpful-information / Deployment](https://github.com/rodekruis/helpful-information#deployment))
+- (optional) A static file hosting solution/service (see options: [helpful-information / Deployment](https://github.com/rodekruis/helpful-information#deployment), use GitHub by default)
 
 ## Checklist
 
@@ -35,7 +35,14 @@ This guide will help you set up an instance of a [Helpful Information App](https
 - [ ] [Choose what public URL the web-app will be available on.](#choose-a-public-url)
 
 - [ ] [Create the GitHub-repository](#create-a-github-repository) of your instance.
-
+- [ ] Git clone your repository locally and add HIA submodule 
+```
+git submodule add --name helpful-information https://github.com/rodekruis/helpful-information.git 
+git add *
+git commit -m "add submodule"
+git push
+```
+- [ ] Go to Settings > Pages and select Source: Github Actions
 - [ ] [Create a Google Sheets API-key](#create-a-google-sheets-api-key)  
        To let the web-app access the sheet in the visitors' browser and to comply with Google's terms of service.
 
