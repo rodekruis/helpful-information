@@ -33,7 +33,9 @@ This guide will help you set up an instance of a [Helpful Information App](https
   - [ ] (optional) These editors can already start adding/changing content in this sheet from this point forward.
 
 - [ ] [Choose what public URL the web-app will be available on.](#choose-a-public-url)
+
 - [ ] [Create the GitHub-repository](#create-a-github-repository) of your instance.
+
 - [ ] [Create a Google Sheets API-key](#create-a-google-sheets-api-key)  
        To let the web-app access the sheet in the visitors' browser and to comply with Google's terms of service.
 
@@ -52,7 +54,7 @@ This guide will help you set up an instance of a [Helpful Information App](https
 
 ### Create a Google Account
 
-1. Go to <https://accounts.google.com/signup>
+1. Go to <https://accounts.google.com/signup>  
    Its not necessary to create a new Gmail-address; using an existing organization-address is possible.
 2. Finish the flow to create the account and store the login-credentials in a secure place, for example a password-manager.
 3. Enable any additional security measures
@@ -62,10 +64,12 @@ This guide will help you set up an instance of a [Helpful Information App](https
 1. Go to <https://console.cloud.google.com/projectcreate>
 2. Complete any "getting started"-steps when prompted
 3. Enable the Google Sheets API
+
    1. Go to <https://console.cloud.google.com/apis/dashboard>, the "_Enabled APIs & services_"-page
    2. Click on the "**+ Enable APIs and Services**"-button
    3. Search for "`google sheets api`", or go directly to: <https://console.cloud.google.com/apis/library/sheets.googleapis.com>
    4. Click on the "**Enable**"-button
+
 4. Create an API-key
 
    1. Go to <https://console.cloud.google.com/apis/credentials>, the "_Credentials_"-page
@@ -86,6 +90,8 @@ This guide will help you set up an instance of a [Helpful Information App](https
    7. (_Optional, but highly recommended; Can be enabled/updated later._)  
       Set "_API restrictions_" to "**Restrict key**" and Select the "_Google Sheets API_" from the list
    8. Save all changes/settings
+
+---
 
 ### Create a GitHub Account
 
@@ -108,7 +114,7 @@ A GitHub Organization is meant to be used/administered by multiple users, using 
 A GitHub Repository will hold all code and configuration of your instance.
 
 1. Log into GitHub as a user of the appropriate GitHub Organization (with the permissions to create new repositories)
-2. Go to
+2. Go to <https://github.com/rodekruis/create-helpful-information-app/generate>
 3. Name the repository as the public URL, under the appropriate GitHub Organization
 4. Complete the process of creating the repository
 5. Go to Settings > Pages and select Source: "Github Actions".
@@ -120,6 +126,8 @@ A GitHub Repository will hold all code and configuration of your instance.
    git commit -m "add submodule"
    git push
    ```
+
+---
 
 ### Choose a public URL
 
@@ -155,6 +163,8 @@ This is the link/URL you'll communicate to the people affected.
 - **URL**: `https://<specific-sub-domain>.<service-domain>`
 - Depending on service, for options, see [helpful-information / Deployment](https://github.com/rodekruis/helpful-information#deployment)
 
+---
+
 ### Configure instance settings
 
 If you deploy using GitHub Pages (default):
@@ -171,6 +181,8 @@ If you deploy using GitHub Pages (default):
            These will be used in the URL, for example: `https://<public-url>/<region-slug>`
     - [ ] `REGIONS_LABELS`: Human-readable names of all options, these will be displayed as buttons on the landing page.
     - [ ] `REGIONS_SHEET_IDS`: The `Google Spreadsheet ID` of each region/sheet.
+    - [ ] At the "Add static version of region(s)"-step (in the workflow):  
+           Add additional lines for each required `REGION` URL-slug.
 
 If you deploy with another method
 
