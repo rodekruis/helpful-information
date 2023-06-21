@@ -35,7 +35,7 @@
     "@angular/service-worker": "^16.1.1",
     "@ionic/angular": "^6.7.5",
     "@ionic/cli": "^6.20.9",
-    "@microsoft/applicationinsights-web": "^2.8.14",
+    "@microsoft/applicationinsights-web": "^3.0.2",
     "marked": "^4.3.0",
     "ngx-markdown": "^16.0.0",
     "rxjs": "^6.6.7",
