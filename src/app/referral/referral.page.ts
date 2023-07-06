@@ -40,8 +40,8 @@ export class ReferralPageComponent implements OnInit {
 
   public loading = false;
 
-  public useQandAs = environment.useQandAs;
-  public useQandASearch = environment.useQandASearch;
+  private useQandAs = environment.useQandAs;
+  private useQandASearch = environment.useQandASearch;
 
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
@@ -79,7 +79,7 @@ export class ReferralPageComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
+  public async ngOnInit() {
     if (!this.isSupportedRegion()) {
       this.pageMeta.setDirection('');
       this.pageMeta.setLanguage('');
@@ -199,7 +199,7 @@ export class ReferralPageComponent implements OnInit {
     this.router.navigateByUrl(parentPath || '/');
   }
 
-  showRootPage() {
+  public showRootPage() {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.MainScreenClick,
@@ -208,7 +208,7 @@ export class ReferralPageComponent implements OnInit {
     this.router.navigate([this.rootHref]);
   }
 
-  logContactClick(type: 'tel' | 'whatsapp' | 'telegram') {
+  public logContactClick(type: 'tel' | 'whatsapp' | 'telegram') {
     let event = LoggingEvent.FooterContactClick;
 
     if (type === 'whatsapp') {
