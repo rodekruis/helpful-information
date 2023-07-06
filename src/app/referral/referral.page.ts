@@ -89,7 +89,7 @@ export class ReferralPageComponent implements OnInit {
       return;
     }
 
-    await this.loadReferralData();
+    await this.loadAllData();
   }
 
   public getRegionHref() {
@@ -134,7 +134,7 @@ export class ReferralPageComponent implements OnInit {
     return environment.mainPageNotification;
   }
 
-  private async loadReferralData() {
+  private async loadAllData() {
     this.loading = true;
     this.regionData = await this.regionDataService.getData(this.region);
 

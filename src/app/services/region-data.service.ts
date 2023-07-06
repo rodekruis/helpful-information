@@ -23,7 +23,7 @@ export class RegionDataService {
   public async getData(region: string): Promise<RegionData> {
     if (!this.data || !this.isSameRegion(region)) {
       this.resetCache(region);
-      this.data = await this.spreadsheetService.getReferralPageData(region);
+      this.data = await this.spreadsheetService.getRegionConfigData(region);
     }
     return this.data;
   }

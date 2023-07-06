@@ -20,7 +20,7 @@ import { SlugPrefix } from '../models/slug-prefix.enum';
 import { createSlug, getDateFromString, getFullUrl } from '../shared/utils';
 
 enum SheetName {
-  page = 'Referral Page',
+  config = 'Referral Page',
   categories = 'Categories',
   subCategories = 'Sub-Categories',
   offers = 'Offers',
@@ -601,13 +601,13 @@ export class SpreadsheetService {
     return !!index && index !== -1 ? index : fallback;
   }
 
-  public async getReferralPageData(region: string): Promise<RegionData> {
-    return fetch(this.getSheetUrl(region, SheetName.page))
+  public async getRegionConfigData(region: string): Promise<RegionData> {
+    return fetch(this.getSheetUrl(region, SheetName.config))
       .then((response) => response.json())
       .then((response: { values: string[][] }) => {
         if (!response || !response.values || !response.values.length) {
           throw new Error(
-            `Error: ${LoggingEvent.NotFoundSheetRows} - Sheet: ${SheetName.page}`,
+            `Error: ${LoggingEvent.NotFoundSheetRows} - Sheet: ${SheetName.config}`,
           );
         }
         const regionRows = response.values;
