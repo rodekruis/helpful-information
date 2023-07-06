@@ -3,6 +3,7 @@ import {
   getDateFromString,
   getFullUrl,
   getParentPath,
+  getPathDepth,
 } from './utils';
 
 describe('Utils - getFullUrl', () => {
@@ -36,6 +37,28 @@ describe('Utils - getFullUrl', () => {
       const output = getFullUrl(value);
 
       expect(output).toEqual(testValues[index]);
+    });
+  });
+});
+
+describe('Utils - getPathDepth', () => {
+  it('should return the max-level of the path', () => {
+    const testValues = [
+      '/',
+      '/sub-folder',
+      '/parent-folder/sub-folder',
+      '/parent-folder/sub-folder?q=test',
+      '/parent-folder/sub-folder#test',
+      '/parent-folder/parent-sub-folder/sub-folder',
+      '/parent-folder/parent-sub-folder/sub-folder?q=test#test',
+      '/base/parent-folder/parent-sub-folder/sub-folder?q=test#test',
+    ];
+    const testOutputs = [1, 1, 2, 2, 2, 3, 3, 4];
+
+    testValues.forEach((value, index) => {
+      const output = getPathDepth(value);
+
+      expect(output).toEqual(testOutputs[index]);
     });
   });
 });
