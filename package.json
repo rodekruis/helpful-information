@@ -25,6 +25,10 @@
     "fix": "npm run fix:code && npm run fix:syntax"
   },
   "private": true,
+  "engines": {
+    "node": ">=v18 >=v20",
+    "npm": ">=8 >=9"
+  },
   "dependencies": {
     "@angular/common": "^16.1.3",
     "@angular/core": "^16.1.3",
