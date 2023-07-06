@@ -18,8 +18,6 @@ export class AppComponent {
     private loggingService: LoggingService,
     private swUpdates: SwUpdate,
   ) {
-    this.loggingService.logPageView('app');
-
     this.swUpdates.versionUpdates.subscribe((evt) => {
       switch (evt.type) {
         case 'VERSION_READY':
