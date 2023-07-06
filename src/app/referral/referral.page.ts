@@ -203,7 +203,7 @@ export class ReferralPageComponent implements OnInit {
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.MainScreenClick,
-      this.getLogProperties(),
+      { isBack: true },
     );
     this.router.navigate([this.rootHref]);
   }
@@ -219,11 +219,7 @@ export class ReferralPageComponent implements OnInit {
       event = LoggingEvent.FooterTelegramClick;
     }
 
-    this.loggingService.logEvent(
-      LoggingEventCategory.ai,
-      event,
-      this.getLogProperties(),
-    );
+    this.loggingService.logEvent(LoggingEventCategory.ai, event);
   }
 
   /**
