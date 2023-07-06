@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Offer } from 'src/app/models/offer.model';
 import { QASet } from 'src/app/models/qa-set.model';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -14,8 +13,6 @@ import { environment } from 'src/environments/environment';
   imports: [CommonModule, IonicModule, RouterModule],
 })
 export class BreadcrumbsComponent {
-  public useUrlSlugs = environment.useUrlSlugs;
-
   @Input()
   public baseUrl: string = '';
 

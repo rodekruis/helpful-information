@@ -28,14 +28,10 @@ export class ReferralPageComponent implements OnInit {
   public regions: string[];
   public regionsLabels: string[];
 
-  public offers: Offer[];
-  public qaSets: QASet[];
-  public categories: Category[];
-  public subCategories: SubCategory[];
-
-  public category: Category;
-  public subCategory: SubCategory;
-  public offer: Offer;
+  private offers: Offer[];
+  private qaSets: QASet[];
+  private categories: Category[];
+  private subCategories: SubCategory[];
 
   public regionData: RegionData = {};
 
@@ -43,7 +39,6 @@ export class ReferralPageComponent implements OnInit {
 
   public loading = false;
 
-  public useUrlSlugs = environment.useUrlSlugs;
   public useQandAs = environment.useQandAs;
   public useQandASearch = environment.useQandASearch;
 
@@ -93,10 +88,6 @@ export class ReferralPageComponent implements OnInit {
     }
 
     await this.loadReferralData();
-
-    this.route.queryParams.subscribe((queryParams: Params) => {
-      this.handleQueryParams(queryParams);
-    });
   }
 
   public getRegionHref() {
@@ -169,187 +160,16 @@ export class ReferralPageComponent implements OnInit {
     this.loading = false;
   }
 
-  private handleQueryParams(params: Params) {
-    if (!Object.keys(params).length) {
-      this.pageMeta.setTitle({ region: this.regionData.pageTitle });
-    }
-
-    let categoryName: string;
-    let subCategoryName: string;
-    let offerName: string;
-
-    if (!!params.categoryID && this.categories) {
-      this.category = this.categories.find(
-        (category) => category.categoryID === Number(params.categoryID),
-      );
-      if (!this.category) {
-        this.loggingService.logEvent(
-          LoggingEventCategory.error,
-          LoggingEvent.NotFoundCategory,
-          {
-            categoryID: params.categoryID,
-          },
-        );
-      }
-      if (!!this.category && !!this.category.categoryName) {
-        categoryName = this.category.categoryName;
-      }
-    } else {
-      this.category = null;
-    }
-    if (!!params.subCategoryID && this.subCategories) {
-      this.subCategory = this.subCategories.find(
-        (subCategory) =>
-          subCategory.subCategoryID === Number(params.subCategoryID) &&
-          subCategory.categoryID === Number(params.categoryID),
-      );
-      if (!this.subCategory) {
-        this.loggingService.logEvent(
-          LoggingEventCategory.error,
-          LoggingEvent.NotFoundSubCategory,
-          {
-            subCategoryID: params.subCategoryID,
-            categoryID: params.categoryID,
-          },
-        );
-      }
-
-      if (!!this.subCategory && !!this.subCategory.subCategoryName) {
-        subCategoryName = this.subCategory.subCategoryName;
-      }
-    } else {
-      this.subCategory = null;
-    }
-    if (!!params.offerID && this.offers) {
-      this.offer = this.offers.find(
-        (offer) =>
-          offer.offerID === Number(params.offerID) &&
-          offer.categoryID === Number(params.categoryID) &&
-          offer.subCategoryID === Number(params.subCategoryID),
-      );
-      if (!this.offer) {
-        this.loggingService.logEvent(
-          LoggingEventCategory.error,
-          LoggingEvent.NotFoundOffer,
-          {
-            offerID: params.offerID,
-            subCategoryID: params.subCategoryID,
-            categoryID: params.categoryID,
-          },
-        );
-      }
-      if (!!this.offer && !!this.offer.offerName) {
-        offerName = this.offer.offerName;
-      }
-    } else {
-      this.offer = null;
-    }
-
-    this.pageMeta.setTitle({ offerName, subCategoryName, categoryName });
-  }
-
-  public clickCategory(category: Category) {
-    this.category = category;
-    this.subCategory = null;
-    this.offer = null;
-    this.loggingService.logEvent(
-      LoggingEventCategory.ai,
-      LoggingEvent.CategoryClick,
-      this.getLogProperties(),
-    );
-    this.router.navigate([this.getRegionHref()], {
-      queryParams: {
-        categoryID: this.category.categoryID,
-        subCategoryID: this.subCategory ? this.subCategory.subCategoryID : null,
-      },
-    });
-  }
-
-  public clickSubCategory(subCategory: SubCategory) {
-    this.subCategory = subCategory;
-    this.offer = null;
-    this.loggingService.logEvent(
-      LoggingEventCategory.ai,
-      LoggingEvent.SubCategoryClick,
-      this.getLogProperties(),
-    );
-    this.router.navigate([this.getRegionHref()], {
-      queryParams: {
-        categoryID: this.category.categoryID,
-        subCategoryID: this.subCategory.subCategoryID,
-      },
-    });
-  }
-
   public goBack() {
-    if (this.useUrlSlugs) {
-      this.router.navigateByUrl(getParentPath(window.location.pathname));
-      return;
-    }
-    if (this.offer) {
-      this.loggingService.logEvent(
-        LoggingEventCategory.ai,
-        LoggingEvent.BackFromOffer,
-        this.getLogProperties(),
-      );
-      this.clickSubCategory(this.subCategory);
-    } else if (this.subCategory) {
-      this.loggingService.logEvent(
-        LoggingEventCategory.ai,
-        LoggingEvent.BackFromSubCategory,
-        this.getLogProperties(),
-      );
-      if (
-        this.offersService.getOnlyChildSubCategory(
-          this.category,
-          this.subCategories,
-        )
-      ) {
-        this.category = null;
-        this.subCategory = null;
-        this.router.navigate([this.getRegionHref()]);
-      } else {
-        this.clickCategory(this.category);
-      }
-    } else if (this.category) {
-      this.loggingService.logEvent(
-        LoggingEventCategory.ai,
-        LoggingEvent.BackFromCategory,
-        this.getLogProperties(),
-      );
-      this.category = null;
-      this.router.navigate([this.getRegionHref()]);
-    } else {
-      this.loggingService.logEvent(
-        LoggingEventCategory.ai,
-        LoggingEvent.BackFromRegion,
-        this.getLogProperties(),
-      );
-      this.router.navigate([this.rootHref]);
-    }
+    this.router.navigateByUrl(getParentPath(window.location.pathname));
+    return;
   }
 
   getLogProperties() {
     const logParams: { [key: string]: any } = {
       isBack: true,
     };
-    if (this.offer) {
-      logParams.offerID = this.offer.offerID;
-      logParams.offerSlug = this.offer.slug ? this.offer.slug : '';
-      logParams.offerName = this.offer.offerName ? this.offer.offerName : '';
-    }
-    if (this.subCategory) {
-      logParams.subCategoryID = this.subCategory.subCategoryID;
-      logParams.subCategorySlug = this.subCategory.slug
-        ? this.subCategory.slug
-        : '';
-      logParams.subCategory = this.subCategory.subCategoryName;
-    }
-    if (this.category) {
-      logParams.categoryID = this.category.categoryID;
-      logParams.categorySlug = this.category.slug ? this.category.slug : '';
-      logParams.category = this.category.categoryName;
-    }
+
     return logParams;
   }
 
@@ -359,9 +179,6 @@ export class ReferralPageComponent implements OnInit {
       LoggingEvent.MainScreenClick,
       this.getLogProperties(),
     );
-    this.category = null;
-    this.subCategory = null;
-    this.offer = null;
     this.router.navigate([this.rootHref]);
   }
 
@@ -403,10 +220,9 @@ export class ReferralPageComponent implements OnInit {
       });
     }
     if (
-      this.useUrlSlugs &&
-      (!!queryParams.categoryID ||
-        !!queryParams.subCategoryID ||
-        !!queryParams.offerID)
+      !!queryParams.categoryID ||
+      !!queryParams.subCategoryID ||
+      !!queryParams.offerID
     ) {
       let upgradedUrl = this.getRegionHref();
       if (!!queryParams.categoryID) {

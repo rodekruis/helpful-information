@@ -1,14 +1,5 @@
 <a
-  [routerLink]="useUrlSlugs ? ['./', offer?.slug] : ['./']"
-  [queryParams]="
-    useUrlSlugs
-      ? null
-      : {
-          categoryID: offer?.categoryID,
-          subCategoryID: offer?.subCategoryID,
-          offerID: offer?.offerID
-        }
-  "
+  [routerLink]="['./', offer?.slug]"
   (click)="click(offer)"
   class="action list-item"
 >

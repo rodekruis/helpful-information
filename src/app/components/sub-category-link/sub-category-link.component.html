@@ -1,13 +1,5 @@
 <a
-  [routerLink]="useUrlSlugs ? ['./', subCategory?.slug] : ['.']"
-  [queryParams]="
-    useUrlSlugs
-      ? null
-      : {
-          categoryID: subCategory?.categoryID,
-          subCategoryID: subCategory?.subCategoryID
-        }
-  "
+  [routerLink]="['./', subCategory?.slug]"
   (click)="click()"
   class="link-row action"
 >

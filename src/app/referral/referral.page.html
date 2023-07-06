@@ -32,35 +32,7 @@
     </div>
   </ng-container>
 
-  <router-outlet
-    *ngIf="isSupportedRegion() && !loading && (useUrlSlugs || (!useUrlSlugs && !category && !subCategory))"
-  ></router-outlet>
-
-  <!-- Category-page = Sub-Category-list -->
-  <ng-container
-    *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && category && !subCategory"
-  >
-    <app-category-page [category]="category"></app-category-page>
-  </ng-container>
-
-  <!-- Sub-Category-page = Offer-list/Q&A-list -->
-  <ng-container
-    *ngIf="isSupportedRegion() && !loading  && !useUrlSlugs && category && subCategory && !offer"
-  >
-    <app-sub-category-page
-      [category]="category"
-      [subCategory]="subCategory"
-      [offers]="offers"
-      [qaSets]="qaSets"
-    ></app-sub-category-page>
-  </ng-container>
-
-  <!-- Offer-detail page -->
-  <ng-container
-    *ngIf="isSupportedRegion() && !loading && !useUrlSlugs && category && subCategory && offer"
-  >
-    <app-offer-page [offer]="offer"></app-offer-page>
-  </ng-container>
+  <router-outlet *ngIf="isSupportedRegion() && !loading"></router-outlet>
 
   <!-- Error/404 page -->
   <ng-container *ngIf="isSupportedRegion() && !loading && !hasDataToShow()">

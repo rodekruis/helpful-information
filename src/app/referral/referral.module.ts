@@ -50,18 +50,15 @@ import { ReferralPageComponent } from './referral.page';
           },
           {
             path: ':categorySlug/:subCategorySlug/:offerSlug',
-            canActivate: [() => environment.useUrlSlugs],
             loadComponent: () => import('../pages/offer/offer.page'),
           },
           {
             path: ':categorySlug/:subCategorySlug',
-            canActivate: [() => environment.useUrlSlugs],
             loadComponent: () =>
               import('../pages/sub-category/sub-category.page'),
           },
           {
             path: ':categorySlug',
-            canActivate: [() => environment.useUrlSlugs],
             loadComponent: () => import('../pages/category/category.page'),
           },
           {

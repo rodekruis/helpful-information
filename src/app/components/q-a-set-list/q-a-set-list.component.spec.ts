@@ -9,7 +9,6 @@ import {
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import { environment } from 'src/environments/environment';
 import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
 import { QASetComponent } from '../q-a-set/q-a-set.component';
 import { QASetListComponent } from './q-a-set-list.component';
@@ -102,20 +101,10 @@ describe('QASetListComponent', () => {
     const linkItems = fixture.nativeElement.querySelectorAll('a');
 
     expect(linkItems.length).toBe(2);
-    if (environment.useUrlSlugs) {
-      expect(linkItems[0].href).toContain(testList[0].categorySlug);
-      expect(linkItems[1].href).toContain(
-        `${testList[0].categorySlug}/${testList[0].subCategorySlug}`,
-      );
-    } else {
-      expect(linkItems[0].href).toContain(
-        `categoryID=${testList[0].categoryID}`,
-      );
-
-      expect(linkItems[1].href).toContain(
-        `subCategoryID=${testList[0].subCategoryID}`,
-      );
-    }
+    expect(linkItems[0].href).toContain(testList[0].categorySlug);
+    expect(linkItems[1].href).toContain(
+      `${testList[0].categorySlug}/${testList[0].subCategorySlug}`,
+    );
   });
 
   it('should show the "last updated" date INSIDE the question, not OUTSIDE', () => {

@@ -7,7 +7,6 @@ export const environment = {
   // Configuration/Feature-switches:
   envName: '${process.env.ENV_NAME || ''}',
   useServiceWorker: ${process.env.NG_USE_SERVICE_WORKER === 'true' || true},
-  useUrlSlugs: ${process.env.NG_USE_URL_SLUGS === 'true' || false},
   useQandAs: ${process.env.NG_USE_Q_AND_AS === 'true' || false},
   useQandASearch: ${process.env.NG_USE_Q_AND_A_SEARCH === 'true' || false},
 

@@ -8,7 +8,6 @@ import {
 } from 'src/app/models/logging-event.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category-link',
@@ -18,8 +17,6 @@ import { environment } from 'src/environments/environment';
   imports: [CommonModule, RouterModule],
 })
 export class CategoryLinkComponent {
-  public useUrlSlugs = environment.useUrlSlugs;
-
   @Input()
   category: Category;
 
