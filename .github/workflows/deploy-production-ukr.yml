@@ -29,6 +29,15 @@ jobs:
       - name: Build output
         run: 'mkdir www'
 
+      - name: 'Create redirect `/`'
+        run: |-
+          cat <<EOF > www/index.html
+          <!DOCTYPE html>
+          <title>Redirecting...</title>
+          <meta http-equiv="refresh" content="1;url=https://helpfulinformation-faq.redcross.nl/">
+          <a href="https://helpfulinformation-faq.redcross.nl/">Site moved, please update bookmarks/links.</a>
+          EOF
+
       - name: Add Google Site Verification code
         run: 'echo "google-site-verification: google14ff151bbe1f8dd2.html" > www/google14ff151bbe1f8dd2.html'
 
