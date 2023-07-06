@@ -36,6 +36,7 @@ import { environment } from 'src/environments/environment';
 export default class SubCategoryPageComponent implements OnInit {
   private region: string;
 
+  public useOffers = environment.useOffers;
   public useQandAs = environment.useQandAs;
 
   @Input()
@@ -103,11 +104,11 @@ export default class SubCategoryPageComponent implements OnInit {
       return;
     }
 
-    if (!this.offers) {
+    if (this.useOffers && !this.offers) {
       this.offers = await this.offersService.getOffers(this.region);
     }
 
-    if (environment.useQandAs && !this.qaSets) {
+    if (this.useQandAs && !this.qaSets) {
       this.qaSets = await this.offersService.getQAs(this.region);
     }
 

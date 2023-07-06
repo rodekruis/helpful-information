@@ -56,6 +56,7 @@ jobs:
           NG_PRODUCTION: 'true'
           ENV_NAME: 'FAQ-Staging'
           NG_USE_SERVICE_WORKER: 'true'
+          NG_USE_OFFERS: 'false'
           NG_USE_Q_AND_AS: 'true'
           NG_USE_Q_AND_A_SEARCH: 'true'
           TXT_APP_NAME: 'FAQ / Vraagbaak'

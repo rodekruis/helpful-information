@@ -23,7 +23,7 @@
 </ul>
 
 <ul
-  *ngIf="offers && (offers | categoryFilter: category | subCategoryFilter: subCategory)?.length"
+  *ngIf="useOffers && offers && (offers | categoryFilter: category | subCategoryFilter: subCategory)?.length"
   class="list-flat ion-margin-vertical"
 >
   <li

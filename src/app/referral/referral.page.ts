@@ -40,6 +40,7 @@ export class ReferralPageComponent implements OnInit {
 
   public loading = false;
 
+  private useOffers = environment.useOffers;
   private useQandAs = environment.useQandAs;
   private useQandASearch = environment.useQandASearch;
 
@@ -101,21 +102,28 @@ export class ReferralPageComponent implements OnInit {
   }
 
   public hasDataToShow(): boolean {
-    // When environment.useQandAs == false, Offers need to be available
-    // When environment.useQandAs == true, Offers OR Q&A-sets can be empty
     return (
       this.categories &&
       this.categories.some((item) => item.categoryVisible) &&
       this.subCategories &&
       this.subCategories.some((item) => item.subCategoryVisible) &&
-      ((this.useQandAs === false &&
-        this.offers &&
-        this.offers.some((item) => item.offerVisible)) ||
-        (this.useQandAs &&
-          !(
-            (!this.offers || !this.offers.some((item) => item.offerVisible)) &&
-            (!this.qaSets || !this.qaSets.some((item) => item.isVisible))
-          )))
+      // When environment.useQandAs == true, Offers OR Q&A-sets can be empty
+      ((this.useOffers === true &&
+        this.useQandAs === true &&
+        !(
+          (!this.offers || !this.offers.some((item) => item.offerVisible)) &&
+          (!this.qaSets || !this.qaSets.some((item) => item.isVisible))
+        )) ||
+        // When environment.useOffers === false, Q&A-sets need to be available
+        (this.useOffers === false &&
+          this.useQandAs === true &&
+          this.qaSets &&
+          this.qaSets.some((item) => item.isVisible)) ||
+        // When environment.useQandAs == false, Offers need to be available
+        (this.useOffers === true &&
+          this.useQandAs === false &&
+          this.offers &&
+          this.offers.some((item) => item.offerVisible)))
     );
   }
 
@@ -153,8 +161,9 @@ export class ReferralPageComponent implements OnInit {
     this.subCategories = await this.offersService.getAllSubCategories(
       this.region,
     );
-    this.offers = await this.offersService.getOffers(this.region);
-
+    if (this.useOffers) {
+      this.offers = await this.offersService.getOffers(this.region);
+    }
     if (this.useQandAs) {
       this.qaSets = await this.offersService.getQAs(this.region);
     }

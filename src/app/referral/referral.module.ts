@@ -50,6 +50,7 @@ import { ReferralPageComponent } from './referral.page';
           },
           {
             path: ':categorySlug/:subCategorySlug/:offerSlug',
+            canActivate: [() => environment.useOffers],
             loadComponent: () => import('../pages/offer/offer.page'),
           },
           {

@@ -6,6 +6,7 @@ export const environment = {
   // Configuration/Feature-switches:
   envName: 'test',
   useServiceWorker: true,
+  useOffers: true,
   useQandAs: true,
   useQandASearch: true,
 
