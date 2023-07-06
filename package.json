@@ -26,8 +26,8 @@
   },
   "private": true,
   "engines": {
-    "node": ">=v18 >=v20",
-    "npm": ">=8 >=9"
+    "node": ">=18",
+    "npm": ">=8"
   },
   "dependencies": {
     "@angular/common": "^16.1.3",
