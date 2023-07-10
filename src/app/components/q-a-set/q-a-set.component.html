@@ -4,8 +4,8 @@
 >
   <small *ngIf="date">
     {{ labelLastUpdated }}
-    <time [attr.datetime]="date | date : 'yyyy-MM-dd'">
-      {{ date | date : "d-MM-''YY" }}
+    <time [attr.datetime]="date | date: 'yyyy-MM-dd'">
+      {{ date | date: "d-MM-''YY" }}
     </time>
   </small>
 </ng-template>

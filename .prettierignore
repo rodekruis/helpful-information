@@ -1,7 +1,5 @@
-# See .gitignore
-www
-coverage
-.angular/cache/
+# See: https://prettier.io/docs/en/ignore.html
+# Also, everything in: .gitignore
 
 # Exception for inline code/styles
 src/index.html
