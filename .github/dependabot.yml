@@ -13,6 +13,11 @@ updates:
     schedule:
       interval: 'weekly'
     versioning-strategy: increase
+    groups:
+      angular:
+        patterns: ['@angular*']
+      typescript-eslint:
+        patterns: ['@typescript-eslint/*']
     ignore:
       - dependency-name: '@angular/*'
         update-types:
