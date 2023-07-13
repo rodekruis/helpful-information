@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ApplicationInsights,
-  ITelemetryItem,
-} from '@microsoft/applicationinsights-web';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -35,21 +32,7 @@ export class LoggingService {
     });
 
     this.appInsights.loadAppInsights();
-    this.appInsights.addTelemetryInitializer(this.telemetryInitializer);
     this.appInsightsEnabled = true;
-  }
-
-  private telemetryInitializer(item: ITelemetryItem): void {
-    Object.assign(item.data, {
-      isProduction: environment.production,
-      baseUrl: this.getBaseUrl(),
-    });
-  }
-
-  private getBaseUrl(): string {
-    return document.referrer
-      ? document.referrer.match(/:\/\/(?<hostname>.[^/]+)/)[1]
-      : null;
   }
 
   public logPageView(name?: string): void {
