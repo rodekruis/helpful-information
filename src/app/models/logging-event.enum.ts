@@ -7,6 +7,8 @@ export enum LoggingEventCategory {
 export enum LoggingEvent {
   error = 'error',
   exception = 'exception',
+  BreadcrumbCategory = 'breadcrumb-category',
+  BreadcrumbSubCategory = 'breadcrumb-sub-category',
   BackButtonClick = 'back-button-click',
   BackFromRegion = 'back-from-region',
   BackFromCategory = 'back-from-category',

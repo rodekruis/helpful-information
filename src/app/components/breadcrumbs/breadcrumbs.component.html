@@ -4,15 +4,22 @@
       <a
         *ngIf="item?.categoryID"
         [routerLink]="[baseUrl, item?.categorySlug]"
+        (click)="click(item?.categorySlug)"
         class="text-style--inline-link is_minimal"
         >{{ item?.categoryName || item?.categoryID }}</a
       >
+      <strong
+        *ngIf="!item?.subCategoryID"
+        aria-hidden="true"
+        >&nbsp;:
+      </strong>
     </li>
     <li *ngIf="item?.subCategoryID">
       <strong aria-hidden="true">&nbsp;/ </strong>
       <a
         *ngIf="item?.subCategoryID"
         [routerLink]="[baseUrl, item?.categorySlug, item?.subCategorySlug]"
+        (click)="click(item?.categorySlug, item?.subCategorySlug)"
         class="text-style--inline-link is_minimal"
         >{{ item?.subCategoryName || item?.subCategoryID }}</a
       >

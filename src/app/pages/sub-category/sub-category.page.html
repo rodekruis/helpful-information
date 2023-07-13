@@ -1,3 +1,18 @@
+<app-breadcrumbs
+  [baseUrl]="'/' + region"
+  [item]="{
+    categoryID: category?.categoryID,
+    categorySlug: category?.slug,
+    categoryName: category?.categoryName
+  }"
+  style="display: block"
+>
+</app-breadcrumbs>
+<hr
+  style="border-bottom: 1px dotted currentColor"
+  class="ion-margin-vertical"
+/>
+
 <h2 class="text-style--header text-style--size-2">
   {{ subCategory?.subCategoryName }}
 </h2>
