@@ -12,12 +12,6 @@ A web-app _People Affected_ can use to lookup useful organizations and informati
 Latest releases and notable changes are in the [CHANGELOG](CHANGELOG.md).
 
 - [![Tests](https://github.com/rodekruis/helpful-information/actions/workflows/tests.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/tests.yml)
-- NL:
-  [![staging](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging.yml)
-  [![production](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production.yml)
-- UKR:
-  [![staging UKR](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging-ukr.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-staging-ukr.yml)
-  [![production UKR](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production-ukr.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/deploy-production-ukr.yml)
 
 ---
 
