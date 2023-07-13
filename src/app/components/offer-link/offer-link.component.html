@@ -1,14 +1,5 @@
 <a
-  [routerLink]="useUrlSlugs ? ['./', offer?.slug] : ['./']"
-  [queryParams]="
-    useUrlSlugs
-      ? null
-      : {
-          categoryID: offer?.categoryID,
-          subCategoryID: offer?.subCategoryID,
-          offerID: offer?.offerID
-        }
-  "
+  [routerLink]="['./', offer?.slug]"
   (click)="click(offer)"
   class="action list-item"
 >
@@ -37,7 +28,7 @@
     <span
       *ngIf="offer?.offerDescription"
       markdown
-      [data]="offer?.offerDescription | slice : 0 : 200"
+      [data]="offer?.offerDescription | slice: 0 : 200"
       [inline]="true"
     ></span>
   </span>

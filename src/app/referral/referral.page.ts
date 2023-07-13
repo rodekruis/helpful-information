@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
@@ -6,17 +7,17 @@ import {
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
 import { Offer } from 'src/app/models/offer.model';
+import { QASet } from 'src/app/models/qa-set.model';
 import { RegionData } from 'src/app/models/region-data';
+import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
+import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
+import { createSlug, getParentPath, getPathDepth } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
-import { QASet } from '../models/qa-set.model';
-import { SlugPrefix } from '../models/slug-prefix.enum';
-import { PageMetaService } from '../services/page-meta.service';
-import { createSlug, getParentPath } from '../shared/utils';
 
 @Component({
   selector: 'app-referral',
@@ -28,14 +29,10 @@ export class ReferralPageComponent implements OnInit {
   public regions: string[];
   public regionsLabels: string[];
 
-  public offers: Offer[];
-  public qaSets: QASet[];
-  public categories: Category[];
-  public subCategories: SubCategory[];
-
-  public category: Category;
-  public subCategory: SubCategory;
-  public offer: Offer;
+  private offers: Offer[];
+  private qaSets: QASet[];
+  private categories: Category[];
+  private subCategories: SubCategory[];
 
   public regionData: RegionData = {};
 
@@ -43,9 +40,9 @@ export class ReferralPageComponent implements OnInit {
 
   public loading = false;
 
-  public useUrlSlugs = environment.useUrlSlugs;
-  public useQandAs = environment.useQandAs;
-  public useQandASearch = environment.useQandASearch;
+  private useOffers = environment.useOffers;
+  private useQandAs = environment.useQandAs;
+  private useQandASearch = environment.useQandASearch;
 
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
@@ -59,10 +56,11 @@ export class ReferralPageComponent implements OnInit {
     private offersService: OffersService,
     private route: ActivatedRoute,
     private router: Router,
-    private loggingService: LoggingService,
     private regionDataService: RegionDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private pageMeta: PageMetaService,
+    private location: Location,
+    private loggingService?: LoggingService,
   ) {
     this.regions = environment.regions.trim().split(/\s*,\s*/);
     this.regionsLabels = environment.regionsLabels.trim().split(/\s*,\s*/);
@@ -82,7 +80,7 @@ export class ReferralPageComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
+  public async ngOnInit() {
     if (!this.isSupportedRegion()) {
       this.pageMeta.setDirection('');
       this.pageMeta.setLanguage('');
@@ -92,11 +90,7 @@ export class ReferralPageComponent implements OnInit {
       return;
     }
 
-    await this.loadReferralData();
-
-    this.route.queryParams.subscribe((queryParams: Params) => {
-      this.handleQueryParams(queryParams);
-    });
+    await this.loadAllData();
   }
 
   public getRegionHref() {
@@ -108,21 +102,28 @@ export class ReferralPageComponent implements OnInit {
   }
 
   public hasDataToShow(): boolean {
-    // When environment.useQandAs == false, Offers need to be available
-    // When environment.useQandAs == true, Offers OR Q&A-sets can be empty
     return (
       this.categories &&
       this.categories.some((item) => item.categoryVisible) &&
       this.subCategories &&
       this.subCategories.some((item) => item.subCategoryVisible) &&
-      ((this.useQandAs === false &&
-        this.offers &&
-        this.offers.some((item) => item.offerVisible)) ||
-        (this.useQandAs &&
-          !(
-            (!this.offers || !this.offers.some((item) => item.offerVisible)) &&
-            (!this.qaSets || !this.qaSets.some((item) => item.isVisible))
-          )))
+      // When environment.useQandAs == true, Offers OR Q&A-sets can be empty
+      ((this.useOffers === true &&
+        this.useQandAs === true &&
+        !(
+          (!this.offers || !this.offers.some((item) => item.offerVisible)) &&
+          (!this.qaSets || !this.qaSets.some((item) => item.isVisible))
+        )) ||
+        // When environment.useOffers === false, Q&A-sets need to be available
+        (this.useOffers === false &&
+          this.useQandAs === true &&
+          this.qaSets &&
+          this.qaSets.some((item) => item.isVisible)) ||
+        // When environment.useQandAs == false, Offers need to be available
+        (this.useOffers === true &&
+          this.useQandAs === false &&
+          this.offers &&
+          this.offers.some((item) => item.offerVisible)))
     );
   }
 
@@ -141,7 +142,7 @@ export class ReferralPageComponent implements OnInit {
     return environment.mainPageNotification;
   }
 
-  private async loadReferralData() {
+  private async loadAllData() {
     this.loading = true;
     this.regionData = await this.regionDataService.getData(this.region);
 
@@ -160,8 +161,9 @@ export class ReferralPageComponent implements OnInit {
     this.subCategories = await this.offersService.getAllSubCategories(
       this.region,
     );
-    this.offers = await this.offersService.getOffers(this.region);
-
+    if (this.useOffers) {
+      this.offers = await this.offersService.getOffers(this.region);
+    }
     if (this.useQandAs) {
       this.qaSets = await this.offersService.getQAs(this.region);
     }
@@ -169,203 +171,60 @@ export class ReferralPageComponent implements OnInit {
     this.loading = false;
   }
 
-  private handleQueryParams(params: Params) {
-    if (!Object.keys(params).length) {
-      this.pageMeta.setTitle({ region: this.regionData.pageTitle });
+  public goBack(): void {
+    const currentPath = this.location.path();
+    const pathDepth = getPathDepth(currentPath);
+    const parentPath = getParentPath(currentPath);
+
+    let event = LoggingEvent.BackButtonClick;
+
+    switch (pathDepth) {
+      case 4:
+        event = LoggingEvent.BackFromOffer;
+        break;
+      case 3:
+        event = LoggingEvent.BackFromSubCategory;
+        break;
+      case 2:
+        if (currentPath.match(/\/highlights$/)) {
+          event = LoggingEvent.BackFromHighlights;
+          break;
+        }
+        if (currentPath.match(/\/search$/)) {
+          event = LoggingEvent.BackFromSearch;
+          break;
+        }
+        event = LoggingEvent.BackFromCategory;
+        break;
+      case 1:
+        event = LoggingEvent.BackFromRegion;
+        break;
     }
 
-    let categoryName: string;
-    let subCategoryName: string;
-    let offerName: string;
-
-    if (!!params.categoryID && this.categories) {
-      this.category = this.categories.find(
-        (category) => category.categoryID === Number(params.categoryID),
-      );
-      if (!this.category) {
-        this.loggingService.logEvent(
-          LoggingEventCategory.error,
-          LoggingEvent.NotFoundCategory,
-          {
-            categoryID: params.categoryID,
-          },
-        );
-      }
-      if (!!this.category && !!this.category.categoryName) {
-        categoryName = this.category.categoryName;
-      }
-    } else {
-      this.category = null;
-    }
-    if (!!params.subCategoryID && this.subCategories) {
-      this.subCategory = this.subCategories.find(
-        (subCategory) =>
-          subCategory.subCategoryID === Number(params.subCategoryID) &&
-          subCategory.categoryID === Number(params.categoryID),
-      );
-      if (!this.subCategory) {
-        this.loggingService.logEvent(
-          LoggingEventCategory.error,
-          LoggingEvent.NotFoundSubCategory,
-          {
-            subCategoryID: params.subCategoryID,
-            categoryID: params.categoryID,
-          },
-        );
-      }
-
-      if (!!this.subCategory && !!this.subCategory.subCategoryName) {
-        subCategoryName = this.subCategory.subCategoryName;
-      }
-    } else {
-      this.subCategory = null;
-    }
-    if (!!params.offerID && this.offers) {
-      this.offer = this.offers.find(
-        (offer) =>
-          offer.offerID === Number(params.offerID) &&
-          offer.categoryID === Number(params.categoryID) &&
-          offer.subCategoryID === Number(params.subCategoryID),
-      );
-      if (!this.offer) {
-        this.loggingService.logEvent(
-          LoggingEventCategory.error,
-          LoggingEvent.NotFoundOffer,
-          {
-            offerID: params.offerID,
-            subCategoryID: params.subCategoryID,
-            categoryID: params.categoryID,
-          },
-        );
-      }
-      if (!!this.offer && !!this.offer.offerName) {
-        offerName = this.offer.offerName;
-      }
-    } else {
-      this.offer = null;
+    if (this.loggingService) {
+      this.loggingService.logEvent(LoggingEventCategory.ai, event, {
+        isBack: true,
+      });
     }
 
-    this.pageMeta.setTitle({ offerName, subCategoryName, categoryName });
+    this.router.navigateByUrl(parentPath || '/');
   }
 
-  public clickCategory(category: Category) {
-    this.category = category;
-    this.subCategory = null;
-    this.offer = null;
-    this.loggingService.logEvent(
-      LoggingEventCategory.ai,
-      LoggingEvent.CategoryClick,
-      this.getLogProperties(),
-    );
-    this.router.navigate([this.getRegionHref()], {
-      queryParams: {
-        categoryID: this.category.categoryID,
-        subCategoryID: this.subCategory ? this.subCategory.subCategoryID : null,
-      },
-    });
-  }
-
-  public clickSubCategory(subCategory: SubCategory) {
-    this.subCategory = subCategory;
-    this.offer = null;
-    this.loggingService.logEvent(
-      LoggingEventCategory.ai,
-      LoggingEvent.SubCategoryClick,
-      this.getLogProperties(),
-    );
-    this.router.navigate([this.getRegionHref()], {
-      queryParams: {
-        categoryID: this.category.categoryID,
-        subCategoryID: this.subCategory.subCategoryID,
-      },
-    });
-  }
-
-  public goBack() {
-    if (this.useUrlSlugs) {
-      this.router.navigateByUrl(getParentPath(window.location.pathname));
-      return;
-    }
-    if (this.offer) {
+  public showRootPage() {
+    if (this.loggingService) {
       this.loggingService.logEvent(
         LoggingEventCategory.ai,
-        LoggingEvent.BackFromOffer,
-        this.getLogProperties(),
+        LoggingEvent.MainScreenClick,
+        { isBack: true },
       );
-      this.clickSubCategory(this.subCategory);
-    } else if (this.subCategory) {
-      this.loggingService.logEvent(
-        LoggingEventCategory.ai,
-        LoggingEvent.BackFromSubCategory,
-        this.getLogProperties(),
-      );
-      if (
-        this.offersService.getOnlyChildSubCategory(
-          this.category,
-          this.subCategories,
-        )
-      ) {
-        this.category = null;
-        this.subCategory = null;
-        this.router.navigate([this.getRegionHref()]);
-      } else {
-        this.clickCategory(this.category);
-      }
-    } else if (this.category) {
-      this.loggingService.logEvent(
-        LoggingEventCategory.ai,
-        LoggingEvent.BackFromCategory,
-        this.getLogProperties(),
-      );
-      this.category = null;
-      this.router.navigate([this.getRegionHref()]);
-    } else {
-      this.loggingService.logEvent(
-        LoggingEventCategory.ai,
-        LoggingEvent.BackFromRegion,
-        this.getLogProperties(),
-      );
-      this.router.navigate([this.rootHref]);
     }
-  }
-
-  getLogProperties() {
-    const logParams: { [key: string]: any } = {
-      isBack: true,
-    };
-    if (this.offer) {
-      logParams.offerID = this.offer.offerID;
-      logParams.offerSlug = this.offer.slug ? this.offer.slug : '';
-      logParams.offerName = this.offer.offerName ? this.offer.offerName : '';
-    }
-    if (this.subCategory) {
-      logParams.subCategoryID = this.subCategory.subCategoryID;
-      logParams.subCategorySlug = this.subCategory.slug
-        ? this.subCategory.slug
-        : '';
-      logParams.subCategory = this.subCategory.subCategoryName;
-    }
-    if (this.category) {
-      logParams.categoryID = this.category.categoryID;
-      logParams.categorySlug = this.category.slug ? this.category.slug : '';
-      logParams.category = this.category.categoryName;
-    }
-    return logParams;
-  }
-
-  showRootPage() {
-    this.loggingService.logEvent(
-      LoggingEventCategory.ai,
-      LoggingEvent.MainScreenClick,
-      this.getLogProperties(),
-    );
-    this.category = null;
-    this.subCategory = null;
-    this.offer = null;
     this.router.navigate([this.rootHref]);
   }
 
-  logContactClick(type: 'tel' | 'whatsapp' | 'telegram') {
+  public logContactClick(type: 'tel' | 'whatsapp' | 'telegram') {
+    if (!this.loggingService) {
+      return;
+    }
     let event = LoggingEvent.FooterContactClick;
 
     if (type === 'whatsapp') {
@@ -376,11 +235,7 @@ export class ReferralPageComponent implements OnInit {
       event = LoggingEvent.FooterTelegramClick;
     }
 
-    this.loggingService.logEvent(
-      LoggingEventCategory.ai,
-      event,
-      this.getLogProperties(),
-    );
+    this.loggingService.logEvent(LoggingEventCategory.ai, event);
   }
 
   /**
@@ -403,10 +258,9 @@ export class ReferralPageComponent implements OnInit {
       });
     }
     if (
-      this.useUrlSlugs &&
-      (!!queryParams.categoryID ||
-        !!queryParams.subCategoryID ||
-        !!queryParams.offerID)
+      !!queryParams.categoryID ||
+      !!queryParams.subCategoryID ||
+      !!queryParams.offerID
     ) {
       let upgradedUrl = this.getRegionHref();
       if (!!queryParams.categoryID) {

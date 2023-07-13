@@ -1,6 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { mockQASet1, mockQASet2with1SubQuestion } from '../mocks/q-a-set.mock';
-import { QASet } from '../models/qa-set.model';
+import {
+  mockQASet1,
+  mockQASet2with1SubQuestion,
+} from 'src/app/mocks/q-a-set.mock';
+import { QASet } from 'src/app/models/qa-set.model';
+
 import { SearchService } from './search.service';
 
 describe('SearchService', () => {

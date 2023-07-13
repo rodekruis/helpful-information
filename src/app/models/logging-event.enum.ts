@@ -7,6 +7,9 @@ export enum LoggingEventCategory {
 export enum LoggingEvent {
   error = 'error',
   exception = 'exception',
+  BreadcrumbCategory = 'breadcrumb-category',
+  BreadcrumbSubCategory = 'breadcrumb-sub-category',
+  BackButtonClick = 'back-button-click',
   BackFromRegion = 'back-from-region',
   BackFromCategory = 'back-from-category',
   BackFromSubCategory = 'back-from-sub-category',
@@ -31,4 +34,7 @@ export enum LoggingEvent {
   SwUpdateAvailable = 'sw-update-available',
   SwUpdateNotActivated = 'sw-update-not-activated',
   SwUpdateNotAvailable = 'sw-update-not-available',
+  ExternalLinkClick = 'external-link',
+  QuestionOpen = 'question-open',
+  QuestionClose = 'question-close',
 }

@@ -1,8 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { AppComponent } from './app.component';
-import { LoggingService } from './services/logging.service';
+import { AppComponent } from 'src/app/app.component';
+import { LoggingService } from 'src/app/services/logging.service';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {

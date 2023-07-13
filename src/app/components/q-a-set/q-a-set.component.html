@@ -4,8 +4,8 @@
 >
   <small *ngIf="date">
     {{ labelLastUpdated }}
-    <time [attr.datetime]="date | date : 'yyyy-MM-dd'">
-      {{ date | date : "d-MM-''YY" }}
+    <time [attr.datetime]="date | date: 'yyyy-MM-dd'">
+      {{ date | date: "d-MM-''YY" }}
     </time>
   </small>
 </ng-template>
@@ -25,6 +25,7 @@
 <details
   [id]="qaSet.slug"
   [open]="isActive(qaSet.slug)"
+  (toggle)="logDetailsChange($event.target, qaSet.slug, qaSet.question)"
 >
   <summary class="action action-dark">
     {{ qaSet.question }}
@@ -48,7 +49,11 @@
       *ngFor="let subQaSet of qaSet.children"
       class="ion-margin-bottom"
     >
-      <details>
+      <details
+        (toggle)="
+          logDetailsChange($event.target, subQaSet.slug, subQaSet.question)
+        "
+      >
         <summary class="action">
           {{ subQaSet.question }}
         </summary>

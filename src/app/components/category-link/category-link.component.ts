@@ -8,7 +8,6 @@ import {
 } from 'src/app/models/logging-event.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category-link',
@@ -18,17 +17,18 @@ import { environment } from 'src/environments/environment';
   imports: [CommonModule, RouterModule],
 })
 export class CategoryLinkComponent {
-  public useUrlSlugs = environment.useUrlSlugs;
-
   @Input()
   category: Category;
 
   @Input()
   onlyChildSubCategory: SubCategory;
 
-  constructor(private loggingService: LoggingService) {}
+  constructor(private loggingService?: LoggingService) {}
 
   public click(category: Category) {
+    if (!this.loggingService) {
+      return;
+    }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.CategoryClick,

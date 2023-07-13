@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
-import { Offer } from 'src/app/models/offer.model';
-import { SubCategory } from 'src/app/models/sub-category.model';
 import {
   LoggingEvent,
   LoggingEventCategory,
-} from '../models/logging-event.enum';
-import { QASet } from '../models/qa-set.model';
+} from 'src/app/models/logging-event.enum';
+import { Offer } from 'src/app/models/offer.model';
+import { QASet } from 'src/app/models/qa-set.model';
+import { SubCategory } from 'src/app/models/sub-category.model';
+
 import { LoggingService } from './logging.service';
 import { SpreadsheetService } from './spreadsheet.service';
 
@@ -35,7 +36,7 @@ export class OffersService {
 
   constructor(
     private spreadsheetService: SpreadsheetService,
-    private loggingService: LoggingService,
+    private loggingService?: LoggingService,
   ) {}
 
   private needsCaching(name: CacheName, region: string): boolean {
@@ -84,7 +85,7 @@ export class OffersService {
       return categoryMatches;
     });
 
-    if (!foundCategory) {
+    if (!foundCategory && this.loggingService) {
       this.loggingService.logEvent(
         LoggingEventCategory.error,
         LoggingEvent.NotFoundCategory,
@@ -131,7 +132,7 @@ export class OffersService {
       return subCategoryMatches && categoryMatches;
     });
 
-    if (!foundSubCategory) {
+    if (!foundSubCategory && this.loggingService) {
       this.loggingService.logEvent(
         LoggingEventCategory.error,
         LoggingEvent.NotFoundSubCategory,
@@ -198,7 +199,7 @@ export class OffersService {
       return offerMatches && subCategoryMatches && categoryMatches;
     });
 
-    if (!foundOffer) {
+    if (!foundOffer && this.loggingService) {
       this.loggingService.logEvent(
         LoggingEventCategory.error,
         LoggingEvent.NotFoundOffer,

@@ -1,4 +1,4 @@
-import { SlugPrefix } from '../models/slug-prefix.enum';
+import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 
 export const getFullUrl = (value: string): string => {
   if (
@@ -68,6 +68,10 @@ export const getLegacyID = (
 
 export const getParentPath = (fullPath: string): string => {
   return fullPath.split('/').slice(0, -1).join('/');
+};
+
+export const getPathDepth = (fullPath: string): number => {
+  return fullPath.split('/').length - 1;
 };
 
 export const formatPhoneNumberAsUrl = (rawNumber: string): string => {

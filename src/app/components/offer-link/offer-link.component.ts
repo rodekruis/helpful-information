@@ -9,7 +9,6 @@ import {
 } from 'src/app/models/logging-event.enum';
 import { Offer } from 'src/app/models/offer.model';
 import { LoggingService } from 'src/app/services/logging.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-offer-link',
@@ -19,8 +18,6 @@ import { environment } from 'src/environments/environment';
   imports: [CommonModule, IonicModule, RouterModule, MarkdownModule],
 })
 export class OfferLinkComponent {
-  public useUrlSlugs = environment.useUrlSlugs;
-
   @Input()
   public offer: Offer;
 

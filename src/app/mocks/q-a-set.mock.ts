@@ -1,4 +1,4 @@
-import { QASet } from '../models/qa-set.model';
+import { QASet } from 'src/app/models/qa-set.model';
 
 export const mockQASet1: QASet = {
   id: 1,

@@ -2,6 +2,7 @@ import { DOCUMENT, Location } from '@angular/common';
 import { Inject, Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer, Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+
 import { RegionDataService } from './region-data.service';
 
 @Injectable({

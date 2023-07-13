@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RegionData } from 'src/app/models/region-data';
+
 import { SpreadsheetService } from './spreadsheet.service';
 
 @Injectable({
@@ -23,7 +24,7 @@ export class RegionDataService {
   public async getData(region: string): Promise<RegionData> {
     if (!this.data || !this.isSameRegion(region)) {
       this.resetCache(region);
-      this.data = await this.spreadsheetService.getReferralPageData(region);
+      this.data = await this.spreadsheetService.getRegionConfigData(region);
     }
     return this.data;
   }

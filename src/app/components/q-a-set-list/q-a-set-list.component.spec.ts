@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ngxMarkdownModuleFactory } from 'src/app/app.module';
+import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
+import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
@@ -9,9 +11,7 @@ import {
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import { environment } from 'src/environments/environment';
-import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
-import { QASetComponent } from '../q-a-set/q-a-set.component';
+
 import { QASetListComponent } from './q-a-set-list.component';
 
 const testDate = new Date('2022-02-22');
@@ -102,20 +102,10 @@ describe('QASetListComponent', () => {
     const linkItems = fixture.nativeElement.querySelectorAll('a');
 
     expect(linkItems.length).toBe(2);
-    if (environment.useUrlSlugs) {
-      expect(linkItems[0].href).toContain(testList[0].categorySlug);
-      expect(linkItems[1].href).toContain(
-        `${testList[0].categorySlug}/${testList[0].subCategorySlug}`,
-      );
-    } else {
-      expect(linkItems[0].href).toContain(
-        `categoryID=${testList[0].categoryID}`,
-      );
-
-      expect(linkItems[1].href).toContain(
-        `subCategoryID=${testList[0].subCategoryID}`,
-      );
-    }
+    expect(linkItems[0].href).toContain(testList[0].categorySlug);
+    expect(linkItems[1].href).toContain(
+      `${testList[0].categorySlug}/${testList[0].subCategorySlug}`,
+    );
   });
 
   it('should show the "last updated" date INSIDE the question, not OUTSIDE', () => {

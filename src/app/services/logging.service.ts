@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  ApplicationInsights,
-  ITelemetryItem,
-} from '@microsoft/applicationinsights-web';
-import { SeverityLevel } from 'src/app/models/severity-level.enum';
-import { environment } from 'src/environments/environment';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import {
   LoggingEvent,
   LoggingEventCategory,
-} from '../models/logging-event.enum';
+} from 'src/app/models/logging-event.enum';
+import { SeverityLevel } from 'src/app/models/severity-level.enum';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class LoggingService {
@@ -35,21 +32,7 @@ export class LoggingService {
     });
 
     this.appInsights.loadAppInsights();
-    this.appInsights.addTelemetryInitializer(this.telemetryInitializer);
     this.appInsightsEnabled = true;
-  }
-
-  private telemetryInitializer(item: ITelemetryItem): void {
-    Object.assign(item.data, {
-      isProduction: environment.production,
-      baseUrl: this.getBaseUrl(),
-    });
-  }
-
-  private getBaseUrl(): string {
-    return document.referrer
-      ? document.referrer.match(/:\/\/(?<hostname>.[^/]+)/)[1]
-      : null;
   }
 
   public logPageView(name?: string): void {
@@ -74,8 +57,15 @@ export class LoggingService {
   ): void {
     if (this.appInsightsEnabled) {
       this.appInsights.trackEvent(
-        { name: `referral-${action}` },
-        { category, action, ...properties },
+        {
+          name: `referral-${action}`,
+        },
+        {
+          url: window.location.toString(),
+          category,
+          action,
+          ...properties,
+        },
       );
     }
     this.displayOnConsole(

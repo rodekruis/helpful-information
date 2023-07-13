@@ -5,11 +5,12 @@ import { RouteReuseStrategy } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
-import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { LoggingService } from 'src/app/services/logging.service';
+import { environment } from 'src/environments/environment';
+
 import { AppComponent } from './app.component';
-import { ErrorHandlerService } from './services/error-handler.service';
-import { LoggingService } from './services/logging.service';
+import { AppRoutingModule } from './app-routing.module';
 
 export function markedOptionsFactory(): MarkedOptions {
   const renderer = new MarkedRenderer();

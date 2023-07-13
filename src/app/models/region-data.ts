@@ -10,8 +10,8 @@ export class RegionData {
   labelLastUpdated?: string;
   labelMainScreenButton?: string;
   labelOfferAddress?: string;
-  labelOfferNeedToKnow?: string;
   labelOfferEmail?: string;
+  labelOfferNeedToKnow?: string;
   labelOfferOpenWeek?: string;
   labelOfferOpenWeekend?: string;
   labelOfferPhone?: string;
@@ -57,8 +57,8 @@ export enum RegionDataKey {
   navBack = 'nav.back',
   navMain = 'nav.main',
   offerAddress = 'offer.address',
-  offerNeedToKnow = 'offer.need-to-know',
   offerEmail = 'offer.email',
+  offerNeedToKnow = 'offer.need-to-know',
   offerOpenWeek = 'offer.open.week',
   offerOpenWeekend = 'offer.open.weekend',
   offerPhone = 'offer.phone',

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
+import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferLinkComponent } from 'src/app/components/offer-link/offer-link.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
@@ -25,6 +26,7 @@ import { environment } from 'src/environments/environment';
   imports: [
     CommonModule,
     RouterModule,
+    BreadcrumbsComponent,
     OfferLinkComponent,
     QASetComponent,
     LastUpdatedTimeComponent,
@@ -34,8 +36,9 @@ import { environment } from 'src/environments/environment';
   ],
 })
 export default class SubCategoryPageComponent implements OnInit {
-  private region: string;
+  public region: string;
 
+  public useOffers = environment.useOffers;
   public useQandAs = environment.useQandAs;
 
   @Input()
@@ -103,11 +106,11 @@ export default class SubCategoryPageComponent implements OnInit {
       return;
     }
 
-    if (!this.offers) {
+    if (this.useOffers && !this.offers) {
       this.offers = await this.offersService.getOffers(this.region);
     }
 
-    if (environment.useQandAs && !this.qaSets) {
+    if (this.useQandAs && !this.qaSets) {
       this.qaSets = await this.offersService.getQAs(this.region);
     }
 

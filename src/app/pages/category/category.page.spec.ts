@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ngxMarkdownModuleFactory } from 'src/app/app.module';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
+
 import CategoryPageComponent from './category.page';
 
 describe('CategoryPageComponent', () => {

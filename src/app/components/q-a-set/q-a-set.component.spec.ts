@@ -8,6 +8,7 @@ import {
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
+
 import { QASetComponent } from './q-a-set.component';
 
 const testDate = new Date('2022-02-22');
