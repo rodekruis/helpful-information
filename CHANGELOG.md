@@ -6,7 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v23.03.0...main)
+## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v23.07.0...main)
+
+---
+
+## 2023-07-13: [v23.07](https://github.com/rodekruis/helpful-information/releases/tag/v23.07.0)
+
+### Added
+
+- Ability to show a sticky "Notification" on every/the main-page. See [#650](https://github.com/rodekruis/helpful-information/pull/650)
+- Support for / using Node.js v18/v20
+- RTL-support for Arabic. See [#639](https://github.com/rodekruis/helpful-information/issues/639)
+- A Guide: "[How to set up an instance (quickly)](./docs/Guide-How_to_set_up_an_instance.md)"
+
+### Removed
+
+- Support for Node.js v16
+- Support for URLs using `categoryID`, `subCategoryID`, `offerID`, `search=show`, `highlights=show`, etc.
+
+### Changed
+
+- Sheet-level configuration/text-labels as rows in "Referral Page"-sheet can be reorderd, when properly labeled with `#tag`s. See [#158](https://github.com/rodekruis/helpful-information/issues/158)
 
 ---
 
