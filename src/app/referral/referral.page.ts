@@ -56,11 +56,11 @@ export class ReferralPageComponent implements OnInit {
     private offersService: OffersService,
     private route: ActivatedRoute,
     private router: Router,
-    private loggingService: LoggingService,
     private regionDataService: RegionDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private pageMeta: PageMetaService,
     private location: Location,
+    private loggingService?: LoggingService,
   ) {
     this.regions = environment.regions.trim().split(/\s*,\s*/);
     this.regionsLabels = environment.regionsLabels.trim().split(/\s*,\s*/);
@@ -201,23 +201,30 @@ export class ReferralPageComponent implements OnInit {
         break;
     }
 
-    this.loggingService.logEvent(LoggingEventCategory.ai, event, {
-      isBack: true,
-    });
+    if (this.loggingService) {
+      this.loggingService.logEvent(LoggingEventCategory.ai, event, {
+        isBack: true,
+      });
+    }
 
     this.router.navigateByUrl(parentPath || '/');
   }
 
   public showRootPage() {
-    this.loggingService.logEvent(
-      LoggingEventCategory.ai,
-      LoggingEvent.MainScreenClick,
-      { isBack: true },
-    );
+    if (this.loggingService) {
+      this.loggingService.logEvent(
+        LoggingEventCategory.ai,
+        LoggingEvent.MainScreenClick,
+        { isBack: true },
+      );
+    }
     this.router.navigate([this.rootHref]);
   }
 
   public logContactClick(type: 'tel' | 'whatsapp' | 'telegram') {
+    if (!this.loggingService) {
+      return;
+    }
     let event = LoggingEvent.FooterContactClick;
 
     if (type === 'whatsapp') {

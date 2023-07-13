@@ -23,9 +23,12 @@ export class CategoryLinkComponent {
   @Input()
   onlyChildSubCategory: SubCategory;
 
-  constructor(private loggingService: LoggingService) {}
+  constructor(private loggingService?: LoggingService) {}
 
   public click(category: Category) {
+    if (!this.loggingService) {
+      return;
+    }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.CategoryClick,

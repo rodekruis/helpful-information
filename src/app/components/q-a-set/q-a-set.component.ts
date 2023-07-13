@@ -27,7 +27,7 @@ export class QASetComponent {
 
   constructor(
     private regionDataService: RegionDataService,
-    private loggingService: LoggingService,
+    private loggingService?: LoggingService,
   ) {
     if (
       !!this.regionDataService &&
@@ -43,6 +43,9 @@ export class QASetComponent {
   }
 
   public logDetailsChange(target: any, slug?: string, question?: string): void {
+    if (!this.loggingService) {
+      return;
+    }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       target.open ? LoggingEvent.QuestionOpen : LoggingEvent.QuestionClose,
