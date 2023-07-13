@@ -1,4 +1,4 @@
-import { SlugPrefix } from '../models/slug-prefix.enum';
+import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 
 export const getFullUrl = (value: string): string => {
   if (

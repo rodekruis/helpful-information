@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ngxMarkdownModuleFactory } from 'src/app/app.module';
 import mockOffer from 'src/app/mocks/offer.mock';
 import { LoggingService } from 'src/app/services/logging.service';
+
 import { OfferComponent } from './offer.component';
 
 describe('OfferComponent', () => {

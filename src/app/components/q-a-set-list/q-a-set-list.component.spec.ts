@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ngxMarkdownModuleFactory } from 'src/app/app.module';
+import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
+import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
@@ -9,8 +11,7 @@ import {
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
-import { QASetComponent } from '../q-a-set/q-a-set.component';
+
 import { QASetListComponent } from './q-a-set-list.component';
 
 const testDate = new Date('2022-02-22');

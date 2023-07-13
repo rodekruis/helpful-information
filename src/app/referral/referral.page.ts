@@ -7,17 +7,17 @@ import {
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
 import { Offer } from 'src/app/models/offer.model';
+import { QASet } from 'src/app/models/qa-set.model';
 import { RegionData } from 'src/app/models/region-data';
+import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { SubCategory } from 'src/app/models/sub-category.model';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
+import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
+import { createSlug, getParentPath, getPathDepth } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
-import { QASet } from '../models/qa-set.model';
-import { SlugPrefix } from '../models/slug-prefix.enum';
-import { PageMetaService } from '../services/page-meta.service';
-import { createSlug, getParentPath, getPathDepth } from '../shared/utils';
 
 @Component({
   selector: 'app-referral',

@@ -10,10 +10,19 @@ module.exports = {
         project: ['tsconfig.json'],
         createDefaultProgram: true,
       },
-      plugins: ['no-loops', 'promise', 'jasmine'],
+      plugins: [
+        'no-relative-import-paths',
+        'import',
+        'simple-import-sort',
+        'no-loops',
+        'promise',
+        'jasmine',
+      ],
       extends: [
         'plugin:@angular-eslint/recommended',
         'plugin:@angular-eslint/template/process-inline-templates',
+        'plugin:import/recommended',
+        'plugin:import/typescript',
         'plugin:promise/recommended',
         'plugin:no-unsanitized/DOM',
         'plugin:regexp/recommended',
@@ -37,6 +46,23 @@ module.exports = {
             style: 'kebab-case',
           },
         ],
+        'no-relative-import-paths/no-relative-import-paths': [
+          'error',
+          { allowSameFolder: true },
+        ],
+        'import/first': 'error',
+        'import/consistent-type-specifier-style': 'error',
+        'import/newline-after-import': ['error', { count: 1 }],
+        'import/no-absolute-path': 'error',
+        'import/no-relative-packages': 'error',
+        'import/no-useless-path-segments': [
+          'error',
+          {
+            noUselessIndex: true,
+          },
+        ],
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
         'no-restricted-globals': ['error'].concat(restrictedGlobals),
         'promise/no-multiple-resolved': ['error'],
         'regexp/letter-case': [
@@ -64,6 +90,16 @@ module.exports = {
         'regexp/use-ignore-case': ['error'],
         'no-loops/no-loops': ['error'],
       },
+      settings: {
+        'import/parsers': {
+          '@typescript-eslint/parser': ['.ts', '.tsx'],
+        },
+        'import/resolver': {
+          typescript: {
+            alwaysTryTypes: true,
+          },
+        },
+      },
     },
     {
       files: ['*.html'],
@@ -76,7 +112,9 @@ module.exports = {
         ecmaVersion: 2021,
       },
       extends: ['prettier'],
-      rules: {},
+      rules: {
+        'sort-imports': ['error'],
+      },
     },
   ],
 };

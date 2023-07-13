@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { environment } from 'src/environments/environment';
 import {
   LoggingEvent,
   LoggingEventCategory,
-} from './models/logging-event.enum';
-import { LoggingService } from './services/logging.service';
+} from 'src/app/models/logging-event.enum';
+import { LoggingService } from 'src/app/services/logging.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',

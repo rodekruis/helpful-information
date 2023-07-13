@@ -3,12 +3,12 @@ import {
   ApplicationInsights,
   ITelemetryItem,
 } from '@microsoft/applicationinsights-web';
-import { SeverityLevel } from 'src/app/models/severity-level.enum';
-import { environment } from 'src/environments/environment';
 import {
   LoggingEvent,
   LoggingEventCategory,
-} from '../models/logging-event.enum';
+} from 'src/app/models/logging-event.enum';
+import { SeverityLevel } from 'src/app/models/severity-level.enum';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class LoggingService {

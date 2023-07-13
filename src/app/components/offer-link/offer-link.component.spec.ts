@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoggingService } from 'src/app/services/logging.service';
+
 import { OfferLinkComponent } from './offer-link.component';
 
 describe('OfferLinkComponent', () => {

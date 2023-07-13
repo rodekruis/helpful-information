@@ -1,4 +1,4 @@
-import { SubCategory } from '../models/sub-category.model';
+import { SubCategory } from 'src/app/models/sub-category.model';
 
 export default {
   subCategoryID: 1,
