@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
+import {
+  LoggingEvent,
+  LoggingEventCategory,
+} from 'src/app/models/logging-event.enum';
 import { QASet } from 'src/app/models/qa-set.model';
+import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 
 @Component({
@@ -20,17 +25,31 @@ export class QASetComponent {
 
   public labelLastUpdated: string;
 
-  constructor(regionDataService: RegionDataService) {
+  constructor(
+    private regionDataService: RegionDataService,
+    private loggingService: LoggingService,
+  ) {
     if (
-      !!regionDataService &&
-      !!regionDataService.data &&
-      !!regionDataService.data.labelLastUpdated
+      !!this.regionDataService &&
+      !!this.regionDataService.data &&
+      !!this.regionDataService.data.labelLastUpdated
     ) {
-      this.labelLastUpdated = regionDataService.data.labelLastUpdated;
+      this.labelLastUpdated = this.regionDataService.data.labelLastUpdated;
     }
   }
 
   public isActive(slug: string): boolean {
     return window.location.hash === `#${slug}`;
+  }
+
+  public logDetailsChange(target: any, slug?: string, question?: string): void {
+    this.loggingService.logEvent(
+      LoggingEventCategory.ai,
+      target.open ? LoggingEvent.QuestionOpen : LoggingEvent.QuestionClose,
+      {
+        questionSlug: slug,
+        question: question.substring(0, 100),
+      },
+    );
   }
 }
