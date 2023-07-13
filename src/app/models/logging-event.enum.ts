@@ -32,4 +32,5 @@ export enum LoggingEvent {
   SwUpdateAvailable = 'sw-update-available',
   SwUpdateNotActivated = 'sw-update-not-activated',
   SwUpdateNotAvailable = 'sw-update-not-available',
+  ExternalLinkClick = 'external-link',
 }

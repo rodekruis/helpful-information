@@ -18,6 +18,53 @@ export class AppComponent {
     private loggingService: LoggingService,
     private swUpdates: SwUpdate,
   ) {
+    this.setUpExternalLinkTracking();
+
+    this.handleServiceWorkerUpdates();
+    this.handleServiceWorkerErrors();
+  }
+
+  private setUpExternalLinkTracking(): void {
+    document.addEventListener(
+      'click',
+      (event) => {
+        const target = event.target as HTMLElement;
+
+        // Stop if not directly ON or WITHIN a link
+        if (target.tagName !== 'A' && !target.closest('a')) {
+          return;
+        }
+
+        // Use link itself or closest parent link
+        const link = (
+          target.tagName === 'A' ? target : target.closest('a')
+        ) as HTMLAnchorElement;
+
+        // Ignore internal links
+        if (link.hostname === window.location.hostname) {
+          return;
+        }
+
+        this.loggingService.logEvent(
+          LoggingEventCategory.ai,
+          LoggingEvent.ExternalLinkClick,
+          {
+            href: link.href,
+            linkText: link.innerText || '',
+            metaKey: event.metaKey || undefined,
+            shiftKey: event.shiftKey || undefined,
+            ctrlKey: event.ctrlKey || undefined,
+          },
+        );
+      },
+      {
+        capture: false,
+        passive: true,
+      },
+    );
+  }
+
+  private handleServiceWorkerUpdates(): void {
     this.swUpdates.versionUpdates.subscribe((evt) => {
       switch (evt.type) {
         case 'VERSION_READY':
@@ -92,6 +139,9 @@ export class AppComponent {
           break;
       }
     });
+  }
+
+  private handleServiceWorkerErrors(): void {
     this.swUpdates.unrecoverable.subscribe((error) => {
       console.error('ServiceWorker unrecoverable error:', error);
       this.loggingService.logEvent(
