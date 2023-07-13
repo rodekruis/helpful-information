@@ -57,8 +57,15 @@ export class LoggingService {
   ): void {
     if (this.appInsightsEnabled) {
       this.appInsights.trackEvent(
-        { name: `referral-${action}` },
-        { category, action, ...properties },
+        {
+          name: `referral-${action}`,
+        },
+        {
+          url: window.location.toString(),
+          category,
+          action,
+          ...properties,
+        },
       );
     }
     this.displayOnConsole(
