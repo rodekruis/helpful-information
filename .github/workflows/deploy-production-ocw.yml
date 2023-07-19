@@ -56,7 +56,7 @@ jobs:
         run: 'npm run build:production'
         env:
           NG_PRODUCTION: 'true'
-          ENV_NAME: ''
+          ENV_NAME: 'V2'
           NG_USE_SERVICE_WORKER: 'true'
           NG_USE_OFFERS: 'false'
           NG_USE_Q_AND_AS: 'true'
@@ -80,10 +80,10 @@ jobs:
             Türkçe,
             العربية
           REGIONS_SHEET_IDS: >-
-            1cHeyiaYPaIP2tiYjSduQAKOJhcFYZAMHFQwF4Vp8PGI,
-            1CshOqLh7TssMc_m7kK-W7TpeLOoDMRE1Pitb2N7GyRE,
-            14zmJxcPgnamVekeUKXVncPOiE8eYjrlsepKwxYMI4Oc,
-            13FD3t0VnsfdzD7UwPqmS9cvb4lLmcv82CoGB49goKJQ
+            1CJsUTqFcglm1mIq6XxI6z67_moGXaFYuGGW_EGUTLuY,
+            1SkkLGBnjgfdCZAwtyZN2S5qvo6cxqvljE1JzcQSbf4Y,
+            1aOdtxQQ0psavi7QderEd10e1URbCAbGhKNClIG_dUp4,
+            1vf5rgteGvxM-ELogXxbBChTqiSk1iMCALhgonmWOTU8
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
