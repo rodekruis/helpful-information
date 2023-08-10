@@ -56,7 +56,7 @@ jobs:
         run: 'npm run build:production'
         env:
           NG_PRODUCTION: 'true'
-          ENV_NAME: 'V2'
+          ENV_NAME: ''
           NG_USE_SERVICE_WORKER: 'true'
           NG_USE_OFFERS: 'false'
           NG_USE_Q_AND_AS: 'true'
