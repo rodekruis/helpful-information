@@ -34,7 +34,7 @@ jobs:
     name: Build and Deploy Job
     environment: 'production-faq'
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
