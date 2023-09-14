@@ -77,8 +77,8 @@ import { ReferralPageComponent } from './referral.page';
     ]),
     SharedModule,
     MarkdownModule.forChild(),
+    ReferralPageComponent,
   ],
-  declarations: [ReferralPageComponent],
   providers: [Title],
 })
 export class ReferralPageModule {}

@@ -12,8 +12,11 @@ describe('ReferralPageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ReferralPageComponent],
-      imports: [RouterTestingModule, ngxMarkdownModuleFactory()],
+      imports: [
+        RouterTestingModule,
+        ngxMarkdownModuleFactory(),
+        ReferralPageComponent,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         {

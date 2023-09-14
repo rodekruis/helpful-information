@@ -1,6 +1,15 @@
-import { Location } from '@angular/common';
+import { Location, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  Params,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { MarkdownModule } from 'ngx-markdown';
+import { AppHeaderComponent } from 'src/app/components/header/header.component';
 import { Category } from 'src/app/models/category.model';
 import {
   LoggingEvent,
@@ -23,6 +32,16 @@ import { environment } from 'src/environments/environment';
   selector: 'app-referral',
   templateUrl: 'referral.page.html',
   styleUrls: ['referral.page.scss'],
+  standalone: true,
+  imports: [
+    IonicModule,
+    AppHeaderComponent,
+    NgIf,
+    RouterOutlet,
+    MarkdownModule,
+    NgFor,
+    RouterLink,
+  ],
 })
 export class ReferralPageComponent implements OnInit {
   public region: string;
