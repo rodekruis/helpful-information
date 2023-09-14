@@ -68,17 +68,29 @@ jobs:
             ukraine,
             oekraine,
             shelter,
-            opvang
+            opvang,
+            morocco,
+            marokko,
+            libya,
+            libie,
           REGIONS_LABELS: >-
             Ukraine (EN),
             Oekraïne (NL),
             Shelter (EN),
-            Opvang (NL)
+            Opvang (NL),
+            Morocco Earthquake (EN),
+            Marokko Aardbeving (NL),
+            Libya Floods (EN),
+            Libië Overstromingen (NL),
           REGIONS_SHEET_IDS: >-
             14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
             1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE,
             15yXp_w0chnFRwIfvY6uRgs7TwzxwuBz9iz-dgDFHsbs,
-            1wJ4pfB3l7t16igivt_LkGYmaqZ0hiRsR7_giJUjen-s
+            1wJ4pfB3l7t16igivt_LkGYmaqZ0hiRsR7_giJUjen-s,
+            1LIhuGvtwPVGn4cC7OnbU33cDzkus8O1MfeYLq-YXYsc,
+            1oUdEkdpQ4h183nUSj-7rWwXNdAsEopL3m9Iy18dc7LA,
+            1N5EAnnc3QVec3M_ME19r1wavzU_4O_R-NPAiiReD9C8,
+            1Iy1PaqgP8ugmm4EsZ7GHk4wXFZSm5mUGxml8Dwl4Uso,
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
