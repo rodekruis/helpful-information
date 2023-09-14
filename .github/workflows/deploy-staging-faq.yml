@@ -91,7 +91,7 @@ jobs:
             jrncs-hotline,
             ,
             example,
-            test
+            test,
           REGIONS_LABELS: >-
             Ukraine (EN) 🟢,
             Oekraïne (NL) 🟢,
@@ -99,8 +99,8 @@ jobs:
             Opvang (NL) 🟢,
             Morocco Earthquake (EN) 🟢,
             Marokko Aardbeving (NL) 🟢,
-            Libya Floods (EN) 🟡,
-            Libië Overstromingen (NL) 🟡,
+            Libya Floods (EN) 🟢,
+            Libië Overstromingen (NL) 🟢,
             ,
             ,
             Türkiye-Syria Earthquake (EN) 🔘,
@@ -110,7 +110,7 @@ jobs:
             JRNCS Hotline 🟡,
             ,
             Example/Demo 🟡,
-            Test/Example 🚧
+            Test/Example 🚧,
           REGIONS_SHEET_IDS: >-
             14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
             1scCAXRoM66dFbR6f2Lj5FwLWZxm3SLbIgt58LeNNeHE,
@@ -129,7 +129,7 @@ jobs:
             14dv2jpXouk-XjBZpcts32_kth3dun8VZK0KPcGk274s,
             ,
             1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8,
-            10SIJdAQSd6loqCyzwK409QS_01Fgp8P4aqoDO8iBvhY
+            10SIJdAQSd6loqCyzwK409QS_01Fgp8P4aqoDO8iBvhY,
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ''
