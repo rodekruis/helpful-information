@@ -82,7 +82,7 @@ jobs:
             eindhoven,
             ,
             ,
-            policy-change-temporary-protection
+            policy-change-temporary-protection,
           REGIONS_LABELS: >-
             Amsterdam,
             Utrecht,
@@ -94,7 +94,7 @@ jobs:
             Eindhoven,
             ,
             ,
-            Refugees from Ukraine: Change in protection,
+            Refugees from Ukraine: change in temporary protection,
           REGIONS_SHEET_IDS: >-
             1OANMuGJxGBQ2ba3xVfKvTpD0EGQM-ukUrgRyN9tzMbQ,
             1ZqizriL_RJ2dCcNVnCj0GM02pqOLWcIF18A4zVigsrU,
@@ -106,7 +106,7 @@ jobs:
             1OhMLlM6NFD7GkoQEYMP4lnI0FKd__PKdPvYw0x57l8k,
             ,
             ,
-            1kt34eFCCVWrC8RAezX9AzYZ0TiQqxGdcF4KCUkHciLY
+            1kt34eFCCVWrC8RAezX9AzYZ0TiQqxGdcF4KCUkHciLY,
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
