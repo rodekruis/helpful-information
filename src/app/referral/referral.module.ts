@@ -12,7 +12,6 @@ import HighlightsPageComponent from 'src/app/pages/highlights/highlights.page';
 import OfferPageComponent from 'src/app/pages/offer/offer.page';
 import RegionPageComponent from 'src/app/pages/region/region.page';
 import SubCategoryPageComponent from 'src/app/pages/sub-category/sub-category.page';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
 
 import { ReferralPageComponent } from './referral.page';
@@ -75,7 +74,6 @@ import { ReferralPageComponent } from './referral.page';
         component: ReferralPageComponent,
       },
     ]),
-    SharedModule,
     MarkdownModule.forChild(),
     ReferralPageComponent,
   ],
