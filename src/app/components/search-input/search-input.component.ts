@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -7,7 +6,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './search-input.component.html',
   styleUrls: ['./search-input.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
 })
 export class SearchInputComponent implements OnInit {
   @Input()

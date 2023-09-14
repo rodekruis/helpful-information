@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, RouterModule } from '@angular/router';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
@@ -13,7 +13,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   templateUrl: './highlights.page.html',
   styleUrls: ['./highlights.page.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, QASetListComponent],
+  imports: [NgIf, RouterModule, QASetListComponent],
 })
 export default class HighlightsPageComponent implements OnInit {
   private region: string;

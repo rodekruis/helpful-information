@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -24,7 +24,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./sub-category.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
+    NgIf,
+    NgFor,
     RouterModule,
     BreadcrumbsComponent,
     OfferLinkComponent,

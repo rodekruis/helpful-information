@@ -1,12 +1,84 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from 'src/app/app.module';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { ErrorHandler, importProvidersFrom } from '@angular/core';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
+import { RouteReuseStrategy } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';
 
-if (environment.production) {
-  enableProdMode();
+import { AppComponent } from './app/app.component';
+import { AppRoutingModule } from './app/app-routing.module';
+
+export function markedOptionsFactory(): MarkedOptions {
+  const renderer = new MarkedRenderer();
+
+  renderer.heading = (text: string, level: number): string => {
+    const baseLevel = 3;
+    const maxLevel = 6;
+    level = level < baseLevel ? baseLevel : level;
+    level = level > maxLevel ? maxLevel : level;
+
+    return `<h${level}>${text}</h${level}>`;
+  };
+
+  renderer.link = (href: string, title: string, text: string): string => {
+    const isExternal = !href.startsWith('/');
+    return `<a href="${href}"
+     ${isExternal ? `target="_blank" rel="external noopener noreferrer"` : ''}
+     ${title ? ` title="${title}"` : ''}
+     >${text}</a>`;
+  };
+
+  renderer.html = (html: string): string => {
+    return html.replaceAll(
+      /(?<raw_a_href>href=[\s"']*(?:http|\/\/))/gi,
+      ` target="_blank" rel="external noopener noreferrer" $<raw_a_href>`,
+    );
+  };
+
+  return {
+    renderer: renderer,
+    gfm: true,
+    breaks: true,
+    pedantic: false,
+    smartLists: true,
+    smartypants: false,
+  };
 }
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.log(err));
+export function ngxMarkdownModuleFactory() {
+  return MarkdownModule.forRoot({
+    markedOptions: {
+      provide: MarkedOptions,
+      useFactory: markedOptionsFactory,
+    },
+  });
+}
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(
+      BrowserModule,
+      IonicModule.forRoot({
+        mode: 'md',
+        animated: false,
+      }),
+      AppRoutingModule,
+      ServiceWorkerModule.register('ngsw-worker.js', {
+        enabled: environment.useServiceWorker && environment.production,
+        registrationStrategy: 'registerWhenStable:3000',
+      }),
+      ngxMarkdownModuleFactory(),
+    ),
+    LoggingService,
+    { provide: ErrorHandler, useClass: ErrorHandlerService },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+}).catch((err) => console.log(err));

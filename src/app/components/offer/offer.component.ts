@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -17,7 +17,7 @@ import { formatPhoneNumberAsUrl } from 'src/app/shared/utils';
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule, MarkdownModule],
+  imports: [NgIf, NgFor, IonicModule, RouterModule, MarkdownModule],
 })
 export class OfferComponent {
   @Input()

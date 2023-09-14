@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -19,7 +18,6 @@ import { ReferralPageComponent } from './referral.page';
 @NgModule({
   imports: [
     IonicModule,
-    CommonModule,
     FormsModule,
     RegionPageComponent,
     CategoryLinkComponent,

@@ -1,5 +1,7 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { IonicModule } from '@ionic/angular';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -10,6 +12,8 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
+  standalone: true,
+  imports: [NgIf, IonicModule],
 })
 export class AppComponent {
   public envName: string = environment.envName;

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
@@ -18,7 +17,6 @@ import { getLegacyID } from 'src/app/shared/utils';
   styleUrls: ['./offer.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     BreadcrumbsComponent,
     OfferComponent,

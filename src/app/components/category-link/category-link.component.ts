@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
@@ -14,7 +13,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './cateogry-link.component.html',
   styleUrls: ['./cateogry-link.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
 })
 export class CategoryLinkComponent {
   @Input()

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgIf, SlicePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -15,7 +15,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './offer-link.component.html',
   styleUrls: ['./offer-link.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule, MarkdownModule],
+  imports: [NgIf, SlicePipe, IonicModule, RouterModule, MarkdownModule],
 })
 export class OfferLinkComponent {
   @Input()

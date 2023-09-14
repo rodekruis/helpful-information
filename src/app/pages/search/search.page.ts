@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
@@ -15,12 +15,7 @@ import { SearchService } from 'src/app/services/search.service';
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    QASetListComponent,
-    SearchInputComponent,
-  ],
+  imports: [NgIf, RouterModule, QASetListComponent, SearchInputComponent],
 })
 export default class SearchPageComponent implements OnInit {
   private region: string;
