@@ -12,11 +12,7 @@
   "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": ["npm install", "npm start", "npm run test"],
-
-  "containerEnv": {
-    "HUSKY": "0"
-  },
+  "postCreateCommand": "npm install",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -32,6 +28,9 @@
   "portsAttributes": {
     "4200": {
       "label": "dev-preview"
+    },
+    "3001": {
+      "label": "local-data"
     }
   }
 }
