@@ -67,8 +67,8 @@ jobs:
           REGIONS: >-
             ukraine,
             oekraine,
-            shelter,
-            opvang,
+            regular-asylum-procedure,
+            reguliere-asielprocedure,
             morocco,
             marokko,
             libya,
@@ -76,8 +76,8 @@ jobs:
           REGIONS_LABELS: >-
             Ukraine (EN),
             Oekraïne (NL),
-            Shelter (EN),
-            Opvang (NL),
+            Regular Asylum Procedure (EN),
+            Reguliere Asielprocedure (NL),
             Morocco Earthquake (EN),
             Marokko Aardbeving (NL),
             Libya Floods (EN),
