@@ -76,8 +76,8 @@ jobs:
           REGIONS_LABELS: >-
             Ukraine (EN),
             Oekraïne (NL),
-            Shelter (EN),
-            Opvang (NL),
+            Asylum seeker (EN),
+            Asielzoeker (NL),
             Morocco Earthquake (EN),
             Marokko Aardbeving (NL),
             Libya Floods (EN),
