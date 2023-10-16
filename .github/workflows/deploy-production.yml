@@ -54,8 +54,8 @@ jobs:
           ENV_NAME: ''
           NG_USE_SERVICE_WORKER: 'true'
           NG_USE_OFFERS: 'true'
-          NG_USE_Q_AND_AS: 'false'
-          NG_USE_Q_AND_A_SEARCH: 'false'
+          NG_USE_Q_AND_AS: 'true'
+          NG_USE_Q_AND_A_SEARCH: 'true'
           TXT_APP_NAME: 'Helpful Information'
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
           TXT_MAIN_PAGE_HEADER: 'Help for undocumented people'
@@ -65,6 +65,7 @@ jobs:
             \n
             Find information for local services like legal support, health, and shelter.\n
             Need help or do you have questions? Contact the WhatsApp helpdesk of the Red Cross: [+31 6 14 45 87 81](https://wa.me/31614458781)\n
+            \n
           TXT_MAIN_PAGE_NOTICE: '<div class="d-flex"><img src="/assets/icons/contact_whatsapp.png" alt="" with=32 height=32 decoding=async loading=lazy> [**Red Cross WhatsApp Helpdesk**](https://wa.me/31614458781)  <span>Monday-Sunday: `12:00`-`20:00`</span> </div>'
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
@@ -78,7 +79,10 @@ jobs:
             den-haag,
             rotterdam,
             nijmegen,
-            eindhoven
+            eindhoven,
+            ,
+            ,
+            policy-change-temporary-protection,
           REGIONS_LABELS: >-
             Amsterdam,
             Utrecht,
@@ -87,7 +91,10 @@ jobs:
             Den Haag,
             Rotterdam,
             Nijmegen,
-            Eindhoven
+            Eindhoven,
+            ,
+            ,
+            Refugees from Ukraine: change in temporary protection,
           REGIONS_SHEET_IDS: >-
             1OANMuGJxGBQ2ba3xVfKvTpD0EGQM-ukUrgRyN9tzMbQ,
             1ZqizriL_RJ2dCcNVnCj0GM02pqOLWcIF18A4zVigsrU,
@@ -96,7 +103,10 @@ jobs:
             1m43Tw7CWRUdPjaStq6dOi9yvHSYInP1lWjLetk1PrTI,
             18qD1PGTK2jTExpVIXXWpjHdpe5KDy7IdcR537CusCLU,
             1lWUjA8_sqmY7JRmYOBWn3wfRk2whR-2soZ8qfn_Fdaw,
-            1OhMLlM6NFD7GkoQEYMP4lnI0FKd__PKdPvYw0x57l8k
+            1OhMLlM6NFD7GkoQEYMP4lnI0FKd__PKdPvYw0x57l8k,
+            ,
+            ,
+            1kt34eFCCVWrC8RAezX9AzYZ0TiQqxGdcF4KCUkHciLY,
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
           AI_CONNECTION_STRING: ${{ secrets.AI_CONNECTION_STRING }}
