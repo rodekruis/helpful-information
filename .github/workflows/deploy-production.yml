@@ -60,7 +60,7 @@ jobs:
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
           TXT_MAIN_PAGE_HEADER: 'Help for undocumented people'
           TXT_MAIN_PAGE_INTRO: >-
-            This site is by the Netherlands Red Cross for people without legal status.\n
+            This site is by the Netherlands Red Cross for people who are undocumented: without residence permit or BSN.\n
             We do not share your personal details.\n
             \n
             Find information for local services like legal support, health, and shelter.\n
