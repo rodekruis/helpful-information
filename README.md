@@ -163,7 +163,7 @@ During development, an automated watch-process can be run with:
 
 - [Ionic v6](https://ionicframework.com/docs/v6/)
   > ⚠️ The [`Ionicons`](https://ionic.io/ionicons) icon-set is NOT included in the final build, so cannot be used 'by default'. Icons can be added manually.
-- [Angular v15](https://v15.angular.io/docs/)
+- [Angular v16](https://v16.angular.io/docs/)
 - [`ngx-markdown`](https://www.npmjs.com/package/ngx-markdown) is used to process Markdown-content into HTML. _No_ optional dependencies are included/used.
 
 ### Updating dependencies
