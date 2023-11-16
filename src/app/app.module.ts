@@ -4,7 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
+import {
+  MarkdownModule,
+  MARKED_OPTIONS,
+  MarkedOptions,
+  MarkedRenderer,
+} from 'ngx-markdown';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';
@@ -44,15 +49,13 @@ export function markedOptionsFactory(): MarkedOptions {
     gfm: true,
     breaks: true,
     pedantic: false,
-    smartLists: true,
-    smartypants: false,
   };
 }
 
 export function ngxMarkdownModuleFactory() {
   return MarkdownModule.forRoot({
     markedOptions: {
-      provide: MarkedOptions,
+      provide: MARKED_OPTIONS,
       useFactory: markedOptionsFactory,
     },
   });

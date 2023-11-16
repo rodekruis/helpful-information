@@ -49,7 +49,7 @@
                 "inject": true
               }
             ],
-            "scripts": ["node_modules/marked/marked.min.js"],
+            "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
