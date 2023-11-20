@@ -15,7 +15,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
+      paramsInheritanceStrategy: 'always',
       preloadingStrategy: PreloadAllModules,
+      scrollPositionRestoration: 'top',
+      urlUpdateStrategy: 'eager',
     }),
   ],
   exports: [RouterModule],
