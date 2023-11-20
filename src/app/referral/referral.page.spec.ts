@@ -1,4 +1,3 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ngxMarkdownModuleFactory } from 'src/app/app.module';
@@ -17,7 +16,6 @@ describe('ReferralPageComponent', () => {
         ngxMarkdownModuleFactory(),
         ReferralPageComponent,
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         {
           provide: LoggingService,
