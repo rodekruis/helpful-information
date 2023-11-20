@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v23.07.0...main)
 
+### Changed
+
+- Upgrade to Angular v17
+
 ---
 
 ## 2023-07-13: [v23.07](https://github.com/rodekruis/helpful-information/releases/tag/v23.07.0)
