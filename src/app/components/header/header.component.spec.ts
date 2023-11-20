@@ -9,7 +9,7 @@ describe('AppHeaderComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AppHeaderComponent],
+      imports: [AppHeaderComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));

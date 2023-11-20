@@ -9,7 +9,6 @@ import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 
 @NgModule({
-  declarations: [AppHeaderComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -18,6 +17,7 @@ import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list
     BreadcrumbsComponent,
     QASetComponent,
     QASetListComponent,
+    AppHeaderComponent,
   ],
   exports: [AppHeaderComponent],
 })
