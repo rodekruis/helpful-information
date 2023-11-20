@@ -34,10 +34,15 @@ describe('ReferralPageComponent', () => {
   });
 
   it('should render 1 (visible) test-region', () => {
+    // Arrange
     const listItems = fixture.debugElement.nativeElement.querySelectorAll(
       'li:not([aria-hidden])',
     );
 
+    // Act
+    fixture.detectChanges();
+
+    // Assert
     expect(listItems.length).toEqual(1);
   });
 });

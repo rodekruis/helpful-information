@@ -17,9 +17,14 @@ describe('AppComponent', () => {
   }));
 
   it('should create the app', () => {
+    // Arrange
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
 
+    // Act
+    fixture.detectChanges();
+
+    // Assert
     expect(app).toBeTruthy();
   });
 });

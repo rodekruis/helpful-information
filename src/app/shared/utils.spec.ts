@@ -8,6 +8,7 @@ import {
 
 describe('Utils - getFullUrl', () => {
   it('should return a full URL for valid values', () => {
+    // Arrange
     const testValues = [
       'http://example.org',
       'https://example.org',
@@ -24,18 +25,23 @@ describe('Utils - getFullUrl', () => {
     ];
 
     testValues.forEach((value, index) => {
+      // Act
       const output = getFullUrl(value);
 
+      // Assert
       expect(output).toEqual(testOutputs[index]);
     });
   });
 
   it('should return unchanged for invalid URLs/values', () => {
+    // Arrange
     const testValues = ['', '123456', 'test', 'x.test', undefined, null];
 
     testValues.forEach((value, index) => {
+      // Act
       const output = getFullUrl(value);
 
+      // Assert
       expect(output).toEqual(testValues[index]);
     });
   });
@@ -43,6 +49,7 @@ describe('Utils - getFullUrl', () => {
 
 describe('Utils - getPathDepth', () => {
   it('should return the max-level of the path', () => {
+    // Arrange
     const testValues = [
       '/',
       '/sub-folder',
@@ -56,8 +63,10 @@ describe('Utils - getPathDepth', () => {
     const testOutputs = [1, 1, 2, 2, 2, 3, 3, 4];
 
     testValues.forEach((value, index) => {
+      // Act
       const output = getPathDepth(value);
 
+      // Assert
       expect(output).toEqual(testOutputs[index]);
     });
   });
@@ -65,6 +74,7 @@ describe('Utils - getPathDepth', () => {
 
 describe('Utils - getParentPath', () => {
   it('should return the path of the parent folder', () => {
+    // Arrange
     const testValues = [
       '/',
       '/sub-folder',
@@ -85,8 +95,10 @@ describe('Utils - getParentPath', () => {
     ];
 
     testValues.forEach((value, index) => {
+      // Act
       const output = getParentPath(value);
 
+      // Assert
       expect(output).toEqual(testOutputs[index]);
     });
   });
@@ -94,6 +106,7 @@ describe('Utils - getParentPath', () => {
 
 describe('Utils - getDateFromString', () => {
   it('should return a Date for valid strings', () => {
+    // Arrange
     const testValues = [
       '1955-11-05',
       '1970-01-01',
@@ -112,13 +125,16 @@ describe('Utils - getDateFromString', () => {
     ];
 
     testValues.forEach((value, index) => {
+      // Act
       const output = getDateFromString(value);
 
+      // Assert
       expect(output).toEqual(testOutputs[index]);
     });
   });
 
   it('should return null for invalid strings', () => {
+    // Arrange
     const testValues = [
       '1970-31-01',
       '2000-13-31',
@@ -131,8 +147,10 @@ describe('Utils - getDateFromString', () => {
     ];
 
     testValues.forEach((value) => {
+      // Act
       const output = getDateFromString(value);
 
+      // Assert
       expect(output).toBeNull();
     });
   });
@@ -140,6 +158,7 @@ describe('Utils - getDateFromString', () => {
 
 describe('Utils - formatPhoneNumberAsUrl', () => {
   it('should return a tel-URL for each input-value', () => {
+    // Arrange
     const testValues = [
       '1234567890',
       '+1234567890',
@@ -168,8 +187,10 @@ describe('Utils - formatPhoneNumberAsUrl', () => {
     ];
 
     testValues.forEach((value, index) => {
+      // Act
       const output = formatPhoneNumberAsUrl(value);
 
+      // Assert
       expect(output).toEqual(testOutputs[index]);
     });
   });
