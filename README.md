@@ -12,6 +12,7 @@ A web-app _People Affected_ can use to lookup useful organizations and informati
 Latest releases and notable changes are in the [CHANGELOG](CHANGELOG.md).
 
 - [![Tests](https://github.com/rodekruis/helpful-information/actions/workflows/tests.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/tests.yml)
+- [![Workflows](https://github.com/rodekruis/helpful-information/actions/workflows/test_workflows.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/test_workflows.yml)
 
 ---
 
