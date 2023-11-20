@@ -1,16 +1,18 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
 import { AppComponent } from 'src/app/app.component';
 import { LoggingService } from 'src/app/services/logging.service';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      providers: [LoggingService],
       imports: [
+        RouterTestingModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+        AppComponent,
       ],
+      providers: [LoggingService, SwUpdate],
     }).compileComponents();
   }));
 

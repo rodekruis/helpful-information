@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ngxMarkdownModuleFactory } from 'src/app/app.module';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
@@ -8,6 +7,7 @@ import {
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
+import { ngxMarkdownModuleFactory } from 'src/main';
 
 import { QASetComponent } from './q-a-set.component';
 
