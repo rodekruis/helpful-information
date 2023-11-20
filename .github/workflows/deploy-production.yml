@@ -82,6 +82,7 @@ jobs:
             eindhoven,
             ,
             ,
+            winter-shelters,
             policy-change-temporary-protection,
           REGIONS_LABELS: >-
             Amsterdam,
@@ -94,6 +95,7 @@ jobs:
             Eindhoven,
             ,
             ,
+            Winter shelters in The Netherlands,
             Refugees from Ukraine: change in temporary protection,
           REGIONS_SHEET_IDS: >-
             1OANMuGJxGBQ2ba3xVfKvTpD0EGQM-ukUrgRyN9tzMbQ,
@@ -106,6 +108,7 @@ jobs:
             1OhMLlM6NFD7GkoQEYMP4lnI0FKd__PKdPvYw0x57l8k,
             ,
             ,
+            1FMnlbHgoZJLuw5RPDNGRrGH-5tpB21kZOwa_Kidx8BI,
             1kt34eFCCVWrC8RAezX9AzYZ0TiQqxGdcF4KCUkHciLY,
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
