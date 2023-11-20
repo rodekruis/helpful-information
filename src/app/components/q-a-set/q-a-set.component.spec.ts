@@ -113,13 +113,14 @@ describe('QASetComponent', () => {
     expect(timeElements[0].textContent).toContain(testDateFormatted);
   });
 
-  it('should contain clickable links that open a new window, when answer contains plain-text (absolute) URL', () => {
+  it('should contain clickable links that open a new window, when answer contains plain-text (absolute) URL', waitForAsync(async () => {
     const testQASet = mockQASet1;
     testQASet.answer =
       'Answer with URL: www.example.org Test-link: https://example.net/';
     component.qaSet = testQASet;
 
     fixture.detectChanges();
+    await fixture.whenStable();
 
     const linkElements = fixture.nativeElement.querySelectorAll('a[href]');
 
@@ -134,9 +135,9 @@ describe('QASetComponent', () => {
 
     expect(linkElements[0].href).toContain('http://www.example.org/');
     expect(linkElements[1].href).toContain('https://example.net/');
-  });
+  }));
 
-  it('should contain (safe) clickable links that open a new window, when answer contains HTML-links', () => {
+  it('should contain (safe) clickable links that open a new window, when answer contains HTML-links', waitForAsync(async () => {
     const testQASet = mockQASet1;
     testQASet.answer =
       'Answer with HTML-link: <a href="http://evil.example.net/">https://innocent.example.org</a>' +
@@ -149,6 +150,7 @@ describe('QASetComponent', () => {
     component.qaSet = testQASet;
 
     fixture.detectChanges();
+    await fixture.whenStable();
 
     const linkElements = fixture.nativeElement.querySelectorAll('a[href]');
 
@@ -159,9 +161,9 @@ describe('QASetComponent', () => {
       expect(link.rel).toContain('noreferrer');
       expect(link.rel).toContain('noopener');
     });
-  });
+  }));
 
-  it('should contain clickable links that open in same window, when answer contains local/relative links', () => {
+  it('should contain clickable links that open in same window, when answer contains local/relative links', waitForAsync(async () => {
     const testQASet = mockQASet1;
     testQASet.answer =
       'Answer with:\n' +
@@ -172,6 +174,7 @@ describe('QASetComponent', () => {
     component.qaSet = testQASet;
 
     fixture.detectChanges();
+    await fixture.whenStable();
 
     const linkElements = fixture.nativeElement.querySelectorAll('a[href]');
 
@@ -185,5 +188,5 @@ describe('QASetComponent', () => {
     expect(linkElements[2].target).toBe('_blank');
     expect(linkElements[3].rel).toContain('external');
     expect(linkElements[3].target).toBe('_blank');
-  });
+  }));
 });
