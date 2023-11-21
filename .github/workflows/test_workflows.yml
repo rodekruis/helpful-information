@@ -31,5 +31,5 @@ jobs:
       - name: Lint .env files
         uses: dotenv-linter/action-dotenv-linter@v2
         with:
-          reporter: github-code-suggestions
+          reporter: github-pr-check
           dotenv_linter_flags: --skip UnorderedKey
