@@ -38,5 +38,6 @@
       },
       "urls": ["https://sheets.googleapis.com/v4/spreadsheets/*"]
     }
-  ]
+  ],
+  "navigationUrls": ["/**", "!/**/*.*", "!/login", "!/logout", "!/.auth/**"]
 }

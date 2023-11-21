@@ -40,12 +40,16 @@ jobs:
           NG_USE_Q_AND_AS: 'true'
           NG_USE_Q_AND_A_SEARCH: 'true'
           TXT_APP_NAME: 'Private FAQ'
-          TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
+          TXT_APP_LOGO_URL: ''
           TXT_MAIN_PAGE_HEADER: 'Private PoC'
           TXT_MAIN_PAGE_INTRO: >-
-            Private FAQ only:\n
+            Private FAQ only!\n
             \n
-            `[ 🚧 = development ]`\n
+            <a href="/.auth/login/github" class="action"><strong>🔐 Login (with GitHub)</strong></a>\n
+            <a href="/.auth/login/aad" class="action"><strong>🔐 Login (Microsoft-account)</strong></a>\n
+            \n
+            <a href="/logout" class="action"><strong>🔓 Logout</strong></a>\n
+            \n
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
@@ -57,7 +61,7 @@ jobs:
           REGIONS_SHEET_IDS: >-
             1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII,
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
-          GOOGLE_SHEETS_API_URL: '/data/'
+          GOOGLE_SHEETS_API_URL: '/data'
           AI_CONNECTION_STRING: ''
 
       - name: Set/override robots.txt
@@ -80,7 +84,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_ROCK_069A8B403 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: 'upload'
-          config_file_location: '/staticwebapp.config_private.json'
+          config_file_location: '.azure/local-data/'
           app_location: 'www'
           output_location: ''
           skip_app_build: true
