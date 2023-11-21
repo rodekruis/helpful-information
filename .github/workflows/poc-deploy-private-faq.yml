@@ -1,0 +1,101 @@
+# More information on Static Web App workflow configurations,
+# See: https://aka.ms/swaworkflowconfig
+# See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+
+name: 'POC: Private FAQ [staging]'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    environment: 'staging-faq'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: 'npm'
+
+      - name: Install
+        env:
+          HUSKY: 0
+        run: 'npm ci --no-fund --no-audit'
+
+      - name: Set/override favicon.ico
+        run: 'cp --force src/favicon.gold.ico src/favicon.ico'
+
+      - name: Build
+        run: 'npm run build:production'
+        env:
+          NG_PRODUCTION: 'true'
+          ENV_NAME: 'Private-FAQ'
+          NG_USE_SERVICE_WORKER: 'true'
+          NG_USE_OFFERS: 'false'
+          NG_USE_Q_AND_AS: 'true'
+          NG_USE_Q_AND_A_SEARCH: 'true'
+          TXT_APP_NAME: 'Private FAQ'
+          TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
+          TXT_MAIN_PAGE_HEADER: 'Private PoC'
+          TXT_MAIN_PAGE_INTRO: >-
+            Private FAQ only:\n
+            \n
+            `[ 🚧 = development ]`\n
+          TXT_ERROR_HEADER: 'Data Unavailable'
+          TXT_ERROR_MESSAGE: 'Reach out to us at: '
+          TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
+          TXT_ERROR_RETRY: 'Try again?'
+          REGIONS: >-
+            private,
+          REGIONS_LABELS: >-
+            Private 🔐
+          REGIONS_SHEET_IDS: >-
+            1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII,
+          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
+          GOOGLE_SHEETS_API_URL: '/data/'
+          AI_CONNECTION_STRING: ''
+
+      - name: Set/override robots.txt
+        run: 'cp src/robots.private.txt www/robots.txt'
+
+      - name: Download sheet data
+        run: |
+          echo "Downloading sheet data..."
+          cp './data/test-sheet-id-1/values/Referral Page.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Referral Page'
+          cp './data/test-sheet-id-1/values/Categories.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Categories'
+          cp './data/test-sheet-id-1/values/Sub-Categories.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Sub-Categories'
+          cp './data/test-sheet-id-1/values/Offers.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Offers'
+          cp './data/test-sheet-id-1/values/Q&As.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Q&As'
+          echo "Downloading sheet data: done ✅"
+
+      - name: Deploy to Private-Staging
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          skip_deploy_on_missing_secrets: true
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_ROCK_069A8B403 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: 'upload'
+          config_file_location: '/staticwebapp.config_private.json'
+          app_location: 'www'
+          output_location: ''
+          skip_app_build: true
+          skip_api_build: true
+          deployment_environment: 'private'
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    environment: 'staging-faq'
+    steps:
+      - name: Close Pull Request for Staging
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_ROCK_069A8B403 }}
+          action: 'close'
+          deployment_environment: 'private'
