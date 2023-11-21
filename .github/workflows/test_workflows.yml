@@ -5,13 +5,13 @@ name: 'Test Workflows'
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
       - main
+    paths:
+      - .github/workflows/**.yml
+      - .env.example
 
 jobs:
   test:
