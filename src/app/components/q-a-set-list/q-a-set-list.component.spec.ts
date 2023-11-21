@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ngxMarkdownModuleFactory } from 'src/app/app.module';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import {
@@ -11,6 +10,7 @@ import {
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
+import { ngxMarkdownModuleFactory } from 'src/main';
 
 import { QASetListComponent } from './q-a-set-list.component';
 
@@ -73,20 +73,26 @@ describe('QASetListComponent', () => {
   }));
 
   it('should create', () => {
+    // Arrange
     const testList = mockList;
     component.list = testList;
 
+    // Act
     fixture.detectChanges();
 
+    // Assert
     expect(component).toBeTruthy();
   });
 
   it('should show a list of Q&As', () => {
+    // Arrange
     const testList = mockList;
     component.list = testList;
 
+    // Act
     fixture.detectChanges();
 
+    // Assert
     const listItems =
       fixture.nativeElement.querySelectorAll('ol[role=list] > li');
 
@@ -94,11 +100,14 @@ describe('QASetListComponent', () => {
   });
 
   it("should show links to the Q&As' (sub-)category", () => {
+    // Arrange
     const testList = [mockList[0]];
     component.list = testList;
 
+    // Act
     fixture.detectChanges();
 
+    // Assert
     const linkItems = fixture.nativeElement.querySelectorAll('a');
 
     expect(linkItems.length).toBe(2);
@@ -109,13 +118,16 @@ describe('QASetListComponent', () => {
   });
 
   it('should show the "last updated" date INSIDE the question, not OUTSIDE', () => {
+    // Arrange
     const testQASet = mockQASet1;
     testQASet.dateUpdated = testDate;
     component.list = [testQASet];
     component.showDateUpdatedOutsideQuestion = false;
 
+    // Act
     fixture.detectChanges();
 
+    // Assert
     const timeElementsInside =
       fixture.nativeElement.querySelectorAll('app-q-a-set time');
     const timeElementsOutside = fixture.nativeElement.querySelectorAll(
@@ -128,13 +140,16 @@ describe('QASetListComponent', () => {
   });
 
   it('should show the "last updated" date OUTSIDE the question, not INSIDE', () => {
+    // Arrange
     const testQASet = mockQASet1;
     testQASet.dateUpdated = testDate;
     component.list = [testQASet];
     component.showDateUpdatedOutsideQuestion = true;
 
+    // Act
     fixture.detectChanges();
 
+    // Assert
     const timeElementsInside =
       fixture.nativeElement.querySelectorAll('app-q-a-set time');
     const timeElementsOutside = fixture.nativeElement.querySelectorAll(

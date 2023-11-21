@@ -97,9 +97,8 @@ export class OffersService {
 
   public async getAllSubCategories(region: string): Promise<SubCategory[]> {
     if (this.needsCaching(CacheName.subCategories, region)) {
-      let subCategories = await this.spreadsheetService.getSubCategories(
-        region,
-      );
+      let subCategories =
+        await this.spreadsheetService.getSubCategories(region);
       subCategories = subCategories.map((subCategory: SubCategory) => {
         return SpreadsheetService.addParentCategoryDetails(
           subCategory,

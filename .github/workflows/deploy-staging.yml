@@ -45,7 +45,7 @@ jobs:
       - name: Install
         env:
           HUSKY: 0
-        run: 'npm ci --omit=optional --no-fund --no-audit'
+        run: 'npm ci --no-fund --no-audit'
 
       - name: Set/override favicon.ico
         run: 'cp --force src/favicon.green.ico src/favicon.ico'

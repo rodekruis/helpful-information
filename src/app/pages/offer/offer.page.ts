@@ -10,7 +10,6 @@ import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { getLegacyID } from 'src/app/shared/utils';
 
 @Component({
@@ -21,7 +20,6 @@ import { getLegacyID } from 'src/app/shared/utils';
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule,
     BreadcrumbsComponent,
     OfferComponent,
     LastUpdatedTimeComponent,

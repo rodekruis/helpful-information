@@ -12,6 +12,7 @@ A web-app _People Affected_ can use to lookup useful organizations and informati
 Latest releases and notable changes are in the [CHANGELOG](CHANGELOG.md).
 
 - [![Tests](https://github.com/rodekruis/helpful-information/actions/workflows/tests.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/tests.yml)
+- [![Workflows](https://github.com/rodekruis/helpful-information/actions/workflows/test_workflows.yml/badge.svg)](https://github.com/rodekruis/helpful-information/actions/workflows/test_workflows.yml)
 
 ---
 
@@ -120,11 +121,11 @@ Some specific information needs to be configured before use:
 As part of the installed dev-dependencies, we use [Prettier](https://prettier.io/) to format our code.  
 To use these settings without a local setup, use the [Prettier Playground](https://prettier.io/playground/#N4Igxg9gdgLgprEAuEAdK7UwAoEMDO8ABAJ4QCuATkWABa5QDmc+RAllETLXEQDZwAZjCIAHBnD5EGAExoRRJLjyIUYo8iMGUIAW2W9KbRrRHiokgHSYoIADQgFMNtHzJQuSjoDueSgjcUXD5vXBI3BwAjSlwwAGs4GABlXF04ABkOOGRBYPw4KJj4xKTxMA5GZBhKcgKQOF1IuBkZZvSGRnJcZgAxCEpdXBhnJmQQXE0IexBTXT4AdVo2eHwyuCSA5bYAN2WSMbB8CJAOfMocGMZBnLy6gCt8AA8kioEARXIIeBu+fIdxShnMaDShxGQQby2f5GWDzNgybjIAAcAAZoRB8vMYqIxqJ-GdttkHABHT7wbA6USBcb4AC0FmazWm-lJbH8FO61yQuV+dXyujYVRqfNecAAgsMjJFNHBsHBKJkLELag58KKPl9skhqiqQDBcJE4QjaMgAEwOaq4Nh8CoAYT0XPGfD403I+QAKgbAjy-iBtrUAJJQVqwJJgIyiGBi4NJGAkAQ-fIAXyTQA) in your browser.
 
-When installing locally, we use [husky](https://typicode.github.io/husky/#/?id=faq) to automate the formatting not handles by your editor when using Git-commands.
+When installing locally, we use [husky](https://typicode.github.io/husky/#/?id=faq) to automate the formatting and testing (when not already handled by your editor).
 
 ### Local API
 
-To use a local API, without the need for any Google account/credentials.
+To use a local API, without the need for any Google account/credentials:
 
 1. Update the local [`environment.ts`](src/environments/environment.ts)-file with:
 
@@ -161,14 +162,14 @@ During development, an automated watch-process can be run with:
 
 ### Libraries/frameworks in use
 
-- [Ionic v6](https://ionicframework.com/docs/v6/)
+- [Ionic v7](https://ionicframework.com/docs/)
   > ⚠️ The [`Ionicons`](https://ionic.io/ionicons) icon-set is NOT included in the final build, so cannot be used 'by default'. Icons can be added manually.
-- [Angular v16](https://v16.angular.io/docs/)
+- [Angular v17](https://v17.angular.io/docs/)
 - [`ngx-markdown`](https://www.npmjs.com/package/ngx-markdown) is used to process Markdown-content into HTML. _No_ optional dependencies are included/used.
 
 ### Updating dependencies
 
-Most (development-)dependencies in this repository are monitored by the GitHub [Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/about-dependabot-version-updates) service, too keep them up-to-date.  
+Most (development-)dependencies in this repository are monitored by the GitHub [Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/about-dependabot-version-updates) service, to keep them up-to-date.  
 Unfortunately most individual dependencies are 'linked' to related dependencies that need to stay 'in sync'.
 
 To update all Angular and ESLint related dependencies, run:
@@ -223,6 +224,8 @@ classDiagram
   class Offer {
     int offerId
     slug
+    int subCategoryID
+    int categoryID
     bool isVisible
     offerName
     icon
