@@ -11,6 +11,7 @@ on:
 
 jobs:
   build_and_deploy:
+    environment: 'staging-faq'
     if: >
       github.event_name == 'workflow_dispatch' ||
       (
@@ -21,7 +22,6 @@ jobs:
       )
     runs-on: ubuntu-latest
     name: Build and Deploy
-    environment: 'staging-faq'
     steps:
       - uses: actions/checkout@v4
 
