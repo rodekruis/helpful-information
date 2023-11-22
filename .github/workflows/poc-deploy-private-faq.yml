@@ -6,12 +6,21 @@ name: 'POC: Private FAQ [staging]'
 
 on:
   workflow_dispatch:
+  issue_comment:
+    types: [created]
 
 jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+  build_and_deploy:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.event_name == 'issue_comment' &&
+        github.event.issue.number == vars.GHA_DEPLOY_TRIGGER_ISSUE &&
+        contains(github.event.issue.assignees.*.login, github.event.comment.user.login) &&
+        github.event.comment.body == '/update private-faq'
+      )
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    name: Build and Deploy
     environment: 'staging-faq'
     steps:
       - uses: actions/checkout@v4
@@ -40,12 +49,16 @@ jobs:
           NG_USE_Q_AND_AS: 'true'
           NG_USE_Q_AND_A_SEARCH: 'true'
           TXT_APP_NAME: 'Private FAQ'
-          TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
+          TXT_APP_LOGO_URL: ''
           TXT_MAIN_PAGE_HEADER: 'Private PoC'
           TXT_MAIN_PAGE_INTRO: >-
-            Private FAQ only:\n
+            Private FAQ only!\n
             \n
-            `[ 🚧 = development ]`\n
+            <a href="/.auth/login/github" class="action"><strong>🔐 Login (with GitHub)</strong></a>\n
+            <a href="/.auth/login/aad" class="action"><strong>🔐 Login (Microsoft-account)</strong></a>\n
+            \n
+            <a href="/logout" class="action"><strong>🔓 Logout</strong></a>\n
+            \n
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
@@ -57,20 +70,21 @@ jobs:
           REGIONS_SHEET_IDS: >-
             1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII,
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
-          GOOGLE_SHEETS_API_URL: '/data/'
+          GOOGLE_SHEETS_API_URL: '/data'
           AI_CONNECTION_STRING: ''
 
       - name: Set/override robots.txt
         run: 'cp src/robots.private.txt www/robots.txt'
 
+      - name: Install Google Sheets API SDK
+        run: 'npm install googleapis@^128.0.0 --no-save'
+
       - name: Download sheet data
+        env:
+          GOOGLE_SHEETS_API_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SHEETS_API_SERVICE_ACCOUNT }}
         run: |
           echo "Downloading sheet data..."
-          cp './data/test-sheet-id-1/values/Referral Page.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Referral Page'
-          cp './data/test-sheet-id-1/values/Categories.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Categories'
-          cp './data/test-sheet-id-1/values/Sub-Categories.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Sub-Categories'
-          cp './data/test-sheet-id-1/values/Offers.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Offers'
-          cp './data/test-sheet-id-1/values/Q&As.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Q&As'
+          node ./.azure/local-data/download-google-sheets.js 1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII
           echo "Downloading sheet data: done ✅"
 
       - name: Deploy to Private-Staging
@@ -80,22 +94,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_ROCK_069A8B403 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: 'upload'
-          config_file_location: '/staticwebapp.config_private.json'
+          config_file_location: '.azure/local-data/'
           app_location: 'www'
           output_location: ''
           skip_app_build: true
           skip_api_build: true
-          deployment_environment: 'private'
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    environment: 'staging-faq'
-    steps:
-      - name: Close Pull Request for Staging
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_ROCK_069A8B403 }}
-          action: 'close'
           deployment_environment: 'private'
