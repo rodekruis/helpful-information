@@ -67,14 +67,15 @@ jobs:
       - name: Set/override robots.txt
         run: 'cp src/robots.private.txt www/robots.txt'
 
+      - name: Install Google Sheets API SDK
+        run: 'npm install googleapis@^128.0.0 --no-save'
+
       - name: Download sheet data
+        env:
+          GOOGLE_SHEETS_API_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SHEETS_API_SERVICE_ACCOUNT }}
         run: |
           echo "Downloading sheet data..."
-          cp './data/test-sheet-id-1/values/Referral Page.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Referral Page'
-          cp './data/test-sheet-id-1/values/Categories.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Categories'
-          cp './data/test-sheet-id-1/values/Sub-Categories.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Sub-Categories'
-          cp './data/test-sheet-id-1/values/Offers.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Offers'
-          cp './data/test-sheet-id-1/values/Q&As.json' './www/data/1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII/Q&As'
+          node ./.azure/local-data/download-google-sheets.js 1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII
           echo "Downloading sheet data: done ✅"
 
       - name: Deploy to Private-Staging

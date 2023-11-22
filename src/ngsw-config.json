@@ -36,7 +36,18 @@
         "maxAge": "7d",
         "timeout": "8s"
       },
-      "urls": ["https://sheets.googleapis.com/v4/spreadsheets/*"]
+      "urls": ["https://sheets.googleapis.com/v4/spreadsheets/**"]
+    },
+    {
+      "name": "localSheetsData",
+      "version": 1,
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 0,
+        "maxAge": "1u",
+        "timeout": "1u"
+      },
+      "urls": ["/data/**"]
     }
   ],
   "navigationUrls": ["/**", "!/**/*.*", "!/login", "!/logout", "!/.auth/**"]

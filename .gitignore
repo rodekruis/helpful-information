@@ -17,3 +17,6 @@ coverage
 
 # Third party code
 node_modules
+
+# Sensitive data
+.credentials.json
