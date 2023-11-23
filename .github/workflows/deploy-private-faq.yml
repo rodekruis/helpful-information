@@ -95,7 +95,7 @@ jobs:
           REGIONS_SHEET_IDS: >-
             1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII,
           GOOGLE_SHEETS_API_URL: '/data'
-          AI_CONNECTION_STRING: ''
+          AI_CONNECTION_STRING: 'InstrumentationKey=92c7559a-1554-4e7b-b86c-afe18c15b64c;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/'
 
       - name: Set/override robots.txt
         run: 'cp src/robots.private.txt www/robots.txt'
