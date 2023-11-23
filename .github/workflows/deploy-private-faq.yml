@@ -12,6 +12,7 @@ on:
     paths:
       - '!.github/**'
       - '.github/workflows/deploy-private-faq.yml'
+      - '.azure/local-data/**'
       - '*'
       - '!*.md'
       - 'src/**'
@@ -22,6 +23,7 @@ on:
     paths:
       - '!.github/**'
       - '.github/workflows/deploy-private-faq.yml'
+      - '.azure/local-data/**'
       - '*'
       - '!*.md'
       - 'src/**'
