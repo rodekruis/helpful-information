@@ -71,16 +71,15 @@ jobs:
           NG_USE_OFFERS: 'true'
           NG_USE_Q_AND_AS: 'true'
           NG_USE_Q_AND_A_SEARCH: 'true'
-          TXT_APP_NAME: 'Aidworker Only FAQ'
+          TXT_APP_NAME: 'Aidworker FAQ'
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
           TXT_MAIN_PAGE_HEADER: 'Hello Aidworker!'
           TXT_MAIN_PAGE_INTRO: >-
             This website contains internal FAQs only.\n
             \n
             To view the public FAQ, visit:\n
-            <https://helpfulinformation-faq.redcross.nl/>\n
+            <https://helpfulinformation-faq.redcross.nl/>  \n
             \n
-            <a href="/.auth/login/github" class="action"><strong>🔐 Login (with GitHub)</strong></a>\n
             <a href="/login" class="action"><strong>🔐 Login</strong></a>\n
             \n
             When on a public device, you can: [**Logout**](/logout)\n
