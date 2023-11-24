@@ -14,3 +14,9 @@
 .app-header--logo {
   object-fit: contain;
 }
+
+@media print {
+  ion-toolbar {
+    border-bottom: 1px dashed var(--print-text);
+  }
+}

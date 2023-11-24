@@ -152,6 +152,7 @@ describe('QASetComponent', () => {
       expect(link.rel).toContain('external');
       expect(link.rel).toContain('noreferrer');
       expect(link.rel).toContain('noopener');
+      expect(link.rel).toContain('x-plain-url');
     });
 
     expect(linkElements[0].href).toContain('http://www.example.org/');
@@ -184,6 +185,7 @@ describe('QASetComponent', () => {
       expect(link.rel).toContain('external');
       expect(link.rel).toContain('noreferrer');
       expect(link.rel).toContain('noopener');
+      expect(link.rel).not.toContain('x-plain-url');
     });
   }));
 
@@ -209,11 +211,18 @@ describe('QASetComponent', () => {
 
     expect(linkElements[0].rel).toBe('');
     expect(linkElements[0].target).toBe('');
+    expect(linkElements[0].rel).not.toContain('x-plain-url');
+
     expect(linkElements[1].rel).toBe('');
     expect(linkElements[1].target).toBe('');
+    expect(linkElements[1].rel).not.toContain('x-plain-url');
+
     expect(linkElements[2].rel).toContain('external');
+    expect(linkElements[2].rel).not.toContain('x-plain-url');
     expect(linkElements[2].target).toBe('_blank');
+
     expect(linkElements[3].rel).toContain('external');
+    expect(linkElements[3].rel).not.toContain('x-plain-url');
     expect(linkElements[3].target).toBe('_blank');
   }));
 });

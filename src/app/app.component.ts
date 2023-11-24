@@ -23,6 +23,7 @@ export class AppComponent {
     private swUpdates: SwUpdate,
   ) {
     this.setUpExternalLinkTracking();
+    this.setUpPrintTracking();
 
     this.handleServiceWorkerUpdates();
     this.handleServiceWorkerErrors();
@@ -66,6 +67,16 @@ export class AppComponent {
         passive: true,
       },
     );
+  }
+
+  private setUpPrintTracking(): boolean | void {
+    window.addEventListener('beforeprint', () => {
+      this.loggingService.logEvent(
+        LoggingEventCategory.ai,
+        LoggingEvent.Print,
+        {},
+      );
+    });
   }
 
   private handleServiceWorkerUpdates(): void {

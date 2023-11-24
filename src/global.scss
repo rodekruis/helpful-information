@@ -10,6 +10,9 @@
 // @import '~@ionic/angular/css/text-transformation.css';
 // @import '~@ionic/angular/css/flex-utils.css';
 
+// Baseline Print styles
+@import '_print.scss';
+
 // Custom Fonts
 @font-face {
   font-family: 'Open Sans';
@@ -38,6 +41,55 @@
   font-weight: bold;
   font-style: normal;
   font-display: optional;
+}
+
+// Enable Dynamic Font Scaling
+// See: https://ionicframework.com/docs/layout/dynamic-font-scaling
+// From: '~@ionic/angular/css/typography.css';
+html {
+  --ion-dynamic-font: var(--ion-default-dynamic-font);
+
+  font-family: var(--ion-font-family);
+}
+// Enable Dynamic Type (iOS only)
+@supports (-webkit-touch-callout: none) {
+  html {
+    font: var(--ion-dynamic-font, 16px var(--ion-font-family));
+  }
+}
+
+//
+@media print {
+  :root {
+    --print-text: #000;
+    --print-background: #fff;
+
+    --color: var(--print-text);
+    --ion-text-color: var(--print-text);
+
+    --background-color: var(--print-background);
+    --ion-color-base: var(--print-background);
+    --ion-background-color: var(--print-background);
+  }
+  *,
+  *::before,
+  *::after {
+    background: var(--print-background) none !important;
+    color: var(--print-text);
+  }
+
+  // Flatten the 'app'-shell to a regular page
+  ion-content::part(scroll),
+  html,
+  body,
+  ion-router-outlet,
+  .ion-page {
+    position: relative;
+    overflow-y: visible;
+    contain: none;
+
+    background: var(--print-background) none;
+  }
 }
 
 //
@@ -128,6 +180,10 @@ img[decoding='async'] {
 // Floating Action Button (bottom-end)
 .floating-action-area {
   position: fixed;
+
+  @media print {
+    display: none;
+  }
 
   &.is_in-page {
     position: relative;
@@ -265,6 +321,16 @@ img[decoding='async'] {
   border-radius: 0.25rem;
   text-decoration: none;
 
+  @media print {
+    --action--color: #333;
+    --action--color-active: #000;
+    --action--background-color: #fff;
+    --action--background-color-active: #fff;
+
+    border: 0.05em solid #ccc;
+    font-weight: bold;
+  }
+
   &,
   &:link,
   &:visited {
@@ -293,6 +359,9 @@ img[decoding='async'] {
     &:focus {
       outline-color: gold;
     }
+    @media print {
+      border: 0.1em dashed #000;
+    }
   }
 
   &.is_inline {
@@ -317,6 +386,15 @@ img[decoding='async'] {
   --action--color-active: #fff;
   --action--background-color: #1f3958;
   --action--background-color-active: #3a4f6a;
+
+  @media print {
+    --action--color: #333;
+    --action--color-active: #000;
+    --action--background-color: #fff;
+    --action--background-color-active: #fff;
+
+    border: 0.05em solid #ccc;
+  }
 }
 
 .sheet--button {
@@ -451,6 +529,12 @@ img[decoding='async'] {
   th,
   td {
     padding: 0.25em;
+  }
+
+  @media print {
+    a[href]:not([rel~='x-plain-url'])::after {
+      content: ' (' attr(href) ')';
+    }
   }
 }
 
