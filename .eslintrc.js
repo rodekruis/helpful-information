@@ -30,6 +30,9 @@ module.exports = {
         'prettier',
       ],
       rules: {
+        'no-extra-boolean-cast': ['error'],
+        'no-var': ['error'],
+        'prefer-const': ['error'],
         '@angular-eslint/directive-selector': [
           'error',
           {

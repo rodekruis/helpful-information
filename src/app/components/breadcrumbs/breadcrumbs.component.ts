@@ -42,7 +42,7 @@ export class BreadcrumbsComponent {
     }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
-      !!subCategorySlug
+      subCategorySlug
         ? LoggingEvent.BreadcrumbSubCategory
         : LoggingEvent.BreadcrumbCategory,
       {

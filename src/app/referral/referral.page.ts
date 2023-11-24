@@ -155,7 +155,7 @@ export class ReferralPageComponent implements OnInit {
   }
 
   public getNotificationContent(): string {
-    if (!!this.regionData.pageNotification) {
+    if (this.regionData.pageNotification) {
       return this.regionData.pageNotification;
     }
     return environment.mainPageNotification;
@@ -272,7 +272,7 @@ export class ReferralPageComponent implements OnInit {
         queryParamsHandling: 'merge',
         queryParams: {
           search: null,
-          q: !!queryParams.q ? queryParams.q : null,
+          q: queryParams.q ? queryParams.q : null,
         },
       });
     }
@@ -282,16 +282,16 @@ export class ReferralPageComponent implements OnInit {
       !!queryParams.offerID
     ) {
       let upgradedUrl = this.getRegionHref();
-      if (!!queryParams.categoryID) {
+      if (queryParams.categoryID) {
         upgradedUrl +=
           '/' + createSlug('', queryParams.categoryID, SlugPrefix.category);
       }
-      if (!!queryParams.subCategoryID) {
+      if (queryParams.subCategoryID) {
         upgradedUrl +=
           '/' +
           createSlug('', queryParams.subCategoryID, SlugPrefix.subCategory);
       }
-      if (!!queryParams.offerID) {
+      if (queryParams.offerID) {
         upgradedUrl +=
           '/' + createSlug('', queryParams.offerID, SlugPrefix.offer);
       }

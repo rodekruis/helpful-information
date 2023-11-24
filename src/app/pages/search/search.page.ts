@@ -76,9 +76,9 @@ export default class SearchPageComponent implements OnInit {
   }
 
   private handleQueryParams(params: Params) {
-    this.searchQuery = !!params.q ? params.q : '';
+    this.searchQuery = params.q ? params.q : '';
 
-    if (!!params.q) {
+    if (params.q) {
       this.performSearch(params.q);
     }
   }

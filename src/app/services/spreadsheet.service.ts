@@ -84,7 +84,7 @@ export class SpreadsheetService {
   }
 
   private createKeyMap(keys: string[], collection: string[]): KeyMap {
-    let keyMap: KeyMap = new Map();
+    const keyMap: KeyMap = new Map();
     keys.forEach((keyName: string) => {
       keyMap.set(keyName, this.getIndexOfTag(collection, keyName));
     });
@@ -587,7 +587,7 @@ export class SpreadsheetService {
     fallbackIndex: number = -1,
     fallbackValue?: RegionDataFallback,
   ): string {
-    let value = SpreadsheetService.readCellValue(
+    const value = SpreadsheetService.readCellValue(
       baseData.rows[
         this.getIndexOrFallback(baseData.rowMap.get(key), fallbackIndex)
       ],

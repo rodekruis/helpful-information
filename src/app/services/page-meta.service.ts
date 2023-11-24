@@ -34,19 +34,19 @@ export class PageMetaService {
   }) {
     let title = '';
 
-    if (!!parts.offerName) {
+    if (parts.offerName) {
       title += parts.offerName + ' - ';
     }
 
-    if (!!parts.subCategoryName) {
+    if (parts.subCategoryName) {
       title += parts.subCategoryName + ' - ';
     }
 
-    if (!!parts.categoryName) {
+    if (parts.categoryName) {
       title += parts.categoryName + ' - ';
     }
 
-    if (!!parts.region) {
+    if (parts.region) {
       title += parts.region;
     }
 
@@ -54,11 +54,11 @@ export class PageMetaService {
       title += this.regionData?.data?.pageTitle || '';
     }
 
-    if (!!parts.override) {
+    if (parts.override) {
       title = parts.override;
     }
 
-    if (!!environment.envName) {
+    if (environment.envName) {
       title += ` [ ${environment.envName} ]`;
     }
 
@@ -74,20 +74,20 @@ export class PageMetaService {
   }): void {
     let canonicalUrl = '';
 
-    if (!!parts.region) {
+    if (parts.region) {
       canonicalUrl += parts.region;
     }
-    if (!!parts.categorySlug) {
+    if (parts.categorySlug) {
       canonicalUrl += '/' + parts.categorySlug;
     }
-    if (!!parts.subCategorySlug) {
+    if (parts.subCategorySlug) {
       canonicalUrl += '/' + parts.subCategorySlug;
     }
-    if (!!parts.offerSlug) {
+    if (parts.offerSlug) {
       canonicalUrl += '/' + parts.offerSlug;
     }
 
-    if (!!parts.override) {
+    if (parts.override) {
       canonicalUrl = parts.override;
     }
 
