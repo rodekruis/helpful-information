@@ -256,8 +256,9 @@ img[decoding='async'] {
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   line-height: 1.4;
-  max-height: calc(5 * 1.4em + 0.5em);
+  max-height: calc(5 * 1.4em);
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 .text-style--inline-link:visited,
 .text-style--inline-link:link,
