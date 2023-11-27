@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import type { Params } from '@angular/router';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
@@ -26,8 +26,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./sub-category.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    RouterModule,
+    NgIf,
+    NgFor,
+    RouterLink,
     BreadcrumbsComponent,
     OfferLinkComponent,
     QASetComponent,

@@ -1,6 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -13,7 +12,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './sub-category-link.component.html',
   styleUrls: ['./sub-category-link.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterLink],
 })
 export class SubCategoryLinkComponent {
   @Input()

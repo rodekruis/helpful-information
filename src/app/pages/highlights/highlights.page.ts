@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { QASet } from 'src/app/models/qa-set.model';
 import { RegionData } from 'src/app/models/region-data';
@@ -15,7 +15,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   templateUrl: './highlights.page.html',
   styleUrls: ['./highlights.page.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, QASetListComponent],
+  imports: [NgIf, QASetListComponent, RouterLink],
 })
 export default class HighlightsPageComponent implements OnInit {
   private region: string;

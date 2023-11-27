@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { CategoryLinkComponent } from 'src/app/components/category-link/category-link.component';
 import { Category } from 'src/app/models/category.model';
@@ -19,7 +19,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './region.page.html',
   styleUrls: ['./region.page.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, CategoryLinkComponent, MarkdownModule],
+  imports: [NgIf, NgFor, RouterLink, CategoryLinkComponent, MarkdownModule],
 })
 export default class RegionPageComponent implements OnInit {
   public useQandAs = environment.useQandAs;

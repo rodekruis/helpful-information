@@ -1,8 +1,7 @@
-import { CommonModule } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import type { Params } from '@angular/router';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferComponent } from 'src/app/components/offer/offer.component';
@@ -19,13 +18,7 @@ import { getLegacyID } from 'src/app/shared/utils';
   templateUrl: './offer.page.html',
   styleUrls: ['./offer.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    BreadcrumbsComponent,
-    OfferComponent,
-    LastUpdatedTimeComponent,
-  ],
+  imports: [BreadcrumbsComponent, OfferComponent, LastUpdatedTimeComponent],
 })
 export default class OfferPageComponent implements OnInit {
   public region: string;

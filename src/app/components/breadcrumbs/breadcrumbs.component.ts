@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -14,7 +14,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
   standalone: true,
-  imports: [RouterModule, NgIf],
+  imports: [NgIf, RouterLink],
 })
 export class BreadcrumbsComponent {
   @Input()
