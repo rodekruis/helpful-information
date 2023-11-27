@@ -1,4 +1,4 @@
-export class Offer {
+export type Offer = {
   offerID: number;
   slug?: string;
   offerIcon: string;
@@ -19,7 +19,7 @@ export class Offer {
   categorySlug?: string;
   categoryName?: string;
   moreInfo?: string;
-}
+};
 
 // These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
 // For example: "Phone-number(s) (1 digits-only number per line) #PHONENUMBERS"

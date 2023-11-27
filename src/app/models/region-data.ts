@@ -1,4 +1,4 @@
-export class RegionData {
+export type RegionData = {
   contactPhoneNumber?: string;
   contactTelegramLink?: string;
   contactWhatsAppLink?: string;
@@ -27,7 +27,7 @@ export class RegionData {
   pageLogo?: string;
   pageNotification?: string;
   pageTitle?: string;
-}
+};
 
 // These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
 export enum RegionCol {
