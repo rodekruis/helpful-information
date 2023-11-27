@@ -113,6 +113,15 @@ ion-content.ion-padding {
   --padding-bottom: 25vh;
 }
 
+// Prevent scrolling-area from becommnig too small
+@media screen and (orientation: landscape) and (max-height: 30em) {
+  ion-header,
+  ion-footer {
+    max-height: 20vh;
+    overflow: auto;
+  }
+}
+
 // Improve rendering performance (possibly) by lowering priority of images:
 img[decoding='async'] {
   content-visibility: auto;
