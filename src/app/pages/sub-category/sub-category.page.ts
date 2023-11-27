@@ -8,11 +8,11 @@ import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferLinkComponent } from 'src/app/components/offer-link/offer-link.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
-import { Category } from 'src/app/models/category.model';
-import { Offer } from 'src/app/models/offer.model';
-import { QASet } from 'src/app/models/qa-set.model';
+import type { Category } from 'src/app/models/category.model';
+import type { Offer } from 'src/app/models/offer.model';
+import type { QASet } from 'src/app/models/qa-set.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
-import { SubCategory } from 'src/app/models/sub-category.model';
+import type { SubCategory } from 'src/app/models/sub-category.model';
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
 import { OffersService } from 'src/app/services/offers.service';

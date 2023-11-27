@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { QASet } from 'src/app/models/qa-set.model';
+import type { QASet } from 'src/app/models/qa-set.model';
 
 @Injectable({
   providedIn: 'root',

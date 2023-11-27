@@ -1,4 +1,4 @@
-import { Offer } from 'src/app/models/offer.model';
+import type { Offer } from 'src/app/models/offer.model';
 
 export default {
   offerID: 1,

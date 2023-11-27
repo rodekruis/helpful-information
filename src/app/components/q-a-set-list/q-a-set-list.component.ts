@@ -2,7 +2,7 @@ import { DatePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
-import { QASet } from 'src/app/models/qa-set.model';
+import type { QASet } from 'src/app/models/qa-set.model';
 import { RegionDataService } from 'src/app/services/region-data.service';
 
 @Component({

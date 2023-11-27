@@ -7,8 +7,8 @@ import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { Offer } from 'src/app/models/offer.model';
-import { RegionData } from 'src/app/models/region-data';
+import type { Offer } from 'src/app/models/offer.model';
+import type { RegionData } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { formatPhoneNumberAsUrl } from 'src/app/shared/utils';
 

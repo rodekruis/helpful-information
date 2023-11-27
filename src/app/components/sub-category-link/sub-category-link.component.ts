@@ -4,7 +4,7 @@ import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { SubCategory } from 'src/app/models/sub-category.model';
+import type { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({

@@ -5,7 +5,7 @@ import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { QASet } from 'src/app/models/qa-set.model';
+import type { QASet } from 'src/app/models/qa-set.model';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 

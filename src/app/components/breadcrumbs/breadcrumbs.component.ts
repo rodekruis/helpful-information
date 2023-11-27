@@ -5,8 +5,8 @@ import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { Offer } from 'src/app/models/offer.model';
-import { QASet } from 'src/app/models/qa-set.model';
+import type { Offer } from 'src/app/models/offer.model';
+import type { QASet } from 'src/app/models/qa-set.model';
 import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({

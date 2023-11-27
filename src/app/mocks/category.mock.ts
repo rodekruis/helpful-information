@@ -1,4 +1,4 @@
-import { Category } from 'src/app/models/category.model';
+import type { Category } from 'src/app/models/category.model';
 
 export default {
   categoryID: 1,

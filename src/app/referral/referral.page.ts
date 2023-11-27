@@ -11,16 +11,16 @@ import {
 import { IonContent, IonFooter, IonHeader } from '@ionic/angular/standalone';
 import { MarkdownComponent } from 'ngx-markdown';
 import { AppHeaderComponent } from 'src/app/components/header/header.component';
-import { Category } from 'src/app/models/category.model';
+import type { Category } from 'src/app/models/category.model';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { Offer } from 'src/app/models/offer.model';
-import { QASet } from 'src/app/models/qa-set.model';
-import { RegionData } from 'src/app/models/region-data';
+import type { Offer } from 'src/app/models/offer.model';
+import type { QASet } from 'src/app/models/qa-set.model';
+import type { RegionData } from 'src/app/models/region-data';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
-import { SubCategory } from 'src/app/models/sub-category.model';
+import type { SubCategory } from 'src/app/models/sub-category.model';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
