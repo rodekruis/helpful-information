@@ -1,5 +1,6 @@
 const restrictedGlobals = require('confusing-browser-globals');
 
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
   ignorePatterns: ['projects/**/*', 'coverage', 'www'],
