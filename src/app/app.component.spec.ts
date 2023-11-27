@@ -8,9 +8,9 @@ describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
+        AppComponent,
         RouterTestingModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
-        AppComponent,
       ],
       providers: [LoggingService, SwUpdate],
     }).compileComponents();
