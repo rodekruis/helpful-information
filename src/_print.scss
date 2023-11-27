@@ -26,6 +26,7 @@
     page-break-inside: avoid;
   }
 
+  details,
   tr,
   img {
     page-break-inside: avoid;
@@ -38,6 +39,7 @@
     widows: 3;
   }
 
+  summary,
   h2,
   h3 {
     page-break-after: avoid;
