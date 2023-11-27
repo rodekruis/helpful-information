@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { IonicModule } from '@ionic/angular';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [IonicModule, NgIf],
+  imports: [NgIf, IonApp, IonRouterOutlet],
 })
 export class AppComponent {
   public envName: string = environment.envName;
@@ -23,6 +23,7 @@ export class AppComponent {
     private swUpdates: SwUpdate,
   ) {
     this.setUpExternalLinkTracking();
+    this.setUpPrintTracking();
 
     this.handleServiceWorkerUpdates();
     this.handleServiceWorkerErrors();
@@ -66,6 +67,16 @@ export class AppComponent {
         passive: true,
       },
     );
+  }
+
+  private setUpPrintTracking(): boolean | void {
+    window.addEventListener('beforeprint', () => {
+      this.loggingService.logEvent(
+        LoggingEventCategory.ai,
+        LoggingEvent.Print,
+        {},
+      );
+    });
   }
 
   private handleServiceWorkerUpdates(): void {

@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Category, CategoryCol } from 'src/app/models/category.model';
+import type { Category } from 'src/app/models/category.model';
+import { CategoryCol } from 'src/app/models/category.model';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { Offer, OfferCol } from 'src/app/models/offer.model';
+import type { Offer } from 'src/app/models/offer.model';
+import { OfferCol } from 'src/app/models/offer.model';
 import { QACol, QASet } from 'src/app/models/qa-set.model';
+import type { RegionData } from 'src/app/models/region-data';
 import {
   RegionCol,
-  RegionData,
   RegionDataFallback,
   RegionDataKey,
 } from 'src/app/models/region-data';
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
-import { SubCategory, SubCategoryCol } from 'src/app/models/sub-category.model';
+import type { SubCategory } from 'src/app/models/sub-category.model';
+import { SubCategoryCol } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 import {
   createSlug,
@@ -84,7 +87,7 @@ export class SpreadsheetService {
   }
 
   private createKeyMap(keys: string[], collection: string[]): KeyMap {
-    let keyMap: KeyMap = new Map();
+    const keyMap: KeyMap = new Map();
     keys.forEach((keyName: string) => {
       keyMap.set(keyName, this.getIndexOfTag(collection, keyName));
     });
@@ -587,7 +590,7 @@ export class SpreadsheetService {
     fallbackIndex: number = -1,
     fallbackValue?: RegionDataFallback,
   ): string {
-    let value = SpreadsheetService.readCellValue(
+    const value = SpreadsheetService.readCellValue(
       baseData.rows[
         this.getIndexOrFallback(baseData.rowMap.get(key), fallbackIndex)
       ],
@@ -641,7 +644,7 @@ export class SpreadsheetService {
         if (this.loggingService) {
           this.loggingService.logException(error, SeverityLevel.Critical);
         }
-        return new RegionData();
+        return {};
       });
   }
 

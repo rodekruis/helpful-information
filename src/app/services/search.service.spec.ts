@@ -3,7 +3,7 @@ import {
   mockQASet1,
   mockQASet2with1SubQuestion,
 } from 'src/app/mocks/q-a-set.mock';
-import { QASet } from 'src/app/models/qa-set.model';
+import type { QASet } from 'src/app/models/qa-set.model';
 
 import { SearchService } from './search.service';
 

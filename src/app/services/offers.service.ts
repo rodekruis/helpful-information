@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Category } from 'src/app/models/category.model';
+import type { Category } from 'src/app/models/category.model';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { Offer } from 'src/app/models/offer.model';
-import { QASet } from 'src/app/models/qa-set.model';
-import { SubCategory } from 'src/app/models/sub-category.model';
+import type { Offer } from 'src/app/models/offer.model';
+import type { QASet } from 'src/app/models/qa-set.model';
+import type { SubCategory } from 'src/app/models/sub-category.model';
 
 import { LoggingService } from './logging.service';
 import { SpreadsheetService } from './spreadsheet.service';

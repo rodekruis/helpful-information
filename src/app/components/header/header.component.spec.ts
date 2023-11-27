@@ -7,16 +7,12 @@ describe('AppHeaderComponent', () => {
   let fixture: ComponentFixture<AppHeaderComponent>;
 
   beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [AppHeaderComponent],
-    }).compileComponents();
-  }));
+    TestBed.configureTestingModule({}).compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(AppHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -1,13 +1,12 @@
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { Offer } from 'src/app/models/offer.model';
-import { QASet } from 'src/app/models/qa-set.model';
+import type { Offer } from 'src/app/models/offer.model';
+import type { QASet } from 'src/app/models/qa-set.model';
 import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
@@ -15,7 +14,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule],
+  imports: [NgIf, RouterLink],
 })
 export class BreadcrumbsComponent {
   @Input()
@@ -42,7 +41,7 @@ export class BreadcrumbsComponent {
     }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
-      !!subCategorySlug
+      subCategorySlug
         ? LoggingEvent.BreadcrumbSubCategory
         : LoggingEvent.BreadcrumbCategory,
       {

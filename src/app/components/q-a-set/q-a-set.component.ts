@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+import { DatePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { QASet } from 'src/app/models/qa-set.model';
+import type { QASet } from 'src/app/models/qa-set.model';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 
@@ -14,7 +14,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   templateUrl: './q-a-set.component.html',
   styleUrls: ['./q-a-set.component.scss'],
   standalone: true,
-  imports: [CommonModule, MarkdownModule],
+  imports: [NgIf, NgFor, DatePipe, NgTemplateOutlet, MarkdownModule],
 })
 export class QASetComponent {
   @Input()

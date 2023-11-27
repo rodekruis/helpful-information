@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
+import { NgIf, SlicePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { RouterLink } from '@angular/router';
+import { IonImg } from '@ionic/angular/standalone';
 import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { Offer } from 'src/app/models/offer.model';
+import type { Offer } from 'src/app/models/offer.model';
 import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './offer-link.component.html',
   styleUrls: ['./offer-link.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule, MarkdownModule],
+  imports: [MarkdownModule, IonImg, RouterLink, NgIf, SlicePipe],
 })
 export class OfferLinkComponent {
   @Input()

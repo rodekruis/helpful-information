@@ -1,11 +1,13 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgFor, NgIf } from '@angular/common';
+import type { OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import type { Params } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { SubCategoryLinkComponent } from 'src/app/components/sub-category-link/sub-category-link.component';
-import { Category } from 'src/app/models/category.model';
+import type { Category } from 'src/app/models/category.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
-import { SubCategory } from 'src/app/models/sub-category.model';
+import type { SubCategory } from 'src/app/models/sub-category.model';
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
@@ -17,7 +19,8 @@ import { getLegacyID } from 'src/app/shared/utils';
   styleUrls: ['./category.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
+    NgIf,
+    NgFor,
     SubCategoryLinkComponent,
     CategoryFilterPipe,
     MarkdownModule,

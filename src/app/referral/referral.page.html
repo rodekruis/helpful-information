@@ -163,7 +163,10 @@
     </span>
   </div>
 </ion-content>
-<ion-footer *ngIf="!!getNotificationContent()">
+<ion-footer
+  *ngIf="!!getNotificationContent()"
+  class="no-print"
+>
   <div class="notification-bar ion-padding">
     <div
       markdown

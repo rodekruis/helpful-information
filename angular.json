@@ -133,8 +133,7 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "./assets"
-              },
-              "src/manifest.json"
+              }
             ],
             "codeCoverage": true,
             "watch": true,

@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
@@ -8,7 +8,7 @@ import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.servi
   templateUrl: './last-updated-time.component.html',
   styleUrls: ['./last-updated-time.component.scss'],
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [NgIf, DatePipe],
 })
 export class LastUpdatedTimeComponent {
   @Input()

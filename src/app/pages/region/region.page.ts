@@ -1,12 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, RouterModule } from '@angular/router';
+import { NgFor, NgIf } from '@angular/common';
+import type { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { Params } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { CategoryLinkComponent } from 'src/app/components/category-link/category-link.component';
-import { Category } from 'src/app/models/category.model';
-import { QASet } from 'src/app/models/qa-set.model';
-import { RegionData } from 'src/app/models/region-data';
-import { SubCategory } from 'src/app/models/sub-category.model';
+import type { Category } from 'src/app/models/category.model';
+import type { QASet } from 'src/app/models/qa-set.model';
+import type { RegionData } from 'src/app/models/region-data';
+import type { SubCategory } from 'src/app/models/sub-category.model';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
@@ -17,7 +19,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './region.page.html',
   styleUrls: ['./region.page.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, CategoryLinkComponent, MarkdownModule],
+  imports: [NgIf, NgFor, RouterLink, CategoryLinkComponent, MarkdownModule],
 })
 export default class RegionPageComponent implements OnInit {
   public useQandAs = environment.useQandAs;

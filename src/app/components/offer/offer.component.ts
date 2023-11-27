@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { RouterLink } from '@angular/router';
+import { IonImg } from '@ionic/angular/standalone';
 import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { Offer } from 'src/app/models/offer.model';
-import { RegionData } from 'src/app/models/region-data';
+import type { Offer } from 'src/app/models/offer.model';
+import type { RegionData } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { formatPhoneNumberAsUrl } from 'src/app/shared/utils';
 
@@ -17,7 +17,7 @@ import { formatPhoneNumberAsUrl } from 'src/app/shared/utils';
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule, MarkdownModule],
+  imports: [MarkdownModule, IonImg, NgIf, NgFor, RouterLink],
 })
 export class OfferComponent {
   @Input()

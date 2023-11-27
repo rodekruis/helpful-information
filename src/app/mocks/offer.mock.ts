@@ -1,8 +1,9 @@
-import { Offer } from 'src/app/models/offer.model';
+import type { Offer } from 'src/app/models/offer.model';
 
 export default {
   offerID: 1,
-  offerIcon: 'Mock Offer Icon',
+  offerIcon:
+    'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">i</text></svg>',
   offerName: 'Mock Offer Name',
   offerDescription: 'Mock Offer Description',
   offerLinks: ['Mock Offer Link'],

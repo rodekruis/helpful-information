@@ -8,7 +8,7 @@ export class ErrorHandlerService extends ErrorHandler {
     super();
   }
 
-  handleError(error: Error) {
+  override handleError(error: Error) {
     this.loggingService.logException(error);
     const originalError = this.getOriginalError(error);
 

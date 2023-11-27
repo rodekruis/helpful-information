@@ -7,22 +7,28 @@ import {
   ErrorHandler,
   importProvidersFrom,
 } from '@angular/core';
-import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { bootstrapApplication } from '@angular/platform-browser';
 import {
-  MarkdownModule,
-  MARKED_OPTIONS,
-  MarkedOptions,
-  MarkedRenderer,
-} from 'ngx-markdown';
+  PreloadAllModules,
+  provideRouter,
+  RouteReuseStrategy,
+  withInMemoryScrolling,
+  withPreloading,
+  withRouterConfig,
+} from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import {
+  IonicRouteStrategy,
+  provideIonicAngular,
+} from '@ionic/angular/standalone';
+import type { MarkedOptions } from 'ngx-markdown';
+import { MarkdownModule, MARKED_OPTIONS, MarkedRenderer } from 'ngx-markdown';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app/app.component';
-import { AppRoutingModule } from './app/app-routing.module';
+import { routes } from './routes';
 
 function markedOptionsFactory(): MarkedOptions {
   const renderer = new MarkedRenderer();
@@ -38,8 +44,13 @@ function markedOptionsFactory(): MarkedOptions {
 
   renderer.link = (href: string, title: string, text: string): string => {
     const isExternal = !href.startsWith('/');
+    const isPlainUrl = href.includes(text);
+    const rel = `external noopener noreferrer ${
+      isPlainUrl ? `x-plain-url` : ''
+    }`;
+
     return `<a href="${href}"
-     ${isExternal ? `target="_blank" rel="external noopener noreferrer"` : ''}
+     ${isExternal ? `target="_blank" rel="${rel}"` : ''}
      ${title ? ` title="${title}"` : ''}
      >${text}</a>`;
   };
@@ -74,13 +85,19 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(
-      BrowserModule,
-      IonicModule.forRoot({
-        mode: 'md',
-        animated: false,
+    provideRouter(
+      routes,
+      withRouterConfig({
+        paramsInheritanceStrategy: 'always',
+        urlUpdateStrategy: 'eager',
       }),
-      AppRoutingModule,
+      withPreloading(PreloadAllModules),
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'top',
+      }),
+    ),
+    importProvidersFrom(
       ServiceWorkerModule.register('ngsw-worker.js', {
         enabled: environment.useServiceWorker && environment.production,
         registrationStrategy: 'registerWhenStable:3000',
@@ -91,5 +108,9 @@ bootstrapApplication(AppComponent, {
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideHttpClient(withInterceptorsFromDi()),
+    provideIonicAngular({
+      mode: 'md',
+      animated: false,
+    }),
   ],
 }).catch((err) => console.log(err));

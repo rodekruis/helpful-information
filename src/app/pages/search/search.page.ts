@@ -1,10 +1,12 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import { NgIf } from '@angular/common';
+import type { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { Params } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { SearchInputComponent } from 'src/app/components/search-input/search-input.component';
-import { QASet } from 'src/app/models/qa-set.model';
-import { RegionData } from 'src/app/models/region-data';
+import type { QASet } from 'src/app/models/qa-set.model';
+import type { RegionData } from 'src/app/models/region-data';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
@@ -15,12 +17,7 @@ import { SearchService } from 'src/app/services/search.service';
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    QASetListComponent,
-    SearchInputComponent,
-  ],
+  imports: [NgIf, RouterLink, QASetListComponent, SearchInputComponent],
 })
 export default class SearchPageComponent implements OnInit {
   private region: string;
@@ -76,9 +73,9 @@ export default class SearchPageComponent implements OnInit {
   }
 
   private handleQueryParams(params: Params) {
-    this.searchQuery = !!params.q ? params.q : '';
+    this.searchQuery = params.q ? params.q : '';
 
-    if (!!params.q) {
+    if (params.q) {
       this.performSearch(params.q);
     }
   }

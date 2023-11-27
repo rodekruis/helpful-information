@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RegionData } from 'src/app/models/region-data';
+import type { RegionData } from 'src/app/models/region-data';
 
 import { SpreadsheetService } from './spreadsheet.service';
 

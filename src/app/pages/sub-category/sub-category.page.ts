@@ -1,16 +1,18 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import { NgFor, NgIf } from '@angular/common';
+import type { OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import type { Params } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferLinkComponent } from 'src/app/components/offer-link/offer-link.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
-import { Category } from 'src/app/models/category.model';
-import { Offer } from 'src/app/models/offer.model';
-import { QASet } from 'src/app/models/qa-set.model';
+import type { Category } from 'src/app/models/category.model';
+import type { Offer } from 'src/app/models/offer.model';
+import type { QASet } from 'src/app/models/qa-set.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
-import { SubCategory } from 'src/app/models/sub-category.model';
+import type { SubCategory } from 'src/app/models/sub-category.model';
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
 import { OffersService } from 'src/app/services/offers.service';
@@ -24,8 +26,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./sub-category.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    RouterModule,
+    NgIf,
+    NgFor,
+    RouterLink,
     BreadcrumbsComponent,
     OfferLinkComponent,
     QASetComponent,

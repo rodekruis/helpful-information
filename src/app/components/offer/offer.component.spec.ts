@@ -19,16 +19,19 @@ describe('OfferComponent', () => {
         },
       ],
     }).compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(OfferComponent);
     component = fixture.componentInstance;
-    component.offer = mockOffer;
-    fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
+    // Arrange
+    component.offer = mockOffer;
+
+    // Act
+    fixture.detectChanges();
+
+    // Assert
     expect(component).toBeTruthy();
   });
 });

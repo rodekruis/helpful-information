@@ -1,25 +1,26 @@
 import { Location, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { Params } from '@angular/router';
 import {
   ActivatedRoute,
-  Params,
   Router,
   RouterLink,
   RouterOutlet,
 } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonFooter, IonHeader } from '@ionic/angular/standalone';
 import { MarkdownComponent } from 'ngx-markdown';
 import { AppHeaderComponent } from 'src/app/components/header/header.component';
-import { Category } from 'src/app/models/category.model';
+import type { Category } from 'src/app/models/category.model';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { Offer } from 'src/app/models/offer.model';
-import { QASet } from 'src/app/models/qa-set.model';
-import { RegionData } from 'src/app/models/region-data';
+import type { Offer } from 'src/app/models/offer.model';
+import type { QASet } from 'src/app/models/qa-set.model';
+import type { RegionData } from 'src/app/models/region-data';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
-import { SubCategory } from 'src/app/models/sub-category.model';
+import type { SubCategory } from 'src/app/models/sub-category.model';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
@@ -35,12 +36,14 @@ import { environment } from 'src/environments/environment';
   standalone: true,
   imports: [
     AppHeaderComponent,
-    IonicModule,
     MarkdownComponent,
     NgFor,
     NgIf,
     RouterLink,
     RouterOutlet,
+    IonHeader,
+    IonContent,
+    IonFooter,
   ],
 })
 export class ReferralPageComponent implements OnInit {
@@ -155,7 +158,7 @@ export class ReferralPageComponent implements OnInit {
   }
 
   public getNotificationContent(): string {
-    if (!!this.regionData.pageNotification) {
+    if (this.regionData.pageNotification) {
       return this.regionData.pageNotification;
     }
     return environment.mainPageNotification;
@@ -272,7 +275,7 @@ export class ReferralPageComponent implements OnInit {
         queryParamsHandling: 'merge',
         queryParams: {
           search: null,
-          q: !!queryParams.q ? queryParams.q : null,
+          q: queryParams.q ? queryParams.q : null,
         },
       });
     }
@@ -282,16 +285,16 @@ export class ReferralPageComponent implements OnInit {
       !!queryParams.offerID
     ) {
       let upgradedUrl = this.getRegionHref();
-      if (!!queryParams.categoryID) {
+      if (queryParams.categoryID) {
         upgradedUrl +=
           '/' + createSlug('', queryParams.categoryID, SlugPrefix.category);
       }
-      if (!!queryParams.subCategoryID) {
+      if (queryParams.subCategoryID) {
         upgradedUrl +=
           '/' +
           createSlug('', queryParams.subCategoryID, SlugPrefix.subCategory);
       }
-      if (!!queryParams.offerID) {
+      if (queryParams.offerID) {
         upgradedUrl +=
           '/' + createSlug('', queryParams.offerID, SlugPrefix.offer);
       }

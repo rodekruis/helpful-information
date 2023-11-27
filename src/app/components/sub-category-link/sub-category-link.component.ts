@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { SubCategory } from 'src/app/models/sub-category.model';
+import type { SubCategory } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './sub-category-link.component.html',
   styleUrls: ['./sub-category-link.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterLink],
 })
 export class SubCategoryLinkComponent {
   @Input()

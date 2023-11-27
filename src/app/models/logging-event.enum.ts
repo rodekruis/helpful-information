@@ -37,4 +37,5 @@ export enum LoggingEvent {
   ExternalLinkClick = 'external-link',
   QuestionOpen = 'question-open',
   QuestionClose = 'question-close',
+  Print = 'print',
 }

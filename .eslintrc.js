@@ -1,5 +1,6 @@
 const restrictedGlobals = require('confusing-browser-globals');
 
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
   ignorePatterns: ['projects/**/*', 'coverage', 'www'],
@@ -30,6 +31,9 @@ module.exports = {
         'prettier',
       ],
       rules: {
+        'no-extra-boolean-cast': ['error'],
+        'no-var': ['error'],
+        'prefer-const': ['error'],
         '@angular-eslint/directive-selector': [
           'error',
           {
