@@ -1,7 +1,6 @@
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -15,7 +14,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule],
+  imports: [RouterModule, NgIf],
 })
 export class BreadcrumbsComponent {
   @Input()

@@ -7,7 +7,7 @@ import {
   RouterLink,
   RouterOutlet,
 } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonFooter, IonHeader } from '@ionic/angular/standalone';
 import { MarkdownComponent } from 'ngx-markdown';
 import { AppHeaderComponent } from 'src/app/components/header/header.component';
 import { Category } from 'src/app/models/category.model';
@@ -35,12 +35,14 @@ import { environment } from 'src/environments/environment';
   standalone: true,
   imports: [
     AppHeaderComponent,
-    IonicModule,
     MarkdownComponent,
     NgFor,
     NgIf,
     RouterLink,
     RouterOutlet,
+    IonHeader,
+    IonContent,
+    IonFooter,
   ],
 })
 export class ReferralPageComponent implements OnInit {

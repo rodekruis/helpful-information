@@ -1,8 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
-import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
@@ -46,13 +43,7 @@ describe('QASetListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        CommonModule,
-        RouterTestingModule,
-        BreadcrumbsComponent,
-        QASetComponent,
-        ngxMarkdownModuleFactory(),
-      ],
+      imports: [RouterTestingModule, ngxMarkdownModuleFactory()],
       providers: [
         {
           provide: RegionDataService,

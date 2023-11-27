@@ -10,7 +10,10 @@ import {
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import {
+  IonicRouteStrategy,
+  provideIonicAngular,
+} from '@ionic/angular/standalone';
 import {
   MarkdownModule,
   MARKED_OPTIONS,
@@ -81,10 +84,6 @@ bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(
       BrowserModule,
-      IonicModule.forRoot({
-        mode: 'md',
-        animated: false,
-      }),
       AppRoutingModule,
       ServiceWorkerModule.register('ngsw-worker.js', {
         enabled: environment.useServiceWorker && environment.production,
@@ -96,5 +95,9 @@ bootstrapApplication(AppComponent, {
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideHttpClient(withInterceptorsFromDi()),
+    provideIonicAngular({
+      mode: 'md',
+      animated: false,
+    }),
   ],
 }).catch((err) => console.log(err));

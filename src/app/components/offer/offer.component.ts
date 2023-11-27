@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { RouterLink } from '@angular/router';
+import { IonImg } from '@ionic/angular/standalone';
 import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
@@ -17,7 +17,7 @@ import { formatPhoneNumberAsUrl } from 'src/app/shared/utils';
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule, MarkdownModule],
+  imports: [MarkdownModule, IonImg, NgIf, NgFor, RouterLink],
 })
 export class OfferComponent {
   @Input()

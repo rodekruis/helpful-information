@@ -22,6 +22,7 @@ describe('PageMetaService', () => {
         },
       ],
     });
+
     service = TestBed.inject(PageMetaService);
   });
 

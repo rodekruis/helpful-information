@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
   mockQASet1,
@@ -20,7 +19,7 @@ describe('QASetComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule, ngxMarkdownModuleFactory()],
+      imports: [ngxMarkdownModuleFactory()],
       providers: [
         {
           provide: RegionDataService,

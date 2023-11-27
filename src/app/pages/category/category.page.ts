@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -17,7 +17,8 @@ import { getLegacyID } from 'src/app/shared/utils';
   styleUrls: ['./category.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
+    NgIf,
+    NgFor,
     SubCategoryLinkComponent,
     CategoryFilterPipe,
     MarkdownModule,

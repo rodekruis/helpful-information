@@ -1,6 +1,13 @@
 import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonImg,
+  IonThumbnail,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { environment } from 'src/environments/environment';
 
@@ -9,7 +16,15 @@ import { environment } from 'src/environments/environment';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [IonicModule, NgIf],
+  imports: [
+    NgIf,
+    IonToolbar,
+    IonButtons,
+    IonButton,
+    IonTitle,
+    IonThumbnail,
+    IonImg,
+  ],
 })
 export class AppHeaderComponent {
   @Input()

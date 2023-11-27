@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 import { MarkdownModule } from 'ngx-markdown';
 import { CategoryLinkComponent } from 'src/app/components/category-link/category-link.component';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
@@ -18,7 +17,6 @@ import { ReferralPageComponent } from './referral.page';
 
 @NgModule({
   imports: [
-    IonicModule,
     CommonModule,
     FormsModule,
     RegionPageComponent,
