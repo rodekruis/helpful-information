@@ -7,8 +7,15 @@ import {
   ErrorHandler,
   importProvidersFrom,
 } from '@angular/core';
-import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { bootstrapApplication } from '@angular/platform-browser';
+import {
+  PreloadAllModules,
+  provideRouter,
+  RouteReuseStrategy,
+  withInMemoryScrolling,
+  withPreloading,
+  withRouterConfig,
+} from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import {
   IonicRouteStrategy,
@@ -25,7 +32,7 @@ import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app/app.component';
-import { AppRoutingModule } from './app/app-routing.module';
+import { routes } from './routes';
 
 function markedOptionsFactory(): MarkedOptions {
   const renderer = new MarkedRenderer();
@@ -82,9 +89,19 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideRouter(
+      routes,
+      withRouterConfig({
+        paramsInheritanceStrategy: 'always',
+        urlUpdateStrategy: 'eager',
+      }),
+      withPreloading(PreloadAllModules),
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'top',
+      }),
+    ),
     importProvidersFrom(
-      BrowserModule,
-      AppRoutingModule,
       ServiceWorkerModule.register('ngsw-worker.js', {
         enabled: environment.useServiceWorker && environment.production,
         registrationStrategy: 'registerWhenStable:3000',
