@@ -16,6 +16,8 @@ updates:
     groups:
       angular:
         patterns: ['@angular*']
+      types:
+        patterns: ['@types/*']
       typescript-eslint:
         patterns: ['@typescript-eslint/*']
     ignore:
