@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, RouterModule } from '@angular/router';
+import type { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { Params } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { CategoryLinkComponent } from 'src/app/components/category-link/category-link.component';
 import { Category } from 'src/app/models/category.model';

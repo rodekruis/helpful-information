@@ -1,6 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import type { OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import type { Params } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { SubCategoryLinkComponent } from 'src/app/components/sub-category-link/sub-category-link.component';
 import { Category } from 'src/app/models/category.model';

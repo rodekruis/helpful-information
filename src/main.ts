@@ -21,12 +21,8 @@ import {
   IonicRouteStrategy,
   provideIonicAngular,
 } from '@ionic/angular/standalone';
-import {
-  MarkdownModule,
-  MARKED_OPTIONS,
-  MarkedOptions,
-  MarkedRenderer,
-} from 'ngx-markdown';
+import type { MarkedOptions } from 'ngx-markdown';
+import { MarkdownModule, MARKED_OPTIONS, MarkedRenderer } from 'ngx-markdown';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { environment } from 'src/environments/environment';

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import type { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { Params } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { SearchInputComponent } from 'src/app/components/search-input/search-input.component';
 import { QASet } from 'src/app/models/qa-set.model';

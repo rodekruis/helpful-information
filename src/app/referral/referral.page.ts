@@ -1,8 +1,9 @@
 import { Location, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { Params } from '@angular/router';
 import {
   ActivatedRoute,
-  Params,
   Router,
   RouterLink,
   RouterOutlet,

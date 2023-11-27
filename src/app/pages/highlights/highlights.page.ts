@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, RouterModule } from '@angular/router';
+import type { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { Params } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { QASet } from 'src/app/models/qa-set.model';
 import { RegionData } from 'src/app/models/region-data';

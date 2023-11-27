@@ -1,4 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import type { PipeTransform } from '@angular/core';
+import { Pipe } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 import { Offer } from 'src/app/models/offer.model';
 import { QASet } from 'src/app/models/qa-set.model';

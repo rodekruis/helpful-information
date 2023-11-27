@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import type { Routes } from '@angular/router';
 import { ReferralPageComponent } from 'src/app/referral/referral.page';
 import { environment } from 'src/environments/environment';
 

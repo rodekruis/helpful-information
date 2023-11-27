@@ -26,7 +26,8 @@
     "target": "ES2022",
     "typeRoots": ["node_modules/@types"],
     "useDefineForClassFields": false,
-    "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true,
+    "verbatimModuleSyntax": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

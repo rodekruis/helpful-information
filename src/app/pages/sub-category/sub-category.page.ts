@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import type { OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import type { Params } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
