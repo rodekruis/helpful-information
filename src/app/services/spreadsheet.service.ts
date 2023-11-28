@@ -467,6 +467,11 @@ export class SpreadsheetService {
         6,
         RegionDataFallback.labelMainScreenButton,
       ),
+      contactFeedbackUrl: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.contactFeedbackUrl,
+        -1,
+      ),
       contactPhoneNumber: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.contactTel,
@@ -492,6 +497,11 @@ export class SpreadsheetService {
         RegionDataKey.labelLastUpdated,
         10,
         RegionDataFallback.labelLastUpdated,
+      ),
+      labelFeedbackCta: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.labelFeedbackCta,
+        -1,
       ),
       labelOfferAddress: this.getConfigValueOrFallback(
         sharedData,

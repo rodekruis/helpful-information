@@ -1,8 +1,10 @@
 export type RegionData = {
+  contactFeedbackUrl?: string;
   contactPhoneNumber?: string;
   contactTelegramLink?: string;
   contactWhatsAppLink?: string;
   labelBackButton?: string;
+  labelFeedbackCta?: string;
   labelHighlightsButton?: string;
   labelHighlightsItemsCount?: string;
   labelHighlightsItemsZero?: string;
@@ -39,6 +41,7 @@ export enum RegionCol {
 // These labels should be used anywhere in the main sheets' "#KEY"-column, prefixed with a `#`
 // For example: "Contact: Phone-number (only digits, include coutry-code)   #contact.tel"
 export enum RegionDataKey {
+  contactFeedbackUrl = 'contact.feedback-url',
   contactTel = 'contact.tel',
   contactTelegram = 'contact.telegram',
   contactWhatsApp = 'contact.whatsapp',
@@ -46,6 +49,7 @@ export enum RegionDataKey {
   highlightsItems = 'highlights.items',
   highlightsItemsZero = 'highlights.items.0',
   highlightsTitle = 'highlights.title',
+  labelFeedbackCta = 'label.feedback.cta',
   labelLastUpdated = 'label.last-updated',
   localeDirection = 'locale.dir',
   localeLanguage = 'locale.language',
@@ -72,6 +76,7 @@ export enum RegionDataKey {
 
 export enum RegionDataFallback {
   labelBackButton = 'Back',
+  labelFeedbackCta = 'Make a suggestion',
   labelHighlightsButton = '!',
   labelHighlightsItemsCount = 'Highlighted items:',
   labelHighlightsItemsZero = 'No highlighted items.',

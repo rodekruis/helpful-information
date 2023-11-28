@@ -1,4 +1,5 @@
 import {
+  fillTemplateWithUrl,
   formatPhoneNumberAsUrl,
   getDateFromString,
   getFullUrl,
@@ -192,6 +193,68 @@ describe('Utils - formatPhoneNumberAsUrl', () => {
 
       // Assert
       expect(output).toEqual(testOutputs[index]);
+    });
+  });
+});
+
+describe('Utils - fillTemplateWithUrl', () => {
+  it('should return a URL with the parameter replaced (when applicable)', () => {
+    // Arrange
+    const tests = [
+      {
+        template: 'https://example.org/contact',
+        url: 'https://example.org/content-page',
+        output: 'https://example.org/contact',
+      },
+      {
+        template:
+          'https://example.org/contact-form?text=Feedback+on+URL:+{URL}',
+        url: 'https://example.org/content-page/a',
+        output:
+          'https://example.org/contact-form?text=Feedback+on+URL:+https%3A%2F%2Fexample.org%2Fcontent-page%2Fa',
+      },
+      {
+        template: 'mailto:contact@example.org',
+        url: 'https://example.org/content-page',
+        output: 'mailto:contact@example.org',
+      },
+      {
+        template: 'mailto:contact@example.org?subject=Feedback+on+URL:+{URL}',
+        url: 'https://example.org/content-page/a/b',
+        output:
+          'mailto:contact@example.org?subject=Feedback+on+URL:+https%3A%2F%2Fexample.org%2Fcontent-page%2Fa%2Fb',
+      },
+      {
+        template: 'mailto:contact@example.org?subject=Feedback&body={URL}',
+        url: 'https://example.org/content-page/a/b/c',
+        output:
+          'mailto:contact@example.org?subject=Feedback&body=https%3A%2F%2Fexample.org%2Fcontent-page%2Fa%2Fb%2Fc',
+      },
+      {
+        template: 'noop',
+        url: 'https://example.org/content-page',
+        output: 'noop',
+      },
+      {
+        template: '{URL}',
+        url: 'https://example.org/content-page',
+        output: 'https%3A%2F%2Fexample.org%2Fcontent-page',
+      },
+      {
+        template:
+          'mailto:contact@example.org?subject=Feedback+on:+{URL}&body=Feedback+on:+{URL}',
+        url: 'https://example.org/content-page',
+        output:
+          'mailto:contact@example.org?subject=Feedback+on:+https%3A%2F%2Fexample.org%2Fcontent-page&body=Feedback+on:+https%3A%2F%2Fexample.org%2Fcontent-page',
+      },
+    ];
+
+    tests.forEach((testParams) => {
+      // Act
+      const output = fillTemplateWithUrl(testParams.template, testParams.url);
+
+      // Assert
+      expect(output).toEqual(testParams.output);
     });
   });
 });

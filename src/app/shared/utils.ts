@@ -89,3 +89,11 @@ export const formatPhoneNumberAsUrl = (rawNumber: string): string => {
 
   return 'tel:' + onlyDigits;
 };
+
+export const fillTemplateWithUrl = (template: string, url: string): string => {
+  if (!template) {
+    return '';
+  }
+
+  return template.replaceAll('{URL}', window.encodeURIComponent(url));
+};

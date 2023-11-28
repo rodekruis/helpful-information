@@ -52,3 +52,11 @@
 <br />
 
 <app-last-updated-time class="ion-margin-vertical"></app-last-updated-time>
+
+<br />
+
+<app-feedback-link
+  [template]="regionData?.contactFeedbackUrl"
+  [label]="regionData?.labelFeedbackCta"
+  class="ion-margin-vertical"
+></app-feedback-link>

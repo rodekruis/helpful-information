@@ -124,6 +124,16 @@
       "Label: Offer - Need to Know\n#offer.need-to-know",
       "Need to Know",
       "\"First Things First\", \"What do you need to know?\""
+    ],
+    [
+      "Label: \"Make a Suggestion\"\n#label.feedback.cta",
+      "Something missing? Let us know!",
+      "\"Make a suggestion\", \"Provide feedback\" or \"Something missing? Let us know!\""
+    ],
+    [
+      "Contact: Feedback URL\n#contact.feedback-url",
+      "mailto:contact@example.org?subject=Feedback%20on%20URL:%20{URL}",
+      "The placeholder \"{URL}\" can be used to insert the URL of the page where the link is clicked.\nFor e-mail, use: \"mailto:contact@example.org?subject=Feedback%20on%20URL:%20{URL}\", for a web-form, use: \"https://example.org/feedback-form?text=Feedback%20on%20URL:%20{URL}\""
     ]
   ]
 }
