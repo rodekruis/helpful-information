@@ -35,7 +35,7 @@
   <router-outlet *ngIf="isSupportedRegion() && !loading"></router-outlet>
 
   <!-- Error/404 page -->
-  <ng-container *ngIf="isSupportedRegion() && !loading && !hasDataToShow()">
+  <ng-container *ngIf="isSupportedRegion() && !loading && !dataAvailable">
     <h2>{{ errorHeader }}</h2>
     <p>
       {{ errorMessage }}
