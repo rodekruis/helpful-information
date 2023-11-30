@@ -22,4 +22,8 @@
 
 <br />
 
-<app-feedback-link class="ion-margin-vertical"></app-feedback-link>
+<app-feedback-link
+  [template]="regionData?.contactFeedbackUrl"
+  [label]="regionData?.labelFeedbackCta"
+  class="ion-margin-vertical"
+></app-feedback-link>
