@@ -1,23 +1,25 @@
+// All properties sorted alphabetically.
 export type SubCategory = {
-  subCategoryID: number;
-  slug?: string;
-  subCategoryName: string;
-  subCategoryIcon: string;
-  subCategoryDescription?: string;
-  subCategoryVisible: boolean;
   categoryID: number;
-  categorySlug?: string;
   categoryName?: string;
+  categorySlug?: string;
+  slug?: string;
+  subCategoryDescription?: string;
+  subCategoryIcon: string;
+  subCategoryID: number;
+  subCategoryName: string;
+  subCategoryVisible: boolean;
 };
 
 // These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
 // For example: "Sub-Category Description (can be multiple lines) #DESCRIPTION"
+// All properties sorted alphabetically.
 export enum SubCategoryCol {
-  id = 'ID',
-  slug = 'SLUG',
-  name = 'NAME',
-  icon = 'ICON',
-  description = 'DESCRIPTION',
-  visible = 'VISIBLE',
   category = 'CATEGORY',
+  description = 'DESCRIPTION',
+  icon = 'ICON',
+  id = 'ID',
+  name = 'NAME',
+  slug = 'SLUG',
+  visible = 'VISIBLE',
 }

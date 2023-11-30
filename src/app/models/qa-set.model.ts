@@ -1,32 +1,34 @@
+// All properties sorted alphabetically.
 export class QASet {
-  id: number;
+  answer: string;
   categoryID: number;
-  categorySlug?: string;
   categoryName?: string;
-  subCategoryID: number;
-  subCategorySlug?: string;
-  subCategoryName?: string;
-  isVisible: boolean;
-  isHighlight: boolean;
+  categorySlug?: string;
+  children: QASet[];
   dateUpdated: Date | null;
-  slug: string;
+  id: number;
+  isHighlight: boolean;
+  isVisible: boolean;
   parentSlug?: string;
   question: string;
-  answer: string;
-  children: QASet[];
+  slug: string;
+  subCategoryID: number;
+  subCategoryName?: string;
+  subCategorySlug?: string;
 }
 
 // These labels should be used anywhere in the sheets' column-header, prefixed with a `#`
 // For example: "Unique URL-part (no spaces or special characters) #SLUG"
+// All properties sorted alphabetically.
 export enum QACol {
-  id = 'ID',
-  subcategory = 'SUBCATEGORY',
+  answer = 'ANSWER',
   category = 'CATEGORY',
-  visible = 'VISIBLE',
   highlight = 'HIGHLIGHT',
-  updated = 'UPDATED',
-  slug = 'SLUG',
+  id = 'ID',
   parent = 'PARENT',
   question = 'QUESTION',
-  answer = 'ANSWER',
+  slug = 'SLUG',
+  subcategory = 'SUBCATEGORY',
+  updated = 'UPDATED',
+  visible = 'VISIBLE',
 }

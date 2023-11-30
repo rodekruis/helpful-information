@@ -2,10 +2,11 @@
 
 // See: "@microsoft/applicationinsights-common/types/Interfaces/Contracts/SeverityLevel";
 
+// All properties sorted alphabetically.
 export enum SeverityLevel {
-  Verbose = 0,
-  Information = 1,
-  Warning = 2,
-  Error = 3,
   Critical = 4,
+  Error = 3,
+  Information = 1,
+  Verbose = 0,
+  Warning = 2,
 }
