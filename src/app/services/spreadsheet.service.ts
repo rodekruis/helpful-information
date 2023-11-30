@@ -214,7 +214,7 @@ export class SpreadsheetService {
 
         return response.values
           .slice(1) // Remove header-row
-          .map((row: any[]) =>
+          .map((row: string[]) =>
             this.convertCategoryRowToCategoryObject(row, categoriesColumnMap),
           )
           .filter((category: Category): boolean => category.categoryVisible);
@@ -285,7 +285,7 @@ export class SpreadsheetService {
 
         return response.values
           .slice(1) // Remove header-row
-          .map((row: any[]) =>
+          .map((row: string[]) =>
             this.convertSubCategoryRowToSubCategoryObject(
               row,
               subCategoryColumnMap,
@@ -395,7 +395,7 @@ export class SpreadsheetService {
 
         return response.values
           .slice(1) // Remove header-row
-          .map((row: any[]) =>
+          .map((row: string[]) =>
             this.convertOfferRowToOfferObject(row, offerColumnMap),
           )
           .filter((offer: Offer): boolean => offer.offerVisible);

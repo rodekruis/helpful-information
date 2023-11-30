@@ -42,13 +42,19 @@ export class QASetComponent {
     return window.location.hash === `#${slug}`;
   }
 
-  public logDetailsChange(target: any, slug?: string, question?: string): void {
+  public logDetailsChange(
+    target: EventTarget | HTMLDetailsElement,
+    slug?: string,
+    question?: string,
+  ): void {
     if (!this.loggingService) {
       return;
     }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
-      target.open ? LoggingEvent.QuestionOpen : LoggingEvent.QuestionClose,
+      (target as HTMLDetailsElement).open
+        ? LoggingEvent.QuestionOpen
+        : LoggingEvent.QuestionClose,
       {
         questionSlug: slug,
         question: question.substring(0, 100),

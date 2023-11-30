@@ -9,7 +9,7 @@ import type { SubCategory } from 'src/app/models/sub-category.model';
   standalone: true,
 })
 export class SubCategoryFilterPipe implements PipeTransform {
-  transform(items: Array<Offer | QASet>, subCategory: SubCategory): any {
+  transform(items: (Offer | QASet)[], subCategory: SubCategory): any[] {
     if (!items || !subCategory) {
       return items;
     }
