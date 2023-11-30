@@ -16,8 +16,6 @@ import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import type { Offer } from 'src/app/models/offer.model';
-import type { QASet } from 'src/app/models/qa-set.model';
 import type { RegionData } from 'src/app/models/region-data';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import type { SubCategory } from 'src/app/models/sub-category.model';
@@ -51,8 +49,6 @@ export class ReferralPageComponent implements OnInit {
   public regions: string[];
   public regionsLabels: string[];
 
-  private offers: Offer[];
-  private qaSets: QASet[];
   private categories: Category[];
   private subCategories: SubCategory[];
 
@@ -61,6 +57,7 @@ export class ReferralPageComponent implements OnInit {
   private readonly rootHref = '/';
 
   public loading = false;
+  public dataAvailable = false;
 
   private useOffers = environment.useOffers;
   private useQandAs = environment.useQandAs;
@@ -123,30 +120,11 @@ export class ReferralPageComponent implements OnInit {
     return this.region && this.regions.includes(this.region);
   }
 
-  public hasDataToShow(): boolean {
-    return (
-      this.categories &&
-      this.categories.some((item) => item.categoryVisible) &&
-      this.subCategories &&
-      this.subCategories.some((item) => item.subCategoryVisible) &&
-      // When environment.useQandAs == true, Offers OR Q&A-sets can be empty
-      ((this.useOffers === true &&
-        this.useQandAs === true &&
-        !(
-          (!this.offers || !this.offers.some((item) => item.offerVisible)) &&
-          (!this.qaSets || !this.qaSets.some((item) => item.isVisible))
-        )) ||
-        // When environment.useOffers === false, Q&A-sets need to be available
-        (this.useOffers === false &&
-          this.useQandAs === true &&
-          this.qaSets &&
-          this.qaSets.some((item) => item.isVisible)) ||
-        // When environment.useQandAs == false, Offers need to be available
-        (this.useOffers === true &&
-          this.useQandAs === false &&
-          this.offers &&
-          this.offers.some((item) => item.offerVisible)))
-    );
+  private hasDataAvailable(): boolean {
+    const hasCategories = this.categories.length > 0;
+    const hasSubCategories = this.subCategories.length > 0;
+
+    return hasCategories && hasSubCategories;
   }
 
   public hasContactOptions(): boolean {
@@ -184,11 +162,13 @@ export class ReferralPageComponent implements OnInit {
       this.region,
     );
     if (this.useOffers) {
-      this.offers = await this.offersService.getOffers(this.region);
+      await this.offersService.getOffers(this.region);
     }
     if (this.useQandAs) {
-      this.qaSets = await this.offersService.getQAs(this.region);
+      await this.offersService.getQAs(this.region);
     }
+
+    this.dataAvailable = this.hasDataAvailable();
 
     this.loading = false;
   }

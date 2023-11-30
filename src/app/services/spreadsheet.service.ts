@@ -214,7 +214,7 @@ export class SpreadsheetService {
 
         return response.values
           .slice(1) // Remove header-row
-          .map((row: any[]) =>
+          .map((row: string[]) =>
             this.convertCategoryRowToCategoryObject(row, categoriesColumnMap),
           )
           .filter((category: Category): boolean => category.categoryVisible);
@@ -285,7 +285,7 @@ export class SpreadsheetService {
 
         return response.values
           .slice(1) // Remove header-row
-          .map((row: any[]) =>
+          .map((row: string[]) =>
             this.convertSubCategoryRowToSubCategoryObject(
               row,
               subCategoryColumnMap,
@@ -395,7 +395,7 @@ export class SpreadsheetService {
 
         return response.values
           .slice(1) // Remove header-row
-          .map((row: any[]) =>
+          .map((row: string[]) =>
             this.convertOfferRowToOfferObject(row, offerColumnMap),
           )
           .filter((offer: Offer): boolean => offer.offerVisible);
@@ -467,6 +467,11 @@ export class SpreadsheetService {
         6,
         RegionDataFallback.labelMainScreenButton,
       ),
+      contactFeedbackUrl: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.contactFeedbackUrl,
+        -1,
+      ),
       contactPhoneNumber: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.contactTel,
@@ -492,6 +497,11 @@ export class SpreadsheetService {
         RegionDataKey.labelLastUpdated,
         10,
         RegionDataFallback.labelLastUpdated,
+      ),
+      labelFeedbackCta: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.labelFeedbackCta,
+        -1,
       ),
       labelOfferAddress: this.getConfigValueOrFallback(
         sharedData,

@@ -1,9 +1,9 @@
 import type { Category } from 'src/app/models/category.model';
 
 export default {
+  categoryDescription: 'Mock category Description',
+  categoryIcon: 'favicon.ico',
   categoryID: 1,
   categoryName: 'Mock category Name',
-  categoryIcon: 'favicon.ico',
-  categoryDescription: 'Mock category Description',
   categoryVisible: true,
 } as Category;

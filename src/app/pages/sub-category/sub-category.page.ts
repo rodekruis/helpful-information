@@ -5,18 +5,21 @@ import type { Params } from '@angular/router';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
+import { FeedbackLinkComponent } from 'src/app/components/feedback-link/feedback-link.component';
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferLinkComponent } from 'src/app/components/offer-link/offer-link.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import type { Category } from 'src/app/models/category.model';
 import type { Offer } from 'src/app/models/offer.model';
 import type { QASet } from 'src/app/models/qa-set.model';
+import type { RegionData } from 'src/app/models/region-data';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import type { SubCategory } from 'src/app/models/sub-category.model';
 import { CategoryFilterPipe } from 'src/app/pipes/category-filter.pipe';
 import { SubCategoryFilterPipe } from 'src/app/pipes/sub-category-filter.pipe';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
+import { RegionDataService } from 'src/app/services/region-data.service';
 import { getLegacyID } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
@@ -33,6 +36,7 @@ import { environment } from 'src/environments/environment';
     OfferLinkComponent,
     QASetComponent,
     LastUpdatedTimeComponent,
+    FeedbackLinkComponent,
     CategoryFilterPipe,
     SubCategoryFilterPipe,
     MarkdownModule,
@@ -40,6 +44,7 @@ import { environment } from 'src/environments/environment';
 })
 export default class SubCategoryPageComponent implements OnInit {
   public region: string;
+  public regionData: RegionData;
 
   public useOffers = environment.useOffers;
   public useQandAs = environment.useQandAs;
@@ -60,6 +65,7 @@ export default class SubCategoryPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private offersService: OffersService,
+    private regionDataService: RegionDataService,
     private pageMeta: PageMetaService,
   ) {}
 
@@ -116,6 +122,8 @@ export default class SubCategoryPageComponent implements OnInit {
     if (this.useQandAs && !this.qaSets) {
       this.qaSets = await this.offersService.getQAs(this.region);
     }
+
+    this.regionData = await this.regionDataService.getData(this.region);
 
     this.pageMeta.setTitle({
       subCategoryName: this.subCategory.subCategoryName,

@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
+import { FeedbackLinkComponent } from 'src/app/components/feedback-link/feedback-link.component';
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferComponent } from 'src/app/components/offer/offer.component';
 import type { Offer } from 'src/app/models/offer.model';
@@ -18,7 +19,12 @@ import { getLegacyID } from 'src/app/shared/utils';
   templateUrl: './offer.page.html',
   styleUrls: ['./offer.page.scss'],
   standalone: true,
-  imports: [BreadcrumbsComponent, OfferComponent, LastUpdatedTimeComponent],
+  imports: [
+    BreadcrumbsComponent,
+    OfferComponent,
+    LastUpdatedTimeComponent,
+    FeedbackLinkComponent,
+  ],
 })
 export default class OfferPageComponent implements OnInit {
   public region: string;

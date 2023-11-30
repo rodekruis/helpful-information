@@ -235,7 +235,7 @@ export class OffersService {
     // Create a deep copy of the Q&A set:
     const items = qaSets.map((item) => ({ ...item }));
     return items
-      .filter((item) => item.isHighlight && item.isVisible)
+      .filter((item) => item.isHighlight)
       .sort((a, b) => {
         if (a.dateUpdated && !b.dateUpdated) {
           return -1;
