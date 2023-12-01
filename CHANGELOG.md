@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 --
 
-## 2023-11-30: [v23.07](https://github.com/rodekruis/helpful-information/releases/tag/v23.11.0)
+## 2023-11-30: [v23.11](https://github.com/rodekruis/helpful-information/releases/tag/v23.11.0)
 
 ### Added
 
