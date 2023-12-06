@@ -20,7 +20,6 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
-      - '!dependabot/*'
     paths:
       - '!.github/**'
       - '.github/workflows/deploy-private-faq.yml'
@@ -37,7 +36,7 @@ jobs:
     if: >
       github.event_name == 'workflow_dispatch' ||
       github.event_name == 'push' ||
-      (github.event_name == 'pull_request' && github.event.action != 'closed') ||
+      (github.event_name == 'pull_request' && github.event.action != 'closed' && github.actor != 'dependabot[bot]') ||
       (
         github.event_name == 'issue_comment' &&
         github.event.issue.number == vars.GHA_DEPLOY_TRIGGER_ISSUE &&
