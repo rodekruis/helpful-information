@@ -20,8 +20,7 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
-    branches-ignore:
-      - 'dependabot/*'
+      - '!dependabot/*'
     paths:
       - '!.github/**'
       - '.github/workflows/deploy-private-faq.yml'
