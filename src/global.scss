@@ -242,6 +242,9 @@ img[decoding='async'] {
 .text-style--end {
   text-align: end !important;
 }
+.text-style--use-newlines {
+  white-space: pre-wrap;
+}
 .text-style--header {
   font-family: var(--ion-font-family-header);
   font-weight: bold;
