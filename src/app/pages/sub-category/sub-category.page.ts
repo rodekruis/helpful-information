@@ -26,7 +26,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-sub-category-page',
   templateUrl: './sub-category.page.html',
-  styleUrls: ['./sub-category.page.scss'],
+  styleUrls: ['./sub-category.page.css'],
   standalone: true,
   imports: [
     NgIf,

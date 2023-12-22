@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-region-page',
   templateUrl: './region.page.html',
-  styleUrls: ['./region.page.scss'],
+  styleUrls: ['./region.page.css'],
   standalone: true,
   imports: [NgIf, NgFor, RouterLink, CategoryLinkComponent, MarkdownModule],
 })

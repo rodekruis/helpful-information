@@ -8,7 +8,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
 @Component({
   selector: 'app-q-a-set-list',
   templateUrl: './q-a-set-list.component.html',
-  styleUrls: ['./q-a-set-list.component.scss'],
+  styleUrls: ['./q-a-set-list.component.css'],
   standalone: true,
   imports: [
     NgIf,
