@@ -10,7 +10,7 @@ import { LoggingService } from 'src/app/services/logging.service';
 @Component({
   selector: 'app-sub-category-link',
   templateUrl: './sub-category-link.component.html',
-  styleUrls: ['./sub-category-link.component.scss'],
+  styleUrls: ['./sub-category-link.component.css'],
   standalone: true,
   imports: [RouterLink],
 })
