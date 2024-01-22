@@ -59,7 +59,7 @@
     "@angular/language-service": "^17.0.4",
     "@ionic/angular-toolkit": "^10.0.0",
     "@types/jasmine": "^5.1.4",
-    "@types/node": "^20.10.3",
+    "@types/node": "^20.11.5",
     "@typescript-eslint/eslint-plugin": "^6.13.0",
     "@typescript-eslint/parser": "^6.13.0",
     "confusing-browser-globals": "^1.0.11",
