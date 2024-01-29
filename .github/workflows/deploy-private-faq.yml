@@ -2,7 +2,7 @@
 # See: https://aka.ms/swaworkflowconfig
 # See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
-name: 'private-FAQ: Deploy Azure'
+name: 'NLRC-Internal-FAQ: Deploy Azure'
 
 on:
   workflow_dispatch:
@@ -29,6 +29,9 @@ on:
       - 'src/**'
   issue_comment:
     types: [created]
+  schedule:
+    # See: https://crontab.guru/#18_18_*_*_1-5
+    - cron: '42 18 * * 1-5'
 
 jobs:
   build_and_deploy:
@@ -89,11 +92,23 @@ jobs:
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
           TXT_ERROR_RETRY: 'Try again?'
           REGIONS: >-
-            private,
+            work-with-helpline,
+            ,
+            food-program,
+            shelter-program,
+
           REGIONS_LABELS: >-
-            Private FAQ,
+            Work with Helpline,
+            ,
+            Food Program,
+            Shelter Program,
+
           REGIONS_SHEET_IDS: >-
             1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII,
+            ,
+            1WFl8xcy9v-8Ey_iy19eXnflppIwqwgBUaWGBmHtKzLM,
+            1PmlL_KDVeNzFcm4hKMOpXl9k50KJXeY3aX_durfHX0g,
+
           GOOGLE_SHEETS_API_URL: '/data'
           AI_CONNECTION_STRING: 'InstrumentationKey=92c7559a-1554-4e7b-b86c-afe18c15b64c;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/'
 
@@ -109,6 +124,8 @@ jobs:
         run: |
           echo "Downloading sheet data: ..."
           node ./.azure/local-data/download-google-sheets.js 1QsmCBZ7j1sgOwo7sXjI8Jln_jw68oL1gyRvvzj3dHII
+          node ./.azure/local-data/download-google-sheets.js 1WFl8xcy9v-8Ey_iy19eXnflppIwqwgBUaWGBmHtKzLM
+          node ./.azure/local-data/download-google-sheets.js 1PmlL_KDVeNzFcm4hKMOpXl9k50KJXeY3aX_durfHX0g
           echo "Downloading sheet data: done"
 
       - name: Deploy to Azure
