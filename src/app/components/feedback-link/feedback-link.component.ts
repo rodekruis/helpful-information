@@ -8,7 +8,7 @@ import { fillTemplateWithUrl } from 'src/app/shared/utils';
 @Component({
   selector: 'app-feedback-link',
   templateUrl: './feedback-link.component.html',
-  styleUrls: ['./feedback-link.component.scss'],
+  styleUrls: ['./feedback-link.component.css'],
   standalone: true,
   imports: [NgIf],
 })

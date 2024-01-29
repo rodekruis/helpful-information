@@ -15,7 +15,7 @@ import { SearchService } from 'src/app/services/search.service';
 @Component({
   selector: 'app-search-page',
   templateUrl: './search.page.html',
-  styleUrls: ['./search.page.scss'],
+  styleUrls: ['./search.page.css'],
   standalone: true,
   imports: [NgIf, RouterLink, QASetListComponent, SearchInputComponent],
 })

@@ -13,7 +13,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
 @Component({
   selector: 'app-highlights-page',
   templateUrl: './highlights.page.html',
-  styleUrls: ['./highlights.page.scss'],
+  styleUrls: ['./highlights.page.css'],
   standalone: true,
   imports: [NgIf, QASetListComponent, RouterLink],
 })

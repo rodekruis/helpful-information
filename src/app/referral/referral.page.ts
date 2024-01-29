@@ -30,7 +30,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-referral',
   templateUrl: 'referral.page.html',
-  styleUrls: ['referral.page.scss'],
+  styleUrls: ['referral.page.css'],
   standalone: true,
   imports: [
     AppHeaderComponent,
