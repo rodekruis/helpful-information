@@ -33,13 +33,20 @@ on:
     # See: https://crontab.guru/#18_18_*_*_1-5
     - cron: '42 18 * * 1-5'
 
+permissions:
+  deployments: write
+
 jobs:
   build_and_deploy:
     environment: 'private-faq'
     if: >
       github.event_name == 'workflow_dispatch' ||
       github.event_name == 'push' ||
-      (github.event_name == 'pull_request' && github.event.action != 'closed' && github.actor != 'dependabot[bot]') ||
+      github.event_name == 'schedule' ||
+      (
+        github.event_name == 'pull_request' &&
+        github.event.action != 'closed' &&
+        github.actor != 'dependabot[bot]') ||
       (
         github.event_name == 'issue_comment' &&
         github.event.issue.number == vars.GHA_DEPLOY_TRIGGER_ISSUE &&
