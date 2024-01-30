@@ -7,13 +7,6 @@ export enum LoggingEventCategory {
 
 // All properties sorted alphabetically.
 export enum LoggingEvent {
-  BackButtonClick = 'back-button-click',
-  BackFromCategory = 'back-from-category',
-  BackFromHighlights = 'back-from-highlights',
-  BackFromOffer = 'back-from-offer',
-  BackFromRegion = 'back-from-region',
-  BackFromSearch = 'back-from-search',
-  BackFromSubCategory = 'back-from-sub-category',
   BreadcrumbCategory = 'breadcrumb-category',
   BreadcrumbSubCategory = 'breadcrumb-sub-category',
   CategoryClick = 'category-click',

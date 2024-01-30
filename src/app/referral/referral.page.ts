@@ -1,4 +1,4 @@
-import { Location, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
@@ -24,7 +24,7 @@ import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import { createSlug, getParentPath, getPathDepth } from 'src/app/shared/utils';
+import { createSlug } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -78,7 +78,6 @@ export class ReferralPageComponent implements OnInit {
     private regionDataService: RegionDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private pageMeta: PageMetaService,
-    private location: Location,
     private loggingService?: LoggingService,
   ) {
     this.regions = environment.regions.trim().split(/\s*,\s*/);
@@ -171,45 +170,6 @@ export class ReferralPageComponent implements OnInit {
     this.dataAvailable = this.hasDataAvailable();
 
     this.loading = false;
-  }
-
-  public goBack(): void {
-    const currentPath = this.location.path();
-    const pathDepth = getPathDepth(currentPath);
-    const parentPath = getParentPath(currentPath);
-
-    let event = LoggingEvent.BackButtonClick;
-
-    switch (pathDepth) {
-      case 4:
-        event = LoggingEvent.BackFromOffer;
-        break;
-      case 3:
-        event = LoggingEvent.BackFromSubCategory;
-        break;
-      case 2:
-        if (currentPath.match(/\/highlights$/)) {
-          event = LoggingEvent.BackFromHighlights;
-          break;
-        }
-        if (currentPath.match(/\/search$/)) {
-          event = LoggingEvent.BackFromSearch;
-          break;
-        }
-        event = LoggingEvent.BackFromCategory;
-        break;
-      case 1:
-        event = LoggingEvent.BackFromRegion;
-        break;
-    }
-
-    if (this.loggingService) {
-      this.loggingService.logEvent(LoggingEventCategory.ai, event, {
-        isBack: true,
-      });
-    }
-
-    this.router.navigateByUrl(parentPath || '/');
   }
 
   public showRootPage() {

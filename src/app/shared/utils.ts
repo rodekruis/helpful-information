@@ -66,14 +66,6 @@ export const getLegacyID = (
   return null;
 };
 
-export const getParentPath = (fullPath: string): string => {
-  return fullPath.split('/').slice(0, -1).join('/');
-};
-
-export const getPathDepth = (fullPath: string): number => {
-  return fullPath.split('/').length - 1;
-};
-
 export const formatPhoneNumberAsUrl = (rawNumber: string): string => {
   const firstNumber = rawNumber.match(/[\d+]/);
   const phoneNumberStart = firstNumber ? firstNumber.index : 0;

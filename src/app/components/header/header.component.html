@@ -1,37 +1,5 @@
-<ion-toolbar color="secondary">
-  <ion-buttons
-    slot="start"
-    style="min-width: 70px"
-  >
-    <ion-button
-      *ngIf="backButtonLabel"
-      (click)="backClick($event)"
-      class="app-header--back-button text-style--header ion-no-padding no-print"
-    >
-      <!-- Inlined SVG icon: chevron-back-outline from Ionicons v5.5 -->
-      <img
-        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M328 112L184 256l144 144'/%3E%3C/svg%3E"
-        aria-hidden="true"
-        class="app-header--back-icon directional_swap-horizontal"
-      />
-
-      {{ backButtonLabel }}
-    </ion-button>
-  </ion-buttons>
-
-  <ion-title
-    class="text-style--center text-style--header text-style--size-1"
-    size="small"
-  >
-    <h1
-      [title]="title || fallbackTitle"
-      class="text-style--header text-style--size-1"
-    >
-      {{ title || fallbackTitle }}
-    </h1>
-  </ion-title>
-
-  <ion-buttons slot="end">
+<div class="app-header--bar ion-padding-horizontal">
+  <div class="app-header--logo">
     <a
       href="/"
       (click)="logoClick($event)"
@@ -43,10 +11,20 @@
         <ion-img
           *ngIf="logoUrl || fallbackLogoUrl"
           [src]="logoUrl || fallbackLogoUrl"
-          alt=""
-          class="app-header--logo"
+          [alt]="logoActionLabel || fallbackActionLabel"
+          role="presentation"
+          class="app-header--logo-img"
         ></ion-img>
       </ion-thumbnail>
     </a>
-  </ion-buttons>
-</ion-toolbar>
+  </div>
+
+  <div class="app-header--title">
+    <h1
+      [title]="title || fallbackTitle"
+      class="text-style--header text-style--size-1"
+    >
+      {{ title || fallbackTitle }}
+    </h1>
+  </div>
+</div>
