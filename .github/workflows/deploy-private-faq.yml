@@ -35,6 +35,7 @@ on:
 
 permissions:
   deployments: write
+  issues: write
 
 jobs:
   build_and_deploy:
