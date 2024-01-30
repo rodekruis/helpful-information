@@ -16,10 +16,9 @@ updates:
     groups:
       angular:
         patterns: ['@angular*']
-      types:
-        patterns: ['@types/*']
-      typescript-eslint:
-        patterns: ['@typescript-eslint/*']
+      development:
+        dependency-type: development
+        exclude-patterns: ['*angular*']
     ignore:
       - dependency-name: '@angular/*'
         update-types:
