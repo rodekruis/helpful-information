@@ -28,4 +28,7 @@
 .app-header--title {
   flex: 1 1 100%;
 }
+
+.app-header--tools {
+  flex: 0 0 auto;
 }

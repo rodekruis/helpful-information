@@ -23,6 +23,11 @@ export type RegionData = {
   labelSearchPageTitle?: string;
   labelSearchResultsCount?: string;
   lastUpdatedTime?: string;
+  localeAlternatives?: {
+    key: string;
+    label: string;
+  }[];
+  localeAlternativesExplanation?: string;
   localeDirection?: string;
   localeLanguage?: string;
   pageGreeting?: string;
@@ -54,6 +59,8 @@ export enum RegionDataKey {
   highlightsTitle = 'highlights.title',
   labelFeedbackCta = 'label.feedback.cta',
   labelLastUpdated = 'label.last-updated',
+  localeAlternatives = 'locale.alternatives',
+  localeAlternativesExplanation = 'locale.alternatives.explanation',
   localeDirection = 'locale.dir',
   localeLanguage = 'locale.language',
   logo = 'logo',
