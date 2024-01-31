@@ -1,4 +1,4 @@
-<div class="app-header--bar ion-padding-horizontal">
+<div class="app-header--bar ion-padding-horizontal text-area--light">
   <div class="app-header--logo">
     <a
       href="/"
@@ -19,12 +19,21 @@
     </a>
   </div>
 
-  <div class="app-header--title">
+  <div class="app-header--title text-style--header">
     <h1
       [title]="title || fallbackTitle"
       class="text-style--header text-style--size-1"
     >
       {{ title || fallbackTitle }}
     </h1>
+  </div>
+
+  <div class="app-header--tools no-print">
+    <app-translation-options
+      [sourceLanguage]="currentLanguage"
+      [languageOptions]="languageOptions"
+      [languageOptionsExplanation]="languageOptionsExplanation"
+    >
+    </app-translation-options>
   </div>
 </div>

@@ -4,6 +4,9 @@
     [logoUrl]="regionData?.pageLogo"
     (logoAction)="showRootPage()"
     [logoActionLabel]="regionData?.labelMainScreenButton"
+    [languageOptions]="regionData?.localeAlternatives"
+    [currentLanguage]="regionData?.localeLanguage"
+    [languageOptionsExplanation]="regionData?.localeAlternativesExplanation"
   ></app-header>
 </ion-header>
 
@@ -87,7 +90,6 @@
         <!-- filler-item for empty spot at 2nd-in-a-row -->
       </li>
     </ul>
-    <br /><br /><br />
   </ng-container>
 
   <div
@@ -166,7 +168,7 @@
   *ngIf="!!getNotificationContent()"
   class="no-print"
 >
-  <div class="notification-bar ion-padding">
+  <div class="notification-bar text-area--light ion-padding">
     <div
       markdown
       [data]="getNotificationContent()"

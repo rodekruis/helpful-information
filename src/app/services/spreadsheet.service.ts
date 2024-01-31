@@ -19,6 +19,7 @@ import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import type { SubCategory } from 'src/app/models/sub-category.model';
 import { SubCategoryCol } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
+import { createLocaleAlternatives } from 'src/app/shared/util.locales';
 import {
   createSlug,
   getDateFromString,
@@ -428,6 +429,18 @@ export class SpreadsheetService {
       localeLanguage: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.localeLanguage,
+        -1,
+      ),
+      localeAlternatives: createLocaleAlternatives(
+        this.getConfigValueOrFallback(
+          sharedData,
+          RegionDataKey.localeAlternatives,
+          -1,
+        ),
+      ),
+      localeAlternativesExplanation: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.localeAlternativesExplanation,
         -1,
       ),
       pageLogo: this.getConfigValueOrFallback(
