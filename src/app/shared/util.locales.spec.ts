@@ -28,6 +28,20 @@ describe('Util: Locales', () => {
       ]);
     });
 
+    it('should treat "*" as wildcard language-code', () => {
+      // Arrange
+      const input = 'nl:Nederlands, *:Other...';
+
+      // Act
+      const result = createLocaleAlternatives(input);
+
+      // Assert
+      expect(result).toEqual([
+        { key: 'nl', label: 'Nederlands' },
+        { key: '', label: 'Other...' },
+      ]);
+    });
+
     it('should ignore input that is not in the correct format', () => {
       // Arrange
       const inputs = [
