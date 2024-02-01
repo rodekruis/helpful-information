@@ -42,17 +42,38 @@ export const environment = {
   errorRetry: 'Try again?',
 
   // Regions: (A comnma-separated list of URL paths/slugs)
-  regions: '',
-  // Regions Labels: (A comnma-separated list of human-readable text-strings)
-  regionsLabels: '',
-  // Regions Google Sheet IDs, corresponding to the above defined regions
-  regionsSheetIds: '',
+  regions:
+    // Local standalone sheet:
+    'test-local-1' +
+    ',' + // Add extra space to a row
+    // Local language-specific (content-equivalent) sheets:
+    ',nl' +
+    ',ar' +
+    '', // end-of-list
 
+  // Regions Labels: (A comnma-separated list of human-readable text-strings)
+  regionsLabels:
+    'Test Local 1' +
+    ',' + // Add extra space to a row
+    ',Test Local 🌐 NL' +
+    ',Test Local 🌐 AR' +
+    '', // end-of-list
+
+  // Regions Google Sheet IDs, corresponding to the above defined regions
+  regionsSheetIds:
+    'test-sheet-id-1' + // Local Test  🔴
+    ',' + // Add extra space to a row
+    ',test-sheet-id-2-language-nl' + // Local Test NL  🔴
+    ',test-sheet-id-3-language-ar' + // Local Test AR  🔴
+    '', // end-of-list
+
+  //
   // Third-party tokens:
+  //
 
   // Google Sheets API:
   google_sheets_api_key: '',
-  google_sheets_api_url: '',
+  google_sheets_api_url: 'http://localhost:3001',
 
   // Application Insights:
   appInsightsConnectionString: '',

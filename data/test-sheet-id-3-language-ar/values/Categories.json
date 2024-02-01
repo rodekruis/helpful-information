@@ -1,0 +1,10 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    ["#ID", "#NAME", "#SLUG", "#VISIBLE", "#DESCRIPTION", "#ICON"],
+    ["1", "ألفا فئة", "categorie-alfa", "Show", "مقدمة الفئة الأولى.", ""],
+    ["2", "فئة برافو", "categorie-bravo", "Show", "فئة أخرى.", ""],
+    []
+  ]
+}
