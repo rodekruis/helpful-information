@@ -78,12 +78,6 @@ jobs:
             ,
             undocumented-migrants,
             eu-migrants,
-            ,
-            ,
-            morocco,
-            marokko,
-            libya,
-            libie,
 
           REGIONS_LABELS: >-
             Ukraine (EN),
@@ -94,12 +88,6 @@ jobs:
             ,
             Undocumented Migrants,
             EU Migrants,
-            ,
-            ,
-            Morocco Earthquake (EN),
-            Marokko Aardbeving (NL),
-            Libya Floods (EN),
-            Libië Overstromingen (NL),
 
           REGIONS_SHEET_IDS: >-
             14NZwDa8DNmH1q2Rxt-ojP9MZhJ-2GlOIyN8RF19iF04,
@@ -110,12 +98,6 @@ jobs:
             ,
             1Veli11xRUzIbmfTF8N57xAZqnMWcH1yKVP63PpfXF7s,
             1SCyJ8v7blSDaeehWuImaRvwXMXC-9o7kbC5bnmotAYw,
-            ,
-            ,
-            1LIhuGvtwPVGn4cC7OnbU33cDzkus8O1MfeYLq-YXYsc,
-            1oUdEkdpQ4h183nUSj-7rWwXNdAsEopL3m9Iy18dc7LA,
-            1N5EAnnc3QVec3M_ME19r1wavzU_4O_R-NPAiiReD9C8,
-            1Iy1PaqgP8ugmm4EsZ7GHk4wXFZSm5mUGxml8Dwl4Uso,
 
           GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
           GOOGLE_SHEETS_API_URL: 'https://sheets.googleapis.com/v4/spreadsheets'
