@@ -1,0 +1,56 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    ["#KEY", "#VALUE", "#EXAMPLE value"],
+    ["#timestamp.last-updated", "2024-01-02T13:14:15.167Z"],
+    ["#locale.dir", "ltr"],
+    ["#locale.language", "nl"],
+    ["#locale.alternatives", "nl:Nederlands, ar:العربية"],
+    [
+      "#locale.alternatives.explanation",
+      "(Niet alles in beschikbaar in elke taal)"
+    ],
+    [],
+    [
+      "#logo",
+      "https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg"
+    ],
+    ["#name", "Test/Voorbeeld"],
+    ["#main.heading", "Hallo!"],
+    ["#main.intro", "Deze pagina is in het Nederlands."],
+    ["#main.notification", ""],
+    ["#nav.back", "Terug"],
+    ["#nav.main", "Start"],
+    [],
+    ["#label.last-updated", "Laatste wijziging:"],
+    ["#label.feedback.cta", "Mist er iets? Laat het ons weten!"],
+    [],
+    ["#contact.tel", ""],
+    ["#contact.whatsapp", ""],
+    ["#contact.telegram", ""],
+    [
+      "#contact.feedback-url",
+      "mailto:contact@example.nl?subject=Feedback%20on%20URL:%20{URL}"
+    ],
+    [],
+    ["#highlights.title", "Recente wijzigingen"],
+    ["#highlights.items.0", "Geen recente wijzigingen."],
+    ["#highlights.items", "Items met wijzigingen:"],
+    ["#highlights.cta", "Wijzigingen"],
+    [],
+    ["#search.title", "Zoek-resultaten"],
+    ["#search.cta", "Zoek"],
+    ["#search.items", "Resultaten:"],
+    ["#search.items.0", "Geen resultaten."],
+    [],
+    ["#offer.address", "Adres"],
+    ["#offer.phone", "Telefoon"],
+    ["#offer.email", "E-mail"],
+    ["#offer.website", "Website(s)"],
+    ["#offer.open.week", "Openingstijden Ma-Vr"],
+    ["#offer.open.weekend", "Openingstijden Weekend"],
+    ["#offer.need-to-know", "Dit moet je weten"],
+    []
+  ]
+}

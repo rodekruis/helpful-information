@@ -1,0 +1,17 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    ["#CATEGORY", "#ID", "#NAME", "#SLUG", "#VISIBLE", "#DESCRIPTION", "#ICON"],
+    [
+      "1",
+      "1",
+      "Sub-Categorie",
+      "sub-categorie",
+      "Show",
+      "Een introductie van deze sub-categorie.",
+      ""
+    ],
+    []
+  ]
+}

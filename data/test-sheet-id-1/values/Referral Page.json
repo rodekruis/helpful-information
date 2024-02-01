@@ -21,7 +21,7 @@
     [
       "Label: Alternative languages explanation\n#locale.alternatives.explanation",
       "* Translations via Google",
-      "\"Using Google Translate.\", \"(Translate with Google Translate.)\""
+      "\"Using Google Translate.\", \"(Translate with Google Translate.)\" or empty when using sheets-as-languages"
     ],
     [
       "Logo URL\n#logo",
