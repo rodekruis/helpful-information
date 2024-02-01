@@ -19,9 +19,10 @@ export const environment = {
   mainPageHeader: 'The Red Cross provides helpful information.',
   mainPageIntroduction:
     'Intro test-content: \n\n' +
-    '<b>Image:</b> <img src="/favicon.ico" alt=""/> \n\n' +
-    ' <b>Link:</b> <a href="https://github.com/rodekruis/helpful-information">helpful-information on GitHub</a> \n\n ' +
-    ' <b>Internal:</b> <a href="/test">Test</a> \n\n ' +
+    'Image: <img src="/favicon.ico" alt=""/> \n\n' +
+    'Link: <a href="https://github.com/rodekruis/helpful-information">helpful-information on GitHub</a> \n\n ' +
+    'Internal: <a href="/test-local-1">Test Local 1</a> \n\n ' +
+    'Emoji in text: 🚩 📱 🪪 📍 ♿️ ℹ️ ☑️ 🔴🟠🟢 ⚠️  &#x26A0;\n\n' +
     'Markdown content: \n\n' +
     '_inline_ **styles** and [external links](https://example.org) or [internal links](/test) \n\n' +
     '### Level 3 headings down only? \n\n' +
@@ -32,7 +33,7 @@ export const environment = {
     '\n' +
     '1. numbered \n' +
     '1. lists \n' +
-    '\n - - - \n\n' +
+    '\n \n' +
     'Please select your region:',
   mainPageNotification: '',
 
