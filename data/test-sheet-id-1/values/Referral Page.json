@@ -11,12 +11,12 @@
     [
       "Default language\n#locale.language",
       "en",
-      "One of \"nl\" or \"en\" or \"ar\""
+      "One of \"nl\" or \"en\" or \"ar\"\nSee for options: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"
     ],
     [
       "Alternative languages (for auto-translation)\n#locale.alternatives",
-      "en:English, nl:Nederlands, fr:Français, ar:العربية, pt:Português,  :Other...",
-      "List: \"nl:Nederlands, en:English, ar:العربية\" MUST include default-language! \nSee for options: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"
+      "en:English, nl:Nederlands, fr:Français, ar:العربية, pt:Português,  *:Other...",
+      "List: \"nl:Nederlands, en:English, ar:العربية\" MUST include default-language!\nIn the format: \"<language-code>:<language-native-name>\" separated by comma's (\",\")"
     ],
     [
       "Label: Alternative languages explanation\n#locale.alternatives.explanation",

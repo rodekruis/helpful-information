@@ -16,11 +16,16 @@ export function createLocaleAlternatives(
       return [];
     }
 
-    const key = localeSet[0] ? localeSet[0].trim() : '';
+    let key = localeSet[0] ? localeSet[0].trim() : '';
     const label = localeSet[1] ? localeSet[1].trim() : '';
 
     if (!key || !label) {
       return [];
+    }
+
+    // Use "*" as explicit wildcard to omit language-code from URL
+    if (key === '*') {
+      key = '';
     }
 
     return [
