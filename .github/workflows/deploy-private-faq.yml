@@ -137,7 +137,6 @@ jobs:
         run: 'cp .azure/login/frontdoor.html www/frontdoor.html'
 
       - name: Install Google Sheets API SDK
-        if: steps.cache_build.outputs.cache-hit != 'true'
         run: 'npm install googleapis@^128.0.0 --no-save'
 
       - name: Download sheet data
