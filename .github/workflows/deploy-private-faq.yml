@@ -80,7 +80,7 @@ jobs:
         id: cache_build
         with:
           path: www
-          key: ${{ runner.os }}-build-private-hia-${{ hashFiles('*.json,*.js,src') }}-${{ hashFiles('.github/workflows/deploy-private-faq.yml') }}
+          key: ${{ runner.os }}-build-private-hia-${{ hashFiles('*.json', '*.js', 'src') }}-${{ hashFiles('.github/workflows/deploy-private-faq.yml') }}
 
       - name: Build
         if: steps.cache_build.outputs.cache-hit != 'true'
