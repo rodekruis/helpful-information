@@ -131,5 +131,6 @@ jobs:
       - name: Close Pull Request for Production
         uses: Azure/static-web-apps-deploy@v1
         with:
+          app_location: 's'
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GRAY_OCEAN_0BB48C403 }}
           action: 'close'

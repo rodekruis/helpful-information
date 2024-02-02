@@ -75,7 +75,15 @@ jobs:
           echo "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAQAQAQEAAQABABAQEAABEQEREBABAAEAAQAQEAEAAQABABAQAQABEQARAAEQAAAAAAAAAAABEREREREREREREREiERERERERESIREREREREiIiIRERERESIiIhERERERESIRERERERERIhEREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" | base64 --decode > src/favicon.env.ico
           cp --force src/favicon.env.ico src/favicon.ico
 
+      - name: Re-use cached build
+        uses: actions/cache@v3
+        id: cache_build
+        with:
+          path: www
+          key: ${{ runner.os }}-build-private-hia-${{ hashFiles('*.json', '*.js', 'src') }}-${{ hashFiles('.github/workflows/deploy-private-faq.yml') }}
+
       - name: Build
+        if: steps.cache_build.outputs.cache-hit != 'true'
         run: 'npm run build:production'
         env:
           NG_PRODUCTION: 'true'
@@ -121,9 +129,11 @@ jobs:
           AI_CONNECTION_STRING: 'InstrumentationKey=92c7559a-1554-4e7b-b86c-afe18c15b64c;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/'
 
       - name: Set/override robots.txt
+        if: steps.cache_build.outputs.cache-hit != 'true'
         run: 'cp src/robots.private.txt www/robots.txt'
 
       - name: Add Front-door for Azure Entra login
+        if: steps.cache_build.outputs.cache-hit != 'true'
         run: 'cp .azure/login/frontdoor.html www/frontdoor.html'
 
       - name: Install Google Sheets API SDK
