@@ -35,7 +35,7 @@ on:
 
 permissions:
   deployments: write
-  issues: write
+  pull-requests: write
 
 jobs:
   build_and_deploy:
@@ -93,8 +93,6 @@ jobs:
             To view the public FAQ, visit:\n
             <https://helpfulinformation-faq.redcross.nl/>  \n
             \n
-            <a href="/login" class="action"><strong>🔐 Login</strong></a>\n
-            \n
             When on a public device, you can: [**Logout**](/logout)\n
             \n
           TXT_ERROR_HEADER: 'Data Unavailable'
@@ -125,6 +123,9 @@ jobs:
       - name: Set/override robots.txt
         run: 'cp src/robots.private.txt www/robots.txt'
 
+      - name: Add Front-door for Azure Entra login
+        run: 'cp .azure/login/frontdoor.html www/frontdoor.html'
+
       - name: Install Google Sheets API SDK
         run: 'npm install googleapis@^128.0.0 --no-save'
 
@@ -147,9 +148,9 @@ jobs:
           action: 'upload'
           config_file_location: '.azure/local-data/'
           app_location: 'www'
+          api_location: '.azure/login/api/'
           output_location: ''
           skip_app_build: true
-          skip_api_build: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
