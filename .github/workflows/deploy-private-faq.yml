@@ -65,22 +65,24 @@ jobs:
           node-version-file: '.node-version'
           cache: 'npm'
 
-      - name: Install
-        env:
-          HUSKY: 0
-        run: 'npm ci --no-fund --no-audit'
-
-      - name: Set/override favicon.ico
-        run: |
-          echo "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAQAQAQEAAQABABAQEAABEQEREBABAAEAAQAQEAEAAQABABAQAQABEQARAAEQAAAAAAAAAAABEREREREREREREREiERERERERESIREREREREiIiIRERERESIiIhERERERESIRERERERERIhEREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" | base64 --decode > src/favicon.env.ico
-          cp --force src/favicon.env.ico src/favicon.ico
-
       - name: Re-use cached build
         uses: actions/cache@v3
         id: cache_build
         with:
           path: www
           key: ${{ runner.os }}-build-private-hia-${{ hashFiles('*.json', '*.js', 'src') }}-${{ hashFiles('.github/workflows/deploy-private-faq.yml') }}
+
+      - name: Install
+        if: steps.cache_build.outputs.cache-hit != 'true'
+        env:
+          HUSKY: 0
+        run: 'npm ci --no-fund --no-audit'
+
+      - name: Set/override favicon.ico
+        if: steps.cache_build.outputs.cache-hit != 'true'
+        run: |
+          echo "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAQAQAQEAAQABABAQEAABEQEREBABAAEAAQAQEAEAAQABABAQAQABEQARAAEQAAAAAAAAAAABEREREREREREREREiERERERERESIREREREREiIiIRERERESIiIhERERERESIRERERERERIhEREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" | base64 --decode > src/favicon.env.ico
+          cp --force src/favicon.env.ico src/favicon.ico
 
       - name: Build
         if: steps.cache_build.outputs.cache-hit != 'true'
@@ -137,7 +139,8 @@ jobs:
         run: 'cp .azure/login/frontdoor.html www/frontdoor.html'
 
       - name: Install Google Sheets API SDK
-        run: 'npm install googleapis@^128.0.0 --no-save'
+        if: steps.cache_build.outputs.cache-hit != 'true'
+        run: 'npm install googleapis@^128.0.0'
 
       - name: Download sheet data
         env:
