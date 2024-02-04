@@ -30,8 +30,9 @@ on:
   issue_comment:
     types: [created]
   schedule:
-    # See: https://crontab.guru/#18_18_*_*_1-5
-    - cron: '42 18 * * 1-5'
+    # Time in UTC, -2 hours from CEST(Europoe/Amsterdam)
+    # See: https://crontab.guru/#42_15_*_*_1-5
+    - cron: '42 15 * * 1-5'
 
 permissions:
   deployments: write
