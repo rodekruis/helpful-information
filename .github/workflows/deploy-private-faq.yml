@@ -67,7 +67,7 @@ jobs:
           cache: 'npm'
 
       - name: Re-use cached build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache_build
         with:
           path: www
