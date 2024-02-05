@@ -7,7 +7,7 @@
     ["#locale.dir", "rtl"],
     ["#locale.language", "ar"],
     ["#locale.alternatives", "nl:Nederlands, ar:العربية"],
-    ["#locale.alternatives.explanation", "(ليست كلها متوفرة في كل اللغات)"],
+    ["#locale.alternatives.explanation", "(ليس كل شيء متوفر في كل لغة)"],
     [],
     [
       "#logo",
