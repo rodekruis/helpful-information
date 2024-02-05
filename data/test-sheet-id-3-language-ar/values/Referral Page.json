@@ -6,7 +6,7 @@
     ["#timestamp.last-updated", "2024-01-02T13:14:15.167Z"],
     ["#locale.dir", "rtl"],
     ["#locale.language", "ar"],
-    ["#locale.alternatives", "nl:Nederlands, ar:العربية"],
+    ["#locale.alternatives", ""],
     ["#locale.alternatives.explanation", "(ليس كل شيء متوفر في كل لغة)"],
     [],
     [

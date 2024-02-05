@@ -30,7 +30,7 @@ export class AppHeaderComponent {
   public currentLanguage: string;
 
   @Input()
-  public languageOptions: RegionData['localeAlternatives'] = [];
+  public localeAlternatives: RegionData['localeAlternatives'] = [];
 
   @Input()
   public languageOptionsExplanation: string;
