@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v23.11.0...main)
 
+### Removed
+
+- Back-button and related logging/logic
+
+### Added
+
+- Local data - A script to download (private) Google Sheets at build-time
+
 ---
 
 ## 2023-11-30: [v23.11](https://github.com/rodekruis/helpful-information/releases/tag/v23.11.0)

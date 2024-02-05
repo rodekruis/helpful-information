@@ -22,14 +22,15 @@ export const environment = {
   errorRetry: 'Retest',
 
   // Regions:
-  regions: 'test',
-  regionsLabels: 'Test',
-  regionsSheetIds: 'test-id',
+  regions: 'test, ,test-nl,test-ar',
+  regionsLabels: 'Test, ,Test NL,Test AR',
+  regionsSheetIds:
+    'test-sheet-id-1, ,test-sheet-id-2-language-nl,test-sheet-id-3-language-ar',
 
   // Third-party tokens:
   // Google Sheets API:
   google_sheets_api_key: 'test-api-key',
-  google_sheets_api_url: 'https://example.org/api',
+  google_sheets_api_url: '/data',
 
   // Application Insights
   appInsightsConnectionString: '',

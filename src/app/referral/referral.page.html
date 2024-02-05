@@ -73,6 +73,7 @@
       <li
         *ngFor="let region of regions; index as index;"
         class="tile-grid--item"
+        [attr.aria-hidden]="!region"
       >
         <a
           *ngIf="region"
