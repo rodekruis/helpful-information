@@ -11,6 +11,7 @@ export const environment = {
   useOffers: true, // Enable 'Offers'-content type
   useQandAs: true, // Enable 'Q&A'-content type
   useQandASearch: true, // Enable Search-feature for Q&As
+  useRegionPerLocale: true, // Enable language-switcher to switch between Regions
 
   // Configuration of content
   appName: 'Helpful Information',

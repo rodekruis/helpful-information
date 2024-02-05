@@ -1,5 +1,5 @@
 <details
-  *ngIf="languageOptions?.length"
+  *ngIf="languageOptions?.length && sourceLanguage"
   class="language-switcher"
 >
   <summary class="language-switcher--toggle">
@@ -40,12 +40,17 @@
       class="ion-no-margin list-flat"
       role="list"
     >
-      <li *ngFor="let targetLanguage of languageOptions">
+      <li
+        *ngFor="let targetLanguage of languageOptions"
+        [attr.aria-current]="targetLanguage.key === sourceLanguage"
+      >
         <a
-          *ngIf="targetLanguage.key !== sourceLanguage"
-          href="https://translate.google.com/translate?sl={{
-            sourceLanguage
-          }}&tl={{ targetLanguage.key }}&u={{ getCurrentUrl() }}"
+          *ngIf="
+            targetLanguage.key !== sourceLanguage &&
+            targetLanguage.label &&
+            targetLanguage.url
+          "
+          [href]="targetLanguage.url"
           rel="alternate"
           [hreflang]="targetLanguage.key"
           translate="no"
@@ -56,7 +61,6 @@
           *ngIf="targetLanguage.key === sourceLanguage"
           translate="no"
           [attr.lang]="targetLanguage.key"
-          [attr.aria-current]="true"
           class="language-switcher--selected"
         >
           <strong>{{ targetLanguage.label }}</strong>
