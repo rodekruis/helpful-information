@@ -19,6 +19,10 @@ import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import type { SubCategory } from 'src/app/models/sub-category.model';
 import { SubCategoryCol } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
+import {
+  createRegionSlugs,
+  createTokenList,
+} from 'src/app/shared/util.environment';
 import { createLocaleAlternatives } from 'src/app/shared/util.locales';
 import {
   createSlug,
@@ -66,10 +70,10 @@ export class SpreadsheetService {
   }
 
   private loadSheetIds(): void {
-    const regions: string[] = environment.regions.trim().split(/\s*,\s*/);
-    const googleSheetsIds: string[] = environment.regionsSheetIds
-      .trim()
-      .split(/\s*,\s*/);
+    const regions: string[] = createRegionSlugs(environment.regions);
+    const googleSheetsIds: string[] = createTokenList(
+      environment.regionsSheetIds,
+    );
 
     regions.forEach((_, index: number) => {
       this.sheetIds[regions[index]] = googleSheetsIds[index];

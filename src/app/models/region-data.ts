@@ -26,6 +26,7 @@ export type RegionData = {
   localeAlternatives?: {
     key: string;
     label: string;
+    url?: string;
   }[];
   localeAlternativesExplanation?: string;
   localeDirection?: string;

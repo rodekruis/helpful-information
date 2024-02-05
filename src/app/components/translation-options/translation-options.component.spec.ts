@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { TranslationOptionsComponent } from './translation-options.component';
 
@@ -9,6 +10,7 @@ describe('TranslationOptionsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [],
+      providers: [RouterTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TranslationOptionsComponent);
@@ -26,7 +28,8 @@ describe('TranslationOptionsComponent', () => {
       { key: 'nl', label: 'Nederlands' },
       { key: 'fr', label: 'Français' },
     ];
-    component.languageOptions = testLanguageSets;
+    component.localeAlternatives = testLanguageSets;
+    component.sourceLanguage = 'en';
 
     // Act
     fixture.detectChanges();
@@ -46,7 +49,7 @@ describe('TranslationOptionsComponent', () => {
       { key: 'en', label: 'English' },
       { key: 'nl', label: 'Nederlands (duplicate by accident)' },
     ];
-    component.languageOptions = testLanguageSets;
+    component.localeAlternatives = testLanguageSets;
     component.sourceLanguage = 'nl';
     const testLanguageLinkCount = 2;
 

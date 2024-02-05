@@ -24,6 +24,10 @@ import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
+import {
+  createRegionLabels,
+  createRegionSlugs,
+} from 'src/app/shared/util.environment';
 import { createSlug } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
@@ -80,8 +84,8 @@ export class ReferralPageComponent implements OnInit {
     private pageMeta: PageMetaService,
     private loggingService?: LoggingService,
   ) {
-    this.regions = environment.regions.trim().split(/\s*,\s*/);
-    this.regionsLabels = environment.regionsLabels.trim().split(/\s*,\s*/);
+    this.regions = createRegionSlugs(environment.regions);
+    this.regionsLabels = createRegionLabels(environment.regionsLabels);
 
     this.route.params.subscribe((params: Params) => {
       this.region = params.region;
