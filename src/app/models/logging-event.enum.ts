@@ -25,6 +25,7 @@ export enum LoggingEvent {
   NotFoundSubCategory = 'not-found-sub-category',
   OfferClick = 'offer-click',
   OfferDetailClick = 'offer-detail-click',
+  ParentLinkClick = 'parent-link-click',
   Print = 'print',
   QuestionClose = 'question-close',
   QuestionOpen = 'question-open',
