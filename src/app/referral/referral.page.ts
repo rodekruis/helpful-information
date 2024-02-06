@@ -84,8 +84,8 @@ export class ReferralPageComponent implements OnInit {
     private pageMeta: PageMetaService,
     private loggingService?: LoggingService,
   ) {
-    this.regions = createRegionSlugs(environment.regions);
-    this.regionsLabels = createRegionLabels(environment.regionsLabels);
+    this.regions = createRegionSlugs();
+    this.regionsLabels = createRegionLabels();
 
     this.route.params.subscribe((params: Params) => {
       this.region = params.region;
