@@ -12,10 +12,7 @@
       "(Niet alles is beschikbaar in elke taal)"
     ],
     [],
-    [
-      "#logo",
-      "https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg"
-    ],
+    ["#logo", ""],
     ["#name", "Test/Voorbeeld"],
     ["#main.heading", "Hallo!"],
     ["#main.intro", "Deze pagina is in het Nederlands."],

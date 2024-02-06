@@ -9,10 +9,7 @@
     ["#locale.alternatives", ""],
     ["#locale.alternatives.explanation", "(ليس كل شيء متوفر في كل لغة)"],
     [],
-    [
-      "#logo",
-      "https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg"
-    ],
+    ["#logo", ""],
     ["#name", "اختبار/مثال"],
     ["#main.heading", "مرحبًا!"],
     ["#main.intro", "هذه الصفحة باللغة العربية."],
