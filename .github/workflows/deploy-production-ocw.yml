@@ -61,6 +61,7 @@ jobs:
           NG_USE_OFFERS: 'false'
           NG_USE_Q_AND_AS: 'true'
           NG_USE_Q_AND_A_SEARCH: 'true'
+          NG_USE_REGION_PER_LOCALE: 'true'
           TXT_APP_NAME: 'Vragen over Schoolmaaltijden'
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/OCWLogo2.svg'
           TXT_MAIN_PAGE_HEADER: ''
