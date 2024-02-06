@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
+import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
 import { SubCategoryLinkComponent } from 'src/app/components/sub-category-link/sub-category-link.component';
 import type { Category } from 'src/app/models/category.model';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
@@ -24,10 +25,11 @@ import { getLegacyID } from 'src/app/shared/utils';
     SubCategoryLinkComponent,
     CategoryFilterPipe,
     MarkdownModule,
+    ParentLinkComponent,
   ],
 })
 export default class CategoryPageComponent implements OnInit {
-  private region: string;
+  public region: string;
 
   @Input()
   public category: Category;
