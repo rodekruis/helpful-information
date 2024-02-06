@@ -4,8 +4,8 @@ import type { Event } from '@angular/router';
 import { EventType, Router } from '@angular/router';
 import type { RegionData } from 'src/app/models/region-data';
 import {
-  createRegionLabels,
   createRegionSlugs,
+  getRegionLabel,
 } from 'src/app/shared/util.environment';
 import { environment } from 'src/environments/environment';
 
@@ -116,13 +116,12 @@ export class TranslationOptionsComponent {
   }
 
   private createLocalLanguageOptions(): RegionData['localeAlternatives'] {
-    const regions = createRegionSlugs(environment.regions);
-    const regionsLabels = createRegionLabels(environment.regionsLabels);
+    const regions = createRegionSlugs();
 
-    return regions.map((region: string, index: number) => {
+    return regions.map((region: string) => {
       return {
         key: region,
-        label: regionsLabels[index],
+        label: getRegionLabel(region),
       };
     });
   }
