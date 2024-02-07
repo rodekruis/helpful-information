@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { LoggingService } from 'src/app/services/logging.service';
 
 import { TranslationOptionsComponent } from './translation-options.component';
 
@@ -10,7 +11,12 @@ describe('TranslationOptionsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [],
-      providers: [RouterTestingModule],
+      providers: [
+        RouterTestingModule,
+        {
+          provide: LoggingService,
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TranslationOptionsComponent);
