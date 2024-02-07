@@ -16,6 +16,8 @@ export enum LoggingEvent {
   FooterContactClick = 'footer-contact-click',
   FooterTelegramClick = 'footer-telegram-click',
   FooterWhatsAppClick = 'footer-whatsapp-click',
+  LanguageOptionsClose = 'language-options-close',
+  LanguageOptionsOpen = 'language-options-open',
   MainScreenClick = 'main-screen-button-click',
   NotFoundCategory = 'not-found-category',
   NotFoundOffer = 'not-found-offer',
