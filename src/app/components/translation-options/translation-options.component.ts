@@ -2,7 +2,12 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import type { Event } from '@angular/router';
 import { EventType, Router } from '@angular/router';
+import {
+  LoggingEvent,
+  LoggingEventCategory,
+} from 'src/app/models/logging-event.enum';
 import type { RegionData } from 'src/app/models/region-data';
+import { LoggingService } from 'src/app/services/logging.service';
 import {
   createRegionSlugs,
   getRegionLabel,
@@ -43,7 +48,10 @@ export class TranslationOptionsComponent {
     }
   }
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private loggingService?: LoggingService,
+  ) {
     if (this.useRegionPerLocale) {
       this.languageOptions = this.createLocalLanguageOptions();
     }
@@ -140,5 +148,17 @@ export class TranslationOptionsComponent {
 
       return languageOption;
     });
+  }
+
+  public toggle(target: EventTarget | HTMLDetailsElement): void {
+    if (!this.loggingService) {
+      return;
+    }
+    this.loggingService.logEvent(
+      LoggingEventCategory.ai,
+      (target as HTMLDetailsElement).open
+        ? LoggingEvent.LanguageOptionsOpen
+        : LoggingEvent.LanguageOptionsClose,
+    );
   }
 }

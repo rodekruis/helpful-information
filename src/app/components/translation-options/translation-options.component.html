@@ -1,5 +1,6 @@
 <details
   *ngIf="languageOptions?.length && sourceLanguage"
+  (toggle)="toggle($event.target)"
   class="language-switcher"
 >
   <summary class="language-switcher--toggle">
