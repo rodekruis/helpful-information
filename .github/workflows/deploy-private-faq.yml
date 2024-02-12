@@ -161,9 +161,9 @@ jobs:
           action: 'upload'
           config_file_location: '.azure/local-data/'
           app_location: 'www'
-          api_location: '.azure/login/api/'
           output_location: ''
           skip_app_build: true
+          skip_api_build: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
