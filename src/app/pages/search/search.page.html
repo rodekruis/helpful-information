@@ -6,7 +6,7 @@
 
 <app-search-input
   [(searchQuery)]="searchQuery"
-  (doSearch)="performSearch($event)"
+  (doSearch)="onSearchInput($event)"
   [actionLabel]="regionData?.labelSearchAction"
   class="ion-margin-vertical"
 ></app-search-input>
