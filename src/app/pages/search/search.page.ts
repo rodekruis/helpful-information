@@ -3,6 +3,7 @@ import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { SearchInputComponent } from 'src/app/components/search-input/search-input.component';
 import type { QASet } from 'src/app/models/qa-set.model';
@@ -13,12 +14,29 @@ import { RegionDataService } from 'src/app/services/region-data.service';
 import { SearchService } from 'src/app/services/search.service';
 import { environment } from 'src/environments/environment';
 
+type SearchApiResponse = {
+  status?: number;
+  answer?: string;
+  references?: {
+    category: string;
+    subcategory: string;
+    slug?: string;
+    parent?: string;
+  }[];
+};
+
 @Component({
   selector: 'app-search-page',
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.css'],
   standalone: true,
-  imports: [NgIf, RouterLink, QASetListComponent, SearchInputComponent],
+  imports: [
+    NgIf,
+    RouterLink,
+    QASetListComponent,
+    SearchInputComponent,
+    MarkdownModule,
+  ],
 })
 export default class SearchPageComponent implements OnInit {
   public useSearchApi = environment.useQandASearch && !!environment.searchApi;
@@ -28,6 +46,8 @@ export default class SearchPageComponent implements OnInit {
 
   public searchQuery: string;
   public searchResults: QASet[];
+  public searchResultSummary: string;
+  public loadingSearch: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -84,7 +104,9 @@ export default class SearchPageComponent implements OnInit {
   }
 
   public onSearchInput(rawQuery: string) {
-    const safeQuery = this.searchService.sanitizeSearchQuery(rawQuery);
+    const safeQuery = this.useSearchApi
+      ? rawQuery
+      : this.searchService.sanitizeSearchQuery(rawQuery);
 
     this.router.navigate([], {
       queryParams: { q: safeQuery },
@@ -95,7 +117,23 @@ export default class SearchPageComponent implements OnInit {
   public async performSearch(query: string): Promise<void> {
     const safeQuery = this.searchService.sanitizeSearchQuery(query);
 
-    this.searchResults = this.searchService.query(safeQuery);
+    if (this.useSearchApi) {
+      this.loadingSearch = true;
+      const apiResponse: SearchApiResponse =
+        await this.fetchApiResults(safeQuery);
+
+      if (apiResponse) {
+        this.loadingSearch = false;
+      }
+      if (apiResponse && apiResponse.answer) {
+        this.searchResultSummary = apiResponse.answer;
+      }
+      if (apiResponse && apiResponse.references) {
+        this.searchResults = this.createReferences(apiResponse.references);
+      }
+    } else {
+      this.searchResults = this.searchService.query(safeQuery);
+    }
 
     if (this.searchResults.length > 1) {
       this.pageMeta.setTitle({
@@ -107,5 +145,48 @@ export default class SearchPageComponent implements OnInit {
         resultFrame.focus();
       }
     }
+  }
+
+  private createReferences(
+    references: SearchApiResponse['references'],
+  ): QASet[] {
+    const results = references.map((reference) => {
+      const result = this.qaSets.find((qa) => {
+        return (
+          qa.categoryID === Number(reference.category) &&
+          qa.subCategoryID === Number(reference.subcategory)
+        );
+      });
+
+      return result;
+    });
+    return results;
+  }
+
+  private async fetchApiResults(query: string): Promise<SearchApiResponse> {
+    const response = await window.fetch(environment.searchApi, {
+      method: 'POST',
+      credentials: 'omit',
+      mode: 'cors',
+      headers: {
+        Authorization: environment.searchApiKey,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question: query,
+        googleSheetId: this.regionData.sheetId,
+      }),
+    });
+
+    if (!response || !response.ok) {
+      console.warn('Something went wrong:', response);
+      return {
+        answer: `Something went wrong.\nMaybe you can try again. \n\n ${response.status} ${response.statusText}`,
+        references: [],
+      };
+    }
+
+    return await response.json();
   }
 }
