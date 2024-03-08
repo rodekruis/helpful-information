@@ -92,13 +92,17 @@ export default class SearchPageComponent implements OnInit {
     }
   }
 
-  public performSearch(rawQuery: string): void {
+  public onSearchInput(rawQuery: string) {
     const safeQuery = this.searchService.sanitizeSearchQuery(rawQuery);
 
     this.router.navigate([], {
       queryParams: { q: safeQuery },
       queryParamsHandling: 'merge',
     });
+  }
+
+  public async performSearch(query: string): Promise<void> {
+    const safeQuery = this.searchService.sanitizeSearchQuery(query);
 
     this.searchResults = this.searchService.query(safeQuery);
 
