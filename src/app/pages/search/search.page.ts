@@ -11,6 +11,7 @@ import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { SearchService } from 'src/app/services/search.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search-page',
@@ -20,9 +21,11 @@ import { SearchService } from 'src/app/services/search.service';
   imports: [NgIf, RouterLink, QASetListComponent, SearchInputComponent],
 })
 export default class SearchPageComponent implements OnInit {
+  public useSearchApi = environment.useQandASearch && !!environment.searchApi;
   private region: string;
   public regionData: RegionData;
   public qaSets: QASet[];
+
   public searchQuery: string;
   public searchResults: QASet[];
 

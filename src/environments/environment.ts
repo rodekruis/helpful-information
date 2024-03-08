@@ -13,6 +13,9 @@ export const environment = {
   useQandASearch: true, // Enable Search-feature for Q&As
   useRegionPerLocale: true, // Enable language-switcher to switch between Regions
 
+  searchApi: '', // Server-side Search-feature via API
+  searchApiKey: '', // Server-side Search-API-Key
+
   // Configuration of content
   appName: 'Helpful Information',
   appLogoUrl:

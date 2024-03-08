@@ -11,6 +11,9 @@ export const environment = {
   useQandASearch: true,
   useRegionPerLocale: false,
 
+  searchApi: '',
+  searchApiKey: '',
+
   // Configuration of content
   appName: 'HIA-test',
   appLogoUrl: '',

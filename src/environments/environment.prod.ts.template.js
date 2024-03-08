@@ -12,6 +12,9 @@ export const environment = {
   useQandASearch: ${process.env.NG_USE_Q_AND_A_SEARCH === 'true' || false},
   useRegionPerLocale: ${process.env.NG_USE_REGION_PER_LOCALE === 'true' || false},
 
+  searchApi: '${process.env.SEARCH_API || ''}',
+  searchApiKey: '${process.env.SEARCH_API_KEY || ''}',
+
   // Configuration of content
   appName: '${process.env.TXT_APP_NAME || ''}',
   appLogoUrl: '${process.env.TXT_APP_LOGO_URL || ''}',
