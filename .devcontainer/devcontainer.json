@@ -20,17 +20,17 @@
       "openFiles": [
         "README.md",
         "package.json",
-        "src/environments/environment.ts",
-      ],
-    },
+        "src/environments/environment.ts"
+      ]
+    }
   },
 
   "portsAttributes": {
     "4200": {
-      "label": "dev-preview",
+      "label": "dev-preview"
     },
     "3001": {
-      "label": "local-data",
-    },
-  },
+      "label": "local-data"
+    }
+  }
 }
