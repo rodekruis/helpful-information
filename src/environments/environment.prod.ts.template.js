@@ -13,6 +13,9 @@ export const environment = {
   useRegionPerLocale: ${process.env.NG_USE_REGION_PER_LOCALE === 'true' || false},
   useFeedbackPrompt: ${process.env.NG_USE_FEEDBACK_PROMPT === 'true' || false},
 
+  searchApi: '${process.env.SEARCH_API || ''}',
+  searchApiKey: '${process.env.SEARCH_API_KEY || ''}',
+
   // Configuration of content
   localeLanguage: '${process.env.NG_LOCALE_LANGUAGE || ''}',
   localeDir: '${process.env.NG_LOCALE_DIR || ''}',
