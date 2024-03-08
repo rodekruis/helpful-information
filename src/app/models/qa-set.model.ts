@@ -24,7 +24,6 @@ export enum QACol {
   answer = 'ANSWER',
   category = 'CATEGORY',
   highlight = 'HIGHLIGHT',
-  id = 'ID',
   parent = 'PARENT',
   question = 'QUESTION',
   slug = 'SLUG',
