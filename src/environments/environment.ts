@@ -14,6 +14,9 @@ export const environment = {
   useRegionPerLocale: true, // Enable language-switcher to switch between Regions
   useFeedbackPrompt: true, // Enable Feedback-prompt on Sub-Category and Offer pages
 
+  searchApi: '', // Server-side Search-feature via API
+  searchApiKey: '', // Server-side Search-API-Key
+
   // Configuration of content
   localeLanguage: 'en', // Default language
   localeDir: 'ltr', // Default language direction: 'ltr' or 'rtl'
