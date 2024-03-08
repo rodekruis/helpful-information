@@ -1,5 +1,6 @@
 // All properties sorted alphabetically.
 export type RegionData = {
+  sheetId?: string;
   contactFeedbackUrl?: string;
   contactPhoneNumber?: string;
   contactTelegramLink?: string;

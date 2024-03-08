@@ -661,11 +661,14 @@ export class SpreadsheetService {
           keysCol,
         );
 
-        return this.convertConfigSheetToRegionData(
-          regionRows,
-          valueCol,
-          regionRowMap,
-        );
+        return {
+          sheetId: this.sheetIds[region],
+          ...this.convertConfigSheetToRegionData(
+            regionRows,
+            valueCol,
+            regionRowMap,
+          ),
+        };
       })
       .catch((error) => {
         if (this.loggingService) {
