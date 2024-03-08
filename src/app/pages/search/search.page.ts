@@ -8,12 +8,23 @@ import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list
 import { SearchInputComponent } from 'src/app/components/search-input/search-input.component';
 import type { QASet } from 'src/app/models/qa-set.model';
 import type { RegionData } from 'src/app/models/region-data';
+import { ConfigService } from 'src/app/services/config.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { SearchService } from 'src/app/services/search.service';
 import { environment } from 'src/environments/environment';
 import { AppPath } from 'src/routes';
+
+type SearchApiResponse = {
+  status?: number;
+  references?: {
+    category: string;
+    subcategory: string;
+    slug?: string;
+    parent?: string;
+  }[];
+};
 
 @Component({
   selector: 'app-search-page',
@@ -36,6 +47,7 @@ export default class SearchPageComponent implements OnInit {
 
   public searchQuery: string;
   public searchResults: QASet[];
+  public loadingSearch: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +56,7 @@ export default class SearchPageComponent implements OnInit {
     private offersService: OffersService,
     private searchService: SearchService,
     private pageMeta: PageMetaService,
+    private configService: ConfigService,
   ) {}
 
   async ngOnInit() {
@@ -93,7 +106,9 @@ export default class SearchPageComponent implements OnInit {
   }
 
   public onSearchInput(rawQuery: string) {
-    const safeQuery = this.searchService.sanitizeSearchQuery(rawQuery);
+    const safeQuery = this.useSearchApi
+      ? rawQuery
+      : this.searchService.sanitizeSearchQuery(rawQuery);
 
     this.router.navigate([], {
       queryParams: { q: safeQuery },
@@ -104,7 +119,20 @@ export default class SearchPageComponent implements OnInit {
   public async performSearch(query: string): Promise<void> {
     const safeQuery = this.searchService.sanitizeSearchQuery(query);
 
-    this.searchResults = this.searchService.query(safeQuery);
+    if (this.useSearchApi) {
+      this.loadingSearch = true;
+      const apiResponse: SearchApiResponse =
+        await this.fetchApiResults(safeQuery);
+
+      if (apiResponse) {
+        this.loadingSearch = false;
+      }
+      if (apiResponse && apiResponse.references) {
+        this.searchResults = this.createReferences(apiResponse.references);
+      }
+    } else {
+      this.searchResults = this.searchService.query(safeQuery);
+    }
 
     if (this.searchResults.length > 1) {
       this.pageMeta.setTitle({
@@ -117,5 +145,48 @@ export default class SearchPageComponent implements OnInit {
         resultFrame.focus();
       }
     }
+  }
+
+  private createReferences(
+    references: SearchApiResponse['references'],
+  ): QASet[] {
+    const results = references.map((reference) => {
+      const result = this.qaSets.find((qa) => {
+        return (
+          qa.categoryID === Number(reference.category) &&
+          qa.subCategoryID === Number(reference.subcategory)
+        );
+      });
+
+      return result;
+    });
+    return results;
+  }
+
+  private async fetchApiResults(query: string): Promise<SearchApiResponse> {
+    const response = await window.fetch(environment.searchApi, {
+      method: 'POST',
+      credentials: 'omit',
+      mode: 'cors',
+      headers: {
+        Authorization: environment.searchApiKey,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question: query,
+        googleSheetId: this.configService.getRegionByRegionSlug(this.region)
+          .sheetId,
+      }),
+    });
+
+    if (!response || !response.ok) {
+      console.warn('Something went wrong:', response);
+      return {
+        references: [],
+      };
+    }
+
+    return await response.json();
   }
 }

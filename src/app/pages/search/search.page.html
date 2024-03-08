@@ -1,8 +1,13 @@
 <app-parent-link [region]="region"></app-parent-link>
 
 <h2 class="text-style--alt text-style--size-2">
-  {{ regionData?.labelSearchPageTitle }}
+  <ng-container *ngIf="!useSearchApi">
+    {{ regionData?.labelSearchPageTitle }}
+  </ng-container>
+  <ng-container *ngIf="useSearchApi"> What are you looking for? </ng-container>
 </h2>
+
+<p *ngIf="useSearchApi">Search by typing a question or relevant keywords.</p>
 
 <app-search-input
   [(searchQuery)]="searchQuery"
@@ -17,12 +22,38 @@
   [tabindex]="-1"
   class="focus--minimal focus--fade-out"
 >
-  <p *ngIf="!!searchQuery">
-    {{ regionData?.labelSearchResultsCount }}
-    <strong>{{ searchResults?.length }}</strong>
+  <div
+    *ngIf="useSearchApi"
+    class="ion-padding"
+    style="border: 1px solid white; border-radius: 0.25em"
+  >
+    <div *ngIf="loadingSearch">
+      <span
+        class="loading-text"
+        style="width: 95%"
+      ></span>
+      <span class="loading-text"></span>
+      <span
+        class="loading-text"
+        style="width: 88%"
+      ></span>
+      <span
+        class="loading-text"
+        style="width: 75%"
+      ></span>
+    </div>
+  </div>
+
+  <p
+    *ngIf="
+      useSearchApi && !!searchQuery && !loadingSearch && searchResults?.length
+    "
+  >
+    For more detailed information, check out these FAQs:
   </p>
 
   <app-q-a-set-list
+    *ngIf="!!searchQuery && !loadingSearch"
     [baseUrl]="'../'"
     [list]="searchResults"
     [showDateUpdatedOutsideQuestion]="false"
