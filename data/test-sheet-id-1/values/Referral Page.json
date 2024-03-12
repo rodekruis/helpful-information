@@ -11,11 +11,21 @@
     [
       "Default language\n#locale.language",
       "en",
-      "One of \"nl\" or \"en\" or \"pt-BR\""
+      "One of \"nl\" or \"en\" or \"ar\"\nSee for options: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"
+    ],
+    [
+      "Alternative languages (for auto-translation)\n#locale.alternatives",
+      "en:English, nl:Nederlands, fr:Français, ar:العربية, pt:Português,  *:Other...",
+      "List: \"nl:Nederlands, en:English, ar:العربية\" MUST include default-language!\nIn the format: \"<language-code>:<language-native-name>\" separated by comma's (\",\")"
+    ],
+    [
+      "Label: Alternative languages explanation\n#locale.alternatives.explanation",
+      "* Translations via Google",
+      "\"Using Google Translate.\", \"(Translate with Google Translate.)\" or empty when using sheets-as-languages"
     ],
     [
       "Logo URL\n#logo",
-      "https://raw.githubusercontent.com/rodekruis/helpful-information/main/src/assets/icons/red_cross.png"
+      "data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 243 150'><path fill='%23f5333f' d='M57 89H23V60h34V26h29v34h34v29H86v34H57V89zm108-15a41 41 0 0 1 56-39 49 49 0 1 0 0 77 41 41 0 0 1-56-38'/></svg>"
     ],
     ["App/Site Name/title\n#name", "Test/Example"],
     ["Greeting/Heading\n#main.heading", "Hello!", "", "", "Hello!", "Hallo!"],

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { LoggingService } from 'src/app/services/logging.service';
 
 import { AppHeaderComponent } from './header.component';
 
@@ -7,7 +8,13 @@ describe('AppHeaderComponent', () => {
   let fixture: ComponentFixture<AppHeaderComponent>;
 
   beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({}).compileComponents();
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: LoggingService,
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AppHeaderComponent);
     component = fixture.componentInstance;

@@ -9,6 +9,8 @@
 data/**/values/*.json
 # Only the example/test data will be included:
 !data/test-sheet-id-1/values/*.json
+!data/test-sheet-id-2-langauge-nl/values/*.json
+!data/test-sheet-id-3-language-ar/values/*.json
 
 # Generated code
 www

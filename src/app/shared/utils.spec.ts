@@ -3,8 +3,6 @@ import {
   formatPhoneNumberAsUrl,
   getDateFromString,
   getFullUrl,
-  getParentPath,
-  getPathDepth,
 } from './utils';
 
 describe('Utils - getFullUrl', () => {
@@ -44,63 +42,6 @@ describe('Utils - getFullUrl', () => {
 
       // Assert
       expect(output).toEqual(testValues[index]);
-    });
-  });
-});
-
-describe('Utils - getPathDepth', () => {
-  it('should return the max-level of the path', () => {
-    // Arrange
-    const testValues = [
-      '/',
-      '/sub-folder',
-      '/parent-folder/sub-folder',
-      '/parent-folder/sub-folder?q=test',
-      '/parent-folder/sub-folder#test',
-      '/parent-folder/parent-sub-folder/sub-folder',
-      '/parent-folder/parent-sub-folder/sub-folder?q=test#test',
-      '/base/parent-folder/parent-sub-folder/sub-folder?q=test#test',
-    ];
-    const testOutputs = [1, 1, 2, 2, 2, 3, 3, 4];
-
-    testValues.forEach((value, index) => {
-      // Act
-      const output = getPathDepth(value);
-
-      // Assert
-      expect(output).toEqual(testOutputs[index]);
-    });
-  });
-});
-
-describe('Utils - getParentPath', () => {
-  it('should return the path of the parent folder', () => {
-    // Arrange
-    const testValues = [
-      '/',
-      '/sub-folder',
-      '/parent-folder/sub-folder',
-      '/parent-folder/sub-folder?q=test',
-      '/parent-folder/sub-folder#test',
-      '/parent-folder/parent-sub-folder/sub-folder',
-      '/parent-folder/parent-sub-folder/sub-folder?q=test#test',
-    ];
-    const testOutputs = [
-      '',
-      '',
-      '/parent-folder',
-      '/parent-folder',
-      '/parent-folder',
-      '/parent-folder/parent-sub-folder',
-      '/parent-folder/parent-sub-folder',
-    ];
-
-    testValues.forEach((value, index) => {
-      // Act
-      const output = getParentPath(value);
-
-      // Assert
-      expect(output).toEqual(testOutputs[index]);
     });
   });
 });

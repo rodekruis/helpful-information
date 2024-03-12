@@ -7,13 +7,6 @@ export enum LoggingEventCategory {
 
 // All properties sorted alphabetically.
 export enum LoggingEvent {
-  BackButtonClick = 'back-button-click',
-  BackFromCategory = 'back-from-category',
-  BackFromHighlights = 'back-from-highlights',
-  BackFromOffer = 'back-from-offer',
-  BackFromRegion = 'back-from-region',
-  BackFromSearch = 'back-from-search',
-  BackFromSubCategory = 'back-from-sub-category',
   BreadcrumbCategory = 'breadcrumb-category',
   BreadcrumbSubCategory = 'breadcrumb-sub-category',
   CategoryClick = 'category-click',
@@ -23,6 +16,8 @@ export enum LoggingEvent {
   FooterContactClick = 'footer-contact-click',
   FooterTelegramClick = 'footer-telegram-click',
   FooterWhatsAppClick = 'footer-whatsapp-click',
+  LanguageOptionsClose = 'language-options-close',
+  LanguageOptionsOpen = 'language-options-open',
   MainScreenClick = 'main-screen-button-click',
   NotFoundCategory = 'not-found-category',
   NotFoundOffer = 'not-found-offer',
@@ -32,6 +27,7 @@ export enum LoggingEvent {
   NotFoundSubCategory = 'not-found-sub-category',
   OfferClick = 'offer-click',
   OfferDetailClick = 'offer-detail-click',
+  ParentLinkClick = 'parent-link-click',
   Print = 'print',
   QuestionClose = 'question-close',
   QuestionOpen = 'question-open',

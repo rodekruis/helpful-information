@@ -1,0 +1,29 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "#SUBCATEGORY",
+      "#CATEGORY",
+      "#VISIBLE",
+      "#SLUG",
+      "#PARENT",
+      "#QUESTION",
+      "#ANSWER",
+      "#UPDATED",
+      "#HIGHLIGHT"
+    ],
+    [
+      "1",
+      "1",
+      "Show",
+      "",
+      "",
+      "كيف يبدو السؤال النموذجي؟",
+      "هذا ما تبدو عليه الإجابة النموذجية.",
+      "",
+      "Yes"
+    ],
+    []
+  ]
+}

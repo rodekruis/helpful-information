@@ -11,6 +11,10 @@ export const environment = {
   useOffers: true, // Enable 'Offers'-content type
   useQandAs: true, // Enable 'Q&A'-content type
   useQandASearch: true, // Enable Search-feature for Q&As
+  useRegionPerLocale: true, // Enable language-switcher to switch between Regions
+
+  searchApi: '', // Server-side Search-feature via API
+  searchApiKey: '', // Server-side Search-API-Key
 
   // Configuration of content
   appName: 'Helpful Information',
@@ -19,9 +23,10 @@ export const environment = {
   mainPageHeader: 'The Red Cross provides helpful information.',
   mainPageIntroduction:
     'Intro test-content: \n\n' +
-    '<b>Image:</b> <img src="/favicon.ico" alt=""/> \n\n' +
-    ' <b>Link:</b> <a href="https://github.com/rodekruis/helpful-information">helpful-information on GitHub</a> \n\n ' +
-    ' <b>Internal:</b> <a href="/test">Test</a> \n\n ' +
+    'Image: <img src="/favicon.ico" alt=""/> \n\n' +
+    'Link: <a href="https://github.com/rodekruis/helpful-information">helpful-information on GitHub</a> \n\n ' +
+    'Internal: <a href="/test-local-1">Test Local 1</a> \n\n ' +
+    'Emoji in text: 🚩 📱 🪪 📍 ♿️ ℹ️ ☑️ 🔴🟠🟢 ⚠️  &#x26A0;\n\n' +
     'Markdown content: \n\n' +
     '_inline_ **styles** and [external links](https://example.org) or [internal links](/test) \n\n' +
     '### Level 3 headings down only? \n\n' +
@@ -32,7 +37,7 @@ export const environment = {
     '\n' +
     '1. numbered \n' +
     '1. lists \n' +
-    '\n - - - \n\n' +
+    '\n \n' +
     'Please select your region:',
   mainPageNotification: '',
 
@@ -42,17 +47,38 @@ export const environment = {
   errorRetry: 'Try again?',
 
   // Regions: (A comnma-separated list of URL paths/slugs)
-  regions: '',
-  // Regions Labels: (A comnma-separated list of human-readable text-strings)
-  regionsLabels: '',
-  // Regions Google Sheet IDs, corresponding to the above defined regions
-  regionsSheetIds: '',
+  regions:
+    // Local standalone sheet:
+    'test-local-1' +
+    ',' + // Add extra space to a row
+    // Local language-specific (content-equivalent) sheets:
+    ',nl' +
+    ',ar' +
+    '', // end-of-list
 
+  // Regions Labels: (A comnma-separated list of human-readable text-strings)
+  regionsLabels:
+    'Test Local 1' +
+    ',' + // Add extra space to a row
+    ',Test Local 🌐 NL' +
+    ',Test Local 🌐 AR' +
+    '', // end-of-list
+
+  // Regions Google Sheet IDs, corresponding to the above defined regions
+  regionsSheetIds:
+    'test-sheet-id-1' + // Local Test  🔴
+    ',' + // Add extra space to a row
+    ',test-sheet-id-2-language-nl' + // Local Test NL  🔴
+    ',test-sheet-id-3-language-ar' + // Local Test AR  🔴
+    '', // end-of-list
+
+  //
   // Third-party tokens:
+  //
 
   // Google Sheets API:
   google_sheets_api_key: '',
-  google_sheets_api_url: '',
+  google_sheets_api_url: 'http://localhost:3001',
 
   // Application Insights:
   appInsightsConnectionString: '',

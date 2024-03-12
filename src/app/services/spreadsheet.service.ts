@@ -20,6 +20,11 @@ import type { SubCategory } from 'src/app/models/sub-category.model';
 import { SubCategoryCol } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 import {
+  createRegionSlugs,
+  createTokenList,
+} from 'src/app/shared/util.environment';
+import { createLocaleAlternatives } from 'src/app/shared/util.locales';
+import {
   createSlug,
   getDateFromString,
   getFullUrl,
@@ -65,10 +70,10 @@ export class SpreadsheetService {
   }
 
   private loadSheetIds(): void {
-    const regions: string[] = environment.regions.trim().split(/\s*,\s*/);
-    const googleSheetsIds: string[] = environment.regionsSheetIds
-      .trim()
-      .split(/\s*,\s*/);
+    const regions: string[] = createRegionSlugs(environment.regions);
+    const googleSheetsIds: string[] = createTokenList(
+      environment.regionsSheetIds,
+    );
 
     regions.forEach((_, index: number) => {
       this.sheetIds[regions[index]] = googleSheetsIds[index];
@@ -430,6 +435,18 @@ export class SpreadsheetService {
         RegionDataKey.localeLanguage,
         -1,
       ),
+      localeAlternatives: createLocaleAlternatives(
+        this.getConfigValueOrFallback(
+          sharedData,
+          RegionDataKey.localeAlternatives,
+          -1,
+        ),
+      ),
+      localeAlternativesExplanation: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.localeAlternativesExplanation,
+        -1,
+      ),
       pageLogo: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.logo,
@@ -644,11 +661,14 @@ export class SpreadsheetService {
           keysCol,
         );
 
-        return this.convertConfigSheetToRegionData(
-          regionRows,
-          valueCol,
-          regionRowMap,
-        );
+        return {
+          sheetId: this.sheetIds[region],
+          ...this.convertConfigSheetToRegionData(
+            regionRows,
+            valueCol,
+            regionRowMap,
+          ),
+        };
       })
       .catch((error) => {
         if (this.loggingService) {

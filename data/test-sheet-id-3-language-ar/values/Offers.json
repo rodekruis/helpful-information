@@ -1,0 +1,43 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "#SUBCATEGORY",
+      "#CATEGORY",
+      "#ID",
+      "#VISIBLE",
+      "#SLUG",
+      "#NAME",
+      "#DESCRIPTION",
+      "#ICON",
+      "#PHONENUMBERS",
+      "#EMAILS",
+      "#WEBURLS",
+      "#ADDRESS",
+      "#OPENWEEK",
+      "#OPENWEEKEND",
+      "#NEEDTOKNOW",
+      "#MOREINFO"
+    ],
+    [
+      "1",
+      "1",
+      "1",
+      "Show",
+      "de-organisatie",
+      "المنظمة",
+      "تقدم هذه المنظمة خدمة محددة.",
+      "",
+      "+31 (0) 70 - 000 00 00\n'+31 (0) 6 - 00 00 00 00",
+      "info@example.nl",
+      "https://example.nl/\nhttps://example.org/\n",
+      "Straatnaam 00\n0000 AA\nStad\n\nملاحظة حول العنوان.",
+      "24/7",
+      "24/7",
+      "",
+      "### العنوان الفرعي\n\n يمكن أن يحتوي على نص في أكثر من \n أسطر \n مع (*Mark*_down_). \n\n"
+    ],
+    []
+  ]
+}

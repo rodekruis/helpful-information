@@ -1,0 +1,24 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    ["#ID", "#NAME", "#SLUG", "#VISIBLE", "#DESCRIPTION", "#ICON"],
+    [
+      "1",
+      "Categorie Alfa",
+      "categorie-alfa",
+      "Show",
+      "Introductie van de eerste categorie.",
+      ""
+    ],
+    [
+      "2",
+      "Categorie Bravo",
+      "categorie-bravo",
+      "Show",
+      "Een andere categorie.",
+      ""
+    ],
+    []
+  ]
+}
