@@ -25,7 +25,10 @@ This guide will help you set up an instance of a [Helpful Information App](https
 - [ ] Choose/[Create a Google Account](#create-a-google-account) that will own all the content.
 - [ ] Create a copy of a HIA Google Sheet Template.
 > [!TIP]
-> The template-sheet "[HIA - Staging  Demo/Example](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)" is displayed at [helpful-info.github.io/example/demo](https://helpful-info.github.io/example/demo); this template contains all functionalities of HIA and is therefore the best choice to familiarize yourself with them.
+> The template-sheet "[HIA - Staging  Demo/Example](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)"
+> is displayed at [helpful-info.github.io/example/demo](https://helpful-info.github.io/example/demo);
+> this template contains all functionalities of HIA and is
+> therefore the best choice to familiarize yourself with them.
   - [ ] Select one of the template-sheets from the Google Drive folder: "[HIA Templates (public)](https://drive.google.com/drive/folders/1eoKlwKqPXagTnkQGxj0JpH5TRplqXX-C)".  
          From the "right-click"- or "**⋮**"-menu.
   - [ ] Share the file with "**Anyone with the link**" set to "**Viewer**".
