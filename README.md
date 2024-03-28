@@ -390,7 +390,7 @@ To deploy the web-app using [Azure Static Web App service](https://azure.microso
 
 ### Using static file hosting (i.e. Surge.sh, GitHub/GitLab Pages or similar)
 
-To deploy the web-app using or a static-files web-host, see options at: <https://www.jamstackdeploy.com/>
+To deploy the web-app using or a static-files web-host, see options at: <https://jamstack-deploy.vercel.app/> or articles like: <https://www.hostingadvice.com/how-to/best-static-web-hosting/>.
 
 Configure and build a 'production'-build of the web-app following the steps [defined at "Deployment"](#deployment).
 
