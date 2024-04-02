@@ -6,11 +6,11 @@ This guide will help you set up an instance of a [Helpful Information App](https
 
 ## Preparations
 
-- [ ] Make sure to have a good overview of the specific information-needs of the people affected
-- [ ] Make sure to involve _all appropriate people from possible partner organizations_
-- [ ] Make sure to involve a _CEA specialist to start up the process of gathering, sorting, prioritizing all expected content_
-- [ ] Make sure to meet all [technical requirements](#technical-requirements) within the (partner-)organization.
-- [ ] Make sure to set up a follow-up/monitoring/evaluation process of the effectiveness of the content and categorization/prioritization.
+- Make sure to have a good overview of the specific information-needs of the people affected
+- Make sure to involve _all appropriate people from possible partner organizations_
+- Make sure to involve a _CEA specialist to start up the process of gathering, sorting, prioritizing all expected content_
+- Make sure to meet all [technical requirements](#technical-requirements) within the (partner-)organization.
+- Make sure to set up a follow-up/monitoring/evaluation process of the effectiveness of the content and categorization/prioritization.
 
 ## Technical Requirements
 
@@ -22,31 +22,75 @@ This guide will help you set up an instance of a [Helpful Information App](https
 
 ## Checklist
 
-- [ ] Choose/[Create a Google Account](#create-a-google-account) that will own all the content.
-- [ ] Create a copy of a HIA Google Sheet Template.
+- [ ] Choose or [Create a Google Account](#create-a-google-account) that will own all the content.
+- [ ] Sign into that Google account.
+- Create a copy of a HIA Google Sheet Template.
 
-  - [ ] Select one of the template-sheets from the Google Drive folder: "[HIA Templates (public)](https://drive.google.com/drive/folders/1eoKlwKqPXagTnkQGxj0JpH5TRplqXX-C)".  
-         From the "right-click"- or "**⋮**"-menu.
+  - [ ] Select one of the template-sheets from the Google Drive folder: "[HIA Templates (public)](https://drive.google.com/drive/folders/1eoKlwKqPXagTnkQGxj0JpH5TRplqXX-C)".
+
+  > [TIP!]
+  > The template-sheet "[HIA - Staging Demo/Example](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)"
+  > is recurrently used to test all HIA functionalities, so it is the best starting point to understand how the app works and what it offers.
+
+  - [ ] Click "**File**" > "**Make a copy**"; from now on, you will only work on this copy of the template-sheet.
   - [ ] Share the file with "**Anyone with the link**" set to "**Viewer**".
   - [ ] Take note of the `Google Spreadsheet ID` of the created file:  
          It is the special, 44-character string in the URL: `https://docs.google.com/spreadsheets/d/`**`___SPREADSHEET_ID___`**`/edit?usp=sharing`
   - [ ] (optional) Share the file with other Google Accounts by giving them "**Edit**"-permissions.
   - [ ] (optional) These editors can already start adding/changing content in this sheet from this point forward.
 
-- [ ] [Choose what public URL the web-app will be available on.](#choose-a-public-url)
+- Create a Google Sheets API-key, to let the web-app access the sheet in the visitors' browser
 
-- [ ] [Create a Google Sheets API-key](#create-a-google-sheets-api-key)  
-       To let the web-app access the sheet in the visitors' browser and to comply with Google's terms of service.
+  - [ ] Go to https://console.cloud.google.com/projectcreate
+  - [ ] Complete any "getting started"-steps when prompted
+  - Enable the Google Sheets API
+    - [ ] Go to https://console.cloud.google.com/apis/dashboard, the "**Enabled APIs & services**"-page
+    - [ ] Click on the "**+ Enable APIs and Services**"-button
+    - [ ] Search for "google sheets api", or go directly to: https://console.cloud.google.com/apis/library/sheets.googleapis.com
+    - [ ] Click on the "**Enable**"-button
+  - Create an API-key
 
-- [ ] [Create the GitHub-repository](#create-a-github-repository) of your instance.
+    - [ ] Go to https://console.cloud.google.com/apis/credentials, the "**Credentials**"-page
+    - [ ] Click on the "**+ Create Credential**"-button
+    - [ ] Select "**API-key**" from the list, wait for the key to be generated
+    - [ ] In the pop-up, click the "**Edit API key**"-link
+    - [ ] Give it a recognizable name; make sure to include its _scope_, i.e. "production" or "local-dev", to know which key is responsible for what.
+    - [ ] (_Optional, but highly recommended; Can be enabled/updated later._)  
+           Select "**HTTP referrers (websites)**" from the "**Application restrictions**"-list.  
+           Add (all) the public URL(s) under "**Website Restrictions**".  
+           For example `https://<organization-or-user-name>.github.io/*`
 
-- [ ] [Define all dynamic values and settings](#configure-instance-settings) of your instance. (Using all previously created IDs, keys, etc.)
+    - [ ] (_Optional, but highly recommended; Can be enabled/updated later._)  
+           Set "**API restrictions**" to "**Restrict key**" and Select the "**Google Sheets API**" from the list
+    - [ ] Save all changes/settings
 
-- [ ] Your instance will be deployed automatically.
+- By default, the URL of your HIA instance will be `https://<organization-or-user-name>.github.io/<repository-name>`,
+  if you need a different one, see [more options in the appendix.](#choose-a-public-url)
 
-- [ ] ✅ Done.  
-       Editors can now see their content-changes on the public URL.  
-       People affected can be informed about the available information at the public URL.
+- Create the GitHub-repository
+  - [ ] Log into GitHub; if you need a Github Organization to host HIA, make sure you have permission to create new repositories in that organization.
+  - [ ] Go to <https://github.com/helpful-info/template/generate>
+  - [ ] Name the repository as (last part of) the URL; select as owner the appropriate GitHub Organization, if necessary.
+  - [ ] Make sure to select "**Public**" as the repository visibility.
+  - [ ] Complete the process of creating the repository
+  - [ ] Go to "**Settings**" > "**Pages**" and select "**Source**": "**Github Actions**".
+- Add the Google Sheet API Key as a secret to the repository
+
+  - [ ] Go to the repository's "**Settings**" > "**Secret and variables**" > "**Actions**" > "**New repository secret**"
+  - [ ] Name the secret: `GOOGLE_SHEETS_API_KEY`and insert the API Key as value
+
+- Define dynamic values and settings of your instance and deploy it
+
+  - [ ] Go to the file: `.github/workflows/deploy-github-pages.yml` and click "**Edit this file**" (pencil icon)
+  - [ ] Configure the necessary variables; see comment lines to understand what each variable does
+  - [ ] Save/Commit the changes
+  - [ ] Verify the deployment is triggered by going to the "**Actions**"-tab and checking the latest run
+  - [ ] After a successful run, the instance should be available on the chosen URL
+
+- ✅ Done.
+
+Editors can now see their content-changes on the public URL.  
+ People affected can be informed about the available information at the public URL.
 
 ---
 
@@ -58,40 +102,6 @@ This guide will help you set up an instance of a [Helpful Information App](https
    Its not necessary to create a new Gmail-address; using an existing organization-address is possible.
 2. Finish the flow to create the account and store the login-credentials in a secure place, for example a password-manager.
 3. Enable any additional security measures
-
-### Create a Google Sheets API-key
-
-1. Go to <https://console.cloud.google.com/projectcreate>
-2. Complete any "getting started"-steps when prompted
-3. Enable the Google Sheets API
-
-   1. Go to <https://console.cloud.google.com/apis/dashboard>, the "_Enabled APIs & services_"-page
-   2. Click on the "**+ Enable APIs and Services**"-button
-   3. Search for "`google sheets api`", or go directly to: <https://console.cloud.google.com/apis/library/sheets.googleapis.com>
-   4. Click on the "**Enable**"-button
-
-4. Create an API-key
-
-   1. Go to <https://console.cloud.google.com/apis/credentials>, the "_Credentials_"-page
-   2. Click on the "**+ Create Credential**"-button
-   3. Select "API-key" from the list, wait for the key to be generated
-   4. In the pop-up, click the "**Edit API key**"-link
-   5. Give it a recognizable name.  
-      Make sure to include its 'scope', i.e. "production" or "local-dev", to know which key is responsible for what.
-   6. (_Optional, but highly recommended; Can be enabled/updated later._)  
-      Select "**HTTP referrers (web sites)**" from the "_Application restrictions_"-list.  
-      Add (all) the public URL(s) under "_Website Restrictions_".  
-      For example:
-
-      - `https://helpful-info.github.io/<repository-name>/*`
-      - or `https://<custom-domain-name>.example.org/*`
-      - Include `https://*.translate.goog/*` to enable use of Google Translate by people affected.
-
-   7. (_Optional, but highly recommended; Can be enabled/updated later._)  
-      Set "_API restrictions_" to "**Restrict key**" and Select the "_Google Sheets API_" from the list
-   8. Save all changes/settings
-
----
 
 ### Create a GitHub Account
 
@@ -108,18 +118,6 @@ A GitHub Organization is meant to be used/administered by multiple users, using 
 1. Log into GitHub as the owner/admin of the new to-be-created Organization.
 2. Go to <https://github.com/account/organizations/new?plan=free>
 3. When choosing an account-name, take into account that possible URL(s) will be: `https://<organization-name>.github.io` or `https://<organization-name>.github.io/<specific-name>`.
-
-### Create a GitHub Repository
-
-A GitHub Repository will hold all code and configuration of your instance.
-
-1. Log into GitHub as a user of the appropriate GitHub Organization (with the permission to create new repositories)
-2. Go to <https://github.com/helpful-info/template/generate>
-3. Name the repository as (last part of) the public URL, under the appropriate GitHub Organization
-4. Complete the process of creating the repository
-5. Go to Settings > Pages and select Source: "Github Actions".
-
----
 
 ### Choose a public URL
 
@@ -160,16 +158,3 @@ This is the link/URL you'll communicate to the people affected and/or aid-worker
 
 - **URL**: `https://<specific-sub-domain>.<service-domain>`
 - Depending on service, for options, see [helpful-information / Deployment](https://github.com/rodekruis/helpful-information#deployment)
-
----
-
-### Configure instance settings
-
-If you deploy using GitHub Pages (default):
-
-1. Go to the file: `.github/workflows/deploy-github-pages.yml` and click "**Edit in place**".  
-   Or go to the URL: `https://github.com/helpful-info/`**_`<your-repository-name>`_**`/edit/main/.github/workflows/deploy-github-pages.yml`
-2. Configure all variables mentioned in the ENV section on top
-3. Save/Commit the changes
-4. Verify the deployment is triggered by going to the **Actions**-tab and checking the latest run
-5. After a successful run, the instance should be available on the chosen public URL
