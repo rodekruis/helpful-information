@@ -28,8 +28,8 @@ This guide will help you set up an instance of a [Helpful Information App](https
 
   - [ ] Select one of the template-sheets from the Google Drive folder: "[HIA Templates (public)](https://drive.google.com/drive/folders/1eoKlwKqPXagTnkQGxj0JpH5TRplqXX-C)".
 
-  > [TIP!]
-  > The template-sheet "[HIA - Staging Demo/Example](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)"
+  > Tip:
+  > the template-sheet "[HIA - Staging Demo/Example](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)"
   > is recurrently used to test all HIA functionalities, so it is the best starting point to understand how the app works and what it offers.
 
   - [ ] Click "**File**" > "**Make a copy**"; from now on, you will only work on this copy of the template-sheet.
