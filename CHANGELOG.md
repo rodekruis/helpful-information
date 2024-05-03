@@ -18,6 +18,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Language-Switcher - Using Google Translate with language-options defined per-region/sheet
 - Language-Switcher - Using separate sheets-as-languages defined at build-time, per-instance
 
+### Changed
+
+- Upgrade to use Node.js v22 by default
+
 ---
 
 ## 2023-11-30: [v23.11](https://github.com/rodekruis/helpful-information/releases/tag/v23.11.0)
