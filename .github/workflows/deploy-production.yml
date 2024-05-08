@@ -66,7 +66,7 @@ jobs:
             Find information for local services like legal support, health, and shelter.\n
             Need help or do you have questions? Contact the WhatsApp helpdesk of the Red Cross: [+31 970 10 28 69 64](https://wa.me/3197010286964)\n
             \n
-          TXT_MAIN_PAGE_NOTICE: '<div class="d-flex"><img src="/assets/icons/contact_whatsapp.png" alt="" with=32 height=32 decoding=async loading=lazy> [**Red Cross WhatsApp Helpdesk**](https://wa.me/3197010286964)  <span>Monday-Sunday: `12:00`-`20:00`</span> </div>'
+          TXT_MAIN_PAGE_NOTICE: '<div class="d-flex"><img src="/assets/icons/contact_whatsapp.png" alt="" with=32 height=32 decoding=async loading=lazy> [**Red Cross WhatsApp Helpdesk**](https://wa.me/3197010286964)  <span>Monday-Sunday: `10:00`-`18:00`</span> </div>'
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
