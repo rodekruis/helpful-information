@@ -10,6 +10,7 @@ updates:
 
   - package-ecosystem: 'npm'
     directory: '/'
+    target-branch: 'develop'
     schedule:
       interval: 'weekly'
     versioning-strategy: increase
