@@ -5,8 +5,12 @@
   <a
     *ngIf="useQandAs && qaHighlights?.length > 0"
     [routerLink]="['highlights']"
-    [attr.title]="regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length"
-    [attr.aria-label]="regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length"
+    [attr.title]="
+      regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length
+    "
+    [attr.aria-label]="
+      regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length
+    "
     class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
   >
     <strong>
@@ -58,14 +62,14 @@
     ></app-category-link>
   </li>
   <li
-    *ngIf="(categories?.length % 3) <= 1"
+    *ngIf="categories?.length % 3 <= 1"
     class="tile-grid--item"
     aria-hidden="true"
   >
     <!-- filler-item for empty spot at 2nd-in-a-row -->
   </li>
   <li
-    *ngIf="(categories?.length % 3) <= 2"
+    *ngIf="categories?.length % 3 <= 2"
     class="tile-grid--item"
     aria-hidden="true"
   >

@@ -13,11 +13,20 @@
 ></div>
 
 <ul
-  *ngIf="useQandAs && qaSets && qaSets?.length && (qaSets | categoryFilter: category | subCategoryFilter: subCategory)?.length"
+  *ngIf="
+    useQandAs &&
+    qaSets &&
+    qaSets?.length &&
+    (qaSets | categoryFilter: category | subCategoryFilter: subCategory)?.length
+  "
   class="list-flat ion-margin-vertical"
 >
   <li
-    *ngFor="let qaSetItem of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
+    *ngFor="
+      let qaSetItem of qaSets
+        | categoryFilter: category
+        | subCategoryFilter: subCategory
+    "
     class="ion-margin-bottom"
   >
     <app-q-a-set [qaSet]="qaSetItem"></app-q-a-set>
@@ -25,11 +34,19 @@
 </ul>
 
 <ul
-  *ngIf="useOffers && offers && (offers | categoryFilter: category | subCategoryFilter: subCategory)?.length"
+  *ngIf="
+    useOffers &&
+    offers &&
+    (offers | categoryFilter: category | subCategoryFilter: subCategory)?.length
+  "
   class="list-flat ion-margin-vertical"
 >
   <li
-    *ngFor="let offerItem of offers | categoryFilter: category | subCategoryFilter: subCategory"
+    *ngFor="
+      let offerItem of offers
+        | categoryFilter: category
+        | subCategoryFilter: subCategory
+    "
     class="ion-margin-bottom"
   >
     <app-offer-link [offer]="offerItem"></app-offer-link>
