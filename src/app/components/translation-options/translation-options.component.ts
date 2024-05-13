@@ -139,15 +139,24 @@ export class TranslationOptionsComponent {
   ): RegionData['localeAlternatives'] {
     const currentUrl = this.getCurrentUrl();
 
-    return languageOptions.map((languageOption) => {
-      languageOption.url = this.getUrl(
-        this.sourceLanguage,
-        languageOption.key,
-        currentUrl,
-      );
+    return languageOptions
+      .map((languageOption) => {
+        languageOption.url = this.getUrl(
+          this.sourceLanguage,
+          languageOption.key,
+          currentUrl,
+        );
 
-      return languageOption;
-    });
+        return languageOption;
+      })
+      .filter((languageOption, index) => {
+        // Only retain the first occurrence of a language-option
+        return (
+          languageOptions.findIndex(
+            (otherLanguage) => otherLanguage.key === languageOption.key,
+          ) === index
+        );
+      });
   }
 
   public toggle(target: EventTarget | HTMLDetailsElement): void {

@@ -54,14 +54,14 @@
   border-bottom: 1px solid silver;
 }
 
-.language-switcher--contents li a {
+.language-switcher--option {
   display: block;
   text-decoration: none;
 }
 
 .language-switcher--selected,
 .language-switcher--explanation,
-.language-switcher--contents li a {
+.language-switcher--option {
   padding: 0.33em 1em;
 }
 
@@ -69,6 +69,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  font-weight: bold;
 }
 
 .language-switcher--indicator {

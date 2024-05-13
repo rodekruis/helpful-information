@@ -29,11 +29,9 @@
       aria-hidden="true"
       viewBox="0 0 16 16"
     >
-      <!-- <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 328l144-144 144 144"/> -->
-      <path
-        fill="currentColor"
-        d="M15 5.1a1.1 1.1 0 0 1-.4.9l-5.8 5.7a1.2 1.2 0 0 1-.8.3 1.2 1.2 0 0 1-.8-.3L1.3 6a1.1 1.1 0 0 1 0-1.7 1.2 1.2 0 0 1 1.7 0l5 5 5-5a1.2 1.2 0 0 1 1.3-.2 1.1 1.1 0 0 1 .7 1z"
-      />
+      <!-- prettier-ignore -->
+      <path fill="currentColor" d="M15 5.1a1.1 1.1 0 0 1-.4.9l-5.8 5.7a1.2 1.2 0 0 1-.8.3 1.2 1.2 0 0 1-.8-.3L1.3 6a1.1 1.1 0 0 1 0-1.7 1.2 1.2 0 0 1 1.7 0l5 5 5-5a1.2 1.2 0 0 1 1.3-.2 1.1 1.1 0 0 1 .7 1z" />
+      <!-- prettier-ignore-end -->
     </svg>
   </summary>
   <div class="language-switcher--contents text-area--light">
@@ -41,45 +39,34 @@
       class="ion-no-margin list-flat"
       role="list"
     >
-      <li
-        *ngFor="let targetLanguage of languageOptions"
-        [attr.aria-current]="targetLanguage.key === sourceLanguage"
-      >
+      <li *ngFor="let targetLanguage of languageOptions">
         <a
-          *ngIf="
-            targetLanguage.key !== sourceLanguage &&
-            targetLanguage.label &&
-            targetLanguage.url
-          "
+          *ngIf="targetLanguage.label && targetLanguage.url"
           [href]="targetLanguage.url"
+          [attr.lang]="targetLanguage.key"
+          [attr.aria-current]="
+            targetLanguage.key === sourceLanguage ? true : null
+          "
           rel="alternate"
           [hreflang]="targetLanguage.key"
           translate="no"
+          [class]="{
+            'language-switcher--option': true,
+            'language-switcher--selected': targetLanguage.key === sourceLanguage
+          }"
         >
-          {{ targetLanguage.label }}
-        </a>
-        <div
-          *ngIf="targetLanguage.key === sourceLanguage"
-          translate="no"
-          [attr.lang]="targetLanguage.key"
-          class="language-switcher--selected"
-        >
-          <strong>{{ targetLanguage.label }}</strong>
+          <span>{{ targetLanguage.label }}</span>
           <svg
+            *ngIf="targetLanguage.key === sourceLanguage"
             class="language-switcher--indicator"
             aria-hidden="true"
             viewBox="0 0 16 16"
           >
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2.8"
-              d="m1.4 7.2 5 5.7L14.5 3"
-            />
+            <!-- prettier-ignore -->
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="m1.4 7.2 5 5.7L14.5 3" />
+            <!-- prettier-ignore-end -->
           </svg>
-        </div>
+        </a>
       </li>
     </ul>
 

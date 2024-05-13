@@ -41,13 +41,13 @@ describe('TranslationOptionsComponent', () => {
     fixture.detectChanges();
 
     // Assert
-    const listItems =
+    const linkItems =
       fixture.debugElement.nativeElement.querySelectorAll('li a');
 
-    expect(listItems.length).toBe(testLanguageSets.length);
+    expect(linkItems.length).toBe(testLanguageSets.length);
   });
 
-  it('should contain a link for each Language-alternative, that is NOT the default-language', () => {
+  it('should contain a link for each Language-alternative (without duplicates)', () => {
     // Arrange
     const testLanguageSets = [
       { key: 'nl', label: 'Nederlands' },
@@ -57,15 +57,15 @@ describe('TranslationOptionsComponent', () => {
     ];
     component.localeAlternatives = testLanguageSets;
     component.sourceLanguage = 'nl';
-    const testLanguageLinkCount = 2;
+    const testLanguageLinkCount = 3;
 
     // Act
     fixture.detectChanges();
 
     // Assert
-    const listItems =
+    const linkItems =
       fixture.debugElement.nativeElement.querySelectorAll('li a');
 
-    expect(listItems.length).toBe(testLanguageLinkCount);
+    expect(linkItems.length).toBe(testLanguageLinkCount);
   });
 });
