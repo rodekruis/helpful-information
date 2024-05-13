@@ -12,12 +12,19 @@
 </div>
 
 <h2 class="ion-no-margin text-style--header text-style--size-2">
-  {{ regionData?.labelSearchPageTitle }}
+  <ng-container *ngIf="!useSearchApi">
+    {{ regionData?.labelSearchPageTitle }}
+  </ng-container>
+  <ng-container *ngIf="!!useSearchApi">
+    What are you looking for?
+  </ng-container>
 </h2>
+
+<p *ngIf="!!useSearchApi">Search by typing a question or relevant keywords.</p>
 
 <app-search-input
   [(searchQuery)]="searchQuery"
-  (doSearch)="performSearch($event)"
+  (doSearch)="onSearchInput($event)"
   [actionLabel]="regionData?.labelSearchAction"
   class="ion-margin-vertical"
 ></app-search-input>
@@ -28,12 +35,40 @@
   [tabindex]="-1"
   class="focus--minimal focus--fade-out"
 >
-  <p *ngIf="!!searchQuery">
-    {{ regionData?.labelSearchResultsCount }}
-    <strong>{{ searchResults?.length }}</strong>
+  <div
+    class="ion-padding"
+    style="border: 1px solid white; border-radius: 0.25em"
+  >
+    <div *ngIf="useSearchApi && loadingSearch">
+      <span
+        class="loading-text"
+        style="width: 95%"
+      ></span>
+      <span class="loading-text"></span>
+      <span
+        class="loading-text"
+        style="width: 88%"
+      ></span>
+      <span
+        class="loading-text"
+        style="width: 75%"
+      ></span>
+    </div>
+
+    <div
+      *ngIf="useSearchApi && !!searchQuery && searchResultSummary && !loadingSearch"
+      markdown
+      [data]="searchResultSummary"
+      [inline]="false"
+    ></div>
+  </div>
+
+  <p *ngIf="!!searchQuery && !loadingSearch && searchResults?.length">
+    For more detailed information, check out these FAQs:
   </p>
 
   <app-q-a-set-list
+    *ngIf="!!searchQuery && !loadingSearch"
     [baseUrl]="'../'"
     [list]="searchResults"
     [showDateUpdatedOutsideQuestion]="false"

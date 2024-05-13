@@ -27,13 +27,14 @@
     "typeRoots": ["node_modules/@types"],
     "useDefineForClassFields": false,
     "useUnknownInCatchVariables": true,
-    "verbatimModuleSyntax": true,
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-  },
+    "strictTemplates": true
+  }
 }

@@ -1,13 +1,4 @@
-<app-breadcrumbs
-  [baseUrl]="'/' + region"
-  [item]="offer"
-  style="display: block"
->
-</app-breadcrumbs>
-<hr
-  style="border-bottom: 1px dotted currentColor"
-  class="ion-margin-vertical"
-/>
+<app-parent-link [label]="offer?.subCategoryName"></app-parent-link>
 
 <article>
   <app-offer
