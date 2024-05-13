@@ -28,26 +28,15 @@
   ],
   "dataGroups": [
     {
-      "name": "googleSheetsApi",
-      "version": 4,
+      "name": "sheetsData",
+      "version": 1,
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 42,
         "maxAge": "7d",
-        "timeout": "8s"
+        "timeout": "16s"
       },
-      "urls": ["https://sheets.googleapis.com/v4/spreadsheets/**"]
-    },
-    {
-      "name": "localSheetsData",
-      "version": 1,
-      "cacheConfig": {
-        "strategy": "freshness",
-        "maxSize": 0,
-        "maxAge": "1u",
-        "timeout": "1u"
-      },
-      "urls": ["/data/**"]
+      "urls": ["/data/**", "https://sheets.googleapis.com/v4/spreadsheets/**"]
     }
   ],
   "navigationUrls": ["/**", "!/**/*.*", "!/login", "!/logout", "!/.auth/**"]
