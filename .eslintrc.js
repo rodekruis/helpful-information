@@ -3,10 +3,10 @@ const restrictedGlobals = require('confusing-browser-globals');
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
-  ignorePatterns: ['projects/**/*', 'coverage', 'www'],
+  ignorePatterns: ['coverage', 'www'],
   overrides: [
     {
-      files: ['*.ts'],
+      files: ['**/*.ts'],
       parserOptions: {
         project: ['tsconfig.json'],
         createDefaultProgram: true,
@@ -27,8 +27,7 @@ module.exports = {
         'plugin:promise/recommended',
         'plugin:no-unsanitized/DOM',
         'plugin:regexp/recommended',
-        'plugin:jasmine/recommended',
-        'prettier',
+        'plugin:prettier/recommended',
       ],
       rules: {
         'no-extra-boolean-cast': ['error'],
@@ -106,16 +105,24 @@ module.exports = {
       },
     },
     {
-      files: ['*.html'],
-      extends: ['plugin:@angular-eslint/template/recommended', 'prettier'],
+      files: ['**/*.spec.ts'],
+      extends: ['plugin:jasmine/recommended', 'plugin:prettier/recommended'],
+    },
+    {
+      files: ['**/*.html'],
+      extends: [
+        'plugin:@angular-eslint/template/accessibility',
+        'plugin:@angular-eslint/template/recommended',
+        'plugin:prettier/recommended',
+      ],
       rules: {},
     },
     {
-      files: ['*.js'],
+      files: ['**/*.js'],
       parserOptions: {
         ecmaVersion: 2021,
       },
-      extends: ['prettier'],
+      extends: ['plugin:prettier/recommended'],
       rules: {
         'sort-imports': ['error'],
       },
