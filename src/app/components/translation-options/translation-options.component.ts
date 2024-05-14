@@ -120,6 +120,9 @@ export class TranslationOptionsComponent {
     targetLanguage: string,
     currentUrl: string,
   ): string {
+    if (sourceLanguage === targetLanguage) {
+      return currentUrl;
+    }
     return `https://translate.google.com/translate?sl=${sourceLanguage}&tl=${targetLanguage}&u=${currentUrl}`;
   }
 
