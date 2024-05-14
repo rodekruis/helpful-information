@@ -25,7 +25,7 @@
     ],
     [
       "Logo URL\n#logo",
-      "data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 243 150'><path fill='%23f5333f' d='M57 89H23V60h34V26h29v34h34v29H86v34H57V89zm108-15a41 41 0 0 1 56-39 49 49 0 1 0 0 77 41 41 0 0 1-56-38'/></svg>"
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%0A%3E%3Cg fill='%23f5333f'%3E%3Cpath d='M10 0h10v30H10z' /%3E%3Cpath d='M30 10v10H0V10z' /%3E%3C/g%3E%3C/svg%3E%0A"
     ],
     ["App/Site Name/title\n#name", "Test/Example"],
     ["Greeting/Heading\n#main.heading", "Hello!", "", "", "Hello!", "Hallo!"],
