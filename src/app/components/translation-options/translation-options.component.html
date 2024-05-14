@@ -48,7 +48,11 @@
             targetLanguage.key === sourceLanguage ? true : null
           "
           rel="alternate"
-          [hreflang]="targetLanguage.key"
+          [hreflang]="
+            targetLanguage.key === sourceLanguage
+              ? targetLanguage.key + ' x-default'
+              : targetLanguage.key
+          "
           translate="no"
           [class]="{
             'language-switcher--option': true,
