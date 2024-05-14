@@ -16,6 +16,7 @@ data/**/values/*.json
 www
 coverage
 .angular/cache/
+.nx/
 
 # Third party code
 node_modules
