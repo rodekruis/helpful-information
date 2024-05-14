@@ -3,29 +3,21 @@
     <a
       href="/"
       (click)="logoClick($event)"
-      [title]="logoActionLabel || fallbackActionLabel"
-      [attr.aria-label]="logoActionLabel || fallbackActionLabel"
       class="app-header--logo-link"
     >
-      <ion-thumbnail>
-        <ion-img
-          *ngIf="logoUrl || fallbackLogoUrl"
-          [src]="logoUrl || fallbackLogoUrl"
-          [alt]="logoActionLabel || fallbackActionLabel"
-          role="presentation"
-          class="app-header--logo-img"
-        ></ion-img>
-      </ion-thumbnail>
+      <img
+        *ngIf="logoUrl || fallbackLogoUrl"
+        [src]="logoUrl || fallbackLogoUrl"
+        alt=""
+        role="presentation"
+        class="app-header--logo-img"
+      />
+      <strong
+        class="app-header--logo-title text-style--header text-style--size-08 text-style--use-newlines"
+      >
+        {{ title || fallbackTitle }}
+      </strong>
     </a>
-  </div>
-
-  <div class="app-header--title text-style--header">
-    <h1
-      [title]="title || fallbackTitle"
-      class="text-style--header text-style--size-1"
-    >
-      {{ title || fallbackTitle }}
-    </h1>
   </div>
 
   <div class="app-header--tools no-print">

@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonImg, IonThumbnail } from '@ionic/angular/standalone';
 import { TranslationOptionsComponent } from 'src/app/components/translation-options/translation-options.component';
 import type { RegionData } from 'src/app/models/region-data';
-import { RegionDataFallback } from 'src/app/models/region-data';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -20,9 +19,6 @@ export class AppHeaderComponent {
   @Input()
   public logoUrl: string;
 
-  @Input()
-  public logoActionLabel: string;
-
   @Output()
   public logoAction = new EventEmitter<MouseEvent>();
 
@@ -37,7 +33,6 @@ export class AppHeaderComponent {
 
   public fallbackTitle = environment.appName;
   public fallbackLogoUrl = environment.appLogoUrl;
-  public fallbackActionLabel = RegionDataFallback.labelMainScreenButton;
 
   public logoClick($event: MouseEvent) {
     $event.preventDefault();

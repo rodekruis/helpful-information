@@ -14,19 +14,29 @@
 .app-header--logo {
   flex: 0 0 auto;
 
-  padding: 0.25em 0;
+  padding: 0.7rem 0;
+  min-height: 3.5rem;
 }
 
 .app-header--logo-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-items: flex-start;
+
+  text-decoration: none;
+}
+
+.app-header--logo-title {
+  line-height: 1.2;
 }
 
 .app-header--logo-img {
-  object-fit: contain;
-}
-
-.app-header--title {
-  flex: 1 1 100%;
+  width: 2rem;
+  max-width: 2rem;
+  max-height: 2rem;
+  aspect-ratio: 1 / 1;
+  /* object-fit: contain; */
+  margin-inline-end: 0.375em;
 }
 
 .app-header--tools {

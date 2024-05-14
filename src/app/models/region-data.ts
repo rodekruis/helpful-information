@@ -94,7 +94,7 @@ export enum RegionDataFallback {
   labelHighlightsItemsZero = 'No highlighted items.',
   labelHighlightsPageTitle = 'Highlights',
   labelLastUpdated = 'Last updated:',
-  labelMainScreenButton = 'Main screen',
+  labelMainScreenButton = 'Helpful Information',
   labelOfferAddress = 'Address',
   labelOfferEmail = 'E-mail',
   labelOfferNeedToKnow = 'What do you need to know?',

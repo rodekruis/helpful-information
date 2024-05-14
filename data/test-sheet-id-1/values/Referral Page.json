@@ -27,8 +27,12 @@
       "Logo URL\n#logo",
       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%0A%3E%3Cg fill='%23f5333f'%3E%3Cpath d='M10 0h10v30H10z' /%3E%3Cpath d='M30 10v10H0V10z' /%3E%3C/g%3E%3C/svg%3E%0A"
     ],
-    ["App/Site Name/title\n#name", "Test/Example"],
-    ["Greeting/Heading\n#main.heading", "Hello!", "", "", "Hello!", "Hallo!"],
+    [
+      "App/Site Name/title\n#name",
+      "",
+      "For translation only! Use a translation of \"Helpful Information\" or leave empty."
+    ],
+    ["Greeting/Heading\n#main.heading", "Test/Example"],
     [
       "Introduction text\n#main.intro",
       "This website is made to give helpful information...\n\nMultiple lines of text,\ncan be used.\nWith __Mark__**Down** and/or <b>HTML</b> content:\n- lists\n- plain URL-links\n- [links](https://example.org)\n - - -\n# No level-1 Headings here\n...\n### Level 3+ Headings only here\n...\n"
