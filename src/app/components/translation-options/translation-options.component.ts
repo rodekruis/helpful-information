@@ -124,7 +124,10 @@ export class TranslationOptionsComponent {
   }
 
   private createLocalLanguageOptions(): RegionData['localeAlternatives'] {
-    const regions = createRegionSlugs();
+    const regions = createRegionSlugs().filter((region) => {
+      // Remove empty 'placeholder' regions that are used for layout only.
+      return region !== '';
+    });
 
     return regions.map((region: string) => {
       return {
