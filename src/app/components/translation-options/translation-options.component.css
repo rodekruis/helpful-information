@@ -17,6 +17,10 @@
   cursor: pointer;
   list-style: none;
 }
+.language-switcher--toggle::-webkit-details-marker,
+.language-switcher--toggle::marker {
+  display: none;
+}
 
 .language-switcher--icon {
   flex: 0 0 auto;
