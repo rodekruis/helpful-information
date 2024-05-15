@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Upgrade to use Node.js v22 by default
 - Upgrade to Ionic v8
+- Color-scheme to match new design
 
 ---
 

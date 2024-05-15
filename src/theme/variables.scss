@@ -3,11 +3,7 @@
 
 /** Ionic CSS Variables **/
 :root {
-  --ion-font-family-body: 'Open Sans', Arial, 'Helvetica Neue', sans-serif;
-  --ion-font-family-header: 'montserrat_webfont', Tahoma, 'Gill Sans',
-    sans-serif;
-
-  --ion-font-family: var(--ion-font-family-body);
+  --ion-font-family: var(--hia_content_font-family);
 
   /** primary **/
   --ion-color-primary: #ffffff;
