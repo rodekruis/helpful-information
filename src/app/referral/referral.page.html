@@ -1,96 +1,97 @@
 <ion-header class="text-area--level">
-  <app-header
-    [title]="regionData?.pageTitle"
-    [logoUrl]="regionData?.pageLogo"
-    (logoAction)="showRootPage()"
-    [localeAlternatives]="regionData?.localeAlternatives"
-    [currentLanguage]="regionData?.localeLanguage"
-    [languageOptionsExplanation]="regionData?.localeAlternativesExplanation"
-  ></app-header>
+  <div class="layout--container layout--container_wide">
+    <app-header
+      [title]="regionData?.pageTitle"
+      [logoUrl]="regionData?.pageLogo"
+      (logoAction)="showRootPage()"
+      [localeAlternatives]="regionData?.localeAlternatives"
+      [currentLanguage]="regionData?.localeLanguage"
+      [languageOptionsExplanation]="regionData?.localeAlternativesExplanation"
+    ></app-header>
+  </div>
 </ion-header>
 
-<ion-content
-  color="dark"
-  class="ion-padding"
->
-  <!-- Loading-placeholder -->
-  <ng-container *ngIf="isSupportedRegion() && loading">
-    <div class="ion-margin-vertical text-style--size-2">
-      <span
-        class="loading-text"
-        style="width: 33%"
-      ></span>
-    </div>
-    <div class="ion-margin-vertical ion-padding-bottom">
-      <span class="loading-text"></span>
-      <span class="loading-text"></span>
-      <span
-        class="loading-text"
-        style="width: 75%"
-      ></span>
-    </div>
-  </ng-container>
+<ion-content color="dark">
+  <div class="layout--container ion-padding">
+    <!-- Loading-placeholder -->
+    <ng-container *ngIf="isSupportedRegion() && loading">
+      <div class="ion-margin-vertical text-style--size-2">
+        <span
+          class="loading-text"
+          style="width: 33%"
+        ></span>
+      </div>
+      <div class="ion-margin-vertical ion-padding-bottom">
+        <span class="loading-text"></span>
+        <span class="loading-text"></span>
+        <span
+          class="loading-text"
+          style="width: 75%"
+        ></span>
+      </div>
+    </ng-container>
 
-  <router-outlet *ngIf="isSupportedRegion() && !loading"></router-outlet>
+    <router-outlet *ngIf="isSupportedRegion() && !loading"></router-outlet>
 
-  <!-- Error/404 page -->
-  <ng-container *ngIf="isSupportedRegion() && !loading && !dataAvailable">
-    <h2>{{ errorHeader }}</h2>
-    <p>
-      {{ errorMessage }}
-      <a
-        [href]="errorContactUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="color: red"
-        >{{ errorContactUrl }}</a
-      >
-      <br /><br /><br />
-      <a
-        href="/"
-        onclick="location.reload(true)"
-        style="color: gold"
-      >
-        {{ errorRetry }}
-      </a>
-    </p>
-  </ng-container>
-
-  <!-- Main/Root/Regions-list page -->
-  <ng-container *ngIf="!isSupportedRegion()">
-    <div class="ion-margin-bottom ion-padding-bottom">
-      <h2 class="text-style--alt text-style--size-2">{{ pageHeader }}</h2>
-      <div
-        markdown
-        [data]="pageIntroduction"
-        [inline]="false"
-      ></div>
-    </div>
-    <ul
-      class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical text-style--use-newlines"
-    >
-      <li
-        *ngFor="let region of regions; index as index"
-        class="tile-grid--item"
-        [attr.aria-hidden]="!region"
-      >
+    <!-- Error/404 page -->
+    <ng-container *ngIf="isSupportedRegion() && !loading && !dataAvailable">
+      <h2>{{ errorHeader }}</h2>
+      <p>
+        {{ errorMessage }}
         <a
-          *ngIf="region"
-          [routerLink]="['/', region]"
-          class="sheet--button action text-style--alt text-style--size-08"
+          [href]="errorContactUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="color: red"
+          >{{ errorContactUrl }}</a
         >
-          <span>{{ regionsLabels[index] }}</span>
+        <br /><br /><br />
+        <a
+          href="/"
+          onclick="location.reload(true)"
+          style="color: gold"
+        >
+          {{ errorRetry }}
         </a>
-      </li>
-      <li
-        *ngIf="regions.length % 2 === 1"
-        aria-hidden="true"
-        class="tile-grid--item"
+      </p>
+    </ng-container>
+
+    <!-- Main/Root/Regions-list page -->
+    <ng-container *ngIf="!isSupportedRegion()">
+      <div class="ion-margin-bottom ion-padding-bottom">
+        <h2 class="text-style--alt text-style--size-2">{{ pageHeader }}</h2>
+        <div
+          markdown
+          [data]="pageIntroduction"
+          [inline]="false"
+        ></div>
+      </div>
+      <ul
+        class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical text-style--use-newlines"
       >
-        <!-- filler-item for empty spot at 2nd-in-a-row -->
-      </li>
-    </ul>
-  </ng-container>
+        <li
+          *ngFor="let region of regions; index as index"
+          class="tile-grid--item"
+          [attr.aria-hidden]="!region"
+        >
+          <a
+            *ngIf="region"
+            [routerLink]="['/', region]"
+            class="sheet--button action text-style--alt text-style--size-08"
+          >
+            <span>{{ regionsLabels[index] }}</span>
+          </a>
+        </li>
+        <li
+          *ngIf="regions.length % 2 === 1"
+          aria-hidden="true"
+          class="tile-grid--item"
+        >
+          <!-- filler-item for empty spot at 2nd-in-a-row -->
+        </li>
+      </ul>
+    </ng-container>
+  </div>
 
   <div
     class="floating-action-area is_bottom-end"
@@ -170,7 +171,7 @@
   *ngIf="!!getNotificationContent()"
   class="no-print text-area--level"
 >
-  <div class="notification-bar ion-padding">
+  <div class="notification-bar ion-padding layout--container">
     <div
       markdown
       [data]="getNotificationContent()"
