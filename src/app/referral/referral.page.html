@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="text-area--level">
   <app-header
     [title]="regionData?.pageTitle"
     [logoUrl]="regionData?.pageLogo"
@@ -168,9 +168,9 @@
 </ion-content>
 <ion-footer
   *ngIf="!!getNotificationContent()"
-  class="no-print"
+  class="no-print text-area--level"
 >
-  <div class="notification-bar text-area--light ion-padding">
+  <div class="notification-bar ion-padding">
     <div
       markdown
       [data]="getNotificationContent()"
