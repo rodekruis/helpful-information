@@ -11,7 +11,7 @@
   </div>
 </ion-header>
 
-<ion-content color="dark">
+<ion-content color="light">
   <div class="layout--container ion-padding">
     <!-- Loading-placeholder -->
     <ng-container *ngIf="isSupportedRegion() && loading">
@@ -108,7 +108,7 @@
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('tel')"
-        class="contact-button--link"
+        class="contact-button--link action is_round"
       >
         <img
           src="assets/icons/contact_phone.png"
@@ -130,7 +130,7 @@
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('whatsapp')"
-        class="contact-button--link"
+        class="contact-button--link action is_round"
       >
         <img
           src="assets/icons/contact_whatsapp.png"
@@ -152,7 +152,7 @@
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('telegram')"
-        class="contact-button--link"
+        class="contact-button--link action is_round"
       >
         <img
           src="assets/icons/contact_telegram.png"

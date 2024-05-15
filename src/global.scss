@@ -42,6 +42,8 @@
   --hia_color_dark-navy: #011e41;
   --hia_color_white: #ffffff;
 
+  --hia_style_shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.1);
+
   // Colors - Functions
   //
   // Colors - Function: Base (the main body of content)
@@ -55,6 +57,8 @@
   // Colors - Function: Level (slightly raised, used for CTAs etc.
   --hia_level_text: var(--env_hia_level_text, var(--hia_color_dark-navy));
   --hia_level_fill: var(--env_hia_level_fill, var(--hia_color_white));
+
+  --hia_level_shadow: var(--env_hia_level_shadow, var(--hia_style_shadow));
 }
 
 // Baseline Print styles
@@ -265,8 +269,8 @@ img[decoding='async'] {
     position: relative;
   }
   &.is_bottom-end {
-    inset-inline-end: 0;
-    bottom: 1rem;
+    inset-inline-end: 1.33rem;
+    bottom: 4rem;
   }
 }
 
@@ -351,7 +355,7 @@ img[decoding='async'] {
 
 .floating-box {
   border-radius: 0.25rem;
-  box-shadow: 0 0 1rem rgba(var(--ion-color-light-contrast-rgb), 0.6);
+  box-shadow: var(--hia_level_shadow);
 }
 
 @keyframes shine {
@@ -364,7 +368,7 @@ img[decoding='async'] {
 }
 
 .loading-text {
-  --background-rgb: var(--ion-color-dark-contrast-rgb);
+  --background-rgb: 184, 184, 184;
 
   display: inline-block;
   width: 100%;
@@ -390,9 +394,9 @@ img[decoding='async'] {
 }
 
 .action {
-  --action--color: #011e60;
-  --action--color-active: #011e60;
-  --action--background-color: #fff;
+  --action--color: var(--hia_level_text);
+  --action--color-active: var(--hia_level_text);
+  --action--background-color: var(--hia_level_fill);
   --action--background-color-active: #efefef;
 
   display: block;
@@ -401,6 +405,7 @@ img[decoding='async'] {
 
   border-radius: 0.25rem;
   text-decoration: none;
+  box-shadow: var(--hia_level_shadow);
 
   @media print {
     --action--color: #333;
@@ -410,6 +415,7 @@ img[decoding='async'] {
 
     border: 0.05em solid #ccc;
     font-weight: bold;
+    box-shadow: none;
   }
 
   &,
@@ -423,26 +429,13 @@ img[decoding='async'] {
   &:focus {
     color: var(--action--color-active);
     background-color: var(--action--background-color-active);
-    outline-color: initial;
-    outline-offset: 2px;
-    outline-width: 4px;
+    outline-color: transparent;
+    outline-offset: 0.1875rem;
+    outline-width: 0.125rem;
     outline-style: solid;
   }
   &:focus {
-    outline-color: var(--action--background-color-active);
-  }
-
-  &.is_attention {
-    color: black;
-    background-color: gold;
-
-    &:hover,
-    &:focus {
-      outline-color: gold;
-    }
-    @media print {
-      border: 0.1em dashed #000;
-    }
+    outline-color: var(--action--color-active);
   }
 
   &.is_inline {
@@ -459,22 +452,6 @@ img[decoding='async'] {
     &.is_inline {
       border-radius: 1rem;
     }
-  }
-}
-
-.action-dark {
-  --action--color: #fff;
-  --action--color-active: #fff;
-  --action--background-color: #1f3958;
-  --action--background-color-active: #3a4f6a;
-
-  @media print {
-    --action--color: #333;
-    --action--color-active: #000;
-    --action--background-color: #fff;
-    --action--background-color-active: #fff;
-
-    border: 0.05em solid #ccc;
   }
 }
 
@@ -512,7 +489,7 @@ img[decoding='async'] {
   width: 6.5rem;
   height: 6.5rem;
   padding: 0.5rem;
-  background-color: #fff;
+  background-color: rgba(244, 247, 250, 1);
   border-radius: 0.25rem;
 
   .logo-badge--image {
@@ -527,21 +504,7 @@ img[decoding='async'] {
 
   .contact-button--link {
     display: inline-block;
-    padding-block: 0.3rem;
-    padding-inline: 0.6rem;
-    background: white;
-    border-radius: 48px 0 0 48px;
     overflow: hidden;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
-    border: 2px solid transparent;
-
-    &:hover,
-    &:focus {
-      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.9);
-    }
-    &:focus {
-      border-color: gold;
-    }
   }
 
   .contact-button--logo {
@@ -554,7 +517,7 @@ img[decoding='async'] {
 }
 
 .contact-button + .contact-button {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .notification-bar {

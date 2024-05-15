@@ -1,8 +1,10 @@
 :host {
   display: block;
 
-  --search-input--text: var(--ion-color-light-contrast, black);
-  --search-input--background: var(--ion-color-light, white);
+  --search-input--text: var(--hia_level_text, black);
+  --search-input--background: var(--hia_level_fill, white);
+  --search-input--border: silver;
+  --search-input--focus: var(--hia_level_text, black);
 }
 
 form {
@@ -24,15 +26,15 @@ form {
 .input-field--text {
   color: var(--search-input--text);
   background: var(--search-input--background);
-  border: 0;
+  border: 1px solid var(--search-input--border);
   border-radius: 0.25em;
   padding-block: 0.25em;
   padding-inline: 0.5em;
 
   &:focus {
-    outline-color: var(--search-input--background);
+    outline-color: var(--search-input--focus);
     outline-offset: 2px;
-    outline-width: 4px;
+    outline-width: 2px;
     outline-style: solid;
   }
 }
