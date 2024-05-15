@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - 'Fixed' logo with text (still translatable via sheet)
 - Language-Switcher - Using Google Translate with language-options defined per-region/sheet
 - Language-Switcher - Using separate sheets-as-languages defined at build-time, per-instance
+- Configurable color variables
 
 ### Changed
 

@@ -10,6 +10,53 @@
 // @import '@ionic/angular/css/text-transformation.css';
 // @import '@ionic/angular/css/flex-utils.css';
 
+// Configuration Variables
+//
+// Possible to override via the `theme/overrides.scss`-file (set before/during build)
+:root {
+  // Fonts
+  //
+  // Fonts - Theme (named fonts):
+  --hia_font_open-sans: 'Open Sans', Arial, 'Helvetica Neue', sans-serif;
+  --hia_font_montserrat: 'montserrat_webfont', Tahoma, 'Gill Sans', sans-serif;
+
+  // Fonts - Content-text:
+  --hia_content_font-family: var(
+    --env_hia_content_font-family,
+    var(--hia_font_open-sans)
+  );
+  --hia_content_font-size: var(--env_hia_content_font-size, 16px);
+
+  // Fonts - Headings:
+  --hia_alt_font-family: var(
+    --env_hia_alt_font-family,
+    var(--hia_font_montserrat)
+  );
+  --hia_heading_font-size: var(--env_hia_heading_font-size, 16px);
+
+  // Colors
+  //
+  // Colors - Theme (named colors):
+  --hia_color_light-beige: #faf5e5;
+  --hia_color_dark-green: #2f5f6e;
+  --hia_color_dark-navy: #011e41;
+  --hia_color_white: #ffffff;
+
+  // Colors - Functions
+  //
+  // Colors - Function: Base (the main body of content)
+  --hia_base_text: var(--env_hia_base_text, var(--hia_color_dark-navy));
+  --hia_base_fill: var(--env_hia_base_fill, var(--hia_color_light-beige));
+
+  // Colors - Function: Alt (alternative color-scheme, used for Footer)
+  --hia_alt_text: var(--env_hia_alt_text, var(--hia_color_white));
+  --hia_alt_fill: var(--env_hia_alt_fill, var(--hia_color_dark-green));
+
+  // Colors - Function: Level (slightly raised, used for CTAs etc.
+  --hia_level_text: var(--env_hia_level_text, var(--hia_color_dark-navy));
+  --hia_level_fill: var(--env_hia_level_fill, var(--hia_color_white));
+}
+
 // Baseline Print styles
 @import '_print.scss';
 
