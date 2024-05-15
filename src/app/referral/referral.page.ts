@@ -206,6 +206,7 @@ export class ReferralPageComponent implements OnInit {
 
   /**
    * To support possible bookmarks of the old, query-style URLs
+   * @deprecated
    */
   private upgradeLegacyUrls(queryParams: Params) {
     if (this.useQandAs && !!queryParams.highlights) {
