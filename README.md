@@ -304,9 +304,13 @@ See the options in the [`.env.example`](.env.example)-file.
 Each Instance:
 
 - can have 1 or multiple Sheet(s), each:
+
   - has a unique URL-slug (`[a-z0-9._-]`)
   - has a human-readable (short) label (can contain capitals, spaces, numbers, emoji, etc.)
   - has a `Google Spreadsheet ID`, a 44-character string (from: `https://docs.google.com/spreadsheets/d/`**`___SPREADSHEET_ID___`**`/edit?usp=sharing`)
+
+- can have a customized 'color scheme' (and other CSS), by adjusting the contents of the [`overrides.scss`](./src/theme/overrides.scss)-file.  
+  This needs to be done _before_ building the web-app. (See for example: `[.github/workflows/deploy-staging.yml`](.github/workflows/deploy-staging.yml#L50)).
 
 ### Sheet level configuration
 
