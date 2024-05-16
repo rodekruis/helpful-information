@@ -12,6 +12,31 @@
 </ion-header>
 
 <ion-content color="light">
+  <!-- Notification (optional) -->
+  <div
+    *ngIf="!!getNotificationContent()"
+    class="layout--container"
+  >
+    <details
+      open
+      class="notification-bar ion-margin-vertical ion-padding text-area--level"
+    >
+      <summary
+        class="notification-bar--close action is_round is_inline is_flat text-style--center"
+        title="OK"
+        aria-label="OK"
+      >
+        <strong aria-hidden="true">&times;</strong>
+      </summary>
+      <div
+        markdown
+        [data]="getNotificationContent()"
+        [inline]="true"
+        class="notification-bar--content"
+      ></div>
+    </details>
+  </div>
+
   <div class="layout--container ion-padding">
     <!-- Loading-placeholder -->
     <ng-container *ngIf="isSupportedRegion() && loading">
@@ -95,9 +120,7 @@
 
   <div
     class="floating-action-area is_bottom-end"
-    *ngIf="
-      isSupportedRegion() && hasContactOptions() && !getNotificationContent()
-    "
+    *ngIf="isSupportedRegion() && hasContactOptions()"
   >
     <span
       class="contact-button"
@@ -167,15 +190,3 @@
     </span>
   </div>
 </ion-content>
-<ion-footer
-  *ngIf="!!getNotificationContent()"
-  class="no-print text-area--level"
->
-  <div class="notification-bar ion-padding layout--container">
-    <div
-      markdown
-      [data]="getNotificationContent()"
-      [inline]="true"
-    ></div>
-  </div>
-</ion-footer>

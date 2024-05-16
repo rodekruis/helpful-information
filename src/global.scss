@@ -156,6 +156,10 @@ a {
   -webkit-touch-callout: initial; // Enable "tap-and-hold" on links on mobile/touch/iOS
 }
 
+details summary {
+  cursor: pointer;
+}
+
 hr {
   border-top: 1px dashed currentColor;
 }
@@ -453,6 +457,10 @@ img[decoding='async'] {
       border-radius: 1rem;
     }
   }
+
+  &.is_flat {
+    box-shadow: none;
+  }
 }
 
 .sheet--button {
@@ -520,21 +528,24 @@ img[decoding='async'] {
   margin-top: 1rem;
 }
 
+// Details-element as 'sticky' notification
 .notification-bar {
-  font-size: 85%;
-  border-start-start-radius: 0.25rem;
-  border-start-end-radius: 0.25rem;
+  position: relative;
 
-  // Utility class to use in (Markdown)content
-  .d-flex {
-    display: flex;
-    align-items: center;
-    gap: 1ex;
+  // Use summary-toggle as dismiss-button, so hide-when-closed:
+  &:not([open]) {
+    display: none;
   }
 
-  // Utility class to use in (Markdown)content
-  .d-center {
-    text-align: center;
+  .notification-bar--close {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+
+    &::-webkit-details-marker,
+    &::marker {
+      display: none;
+    }
   }
 }
 
@@ -576,6 +587,17 @@ img[decoding='async'] {
     a[href]:not([rel~='x-plain-url'])::after {
       content: ' (' attr(href) ')';
     }
+  }
+
+  // Utility layout/style classes
+  .d-flex {
+    display: flex;
+    align-items: center;
+    gap: 1ex;
+  }
+
+  .d-center {
+    text-align: center;
   }
 }
 
