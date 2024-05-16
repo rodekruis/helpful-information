@@ -233,7 +233,7 @@ img[decoding='async'] {
 }
 
 .tile-grid {
-  --column-gap: 0.25rem;
+  --column-gap: 0.1875rem;
 
   display: flex;
   flex-flow: row wrap;
@@ -245,7 +245,7 @@ img[decoding='async'] {
   .tile-grid--item {
     padding-inline-start: var(--column-gap);
     padding-inline-end: var(--column-gap);
-    margin-bottom: 1rem;
+    margin-block: var(--column-gap);
     min-width: 150px; // To always fit 2 items for narrow viewports
   }
 
