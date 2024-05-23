@@ -463,6 +463,20 @@ img[decoding='async'] {
   }
 }
 
+.q-a-set {
+  &[open] > .q-a-set--toggle {
+    box-shadow: none; // Override .action styles
+  }
+
+  .q-a-set--content {
+    padding-inline-start: 1.6rem; // Allow room for marker as padding
+
+    *:first-of-type {
+      margin-top: 0;
+    }
+  }
+}
+
 .sheet--button {
   display: flex;
   justify-content: center;

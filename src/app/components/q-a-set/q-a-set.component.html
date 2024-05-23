@@ -18,7 +18,6 @@
     markdown
     [data]="answer"
     [inline]="false"
-    class="ion-margin-vertical"
   ></div>
 </ng-template>
 
@@ -26,51 +25,62 @@
   [id]="qaSet.slug"
   [open]="isActive(qaSet.slug)"
   (toggle)="logDetailsChange($event.target, qaSet.slug, qaSet.question)"
+  class="q-a-set text-area--level floating-box"
 >
-  <summary class="action">
+  <summary class="q-a-set--toggle action">
     {{ qaSet.question }}
   </summary>
-
-  <p *ngIf="showParentDateUpdated && qaSet.dateUpdated">
-    <ng-container
-      *ngTemplateOutlet="lastUpdatedLine; context: { date: qaSet.dateUpdated }"
-    ></ng-container>
-  </p>
-
-  <ng-container
-    *ngTemplateOutlet="answerBlock; context: { answer: qaSet.answer }"
-  ></ng-container>
-
-  <ul
-    *ngIf="qaSet.children.length"
-    class="ion-padding"
-  >
-    <li
-      *ngFor="let subQaSet of qaSet.children"
-      class="ion-margin-bottom"
-    >
-      <details
-        (toggle)="
-          logDetailsChange($event.target, subQaSet.slug, subQaSet.question)
+  <div class="q-a-set--content ion-padding">
+    <p *ngIf="showParentDateUpdated && qaSet.dateUpdated">
+      <ng-container
+        *ngTemplateOutlet="
+          lastUpdatedLine;
+          context: { date: qaSet.dateUpdated }
         "
+      ></ng-container>
+    </p>
+
+    <ng-container
+      *ngTemplateOutlet="answerBlock; context: { answer: qaSet.answer }"
+    ></ng-container>
+
+    <ul
+      *ngIf="qaSet.children.length"
+      class="ion-no-padding"
+    >
+      <li
+        *ngFor="let subQaSet of qaSet.children"
+        class="ion-margin-bottom"
       >
-        <summary class="action">
-          {{ subQaSet.question }}
-        </summary>
+        <details
+          (toggle)="
+            logDetailsChange($event.target, subQaSet.slug, subQaSet.question)
+          "
+          class="q-a-set is_child floating-box"
+        >
+          <summary class="q-a-set--toggle action">
+            {{ subQaSet.question }}
+          </summary>
 
-        <p *ngIf="subQaSet.dateUpdated">
-          <ng-container
-            *ngTemplateOutlet="
-              lastUpdatedLine;
-              context: { date: subQaSet.dateUpdated }
-            "
-          ></ng-container>
-        </p>
+          <div class="q-a-set--content ion-padding">
+            <p *ngIf="subQaSet.dateUpdated">
+              <ng-container
+                *ngTemplateOutlet="
+                  lastUpdatedLine;
+                  context: { date: subQaSet.dateUpdated }
+                "
+              ></ng-container>
+            </p>
 
-        <ng-container
-          *ngTemplateOutlet="answerBlock; context: { answer: subQaSet.answer }"
-        ></ng-container>
-      </details>
-    </li>
-  </ul>
+            <ng-container
+              *ngTemplateOutlet="
+                answerBlock;
+                context: { answer: subQaSet.answer }
+              "
+            ></ng-container>
+          </div>
+        </details>
+      </li>
+    </ul>
+  </div>
 </details>
