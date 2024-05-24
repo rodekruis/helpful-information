@@ -37,6 +37,7 @@ export const environment = {
     '\n \n' +
     'Please select your region:',
   mainPageNotification: '',
+  mainFooter: '',
 
   errorHeader: 'Data unavailable',
   errorMessage: 'Contact us at: ',

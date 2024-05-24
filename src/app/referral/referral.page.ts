@@ -70,6 +70,7 @@ export class ReferralPageComponent implements OnInit {
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
   public pageNotification = environment.mainPageNotification;
+  public pageFooter = environment.mainFooter;
   public errorHeader = environment.errorHeader;
   public errorMessage = environment.errorMessage;
   public errorContactUrl = environment.errorContactUrl;
@@ -143,6 +144,13 @@ export class ReferralPageComponent implements OnInit {
       return this.regionData.pageNotification;
     }
     return environment.mainPageNotification;
+  }
+
+  public getFooterContent(): string {
+    if (this.regionData.pageFooter) {
+      return this.regionData.pageFooter;
+    }
+    return environment.mainFooter;
   }
 
   private async loadAllData() {

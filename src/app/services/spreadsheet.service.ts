@@ -472,6 +472,11 @@ export class SpreadsheetService {
         RegionDataKey.mainNotification,
         11,
       ),
+      pageFooter: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.mainFooter,
+        -1,
+      ),
       labelBackButton: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.navBack,

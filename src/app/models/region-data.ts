@@ -35,6 +35,7 @@ export type RegionData = {
   pageInstructions?: string;
   pageLogo?: string;
   pageNotification?: string;
+  pageFooter?: string;
   pageTitle?: string;
 };
 
@@ -68,6 +69,7 @@ export enum RegionDataKey {
   mainHeading = 'main.heading',
   mainIntro = 'main.intro',
   mainNotification = 'main.notification',
+  mainFooter = 'main.footer',
   name = 'name',
   navBack = 'nav.back',
   navMain = 'nav.main',

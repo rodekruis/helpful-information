@@ -11,7 +11,10 @@
   </div>
 </ion-header>
 
-<ion-content color="light">
+<ion-content
+  color="light"
+  class="layout--stretch-height"
+>
   <!-- Notification (optional) -->
   <div
     *ngIf="!!getNotificationContent()"
@@ -189,4 +192,18 @@
       </a>
     </span>
   </div>
+
+  <footer
+    *ngIf="!!getFooterContent()"
+    role="contentinfo"
+    class="layout--stick-to-end text-area--alt ion-margin-top"
+  >
+    <div class="layout--container layout--container_wideX">
+      <div
+        markdown
+        [data]="getFooterContent()"
+        [inline]="true"
+      ></div>
+    </div>
+  </footer>
 </ion-content>

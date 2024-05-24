@@ -18,6 +18,7 @@ export const environment = {
   mainPageHeader: '${process.env.TXT_MAIN_PAGE_HEADER || ''}',
   mainPageIntroduction: '${process.env.TXT_MAIN_PAGE_INTRO || ''}',
   mainPageNotification: '${process.env.TXT_MAIN_PAGE_NOTICE || ''}',
+  mainFooter: '${process.env.TXT_MAIN_FOOTER || ''}',
   errorHeader: '${process.env.TXT_ERROR_HEADER || ''}',
   errorMessage: '${process.env.TXT_ERROR_MESSAGE || ''}',
   errorContactUrl: '${process.env.TXT_ERROR_CONTACT_URL || ''}',

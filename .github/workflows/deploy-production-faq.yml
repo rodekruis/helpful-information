@@ -65,6 +65,16 @@ jobs:
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
           TXT_MAIN_PAGE_HEADER: 'This web app is made to give helpful information (HIA) about frequently asked questions (FAQ).'
           TXT_MAIN_PAGE_INTRO: 'Please select your FAQ below:'
+          TXT_MAIN_PAGE_NOTICE: ''
+          TXT_MAIN_FOOTER: >-
+            <div class='d-flex d-flex-align-end d-flex-justify-between'>
+              <div class='ion-padding text-style--size-08'>
+                **Helpful Information**
+                \n\n\n\n
+                 [WhatsApp Helpdesk](https://wa.me/3197010286964)
+              </div> <div class='ion-padding-horizontal'>
+                <a href='https://www.rodekruis.nl/' target=_blank rel='author noopener noreferrer' class='d-flex text-area--level ion-padding'><img src='https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg' alt='' with=86 height=32 decoding=async loading=lazy></a>
+              </div> </div>
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
