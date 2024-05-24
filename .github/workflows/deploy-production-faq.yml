@@ -61,7 +61,7 @@ jobs:
           NG_USE_OFFERS: 'false'
           NG_USE_Q_AND_AS: 'true'
           NG_USE_Q_AND_A_SEARCH: 'true'
-          TXT_APP_NAME: 'FAQ / Vraagbaak'
+          TXT_APP_NAME: 'FAQ \n Vraagbaak'
           TXT_APP_LOGO_URL: 'https://rodekruis.github.io/510-ICON-LIBRARY/Beeldmerk_van_het_Nederlandse_Rode_Kruis.svg'
           TXT_MAIN_PAGE_HEADER: 'This web app is made to give helpful information (HIA) about frequently asked questions (FAQ).'
           TXT_MAIN_PAGE_INTRO: 'Please select your FAQ below:'
