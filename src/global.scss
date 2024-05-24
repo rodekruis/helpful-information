@@ -192,16 +192,9 @@ html.plt-mobile ion-app {
   user-select: auto;
 }
 
-// Always reserve space to scroll (and to show floating-action-area)
-ion-content.ion-padding-vertical,
-ion-content.ion-padding {
-  --padding-bottom: 2rem;
-}
-
 // Prevent scrolling-area from becommnig too small
 @media screen and (orientation: landscape) and (max-height: 30em) {
-  ion-header,
-  ion-footer {
+  ion-header {
     max-height: 20vh;
     overflow: auto;
   }
