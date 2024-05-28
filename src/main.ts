@@ -43,7 +43,9 @@ function markedOptionsFactory(): MarkedOptions {
   };
 
   renderer.link = (href: string, title: string, text: string): string => {
-    const isExternal = !href.startsWith('/');
+    const isExternal = !(
+      href.startsWith(window.location.origin) || href.startsWith('/')
+    );
     const isPlainUrl = href.includes(text);
     const rel = `external noopener noreferrer ${
       isPlainUrl ? `x-plain-url` : ''
