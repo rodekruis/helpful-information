@@ -9,6 +9,7 @@ import type { RegionData } from 'src/app/models/region-data';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
+import { AppPath } from 'src/routes';
 
 @Component({
   selector: 'app-highlights-page',
@@ -55,10 +56,11 @@ export default class HighlightsPageComponent implements OnInit {
       }
 
       this.pageMeta.setTitle({
-        override: `${highlightsPageTitle} - ${this.regionData?.pageTitle}`,
+        pageName: highlightsPageTitle,
+        region: this.region,
       });
       this.pageMeta.setCanonicalUrl({
-        override: this.region + '/highlights',
+        override: `${this.region}/${AppPath.highlights}`,
       });
     });
   }

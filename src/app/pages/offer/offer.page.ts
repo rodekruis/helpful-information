@@ -88,6 +88,7 @@ export default class OfferPageComponent implements OnInit {
       offerName: this.offer.offerName ? this.offer.offerName : '',
       subCategoryName: this.offer.subCategoryName,
       categoryName: this.offer.categoryName,
+      region: this.region,
     });
 
     this.pageMeta.setCanonicalUrl({

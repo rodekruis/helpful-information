@@ -80,6 +80,7 @@ export default class CategoryPageComponent implements OnInit {
 
     this.pageMeta.setTitle({
       categoryName: this.category.categoryName,
+      region: this.region,
     });
 
     this.pageMeta.setCanonicalUrl({

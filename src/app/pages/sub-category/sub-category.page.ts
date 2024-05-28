@@ -127,6 +127,7 @@ export default class SubCategoryPageComponent implements OnInit {
     this.pageMeta.setTitle({
       subCategoryName: this.subCategory.subCategoryName,
       categoryName: this.subCategory.categoryName,
+      region: this.region,
     });
 
     this.pageMeta.setCanonicalUrl({

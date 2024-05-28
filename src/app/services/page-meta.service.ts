@@ -1,16 +1,14 @@
 import { DOCUMENT, Location } from '@angular/common';
 import { Inject, Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer, Title } from '@angular/platform-browser';
+import { getRegionLabel } from 'src/app/shared/util.environment';
 import { environment } from 'src/environments/environment';
-
-import { RegionDataService } from './region-data.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PageMetaService {
   constructor(
-    private regionData: RegionDataService,
     private titleService: Title,
     @Inject(DOCUMENT) private dom: Document,
     private domSanitizer: DomSanitizer,
@@ -26,6 +24,7 @@ export class PageMetaService {
   }
 
   public setTitle(parts: {
+    pageName?: string;
     offerName?: string;
     subCategoryName?: string;
     categoryName?: string;
@@ -33,26 +32,30 @@ export class PageMetaService {
     override?: string;
   }) {
     let title = '';
+    const separator = ' - ';
+
+    if (parts.pageName) {
+      title += parts.pageName + separator;
+    }
 
     if (parts.offerName) {
-      title += parts.offerName + ' - ';
+      title += parts.offerName + separator;
     }
 
     if (parts.subCategoryName) {
-      title += parts.subCategoryName + ' - ';
+      title += parts.subCategoryName + separator;
     }
 
     if (parts.categoryName) {
-      title += parts.categoryName + ' - ';
+      title += parts.categoryName + separator;
     }
 
     if (parts.region) {
-      title += parts.region;
+      title += getRegionLabel(parts.region) + separator;
     }
 
-    if (!parts.region && !parts.override) {
-      title += this.regionData?.data?.pageTitle || '';
-    }
+    // App name as a base-title
+    title += environment.appName || '';
 
     if (parts.override) {
       title = parts.override;

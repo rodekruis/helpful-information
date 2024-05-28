@@ -53,7 +53,7 @@ export default class RegionPageComponent implements OnInit {
       this.pageMeta.setLanguage(this.regionData.localeLanguage);
 
       this.pageMeta.setTitle({
-        region: this.regionData.pageTitle,
+        region: this.region,
       });
 
       this.pageMeta.setCanonicalUrl({

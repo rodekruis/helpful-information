@@ -11,6 +11,7 @@ import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { SearchService } from 'src/app/services/search.service';
+import { AppPath } from 'src/routes';
 
 @Component({
   selector: 'app-search-page',
@@ -56,10 +57,11 @@ export default class SearchPageComponent implements OnInit {
     this.pageMeta.setLanguage(this.regionData.localeLanguage);
 
     this.pageMeta.setTitle({
-      override: `${this.regionData?.labelSearchPageTitle} - ${this.regionData?.pageTitle}`,
+      pageName: this.regionData?.labelSearchPageTitle,
+      region: this.region,
     });
     this.pageMeta.setCanonicalUrl({
-      override: this.region + '/search',
+      override: `${this.region}/${AppPath.search}`,
     });
 
     if (!this.qaSets) {
@@ -92,7 +94,8 @@ export default class SearchPageComponent implements OnInit {
 
     if (this.searchResults.length > 1) {
       this.pageMeta.setTitle({
-        override: `${this.regionData?.labelSearchPageTitle} (${this.searchResults.length}) - ${this.regionData?.pageTitle}`,
+        pageName: `${this.regionData?.labelSearchPageTitle} (${this.searchResults.length})`,
+        region: this.region,
       });
 
       const resultFrame = document.getElementById('search-results');

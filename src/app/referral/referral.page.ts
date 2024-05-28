@@ -149,7 +149,7 @@ export class ReferralPageComponent implements OnInit {
     this.pageMeta.setDirection('');
     this.pageMeta.setLanguage('');
     this.pageMeta.setCanonicalUrl({});
-    this.pageMeta.setTitle({ override: environment.appName });
+    this.pageMeta.setTitle({});
   }
 
   private setStaticPageMeta() {
@@ -168,7 +168,8 @@ export class ReferralPageComponent implements OnInit {
 
     const pageTitle = extractPageTitleFromMarkdown(pageContent);
     this.pageMeta.setTitle({
-      override: `${pageTitle} - ${environment.appName}`,
+      pageName: pageTitle,
+      region: this.region ? this.region : '',
     });
   }
 
@@ -207,7 +208,7 @@ export class ReferralPageComponent implements OnInit {
 
     this.pageMeta.setDirection(this.regionData.localeDirection);
     this.pageMeta.setLanguage(this.regionData.localeLanguage);
-    this.pageMeta.setTitle({ region: this.regionData.pageTitle });
+    this.pageMeta.setTitle({ region: this.region });
 
     this.lastUpdatedTimeService.setLastUpdatedTime(
       this.regionData.lastUpdatedTime,
