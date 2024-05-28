@@ -3,6 +3,7 @@ import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import type { QASet } from 'src/app/models/qa-set.model';
 import type { RegionData } from 'src/app/models/region-data';
@@ -16,10 +17,10 @@ import { AppPath } from 'src/routes';
   templateUrl: './highlights.page.html',
   styleUrls: ['./highlights.page.css'],
   standalone: true,
-  imports: [NgIf, QASetListComponent, RouterLink],
+  imports: [NgIf, QASetListComponent, RouterLink, ParentLinkComponent],
 })
 export default class HighlightsPageComponent implements OnInit {
-  private region: string;
+  public region: string;
   public regionData: RegionData;
   public qaHighlights: QASet[];
 

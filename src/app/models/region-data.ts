@@ -4,7 +4,6 @@ export type RegionData = {
   contactPhoneNumber?: string;
   contactTelegramLink?: string;
   contactWhatsAppLink?: string;
-  labelBackButton?: string;
   labelFeedbackCta?: string;
   labelHighlightsButton?: string;
   labelHighlightsItemsCount?: string;
@@ -71,7 +70,6 @@ export enum RegionDataKey {
   mainNotification = 'main.notification',
   mainFooter = 'main.footer',
   name = 'name',
-  navBack = 'nav.back',
   navMain = 'nav.main',
   offerAddress = 'offer.address',
   offerEmail = 'offer.email',
@@ -89,7 +87,6 @@ export enum RegionDataKey {
 
 // All properties sorted alphabetically.
 export enum RegionDataFallback {
-  labelBackButton = 'Back',
   labelFeedbackCta = 'Make a suggestion',
   labelHighlightsButton = '!',
   labelHighlightsItemsCount = 'Highlighted items:',

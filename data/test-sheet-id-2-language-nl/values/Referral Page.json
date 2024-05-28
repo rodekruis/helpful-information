@@ -17,7 +17,6 @@
     ["#main.heading", "Test/Voorbeeld"],
     ["#main.intro", "Deze pagina is in het Nederlands."],
     ["#main.notification", ""],
-    ["#nav.back", "Terug"],
     ["#nav.main", "Start"],
     [],
     ["#label.last-updated", "Laatste wijziging:"],

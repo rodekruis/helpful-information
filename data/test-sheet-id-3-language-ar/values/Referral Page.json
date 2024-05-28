@@ -14,7 +14,6 @@
     ["#main.heading", "اختبار/مثال"],
     ["#main.intro", "هذه الصفحة باللغة العربية."],
     ["#main.notification", ""],
-    ["#nav.back", "خلف"],
     ["#nav.main", "يبدأ"],
     [],
     ["#label.last-updated", "اخر تعديل:"],

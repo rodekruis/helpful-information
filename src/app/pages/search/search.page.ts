@@ -3,6 +3,7 @@ import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { SearchInputComponent } from 'src/app/components/search-input/search-input.component';
 import type { QASet } from 'src/app/models/qa-set.model';
@@ -18,10 +19,16 @@ import { AppPath } from 'src/routes';
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.css'],
   standalone: true,
-  imports: [NgIf, RouterLink, QASetListComponent, SearchInputComponent],
+  imports: [
+    NgIf,
+    RouterLink,
+    QASetListComponent,
+    SearchInputComponent,
+    ParentLinkComponent,
+  ],
 })
 export default class SearchPageComponent implements OnInit {
-  private region: string;
+  public region: string;
   public regionData: RegionData;
   public qaSets: QASet[];
   public searchQuery: string;
