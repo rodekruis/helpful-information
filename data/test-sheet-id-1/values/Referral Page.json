@@ -60,7 +60,11 @@
       "<div class=\"d-center\">⚠️ **Scheduled maintenance**: `16:00`-`16:05` </div>",
       "\"**Warning** Please [contact us](/contact)\" or \"HSP **closed** from `8:00`-`11:00`\""
     ],
-    ["Footer text\n#main.footer", "**Helpful Information**  \n\n  ...", ""],
+    [
+      "Footer text\n#main.footer",
+      "**Helpful Information** \n\n [About](/about) \n\n [Privacy](/privacy) \n\n",
+      ""
+    ],
     [
       "Contact: Telegram URL\n#contact.telegram",
       "https://telegram.me/username",

@@ -213,15 +213,17 @@
   <div><br /><br /><br /></div>
 
   <footer
-    *ngIf="!!getFooterContent()"
     role="contentinfo"
     class="layout--stick-to-end text-area--alt ion-margin-top"
   >
     <div class="layout--container layout--container_wide">
+      <div *ngIf="!getFooterContent()"><br /><br /><br /></div>
       <div
+        *ngIf="!!getFooterContent()"
         markdown
         [data]="getFooterContent()"
-        [inline]="true"
+        [inline]="false"
+        class="ion-padding-top ion-padding-horizontal text-style--size-08"
       ></div>
     </div>
   </footer>
