@@ -52,6 +52,15 @@ jobs:
           echo "AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWYe8BCaD/oAqh//8Kof//CqH//wqh//8Kof//CqH/9gmg/98JoP+9CaD/fgmg/wsAAAAAAAAAAAAAAAAAAAAAAAAAAAmg/ywJoP95CaD/lQmg/6UJoP+8CqH/2Qqh/+wKof/4CqH//wqh//8JoP8sAAAAAAAAAAAAAAAAIyPeLSMj3o8jI95NAAAAAAAAAAAAAAAAAAAAABZh7gIWYe4KCaD/FQmg/8sKof//CaD/jgAAAAAAAAAAIyPeCCMj3pkkJN//IyPeqiMj3gsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJoP89CqH//wmh/9wJoP8BAAAAACMj3kUkJN//JCTe/CMj3hT///9A////PQAAAAAAAAAAAAAAAAAAAAAAAAAACJ//CAqh//MKof/8CaD/FyIi3xgjI97uJCTf/yMj3nkjI94B////Uf////7///8jAAAAAAAAAAAAAAAAAAAAAAAAAAAJoP+6CqH//wmg/10jI95oJCTf/yMj3uIjI94RAAAAAJKS7wH////i////zwAAAAAAAAAAAAAAAAAAAAAAAAAACaD/cAqh//8JoP/DIyPesCQk3/8jI95sAAAAAAAAAAAAAAAA////UP////3///8cCqD/Iwmg/zIMoP8SAAAAAAmg/0IKof//CqH/7yQk3/IkJN/4IyPeMQAAAAAjI94NAAAAAP///wb////y////awmg/2sKof/9CaD/wQig/wEJoP9ECqH//wmg/+wkJN/8JCTf/iMj3ikiIt4JIyPe3SMj3s6Rke8R////pf///6kKoP9BCqH//wqh//4JoP96CaD/7gqh//8JoP+nIyPevSQk3/8jI97xIyPesCQk3/8kJN70IyPeHf///0r////FhND/Fgmg/9wKof//CqH//wqh//8JoP/yCaD/NiMj3wkjI9/qJCTf/yQk3/8jI9/+IyPeTwAAAAD///8r////9P///wsJn/8ECaD/ggmg/6wJoP98CaD/LgAAAAAAAAAAIyPfAyMj3lYjI995IyPeHiMj3gIAAAAA////df////7////h////AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///4v////+/////P///ywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///90////2////7D///9OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////MP///7L///+Y////VgAAAAAAAAAAAAAAAAAAAAAAAAAA8AcAAPwDAADv8QAAx/kAAM/5AACd+QAAnPwAAD78AAA+zAAAMkgAAANBAACHZwAA/z8AAP4/AAD/PwAA/z8AAA==" | base64 --decode > src/favicon.ocw.ico
           cp --force src/favicon.ocw.ico src/favicon.ico
 
+      - name: Set/override theme-colors
+        run: |-
+          cat <<EOF > src/theme/overrides.scss
+          :root {
+            --env_hia_alt_text: var(--hia_base_text);
+            --env_hia_alt_fill: white;
+          }
+          EOF
+
       - name: Build
         run: 'npm run build:production'
         env:
@@ -70,8 +79,9 @@ jobs:
           TXT_PAGE_ABOUT: ''
           TXT_PAGE_PRIVACY: ''
           TXT_MAIN_FOOTER: >-
-            <br>
-            <img src="https://schoolmaaltijden.nl/wp-content/uploads/2023/03/NRK_JEF_OCW_Schoolmaaltijden_Primair-768x135.jpg" alt="" class="d-block floating-box" decoding=async loading=lazy />
+            <div class="text-style--center">
+            <img src="https://schoolmaaltijden.nl/wp-content/uploads/2023/03/NRK_JEF_OCW_Schoolmaaltijden_Primair-768x135.jpg" alt="" decoding=async loading=lazy />
+            </div>
           TXT_ERROR_HEADER: 'Data Unavailable'
           TXT_ERROR_MESSAGE: 'Reach out to us at: '
           TXT_ERROR_CONTACT_URL: 'https://www.rodekruis.nl/'
