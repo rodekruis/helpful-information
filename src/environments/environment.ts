@@ -38,8 +38,8 @@ export const environment = {
     'Please select your region:',
   mainPageNotification: '',
   mainFooter: '',
-  mainPageAbout: '## About \n\n ... \n\n',
-  mainPagePrivacy:
+  pageAbout: '## About \n\n ... \n\n',
+  pagePrivacy:
     '## Privacy \n\n' +
     'On this website, Helpful Information, your privacy is our priority.\n' +
     '\n' +

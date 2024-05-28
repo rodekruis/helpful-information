@@ -67,8 +67,8 @@ jobs:
           TXT_MAIN_PAGE_HEADER: ''
           TXT_MAIN_PAGE_INTRO: ''
           TXT_MAIN_PAGE_NOTICE: ''
-          TXT_MAIN_ABOUT: ''
-          TXT_MAIN_PRIVACY: ''
+          TXT_PAGE_ABOUT: ''
+          TXT_PAGE_PRIVACY: ''
           TXT_MAIN_FOOTER: >-
             <br>
             <img src="https://schoolmaaltijden.nl/wp-content/uploads/2023/03/NRK_JEF_OCW_Schoolmaaltijden_Primair-768x135.jpg" alt="" class="d-block floating-box" decoding=async loading=lazy />

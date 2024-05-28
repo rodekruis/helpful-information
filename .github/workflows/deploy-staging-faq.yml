@@ -70,10 +70,10 @@ jobs:
             `🔘 = archive `\n
             `🚧 = development `\n
           TXT_MAIN_PAGE_NOTICE: ''
-          TXT_MAIN_ABOUT: >-
+          TXT_PAGE_ABOUT: >-
             ## About \n
             \n
-          TXT_MAIN_PRIVACY: >-
+          TXT_PAGE_PRIVACY: >-
             ## Privacy \n
             \n
           TXT_MAIN_FOOTER: >-
