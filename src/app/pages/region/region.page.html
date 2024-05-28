@@ -4,7 +4,7 @@
 >
   <a
     *ngIf="useQandAs && qaHighlights?.length > 0"
-    [routerLink]="['highlights']"
+    [routerLink]="[AppPath.highlights]"
     [attr.title]="
       regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length
     "
@@ -25,7 +25,7 @@
   <br *ngIf="useQandAs && useQandASearch && qaSets?.length" />
   <a
     *ngIf="useQandAs && useQandASearch && qaSets?.length"
-    [routerLink]="['search']"
+    [routerLink]="[AppPath.search]"
     [attr.title]="regionData?.labelSearchPageTitle"
     [attr.aria-label]="regionData?.labelSearchPageTitle"
     class="action is_inline is_round is_attention text-style--center ion-margin-bottom"

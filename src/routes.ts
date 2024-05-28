@@ -2,6 +2,11 @@ import type { Routes } from '@angular/router';
 import { ReferralPageComponent } from 'src/app/referral/referral.page';
 import { environment } from 'src/environments/environment';
 
+export enum AppPath {
+  highlights = 'highlights',
+  search = 'search',
+}
+
 export const routes: Routes = [
   {
     path: ':region',
@@ -9,13 +14,13 @@ export const routes: Routes = [
     component: ReferralPageComponent,
     children: [
       {
-        path: 'highlights',
+        path: AppPath.highlights,
         pathMatch: 'prefix',
         canActivate: [() => environment.useQandAs],
         loadComponent: () => import('./app/pages/highlights/highlights.page'),
       },
       {
-        path: 'search',
+        path: AppPath.search,
         pathMatch: 'prefix',
         canActivate: [
           () => environment.useQandAs && environment.useQandASearch,

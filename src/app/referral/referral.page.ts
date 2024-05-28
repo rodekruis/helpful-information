@@ -30,6 +30,7 @@ import {
 } from 'src/app/shared/util.environment';
 import { createSlug } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
+import { AppPath } from 'src/routes';
 
 @Component({
   selector: 'app-referral',
@@ -218,12 +219,12 @@ export class ReferralPageComponent implements OnInit {
    */
   private upgradeLegacyUrls(queryParams: Params) {
     if (this.useQandAs && !!queryParams.highlights) {
-      this.router.navigate([this.getRegionHref(), 'highlights'], {
+      this.router.navigate([this.getRegionHref(), AppPath.highlights], {
         replaceUrl: true,
       });
     }
     if (this.useQandASearch && !!queryParams.search) {
-      this.router.navigate([this.getRegionHref(), 'search'], {
+      this.router.navigate([this.getRegionHref(), AppPath.search], {
         replaceUrl: true,
         queryParamsHandling: 'merge',
         queryParams: {
