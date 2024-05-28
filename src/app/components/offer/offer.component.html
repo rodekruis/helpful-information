@@ -77,14 +77,17 @@
 
     <div *ngIf="offer.offerLinks?.length">
       <h3 class="no-margin-bottom text-style--size-2">
-        <img
-          src="assets/icons/external-link.svg"
-          alt=""
+        <!-- See source: assets/icons/external-link.svg -->
+        <svg
+          viewBox="0 0 13 13"
           aria-hidden="true"
-          loading="lazy"
-          decoding="async"
           class="icon is_small"
-        />
+        >
+          <path
+            fill="currentColor"
+            d="M10.97 8.13h-.81a.4.4 0 0 0-.41.4v2.85H1.62V3.24h3.66a.4.4 0 0 0 .4-.4v-.82a.4.4 0 0 0-.4-.4H1.22A1.22 1.22 0 0 0 0 2.83v8.94A1.22 1.22 0 0 0 1.22 13h8.94a1.22 1.22 0 0 0 1.21-1.22V8.53a.4.4 0 0 0-.4-.4ZM12.39 0H9.14a.61.61 0 0 0-.43 1.04l.9.9-6.18 6.2a.61.61 0 0 0 0 .86l.57.57a.6.6 0 0 0 .87 0l6.18-6.18.9.9A.61.61 0 0 0 13 3.86V.6a.6.6 0 0 0-.6-.61Z"
+          />
+        </svg>
         {{ regionData?.labelOfferWebsite }}
       </h3>
       <p class="ion-no-margin ion-margin-bottom">
@@ -121,14 +124,17 @@
 
     <ng-container *ngIf="offer.offerNumbers?.length">
       <h3 class="no-margin-bottom text-style--size-2">
-        <img
-          src="assets/icons/phone.svg"
-          alt=""
+        <!-- See source: assets/icons/phone.svg -->
+        <svg
+          viewBox="0 0 13 13"
           aria-hidden="true"
-          loading="lazy"
-          decoding="async"
           class="icon is_small"
-        />
+        >
+          <path
+            fill="currentColor"
+            d="M12.63 9.19 9.79 7.97a.6.6 0 0 0-.72.17L7.81 9.68a9.41 9.41 0 0 1-4.5-4.5l1.54-1.26a.6.6 0 0 0 .18-.7L3.81.36a.61.61 0 0 0-.7-.35L.47.62a.6.6 0 0 0-.47.6C0 7.73 5.28 13 11.78 13a.6.6 0 0 0 .6-.47l.6-2.64a.62.62 0 0 0-.35-.7Z"
+          />
+        </svg>
         {{ regionData?.labelOfferPhone }}
       </h3>
       <p class="ion-no-margin ion-margin-bottom">
