@@ -67,6 +67,12 @@ jobs:
             Need help or do you have questions? Contact the WhatsApp helpdesk of the Red Cross: [+31 970 10 28 69 64](https://wa.me/3197010286964)\n
             \n
           TXT_MAIN_PAGE_NOTICE: ''
+          TXT_MAIN_ABOUT: >-
+            ## About \n
+            \n
+          TXT_MAIN_PRIVACY: >-
+            ## Privacy \n
+            \n
           TXT_MAIN_FOOTER: >-
             <div class="d-flex d-flex-align-end d-flex-justify-between"> <div class="ion-padding text-style--size-08">
             **Helpful Information** \n

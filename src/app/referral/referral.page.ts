@@ -28,6 +28,7 @@ import {
   createRegionLabels,
   createRegionSlugs,
 } from 'src/app/shared/util.environment';
+import { extractPageTitleFromMarkdown } from 'src/app/shared/util.markdown';
 import { createSlug } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 import { AppPath } from 'src/routes';
@@ -72,10 +73,14 @@ export class ReferralPageComponent implements OnInit {
   public pageIntroduction = environment.mainPageIntroduction;
   public pageNotification = environment.mainPageNotification;
   public pageFooter = environment.mainFooter;
+  public pageAbout = environment.mainPageAbout;
+  public pagePrivacy = environment.mainPagePrivacy;
   public errorHeader = environment.errorHeader;
   public errorMessage = environment.errorMessage;
   public errorContactUrl = environment.errorContactUrl;
   public errorRetry = environment.errorRetry;
+
+  public AppPath = AppPath;
 
   constructor(
     private offersService: OffersService,
@@ -93,10 +98,11 @@ export class ReferralPageComponent implements OnInit {
       this.region = params.region;
 
       if (!this.isSupportedRegion()) {
-        this.pageMeta.setDirection('');
-        this.pageMeta.setLanguage('');
-        this.pageMeta.setTitle({ override: environment.appName });
-        this.pageMeta.setCanonicalUrl({});
+        this.resetPageMeta();
+
+        if (this.isStaticPage()) {
+          this.setStaticPageMeta();
+        }
       }
     });
     this.route.queryParams.subscribe((queryParams: Params) => {
@@ -106,10 +112,13 @@ export class ReferralPageComponent implements OnInit {
 
   public async ngOnInit() {
     if (!this.isSupportedRegion()) {
-      this.pageMeta.setDirection('');
-      this.pageMeta.setLanguage('');
-      this.pageMeta.setTitle({ override: environment.appName });
-      this.pageMeta.setCanonicalUrl({});
+      this.resetPageMeta();
+
+      if (this.isStaticPage()) {
+        this.setStaticPageMeta();
+        return;
+      }
+
       this.router.navigate([this.rootHref]);
       return;
     }
@@ -123,6 +132,47 @@ export class ReferralPageComponent implements OnInit {
 
   public isSupportedRegion() {
     return this.region && this.regions.includes(this.region);
+  }
+
+  public isStaticPage(page?: AppPath) {
+    if (page) {
+      return this.route.snapshot.data.path === page;
+    }
+
+    return (
+      this.route.snapshot.data.isAboutPage ||
+      this.route.snapshot.data.isPrivacyPage
+    );
+  }
+
+  private resetPageMeta() {
+    this.pageMeta.setDirection('');
+    this.pageMeta.setLanguage('');
+    this.pageMeta.setCanonicalUrl({});
+    this.pageMeta.setTitle({ override: environment.appName });
+  }
+
+  private setStaticPageMeta() {
+    let pageContent;
+
+    if (this.route.snapshot.data.isAboutPage && !!environment.mainPageAbout) {
+      pageContent = environment.mainPageAbout;
+    }
+    if (
+      this.route.snapshot.data.isPrivacyPage &&
+      !!environment.mainPagePrivacy
+    ) {
+      pageContent = environment.mainPagePrivacy;
+    }
+
+    if (!pageContent) {
+      return;
+    }
+
+    const pageTitle = extractPageTitleFromMarkdown(pageContent);
+    this.pageMeta.setTitle({
+      override: `${pageTitle} - ${environment.appName}`,
+    });
   }
 
   private hasDataAvailable(): boolean {

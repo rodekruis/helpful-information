@@ -3,11 +3,33 @@ import { ReferralPageComponent } from 'src/app/referral/referral.page';
 import { environment } from 'src/environments/environment';
 
 export enum AppPath {
+  about = 'about',
   highlights = 'highlights',
+  privacy = 'privacy',
   search = 'search',
 }
 
 export const routes: Routes = [
+  {
+    path: AppPath.about,
+    pathMatch: 'full',
+    canActivate: [() => !!environment.mainPageAbout],
+    component: ReferralPageComponent,
+    data: {
+      path: AppPath.about,
+      isAboutPage: true,
+    },
+  },
+  {
+    path: AppPath.privacy,
+    pathMatch: 'full',
+    canActivate: [() => !!environment.mainPagePrivacy],
+    component: ReferralPageComponent,
+    data: {
+      path: AppPath.privacy,
+      isPrivacyPage: true,
+    },
+  },
   {
     path: ':region',
     pathMatch: 'prefix',

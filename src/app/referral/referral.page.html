@@ -83,7 +83,7 @@
     </ng-container>
 
     <!-- Main/Root/Regions-list page -->
-    <ng-container *ngIf="!isSupportedRegion()">
+    <ng-container *ngIf="!isSupportedRegion() && !isStaticPage()">
       <div class="ion-margin-bottom ion-padding-bottom">
         <h2 class="text-style--alt text-style--size-2">{{ pageHeader }}</h2>
         <div
@@ -116,6 +116,24 @@
           <!-- filler-item for empty spot at 2nd-in-a-row -->
         </li>
       </ul>
+    </ng-container>
+
+    <!-- About page -->
+    <ng-container *ngIf="!isSupportedRegion() && isStaticPage(AppPath.about)">
+      <div
+        markdown
+        [data]="pageAbout"
+        [inline]="false"
+      ></div>
+    </ng-container>
+
+    <!-- Privacy page -->
+    <ng-container *ngIf="!isSupportedRegion() && isStaticPage(AppPath.privacy)">
+      <div
+        markdown
+        [data]="pagePrivacy"
+        [inline]="false"
+      ></div>
     </ng-container>
   </div>
 

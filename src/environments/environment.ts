@@ -38,6 +38,17 @@ export const environment = {
     'Please select your region:',
   mainPageNotification: '',
   mainFooter: '',
+  mainPageAbout: '## About \n\n ... \n\n',
+  mainPagePrivacy:
+    '## Privacy \n\n' +
+    'On this website, Helpful Information, your privacy is our priority.\n' +
+    '\n' +
+    '- **No Data Collection**  \n' +
+    'We do not collect any personal information or location data from our users. Feel free to explore our site anonymously.\n' +
+    '- **Contacting Us**  \n' +
+    'If you choose to contact us, rest assured that any details you share, including your email address, will remain protected. We do not share this information with third parties unless required by law.\n' +
+    '\n' +
+    'The Helpful Information Team',
 
   errorHeader: 'Data unavailable',
   errorMessage: 'Contact us at: ',

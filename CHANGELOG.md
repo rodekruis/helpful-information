@@ -19,6 +19,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Language-Switcher - Using separate sheets-as-languages defined at build-time, per-instance
 - Configurable color variables
 - Configurable Footer-text, see the ENV-variable: [`TXT_MAIN_FOOTER`](.env.example)
+- Configurable About-page, see the ENV-variable: [`TXT_MAIN_ABOUT`](.env.example)
+- Configurable Privacy-page, see the ENV-variable: [`TXT_MAIN_PRIVACY`](.env.example)
 
 ### Changed
 

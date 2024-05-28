@@ -17,6 +17,8 @@ export const environment = {
   mainPageHeader: 'We test Helpful Information.',
   mainPageIntroduction: 'Select a region:',
   mainPageNotification: '',
+  mainPageAbout: '',
+  mainPagePrivacy: '',
   mainFooter: '',
   errorHeader: 'Error',
   errorMessage: 'Message',

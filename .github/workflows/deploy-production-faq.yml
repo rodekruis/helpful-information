@@ -66,6 +66,12 @@ jobs:
           TXT_MAIN_PAGE_HEADER: 'This web app is made to give helpful information (HIA) about frequently asked questions (FAQ).'
           TXT_MAIN_PAGE_INTRO: 'Please select your FAQ below:'
           TXT_MAIN_PAGE_NOTICE: ''
+          TXT_MAIN_ABOUT: >-
+            ## About \n
+            \n
+          TXT_MAIN_PRIVACY: >-
+            ## Privacy \n
+            \n
           TXT_MAIN_FOOTER: >-
             <div class="d-flex d-flex-align-end d-flex-justify-between"> <div class="ion-padding text-style--size-08">
             **Helpful Information** \n
