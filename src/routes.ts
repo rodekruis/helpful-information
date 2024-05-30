@@ -13,7 +13,6 @@ export const routes: Routes = [
   {
     path: AppPath.about,
     pathMatch: 'full',
-    canActivate: [() => !!environment.pageAbout],
     component: ReferralPageComponent,
     data: {
       path: AppPath.about,
@@ -23,7 +22,6 @@ export const routes: Routes = [
   {
     path: AppPath.privacy,
     pathMatch: 'full',
-    canActivate: [() => !!environment.pagePrivacy],
     component: ReferralPageComponent,
     data: {
       path: AppPath.privacy,

@@ -73,8 +73,8 @@ export class ReferralPageComponent implements OnInit {
   public pageIntroduction = environment.mainPageIntroduction;
   public pageNotification = environment.mainPageNotification;
   public pageFooter = environment.mainFooter;
-  public pageAbout = environment.pageAbout;
-  public pagePrivacy = environment.pagePrivacy;
+  public pageAbout = environment.pageAbout?.trim();
+  public pagePrivacy = environment.pagePrivacy?.trim();
   public errorHeader = environment.errorHeader;
   public errorMessage = environment.errorMessage;
   public errorContactUrl = environment.errorContactUrl;
@@ -155,14 +155,17 @@ export class ReferralPageComponent implements OnInit {
   private setStaticPageMeta() {
     let pageContent;
 
-    if (this.route.snapshot.data.isAboutPage && !!environment.pageAbout) {
-      pageContent = environment.pageAbout;
+    if (this.route.snapshot.data.isAboutPage && !!this.pageAbout) {
+      pageContent = this.pageAbout;
     }
-    if (this.route.snapshot.data.isPrivacyPage && !!environment.pagePrivacy) {
-      pageContent = environment.pagePrivacy;
+    if (this.route.snapshot.data.isPrivacyPage && !!this.pagePrivacy) {
+      pageContent = this.pagePrivacy;
     }
 
     if (!pageContent) {
+      this.router.navigate([this.rootHref], {
+        replaceUrl: true,
+      });
       return;
     }
 
