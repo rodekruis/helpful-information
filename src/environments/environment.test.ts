@@ -10,6 +10,7 @@ export const environment = {
   useQandAs: true,
   useQandASearch: true,
   useRegionPerLocale: false,
+  useFeedbackPrompt: true,
 
   // Configuration of content
   appName: 'HIA-test',

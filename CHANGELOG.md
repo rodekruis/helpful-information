@@ -10,7 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 
-- Back-button and related logging/logic; Sheets can remove `#nav.back`-row.
+- Back-button and related logging/logic; `#nav.back`-row can be removed from Sheets.
+- Feedback-widget has changed; `#label.feedback.cta`-row can be removed from Sheets.
 
 ### Added
 
@@ -21,6 +22,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Configurable Footer-text, see the ENV-variable: [`TXT_MAIN_FOOTER`](.env.example)
 - Configurable About-page, see the ENV-variable: [`TXT_PAGE_ABOUT`](.env.example)
 - Configurable Privacy-page, see the ENV-variable: [`TXT_PAGE_PRIVACY`](.env.example)
+- Improved Feedback-Widget;  
+  New rows `#feedback.*` can be used to configure the feedback-widget. See: [`Referral Page.json`](./data/test-sheet-id-1/values/Referral%20Page.json)
 
 ### Changed
 

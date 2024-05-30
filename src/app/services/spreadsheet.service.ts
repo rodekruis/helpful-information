@@ -483,11 +483,6 @@ export class SpreadsheetService {
         6,
         RegionDataFallback.labelMainScreenButton,
       ),
-      contactFeedbackUrl: this.getConfigValueOrFallback(
-        sharedData,
-        RegionDataKey.contactFeedbackUrl,
-        -1,
-      ),
       contactPhoneNumber: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.contactTel,
@@ -602,6 +597,52 @@ export class SpreadsheetService {
         RegionDataKey.searchItems,
         21,
         RegionDataFallback.labelSearchResultsCount,
+      ),
+      feedbackQuestion: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackQuestion,
+        -1,
+        RegionDataFallback.feedbackQuestion,
+      ),
+      feedbackAnswerPositive: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackAnswerPositive,
+        -1,
+        RegionDataFallback.feedbackAnswerPositive,
+      ),
+      feedbackAnswerNegative: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackAnswerNegative,
+        -1,
+        RegionDataFallback.feedbackAnswerNegative,
+      ),
+      feedbackThanks: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackThanks,
+        -1,
+        RegionDataFallback.feedbackThanks,
+      ),
+      feedbackResultPostive: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackResultPostive,
+        -1,
+        RegionDataFallback.feedbackResultPostive,
+      ),
+      feedbackResultNegative: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackResultNegative,
+        -1,
+        RegionDataFallback.feedbackResultNegative,
+      ),
+      feedbackShareCta: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackShareCta,
+        -1,
+        RegionDataFallback.feedbackShareCta,
+      ),
+      feedbackShareUrl: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackShareUrl,
       ),
     };
   }

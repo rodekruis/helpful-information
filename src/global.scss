@@ -454,9 +454,19 @@ img[decoding='async'] {
     outline-color: var(--action--color-active);
   }
 
+  &.is_outline {
+    padding: 0.5em 1em;
+    font-weight: bold;
+    border: 0.0625rem solid var(--action--color);
+  }
+
   &.is_inline {
     display: inline-block;
     width: auto;
+
+    .icon {
+      vertical-align: middle;
+    }
   }
 
   &.is_round {
@@ -505,7 +515,16 @@ img[decoding='async'] {
   &.is_small {
     width: 0.8125em;
     height: 0.8125em;
+  }
+  &.is_medium {
+    width: 1em;
+    height: 1em;
+  }
+  &.is_inline-start {
     margin-inline-end: 0.25em;
+  }
+  &.is_inline-end {
+    margin-inline-start: 0.25em;
   }
 }
 
@@ -562,10 +581,10 @@ img[decoding='async'] {
   margin-top: 1rem;
 }
 
-// Component: Notification
+// Component: Dismissable Container
 //
 // Details-element as 'sticky' notification
-.notification-bar {
+.dismissible-container {
   position: relative;
 
   // Use summary-toggle as dismiss-button, so hide-when-closed:
@@ -573,7 +592,7 @@ img[decoding='async'] {
     display: none;
   }
 
-  .notification-bar--close {
+  .dismissible-container--close {
     position: absolute;
     inset-block-start: 0;
     inset-inline-end: 0;

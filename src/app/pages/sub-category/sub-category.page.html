@@ -60,7 +60,14 @@
 <br />
 
 <app-feedback-link
-  [template]="regionData?.contactFeedbackUrl"
-  [label]="regionData?.labelFeedbackCta"
-  class="ion-margin-vertical"
+  [template]="regionData?.feedbackShareUrl"
+  [labels]="{
+    answerNegative: regionData?.feedbackAnswerNegative,
+    answerPositive: regionData?.feedbackAnswerPositive,
+    question: regionData?.feedbackQuestion,
+    resultNegative: regionData?.feedbackResultNegative,
+    resultPostive: regionData?.feedbackResultPostive,
+    shareCta: regionData?.feedbackShareCta,
+    thanks: regionData?.feedbackThanks
+  }"
 ></app-feedback-link>

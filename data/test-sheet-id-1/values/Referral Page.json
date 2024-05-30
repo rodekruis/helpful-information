@@ -143,15 +143,28 @@
       "Need to Know",
       "\"First Things First\", \"What do you need to know?\""
     ],
+    [],
+    ["Feedback: Question\n#feedback.question", "Was this helpful?"],
+    ["Feedback: Positive Answer\n#feedback.answer.positive", "Yes"],
+    ["Feedback: Negative Answer\n#feedback.answer.negative", "No"],
     [
-      "Label: \"Make a Suggestion\"\n#label.feedback.cta",
-      "Something missing? Let us know!",
-      "\"Make a suggestion\", \"Provide feedback\" or \"Something missing? Let us know!\""
+      "Feedback: Thanks\n#feedback.thanks",
+      "Thank you for sharing your opinion."
     ],
     [
-      "Contact: Feedback URL\n#contact.feedback-url",
+      "Feedback: Positive response message\n#feedback.result.positive",
+      "We are happy you found this information helpful."
+    ],
+    [
+      "Feedback: Negative response message\n#feedback.result.negative",
+      "We're sorry you didn't find this information helpful. Share more feedback by filling our anonymous survey."
+    ],
+    ["Feedback: Share CTA\n#feedback.result.share-cta", "Share feedback"],
+    [
+      "Feedback: Share URL\n#contact.feedback-url",
       "mailto:contact@example.org?subject=Feedback%20on%20URL:%20{URL}",
       "The placeholder \"{URL}\" can be used to insert the URL of the page where the link is clicked.\nFor e-mail, use: \"mailto:contact@example.org?subject=Feedback%20on%20URL:%20{URL}\", for a web-form, use: \"https://example.org/feedback-form?text=Feedback%20on%20URL:%20{URL}\""
-    ]
+    ],
+    []
   ]
 }

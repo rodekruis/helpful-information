@@ -22,10 +22,7 @@
     ["#contact.tel", ""],
     ["#contact.whatsapp", ""],
     ["#contact.telegram", ""],
-    [
-      "#contact.feedback-url",
-      "mailto:contact@example.nl?subject=Feedback%20on%20URL:%20{URL}"
-    ],
+    ["#contact.feedback-url", ""],
     [],
     ["#highlights.title", "التغييرات الأخيرة"],
     ["#highlights.items.0", "لا توجد تغييرات حديثة."],

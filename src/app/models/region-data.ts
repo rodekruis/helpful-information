@@ -1,9 +1,16 @@
 // All properties sorted alphabetically.
 export type RegionData = {
-  contactFeedbackUrl?: string;
   contactPhoneNumber?: string;
   contactTelegramLink?: string;
   contactWhatsAppLink?: string;
+  feedbackAnswerNegative?: string;
+  feedbackAnswerPositive?: string;
+  feedbackQuestion?: string;
+  feedbackResultNegative?: string;
+  feedbackResultPostive?: string;
+  feedbackShareCta?: string;
+  feedbackShareUrl?: string;
+  feedbackThanks?: string;
   labelFeedbackCta?: string;
   labelHighlightsButton?: string;
   labelHighlightsItemsCount?: string;
@@ -50,10 +57,17 @@ export enum RegionCol {
 // For example: "Contact: Phone-number (only digits, include coutry-code)   #contact.tel"
 // All properties sorted alphabetically.
 export enum RegionDataKey {
-  contactFeedbackUrl = 'contact.feedback-url',
   contactTel = 'contact.tel',
   contactTelegram = 'contact.telegram',
   contactWhatsApp = 'contact.whatsapp',
+  feedbackAnswerNegative = 'feedback.answer.negative',
+  feedbackAnswerPositive = 'feedback.answer.positive',
+  feedbackQuestion = 'feedback.question',
+  feedbackResultNegative = 'feedback.result.negative',
+  feedbackResultPostive = 'feedback.result.positive',
+  feedbackShareCta = 'feedback.share-cta',
+  feedbackShareUrl = 'contact.feedback-url',
+  feedbackThanks = 'feedback.thanks',
   highlightsCta = 'highlights.cta',
   highlightsItems = 'highlights.items',
   highlightsItemsZero = 'highlights.items.0',
@@ -87,7 +101,13 @@ export enum RegionDataKey {
 
 // All properties sorted alphabetically.
 export enum RegionDataFallback {
-  labelFeedbackCta = 'Make a suggestion',
+  feedbackAnswerNegative = 'No',
+  feedbackAnswerPositive = 'Yes',
+  feedbackQuestion = 'Was this helpful?',
+  feedbackResultNegative = 'We are sorry you did not find this information helpful.',
+  feedbackResultPostive = 'We are happy you found this information helpful.',
+  feedbackShareCta = 'Share feedback',
+  feedbackThanks = 'Thank you for sharing your opinion',
   labelHighlightsButton = '!',
   labelHighlightsItemsCount = 'Highlighted items:',
   labelHighlightsItemsZero = 'No highlighted items.',

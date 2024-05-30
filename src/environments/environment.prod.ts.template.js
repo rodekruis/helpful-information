@@ -11,6 +11,7 @@ export const environment = {
   useQandAs: ${process.env.NG_USE_Q_AND_AS === 'true' || false},
   useQandASearch: ${process.env.NG_USE_Q_AND_A_SEARCH === 'true' || false},
   useRegionPerLocale: ${process.env.NG_USE_REGION_PER_LOCALE === 'true' || false},
+  useFeedbackPrompt: ${process.env.NG_USE_FEEDBACK_PROMPT === 'true' || false},
 
   // Configuration of content
   appName: '${process.env.TXT_APP_NAME || ''}',

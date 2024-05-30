@@ -12,6 +12,7 @@ export const environment = {
   useQandAs: true, // Enable 'Q&A'-content type
   useQandASearch: true, // Enable Search-feature for Q&As
   useRegionPerLocale: true, // Enable language-switcher to switch between Regions
+  useFeedbackPrompt: true, // Enable Feedback-prompt on Sub-Category and Offer pages
 
   // Configuration of content
   appName: 'Helpful \n Information',
