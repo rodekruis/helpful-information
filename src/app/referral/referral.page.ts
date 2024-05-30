@@ -264,6 +264,13 @@ export class ReferralPageComponent implements OnInit {
     this.loggingService.logEvent(LoggingEventCategory.ai, event);
   }
 
+  public logNotificationDismiss() {
+    this.loggingService.logEvent(
+      LoggingEventCategory.ai,
+      LoggingEvent.NotificationDismissed,
+    );
+  }
+
   /**
    * To support possible bookmarks of the old, query-style URLs
    * @deprecated

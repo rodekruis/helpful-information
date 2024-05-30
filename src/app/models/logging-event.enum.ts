@@ -29,6 +29,7 @@ export enum LoggingEvent {
   NotFoundParentQuestionIsSelf = 'not-found-parent-question-is-self',
   NotFoundSheetRows = 'not-found-sheet-rows',
   NotFoundSubCategory = 'not-found-sub-category',
+  NotificationDismissed = 'notification-dismissed',
   OfferClick = 'offer-click',
   OfferDetailClick = 'offer-detail-click',
   ParentLinkClick = 'parent-link-click',
