@@ -365,11 +365,15 @@ img[decoding='async'] {
 // Components
 //
 
+// Component: Floating Box
+//
+// Styling-only helper.
 .floating-box {
   border-radius: 0.25rem;
   box-shadow: var(--hia_level_shadow);
 }
 
+// Component: Loading Text skeleton/placeholder
 @keyframes shine {
   0% {
     background-position: -500px 0;
@@ -378,7 +382,6 @@ img[decoding='async'] {
     background-position: 500px 0;
   }
 }
-
 .loading-text {
   --background-rgb: 184, 184, 184;
 
@@ -405,6 +408,7 @@ img[decoding='async'] {
   }
 }
 
+// Component: Action (CTA/Button)
 .action {
   --action--color: var(--hia_level_text);
   --action--color-active: var(--hia_level_text);
@@ -471,6 +475,7 @@ img[decoding='async'] {
   }
 }
 
+// Component: Q&A Set
 .q-a-set {
   &[open] > .q-a-set--toggle {
     box-shadow: none; // Override .action styles
@@ -485,6 +490,7 @@ img[decoding='async'] {
   }
 }
 
+// Component: Sheet Button
 .sheet--button {
   display: flex;
   justify-content: center;
@@ -494,6 +500,7 @@ img[decoding='async'] {
   text-align: center;
 }
 
+// Component: Icon
 .icon {
   &.is_small {
     width: 0.8125em;
@@ -502,6 +509,9 @@ img[decoding='async'] {
   }
 }
 
+// Component: List Item
+//
+// Layout helper similar to "media object/island"
 .list-item {
   display: flex;
 
@@ -514,6 +524,7 @@ img[decoding='async'] {
   }
 }
 
+// Component: Logo Badge
 .logo-badge {
   display: flex;
   width: 6.5rem;
@@ -528,6 +539,7 @@ img[decoding='async'] {
   }
 }
 
+// Component: Contact-option Button
 .contact-button {
   display: block;
   line-height: 1;
@@ -550,6 +562,8 @@ img[decoding='async'] {
   margin-top: 1rem;
 }
 
+// Component: Notification
+//
 // Details-element as 'sticky' notification
 .notification-bar {
   position: relative;
