@@ -159,7 +159,7 @@
       "Feedback: Negative response message\n#feedback.result.negative",
       "We're sorry you didn't find this information helpful. Share more feedback by filling our anonymous survey."
     ],
-    ["Feedback: Share CTA\n#feedback.result.share-cta", "Share feedback"],
+    ["Feedback: Share CTA\n#feedback.share-cta", "Share feedback"],
     [
       "Feedback: Share URL\n#contact.feedback-url",
       "mailto:contact@example.org?subject=Feedback%20on%20URL:%20{URL}",
