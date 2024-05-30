@@ -74,7 +74,7 @@ jobs:
             ## Privacy \n
             \n
           TXT_MAIN_FOOTER: >-
-            <div class="d-flex d-flex-align-end d-flex-justify-between"> <div class="markdown"> \n
+            <div class="d-flex d-flex-align-end d-flex-justify-between"> <div class="markdown"> \n\n
             **Helpful Information**  \n\n
             [About](/about)  \n\n
             [Privacy](/privacy) \n\n
