@@ -11,7 +11,7 @@
     [attr.aria-label]="
       regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length
     "
-    class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
+    class="action is_inline is_round is_outline text-style--center ion-margin-bottom"
   >
     <strong>
       <small *ngIf="regionData?.labelHighlightsButton?.length > 1">
@@ -28,7 +28,7 @@
     [routerLink]="[AppPath.search]"
     [attr.title]="regionData?.labelSearchPageTitle"
     [attr.aria-label]="regionData?.labelSearchPageTitle"
-    class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
+    class="action is_inline is_round is_outline text-style--center ion-margin-bottom"
   >
     <!-- See Source: /src/assets/icons/search.svg -->
     <img
@@ -38,6 +38,7 @@
       loading="lazy"
       decoding="async"
       style="display: block"
+      class="icon is_medium"
     />
   </a>
 </div>
