@@ -59,8 +59,8 @@ export const environment = {
   regions:
     // Local standalone sheet:
     'test-local-1' +
-    ',' + // Add extra space to a row
     // Local language-specific (content-equivalent) sheets:
+    ',en' +
     ',nl' +
     ',ar' +
     '', // end-of-list
@@ -68,7 +68,7 @@ export const environment = {
   // Regions Labels: (A comnma-separated list of human-readable text-strings)
   regionsLabels:
     'Test Local 1' +
-    ',' + // Add extra space to a row
+    ',Test Local 🌐 EN' +
     ',Test Local 🌐 NL' +
     ',Test Local 🌐 AR' +
     '', // end-of-list
@@ -76,7 +76,7 @@ export const environment = {
   // Regions Google Sheet IDs, corresponding to the above defined regions
   regionsSheetIds:
     'test-sheet-id-1' + // Local Test  🔴
-    ',' + // Add extra space to a row
+    ',test-sheet-id-1' + // Local Test EN  🔴
     ',test-sheet-id-2-language-nl' + // Local Test NL  🔴
     ',test-sheet-id-3-language-ar' + // Local Test AR  🔴
     '', // end-of-list
