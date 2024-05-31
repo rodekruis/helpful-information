@@ -1,13 +1,14 @@
 <aside *ngIf="isEnabled">
   <details
-    [attr.open]="isVisible ? '' : null"
+    #details
+    open
+    (toggle)="toggle($event.target)"
     class="dismissible-container text-area--level floating-box text-style--center ion-padding"
   >
     <summary
       class="dismissible-container--close action is_round is_inline is_flat text-style--center"
       title="OK"
       aria-label="OK"
-      (toggle)="hide(true)"
     >
       <strong aria-hidden="true">&times;</strong>
     </summary>

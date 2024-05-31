@@ -1,6 +1,11 @@
 import { NgIf } from '@angular/common';
-import type { OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Component, Input, SecurityContext } from '@angular/core';
+import type {
+  ElementRef,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { Component, Input, SecurityContext, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
   LoggingEvent,
@@ -24,6 +29,9 @@ enum AnswerValue {
   providers: [LoggingService],
 })
 export class FeedbackLinkComponent implements OnChanges, OnInit {
+  @ViewChild('details')
+  private details: ElementRef<HTMLDetailsElement>;
+
   @Input()
   public template: string;
 
@@ -41,7 +49,6 @@ export class FeedbackLinkComponent implements OnChanges, OnInit {
   public AnswerValue = AnswerValue;
   public safeUrl: string;
   public isEnabled = environment.useFeedbackPrompt;
-  public isVisible = false;
 
   public answerValue: AnswerValue | null = null;
 
@@ -68,7 +75,7 @@ export class FeedbackLinkComponent implements OnChanges, OnInit {
     const url = fillTemplateWithUrl(this.template, window.location.href);
     this.safeUrl = this.domSanitizer.sanitize(SecurityContext.URL, url);
 
-    this.isVisible = true;
+    this.show();
   }
 
   private isTemplateValid(template: string): boolean {
@@ -81,7 +88,9 @@ export class FeedbackLinkComponent implements OnChanges, OnInit {
   }
 
   public show(): void {
-    this.isVisible = true;
+    if (this.details && !this.details.nativeElement.open) {
+      this.details.nativeElement.open = true;
+    }
 
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
@@ -89,15 +98,15 @@ export class FeedbackLinkComponent implements OnChanges, OnInit {
     );
   }
 
-  public hide(userInitiated = false): void {
-    this.isVisible = false;
-
-    if (userInitiated) {
-      this.loggingService.logEvent(
-        LoggingEventCategory.ai,
-        LoggingEvent.FeedbackPromptDismissed,
-      );
+  public toggle(target: EventTarget | HTMLDetailsElement): void {
+    if ((target as HTMLDetailsElement).open) {
+      return;
     }
+
+    this.loggingService.logEvent(
+      LoggingEventCategory.ai,
+      LoggingEvent.FeedbackPromptDismissed,
+    );
   }
 
   public answer(value: AnswerValue): void {
