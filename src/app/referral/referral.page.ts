@@ -1,15 +1,17 @@
 import { NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import type { Params } from '@angular/router';
 import {
   ActivatedRoute,
+  NavigationStart,
   Router,
   RouterLink,
   RouterOutlet,
 } from '@angular/router';
 import { IonContent, IonFooter, IonHeader } from '@ionic/angular/standalone';
 import { MarkdownComponent } from 'ngx-markdown';
+import { filter } from 'rxjs';
 import { AppHeaderComponent } from 'src/app/components/header/header.component';
 import type { Category } from 'src/app/models/category.model';
 import {
@@ -51,6 +53,9 @@ import { AppPath } from 'src/routes';
   ],
 })
 export class ReferralPageComponent implements OnInit {
+  @ViewChild('content')
+  private content: IonContent;
+
   public region: string;
   public regions: string[];
   public regionsLabels: string[];
@@ -93,6 +98,15 @@ export class ReferralPageComponent implements OnInit {
   ) {
     this.regions = createRegionSlugs();
     this.regionsLabels = createRegionLabels();
+
+    this.router.events
+      .pipe(filter((e) => e instanceof NavigationStart))
+      .subscribe(() => {
+        if (this.content) {
+          // To prevent a confusing scroll-position inherited from a previous page:
+          this.content.scrollToTop(0);
+        }
+      });
 
     this.route.params.subscribe((params: Params) => {
       this.region = params.region;
