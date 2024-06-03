@@ -59,6 +59,7 @@ jobs:
           NG_USE_OFFERS: 'true'
           NG_USE_Q_AND_AS: 'true'
           NG_USE_Q_AND_A_SEARCH: 'true'
+          NG_USE_FEEDBACK_PROMPT: 'true'
           TXT_APP_NAME: 'Helpful \n Information'
           TXT_APP_LOGO_URL: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cg fill="%23f5333f"%3E%3Cpath d="M10 0h10v30H10z" /%3E%3Cpath d="M30 10v10H0V10z" /%3E%3C/g%3E%3C/svg%3E'
           TXT_MAIN_PAGE_HEADER: 'Help for undocumented people'
