@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v23.11.0...main)
+## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.06.0...main)
+
+---
+
+## 2024-06-03: [v24.06](https://github.com/rodekruis/helpful-information/releases/tag/v24.06.0)
 
 ### Removed
 
