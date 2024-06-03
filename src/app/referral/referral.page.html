@@ -2,6 +2,7 @@
   <div class="layout--container layout--container_wide">
     <app-header
       [title]="regionData?.pageTitle"
+      [mainUrl]="mainUrl"
       [logoUrl]="regionData?.pageLogo"
       (logoAction)="showRootPage()"
       [localeAlternatives]="regionData?.localeAlternatives"
@@ -76,8 +77,8 @@
         >
         <br /><br /><br />
         <a
-          href="/"
-          onclick="location.reload(true)"
+          [href]="mainUrl"
+          onclick="location.reload(true);return false;"
         >
           {{ errorRetry }}
         </a>

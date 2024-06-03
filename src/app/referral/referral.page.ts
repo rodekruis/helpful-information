@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { Location, NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component, ViewChild } from '@angular/core';
 import type { Params } from '@angular/router';
@@ -19,7 +19,6 @@ import {
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
 import type { RegionData } from 'src/app/models/region-data';
-import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import type { SubCategory } from 'src/app/models/sub-category.model';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
@@ -31,7 +30,6 @@ import {
   createRegionSlugs,
 } from 'src/app/shared/util.environment';
 import { extractPageTitleFromMarkdown } from 'src/app/shared/util.markdown';
-import { createSlug } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 import { AppPath } from 'src/routes';
 
@@ -65,14 +63,12 @@ export class ReferralPageComponent implements OnInit {
 
   public regionData: RegionData = {};
 
-  private readonly rootHref = '/';
-
   public loading = false;
   public dataAvailable = false;
+  public mainUrl: string;
 
   private useOffers = environment.useOffers;
   private useQandAs = environment.useQandAs;
-  private useQandASearch = environment.useQandASearch;
 
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
@@ -91,6 +87,7 @@ export class ReferralPageComponent implements OnInit {
     private offersService: OffersService,
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private regionDataService: RegionDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private pageMeta: PageMetaService,
@@ -98,6 +95,8 @@ export class ReferralPageComponent implements OnInit {
   ) {
     this.regions = createRegionSlugs();
     this.regionsLabels = createRegionLabels();
+
+    this.mainUrl = this.location.normalize('/');
 
     this.router.events
       .pipe(filter((e) => e instanceof NavigationStart))
@@ -119,9 +118,6 @@ export class ReferralPageComponent implements OnInit {
         }
       }
     });
-    this.route.queryParams.subscribe((queryParams: Params) => {
-      this.upgradeLegacyUrls(queryParams);
-    });
   }
 
   public async ngOnInit() {
@@ -133,15 +129,11 @@ export class ReferralPageComponent implements OnInit {
         return;
       }
 
-      this.router.navigate([this.rootHref]);
+      this.router.navigate(['/']);
       return;
     }
 
     await this.loadAllData();
-  }
-
-  public getRegionHref() {
-    return this.rootHref + this.region;
   }
 
   public isSupportedRegion() {
@@ -177,7 +169,7 @@ export class ReferralPageComponent implements OnInit {
     }
 
     if (!pageContent) {
-      this.router.navigate([this.rootHref], {
+      this.router.navigate(['/'], {
         replaceUrl: true,
       });
       return;
@@ -258,7 +250,7 @@ export class ReferralPageComponent implements OnInit {
         { isBack: true },
       );
     }
-    this.router.navigate([this.rootHref]);
+    this.router.navigate(['/']);
   }
 
   public logContactClick(type: 'tel' | 'whatsapp' | 'telegram') {
@@ -289,50 +281,5 @@ export class ReferralPageComponent implements OnInit {
       LoggingEventCategory.ai,
       LoggingEvent.NotificationDismissed,
     );
-  }
-
-  /**
-   * To support possible bookmarks of the old, query-style URLs
-   * @deprecated
-   */
-  private upgradeLegacyUrls(queryParams: Params) {
-    if (this.useQandAs && !!queryParams.highlights) {
-      this.router.navigate([this.getRegionHref(), AppPath.highlights], {
-        replaceUrl: true,
-      });
-    }
-    if (this.useQandASearch && !!queryParams.search) {
-      this.router.navigate([this.getRegionHref(), AppPath.search], {
-        replaceUrl: true,
-        queryParamsHandling: 'merge',
-        queryParams: {
-          search: null,
-          q: queryParams.q ? queryParams.q : null,
-        },
-      });
-    }
-    if (
-      !!queryParams.categoryID ||
-      !!queryParams.subCategoryID ||
-      !!queryParams.offerID
-    ) {
-      let upgradedUrl = this.getRegionHref();
-      if (queryParams.categoryID) {
-        upgradedUrl +=
-          '/' + createSlug('', queryParams.categoryID, SlugPrefix.category);
-      }
-      if (queryParams.subCategoryID) {
-        upgradedUrl +=
-          '/' +
-          createSlug('', queryParams.subCategoryID, SlugPrefix.subCategory);
-      }
-      if (queryParams.offerID) {
-        upgradedUrl +=
-          '/' + createSlug('', queryParams.offerID, SlugPrefix.offer);
-      }
-      this.router.navigateByUrl(upgradedUrl, {
-        replaceUrl: true,
-      });
-    }
   }
 }

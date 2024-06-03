@@ -17,6 +17,9 @@ export class AppHeaderComponent {
   public title: string;
 
   @Input()
+  public mainUrl = '/';
+
+  @Input()
   public logoUrl: string;
 
   @Output()

@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.06.0...main)
 
+### Fixed
+
+- Links to Main-page(the Logo, "Try Again"-link) now takes into account if deployed in a sub-folder or on (sub-)domain.
+
+### Removed
+
+- No more URL-rewriting/redirecting for 'old-style' URLs using query-parameters only.
+
 ---
 
 ## 2024-06-03: [v24.06](https://github.com/rodekruis/helpful-information/releases/tag/v24.06.0)
