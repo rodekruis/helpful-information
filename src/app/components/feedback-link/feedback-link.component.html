@@ -1,11 +1,103 @@
-<p
-  *ngIf="safeUrl"
-  class="text-style--center"
->
-  <a
-    [href]="safeUrl"
-    target="_blank"
-    rel="noopener noreferrer contact"
-    >{{ label }}</a
+<aside *ngIf="isEnabled">
+  <details
+    #details
+    open
+    (toggle)="toggle($event.target)"
+    class="dismissible-container text-area--level floating-box text-style--center ion-padding"
   >
-</p>
+    <summary
+      class="dismissible-container--close action is_round is_inline is_flat text-style--center"
+      title="OK"
+      aria-label="OK"
+    >
+      <strong aria-hidden="true">&times;</strong>
+    </summary>
+
+    <div *ngIf="!answerValue">
+      <div class="ion-margin-bottom">
+        <strong>{{ labels.question }}</strong>
+      </div>
+      <div>
+        <button
+          (click)="answer(AnswerValue.Positive)"
+          class="action is_round is_inline is_outline is_flat"
+        >
+          <svg
+            fill="none"
+            viewBox="0 0 19 20"
+            class="icon is_medium is_inline-start"
+          >
+            <path
+              stroke="#368704"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 5 7 15l-3-4"
+            />
+          </svg>
+
+          {{ labels.answerPositive }}
+        </button>
+        &nbsp;
+        <button
+          (click)="answer(AnswerValue.Negative)"
+          class="action is_round is_inline is_outline is_flat"
+        >
+          <svg
+            fill="none"
+            viewBox="0 0 13 12"
+            class="icon is_medium is_inline-start"
+          >
+            <path
+              fill="#C70000"
+              d="M11.9 1.81a.85.85 0 1 0-1.21-1.2L6.5 4.78 2.31.6a.85.85 0 1 0-1.2 1.21L5.28 6 1.1 10.19a.85.85 0 0 0 1.21 1.2L6.5 7.22l4.19 4.19a.85.85 0 1 0 1.2-1.21L7.72 6l4.19-4.19Z"
+            />
+          </svg>
+
+          {{ labels.answerNegative }}
+        </button>
+      </div>
+    </div>
+    <div *ngIf="!!answerValue">
+      <strong>{{ labels.thanks }}</strong>
+
+      <ng-container *ngIf="answerValue === AnswerValue.Positive">
+        <p>
+          {{ labels.resultPostive }}
+        </p>
+      </ng-container>
+
+      <ng-container *ngIf="answerValue === AnswerValue.Negative">
+        <p>
+          {{ labels.resultNegative }}
+        </p>
+        <p>
+          <a
+            *ngIf="safeUrl"
+            [href]="safeUrl"
+            (click)="shareClick()"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="action is_round is_inline is_flat is_outline"
+          >
+            {{ labels.shareCta }}
+
+            <svg
+              class="icon is_small is_inline-end"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="48"
+                d="M268 112l144 144-144 144M392 256H100"
+              />
+            </svg>
+          </a>
+        </p>
+      </ng-container>
+    </div>
+  </details>
+</aside>

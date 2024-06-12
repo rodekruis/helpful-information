@@ -1,6 +1,8 @@
+<app-parent-link [region]="region"></app-parent-link>
+
 <h2
   *ngIf="category?.categoryName"
-  class="text-style--header text-style--size-2"
+  class="text-style--alt text-style--size-2"
 >
   {{ category?.categoryName }}
 </h2>
@@ -14,11 +16,15 @@
 ></div>
 
 <ul
-  *ngIf="subCategories && subCategories?.length && (subCategories|categoryFilter:category)?.length"
+  *ngIf="
+    subCategories &&
+    subCategories?.length &&
+    (subCategories | categoryFilter: category)?.length
+  "
   class="list-flat ion-margin-vertical"
 >
   <li
-    *ngFor="let subCategoryItem of subCategories|categoryFilter:category"
+    *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
     class="ion-margin-bottom"
   >
     <app-sub-category-link

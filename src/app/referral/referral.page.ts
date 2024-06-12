@@ -1,15 +1,17 @@
 import { Location, NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import type { Params } from '@angular/router';
 import {
   ActivatedRoute,
+  NavigationStart,
   Router,
   RouterLink,
   RouterOutlet,
 } from '@angular/router';
 import { IonContent, IonFooter, IonHeader } from '@ionic/angular/standalone';
 import { MarkdownComponent } from 'ngx-markdown';
+import { filter } from 'rxjs';
 import { AppHeaderComponent } from 'src/app/components/header/header.component';
 import type { Category } from 'src/app/models/category.model';
 import {
@@ -17,15 +19,19 @@ import {
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
 import type { RegionData } from 'src/app/models/region-data';
-import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import type { SubCategory } from 'src/app/models/sub-category.model';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import { createSlug, getParentPath, getPathDepth } from 'src/app/shared/utils';
+import {
+  createRegionLabels,
+  createRegionSlugs,
+} from 'src/app/shared/util.environment';
+import { extractPageTitleFromMarkdown } from 'src/app/shared/util.markdown';
 import { environment } from 'src/environments/environment';
+import { AppPath } from 'src/routes';
 
 @Component({
   selector: 'app-referral',
@@ -45,6 +51,9 @@ import { environment } from 'src/environments/environment';
   ],
 })
 export class ReferralPageComponent implements OnInit {
+  @ViewChild('content')
+  private content: IonContent;
+
   public region: string;
   public regions: string[];
   public regionsLabels: string[];
@@ -54,70 +63,123 @@ export class ReferralPageComponent implements OnInit {
 
   public regionData: RegionData = {};
 
-  private readonly rootHref = '/';
-
   public loading = false;
   public dataAvailable = false;
+  public mainUrl: string;
 
   private useOffers = environment.useOffers;
   private useQandAs = environment.useQandAs;
-  private useQandASearch = environment.useQandASearch;
 
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
   public pageNotification = environment.mainPageNotification;
+  public pageFooter = environment.mainFooter;
+  public pageAbout = environment.pageAbout?.trim();
+  public pagePrivacy = environment.pagePrivacy?.trim();
   public errorHeader = environment.errorHeader;
   public errorMessage = environment.errorMessage;
   public errorContactUrl = environment.errorContactUrl;
   public errorRetry = environment.errorRetry;
 
+  public AppPath = AppPath;
+
   constructor(
     private offersService: OffersService,
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private regionDataService: RegionDataService,
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private pageMeta: PageMetaService,
-    private location: Location,
     private loggingService?: LoggingService,
   ) {
-    this.regions = environment.regions.trim().split(/\s*,\s*/);
-    this.regionsLabels = environment.regionsLabels.trim().split(/\s*,\s*/);
+    this.regions = createRegionSlugs();
+    this.regionsLabels = createRegionLabels();
+
+    this.mainUrl = this.location.normalize('/');
+
+    this.router.events
+      .pipe(filter((e) => e instanceof NavigationStart))
+      .subscribe(() => {
+        if (this.content) {
+          // To prevent a confusing scroll-position inherited from a previous page:
+          this.content.scrollToTop(0);
+        }
+      });
 
     this.route.params.subscribe((params: Params) => {
       this.region = params.region;
 
       if (!this.isSupportedRegion()) {
-        this.pageMeta.setDirection('');
-        this.pageMeta.setLanguage('');
-        this.pageMeta.setTitle({ override: environment.appName });
-        this.pageMeta.setCanonicalUrl({});
+        this.resetPageMeta();
+
+        if (this.isStaticPage()) {
+          this.setStaticPageMeta();
+        }
       }
-    });
-    this.route.queryParams.subscribe((queryParams: Params) => {
-      this.upgradeLegacyUrls(queryParams);
     });
   }
 
   public async ngOnInit() {
     if (!this.isSupportedRegion()) {
-      this.pageMeta.setDirection('');
-      this.pageMeta.setLanguage('');
-      this.pageMeta.setTitle({ override: environment.appName });
-      this.pageMeta.setCanonicalUrl({});
-      this.router.navigate([this.rootHref]);
+      this.resetPageMeta();
+
+      if (this.isStaticPage()) {
+        this.setStaticPageMeta();
+        return;
+      }
+
+      this.router.navigate(['/']);
       return;
     }
 
     await this.loadAllData();
   }
 
-  public getRegionHref() {
-    return this.rootHref + this.region;
-  }
-
   public isSupportedRegion() {
     return this.region && this.regions.includes(this.region);
+  }
+
+  public isStaticPage(page?: AppPath) {
+    if (page) {
+      return this.route.snapshot.data.path === page;
+    }
+
+    return (
+      this.route.snapshot.data.isAboutPage ||
+      this.route.snapshot.data.isPrivacyPage
+    );
+  }
+
+  private resetPageMeta() {
+    this.pageMeta.setDirection('');
+    this.pageMeta.setLanguage('');
+    this.pageMeta.setCanonicalUrl({});
+    this.pageMeta.setTitle({});
+  }
+
+  private setStaticPageMeta() {
+    let pageContent;
+
+    if (this.route.snapshot.data.isAboutPage && !!this.pageAbout) {
+      pageContent = this.pageAbout;
+    }
+    if (this.route.snapshot.data.isPrivacyPage && !!this.pagePrivacy) {
+      pageContent = this.pagePrivacy;
+    }
+
+    if (!pageContent) {
+      this.router.navigate(['/'], {
+        replaceUrl: true,
+      });
+      return;
+    }
+
+    const pageTitle = extractPageTitleFromMarkdown(pageContent);
+    this.pageMeta.setTitle({
+      pageName: pageTitle,
+      region: this.region ? this.region : '',
+    });
   }
 
   private hasDataAvailable(): boolean {
@@ -142,13 +204,20 @@ export class ReferralPageComponent implements OnInit {
     return environment.mainPageNotification;
   }
 
+  public getFooterContent(): string {
+    if (this.regionData.pageFooter) {
+      return this.regionData.pageFooter;
+    }
+    return environment.mainFooter;
+  }
+
   private async loadAllData() {
     this.loading = true;
     this.regionData = await this.regionDataService.getData(this.region);
 
     this.pageMeta.setDirection(this.regionData.localeDirection);
     this.pageMeta.setLanguage(this.regionData.localeLanguage);
-    this.pageMeta.setTitle({ region: this.regionData.pageTitle });
+    this.pageMeta.setTitle({ region: this.region });
 
     this.lastUpdatedTimeService.setLastUpdatedTime(
       this.regionData.lastUpdatedTime,
@@ -173,45 +242,6 @@ export class ReferralPageComponent implements OnInit {
     this.loading = false;
   }
 
-  public goBack(): void {
-    const currentPath = this.location.path();
-    const pathDepth = getPathDepth(currentPath);
-    const parentPath = getParentPath(currentPath);
-
-    let event = LoggingEvent.BackButtonClick;
-
-    switch (pathDepth) {
-      case 4:
-        event = LoggingEvent.BackFromOffer;
-        break;
-      case 3:
-        event = LoggingEvent.BackFromSubCategory;
-        break;
-      case 2:
-        if (currentPath.match(/\/highlights$/)) {
-          event = LoggingEvent.BackFromHighlights;
-          break;
-        }
-        if (currentPath.match(/\/search$/)) {
-          event = LoggingEvent.BackFromSearch;
-          break;
-        }
-        event = LoggingEvent.BackFromCategory;
-        break;
-      case 1:
-        event = LoggingEvent.BackFromRegion;
-        break;
-    }
-
-    if (this.loggingService) {
-      this.loggingService.logEvent(LoggingEventCategory.ai, event, {
-        isBack: true,
-      });
-    }
-
-    this.router.navigateByUrl(parentPath || '/');
-  }
-
   public showRootPage() {
     if (this.loggingService) {
       this.loggingService.logEvent(
@@ -220,7 +250,7 @@ export class ReferralPageComponent implements OnInit {
         { isBack: true },
       );
     }
-    this.router.navigate([this.rootHref]);
+    this.router.navigate(['/']);
   }
 
   public logContactClick(type: 'tel' | 'whatsapp' | 'telegram') {
@@ -240,47 +270,16 @@ export class ReferralPageComponent implements OnInit {
     this.loggingService.logEvent(LoggingEventCategory.ai, event);
   }
 
-  /**
-   * To support possible bookmarks of the old, query-style URLs
-   */
-  private upgradeLegacyUrls(queryParams: Params) {
-    if (this.useQandAs && !!queryParams.highlights) {
-      this.router.navigate([this.getRegionHref(), 'highlights'], {
-        replaceUrl: true,
-      });
+  public logNotificationDismiss(
+    target: EventTarget | HTMLDetailsElement,
+  ): void {
+    if ((target as HTMLDetailsElement).open) {
+      return;
     }
-    if (this.useQandASearch && !!queryParams.search) {
-      this.router.navigate([this.getRegionHref(), 'search'], {
-        replaceUrl: true,
-        queryParamsHandling: 'merge',
-        queryParams: {
-          search: null,
-          q: queryParams.q ? queryParams.q : null,
-        },
-      });
-    }
-    if (
-      !!queryParams.categoryID ||
-      !!queryParams.subCategoryID ||
-      !!queryParams.offerID
-    ) {
-      let upgradedUrl = this.getRegionHref();
-      if (queryParams.categoryID) {
-        upgradedUrl +=
-          '/' + createSlug('', queryParams.categoryID, SlugPrefix.category);
-      }
-      if (queryParams.subCategoryID) {
-        upgradedUrl +=
-          '/' +
-          createSlug('', queryParams.subCategoryID, SlugPrefix.subCategory);
-      }
-      if (queryParams.offerID) {
-        upgradedUrl +=
-          '/' + createSlug('', queryParams.offerID, SlugPrefix.offer);
-      }
-      this.router.navigateByUrl(upgradedUrl, {
-        replaceUrl: true,
-      });
-    }
+
+    this.loggingService.logEvent(
+      LoggingEventCategory.ai,
+      LoggingEvent.NotificationDismissed,
+    );
   }
 }

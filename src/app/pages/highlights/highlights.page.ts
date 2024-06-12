@@ -3,22 +3,24 @@ import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import type { QASet } from 'src/app/models/qa-set.model';
 import type { RegionData } from 'src/app/models/region-data';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
+import { AppPath } from 'src/routes';
 
 @Component({
   selector: 'app-highlights-page',
   templateUrl: './highlights.page.html',
   styleUrls: ['./highlights.page.css'],
   standalone: true,
-  imports: [NgIf, QASetListComponent, RouterLink],
+  imports: [NgIf, QASetListComponent, RouterLink, ParentLinkComponent],
 })
 export default class HighlightsPageComponent implements OnInit {
-  private region: string;
+  public region: string;
   public regionData: RegionData;
   public qaHighlights: QASet[];
 
@@ -55,10 +57,11 @@ export default class HighlightsPageComponent implements OnInit {
       }
 
       this.pageMeta.setTitle({
-        override: `${highlightsPageTitle} - ${this.regionData?.pageTitle}`,
+        pageName: highlightsPageTitle,
+        region: this.region,
       });
       this.pageMeta.setCanonicalUrl({
-        override: this.region + '/highlights',
+        override: `${this.region}/${AppPath.highlights}`,
       });
     });
   }

@@ -10,6 +10,57 @@
 // @import '@ionic/angular/css/text-transformation.css';
 // @import '@ionic/angular/css/flex-utils.css';
 
+// Configuration Variables
+//
+// Possible to override via the `theme/overrides.scss`-file (set before/during build)
+:root {
+  // Fonts
+  //
+  // Fonts - Theme (named fonts):
+  --hia_font_open-sans: 'Open Sans', Arial, 'Helvetica Neue', sans-serif;
+  --hia_font_montserrat: 'montserrat_webfont', Tahoma, 'Gill Sans', sans-serif;
+
+  // Fonts - Content-text:
+  --hia_content_font-family: var(
+    --env_hia_content_font-family,
+    var(--hia_font_open-sans)
+  );
+  --hia_content_font-size: var(--env_hia_content_font-size, 16px);
+
+  // Fonts - Headings:
+  --hia_alt_font-family: var(
+    --env_hia_alt_font-family,
+    var(--hia_font_montserrat)
+  );
+  --hia_heading_font-size: var(--env_hia_heading_font-size, 16px);
+
+  // Colors
+  //
+  // Colors - Theme (named colors):
+  --hia_color_light-beige: #faf5e5;
+  --hia_color_dark-green: #2f5f6e;
+  --hia_color_dark-navy: #011e41;
+  --hia_color_white: #ffffff;
+
+  --hia_style_shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.1);
+
+  // Colors - Functions
+  //
+  // Colors - Function: Base (the main body of content)
+  --hia_base_text: var(--env_hia_base_text, var(--hia_color_dark-navy));
+  --hia_base_fill: var(--env_hia_base_fill, var(--hia_color_light-beige));
+
+  // Colors - Function: Alt (alternative color-scheme, used for Footer)
+  --hia_alt_text: var(--env_hia_alt_text, var(--hia_color_white));
+  --hia_alt_fill: var(--env_hia_alt_fill, var(--hia_color_dark-green));
+
+  // Colors - Function: Level (slightly raised, used for CTAs etc.
+  --hia_level_text: var(--env_hia_level_text, var(--hia_color_dark-navy));
+  --hia_level_fill: var(--env_hia_level_fill, var(--hia_color_white));
+
+  --hia_level_shadow: var(--env_hia_level_shadow, var(--hia_style_shadow));
+}
+
 // Baseline Print styles
 @import '_print.scss';
 
@@ -71,6 +122,7 @@ html {
     --ion-color-base: var(--print-background);
     --ion-background-color: var(--print-background);
   }
+
   *,
   *::before,
   *::after {
@@ -95,9 +147,42 @@ html {
 //
 // Baseline / Normalizations
 //
+hr {
+  border-top: 1px dashed currentColor;
+}
+
 a {
   color: inherit;
   -webkit-touch-callout: initial; // Enable "tap-and-hold" on links on mobile/touch/iOS
+}
+
+details summary {
+  cursor: pointer;
+}
+
+hr {
+  border-top: 1px dashed currentColor;
+}
+
+// 'Page'-width
+.layout--container {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 500px;
+
+  &.layout--container_wide {
+    max-width: 1024px;
+  }
+}
+
+ion-content::part(scroll),
+.layout--stretch-height {
+  display: flex;
+  flex-flow: column nowrap;
+}
+// Must be used IN a flex-parent (like .layout--stretch-height)
+.layout--stick-to-end {
+  margin-block-start: auto;
 }
 
 // Workaround for touch-screen laptops
@@ -107,16 +192,9 @@ html.plt-mobile ion-app {
   user-select: auto;
 }
 
-// Always reserve space to scroll (and to show floating-action-area)
-ion-content.ion-padding-vertical,
-ion-content.ion-padding {
-  --padding-bottom: 25vh;
-}
-
 // Prevent scrolling-area from becommnig too small
 @media screen and (orientation: landscape) and (max-height: 30em) {
-  ion-header,
-  ion-footer {
+  ion-header {
     max-height: 20vh;
     overflow: auto;
   }
@@ -158,7 +236,7 @@ img[decoding='async'] {
 }
 
 .tile-grid {
-  --column-gap: 0.25rem;
+  --column-gap: 0.1875rem;
 
   display: flex;
   flex-flow: row wrap;
@@ -170,7 +248,7 @@ img[decoding='async'] {
   .tile-grid--item {
     padding-inline-start: var(--column-gap);
     padding-inline-end: var(--column-gap);
-    margin-bottom: 1rem;
+    margin-block: var(--column-gap);
     min-width: 150px; // To always fit 2 items for narrow viewports
   }
 
@@ -198,18 +276,8 @@ img[decoding='async'] {
     position: relative;
   }
   &.is_bottom-end {
-    inset-inline-end: 0;
-    bottom: 1rem;
-  }
-}
-
-//
-// Accessibility (A11y) Utilities
-//
-// Directionality
-.directional_swap-horizontal {
-  [dir='rtl'] & {
-    transform: rotate(180deg);
+    inset-inline-end: 1.33rem;
+    bottom: 4rem;
   }
 }
 
@@ -245,8 +313,8 @@ img[decoding='async'] {
 .text-style--use-newlines {
   white-space: pre-wrap;
 }
-.text-style--header {
-  font-family: var(--ion-font-family-header);
+.text-style--alt {
+  font-family: var(--hia_alt_font-family);
   font-weight: bold;
   letter-spacing: 0.08em;
 
@@ -282,10 +350,30 @@ img[decoding='async'] {
   }
 }
 
+.text-area--level {
+  font-family: var(--hia_content_font-family);
+  color: var(--hia_level_text);
+  background-color: var(--hia_level_fill);
+}
+
+.text-area--alt {
+  color: var(--hia_alt_text);
+  background-color: var(--hia_alt_fill);
+}
+
 //
 // Components
 //
 
+// Component: Floating Box
+//
+// Styling-only helper.
+.floating-box {
+  border-radius: 0.25rem;
+  box-shadow: var(--hia_level_shadow);
+}
+
+// Component: Loading Text skeleton/placeholder
 @keyframes shine {
   0% {
     background-position: -500px 0;
@@ -294,9 +382,8 @@ img[decoding='async'] {
     background-position: 500px 0;
   }
 }
-
 .loading-text {
-  --background-rgb: var(--ion-color-dark-contrast-rgb);
+  --background-rgb: 184, 184, 184;
 
   display: inline-block;
   width: 100%;
@@ -321,10 +408,11 @@ img[decoding='async'] {
   }
 }
 
+// Component: Action (CTA/Button)
 .action {
-  --action--color: #011e60;
-  --action--color-active: #011e60;
-  --action--background-color: #fff;
+  --action--color: var(--hia_level_text);
+  --action--color-active: var(--hia_level_text);
+  --action--background-color: var(--hia_level_fill);
   --action--background-color-active: #efefef;
 
   display: block;
@@ -333,6 +421,7 @@ img[decoding='async'] {
 
   border-radius: 0.25rem;
   text-decoration: none;
+  box-shadow: var(--hia_level_shadow);
 
   @media print {
     --action--color: #333;
@@ -342,6 +431,7 @@ img[decoding='async'] {
 
     border: 0.05em solid #ccc;
     font-weight: bold;
+    box-shadow: none;
   }
 
   &,
@@ -355,31 +445,28 @@ img[decoding='async'] {
   &:focus {
     color: var(--action--color-active);
     background-color: var(--action--background-color-active);
-    outline-color: initial;
-    outline-offset: 2px;
-    outline-width: 4px;
+    outline-color: transparent;
+    outline-offset: 0.1875rem;
+    outline-width: 0.125rem;
     outline-style: solid;
   }
   &:focus {
-    outline-color: var(--action--background-color-active);
+    outline-color: var(--action--color-active);
   }
 
-  &.is_attention {
-    color: black;
-    background-color: gold;
-
-    &:hover,
-    &:focus {
-      outline-color: gold;
-    }
-    @media print {
-      border: 0.1em dashed #000;
-    }
+  &.is_outline {
+    padding: 0.5em 1em;
+    font-weight: bold;
+    border: 0.0625rem solid var(--action--color);
   }
 
   &.is_inline {
     display: inline-block;
     width: auto;
+
+    .icon {
+      vertical-align: middle;
+    }
   }
 
   &.is_round {
@@ -392,24 +479,28 @@ img[decoding='async'] {
       border-radius: 1rem;
     }
   }
-}
 
-.action-dark {
-  --action--color: #fff;
-  --action--color-active: #fff;
-  --action--background-color: #1f3958;
-  --action--background-color-active: #3a4f6a;
-
-  @media print {
-    --action--color: #333;
-    --action--color-active: #000;
-    --action--background-color: #fff;
-    --action--background-color-active: #fff;
-
-    border: 0.05em solid #ccc;
+  &.is_flat {
+    box-shadow: none;
   }
 }
 
+// Component: Q&A Set
+.q-a-set {
+  &[open] > .q-a-set--toggle {
+    box-shadow: none; // Override .action styles
+  }
+
+  .q-a-set--content {
+    padding-inline-start: 1.6rem; // Allow room for marker as padding
+
+    *:first-of-type {
+      margin-top: 0;
+    }
+  }
+}
+
+// Component: Sheet Button
 .sheet--button {
   display: flex;
   justify-content: center;
@@ -419,14 +510,27 @@ img[decoding='async'] {
   text-align: center;
 }
 
+// Component: Icon
 .icon {
   &.is_small {
     width: 0.8125em;
     height: 0.8125em;
+  }
+  &.is_medium {
+    width: 1em;
+    height: 1em;
+  }
+  &.is_inline-start {
     margin-inline-end: 0.25em;
+  }
+  &.is_inline-end {
+    margin-inline-start: 0.25em;
   }
 }
 
+// Component: List Item
+//
+// Layout helper similar to "media object/island"
 .list-item {
   display: flex;
 
@@ -439,12 +543,13 @@ img[decoding='async'] {
   }
 }
 
+// Component: Logo Badge
 .logo-badge {
   display: flex;
   width: 6.5rem;
   height: 6.5rem;
   padding: 0.5rem;
-  background-color: #fff;
+  background-color: rgba(244, 247, 250, 1);
   border-radius: 0.25rem;
 
   .logo-badge--image {
@@ -453,27 +558,14 @@ img[decoding='async'] {
   }
 }
 
+// Component: Contact-option Button
 .contact-button {
   display: block;
   line-height: 1;
 
   .contact-button--link {
     display: inline-block;
-    padding-block: 0.3rem;
-    padding-inline: 0.6rem;
-    background: white;
-    border-radius: 48px 0 0 48px;
     overflow: hidden;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
-    border: 2px solid transparent;
-
-    &:hover,
-    &:focus {
-      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.9);
-    }
-    &:focus {
-      border-color: gold;
-    }
   }
 
   .contact-button--logo {
@@ -486,27 +578,29 @@ img[decoding='async'] {
 }
 
 .contact-button + .contact-button {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
-.notification-bar {
-  font-family: var(--ion-font-family);
-  font-size: 85%;
-  color: var(--ion-color-black);
-  background-color: var(--ion-color-secondary);
-  border-start-start-radius: 0.25rem;
-  border-start-end-radius: 0.25rem;
+// Component: Dismissable Container
+//
+// Details-element as 'sticky' notification
+.dismissible-container {
+  position: relative;
 
-  // Utility class to use in (Markdown)content
-  .d-flex {
-    display: flex;
-    align-items: center;
-    gap: 1ex;
+  // Use summary-toggle as dismiss-button, so hide-when-closed:
+  &:not([open]) {
+    display: none;
   }
 
-  // Utility class to use in (Markdown)content
-  .d-center {
-    text-align: center;
+  .dismissible-container--close {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+
+    &::-webkit-details-marker,
+    &::marker {
+      display: none;
+    }
   }
 }
 
@@ -549,6 +643,27 @@ img[decoding='async'] {
       content: ' (' attr(href) ')';
     }
   }
+
+  // Utility layout/style classes
+  .d-block {
+    display: block;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .d-flex-justify-between {
+    justify-content: space-between;
+  }
+
+  .d-flex-align-end {
+    align-items: flex-end;
+  }
+
+  .d-center {
+    text-align: center;
+  }
 }
 
 /**
@@ -560,5 +675,10 @@ body[style*='margin-top: 56px;'] {
 
   ion-app {
     top: 56px;
+  }
+
+  // Hide own language-switcher when Google's is active
+  .language-switcher {
+    display: none;
   }
 }

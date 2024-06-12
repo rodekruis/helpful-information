@@ -13,6 +13,7 @@ import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { environment } from 'src/environments/environment';
+import { AppPath } from 'src/routes';
 
 @Component({
   selector: 'app-region-page',
@@ -24,6 +25,7 @@ import { environment } from 'src/environments/environment';
 export default class RegionPageComponent implements OnInit {
   public useQandAs = environment.useQandAs;
   public useQandASearch = environment.useQandASearch;
+  public AppPath = AppPath;
 
   private region: string;
   public regionData: RegionData;
@@ -51,7 +53,7 @@ export default class RegionPageComponent implements OnInit {
       this.pageMeta.setLanguage(this.regionData.localeLanguage);
 
       this.pageMeta.setTitle({
-        region: this.regionData.pageTitle,
+        region: this.region,
       });
 
       this.pageMeta.setCanonicalUrl({

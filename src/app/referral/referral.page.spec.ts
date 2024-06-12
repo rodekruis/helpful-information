@@ -30,12 +30,20 @@ describe('ReferralPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render 1 (visible) test-region', () => {
+  it('should render 3 visible test-region(s)', () => {
     // Assert
     const listItems = fixture.debugElement.nativeElement.querySelectorAll(
-      'li:not([aria-hidden])',
+      'li:not([aria-hidden="true"])',
     );
 
-    expect(listItems.length).toEqual(1);
+    expect(listItems.length).toEqual(3);
+  });
+
+  it('should render 3 visible buttons for test-region(s)', () => {
+    // Assert
+    const listItems =
+      fixture.debugElement.nativeElement.querySelectorAll('li a[href]');
+
+    expect(listItems.length).toEqual(3);
   });
 });

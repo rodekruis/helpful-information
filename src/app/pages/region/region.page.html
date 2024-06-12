@@ -4,10 +4,14 @@
 >
   <a
     *ngIf="useQandAs && qaHighlights?.length > 0"
-    [routerLink]="['highlights']"
-    [attr.title]="regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length"
-    [attr.aria-label]="regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length"
-    class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
+    [routerLink]="[AppPath.highlights]"
+    [attr.title]="
+      regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length
+    "
+    [attr.aria-label]="
+      regionData?.labelHighlightsItemsCount + ' ' + qaHighlights?.length
+    "
+    class="action is_inline is_round is_outline text-style--center ion-margin-bottom"
   >
     <strong>
       <small *ngIf="regionData?.labelHighlightsButton?.length > 1">
@@ -21,10 +25,10 @@
   <br *ngIf="useQandAs && useQandASearch && qaSets?.length" />
   <a
     *ngIf="useQandAs && useQandASearch && qaSets?.length"
-    [routerLink]="['search']"
+    [routerLink]="[AppPath.search]"
     [attr.title]="regionData?.labelSearchPageTitle"
     [attr.aria-label]="regionData?.labelSearchPageTitle"
-    class="action is_inline is_round is_attention text-style--center ion-margin-bottom"
+    class="action is_inline is_round is_outline text-style--center ion-margin-bottom"
   >
     <!-- See Source: /src/assets/icons/search.svg -->
     <img
@@ -34,6 +38,7 @@
       loading="lazy"
       decoding="async"
       style="display: block"
+      class="icon is_medium"
     />
   </a>
 </div>
@@ -58,19 +63,17 @@
     ></app-category-link>
   </li>
   <li
-    *ngIf="(categories?.length % 3) <= 1"
+    *ngIf="categories?.length % 3 <= 1"
     class="tile-grid--item"
     aria-hidden="true"
   >
     <!-- filler-item for empty spot at 2nd-in-a-row -->
   </li>
   <li
-    *ngIf="(categories?.length % 3) <= 2"
+    *ngIf="categories?.length % 3 <= 2"
     class="tile-grid--item"
     aria-hidden="true"
   >
     <!-- filler-item for empty spot at 3rd-in-a-row -->
   </li>
 </ul>
-
-<br /><br /><br />

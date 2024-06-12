@@ -1,0 +1,17 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    ["#CATEGORY", "#ID", "#NAME", "#SLUG", "#VISIBLE", "#DESCRIPTION", "#ICON"],
+    [
+      "1",
+      "1",
+      "تصنيف فرعي",
+      "sub-categorie",
+      "Show",
+      "مقدمة لهذه الفئة الفرعية.",
+      ""
+    ],
+    []
+  ]
+}

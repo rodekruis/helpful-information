@@ -8,7 +8,12 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": true,
+          "style": "css"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -33,11 +38,11 @@
             ],
             "styles": [
               {
-                "input": "src/theme/variables.scss",
+                "input": "src/global.scss",
                 "inject": true
               },
               {
-                "input": "src/global.scss",
+                "input": "src/theme/variables.scss",
                 "inject": true
               },
               {
@@ -177,14 +182,20 @@
   },
   "cli": {
     "analytics": false,
-    "schematicCollections": ["@ionic/angular-toolkit", "@schematics/angular"]
+    "schematicCollections": [
+      "@schematics/angular",
+      "@ionic/angular-toolkit",
+      "@angular-eslint/schematics"
+    ]
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
-      "styleext": "scss"
+      "standalone": true,
+      "styleext": "css"
     },
     "@ionic/angular-toolkit:page": {
-      "styleext": "scss"
+      "standalone": true,
+      "styleext": "css"
     },
     "@angular-eslint/schematics:application": {
       "setParserOptionsProject": true

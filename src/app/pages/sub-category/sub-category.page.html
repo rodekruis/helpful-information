@@ -1,19 +1,6 @@
-<app-breadcrumbs
-  [baseUrl]="'/' + region"
-  [item]="{
-    categoryID: category?.categoryID,
-    categorySlug: category?.slug,
-    categoryName: category?.categoryName
-  }"
-  style="display: block"
->
-</app-breadcrumbs>
-<hr
-  style="border-bottom: 1px dotted currentColor"
-  class="ion-margin-vertical"
-/>
+<app-parent-link [label]="subCategory?.categoryName"></app-parent-link>
 
-<h2 class="text-style--header text-style--size-2">
+<h2 class="text-style--alt text-style--size-2">
   {{ subCategory?.subCategoryName }}
 </h2>
 
@@ -26,11 +13,20 @@
 ></div>
 
 <ul
-  *ngIf="useQandAs && qaSets && qaSets?.length && (qaSets | categoryFilter: category | subCategoryFilter: subCategory)?.length"
+  *ngIf="
+    useQandAs &&
+    qaSets &&
+    qaSets?.length &&
+    (qaSets | categoryFilter: category | subCategoryFilter: subCategory)?.length
+  "
   class="list-flat ion-margin-vertical"
 >
   <li
-    *ngFor="let qaSetItem of qaSets | categoryFilter: category | subCategoryFilter: subCategory"
+    *ngFor="
+      let qaSetItem of qaSets
+        | categoryFilter: category
+        | subCategoryFilter: subCategory
+    "
     class="ion-margin-bottom"
   >
     <app-q-a-set [qaSet]="qaSetItem"></app-q-a-set>
@@ -38,11 +34,19 @@
 </ul>
 
 <ul
-  *ngIf="useOffers && offers && (offers | categoryFilter: category | subCategoryFilter: subCategory)?.length"
+  *ngIf="
+    useOffers &&
+    offers &&
+    (offers | categoryFilter: category | subCategoryFilter: subCategory)?.length
+  "
   class="list-flat ion-margin-vertical"
 >
   <li
-    *ngFor="let offerItem of offers | categoryFilter: category | subCategoryFilter: subCategory"
+    *ngFor="
+      let offerItem of offers
+        | categoryFilter: category
+        | subCategoryFilter: subCategory
+    "
     class="ion-margin-bottom"
   >
     <app-offer-link [offer]="offerItem"></app-offer-link>
@@ -56,7 +60,14 @@
 <br />
 
 <app-feedback-link
-  [template]="regionData?.contactFeedbackUrl"
-  [label]="regionData?.labelFeedbackCta"
-  class="ion-margin-vertical"
+  [template]="regionData?.feedbackShareUrl"
+  [labels]="{
+    answerNegative: regionData?.feedbackAnswerNegative,
+    answerPositive: regionData?.feedbackAnswerPositive,
+    question: regionData?.feedbackQuestion,
+    resultNegative: regionData?.feedbackResultNegative,
+    resultPostive: regionData?.feedbackResultPostive,
+    shareCta: regionData?.feedbackShareCta,
+    thanks: regionData?.feedbackThanks
+  }"
 ></app-feedback-link>

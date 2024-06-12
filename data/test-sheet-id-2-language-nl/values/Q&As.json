@@ -1,0 +1,40 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "#SUBCATEGORY",
+      "#CATEGORY",
+      "#VISIBLE",
+      "#SLUG",
+      "#PARENT",
+      "#QUESTION",
+      "#ANSWER",
+      "#UPDATED",
+      "#HIGHLIGHT"
+    ],
+    [
+      "1",
+      "1",
+      "Show",
+      "",
+      "",
+      "Hoe ziet een voorbeeldvraag er uit?",
+      "Zo ziet een voorbeeldantwoord er uit.",
+      "",
+      "Yes"
+    ],
+    [
+      "2",
+      "3",
+      "Show",
+      "single-question",
+      "",
+      "Enkele Vraag",
+      "Antwoord op de vraag uit de Enkele categorie.",
+      "",
+      ""
+    ],
+    []
+  ]
+}

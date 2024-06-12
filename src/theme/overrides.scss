@@ -1,0 +1,27 @@
+/**
+ * Before/during a build step, these (color-)variables can be set:
+ *
+ * Example:
+
+```css
+:root {
+  --env_hia_content_font-family: Georgia, serif;
+  --env_hia_content_font-size: 1.2rem;
+
+  --env_hia_alt_font-family: Monaco, monospace;
+  --env_hia_heading_font-size: 2rem;
+
+  --env_hia_base_text: #000;
+  --env_hia_base_fill: #fff;
+
+  --env_hia_alt_text: white;
+  --env_hia_alt_fill: blue;
+
+  --env_hia_level_text: darkblue;
+  --env_hia_level_fill: lightgoldenrodyellow;
+
+  --env_hia_level_shadow: 0 0 0.33rem rgba(0, 0, 0, 0.66);
+}
+```
+
+ */

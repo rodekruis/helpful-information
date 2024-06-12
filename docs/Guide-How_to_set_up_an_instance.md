@@ -28,8 +28,8 @@ This guide will help you set up an instance of a [Helpful Information App](https
 
   - [ ] Select one of the template-sheets from the Google Drive folder: "[HIA Templates (public)](https://drive.google.com/drive/folders/1eoKlwKqPXagTnkQGxj0JpH5TRplqXX-C)".
 
-  > Tip:
-  > the template-sheet "[HIA - Staging Demo/Example](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)"
+  > [TIP!]
+  > The template-sheet "[HIA - Staging Demo/Example](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)"
   > is recurrently used to test all HIA functionalities, so it is the best starting point to understand how the app works and what it offers.
 
   - [ ] Click "**File**" > "**Make a copy**"; from now on, you will only work on this copy of the template-sheet.
@@ -41,16 +41,16 @@ This guide will help you set up an instance of a [Helpful Information App](https
 
 - Create a Google Sheets API-key, to let the web-app access the sheet in the visitors' browser
 
-  - [ ] Go to https://console.cloud.google.com/projectcreate
+  - [ ] Go to <https://console.cloud.google.com/projectcreate>
   - [ ] Complete any "getting started"-steps when prompted
   - Enable the Google Sheets API
-    - [ ] Go to https://console.cloud.google.com/apis/dashboard, the "**Enabled APIs & services**"-page
+    - [ ] Go to <https://console.cloud.google.com/apis/dashboard>, the "**Enabled APIs & services**"-page
     - [ ] Click on the "**+ Enable APIs and Services**"-button
-    - [ ] Search for "google sheets api", or go directly to: https://console.cloud.google.com/apis/library/sheets.googleapis.com
+    - [ ] Search for "google sheets api", or go directly to: <https://console.cloud.google.com/apis/library/sheets.googleapis.com>
     - [ ] Click on the "**Enable**"-button
   - Create an API-key
 
-    - [ ] Go to https://console.cloud.google.com/apis/credentials, the "**Credentials**"-page
+    - [ ] Go to <https://console.cloud.google.com/apis/credentials>, the "**Credentials**"-page
     - [ ] Click on the "**+ Create Credential**"-button
     - [ ] Select "**API-key**" from the list, wait for the key to be generated
     - [ ] In the pop-up, click the "**Edit API key**"-link

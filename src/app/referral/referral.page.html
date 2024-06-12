@@ -1,101 +1,148 @@
-<ion-header>
-  <app-header
-    [title]="regionData?.pageTitle"
-    [loading]="loading"
-    (backAction)="goBack()"
-    [backButtonLabel]="regionData?.labelBackButton"
-    [logoUrl]="regionData?.pageLogo"
-    (logoAction)="showRootPage()"
-    [logoActionLabel]="regionData?.labelMainScreenButton"
-  ></app-header>
+<ion-header class="text-area--level">
+  <div class="layout--container layout--container_wide">
+    <app-header
+      [title]="regionData?.pageTitle"
+      [mainUrl]="mainUrl"
+      [logoUrl]="regionData?.pageLogo"
+      (logoAction)="showRootPage()"
+      [localeAlternatives]="regionData?.localeAlternatives"
+      [currentLanguage]="regionData?.localeLanguage"
+      [languageOptionsExplanation]="regionData?.localeAlternativesExplanation"
+    ></app-header>
+  </div>
 </ion-header>
 
 <ion-content
-  color="dark"
-  class="ion-padding"
+  color="light"
+  class="layout--stretch-height"
+  #content
 >
-  <!-- Loading-placeholder -->
-  <ng-container *ngIf="isSupportedRegion() && loading">
-    <div class="ion-margin-vertical text-style--size-2">
-      <span
-        class="loading-text"
-        style="width: 33%"
-      ></span>
-    </div>
-    <div class="ion-margin-vertical ion-padding-bottom">
-      <span class="loading-text"></span>
-      <span class="loading-text"></span>
-      <span
-        class="loading-text"
-        style="width: 75%"
-      ></span>
-    </div>
-  </ng-container>
-
-  <router-outlet *ngIf="isSupportedRegion() && !loading"></router-outlet>
-
-  <!-- Error/404 page -->
-  <ng-container *ngIf="isSupportedRegion() && !loading && !dataAvailable">
-    <h2>{{ errorHeader }}</h2>
-    <p>
-      {{ errorMessage }}
-      <a
-        [href]="errorContactUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="color: red"
-        >{{ errorContactUrl }}</a
+  <!-- Notification (optional) -->
+  <div
+    *ngIf="!!getNotificationContent()"
+    class="layout--container"
+  >
+    <details
+      open
+      (toggle)="logNotificationDismiss($event.target)"
+      class="dismissible-container ion-margin-vertical ion-padding text-area--level"
+    >
+      <summary
+        class="dismissible-container--close action is_round is_inline is_flat text-style--center"
+        title="OK"
+        aria-label="OK"
       >
-      <br /><br /><br />
-      <a
-        href="/"
-        onclick="location.reload(true)"
-        style="color: gold"
-      >
-        {{ errorRetry }}
-      </a>
-    </p>
-  </ng-container>
-
-  <!-- Main/Root/Regions-list page -->
-  <ng-container *ngIf="!isSupportedRegion()">
-    <div class="ion-margin-bottom ion-padding-bottom">
-      <h2 class="text-style--header text-style--size-2">{{ pageHeader }}</h2>
+        <strong aria-hidden="true">&times;</strong>
+      </summary>
       <div
         markdown
-        [data]="pageIntroduction"
+        [data]="getNotificationContent()"
+        [inline]="true"
+        class="ion-padding-vertical"
+      ></div>
+    </details>
+  </div>
+
+  <div class="layout--container ion-padding">
+    <!-- Loading-placeholder -->
+    <ng-container *ngIf="isSupportedRegion() && loading">
+      <div class="ion-margin-vertical text-style--size-2">
+        <span
+          class="loading-text"
+          style="width: 33%"
+        ></span>
+      </div>
+      <div class="ion-margin-vertical ion-padding-bottom">
+        <span class="loading-text"></span>
+        <span class="loading-text"></span>
+        <span
+          class="loading-text"
+          style="width: 75%"
+        ></span>
+      </div>
+    </ng-container>
+
+    <router-outlet *ngIf="isSupportedRegion() && !loading"></router-outlet>
+
+    <!-- Error/404 page -->
+    <ng-container *ngIf="isSupportedRegion() && !loading && !dataAvailable">
+      <h2>{{ errorHeader }}</h2>
+      <p>
+        {{ errorMessage }}
+        <a
+          [href]="errorContactUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ errorContactUrl }}</a
+        >
+        <br /><br /><br />
+        <a
+          [href]="mainUrl"
+          onclick="location.reload(true);return false;"
+        >
+          {{ errorRetry }}
+        </a>
+      </p>
+    </ng-container>
+
+    <!-- Main/Root/Regions-list page -->
+    <ng-container *ngIf="!isSupportedRegion() && !isStaticPage()">
+      <div class="ion-margin-bottom ion-padding-bottom">
+        <h2 class="text-style--alt text-style--size-2">{{ pageHeader }}</h2>
+        <div
+          markdown
+          [data]="pageIntroduction"
+          [inline]="false"
+        ></div>
+      </div>
+      <ul
+        class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical text-style--use-newlines"
+      >
+        <li
+          *ngFor="let region of regions; index as index"
+          class="tile-grid--item"
+          [attr.aria-hidden]="!region"
+        >
+          <a
+            *ngIf="region"
+            [routerLink]="['/', region]"
+            class="sheet--button action text-style--alt text-style--size-08"
+          >
+            <span>{{ regionsLabels[index] }}</span>
+          </a>
+        </li>
+        <li
+          *ngIf="regions.length % 2 === 1"
+          aria-hidden="true"
+          class="tile-grid--item"
+        >
+          <!-- filler-item for empty spot at 2nd-in-a-row -->
+        </li>
+      </ul>
+    </ng-container>
+
+    <!-- About page -->
+    <ng-container *ngIf="!isSupportedRegion() && isStaticPage(AppPath.about)">
+      <div
+        markdown
+        [data]="pageAbout"
         [inline]="false"
       ></div>
-    </div>
-    <ul
-      class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical text-style--use-newlines"
-    >
-      <li
-        *ngFor="let region of regions; index as index;"
-        class="tile-grid--item"
-      >
-        <a
-          *ngIf="region"
-          [routerLink]="['/', region]"
-          class="sheet--button action text-style--header text-style--size-08"
-        >
-          <span>{{ regionsLabels[index] }}</span>
-        </a>
-      </li>
-      <li
-        *ngIf="(regions.length % 2) === 1"
-        aria-hidden="true"
-        class="tile-grid--item"
-      >
-        <!-- filler-item for empty spot at 2nd-in-a-row -->
-      </li>
-    </ul>
-    <br /><br /><br />
-  </ng-container>
+    </ng-container>
+
+    <!-- Privacy page -->
+    <ng-container *ngIf="!isSupportedRegion() && isStaticPage(AppPath.privacy)">
+      <div
+        markdown
+        [data]="pagePrivacy"
+        [inline]="false"
+      ></div>
+    </ng-container>
+  </div>
 
   <div
     class="floating-action-area is_bottom-end"
-    *ngIf="isSupportedRegion() && hasContactOptions() && !getNotificationContent()"
+    *ngIf="isSupportedRegion() && hasContactOptions()"
   >
     <span
       class="contact-button"
@@ -106,7 +153,7 @@
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('tel')"
-        class="contact-button--link"
+        class="contact-button--link action is_round"
       >
         <img
           src="assets/icons/contact_phone.png"
@@ -128,7 +175,7 @@
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('whatsapp')"
-        class="contact-button--link"
+        class="contact-button--link action is_round"
       >
         <img
           src="assets/icons/contact_whatsapp.png"
@@ -150,7 +197,7 @@
         target="_blank"
         rel="noopener noreferrer"
         (click)="logContactClick('telegram')"
-        class="contact-button--link"
+        class="contact-button--link action is_round"
       >
         <img
           src="assets/icons/contact_telegram.png"
@@ -164,16 +211,23 @@
       </a>
     </span>
   </div>
+
+  <!-- Add space before footer/bottom-of-viewport -->
+  <div><br /><br /><br /></div>
+
+  <footer
+    role="contentinfo"
+    class="layout--stick-to-end text-area--alt ion-margin-top"
+  >
+    <div class="layout--container layout--container_wide">
+      <div *ngIf="!getFooterContent()"><br /><br /><br /></div>
+      <div
+        *ngIf="!!getFooterContent()"
+        markdown
+        [data]="getFooterContent()"
+        [inline]="false"
+        class="ion-padding-top ion-padding-horizontal text-style--size-08"
+      ></div>
+    </div>
+  </footer>
 </ion-content>
-<ion-footer
-  *ngIf="!!getNotificationContent()"
-  class="no-print"
->
-  <div class="notification-bar ion-padding">
-    <div
-      markdown
-      [data]="getNotificationContent()"
-      [inline]="true"
-    ></div>
-  </div>
-</ion-footer>

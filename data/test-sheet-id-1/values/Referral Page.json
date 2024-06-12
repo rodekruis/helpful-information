@@ -11,19 +11,32 @@
     [
       "Default language\n#locale.language",
       "en",
-      "One of \"nl\" or \"en\" or \"pt-BR\""
+      "One of \"nl\" or \"en\" or \"ar\"\nSee for options: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"
+    ],
+    [
+      "Alternative languages (for auto-translation)\n#locale.alternatives",
+      "en:English, nl:Nederlands, fr:Français, ar:العربية, pt:Português,  *:Other...",
+      "List: \"nl:Nederlands, en:English, ar:العربية\" MUST include default-language!\nIn the format: \"<language-code>:<language-native-name>\" separated by comma's (\",\")"
+    ],
+    [
+      "Label: Alternative languages explanation\n#locale.alternatives.explanation",
+      "* Translations via Google",
+      "\"Using Google Translate.\", \"(Translate with Google Translate.)\" or empty when using sheets-as-languages"
     ],
     [
       "Logo URL\n#logo",
-      "https://raw.githubusercontent.com/rodekruis/helpful-information/main/src/assets/icons/red_cross.png"
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cg fill='%23f5333f'%3E%3Cpath d='M10 0h10v30H10z' /%3E%3Cpath d='M30 10v10H0V10z' /%3E%3C/g%3E%3C/svg%3E"
     ],
-    ["App/Site Name/title\n#name", "Test/Example"],
-    ["Greeting/Heading\n#main.heading", "Hello!", "", "", "Hello!", "Hallo!"],
+    [
+      "App/Site Name/title\n#name",
+      "",
+      "For translation only! Use a translation of \"Helpful Information\" or leave empty."
+    ],
+    ["Greeting/Heading\n#main.heading", "Test/Example"],
     [
       "Introduction text\n#main.intro",
       "This website is made to give helpful information...\n\nMultiple lines of text,\ncan be used.\nWith __Mark__**Down** and/or <b>HTML</b> content:\n- lists\n- plain URL-links\n- [links](https://example.org)\n - - -\n# No level-1 Headings here\n...\n### Level 3+ Headings only here\n...\n"
     ],
-    ["Label: Back Button\n#nav.back", "Back", "\"Back\", \"Previous\""],
     [
       "Label: Main Screen Button/Logo\n#nav.main",
       "Main Screen",
@@ -45,6 +58,11 @@
       "Notification text\n#main.notification",
       "<div class=\"d-center\">⚠️ **Scheduled maintenance**: `16:00`-`16:05` </div>",
       "\"**Warning** Please [contact us](/contact)\" or \"HSP **closed** from `8:00`-`11:00`\""
+    ],
+    [
+      "Footer text\n#main.footer",
+      "**Helpful Information** \n\n [About](/about) \n\n [Privacy](/privacy) \n\n",
+      ""
     ],
     [
       "Contact: Telegram URL\n#contact.telegram",
@@ -125,15 +143,28 @@
       "Need to Know",
       "\"First Things First\", \"What do you need to know?\""
     ],
+    [],
+    ["Feedback: Question\n#feedback.question", "Was this helpful?"],
+    ["Feedback: Positive Answer\n#feedback.answer.positive", "Yes"],
+    ["Feedback: Negative Answer\n#feedback.answer.negative", "No"],
     [
-      "Label: \"Make a Suggestion\"\n#label.feedback.cta",
-      "Something missing? Let us know!",
-      "\"Make a suggestion\", \"Provide feedback\" or \"Something missing? Let us know!\""
+      "Feedback: Thanks\n#feedback.thanks",
+      "Thank you for sharing your opinion."
     ],
     [
-      "Contact: Feedback URL\n#contact.feedback-url",
+      "Feedback: Positive response message\n#feedback.result.positive",
+      "We are happy you found this information helpful."
+    ],
+    [
+      "Feedback: Negative response message\n#feedback.result.negative",
+      "We're sorry you didn't find this information helpful. Share more feedback by filling our anonymous survey."
+    ],
+    ["Feedback: Share CTA\n#feedback.share-cta", "Share feedback"],
+    [
+      "Feedback: Share URL\n#contact.feedback-url",
       "mailto:contact@example.org?subject=Feedback%20on%20URL:%20{URL}",
       "The placeholder \"{URL}\" can be used to insert the URL of the page where the link is clicked.\nFor e-mail, use: \"mailto:contact@example.org?subject=Feedback%20on%20URL:%20{URL}\", for a web-form, use: \"https://example.org/feedback-form?text=Feedback%20on%20URL:%20{URL}\""
-    ]
+    ],
+    []
   ]
 }

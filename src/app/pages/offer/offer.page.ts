@@ -2,10 +2,10 @@ import type { OnInit } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { FeedbackLinkComponent } from 'src/app/components/feedback-link/feedback-link.component';
 import { LastUpdatedTimeComponent } from 'src/app/components/last-updated-time/last-updated-time.component';
 import { OfferComponent } from 'src/app/components/offer/offer.component';
+import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
 import type { Offer } from 'src/app/models/offer.model';
 import type { RegionData } from 'src/app/models/region-data';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
@@ -20,10 +20,10 @@ import { getLegacyID } from 'src/app/shared/utils';
   styleUrls: ['./offer.page.css'],
   standalone: true,
   imports: [
-    BreadcrumbsComponent,
     OfferComponent,
     LastUpdatedTimeComponent,
     FeedbackLinkComponent,
+    ParentLinkComponent,
   ],
 })
 export default class OfferPageComponent implements OnInit {
@@ -88,6 +88,7 @@ export default class OfferPageComponent implements OnInit {
       offerName: this.offer.offerName ? this.offer.offerName : '',
       subCategoryName: this.offer.subCategoryName,
       categoryName: this.offer.categoryName,
+      region: this.region,
     });
 
     this.pageMeta.setCanonicalUrl({

@@ -24,7 +24,10 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.enable": true,
   "eslint.format.enable": true,
-  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "eslint.options": {
+    "extensions": [".ts", ".html"]
+  },
+  "eslint.validate": ["javascript", "typescript", "html"],
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.autoImportFileExcludePatterns": [
     "@ionic/angular/common",

@@ -10,6 +10,8 @@ export const environment = {
   useOffers: ${process.env.NG_USE_OFFERS === 'true' || false},
   useQandAs: ${process.env.NG_USE_Q_AND_AS === 'true' || false},
   useQandASearch: ${process.env.NG_USE_Q_AND_A_SEARCH === 'true' || false},
+  useRegionPerLocale: ${process.env.NG_USE_REGION_PER_LOCALE === 'true' || false},
+  useFeedbackPrompt: ${process.env.NG_USE_FEEDBACK_PROMPT === 'true' || false},
 
   // Configuration of content
   appName: '${process.env.TXT_APP_NAME || ''}',
@@ -17,6 +19,9 @@ export const environment = {
   mainPageHeader: '${process.env.TXT_MAIN_PAGE_HEADER || ''}',
   mainPageIntroduction: '${process.env.TXT_MAIN_PAGE_INTRO || ''}',
   mainPageNotification: '${process.env.TXT_MAIN_PAGE_NOTICE || ''}',
+  pageAbout: '${process.env.TXT_PAGE_ABOUT || ''}',
+  pagePrivacy: '${process.env.TXT_PAGE_PRIVACY || ''}',
+  mainFooter: '${process.env.TXT_MAIN_FOOTER || ''}',
   errorHeader: '${process.env.TXT_ERROR_HEADER || ''}',
   errorMessage: '${process.env.TXT_ERROR_MESSAGE || ''}',
   errorContactUrl: '${process.env.TXT_ERROR_CONTACT_URL || ''}',

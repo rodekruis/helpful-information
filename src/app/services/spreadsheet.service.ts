@@ -20,6 +20,11 @@ import type { SubCategory } from 'src/app/models/sub-category.model';
 import { SubCategoryCol } from 'src/app/models/sub-category.model';
 import { LoggingService } from 'src/app/services/logging.service';
 import {
+  createRegionSlugs,
+  createTokenList,
+} from 'src/app/shared/util.environment';
+import { createLocaleAlternatives } from 'src/app/shared/util.locales';
+import {
   createSlug,
   getDateFromString,
   getFullUrl,
@@ -65,10 +70,10 @@ export class SpreadsheetService {
   }
 
   private loadSheetIds(): void {
-    const regions: string[] = environment.regions.trim().split(/\s*,\s*/);
-    const googleSheetsIds: string[] = environment.regionsSheetIds
-      .trim()
-      .split(/\s*,\s*/);
+    const regions: string[] = createRegionSlugs(environment.regions);
+    const googleSheetsIds: string[] = createTokenList(
+      environment.regionsSheetIds,
+    );
 
     regions.forEach((_, index: number) => {
       this.sheetIds[regions[index]] = googleSheetsIds[index];
@@ -430,6 +435,18 @@ export class SpreadsheetService {
         RegionDataKey.localeLanguage,
         -1,
       ),
+      localeAlternatives: createLocaleAlternatives(
+        this.getConfigValueOrFallback(
+          sharedData,
+          RegionDataKey.localeAlternatives,
+          -1,
+        ),
+      ),
+      localeAlternativesExplanation: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.localeAlternativesExplanation,
+        -1,
+      ),
       pageLogo: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.logo,
@@ -455,22 +472,16 @@ export class SpreadsheetService {
         RegionDataKey.mainNotification,
         11,
       ),
-      labelBackButton: this.getConfigValueOrFallback(
+      pageFooter: this.getConfigValueOrFallback(
         sharedData,
-        RegionDataKey.navBack,
-        5,
-        RegionDataFallback.labelBackButton,
+        RegionDataKey.mainFooter,
+        -1,
       ),
       labelMainScreenButton: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.navMain,
         6,
         RegionDataFallback.labelMainScreenButton,
-      ),
-      contactFeedbackUrl: this.getConfigValueOrFallback(
-        sharedData,
-        RegionDataKey.contactFeedbackUrl,
-        -1,
       ),
       contactPhoneNumber: this.getConfigValueOrFallback(
         sharedData,
@@ -586,6 +597,52 @@ export class SpreadsheetService {
         RegionDataKey.searchItems,
         21,
         RegionDataFallback.labelSearchResultsCount,
+      ),
+      feedbackQuestion: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackQuestion,
+        -1,
+        RegionDataFallback.feedbackQuestion,
+      ),
+      feedbackAnswerPositive: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackAnswerPositive,
+        -1,
+        RegionDataFallback.feedbackAnswerPositive,
+      ),
+      feedbackAnswerNegative: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackAnswerNegative,
+        -1,
+        RegionDataFallback.feedbackAnswerNegative,
+      ),
+      feedbackThanks: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackThanks,
+        -1,
+        RegionDataFallback.feedbackThanks,
+      ),
+      feedbackResultPostive: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackResultPostive,
+        -1,
+        RegionDataFallback.feedbackResultPostive,
+      ),
+      feedbackResultNegative: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackResultNegative,
+        -1,
+        RegionDataFallback.feedbackResultNegative,
+      ),
+      feedbackShareCta: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackShareCta,
+        -1,
+        RegionDataFallback.feedbackShareCta,
+      ),
+      feedbackShareUrl: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.feedbackShareUrl,
       ),
     };
   }

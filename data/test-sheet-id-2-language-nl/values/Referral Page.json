@@ -1,0 +1,55 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    ["#KEY", "#VALUE", "#EXAMPLE value"],
+    ["#timestamp.last-updated", "2024-01-02T13:14:15.167Z"],
+    ["#locale.dir", "ltr"],
+    ["#locale.language", "nl"],
+    ["#locale.alternatives", ""],
+    [
+      "#locale.alternatives.explanation",
+      "(Niet alles is beschikbaar in elke taal)"
+    ],
+    [],
+    [
+      "#logo",
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cg fill='%23f5333f'%3E%3Cpath d='M10 0h10v30H10z' /%3E%3Cpath d='M30 10v10H0V10z' /%3E%3C/g%3E%3C/svg%3E"
+    ],
+    ["#name", "Handige \n Informatie"],
+    ["#main.heading", "Test/Voorbeeld"],
+    ["#main.intro", "Deze pagina is in het Nederlands."],
+    ["#main.notification", ""],
+    ["#nav.main", "Start"],
+    [],
+    ["#label.last-updated", "Laatste wijziging:"],
+    ["#label.feedback.cta", "Mist er iets? Laat het ons weten!"],
+    [],
+    ["#contact.tel", ""],
+    ["#contact.whatsapp", ""],
+    ["#contact.telegram", ""],
+    [
+      "#contact.feedback-url",
+      "mailto:contact@example.nl?subject=Feedback%20on%20URL:%20{URL}"
+    ],
+    [],
+    ["#highlights.title", "Recente wijzigingen"],
+    ["#highlights.items.0", "Geen recente wijzigingen."],
+    ["#highlights.items", "Items met wijzigingen:"],
+    ["#highlights.cta", "Wijzigingen"],
+    [],
+    ["#search.title", "Zoek-resultaten"],
+    ["#search.cta", "Zoek"],
+    ["#search.items", "Resultaten:"],
+    ["#search.items.0", "Geen resultaten."],
+    [],
+    ["#offer.address", "Adres"],
+    ["#offer.phone", "Telefoon"],
+    ["#offer.email", "E-mail"],
+    ["#offer.website", "Website(s)"],
+    ["#offer.open.week", "Openingstijden Ma-Vr"],
+    ["#offer.open.weekend", "Openingstijden Weekend"],
+    ["#offer.need-to-know", "Dit moet je weten"],
+    []
+  ]
+}

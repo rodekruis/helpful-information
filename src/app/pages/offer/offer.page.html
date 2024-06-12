@@ -1,15 +1,6 @@
-<app-breadcrumbs
-  [baseUrl]="'/' + region"
-  [item]="offer"
-  style="display: block"
->
-</app-breadcrumbs>
-<hr
-  style="border-bottom: 1px dotted currentColor"
-  class="ion-margin-vertical"
-/>
+<app-parent-link [label]="offer?.subCategoryName"></app-parent-link>
 
-<article>
+<article class="ion-margin-vertical">
   <app-offer
     [offer]="offer"
     [regionData]="regionData"
@@ -23,7 +14,14 @@
 <br />
 
 <app-feedback-link
-  [template]="regionData?.contactFeedbackUrl"
-  [label]="regionData?.labelFeedbackCta"
-  class="ion-margin-vertical"
+  [template]="regionData?.feedbackShareUrl"
+  [labels]="{
+    answerNegative: regionData?.feedbackAnswerNegative,
+    answerPositive: regionData?.feedbackAnswerPositive,
+    question: regionData?.feedbackQuestion,
+    resultNegative: regionData?.feedbackResultNegative,
+    resultPostive: regionData?.feedbackResultPostive,
+    shareCta: regionData?.feedbackShareCta,
+    thanks: regionData?.feedbackThanks
+  }"
 ></app-feedback-link>

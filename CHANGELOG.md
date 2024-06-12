@@ -6,7 +6,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v23.11.0...main)
+## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.06.0...main)
+
+### Fixed
+
+- Links to Main-page(the Logo, "Try Again"-link) now takes into account if deployed in a sub-folder or on (sub-)domain.
+
+### Removed
+
+- No more URL-rewriting/redirecting for 'old-style' URLs using query-parameters only.
+
+---
+
+## 2024-06-03: [v24.06](https://github.com/rodekruis/helpful-information/releases/tag/v24.06.0)
+
+### Removed
+
+- Back-button and related logging/logic; `#nav.back`-row can be removed from Sheets.
+- Feedback-widget has changed; `#label.feedback.cta`-row can be removed from Sheets.
+
+### Added
+
+- 'Fixed' logo with text (still translatable via sheet)
+- Language-Switcher - Using Google Translate with language-options defined per-region/sheet
+- Language-Switcher - Using separate sheets-as-languages defined at build-time, per-instance
+- Configurable color variables
+- Configurable Footer-text, see the ENV-variable: [`TXT_MAIN_FOOTER`](.env.example)
+- Configurable About-page, see the ENV-variable: [`TXT_PAGE_ABOUT`](.env.example)
+- Configurable Privacy-page, see the ENV-variable: [`TXT_PAGE_PRIVACY`](.env.example)
+- Improved Feedback-Widget;  
+  New rows `#feedback.*` can be used to configure the feedback-widget. See: [`Referral Page.json`](./data/test-sheet-id-1/values/Referral%20Page.json)
+
+### Changed
+
+- Upgrade to use Node.js v22 by default
+- Upgrade to Ionic v8
+- Color-scheme to match new design
 
 ---
 

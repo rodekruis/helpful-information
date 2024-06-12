@@ -1,0 +1,26 @@
+{
+  "range": "",
+  "majorDimension": "ROWS",
+  "values": [
+    ["#CATEGORY", "#ID", "#NAME", "#SLUG", "#VISIBLE", "#DESCRIPTION", "#ICON"],
+    [
+      "1",
+      "1",
+      "Sub-Categorie",
+      "sub-categorie",
+      "Show",
+      "Een introductie van deze sub-categorie.",
+      ""
+    ],
+    [
+      "3",
+      "2",
+      "Enkel niveau",
+      "single-level",
+      "Show",
+      "Deze sub-categorie heeft maaar 1 Offer/vraag.  \n\n<small lang=en>ℹ️ This page is also available in English. (_Use the language-switcher above!_)</small>",
+      "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-size=%2290%22>1️⃣</text></svg>"
+    ],
+    []
+  ]
+}

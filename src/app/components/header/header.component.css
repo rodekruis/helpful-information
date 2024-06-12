@@ -1,22 +1,44 @@
-.app-header--back-icon {
-  font-size: 2em;
-  width: 1em;
-  height: 1em;
-  margin-inline-start: -0.5em;
-  margin-inline-end: -0.2em;
-}
-
-.app-header--logo-link {
-  padding-block: 0;
-  padding-inline: 0.5em;
-}
-
-.app-header--logo {
-  object-fit: contain;
+.app-header--bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
 }
 
 @media print {
-  ion-toolbar {
+  .app-header--bar {
     border-bottom: 1px dashed var(--print-text);
   }
+}
+
+.app-header--logo {
+  flex: 0 0 auto;
+
+  padding: 0.7rem 0;
+  min-height: 3.5rem;
+}
+
+.app-header--logo-link {
+  display: flex;
+  align-items: center;
+  justify-items: flex-start;
+
+  text-decoration: none;
+}
+
+.app-header--logo-title {
+  line-height: 1.2;
+}
+
+.app-header--logo-img {
+  width: 2rem;
+  max-width: 2rem;
+  max-height: 2rem;
+  aspect-ratio: 1 / 1;
+  /* object-fit: contain; */
+  margin-inline-end: 0.375em;
+}
+
+.app-header--tools {
+  flex: 0 0 auto;
 }
