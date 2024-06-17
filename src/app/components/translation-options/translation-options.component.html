@@ -56,7 +56,8 @@
           translate="no"
           [class]="{
             'language-switcher--option': true,
-            'language-switcher--selected': targetLanguage.key === sourceLanguage
+            'language-switcher--selected':
+              targetLanguage.key === sourceLanguage,
           }"
         >
           <span>{{ targetLanguage.label }}</span>
