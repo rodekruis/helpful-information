@@ -28,6 +28,9 @@ export class LoggingService {
         enableSessionStorageBuffer: true,
         autoTrackPageVisitTime: true,
         enableAutoRouteTracking: true,
+        extensionConfig: {
+          ['AppInsightsCfgSyncPlugin']: { cfgUrl: '' },
+        },
       },
     });
 
