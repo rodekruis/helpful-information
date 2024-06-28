@@ -57,12 +57,14 @@
           [class]="{
             'language-switcher--option': true,
             'language-switcher--selected':
-              targetLanguage.key === sourceLanguage,
+              isCurrentLanguageActive && targetLanguage.key === sourceLanguage,
           }"
         >
           <span>{{ targetLanguage.label }}</span>
           <svg
-            *ngIf="targetLanguage.key === sourceLanguage"
+            *ngIf="
+              isCurrentLanguageActive && targetLanguage.key === sourceLanguage
+            "
             class="language-switcher--indicator"
             aria-hidden="true"
             viewBox="0 0 16 16"

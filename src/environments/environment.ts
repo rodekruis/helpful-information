@@ -15,6 +15,10 @@ export const environment = {
   useFeedbackPrompt: true, // Enable Feedback-prompt on Sub-Category and Offer pages
 
   // Configuration of content
+  localeLanguage: 'en', // Default language
+  localeDir: 'ltr', // Default language direction: 'ltr' or 'rtl'
+  localeAlternatives: '', // Other language-options
+  localeAlternativesExplanation: '', // Auto-translation explanation: i.e. "* Using Google Translate"
   appName: 'Helpful \n Information',
   appLogoUrl:
     "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚧</text></svg>",

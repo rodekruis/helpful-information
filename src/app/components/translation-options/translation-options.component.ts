@@ -25,6 +25,7 @@ export class TranslationOptionsComponent {
   public useRegionPerLocale = environment.useRegionPerLocale;
   public languageOptions: RegionData['localeAlternatives'] = [];
   public currentLanguageLabel: string | null;
+  public isCurrentLanguageActive = !this.useRegionPerLocale;
 
   private _sourceLanguage: string;
 
@@ -62,11 +63,24 @@ export class TranslationOptionsComponent {
       }
 
       this.languageOptions = this.updateLanguageOptions(this.languageOptions);
+
+      if (this.useRegionPerLocale) {
+        this.isCurrentLanguageActive = this.checkActiveLanguage();
+      }
     });
   }
 
   public getCurrentUrl(): string {
     return window.location.href;
+  }
+
+  private checkActiveLanguage(): boolean {
+    return (
+      this.getCurrentUrl() ===
+      this.languageOptions.find(
+        (option) => option.label === this.currentLanguageLabel,
+      )?.url
+    );
   }
 
   private getLabel(languageKey: string): string | null {
@@ -104,6 +118,10 @@ export class TranslationOptionsComponent {
         `/${sourceLanguageKey}`,
         `/${targetLanguageKey}`,
       );
+
+      if (newUrl === currentUrl && currentUrl.endsWith('/')) {
+        return currentUrl + targetLanguageKey;
+      }
 
       return newUrl;
     }

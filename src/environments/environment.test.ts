@@ -13,6 +13,10 @@ export const environment = {
   useFeedbackPrompt: true,
 
   // Configuration of content
+  localeLanguage: 'en',
+  localeDir: '',
+  localeAlternatives: '',
+  localeAlternativesExplanation: '',
   appName: 'HIA-test',
   appLogoUrl: '',
   mainPageHeader: 'We test Helpful Information.',
