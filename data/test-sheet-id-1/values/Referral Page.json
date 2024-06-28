@@ -20,7 +20,7 @@
     ],
     [
       "Label: Alternative languages explanation\n#locale.alternatives.explanation",
-      "* Translations via Google",
+      "(Not all content is available in all languages.)",
       "\"Using Google Translate.\", \"(Translate with Google Translate.)\" or empty when using sheets-as-languages"
     ],
     [
