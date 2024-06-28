@@ -29,6 +29,7 @@ import {
   createRegionLabels,
   createRegionSlugs,
 } from 'src/app/shared/util.environment';
+import { createLocaleAlternatives } from 'src/app/shared/util.locales';
 import { extractPageTitleFromMarkdown } from 'src/app/shared/util.markdown';
 import { environment } from 'src/environments/environment';
 import { AppPath } from 'src/routes';
@@ -70,6 +71,13 @@ export class ReferralPageComponent implements OnInit {
   private useOffers = environment.useOffers;
   private useQandAs = environment.useQandAs;
 
+  public localeLanguage = environment.localeLanguage;
+  public localeDir = environment.localeDir;
+  public localeAlternatives = createLocaleAlternatives(
+    environment.localeAlternatives,
+  );
+  public localeAlternativesExplanation =
+    environment.localeAlternativesExplanation;
   public pageHeader = environment.mainPageHeader;
   public pageIntroduction = environment.mainPageIntroduction;
   public pageNotification = environment.mainPageNotification;
@@ -152,8 +160,12 @@ export class ReferralPageComponent implements OnInit {
   }
 
   private resetPageMeta() {
-    this.pageMeta.setDirection('');
-    this.pageMeta.setLanguage('');
+    this.pageMeta.setDirection(
+      environment.localeDir ? environment.localeDir : '',
+    );
+    this.pageMeta.setLanguage(
+      environment.localeLanguage ? environment.localeLanguage : '',
+    );
     this.pageMeta.setCanonicalUrl({});
     this.pageMeta.setTitle({});
   }

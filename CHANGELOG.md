@@ -3,14 +3,27 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICRO`.
 
 ---
 
-## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.06.0...main)
+## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.06.1...main)
+
+---
+
+## 2024-06-28: [v24.06.1](https://github.com/rodekruis/helpful-information/releases/tag/v24.06.1)
+
+### Added
+
+- Language-switcher now also available on the Main-page. (when configured via [`ENV`](.env.example)-variables)
 
 ### Fixed
 
 - Links to Main-page(the Logo, "Try Again"-link) now takes into account if deployed in a sub-folder or on (sub-)domain.
+
+### Changed
+
+- Upgrade to Angular v18 + Ionic v7
 
 ### Removed
 

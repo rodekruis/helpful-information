@@ -14,6 +14,10 @@ export const environment = {
   useFeedbackPrompt: ${process.env.NG_USE_FEEDBACK_PROMPT === 'true' || false},
 
   // Configuration of content
+  localeLanguage: '${process.env.NG_LOCALE_LANGUAGE || ''}',
+  localeDir: '${process.env.NG_LOCALE_DIR || ''}',
+  localeAlternatives: '${process.env.NG_LOCALE_ALTERNATIVES || ''}',
+  localeAlternativesExplanation: '${process.env.NG_LOCALE_ALTERNATIVES_EXPLANATION || ''}',
   appName: '${process.env.TXT_APP_NAME || ''}',
   appLogoUrl: '${process.env.TXT_APP_LOGO_URL || ''}',
   mainPageHeader: '${process.env.TXT_MAIN_PAGE_HEADER || ''}',

@@ -6,6 +6,7 @@
     "alwaysStrict": true,
     "baseUrl": "./",
     "declaration": false,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,

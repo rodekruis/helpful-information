@@ -5,9 +5,14 @@
       [mainUrl]="mainUrl"
       [logoUrl]="regionData?.pageLogo"
       (logoAction)="showRootPage()"
-      [localeAlternatives]="regionData?.localeAlternatives"
-      [currentLanguage]="regionData?.localeLanguage"
-      [languageOptionsExplanation]="regionData?.localeAlternativesExplanation"
+      [localeAlternatives]="
+        regionData?.localeAlternatives || localeAlternatives
+      "
+      [currentLanguage]="regionData?.localeLanguage || localeLanguage"
+      [languageOptionsExplanation]="
+        regionData?.localeAlternativesExplanation ||
+        localeAlternativesExplanation
+      "
     ></app-header>
   </div>
 </ion-header>
