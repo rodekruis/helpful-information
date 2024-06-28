@@ -3,10 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICRO`.
 
 ---
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.06.0...main)
+
+### Added
+
+- Language-switcher now also available on the Main-page. (when configured via [`ENV`](.env.example)-variables)
 
 ### Fixed
 
