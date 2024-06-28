@@ -21,6 +21,10 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 - Links to Main-page(the Logo, "Try Again"-link) now takes into account if deployed in a sub-folder or on (sub-)domain.
 
+### Changed
+
+- Upgrade to Angular v18 + Ionic v7
+
 ### Removed
 
 - No more URL-rewriting/redirecting for 'old-style' URLs using query-parameters only.
