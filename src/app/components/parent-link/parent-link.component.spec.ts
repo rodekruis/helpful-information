@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { LoggingService } from 'src/app/services/logging.service';
 
 import { ParentLinkComponent } from './parent-link.component';
@@ -10,8 +10,9 @@ describe('ParentLinkComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ParentLinkComponent, RouterTestingModule],
+      imports: [ParentLinkComponent],
       providers: [
+        provideRouter([]),
         {
           provide: LoggingService,
         },

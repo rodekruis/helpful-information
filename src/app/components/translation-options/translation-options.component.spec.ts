@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { LoggingService } from 'src/app/services/logging.service';
 
 import { TranslationOptionsComponent } from './translation-options.component';
@@ -12,7 +12,7 @@ describe('TranslationOptionsComponent', () => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
-        RouterTestingModule,
+        provideRouter([]),
         {
           provide: LoggingService,
         },

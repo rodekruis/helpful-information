@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { LoggingService } from 'src/app/services/logging.service';
 
 import { SubCategoryLinkComponent } from './sub-category-link.component';
@@ -10,8 +10,9 @@ describe('SubCategoryLinkComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, SubCategoryLinkComponent],
+      imports: [SubCategoryLinkComponent],
       providers: [
+        provideRouter([]),
         {
           provide: LoggingService,
           useValue: null,
