@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { LoggingService } from 'src/app/services/logging.service';
 import { ngxMarkdownModuleFactory } from 'src/main';
 
@@ -11,8 +11,9 @@ describe('SubCategoryPageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ngxMarkdownModuleFactory()],
+      imports: [ngxMarkdownModuleFactory()],
       providers: [
+        provideRouter([]),
         {
           provide: LoggingService,
         },

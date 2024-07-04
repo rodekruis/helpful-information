@@ -14,7 +14,7 @@ export const environment = {
 
   // Configuration of content
   localeLanguage: 'en',
-  localeDir: '',
+  localeDir: 'ltr',
   localeAlternatives: '',
   localeAlternativesExplanation: '',
   appName: 'HIA-test',

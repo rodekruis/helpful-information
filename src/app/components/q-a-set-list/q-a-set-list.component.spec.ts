@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
@@ -43,8 +43,9 @@ describe('QASetListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ngxMarkdownModuleFactory()],
+      imports: [ngxMarkdownModuleFactory()],
       providers: [
+        provideRouter([]),
         {
           provide: RegionDataService,
           useValue: {
