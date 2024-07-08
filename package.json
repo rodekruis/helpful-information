@@ -39,7 +39,7 @@
     "@angular/service-worker": "^18.0.3",
     "@ionic/angular": "^8.2.2",
     "@ionic/cli": "^7.2.0",
-    "@microsoft/applicationinsights-web": "^3.2.2",
+    "@microsoft/applicationinsights-web": "^3.3.0",
     "marked": "^12.0.2",
     "ngx-markdown": "^18.0.0",
     "rxjs": "^7.5.0",
