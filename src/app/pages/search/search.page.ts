@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
@@ -19,6 +19,7 @@ import { AppPath } from 'src/routes';
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     NgIf,
     RouterLink,

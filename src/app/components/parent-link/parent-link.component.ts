@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
@@ -12,6 +12,7 @@ import { getRegionLabel } from 'src/app/shared/util.environment';
   templateUrl: './parent-link.component.html',
   styleUrls: ['./parent-link.component.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink],
 })
 export class ParentLinkComponent {

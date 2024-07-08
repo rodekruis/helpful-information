@@ -1,5 +1,5 @@
 import { DatePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
@@ -14,6 +14,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   templateUrl: './q-a-set.component.html',
   styleUrls: ['./q-a-set.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgIf, NgFor, DatePipe, NgTemplateOutlet, MarkdownModule],
 })
 export class QASetComponent {

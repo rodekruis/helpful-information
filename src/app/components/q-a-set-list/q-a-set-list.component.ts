@@ -1,5 +1,5 @@
 import { DatePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import type { QASet } from 'src/app/models/qa-set.model';
@@ -10,6 +10,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   templateUrl: './q-a-set-list.component.html',
   styleUrls: ['./q-a-set-list.component.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     NgIf,
     NgFor,

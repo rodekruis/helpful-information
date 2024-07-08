@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import type { Category } from 'src/app/models/category.model';
 import {
@@ -13,6 +13,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './cateogry-link.component.html',
   styleUrls: ['./cateogry-link.component.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink],
 })
 export class CategoryLinkComponent {

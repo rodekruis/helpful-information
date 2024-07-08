@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackLinkComponent } from 'src/app/components/feedback-link/feedback-link.component';
@@ -19,6 +19,7 @@ import { getLegacyID } from 'src/app/shared/utils';
   templateUrl: './offer.page.html',
   styleUrls: ['./offer.page.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     OfferComponent,
     LastUpdatedTimeComponent,

@@ -5,7 +5,13 @@ import type {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { Component, Input, SecurityContext, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  SecurityContext,
+  ViewChild,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
   LoggingEvent,
@@ -25,6 +31,7 @@ enum AnswerValue {
   templateUrl: './feedback-link.component.html',
   styleUrls: ['./feedback-link.component.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgIf],
   providers: [LoggingService],
 })

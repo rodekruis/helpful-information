@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -28,6 +28,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './sub-category.page.html',
   styleUrls: ['./sub-category.page.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     NgIf,
     NgFor,

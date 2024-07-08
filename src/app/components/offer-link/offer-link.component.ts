@@ -1,5 +1,5 @@
 import { NgIf, SlicePipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IonImg } from '@ionic/angular/standalone';
 import { MarkdownModule } from 'ngx-markdown';
@@ -15,6 +15,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './offer-link.component.html',
   styleUrls: ['./offer-link.component.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MarkdownModule, IonImg, RouterLink, NgIf, SlicePipe],
 })
 export class OfferLinkComponent {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
@@ -12,6 +12,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   templateUrl: './sub-category-link.component.html',
   styleUrls: ['./sub-category-link.component.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink],
 })
 export class SubCategoryLinkComponent {
