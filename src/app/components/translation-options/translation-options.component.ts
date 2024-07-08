@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import type { Event } from '@angular/router';
 import { EventType, Router } from '@angular/router';
 import {
@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './translation-options.component.html',
   styleUrls: ['./translation-options.component.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Default,
   imports: [NgIf, NgFor],
 })
 export class TranslationOptionsComponent {

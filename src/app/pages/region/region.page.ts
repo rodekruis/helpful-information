@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -20,6 +20,7 @@ import { AppPath } from 'src/routes';
   templateUrl: './region.page.html',
   styleUrls: ['./region.page.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Default,
   imports: [NgIf, NgFor, RouterLink, CategoryLinkComponent, MarkdownModule],
 })
 export default class RegionPageComponent implements OnInit {

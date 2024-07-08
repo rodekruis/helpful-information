@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import {
@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Default,
   imports: [NgIf, IonApp, IonRouterOutlet],
 })
 export class AppComponent {

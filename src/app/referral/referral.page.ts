@@ -1,6 +1,6 @@
 import { Location, NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import type { Params } from '@angular/router';
 import {
   ActivatedRoute,
@@ -39,6 +39,7 @@ import { AppPath } from 'src/routes';
   templateUrl: 'referral.page.html',
   styleUrls: ['referral.page.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Default,
   imports: [
     AppHeaderComponent,
     MarkdownComponent,

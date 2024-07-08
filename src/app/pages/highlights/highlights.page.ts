@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
@@ -17,6 +17,7 @@ import { AppPath } from 'src/routes';
   templateUrl: './highlights.page.html',
   styleUrls: ['./highlights.page.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Default,
   imports: [NgIf, QASetListComponent, RouterLink, ParentLinkComponent],
 })
 export default class HighlightsPageComponent implements OnInit {
