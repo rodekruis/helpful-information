@@ -1,3 +1,4 @@
+import { provideLocationMocks } from '@angular/common/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { LoggingService } from 'src/app/services/logging.service';
@@ -10,9 +11,9 @@ describe('TranslationOptionsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [],
       providers: [
         provideRouter([]),
+        provideLocationMocks(),
         {
           provide: LoggingService,
         },
