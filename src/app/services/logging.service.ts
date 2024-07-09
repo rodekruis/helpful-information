@@ -7,7 +7,9 @@ import {
 import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class LoggingService {
   appInsights: ApplicationInsights;
   appInsightsEnabled: boolean;
@@ -17,17 +19,16 @@ export class LoggingService {
   }
 
   private setupApplicationInsights() {
-    if (!environment.appInsightsConnectionString) {
+    if (!environment.appInsightsConnectionString || this.appInsightsEnabled) {
       return;
     }
     this.appInsights = new ApplicationInsights({
       config: {
         connectionString: environment.appInsightsConnectionString,
         disableCookiesUsage: true,
-        isStorageUseDisabled: true,
         enableSessionStorageBuffer: true,
-        autoTrackPageVisitTime: true,
         enableAutoRouteTracking: true,
+        enableUnhandledPromiseRejectionTracking: true,
         extensionConfig: {
           ['AppInsightsCfgSyncPlugin']: { cfgUrl: '' },
         },

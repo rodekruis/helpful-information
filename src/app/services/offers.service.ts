@@ -36,7 +36,7 @@ export class OffersService {
 
   constructor(
     private spreadsheetService: SpreadsheetService,
-    private loggingService?: LoggingService,
+    private loggingService: LoggingService,
   ) {}
 
   private needsCaching(name: CacheName, region: string): boolean {
@@ -85,7 +85,7 @@ export class OffersService {
       return categoryMatches;
     });
 
-    if (!foundCategory && this.loggingService) {
+    if (!foundCategory) {
       this.loggingService.logEvent(
         LoggingEventCategory.error,
         LoggingEvent.NotFoundCategory,
@@ -131,7 +131,7 @@ export class OffersService {
       return subCategoryMatches && categoryMatches;
     });
 
-    if (!foundSubCategory && this.loggingService) {
+    if (!foundSubCategory) {
       this.loggingService.logEvent(
         LoggingEventCategory.error,
         LoggingEvent.NotFoundSubCategory,
@@ -198,7 +198,7 @@ export class OffersService {
       return offerMatches && subCategoryMatches && categoryMatches;
     });
 
-    if (!foundOffer && this.loggingService) {
+    if (!foundOffer) {
       this.loggingService.logEvent(
         LoggingEventCategory.error,
         LoggingEvent.NotFoundOffer,

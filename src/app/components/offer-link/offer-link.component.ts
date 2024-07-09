@@ -21,12 +21,9 @@ export class OfferLinkComponent {
   @Input()
   public offer: Offer;
 
-  constructor(private loggingService?: LoggingService) {}
+  constructor(private loggingService: LoggingService) {}
 
   public click(offer: Offer) {
-    if (!this.loggingService) {
-      return;
-    }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.OfferClick,

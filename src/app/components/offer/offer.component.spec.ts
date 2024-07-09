@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import mockOffer from 'src/app/mocks/offer.mock';
 import { LoggingService } from 'src/app/services/logging.service';
 import { ngxMarkdownModuleFactory } from 'src/main';
@@ -12,7 +12,7 @@ describe('OfferComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ngxMarkdownModuleFactory()],
+      imports: [provideRouter([]), ngxMarkdownModuleFactory()],
       providers: [
         {
           provide: LoggingService,

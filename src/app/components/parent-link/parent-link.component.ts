@@ -23,12 +23,9 @@ export class ParentLinkComponent {
     this.label = getRegionLabel(value);
   }
 
-  constructor(private loggingService?: LoggingService) {}
+  constructor(private loggingService: LoggingService) {}
 
   public click() {
-    if (!this.loggingService) {
-      return;
-    }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.ParentLinkClick,

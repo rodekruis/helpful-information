@@ -50,7 +50,7 @@ export class SpreadsheetService {
 
   private sheetIds: { [key: string]: string } = {};
 
-  constructor(private loggingService?: LoggingService) {
+  constructor(private loggingService: LoggingService) {
     this.loadSheetIds();
   }
 
@@ -225,9 +225,7 @@ export class SpreadsheetService {
           .filter((category: Category): boolean => category.categoryVisible);
       })
       .catch((error) => {
-        if (this.loggingService) {
-          this.loggingService.logException(error, SeverityLevel.Critical);
-        }
+        this.loggingService.logException(error, SeverityLevel.Critical);
         return [];
       });
   }
@@ -302,9 +300,7 @@ export class SpreadsheetService {
           );
       })
       .catch((error) => {
-        if (this.loggingService) {
-          this.loggingService.logException(error, SeverityLevel.Critical);
-        }
+        this.loggingService.logException(error, SeverityLevel.Critical);
         return [];
       });
   }
@@ -406,9 +402,7 @@ export class SpreadsheetService {
           .filter((offer: Offer): boolean => offer.offerVisible);
       })
       .catch((error) => {
-        if (this.loggingService) {
-          this.loggingService.logException(error, SeverityLevel.Critical);
-        }
+        this.loggingService.logException(error, SeverityLevel.Critical);
         return [];
       });
   }
@@ -708,9 +702,7 @@ export class SpreadsheetService {
         );
       })
       .catch((error) => {
-        if (this.loggingService) {
-          this.loggingService.logException(error, SeverityLevel.Critical);
-        }
+        this.loggingService.logException(error, SeverityLevel.Critical);
         return {};
       });
   }
@@ -768,33 +760,29 @@ export class SpreadsheetService {
 
     // When defined parentRow is missing, treat as a 'normal' question
     if (!parentRow) {
-      if (this.loggingService) {
-        this.loggingService.logEvent(
-          LoggingEventCategory.error,
-          LoggingEvent.NotFoundParentQuestion,
-          {
-            row: element.id,
-            slug: element.slug,
-            parentSlug: element.parentSlug,
-          },
-        );
-      }
+      this.loggingService.logEvent(
+        LoggingEventCategory.error,
+        LoggingEvent.NotFoundParentQuestion,
+        {
+          row: element.id,
+          slug: element.slug,
+          parentSlug: element.parentSlug,
+        },
+      );
       return element;
     }
 
     // When pointing to itself, treat as a 'normal' question
     if (parentRow === element) {
-      if (this.loggingService) {
-        this.loggingService.logEvent(
-          LoggingEventCategory.error,
-          LoggingEvent.NotFoundParentQuestionIsSelf,
-          {
-            row: element.id,
-            slug: element.slug,
-            parentSlug: element.parentSlug,
-          },
-        );
-      }
+      this.loggingService.logEvent(
+        LoggingEventCategory.error,
+        LoggingEvent.NotFoundParentQuestionIsSelf,
+        {
+          row: element.id,
+          slug: element.slug,
+          parentSlug: element.parentSlug,
+        },
+      );
       return element;
     }
 
@@ -834,9 +822,7 @@ export class SpreadsheetService {
           );
       })
       .catch((error) => {
-        if (this.loggingService) {
-          this.loggingService.logException(error, SeverityLevel.Critical);
-        }
+        this.loggingService.logException(error, SeverityLevel.Critical);
         return [];
       });
   }
