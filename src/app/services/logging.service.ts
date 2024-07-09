@@ -26,10 +26,9 @@ export class LoggingService {
       config: {
         connectionString: environment.appInsightsConnectionString,
         disableCookiesUsage: true,
-        isStorageUseDisabled: true,
         enableSessionStorageBuffer: true,
-        autoTrackPageVisitTime: true,
         enableAutoRouteTracking: true,
+        enableUnhandledPromiseRejectionTracking: true,
         extensionConfig: {
           ['AppInsightsCfgSyncPlugin']: { cfgUrl: '' },
         },
