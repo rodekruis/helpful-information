@@ -28,12 +28,9 @@ export class OfferComponent {
 
   public formatPhoneNumberAsUrl = formatPhoneNumberAsUrl;
 
-  constructor(private loggingService?: LoggingService) {}
+  constructor(private loggingService: LoggingService) {}
 
   public logDetailClick(name: string) {
-    if (!this.loggingService) {
-      return;
-    }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       LoggingEvent.OfferDetailClick,

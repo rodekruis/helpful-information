@@ -33,12 +33,9 @@ export class BreadcrumbsComponent {
     | Offer
     | QASet;
 
-  constructor(private loggingService?: LoggingService) {}
+  constructor(private loggingService: LoggingService) {}
 
   public click(categorySlug: string, subCategorySlug?: string) {
-    if (!this.loggingService) {
-      return;
-    }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       subCategorySlug

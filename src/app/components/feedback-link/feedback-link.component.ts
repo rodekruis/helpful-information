@@ -26,7 +26,6 @@ enum AnswerValue {
   styleUrls: ['./feedback-link.component.css'],
   standalone: true,
   imports: [NgIf],
-  providers: [LoggingService],
 })
 export class FeedbackLinkComponent implements OnChanges, OnInit {
   @ViewChild('details')

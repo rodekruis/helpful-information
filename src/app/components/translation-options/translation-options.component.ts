@@ -51,7 +51,7 @@ export class TranslationOptionsComponent {
 
   constructor(
     private router: Router,
-    private loggingService?: LoggingService,
+    private loggingService: LoggingService,
   ) {
     if (this.useRegionPerLocale) {
       this.languageOptions = this.createLocalLanguageOptions();
@@ -184,9 +184,6 @@ export class TranslationOptionsComponent {
   }
 
   public toggle(target: EventTarget | HTMLDetailsElement): void {
-    if (!this.loggingService) {
-      return;
-    }
     this.loggingService.logEvent(
       LoggingEventCategory.ai,
       (target as HTMLDetailsElement).open
