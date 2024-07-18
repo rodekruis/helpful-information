@@ -27,7 +27,6 @@ import {
   createSlug,
   getDateFromString,
   getFullUrl,
-  slugify,
 } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
@@ -402,16 +401,7 @@ export class SpreadsheetService {
           .slice(1) // Remove header-row
           .map((row: string[]) =>
             this.convertOfferRowToOfferObject(row, offerColumnMap),
-          )
-          .filter((offer: Offer): boolean => offer.offerVisible)
-          .map((offer: Offer) => {
-            offer.chapterSlug = createSlug(
-              null,
-              slugify(offer.chapterName),
-              SlugPrefix.chapter,
-            );
-            return offer;
-          });
+          );
       })
       .catch((error) => {
         this.loggingService.logException(error);
