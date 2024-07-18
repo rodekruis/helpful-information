@@ -2,19 +2,7 @@
   "$schema": "https://json.schemastore.org/staticwebapp.config.json",
   "routes": [
     {
-      "route": "/*.js",
-      "headers": {
-        "Cache-Control": "immutable, no-transform, max-age=31536000"
-      }
-    },
-    {
-      "route": "/*.css",
-      "headers": {
-        "Cache-Control": "immutable, no-transform, max-age=31536000"
-      }
-    },
-    {
-      "route": "/*.woff2",
+      "route": "/*.{js,css,woff2}",
       "headers": {
         "Cache-Control": "immutable, no-transform, max-age=31536000"
       }
