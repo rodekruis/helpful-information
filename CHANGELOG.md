@@ -9,6 +9,10 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.07.0...main)
 
+### Added
+
+- Offers can be grouped on Sub-Category-pages by setting an (optional!) "Chapter Name" for each Offer.
+
 ---
 
 ## 2024-07-10: [v24.07.0](https://github.com/rodekruis/helpful-information/releases/tag/v24.07.0)
@@ -16,6 +20,8 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 ### Fixed
 
 - Duplicate page-views and/or unique-users tracking/logging prevented. (Mostly)
+
+---
 
 ## 2024-06-28: [v24.06.1](https://github.com/rodekruis/helpful-information/releases/tag/v24.06.1)
 

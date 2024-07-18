@@ -3,6 +3,8 @@ export type Offer = {
   categoryID: number;
   categoryName?: string;
   categorySlug?: string;
+  chapterName?: string;
+  chapterSlug?: string;
   moreInfo?: string;
   offerAddress?: string;
   offerDescription: string;
@@ -28,6 +30,7 @@ export type Offer = {
 export enum OfferCol {
   address = 'ADDRESS',
   category = 'CATEGORY',
+  chapter = 'CHAPTER',
   description = 'DESCRIPTION',
   emails = 'EMAILS',
   icon = 'ICON',

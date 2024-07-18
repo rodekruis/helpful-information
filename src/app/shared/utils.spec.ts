@@ -3,6 +3,7 @@ import {
   formatPhoneNumberAsUrl,
   getDateFromString,
   getFullUrl,
+  slugify,
 } from './utils';
 
 describe('Utils - getFullUrl', () => {
@@ -196,6 +197,44 @@ describe('Utils - fillTemplateWithUrl', () => {
 
       // Assert
       expect(output).toEqual(testParams.output);
+    });
+  });
+});
+
+describe('Utils - slugify', () => {
+  it('should return the slug-variant for all valid values', () => {
+    // Arrange
+    const testValues = [
+      '',
+      'example slug',
+      'Slug With Capitals',
+      'Dashed-Slug',
+      'Underscores_Allowed',
+      '-too-many--dashes-',
+      '-',
+      '---',
+      'Slug nr. 1',
+      'Slug: Special ✨ Characters Unit',
+    ];
+    const testOutputs = [
+      '',
+      'example-slug',
+      'slug-with-capitals',
+      'dashed-slug',
+      'underscores_allowed',
+      'too-many-dashes',
+      '',
+      '',
+      'slug-nr-1',
+      'slug-special-characters-unit',
+    ];
+
+    testValues.forEach((value, index) => {
+      // Act
+      const output = slugify(value);
+
+      // Assert
+      expect(output).toEqual(testOutputs[index]);
     });
   });
 });

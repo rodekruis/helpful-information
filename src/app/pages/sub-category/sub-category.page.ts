@@ -56,6 +56,7 @@ export default class SubCategoryPageComponent implements OnInit {
 
   @Input()
   public offers: Offer[];
+  public offerChapters: Offer[][];
 
   @Input()
   public qaSets: QASet[];
@@ -115,7 +116,21 @@ export default class SubCategoryPageComponent implements OnInit {
     }
 
     if (this.useOffers && !this.offers) {
-      this.offers = await this.offersService.getOffers(this.region);
+      this.offers = (await this.offersService.getOffers(this.region)).filter(
+        (offer) =>
+          offer.categoryID === this.category.categoryID &&
+          offer.subCategoryID === this.subCategory.subCategoryID,
+      );
+
+      // Slice all Offers into OfferSets by chapterName
+      const offerSets = new Map<string, Offer[]>();
+      this.offers.forEach((offer) => {
+        if (!offerSets.has(offer.chapterName)) {
+          offerSets.set(offer.chapterName, []);
+        }
+        offerSets.get(offer.chapterName).push(offer);
+      });
+      this.offerChapters = Array.from(offerSets.values());
     }
 
     if (this.useQandAs && !this.qaSets) {
