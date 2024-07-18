@@ -5,8 +5,8 @@
     [
       "\nSelect Sub-Category:",
       "Sub-Category ID\n#SUBCATEGORY",
-      "Category ID\n#CATEGORY\"",
-      "Chapter Name\n#CHAPTER\"",
+      "Category ID\n#CATEGORY",
+      "Chapter Name\n#CHAPTER",
       "Offer ID\n#ID",
       "Visible?\n#VISIBLE",
       "Unique URL (only \"a-z 0-9\" or \"-\")\n#SLUG",
@@ -127,19 +127,8 @@
       "Sub-Category",
       "1",
       "1",
-      "Chapter B",
-      "5",
-      "Show",
-      "",
-      "",
-      "A service in Chapter B"
-    ],
-    [
-      "Sub-Category",
-      "1",
-      "1",
       "Chapter C",
-      "7",
+      "5",
       "Show",
       "",
       "",
@@ -150,22 +139,33 @@
       "1",
       "1",
       "Chapter B",
-      "6",
+      "7",
       "Show",
       "",
       "",
-      "Another service in Chapter B"
+      "A service in Chapter B"
     ],
     [
       "Sub-Category",
       "1",
       "1",
       "Chapter C",
-      "8",
+      "6",
       "Show",
       "",
       "",
       "Another service in Chapter C"
+    ],
+    [
+      "Sub-Category",
+      "1",
+      "1",
+      "Chapter B",
+      "8",
+      "Show",
+      "",
+      "",
+      "Another service in Chapter B"
     ]
   ]
 }

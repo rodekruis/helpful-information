@@ -122,15 +122,9 @@ export default class SubCategoryPageComponent implements OnInit {
           offer.subCategoryID === this.subCategory.subCategoryID,
       );
 
-      // Slice all Offers into OfferSets by chapterName
-      const offerSets = new Map<string, Offer[]>();
-      this.offers.forEach((offer) => {
-        if (!offerSets.has(offer.chapterName)) {
-          offerSets.set(offer.chapterName, []);
-        }
-        offerSets.get(offer.chapterName).push(offer);
-      });
-      this.offerChapters = Array.from(offerSets.values());
+      this.offerChapters = this.offersService.getOffersGroupedByChapter(
+        this.offers,
+      );
     }
 
     if (this.useQandAs && !this.qaSets) {

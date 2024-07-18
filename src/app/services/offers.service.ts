@@ -189,6 +189,22 @@ export class OffersService {
     return this.cache[CacheName.offers].data;
   }
 
+  public getOffersGroupedByChapter(offers: Offer[]): Offer[][] {
+    let offerSets = new Map<string, Offer[]>();
+    offers.forEach((offer) => {
+      if (!offerSets.has(offer.chapterName)) {
+        offerSets.set(offer.chapterName, []);
+      }
+      offerSets.get(offer.chapterName).push(offer);
+    });
+    offerSets = new Map(
+      // Sort by Map-key (i.e: by ChapterName)
+      [...offerSets].sort(([a], [b]) => String(a).localeCompare(b)),
+    );
+
+    return Array.from(offerSets.values());
+  }
+
   public async findOffer(query: {
     region: string;
     categoryID?: number;
