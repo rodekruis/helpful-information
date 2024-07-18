@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { DebugPlugin } from '@microsoft/applicationinsights-debugplugin-js';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
-import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,42 +12,67 @@ import { environment } from 'src/environments/environment';
 })
 export class LoggingService {
   appInsights: ApplicationInsights;
-  appInsightsEnabled: boolean;
+  appInsightsInitialized: boolean;
 
   constructor() {
     this.setupApplicationInsights();
   }
 
   private setupApplicationInsights() {
-    if (!environment.appInsightsConnectionString || this.appInsightsEnabled) {
+    if (
+      !environment.appInsightsConnectionString ||
+      this.appInsightsInitialized
+    ) {
       return;
     }
+
+    let debugPluginInstance;
+    let debugPluginConfig: Record<string, unknown> = {};
+
+    if (!environment.production) {
+      debugPluginInstance = new DebugPlugin();
+      debugPluginConfig = {
+        [DebugPlugin.identifier]: {
+          // See: https://github.com/microsoft/ApplicationInsights-JS/tree/main/extensions/applicationinsights-debugplugin-js#basic-usage
+          trackers: [
+            'trackDependencyData',
+            'trackEvent',
+            'trackException',
+            'trackMetric',
+            'trackPageView',
+            'trackTrace',
+          ],
+        },
+      };
+    }
+
     this.appInsights = new ApplicationInsights({
       config: {
         connectionString: environment.appInsightsConnectionString,
         disableCookiesUsage: true,
-        enableSessionStorageBuffer: true,
         enableAutoRouteTracking: true,
+        enableAjaxErrorStatusText: true,
+        enableSessionStorageBuffer: true,
         enableUnhandledPromiseRejectionTracking: true,
+        extensions: debugPluginInstance ? [debugPluginInstance] : [],
+        loggingLevelConsole: 2,
+        loggingLevelTelemetry: 2,
         extensionConfig: {
           ['AppInsightsCfgSyncPlugin']: { cfgUrl: '' },
+          ...debugPluginConfig,
         },
       },
     });
 
     this.appInsights.loadAppInsights();
-    this.appInsightsEnabled = true;
+    this.appInsightsInitialized = true;
   }
 
   public logPageView(name?: string): void {
-    if (this.appInsightsEnabled) {
+    if (this.appInsightsInitialized) {
       this.appInsights.trackPageView({ name });
     }
-    this.displayOnConsole(`logPageView: ${name}`, SeverityLevel.Information);
-  }
-
-  public logError(error: any, severityLevel?: SeverityLevel): void {
-    this.displayOnConsole(error, severityLevel);
+    console.info(`LOG: PageView: "${name ?? ''}"`);
   }
 
   public logEvent(
@@ -59,7 +84,7 @@ export class LoggingService {
       [key: string]: any;
     },
   ): void {
-    if (this.appInsightsEnabled) {
+    if (this.appInsightsInitialized) {
       this.appInsights.trackEvent(
         {
           name: `referral-${action}`,
@@ -72,52 +97,25 @@ export class LoggingService {
         },
       );
     }
-    this.displayOnConsole(
-      `logEvent: ${category} - ${action} - properties: ${JSON.stringify(
-        properties,
-      )}`,
-      SeverityLevel.Information,
-    );
+    console.info(`LOG Event: ${category} - ${action}`, properties);
   }
 
-  public logException(exception: Error, severityLevel?: SeverityLevel): void {
-    if (this.appInsightsEnabled) {
+  public logException(exception: Error): void {
+    if (this.appInsightsInitialized) {
       this.appInsights.trackException({
         exception,
-        severityLevel,
       });
     }
-    this.displayOnConsole(exception, severityLevel);
+    console.error(`LOG Exception`, exception);
   }
 
-  public logTrace(message: string, properties?: { [key: string]: any }): void {
-    if (this.appInsightsEnabled) {
+  public logTrace(
+    message: string,
+    properties?: Record<string, boolean | number | string>,
+  ): void {
+    if (this.appInsightsInitialized) {
       this.appInsights.trackTrace({ message }, properties);
     }
-    this.displayOnConsole(
-      `logTrace: ${message} - properties: ${JSON.stringify(properties)}`,
-    );
-  }
-
-  private displayOnConsole(
-    error: any,
-    severityLevel: SeverityLevel = SeverityLevel.Error,
-  ): void {
-    if (environment.production) {
-      return;
-    }
-
-    switch (severityLevel) {
-      case SeverityLevel.Critical:
-      case SeverityLevel.Error:
-        console.error(error);
-        break;
-      case SeverityLevel.Warning:
-        console.warn(error);
-        break;
-      case SeverityLevel.Information:
-        console.log(error);
-        break;
-    }
+    console.error(`LOG Trace: "${message}"`, properties);
   }
 }

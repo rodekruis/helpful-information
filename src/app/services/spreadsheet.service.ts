@@ -14,7 +14,6 @@ import {
   RegionDataFallback,
   RegionDataKey,
 } from 'src/app/models/region-data';
-import { SeverityLevel } from 'src/app/models/severity-level.enum';
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import type { SubCategory } from 'src/app/models/sub-category.model';
 import { SubCategoryCol } from 'src/app/models/sub-category.model';
@@ -225,7 +224,7 @@ export class SpreadsheetService {
           .filter((category: Category): boolean => category.categoryVisible);
       })
       .catch((error) => {
-        this.loggingService.logException(error, SeverityLevel.Critical);
+        this.loggingService.logException(error);
         return [];
       });
   }
@@ -300,7 +299,7 @@ export class SpreadsheetService {
           );
       })
       .catch((error) => {
-        this.loggingService.logException(error, SeverityLevel.Critical);
+        this.loggingService.logException(error);
         return [];
       });
   }
@@ -376,6 +375,10 @@ export class SpreadsheetService {
         row,
         colMap.get(OfferCol.moreInfo),
       ),
+      chapterName: SpreadsheetService.readCellValue(
+        row,
+        colMap.get(OfferCol.chapter),
+      ),
     };
   }
 
@@ -398,11 +401,10 @@ export class SpreadsheetService {
           .slice(1) // Remove header-row
           .map((row: string[]) =>
             this.convertOfferRowToOfferObject(row, offerColumnMap),
-          )
-          .filter((offer: Offer): boolean => offer.offerVisible);
+          );
       })
       .catch((error) => {
-        this.loggingService.logException(error, SeverityLevel.Critical);
+        this.loggingService.logException(error);
         return [];
       });
   }
@@ -702,7 +704,7 @@ export class SpreadsheetService {
         );
       })
       .catch((error) => {
-        this.loggingService.logException(error, SeverityLevel.Critical);
+        this.loggingService.logException(error);
         return {};
       });
   }
@@ -822,7 +824,7 @@ export class SpreadsheetService {
           );
       })
       .catch((error) => {
-        this.loggingService.logException(error, SeverityLevel.Critical);
+        this.loggingService.logException(error);
         return [];
       });
   }

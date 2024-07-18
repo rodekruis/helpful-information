@@ -222,21 +222,23 @@ classDiagram
   }
 
   class Offer {
+    int categoryID
+    int subCategoryID
+    chapterName
+    chapterSlug
+    bool isVisible
     int offerId
     slug
-    int subCategoryID
-    int categoryID
-    bool isVisible
     offerName
     icon
     + ...many more properties
   }
 
   class QASet {
-    int id
-    int subCategoryID
     int categoryID
+    int subCategoryID
     bool isVisible
+    int id
     slug
     parentSlug
     question
@@ -337,6 +339,8 @@ Each Offer
 - can have a URL-slug (`[a-z0-9._-]`);  
   This _needs_ to be unique within its parent Sub-Category _only_.
 - can be hidden by setting the "**Visible?**"-column to `Hide`.
+- can have a Chapter-name (in plain/normal text);  
+  This will be used to group Offers within their parent Sub-Category.
 - can have some multi-line fields, [Markdown syntax](#text-formatting) can be used for structure/formatting in those.
 
 ### Q&A features

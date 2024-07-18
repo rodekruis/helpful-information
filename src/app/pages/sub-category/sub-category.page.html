@@ -33,25 +33,33 @@
   </li>
 </ul>
 
-<ul
+<ng-container
   *ngIf="
     useOffers &&
     offers &&
-    (offers | categoryFilter: category | subCategoryFilter: subCategory)?.length
+    offers?.length &&
+    offerChapters &&
+    offerChapters?.length
   "
-  class="list-flat ion-margin-vertical"
 >
-  <li
-    *ngFor="
-      let offerItem of offers
-        | categoryFilter: category
-        | subCategoryFilter: subCategory
-    "
-    class="ion-margin-bottom"
-  >
-    <app-offer-link [offer]="offerItem"></app-offer-link>
-  </li>
-</ul>
+  <ng-container *ngFor="let offerChapter of offerChapters">
+    <h3
+      *ngIf="offerChapter[0]?.chapterName"
+      [id]="offerChapter[0]?.chapterSlug"
+      class="ion-padding-top"
+    >
+      {{ offerChapter[0].chapterName }}
+    </h3>
+    <ul class="list-flat ion-margin-vertical">
+      <li
+        *ngFor="let offerItem of offerChapter"
+        class="ion-margin-bottom"
+      >
+        <app-offer-link [offer]="offerItem"></app-offer-link>
+      </li>
+    </ul>
+  </ng-container>
+</ng-container>
 
 <br />
 

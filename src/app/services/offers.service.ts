@@ -6,7 +6,9 @@ import {
 } from 'src/app/models/logging-event.enum';
 import type { Offer } from 'src/app/models/offer.model';
 import type { QASet } from 'src/app/models/qa-set.model';
+import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import type { SubCategory } from 'src/app/models/sub-category.model';
+import { createSlug, slugify } from 'src/app/shared/utils';
 
 import { LoggingService } from './logging.service';
 import { SpreadsheetService } from './spreadsheet.service';
@@ -160,18 +162,47 @@ export class OffersService {
       const subCategories = await this.getAllSubCategories(region);
 
       let offers = await this.spreadsheetService.getOffers(region);
-      offers = offers.map((offer: Offer) => {
-        offer = SpreadsheetService.addParentCategoryDetails(offer, categories);
-        offer = SpreadsheetService.addParentSubCategoryDetails(
-          offer,
-          subCategories,
-        );
-        return offer;
-      });
+      offers = offers
+        .filter((offer: Offer): boolean => offer.offerVisible)
+        .map((offer: Offer) => {
+          offer = SpreadsheetService.addParentCategoryDetails(
+            offer,
+            categories,
+          );
+          offer = SpreadsheetService.addParentSubCategoryDetails(
+            offer,
+            subCategories,
+          );
+          return offer;
+        })
+        .map((offer: Offer) => {
+          offer.chapterSlug = createSlug(
+            null,
+            slugify(offer.chapterName),
+            SlugPrefix.chapter,
+          );
+          return offer;
+        });
 
       this.setCache(CacheName.offers, region, offers);
     }
     return this.cache[CacheName.offers].data;
+  }
+
+  public getOffersGroupedByChapter(offers: Offer[]): Offer[][] {
+    let offerSets = new Map<string, Offer[]>();
+    offers.forEach((offer) => {
+      if (!offerSets.has(offer.chapterName)) {
+        offerSets.set(offer.chapterName, []);
+      }
+      offerSets.get(offer.chapterName).push(offer);
+    });
+    offerSets = new Map(
+      // Sort by Map-key (i.e: by ChapterName)
+      [...offerSets].sort(([a], [b]) => String(a).localeCompare(b)),
+    );
+
+    return Array.from(offerSets.values());
   }
 
   public async findOffer(query: {

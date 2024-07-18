@@ -26,6 +26,20 @@ export const getDateFromString = (value: string): Date | null => {
 };
 
 /**
+ * Convert a string to a proper URL-slug
+ *
+ * @param value {String} - The string to convert
+ * @returns {String}
+ */
+export const slugify = (value: string): string => {
+  return value
+    .toLowerCase()
+    .replace(/\W+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+};
+
+/**
  * Create a slug based on input-`value`, or a fallback
  */
 export const createSlug = (
