@@ -7,7 +7,15 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ---
 
-## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.07.1...main)
+## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.07.2...main)
+
+---
+
+## 2024-07-25: [v24.07.2](https://github.com/rodekruis/helpful-information/releases/tag/v24.07.2)
+
+### Fixed
+
+- Auto-translations using (third-party) Google Translate require less strict security-settings.
 
 ---
 
