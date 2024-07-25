@@ -25,7 +25,6 @@
     }
   },
   "globalHeaders": {
-    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src * 'self' data:; font-src 'self' data:; connect-src * 'self'; media-src * 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; manifest-src 'self'",
     "Cross-Origin-Opener-Policy": "same-origin",
     "Permissions-Policy": "document-domain=(), storage-access=(self), attribution-reporting=(), interest-cohort=(), browsing-topics=()",
     "Referrer-Policy": "same-origin"
