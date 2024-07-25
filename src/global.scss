@@ -669,6 +669,7 @@ img[decoding='async'] {
 /**
   Overrides for Google Translate (in-page)
 */
+// Make room for the Google Translate bar
 body[style*='margin-top: 56px;'] {
   margin-top: 0 !important;
   background-position-y: 56px;
@@ -676,8 +677,10 @@ body[style*='margin-top: 56px;'] {
   ion-app {
     top: 56px;
   }
-
-  // Hide own language-switcher when Google's is active
+}
+// Hide own language-switcher when Google's is active
+body[style*='margin-top: 0px;'],
+body[style*='margin-top: 56px;'] {
   .language-switcher {
     display: none;
   }

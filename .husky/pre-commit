@@ -1,5 +1,4 @@
-#!/usr/bin/env sh
 
 fnm use
 
-npx lint-staged
+lint-staged
