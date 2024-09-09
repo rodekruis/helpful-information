@@ -4,8 +4,8 @@ import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
+import { ConfigService } from 'src/app/services/config.service';
 import { LoggingService } from 'src/app/services/logging.service';
-import { getRegionLabel } from 'src/app/shared/util.environment';
 
 @Component({
   selector: 'app-parent-link',
@@ -20,10 +20,13 @@ export class ParentLinkComponent {
 
   @Input()
   set region(value: string) {
-    this.label = getRegionLabel(value);
+    this.label = this.configService.getRegionByRegionSlug(value)?.label;
   }
 
-  constructor(private loggingService: LoggingService) {}
+  constructor(
+    private loggingService: LoggingService,
+    private configService: ConfigService,
+  ) {}
 
   public click() {
     this.loggingService.logEvent(

@@ -1,7 +1,7 @@
 import { DOCUMENT, Location } from '@angular/common';
 import { Inject, Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer, Title } from '@angular/platform-browser';
-import { getRegionLabel } from 'src/app/shared/util.environment';
+import { ConfigService } from 'src/app/services/config.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,6 +13,7 @@ export class PageMetaService {
     @Inject(DOCUMENT) private dom: Document,
     private domSanitizer: DomSanitizer,
     private location: Location,
+    private configService: ConfigService,
   ) {}
 
   public setDirection(direction: string = 'auto') {
@@ -51,7 +52,9 @@ export class PageMetaService {
     }
 
     if (parts.region) {
-      title += getRegionLabel(parts.region) + separator;
+      title +=
+        this.configService.getRegionByRegionSlug(parts.region)?.label +
+        separator;
     }
 
     // App name as a base-title

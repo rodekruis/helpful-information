@@ -7,11 +7,8 @@ import {
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
 import type { RegionData } from 'src/app/models/region-data';
+import { ConfigService } from 'src/app/services/config.service';
 import { LoggingService } from 'src/app/services/logging.service';
-import {
-  createRegionSlugs,
-  getRegionLabel,
-} from 'src/app/shared/util.environment';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -52,6 +49,7 @@ export class TranslationOptionsComponent {
   constructor(
     private router: Router,
     private loggingService: LoggingService,
+    private configService: ConfigService,
   ) {
     if (this.useRegionPerLocale) {
       this.languageOptions = this.createLocalLanguageOptions();
@@ -145,7 +143,7 @@ export class TranslationOptionsComponent {
   }
 
   private createLocalLanguageOptions(): RegionData['localeAlternatives'] {
-    const regions = createRegionSlugs().filter((region) => {
+    const regions = this.configService.getRegionSlugs().filter((region) => {
       // Remove empty 'placeholder' regions that are used for layout only.
       return region !== '';
     });
@@ -153,7 +151,7 @@ export class TranslationOptionsComponent {
     return regions.map((region: string) => {
       return {
         key: region,
-        label: getRegionLabel(region),
+        label: this.configService.getRegionByRegionSlug(region)?.label,
       };
     });
   }
