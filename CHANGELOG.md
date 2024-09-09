@@ -9,6 +9,10 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.07.2...main)
 
+### Added
+
+- Regions can be grouped on the main-page (with optional sub-headings) via the `REGION_CONFIG`-ENV-variable(experimental!). See: [`ENV`](.env.example)
+
 ---
 
 ## 2024-07-25: [v24.07.2](https://github.com/rodekruis/helpful-information/releases/tag/v24.07.2)
