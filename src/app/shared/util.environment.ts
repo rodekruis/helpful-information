@@ -13,7 +13,7 @@ export function createRegionSlugs(
   return createTokenList(regions).map((s) => s.toLowerCase());
 }
 
-export function createRegionLabels(
+function createRegionLabels(
   regionLabels: string = environment.regionsLabels,
 ): string[] {
   return createTokenList(regionLabels);
