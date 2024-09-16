@@ -1,6 +1,6 @@
 import { environment } from 'src/environments/environment';
 
-export function createTokenList(value: string): string[] {
+function createTokenList(value: string): string[] {
   return value
     .trim()
     .split(/\s*,\s*/)
@@ -13,10 +13,25 @@ export function createRegionSlugs(
   return createTokenList(regions).map((s) => s.toLowerCase());
 }
 
-export function createRegionLabels(
+function createRegionLabels(
   regionLabels: string = environment.regionsLabels,
 ): string[] {
   return createTokenList(regionLabels);
+}
+
+export function getSheetIds(): { [key: string]: string } {
+  const sheetIds: { [key: string]: string } = {};
+
+  const regions: string[] = createRegionSlugs(environment.regions);
+  const googleSheetsIds: string[] = createTokenList(
+    environment.regionsSheetIds,
+  );
+
+  regions.forEach((_, index: number) => {
+    sheetIds[regions[index]] = googleSheetsIds[index];
+  });
+
+  return sheetIds;
 }
 
 export function getRegionLabel(region: string = ''): string {

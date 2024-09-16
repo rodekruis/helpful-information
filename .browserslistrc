@@ -5,8 +5,5 @@
 # You can see what browsers were selected by your queries by running:
 #   npx browserslist
 
-> 0.5% and not dead
-last 2 versions
+>=0.25% and fully supports es6 and not dead
 Firefox ESR
-not supports es5
-not dead

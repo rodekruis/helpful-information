@@ -17,11 +17,8 @@ import {
 import { SlugPrefix } from 'src/app/models/slug-prefix.enum';
 import type { SubCategory } from 'src/app/models/sub-category.model';
 import { SubCategoryCol } from 'src/app/models/sub-category.model';
+import { ConfigService } from 'src/app/services/config.service';
 import { LoggingService } from 'src/app/services/logging.service';
-import {
-  createRegionSlugs,
-  createTokenList,
-} from 'src/app/shared/util.environment';
 import { createLocaleAlternatives } from 'src/app/shared/util.locales';
 import {
   createSlug,
@@ -47,11 +44,10 @@ export class SpreadsheetService {
   static visibleKey = 'Show';
   static booleanTrueKey = 'Yes';
 
-  private sheetIds: { [key: string]: string } = {};
-
-  constructor(private loggingService: LoggingService) {
-    this.loadSheetIds();
-  }
+  constructor(
+    private loggingService: LoggingService,
+    private configService: ConfigService,
+  ) {}
 
   static readCellValue(row: string[], key: number): string {
     if (!!row && !!row[key] && key < row.length) {
@@ -68,19 +64,9 @@ export class SpreadsheetService {
     return value === this.booleanTrueKey;
   }
 
-  private loadSheetIds(): void {
-    const regions: string[] = createRegionSlugs(environment.regions);
-    const googleSheetsIds: string[] = createTokenList(
-      environment.regionsSheetIds,
-    );
-
-    regions.forEach((_, index: number) => {
-      this.sheetIds[regions[index]] = googleSheetsIds[index];
-    });
-  }
-
   private getSheetUrl(region: string, sheetName: SheetName): string {
-    return `${environment.google_sheets_api_url}/${this.sheetIds[region]}/values/${sheetName}?key=${environment.google_sheets_api_key}&alt=json&prettyPrint=false`;
+    const sheetId = this.configService.getRegionByRegionSlug(region)?.sheetId;
+    return `${environment.google_sheets_api_url}/${sheetId}/values/${sheetName}?key=${environment.google_sheets_api_key}&alt=json&prettyPrint=false`;
   }
 
   private getIndexOfTag(collection: string[], tagName: string) {

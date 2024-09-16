@@ -32,6 +32,7 @@ export const environment = {
   errorRetry: '${process.env.TXT_ERROR_RETRY || ''}',
 
   // Regions:
+  regionConfig: '${process.env.REGION_CONFIG || ''}',
   regions: '${process.env.REGIONS || ''}',
   regionsLabels: '${process.env.REGIONS_LABELS || ''}',
   regionsSheetIds: '${process.env.REGIONS_SHEET_IDS || ''}',

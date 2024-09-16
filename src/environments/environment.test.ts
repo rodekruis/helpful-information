@@ -31,6 +31,7 @@ export const environment = {
   errorRetry: 'Retest',
 
   // Regions:
+  regionConfig: '',
   regions: 'test, ,test-nl,test-ar',
   regionsLabels: 'Test, ,Test NL,Test AR',
   regionsSheetIds:

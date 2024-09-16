@@ -69,6 +69,9 @@ This is an example of a [Helpful Information App](https://github.com/rodekruis/h
   errorContactUrl: 'https://github.com/rodekruis/helpfulinformation',
   errorRetry: 'Try again?',
 
+  // RegionConfig: A JSON-string with configuration for all region(-set)(s)
+  regionConfig: '',
+
   // Regions: (A comnma-separated list of URL paths/slugs)
   regions:
     // Local standalone sheet:

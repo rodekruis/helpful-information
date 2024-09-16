@@ -14,21 +14,19 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { filter } from 'rxjs';
 import { AppHeaderComponent } from 'src/app/components/header/header.component';
 import type { Category } from 'src/app/models/category.model';
+import type { RegionSet } from 'src/app/models/config.model';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
 import type { RegionData } from 'src/app/models/region-data';
 import type { SubCategory } from 'src/app/models/sub-category.model';
+import { ConfigService } from 'src/app/services/config.service';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import {
-  createRegionLabels,
-  createRegionSlugs,
-} from 'src/app/shared/util.environment';
 import { createLocaleAlternatives } from 'src/app/shared/util.locales';
 import { extractPageTitleFromMarkdown } from 'src/app/shared/util.markdown';
 import { environment } from 'src/environments/environment';
@@ -56,8 +54,7 @@ export class ReferralPageComponent implements OnInit {
   private content: IonContent;
 
   public region: string;
-  public regions: string[];
-  public regionsLabels: string[];
+  public regionSets: RegionSet[];
 
   private categories: Category[];
   private subCategories: SubCategory[];
@@ -100,9 +97,9 @@ export class ReferralPageComponent implements OnInit {
     private lastUpdatedTimeService: LastUpdatedTimeService,
     private pageMeta: PageMetaService,
     private loggingService: LoggingService,
+    private configService: ConfigService,
   ) {
-    this.regions = createRegionSlugs();
-    this.regionsLabels = createRegionLabels();
+    this.regionSets = this.configService.config.regions;
 
     this.mainUrl = this.location.normalize('/');
 
@@ -145,7 +142,9 @@ export class ReferralPageComponent implements OnInit {
   }
 
   public isSupportedRegion() {
-    return this.region && this.regions.includes(this.region);
+    return (
+      this.region && !!this.configService.getRegionByRegionSlug(this.region)
+    );
   }
 
   public isStaticPage(page?: AppPath) {
