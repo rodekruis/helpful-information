@@ -32,7 +32,7 @@ This guide will help you set up an instance of a [Helpful Information App](https
   > The template-sheet "[HIA - Staging Demo/Example](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)"
   > is recurrently used to test all HIA functionalities, so it is the best starting point to understand how the app works and what it offers.
 
-  - [ ] Click "**File**" > "**Make a copy**"; from now on, you will only work on this copy of the template-sheet.
+  - [ ] Click "**File**" > "**Make a copy**"; from now on, you will only work on this copy of the template-sheet. Give the sheet a descriptive title.
   - [ ] Share the file with "**Anyone with the link**" set to "**Viewer**".
   - [ ] Take note of the `Google Spreadsheet ID` of the created file:  
          It is the special, 44-character string in the URL: `https://docs.google.com/spreadsheets/d/`**`___SPREADSHEET_ID___`**`/edit?usp=sharing`
@@ -42,9 +42,9 @@ This guide will help you set up an instance of a [Helpful Information App](https
 - Create a Google Sheets API-key, to let the web-app access the sheet in the visitors' browser
 
   - [ ] Go to <https://console.cloud.google.com/projectcreate>
-  - [ ] Complete any "getting started"-steps when prompted
+  - [ ] Complete any "getting started"-steps when prompted. Select or create a 'project' with a descriptive title.
   - Enable the Google Sheets API
-    - [ ] Go to <https://console.cloud.google.com/apis/dashboard>, the "**Enabled APIs & services**"-page
+    - [ ] Go to <https://console.cloud.google.com/apis/dashboard>, the "**Enabled APIs & services**"-page.
     - [ ] Click on the "**+ Enable APIs and Services**"-button
     - [ ] Search for "google sheets api", or go directly to: <https://console.cloud.google.com/apis/library/sheets.googleapis.com>
     - [ ] Click on the "**Enable**"-button
@@ -52,8 +52,8 @@ This guide will help you set up an instance of a [Helpful Information App](https
 
     - [ ] Go to <https://console.cloud.google.com/apis/credentials>, the "**Credentials**"-page
     - [ ] Click on the "**+ Create Credential**"-button
-    - [ ] Select "**API-key**" from the list, wait for the key to be generated
-    - [ ] In the pop-up, click the "**Edit API key**"-link
+    - [ ] Select "**API-key**" from the list, wait for the key to be generated. Store the key at a secure place; you will need this later.
+    - [ ] After closing the pop-up, click the "**Edit API key**"-link
     - [ ] Give it a recognizable name; make sure to include its _scope_, i.e. "production" or "local-dev", to know which key is responsible for what.
     - [ ] (_Optional, but highly recommended; Can be enabled/updated later._)  
            Select "**HTTP referrers (websites)**" from the "**Application restrictions**"-list.  
