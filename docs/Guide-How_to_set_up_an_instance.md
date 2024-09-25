@@ -44,7 +44,7 @@ This guide will help you set up an instance of a [Helpful Information App](https
   - [ ] Go to <https://console.cloud.google.com/projectcreate>
   - [ ] Complete any "getting started"-steps when prompted. Select or create a 'project' with a descriptive title.
   - Enable the Google Sheets API
-    - [ ] Go to <https://console.cloud.google.com/apis/dashboard>, the "**Enabled APIs & services**"-page. 
+    - [ ] Go to <https://console.cloud.google.com/apis/dashboard>, the "**Enabled APIs & services**"-page.
     - [ ] Click on the "**+ Enable APIs and Services**"-button
     - [ ] Search for "google sheets api", or go directly to: <https://console.cloud.google.com/apis/library/sheets.googleapis.com>
     - [ ] Click on the "**Enable**"-button
