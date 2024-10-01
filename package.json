@@ -61,7 +61,7 @@
     "@microsoft/applicationinsights-debugplugin-js": "^3.3.3",
     "@types/eslint": "^8.56.12",
     "@types/jasmine": "^5.1.4",
-    "@types/node": "^20.16.7",
+    "@types/node": "^20.16.10",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "confusing-browser-globals": "^1.0.11",
