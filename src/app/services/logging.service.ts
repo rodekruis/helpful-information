@@ -29,12 +29,13 @@ export class LoggingService {
   }
 
   private parseMatomoInfo(connectionString: string | undefined) {
+    const properties = ['id', 'api', 'sdk'];
     const connection: { id?: string; api?: string; sdk?: string } = {};
     if (typeof connectionString === 'string') {
       const allParts = connectionString.split(';');
       allParts.forEach((part: string) => {
         const [key, value] = part.split('=');
-        if (key in connection) {
+        if (properties.includes(key)) {
           connection[key as keyof typeof connection] = value;
         }
       });
