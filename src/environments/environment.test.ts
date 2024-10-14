@@ -42,6 +42,7 @@ export const environment = {
   google_sheets_api_key: 'test-api-key',
   google_sheets_api_url: '/data',
 
-  // Application Insights
+  // Monitoring/Telemetry:
+  matomoConnectionString: '',
   appInsightsConnectionString: '',
 };

@@ -38,11 +38,9 @@ export const environment = {
   regionsSheetIds: '${process.env.REGIONS_SHEET_IDS || ''}',
 
   // Third-party tokens:
-  // Google Sheets API:
   google_sheets_api_key: '${process.env.GOOGLE_SHEETS_API_KEY || ''}',
   google_sheets_api_url: '${process.env.GOOGLE_SHEETS_API_URL || ''}',
-
-  // Application Insights
+  matomoConnectionString: '${process.env.MATOMO_CONNECTION_STRING || ''}',
   appInsightsConnectionString: '${process.env.AI_CONNECTION_STRING || ''}',
 };
 `;
