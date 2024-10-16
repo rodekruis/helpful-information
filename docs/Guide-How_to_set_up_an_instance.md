@@ -2,7 +2,14 @@
 
 ## Introduction
 
-This guide will help you set up an instance of a [Helpful Information App](https://github.com/rodekruis/helpful-information). See the GitHub-repository website to find out how it works and how to use it.
+This guide will help you set up an instance of a [Helpful Information App](https://github.com/rodekruis/helpful-information).  
+See the GitHub-repository website to find out how it works and how to use it.
+
+> [!TIP]
+> Example instances: ([Demo Google Sheet](https://docs.google.com/spreadsheets/d/1op6Ouyxtwv4f8GAEAMSn5PVzcXtfZuftMiLYWsX0pbs))
+>
+> - <https://helpful-info.github.io/example/> - An example with (almost) all features enabled/used.
+> - <https://helpful-info.github.io/example-multilingual/> - An example with local data, focussing on "one sheet/region per language".
 
 ## Preparations
 
