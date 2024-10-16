@@ -9,6 +9,10 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.09.0...main)
 
+### Added
+
+- Support for analytics via [`Matomo`](https://matomo.org/). See: [`ENV`](.env.example)
+
 ---
 
 ## 2024-09-16: [v24.09.0](https://github.com/rodekruis/helpful-information/releases/tag/v24.09.0)
