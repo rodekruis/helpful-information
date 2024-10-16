@@ -25,7 +25,7 @@ module.exports = {
         'plugin:import/recommended',
         'plugin:import/typescript',
         'plugin:promise/recommended',
-        'plugin:no-unsanitized/DOM',
+        'plugin:no-unsanitized/recommended-legacy',
         'plugin:regexp/recommended',
         'plugin:prettier/recommended',
       ],
