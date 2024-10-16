@@ -7,15 +7,66 @@ import {
 } from 'src/app/models/logging-event.enum';
 import { environment } from 'src/environments/environment';
 
+// Decraling the Matomo-based 'data-store'
+declare global {
+  interface Window {
+    _paq?: any[];
+  }
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class LoggingService {
+  matomoInitialized: boolean;
+
   appInsights: ApplicationInsights;
   appInsightsInitialized: boolean;
 
   constructor() {
+    this.setupMatomo();
     this.setupApplicationInsights();
+  }
+
+  private parseMatomoInfo(connectionString: string | undefined) {
+    const properties = ['id', 'api', 'sdk'];
+    const connection: { id?: string; api?: string; sdk?: string } = {};
+    if (typeof connectionString === 'string') {
+      const allParts = connectionString.split(';');
+      allParts.forEach((part: string) => {
+        const [key, value] = part.split('=');
+        if (properties.includes(key)) {
+          connection[key as keyof typeof connection] = value;
+        }
+      });
+    }
+    return connection;
+  }
+
+  private setupMatomo() {
+    const connection = this.parseMatomoInfo(environment.matomoConnectionString);
+
+    if (!connection.id || !connection.api || !connection.sdk) {
+      return;
+    }
+
+    window._paq = window._paq || [];
+    window._paq.push(['setDoNotTrack', true]);
+    window._paq.push(['disableCookies']);
+    window._paq.push(['enableLinkTracking']);
+    window._paq.push(['enableHeartBeatTimer']);
+
+    (() => {
+      window._paq.push(['setTrackerUrl', connection.api]);
+      window._paq.push(['setSiteId', connection.id]);
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = connection.sdk;
+      document.head.appendChild(script);
+
+      this.matomoInitialized = true;
+    })();
   }
 
   private setupApplicationInsights() {
@@ -69,8 +120,12 @@ export class LoggingService {
   }
 
   public logPageView(name?: string): void {
+    if (this.matomoInitialized) {
+      window._paq.push(['setDocumentTitle', name ?? document.title]);
+      window._paq.push(['trackPageView']);
+    }
     if (this.appInsightsInitialized) {
-      this.appInsights.trackPageView({ name });
+      // Not necessary because of `enableAutoRouteTracking`-setting in `setupApplicationInsights()`
     }
     console.info(`LOG: PageView: "${name ?? ''}"`);
   }
@@ -84,6 +139,15 @@ export class LoggingService {
       [key: string]: any;
     },
   ): void {
+    if (this.matomoInitialized) {
+      window._paq.push([
+        'trackEvent',
+        category === LoggingEventCategory.ai ? 'UI' : category,
+        action,
+        properties && properties.name ? properties.name : undefined,
+        properties && properties.value ? properties.value : undefined,
+      ]);
+    }
     if (this.appInsightsInitialized) {
       this.appInsights.trackEvent(
         {

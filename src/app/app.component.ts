@@ -25,6 +25,9 @@ export class AppComponent {
     this.setUpExternalLinkTracking();
     this.setUpPrintTracking();
 
+    // Approximation of the first page-view (Needs improvement)
+    this.loggingService.logPageView();
+
     this.handleServiceWorkerUpdates();
     this.handleServiceWorkerErrors();
   }
