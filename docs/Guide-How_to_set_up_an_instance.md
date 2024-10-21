@@ -90,6 +90,7 @@ See the GitHub-repository website to find out how it works and how to use it.
 
   - [ ] Go to the file: `.github/workflows/deploy-github-pages.yml` and click "**Edit this file**" (pencil icon)
   - [ ] Configure the necessary variables; see comment lines to understand what each variable does
+  - [ ] Specifically make sure to fill in the Google Sheets ID number under REGIONS_SHEET_IDS
   - [ ] Save/Commit the changes
   - [ ] Verify the deployment is triggered by going to the "**Actions**"-tab and checking the latest run
   - [ ] After a successful run, the instance should be available on the chosen URL
@@ -152,6 +153,7 @@ This is the link/URL you'll communicate to the people affected and/or aid-worker
 - Name needs to be clear, recognizable, trustworthy, easily communicated (digitally and verbally).
 - Separate registration-process.
 - Separate configuration required to use domain-name with hosting-solution(GitHub Pages).
+- Go to Settings, click on Pages, click on Custom Domain and fill in the URL you created.
 - Not free.
 
 #### **Solution 4**: Custom sub-domain-name
@@ -160,6 +162,7 @@ This is the link/URL you'll communicate to the people affected and/or aid-worker
 - Needs access to 'parent' organizations' domain-name.
 - Technical limitations depend on parent organization's preferences/abilities.
 - Separate configuration required to use domain-name with hosting-solution(GitHub Pages).
+- Go to Settings, click on Pages, click on Custom Domain and fill in the URL you created.
 
 #### **Solution 5**: Shared hosting-service
 
