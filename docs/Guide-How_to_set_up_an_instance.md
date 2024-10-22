@@ -90,10 +90,18 @@ See the GitHub-repository website to find out how it works and how to use it.
 
   - [ ] Go to the file: `.github/workflows/deploy-github-pages.yml` and click "**Edit this file**" (pencil icon)
   - [ ] Configure the necessary variables; see comment lines to understand what each variable does
-  - [ ] Specifically make sure to fill in the Google Sheets ID number under REGIONS_SHEET_IDS
+  - [ ] Specifically make sure to fill in the `Google Spreadsheet ID` under `REGIONS_SHEET_IDS` (and remove the default/placeholder value)
   - [ ] Save/Commit the changes
   - [ ] Verify the deployment is triggered by going to the "**Actions**"-tab and checking the latest run
   - [ ] After a successful run, the instance should be available on the chosen URL
+  
+- (Optional) Configure a custom (sub-)domain-name to use as public URL. (Applicable for [Solution 3](#solution-3-custom-domain-name) and [Solution 4](#solution-4-custom-sub-domain-name)
+  - Edit the file: `.github/workflows/deploy-github-pages.yml`, below the line:  
+    `# NOTE: When the instance will be run on a custom (sub-)domain, remove the `--base-href`-flag+value.`  
+    So that it looks like:  
+    `run: 'npm run build:production -- --output-path=../www'`
+  - On the GitHub repository-page, go to: "Settings" → "Pages" → "Custom domain" and fill in the applicable public URL
+  - GitHub will validate the DNS-records for the (sub-)domain
 
 - ✅ Done.
 
@@ -153,7 +161,6 @@ This is the link/URL you'll communicate to the people affected and/or aid-worker
 - Name needs to be clear, recognizable, trustworthy, easily communicated (digitally and verbally).
 - Separate registration-process.
 - Separate configuration required to use domain-name with hosting-solution(GitHub Pages).
-- Go to Settings, click on Pages, click on Custom Domain and fill in the URL you created.
 - Not free.
 
 #### **Solution 4**: Custom sub-domain-name
@@ -162,7 +169,6 @@ This is the link/URL you'll communicate to the people affected and/or aid-worker
 - Needs access to 'parent' organizations' domain-name.
 - Technical limitations depend on parent organization's preferences/abilities.
 - Separate configuration required to use domain-name with hosting-solution(GitHub Pages).
-- Go to Settings, click on Pages, click on Custom Domain and fill in the URL you created.
 
 #### **Solution 5**: Shared hosting-service
 
