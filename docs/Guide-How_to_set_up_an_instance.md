@@ -94,19 +94,21 @@ See the GitHub-repository website to find out how it works and how to use it.
   - [ ] Save/Commit the changes
   - [ ] Verify the deployment is triggered by going to the "**Actions**"-tab and checking the latest run
   - [ ] After a successful run, the instance should be available on the chosen URL
-  
+
 - (Optional) Configure a custom (sub-)domain-name to use as public URL. (Applicable for [Solution 3](#solution-3-custom-domain-name) and [Solution 4](#solution-4-custom-sub-domain-name)
+
   - Edit the file: `.github/workflows/deploy-github-pages.yml`, below the line:
-  
+
     ```yml
     # NOTE: When the instance will be run on a custom (sub-)domain, remove the `--base-href`-flag+value.
     ```
-    
+
     So that it looks like:
 
     ```yml
     run: 'npm run build:production -- --output-path=../www'
     ```
+
   - On the GitHub repository-page, go to: "Settings" → "Pages" → "Custom domain" and fill in the applicable public URL
   - GitHub will validate the DNS-records for the (sub-)domain
 
