@@ -3,16 +3,30 @@ import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
 import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { SearchInputComponent } from 'src/app/components/search-input/search-input.component';
 import type { QASet } from 'src/app/models/qa-set.model';
 import type { RegionData } from 'src/app/models/region-data';
+import { ConfigService } from 'src/app/services/config.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { PageMetaService } from 'src/app/services/page-meta.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
 import { SearchService } from 'src/app/services/search.service';
+import { environment } from 'src/environments/environment';
 import { AppPath } from 'src/routes';
+
+type SearchApiResponse = {
+  status?: number;
+  answer?: string;
+  references?: {
+    category: string;
+    subcategory: string;
+    slug?: string;
+    parent?: string;
+  }[];
+};
 
 @Component({
   selector: 'app-search-page',
@@ -24,15 +38,21 @@ import { AppPath } from 'src/routes';
     RouterLink,
     QASetListComponent,
     SearchInputComponent,
+    MarkdownModule,
     ParentLinkComponent,
   ],
 })
 export default class SearchPageComponent implements OnInit {
+  public useSearchApi = environment.useQandASearch && !!environment.searchApi;
+
   public region: string;
   public regionData: RegionData;
   public qaSets: QASet[];
+
   public searchQuery: string;
   public searchResults: QASet[];
+  public searchResultSummary: string;
+  public loadingSearch: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +61,7 @@ export default class SearchPageComponent implements OnInit {
     private offersService: OffersService,
     private searchService: SearchService,
     private pageMeta: PageMetaService,
+    private configService: ConfigService,
   ) {}
 
   async ngOnInit() {
@@ -89,15 +110,37 @@ export default class SearchPageComponent implements OnInit {
     }
   }
 
-  public performSearch(rawQuery: string): void {
-    const safeQuery = this.searchService.sanitizeSearchQuery(rawQuery);
+  public onSearchInput(rawQuery: string) {
+    const safeQuery = this.useSearchApi
+      ? rawQuery
+      : this.searchService.sanitizeSearchQuery(rawQuery);
 
     this.router.navigate([], {
       queryParams: { q: safeQuery },
       queryParamsHandling: 'merge',
     });
+  }
 
-    this.searchResults = this.searchService.query(safeQuery);
+  public async performSearch(query: string): Promise<void> {
+    const safeQuery = this.searchService.sanitizeSearchQuery(query);
+
+    if (this.useSearchApi) {
+      this.loadingSearch = true;
+      const apiResponse: SearchApiResponse =
+        await this.fetchApiResults(safeQuery);
+
+      if (apiResponse) {
+        this.loadingSearch = false;
+      }
+      if (apiResponse && apiResponse.answer) {
+        this.searchResultSummary = apiResponse.answer;
+      }
+      if (apiResponse && apiResponse.references) {
+        this.searchResults = this.createReferences(apiResponse.references);
+      }
+    } else {
+      this.searchResults = this.searchService.query(safeQuery);
+    }
 
     if (this.searchResults.length > 1) {
       this.pageMeta.setTitle({
@@ -110,5 +153,49 @@ export default class SearchPageComponent implements OnInit {
         resultFrame.focus();
       }
     }
+  }
+
+  private createReferences(
+    references: SearchApiResponse['references'],
+  ): QASet[] {
+    const results = references.map((reference) => {
+      const result = this.qaSets.find((qa) => {
+        return (
+          qa.categoryID === Number(reference.category) &&
+          qa.subCategoryID === Number(reference.subcategory)
+        );
+      });
+
+      return result;
+    });
+    return results;
+  }
+
+  private async fetchApiResults(query: string): Promise<SearchApiResponse> {
+    const response = await window.fetch(environment.searchApi, {
+      method: 'POST',
+      credentials: 'omit',
+      mode: 'cors',
+      headers: {
+        Authorization: environment.searchApiKey,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question: query,
+        googleSheetId: this.configService.getRegionByRegionSlug(this.region)
+          .sheetId,
+      }),
+    });
+
+    if (!response || !response.ok) {
+      console.warn('Something went wrong:', response);
+      return {
+        answer: `Something went wrong.\nMaybe you can try again. \n\n ${response.status} ${response.statusText}`,
+        references: [],
+      };
+    }
+
+    return await response.json();
   }
 }
