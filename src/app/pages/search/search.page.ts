@@ -177,6 +177,7 @@ export default class SearchPageComponent implements OnInit {
         question: query,
         googleSheetId: this.configService.getRegionByRegionSlug(this.region)
           .sheetId,
+        locale: this.regionData.localeLanguage,
       }),
     });
 
