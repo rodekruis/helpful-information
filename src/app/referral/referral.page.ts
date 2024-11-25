@@ -9,7 +9,7 @@ import {
   RouterLink,
   RouterOutlet,
 } from '@angular/router';
-import { IonContent, IonFooter, IonHeader } from '@ionic/angular/standalone';
+import { IonContent, IonHeader } from '@ionic/angular/standalone';
 import { MarkdownComponent } from 'ngx-markdown';
 import { filter } from 'rxjs';
 import { AppHeaderComponent } from 'src/app/components/header/header.component';
@@ -46,7 +46,6 @@ import { AppPath } from 'src/routes';
     RouterOutlet,
     IonHeader,
     IonContent,
-    IonFooter,
   ],
 })
 export class ReferralPageComponent implements OnInit {

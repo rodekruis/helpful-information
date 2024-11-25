@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
 import { QASetListComponent } from 'src/app/components/q-a-set-list/q-a-set-list.component';
 import { SearchInputComponent } from 'src/app/components/search-input/search-input.component';
@@ -21,7 +21,6 @@ import { AppPath } from 'src/routes';
   standalone: true,
   imports: [
     NgIf,
-    RouterLink,
     QASetListComponent,
     SearchInputComponent,
     ParentLinkComponent,
