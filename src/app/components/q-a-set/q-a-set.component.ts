@@ -53,6 +53,7 @@ export class QASetComponent {
         ? LoggingEvent.QuestionOpen
         : LoggingEvent.QuestionClose,
       {
+        name: slug, // Use "name"-property for Matomo
         questionSlug: slug,
         question: question.substring(0, 100),
       },
