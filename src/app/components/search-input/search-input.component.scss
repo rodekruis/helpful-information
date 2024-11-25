@@ -7,7 +7,7 @@
   --search-input--focus: var(--hia_level_text, black);
 }
 
-form {
+.search-input {
   padding-block-start: 1em;
   padding-block-end: 1em;
 
@@ -15,11 +15,26 @@ form {
   display: flex;
   gap: 0.5em;
 
-  input[type='search'] {
+  .search-input--input {
     flex: 1 1 80%;
+    position: relative;
   }
-  button[type='submit'] {
-    flex: 0 0 auto;
+  .search-input--action {
+    flex: 0 0 20%;
+    word-wrap: normal;
+  }
+}
+
+.input-field--clear,
+.input-field--text {
+  border: 0;
+  border-radius: 0.25em;
+
+  &:focus {
+    outline-color: var(--search-input--focus);
+    outline-offset: 0.125rem;
+    outline-width: 0.125rem;
+    outline-style: solid;
   }
 }
 
@@ -30,11 +45,18 @@ form {
   border-radius: 0.25em;
   padding-block: 0.25em;
   padding-inline: 0.5em;
+  width: 100%;
+}
+
+.input-field--clear {
+  position: absolute;
+  inset-block-start: 0.25rem;
+  inset-inline-end: 0.25rem;
+  display: inline-block;
+  padding: 0.25rem;
+  background: transparent;
 
   &:focus {
-    outline-color: var(--search-input--focus);
-    outline-offset: 2px;
-    outline-width: 2px;
-    outline-style: solid;
+    outline-color: gold;
   }
 }
