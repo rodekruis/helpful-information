@@ -17,6 +17,7 @@ www
 coverage
 .angular/cache/
 .nx/
+tsconfig.tsbuildinfo
 
 # Third party code
 node_modules

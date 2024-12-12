@@ -17,9 +17,10 @@
     "test:watch": "ng test --configuration=development",
     "serve:local-data": "npx http-server ./data/ --port=3001 --cors='*' -i=false -c=-1 --ext=json",
     "upgrade:angular": "ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits",
-    "lint": "npm run lint:syntax && npm run lint:code",
+    "lint": "npm run lint:syntax && npm run lint:typecheck && npm run lint:code",
     "lint:code": "ng lint",
     "lint:syntax": "prettier --check \"**/*.{md,yml,json,scss}\"",
+    "lint:typecheck": "npx tsc --noEmit",
     "fix:code": "npm run lint:code -- --fix",
     "fix:syntax": "npm run lint:syntax -- --write",
     "fix": "npm run fix:code && npm run fix:syntax"
