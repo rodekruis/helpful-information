@@ -142,6 +142,9 @@ html {
 
     background: var(--print-background) none;
   }
+  ion-content::part(scroll) {
+    overflow: visible;
+  }
 }
 
 //
@@ -172,6 +175,10 @@ hr {
 
   &.layout--container_wide {
     max-width: 1024px;
+  }
+
+  @media print {
+    max-width: 100%;
   }
 }
 
