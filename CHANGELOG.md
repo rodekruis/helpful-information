@@ -9,6 +9,14 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.10.0...main)
 
+### Changed
+
+- Added additional properties to logging via Matomo.
+
+### Fixed
+
+- Printing of full pages is possible again.
+
 ---
 
 ## 2024-10-16: [v24.10.0](https://github.com/rodekruis/helpful-information/releases/tag/v24.10.0)
