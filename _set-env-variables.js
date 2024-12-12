@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 // Load environment-variables from .env file
 dotenv.config({
   debug: process.env.DEBUG,
+  override: true,
 });
 
 const configFileTemplate = require('./src/environments/environment.prod.ts.template.js');
