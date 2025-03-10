@@ -11,7 +11,6 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-parent-link',
   templateUrl: './parent-link.component.html',
   styleUrls: ['./parent-link.component.css'],
-  standalone: true,
   imports: [RouterLink],
 })
 export class ParentLinkComponent {

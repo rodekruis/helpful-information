@@ -36,7 +36,6 @@ import { AppPath } from 'src/routes';
   selector: 'app-referral',
   templateUrl: 'referral.page.html',
   styleUrls: ['referral.page.css'],
-  standalone: true,
   imports: [
     AppHeaderComponent,
     MarkdownComponent,

@@ -18,7 +18,6 @@ import { getLegacyID } from 'src/app/shared/utils';
   selector: 'app-offer-page',
   templateUrl: './offer.page.html',
   styleUrls: ['./offer.page.css'],
-  standalone: true,
   imports: [
     OfferComponent,
     LastUpdatedTimeComponent,

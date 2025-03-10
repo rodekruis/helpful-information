@@ -12,7 +12,6 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-category-link',
   templateUrl: './cateogry-link.component.html',
   styleUrls: ['./cateogry-link.component.css'],
-  standalone: true,
   imports: [RouterLink],
 })
 export class CategoryLinkComponent {

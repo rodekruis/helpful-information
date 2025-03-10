@@ -15,7 +15,6 @@ import { environment } from 'src/environments/environment';
   selector: 'app-translation-options',
   templateUrl: './translation-options.component.html',
   styleUrls: ['./translation-options.component.css'],
-  standalone: true,
   imports: [NgIf, NgFor],
 })
 export class TranslationOptionsComponent {

@@ -13,7 +13,6 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.css'],
-  standalone: true,
   imports: [NgIf, RouterLink],
 })
 export class BreadcrumbsComponent {

@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  standalone: true,
   imports: [NgIf, IonThumbnail, IonImg, TranslationOptionsComponent],
 })
 export class AppHeaderComponent {

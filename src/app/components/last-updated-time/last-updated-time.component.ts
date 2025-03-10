@@ -7,7 +7,6 @@ import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.servi
   selector: 'app-last-updated-time',
   templateUrl: './last-updated-time.component.html',
   styleUrls: ['./last-updated-time.component.css'],
-  standalone: true,
   imports: [NgIf, DatePipe],
 })
 export class LastUpdatedTimeComponent {

@@ -18,7 +18,6 @@ import { AppPath } from 'src/routes';
   selector: 'app-search-page',
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.css'],
-  standalone: true,
   imports: [
     NgIf,
     QASetListComponent,

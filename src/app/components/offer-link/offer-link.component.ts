@@ -14,7 +14,6 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-offer-link',
   templateUrl: './offer-link.component.html',
   styleUrls: ['./offer-link.component.css'],
-  standalone: true,
   imports: [MarkdownModule, IonImg, RouterLink, NgIf, SlicePipe],
 })
 export class OfferLinkComponent {

@@ -16,7 +16,6 @@ import { AppPath } from 'src/routes';
   selector: 'app-highlights-page',
   templateUrl: './highlights.page.html',
   styleUrls: ['./highlights.page.css'],
-  standalone: true,
   imports: [NgIf, QASetListComponent, RouterLink, ParentLinkComponent],
 })
 export default class HighlightsPageComponent implements OnInit {
