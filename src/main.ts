@@ -21,6 +21,7 @@ import {
   IonicRouteStrategy,
   provideIonicAngular,
 } from '@ionic/angular/standalone';
+import { Parser } from 'marked';
 import type { MarkedOptions } from 'ngx-markdown';
 import { MarkdownModule, MARKED_OPTIONS, MarkedRenderer } from 'ngx-markdown';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
@@ -33,7 +34,8 @@ import { routes } from './routes';
 function markedOptionsFactory(): MarkedOptions {
   const renderer = new MarkedRenderer();
 
-  renderer.heading = (text: string, level: number): string => {
+  renderer.heading = ({ text, depth }): string => {
+    let level = depth;
     const baseLevel = 3;
     const maxLevel = 6;
     level = level < baseLevel ? baseLevel : level;
@@ -42,7 +44,8 @@ function markedOptionsFactory(): MarkedOptions {
     return `<h${level}>${text}</h${level}>`;
   };
 
-  renderer.link = (href: string, title: string, text: string): string => {
+  renderer.link = ({ href, title, tokens }): string => {
+    const text = Parser.parseInline(tokens);
     const isExternal = !(
       href.startsWith(window.location.origin) || href.startsWith('/')
     );
@@ -57,8 +60,8 @@ function markedOptionsFactory(): MarkedOptions {
      >${text}</a>`;
   };
 
-  renderer.html = (html: string): string => {
-    return html.replaceAll(
+  renderer.html = ({ text }): string => {
+    return text.replaceAll(
       /(?<raw_a_href>href=[\s"']*(?:http|\/\/))/gi,
       ` target="_blank" rel="external noopener noreferrer" $<raw_a_href>`,
     );
