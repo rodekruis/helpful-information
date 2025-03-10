@@ -209,7 +209,7 @@ export class SpreadsheetService {
           )
           .filter((category: Category): boolean => category.categoryVisible);
       })
-      .catch((error) => {
+      .catch((error): [] => {
         this.loggingService.logException(error);
         return [];
       });
@@ -284,7 +284,7 @@ export class SpreadsheetService {
               subCategory.subCategoryVisible,
           );
       })
-      .catch((error) => {
+      .catch((error): [] => {
         this.loggingService.logException(error);
         return [];
       });
@@ -389,7 +389,7 @@ export class SpreadsheetService {
             this.convertOfferRowToOfferObject(row, offerColumnMap),
           );
       })
-      .catch((error) => {
+      .catch((error): [] => {
         this.loggingService.logException(error);
         return [];
       });
@@ -796,7 +796,7 @@ export class SpreadsheetService {
               row.isVisible && !!row.question && !!row.answer,
           );
       })
-      .catch((error) => {
+      .catch((error): [] => {
         this.loggingService.logException(error);
         return [];
       });
