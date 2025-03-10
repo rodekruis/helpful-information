@@ -196,7 +196,8 @@ describe('QASetComponent', () => {
       'a local HTML-link: <a href= /test>local test</a> \n' +
       'a local Markdown-link: [local test](/test) \n' +
       'an external HTML-link: <a href= https://example.org/test>external test</a> \n' +
-      'an external Markdown-link: [external test](https://example.org/test) \n';
+      'an external Markdown-link: [external test](https://example.org/test) \n' +
+      'a Markdown-link with formatting: [**External** _link_](https://example.org/test)';
     component.qaSet = testQASet;
 
     // Act
@@ -206,7 +207,7 @@ describe('QASetComponent', () => {
     // Assert
     const linkElements = fixture.nativeElement.querySelectorAll('a[href]');
 
-    expect(linkElements.length).toBe(4);
+    expect(linkElements.length).toBe(5);
 
     expect(linkElements[0].rel).toBe('');
     expect(linkElements[0].target).toBe('');
@@ -223,5 +224,12 @@ describe('QASetComponent', () => {
     expect(linkElements[3].rel).toContain('external');
     expect(linkElements[3].rel).not.toContain('x-plain-url');
     expect(linkElements[3].target).toBe('_blank');
+
+    expect(linkElements[4].rel).toContain('external');
+    expect(linkElements[4].rel).not.toContain('x-plain-url');
+    expect(linkElements[4].target).toBe('_blank');
+    expect(linkElements[4].innerHTML).toContain(
+      '<strong>External</strong> <em>link</em>',
+    );
   }));
 });
