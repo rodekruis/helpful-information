@@ -35,19 +35,19 @@
             ],
             "styles": [
               {
-                "input": "src/global.scss",
+                "input": "src/global.css",
                 "inject": true
               },
               {
-                "input": "src/theme/variables.scss",
+                "input": "src/theme/variables.css",
                 "inject": true
               },
               {
-                "input": "src/app/app.scss",
+                "input": "src/app/app.css",
                 "inject": true
               },
               {
-                "input": "src/theme/overrides.scss",
+                "input": "src/theme/overrides.css",
                 "inject": true
               }
             ],

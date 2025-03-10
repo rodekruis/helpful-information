@@ -14,7 +14,7 @@ import { formatPhoneNumberAsUrl } from 'src/app/shared/utils';
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.component.html',
-  styleUrls: ['./offer.component.scss'],
+  styleUrls: ['./offer.component.css'],
   imports: [MarkdownModule, IonImg, NgIf, NgFor],
 })
 export class OfferComponent {

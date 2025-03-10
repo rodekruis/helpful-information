@@ -11,7 +11,7 @@ form {
   padding-block-start: 1em;
   padding-block-end: 1em;
 
-  // Layout
+  /* Layout */
   display: flex;
   gap: 0.5em;
 

@@ -12,7 +12,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
 @Component({
   selector: 'app-q-a-set',
   templateUrl: './q-a-set.component.html',
-  styleUrls: ['./q-a-set.component.scss'],
+  styleUrls: ['./q-a-set.component.css'],
   imports: [NgIf, NgFor, DatePipe, NgTemplateOutlet, MarkdownModule],
 })
 export class QASetComponent {
