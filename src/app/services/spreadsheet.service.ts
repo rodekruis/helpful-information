@@ -562,6 +562,10 @@ export class SpreadsheetService {
         16,
         RegionDataFallback.labelHighlightsItemsCount,
       ),
+      labelSearchPageIntro: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.searchIntro,
+      ),
       labelSearchPageTitle: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.searchTitle,

@@ -25,6 +25,7 @@ export enum LoggingEvent {
   MainScreenClick = 'main-screen-button-click',
   NotFoundCategory = 'not-found-category',
   NotFoundOffer = 'not-found-offer',
+  NotFoundQA = 'not-found-qa',
   NotFoundParentQuestion = 'not-found-parent-question',
   NotFoundParentQuestionIsSelf = 'not-found-parent-question-is-self',
   NotFoundSheetRows = 'not-found-sheet-rows',

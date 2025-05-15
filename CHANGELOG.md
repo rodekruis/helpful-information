@@ -9,6 +9,11 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v24.10.0...main)
 
+### Added
+
+- Search-page can now have an optional introduction-text. Using the `#search.into`-field in the `Referral Page`-sheet.
+- Search can be configured to use an _external_ API. See [`ENV`](.env.example) for `SEARCH_API` and `SEARCH_API_KEY`.
+
 ### Changed
 
 - Added additional properties to logging via Matomo.
