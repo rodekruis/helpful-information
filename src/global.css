@@ -1,42 +1,47 @@
-// http://ionicframework.com/docs/theming/
+/* http://ionicframework.com/docs/theming/ */
 @import '@ionic/angular/css/core.css';
 @import '@ionic/angular/css/normalize.css';
 @import '@ionic/angular/css/structure.css';
-// @import '@ionic/angular/css/typography.css';
-// @import '@ionic/angular/css/display.css';
+/* @import '@ionic/angular/css/typography.css'; */
+/* @import '@ionic/angular/css/display.css'; */
 @import '@ionic/angular/css/padding.css';
-// @import '@ionic/angular/css/float-elements.css';
-// @import '@ionic/angular/css/text-alignment.css';
-// @import '@ionic/angular/css/text-transformation.css';
-// @import '@ionic/angular/css/flex-utils.css';
+/* @import '@ionic/angular/css/float-elements.css'; */
+/* @import '@ionic/angular/css/text-alignment.css'; */
+/* @import '@ionic/angular/css/text-transformation.css'; */
+/* @import '@ionic/angular/css/flex-utils.css'; */
 
-// Configuration Variables
-//
-// Possible to override via the `theme/overrides.scss`-file (set before/during build)
+/* Baseline Print styles */
+@import '_print.css';
+
+/*
+Configuration Variables
+
+Possible to override via the `theme/overrides.css`-file (set before/during build)
+*/
 :root {
-  // Fonts
-  //
-  // Fonts - Theme (named fonts):
+  /* Fonts
+
+  Fonts - Theme (named fonts): */
   --hia_font_open-sans: 'Open Sans', Arial, 'Helvetica Neue', sans-serif;
   --hia_font_montserrat: 'montserrat_webfont', Tahoma, 'Gill Sans', sans-serif;
 
-  // Fonts - Content-text:
+  /* Fonts - Content-text: */
   --hia_content_font-family: var(
     --env_hia_content_font-family,
     var(--hia_font_open-sans)
   );
   --hia_content_font-size: var(--env_hia_content_font-size, 16px);
 
-  // Fonts - Headings:
+  /* Fonts - Headings: */
   --hia_alt_font-family: var(
     --env_hia_alt_font-family,
     var(--hia_font_montserrat)
   );
   --hia_heading_font-size: var(--env_hia_heading_font-size, 16px);
 
-  // Colors
-  //
-  // Colors - Theme (named colors):
+  /* Colors
+
+  Colors - Theme (named colors): */
   --hia_color_light-beige: #faf5e5;
   --hia_color_dark-green: #2f5f6e;
   --hia_color_dark-navy: #011e41;
@@ -44,27 +49,24 @@
 
   --hia_style_shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.1);
 
-  // Colors - Functions
-  //
-  // Colors - Function: Base (the main body of content)
+  /* Colors - Functions
+
+  Colors - Function: Base (the main body of content) */
   --hia_base_text: var(--env_hia_base_text, var(--hia_color_dark-navy));
   --hia_base_fill: var(--env_hia_base_fill, var(--hia_color_light-beige));
 
-  // Colors - Function: Alt (alternative color-scheme, used for Footer)
+  /* Colors - Function: Alt (alternative color-scheme, used for Footer) */
   --hia_alt_text: var(--env_hia_alt_text, var(--hia_color_white));
   --hia_alt_fill: var(--env_hia_alt_fill, var(--hia_color_dark-green));
 
-  // Colors - Function: Level (slightly raised, used for CTAs etc.
+  /* Colors - Function: Level (slightly raised, used for CTAs etc. */
   --hia_level_text: var(--env_hia_level_text, var(--hia_color_dark-navy));
   --hia_level_fill: var(--env_hia_level_fill, var(--hia_color_white));
 
   --hia_level_shadow: var(--env_hia_level_shadow, var(--hia_style_shadow));
 }
 
-// Baseline Print styles
-@import '_print.scss';
-
-// Custom Fonts
+/* Custom Fonts */
 @font-face {
   font-family: 'Open Sans';
   src:
@@ -94,22 +96,21 @@
   font-display: optional;
 }
 
-// Enable Dynamic Font Scaling
-// See: https://ionicframework.com/docs/layout/dynamic-font-scaling
-// From: '~@ionic/angular/css/typography.css';
+/* Enable Dynamic Font Scaling
+See: https://ionicframework.com/docs/layout/dynamic-font-scaling
+From: '~@ionic/angular/css/typography.css'; */
 html {
   --ion-dynamic-font: var(--ion-default-dynamic-font);
 
   font-family: var(--ion-font-family);
 }
-// Enable Dynamic Type (iOS only)
+/* Enable Dynamic Type (iOS only) */
 @supports (-webkit-touch-callout: none) {
   html {
     font: var(--ion-dynamic-font, 16px var(--ion-font-family));
   }
 }
 
-//
 @media print {
   :root {
     --print-text: #000;
@@ -130,7 +131,7 @@ html {
     color: var(--print-text);
   }
 
-  // Flatten the 'app'-shell to a regular page
+  /* Flatten the 'app'-shell to a regular page */
   ion-content::part(scroll),
   html,
   body,
@@ -142,18 +143,21 @@ html {
 
     background: var(--print-background) none;
   }
+  ion-content::part(scroll) {
+    overflow: visible;
+  }
 }
 
-//
-// Baseline / Normalizations
-//
+/*
+Baseline / Normalizations
+*/
 hr {
   border-top: 1px dashed currentColor;
 }
 
 a {
   color: inherit;
-  -webkit-touch-callout: initial; // Enable "tap-and-hold" on links on mobile/touch/iOS
+  -webkit-touch-callout: initial; /* Enable "tap-and-hold" on links on mobile/touch/iOS */
 }
 
 details summary {
@@ -164,7 +168,7 @@ hr {
   border-top: 1px dashed currentColor;
 }
 
-// 'Page'-width
+/* 'Page'-width */
 .layout--container {
   width: 100%;
   margin-inline: auto;
@@ -173,6 +177,10 @@ hr {
   &.layout--container_wide {
     max-width: 1024px;
   }
+
+  @media print {
+    max-width: 100%;
+  }
 }
 
 ion-content::part(scroll),
@@ -180,19 +188,20 @@ ion-content::part(scroll),
   display: flex;
   flex-flow: column nowrap;
 }
-// Must be used IN a flex-parent (like .layout--stretch-height)
+/* Must be used IN a flex-parent (like .layout--stretch-height) */
 .layout--stick-to-end {
   margin-block-start: auto;
 }
 
-// Workaround for touch-screen laptops
-// See: https://github.com/ionic-team/ionic-framework/issues/19942#issuecomment-621944260
-// See: https://github.com/ionic-team/ionic-framework/blob/4.11.x/core/src/components/app/app.scss
+/* Workaround for touch-screen laptops
+See: https://github.com/ionic-team/ionic-framework/issues/19942#issuecomment-621944260
+See: https://github.com/ionic-team/ionic-framework/blob/4.11.x/core/src/components/app/app.scss
+*/
 html.plt-mobile ion-app {
   user-select: auto;
 }
 
-// Prevent scrolling-area from becommnig too small
+/* Prevent scrolling-area from becommnig too small */
 @media screen and (orientation: landscape) and (max-height: 30em) {
   ion-header {
     max-height: 20vh;
@@ -200,14 +209,14 @@ html.plt-mobile ion-app {
   }
 }
 
-// Improve rendering performance (possibly) by lowering priority of images:
+/* Improve rendering performance (possibly) by lowering priority of images: */
 img[decoding='async'] {
   content-visibility: auto;
 }
 
-//
-// Layout Utilities:
-//
+/*
+Layout Utilities:
+*/
 .no-margin-bottom {
   margin-bottom: 0 !important;
 }
@@ -249,7 +258,7 @@ img[decoding='async'] {
     padding-inline-start: var(--column-gap);
     padding-inline-end: var(--column-gap);
     margin-block: var(--column-gap);
-    min-width: 150px; // To always fit 2 items for narrow viewports
+    min-width: 150px; /* To always fit 2 items for narrow viewports */
   }
 
   &.tile-grid_base-2 {
@@ -264,7 +273,7 @@ img[decoding='async'] {
   }
 }
 
-// Floating Action Button (bottom-end)
+/* Floating Action Button (bottom-end) */
 .floating-action-area {
   position: fixed;
 
@@ -281,9 +290,9 @@ img[decoding='async'] {
   }
 }
 
-//
-// Misc. Style Utilities
-//
+/*
+Misc. Style Utilities
+*/
 .focus--minimal:focus-visible {
   outline-width: 1px;
   outline-style: dashed;
@@ -301,9 +310,9 @@ img[decoding='async'] {
   animation: focus-fade-out 1s 0s 1 forwards;
 }
 
-//
-// Text Style Utilities:
-//
+/*
+Text Style Utilities:
+*/
 .text-style--center {
   text-align: center !important;
 }
@@ -361,19 +370,19 @@ img[decoding='async'] {
   background-color: var(--hia_alt_fill);
 }
 
-//
-// Components
-//
+/*
+Components
+*/
 
-// Component: Floating Box
-//
-// Styling-only helper.
+/* Component: Floating Box
+
+Styling-only helper. */
 .floating-box {
   border-radius: 0.25rem;
   box-shadow: var(--hia_level_shadow);
 }
 
-// Component: Loading Text skeleton/placeholder
+/* Component: Loading Text skeleton/placeholder */
 @keyframes shine {
   0% {
     background-position: -500px 0;
@@ -408,7 +417,7 @@ img[decoding='async'] {
   }
 }
 
-// Component: Action (CTA/Button)
+/* Component: Action (CTA/Button) */
 .action {
   --action--color: var(--hia_level_text);
   --action--color-active: var(--hia_level_text);
@@ -485,14 +494,14 @@ img[decoding='async'] {
   }
 }
 
-// Component: Q&A Set
+/* Component: Q&A Set */
 .q-a-set {
   &[open] > .q-a-set--toggle {
-    box-shadow: none; // Override .action styles
+    box-shadow: none; /* Override .action styles */
   }
 
   .q-a-set--content {
-    padding-inline-start: 1.6rem; // Allow room for marker as padding
+    padding-inline-start: 1.6rem; /* Allow room for marker as padding */
 
     *:first-of-type {
       margin-top: 0;
@@ -500,7 +509,7 @@ img[decoding='async'] {
   }
 }
 
-// Component: Sheet Button
+/* Component: Sheet Button */
 .sheet--button {
   display: flex;
   justify-content: center;
@@ -510,7 +519,7 @@ img[decoding='async'] {
   text-align: center;
 }
 
-// Component: Icon
+/* Component: Icon */
 .icon {
   &.is_small {
     width: 0.8125em;
@@ -528,9 +537,9 @@ img[decoding='async'] {
   }
 }
 
-// Component: List Item
-//
-// Layout helper similar to "media object/island"
+/* Component: List Item
+
+Layout helper similar to "media object/island" */
 .list-item {
   display: flex;
 
@@ -543,7 +552,7 @@ img[decoding='async'] {
   }
 }
 
-// Component: Logo Badge
+/* Component: Logo Badge */
 .logo-badge {
   display: flex;
   width: 6.5rem;
@@ -558,7 +567,7 @@ img[decoding='async'] {
   }
 }
 
-// Component: Contact-option Button
+/* Component: Contact-option Button */
 .contact-button {
   display: block;
   line-height: 1;
@@ -581,13 +590,13 @@ img[decoding='async'] {
   margin-top: 1rem;
 }
 
-// Component: Dismissable Container
-//
-// Details-element as 'sticky' notification
+/* Component: Dismissable Container
+
+Details-element as 'sticky' notification */
 .dismissible-container {
   position: relative;
 
-  // Use summary-toggle as dismiss-button, so hide-when-closed:
+  /* Use summary-toggle as dismiss-button, so hide-when-closed: */
   &:not([open]) {
     display: none;
   }
@@ -644,7 +653,7 @@ img[decoding='async'] {
     }
   }
 
-  // Utility layout/style classes
+  /* Utility layout/style classes */
   .d-block {
     display: block;
   }
@@ -669,7 +678,7 @@ img[decoding='async'] {
 /**
   Overrides for Google Translate (in-page)
 */
-// Make room for the Google Translate bar
+/* Make room for the Google Translate bar */
 body[style*='margin-top: 56px;'] {
   margin-top: 0 !important;
   background-position-y: 56px;
@@ -678,7 +687,7 @@ body[style*='margin-top: 56px;'] {
     top: 56px;
   }
 }
-// Hide own language-switcher when Google's is active
+/* Hide own language-switcher when Google's is active */
 body[style*='margin-top: 0px;'],
 body[style*='margin-top: 56px;'] {
   .language-switcher {

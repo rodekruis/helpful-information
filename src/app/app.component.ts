@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  standalone: true,
   imports: [NgIf, IonApp, IonRouterOutlet],
 })
 export class AppComponent {

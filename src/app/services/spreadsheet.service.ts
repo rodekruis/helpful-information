@@ -209,7 +209,7 @@ export class SpreadsheetService {
           )
           .filter((category: Category): boolean => category.categoryVisible);
       })
-      .catch((error) => {
+      .catch((error): [] => {
         this.loggingService.logException(error);
         return [];
       });
@@ -284,7 +284,7 @@ export class SpreadsheetService {
               subCategory.subCategoryVisible,
           );
       })
-      .catch((error) => {
+      .catch((error): [] => {
         this.loggingService.logException(error);
         return [];
       });
@@ -389,7 +389,7 @@ export class SpreadsheetService {
             this.convertOfferRowToOfferObject(row, offerColumnMap),
           );
       })
-      .catch((error) => {
+      .catch((error): [] => {
         this.loggingService.logException(error);
         return [];
       });
@@ -561,6 +561,10 @@ export class SpreadsheetService {
         RegionDataKey.highlightsItems,
         16,
         RegionDataFallback.labelHighlightsItemsCount,
+      ),
+      labelSearchPageIntro: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.searchIntro,
       ),
       labelSearchPageTitle: this.getConfigValueOrFallback(
         sharedData,
@@ -747,30 +751,17 @@ export class SpreadsheetService {
     const parentRow = all.find((row) => row.slug === element.parentSlug);
 
     // When defined parentRow is missing, treat as a 'normal' question
-    if (!parentRow) {
-      this.loggingService.logEvent(
-        LoggingEventCategory.error,
-        LoggingEvent.NotFoundParentQuestion,
-        {
-          row: element.id,
-          slug: element.slug,
-          parentSlug: element.parentSlug,
-        },
-      );
-      return element;
-    }
-
-    // When pointing to itself, treat as a 'normal' question
-    if (parentRow === element) {
-      this.loggingService.logEvent(
-        LoggingEventCategory.error,
-        LoggingEvent.NotFoundParentQuestionIsSelf,
-        {
-          row: element.id,
-          slug: element.slug,
-          parentSlug: element.parentSlug,
-        },
-      );
+    if (!parentRow || parentRow === element) {
+      const errorType =
+        parentRow === element
+          ? LoggingEvent.NotFoundParentQuestionIsSelf
+          : LoggingEvent.NotFoundParentQuestion;
+      this.loggingService.logEvent(LoggingEventCategory.error, errorType, {
+        name: `row=${element.id};slug=${element.slug};parent=${element.parentSlug}`,
+        row: element.id,
+        slug: element.slug,
+        parentSlug: element.parentSlug,
+      });
       return element;
     }
 
@@ -809,7 +800,7 @@ export class SpreadsheetService {
               row.isVisible && !!row.question && !!row.answer,
           );
       })
-      .catch((error) => {
+      .catch((error): [] => {
         this.loggingService.logException(error);
         return [];
       });

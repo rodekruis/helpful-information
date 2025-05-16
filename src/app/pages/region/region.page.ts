@@ -19,7 +19,6 @@ import { AppPath } from 'src/routes';
   selector: 'app-region-page',
   templateUrl: './region.page.html',
   styleUrls: ['./region.page.css'],
-  standalone: true,
   imports: [NgIf, NgFor, RouterLink, CategoryLinkComponent, MarkdownModule],
 })
 export default class RegionPageComponent implements OnInit {

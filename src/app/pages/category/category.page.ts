@@ -18,7 +18,6 @@ import { getLegacyID } from 'src/app/shared/utils';
   selector: 'app-category-page',
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.css'],
-  standalone: true,
   imports: [
     NgIf,
     NgFor,

@@ -24,7 +24,6 @@ enum AnswerValue {
   selector: 'app-feedback-link',
   templateUrl: './feedback-link.component.html',
   styleUrls: ['./feedback-link.component.css'],
-  standalone: true,
   imports: [NgIf],
 })
 export class FeedbackLinkComponent implements OnChanges, OnInit {
@@ -115,6 +114,7 @@ export class FeedbackLinkComponent implements OnChanges, OnInit {
       LoggingEventCategory.ai,
       LoggingEvent.FeedbackAnswered,
       {
+        name: value, // Use "name"-property for Matomo
         answer: value,
       },
     );

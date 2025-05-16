@@ -1,0 +1,61 @@
+:host {
+  display: block;
+
+  --search-input--text: var(--hia_level_text, black);
+  --search-input--background: var(--hia_level_fill, white);
+  --search-input--border: silver;
+  --search-input--focus: var(--hia_level_text, black);
+}
+
+.search-input {
+  padding-block-start: 1em;
+  padding-block-end: 1em;
+
+  /* Layout */
+  display: flex;
+  gap: 0.5em;
+}
+.search-input--input {
+  flex: 1 1 80%;
+  position: relative;
+}
+.search-input--action {
+  flex: 0 0 20%;
+  word-wrap: normal;
+}
+
+.input-field--clear,
+.input-field--text {
+  border: 0;
+  border-radius: 0.25em;
+  vertical-align: middle;
+}
+.input-field--clear:focus,
+.input-field--text:focus {
+  outline-color: var(--search-input--focus);
+  outline-offset: 0.125rem;
+  outline-width: 0.125rem;
+  outline-style: solid;
+}
+
+.input-field--text {
+  color: var(--search-input--text);
+  background: var(--search-input--background);
+  border: 1px solid var(--search-input--border);
+  border-radius: 0.25em;
+  padding-block: 0.25em;
+  padding-inline: 0.5em;
+  width: 100%;
+}
+
+.input-field--clear {
+  position: absolute;
+  inset-block-start: 0.25rem;
+  inset-inline-end: 0.25rem;
+  display: inline-block;
+  padding: 0.25rem;
+  background: transparent;
+}
+.input-field--clear:focus {
+  outline-color: gold;
+}

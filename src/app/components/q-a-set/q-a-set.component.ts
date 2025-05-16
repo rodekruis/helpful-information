@@ -12,8 +12,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
 @Component({
   selector: 'app-q-a-set',
   templateUrl: './q-a-set.component.html',
-  styleUrls: ['./q-a-set.component.scss'],
-  standalone: true,
+  styleUrls: ['./q-a-set.component.css'],
   imports: [NgIf, NgFor, DatePipe, NgTemplateOutlet, MarkdownModule],
 })
 export class QASetComponent {
@@ -38,8 +37,8 @@ export class QASetComponent {
     }
   }
 
-  public isActive(slug: string): boolean {
-    return window.location.hash === `#${slug}`;
+  public isActive(slug: string | undefined): boolean {
+    return !!slug && window.location.hash === `#${slug}`;
   }
 
   public logDetailsChange(
@@ -53,6 +52,7 @@ export class QASetComponent {
         ? LoggingEvent.QuestionOpen
         : LoggingEvent.QuestionClose,
       {
+        name: slug, // Use "name"-property for Matomo
         questionSlug: slug,
         question: question.substring(0, 100),
       },

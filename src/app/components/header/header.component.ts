@@ -1,6 +1,5 @@
 import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IonImg, IonThumbnail } from '@ionic/angular/standalone';
 import { TranslationOptionsComponent } from 'src/app/components/translation-options/translation-options.component';
 import type { RegionData } from 'src/app/models/region-data';
 import { environment } from 'src/environments/environment';
@@ -9,8 +8,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  standalone: true,
-  imports: [NgIf, IonThumbnail, IonImg, TranslationOptionsComponent],
+  imports: [NgIf, TranslationOptionsComponent],
 })
 export class AppHeaderComponent {
   @Input()

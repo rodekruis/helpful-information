@@ -16,11 +16,13 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser-esbuild",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "www",
+            "outputPath": {
+              "base": "www",
+              "browser": ""
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": ["src/polyfills.ts"],
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
@@ -33,19 +35,19 @@
             ],
             "styles": [
               {
-                "input": "src/global.scss",
+                "input": "src/global.css",
                 "inject": true
               },
               {
-                "input": "src/theme/variables.scss",
+                "input": "src/theme/variables.css",
                 "inject": true
               },
               {
-                "input": "src/app/app.scss",
+                "input": "src/app/app.css",
                 "inject": true
               },
               {
-                "input": "src/theme/overrides.scss",
+                "input": "src/theme/overrides.css",
                 "inject": true
               }
             ],
@@ -53,7 +55,8 @@
             "extractLicenses": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -78,8 +81,7 @@
                   "maximumWarning": "6kb"
                 }
               ],
-              "serviceWorker": true,
-              "ngswConfigPath": "src/ngsw-config.json"
+              "serviceWorker": "src/ngsw-config.json"
             },
             "ci": {},
             "test": {},

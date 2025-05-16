@@ -2,18 +2,31 @@
   role="search"
   #ngForm
   (ngSubmit)="doSubmit()"
+  class="search-input"
 >
-  <input
-    type="search"
-    name="q"
-    [(ngModel)]="searchQuery"
-    enterkeyhint="search"
-    class="input-field--text text-style--size-1"
-  />
+  <span class="search-input--input">
+    <input
+      type="search"
+      name="q"
+      [(ngModel)]="searchQuery"
+      enterkeyhint="search"
+      class="input-field--text text-style--size-1"
+    />
+
+    <button
+      *ngIf="!!searchQuery"
+      type="button"
+      class="input-field--clear"
+      [title]="clearLabel || 'Clear'"
+      (click)="searchQuery = ''; doSubmit(); ngForm.q.focus()"
+    >
+      <strong>&times;</strong>
+    </button>
+  </span>
 
   <button
     type="submit"
-    class="action is_round is_inline is_outline text-style--alt text-style--size-1"
+    class="search-input--action action is_round is_inline is_outline text-style--alt text-style--size-1"
   >
     <strong>
       {{ actionLabel || 'Search' }}

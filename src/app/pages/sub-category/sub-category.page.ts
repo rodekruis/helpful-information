@@ -27,7 +27,6 @@ import { environment } from 'src/environments/environment';
   selector: 'app-sub-category-page',
   templateUrl: './sub-category.page.html',
   styleUrls: ['./sub-category.page.css'],
-  standalone: true,
   imports: [
     NgIf,
     NgFor,
