@@ -259,6 +259,38 @@ export class OffersService {
     return this.cache[CacheName.qaSets].data;
   }
 
+  public async findQA(query: {
+    region: string;
+    categoryID?: number;
+    subCategoryID?: number;
+    question?: string;
+    slug?: string | null;
+  }): Promise<QASet | undefined> {
+    const qaSets = await this.getQAs(query.region);
+
+    const foundQA = qaSets.find((qaSet: QASet) => {
+      const slugMatches = !!query.slug && qaSet.slug === query.slug;
+      const questionMatches = qaSet.question === query.question;
+      const subCategoryMatches = qaSet.subCategoryID === query.subCategoryID;
+      const categoryMatches = qaSet.categoryID === query.categoryID;
+
+      return (
+        (slugMatches || questionMatches) &&
+        subCategoryMatches &&
+        categoryMatches
+      );
+    });
+
+    if (!foundQA) {
+      this.loggingService.logEvent(
+        LoggingEventCategory.error,
+        LoggingEvent.NotFoundQA,
+        query,
+      );
+    }
+    return foundQA;
+  }
+
   public async getHighlights(region: string): Promise<QASet[]> {
     // Load 'requirements'...
     const qaSets = await this.getQAs(region);

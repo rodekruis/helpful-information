@@ -26,6 +26,7 @@ export type RegionData = {
   labelOfferPhone?: string;
   labelOfferWebsite?: string;
   labelSearchAction?: string;
+  labelSearchPageIntro?: string;
   labelSearchPageTitle?: string;
   labelSearchResultsCount?: string;
   lastUpdatedTime?: string;
@@ -95,6 +96,7 @@ export enum RegionDataKey {
   searchCta = 'search.cta',
   searchItems = 'search.items',
   searchItemsZero = 'search.items.0',
+  searchIntro = 'search.intro',
   searchTitle = 'search.title',
   timestampLastUpdated = 'timestamp.last-updated',
 }

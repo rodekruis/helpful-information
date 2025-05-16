@@ -97,6 +97,11 @@
       "\"Search\", \"Find\""
     ],
     [
+      "Label: Search - page introduction\n#search.intro",
+      "",
+      "\"Use multiple keywords to search for _any one_ of them.\", \"Ask us anything.\""
+    ],
+    [
       "Label: Search - button action\n#search.cta",
       "Find",
       "\"Search\", \"Find\", \"Go\", \"Look up\""

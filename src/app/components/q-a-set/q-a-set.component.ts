@@ -37,8 +37,8 @@ export class QASetComponent {
     }
   }
 
-  public isActive(slug: string): boolean {
-    return window.location.hash === `#${slug}`;
+  public isActive(slug: string | undefined): boolean {
+    return !!slug && window.location.hash === `#${slug}`;
   }
 
   public logDetailsChange(
