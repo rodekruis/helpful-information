@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const path = require('path');
 const dotenv = require('dotenv');
 
 // Load environment-variables from .env file
@@ -9,8 +10,13 @@ dotenv.config({
   override: true,
 });
 
-const configFileTemplate = require('./src/environments/environment.prod.ts.template.js');
-const targetPath = './src/environments/environment.prod.ts';
+const configFileTemplate = require(
+  path.join(__dirname, '../src/environments/environment.prod.ts.template.js'),
+);
+const targetPath = path.join(
+  __dirname,
+  '../src/environments/environment.prod.ts',
+);
 
 fs.writeFile(targetPath, configFileTemplate, (err) => {
   if (process.env.DEBUG || process.env.CI) {
