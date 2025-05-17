@@ -7,7 +7,15 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ---
 
-## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v25.05.0...main)
+## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v25.05.1...main)
+
+---
+
+## 2025-05-17: [v25.05.1](https://github.com/rodekruis/helpful-information/releases/tag/v25.05.1)
+
+### Fixed
+
+- Included a workaround for when files are generated into a location specified via the command-line. The fix-script tries to correct a few commonly used locations (only). To prevent having breaking changes in a GitHub Actions-build workflow.
 
 ---
 
