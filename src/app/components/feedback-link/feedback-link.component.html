@@ -74,33 +74,34 @@
         <p>
           {{ labels.resultNegative }}
         </p>
-        <p>
-          <a
-            *ngIf="safeUrl"
-            [href]="safeUrl"
-            (click)="shareClick()"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="action is_round is_inline is_flat is_outline"
-          >
-            {{ labels.shareCta }}
-
-            <svg
-              class="icon is_small is_inline-end"
-              viewBox="0 0 512 512"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="48"
-                d="M268 112l144 144-144 144M392 256H100"
-              />
-            </svg>
-          </a>
-        </p>
       </ng-container>
+
+      <p>
+        <a
+          *ngIf="safeUrl"
+          [href]="safeUrl"
+          (click)="shareClick()"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="action is_round is_inline is_flat is_outline"
+        >
+          {{ labels.shareCta }}
+
+          <svg
+            class="icon is_small is_inline-end"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="48"
+              d="M268 112l144 144-144 144M392 256H100"
+            />
+          </svg>
+        </a>
+      </p>
     </div>
   </details>
 </aside>

@@ -7,7 +7,15 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ---
 
-## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v25.05.1...main)
+## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v25.05.2...main)
+
+---
+
+## 2025-05-27: [v25.05.2](https://github.com/rodekruis/helpful-information/releases/tag/v25.05.2)
+
+### Changed
+
+- The Feedback-CTA (link to feedback-form) will now always show, after a negative AND a positive response.
 
 ---
 
