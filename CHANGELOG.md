@@ -9,6 +9,10 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v25.05.2...main)
 
+### Fixed
+
+- Small fixes to handle the returned values from the Search-API better.
+
 ---
 
 ## 2025-05-27: [v25.05.2](https://github.com/rodekruis/helpful-information/releases/tag/v25.05.2)

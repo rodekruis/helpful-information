@@ -270,7 +270,8 @@ export class OffersService {
 
     const foundQA = qaSets.find((qaSet: QASet) => {
       const slugMatches = !!query.slug && qaSet.slug === query.slug;
-      const questionMatches = qaSet.question === query.question;
+      const questionMatches =
+        !!query.question && qaSet.question.trim() === query.question.trim();
       const subCategoryMatches = qaSet.subCategoryID === query.subCategoryID;
       const categoryMatches = qaSet.categoryID === query.categoryID;
 
