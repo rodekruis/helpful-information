@@ -197,7 +197,6 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
   Any sheets without these `#tag`s will not work anymore.
 
   See the specific required/available `#tag`s in:
-
   - [`models/category.model.ts`](./src/app/models/category.model.ts)
   - [`models/sub-category.model.ts`](./src/app/models/sub-category.model.ts)
   - [`models/offer.model.ts`](./src/app/models/offer.model.ts)

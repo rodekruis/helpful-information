@@ -71,7 +71,6 @@ An explanation of (a lot of) the features of this syntax can be found in the [Ma
 
   Install the Node.js version specified in the [`.node-version`](.node-version)-file.  
   To prevent conflicts it is recommended to use a 'version manager'.
-
   - [`fnm`](https://github.com/Schniz/fnm#readme) (for Windows/macOS/Linux)
     After installing, run in this directory:
 
@@ -306,7 +305,6 @@ See the options in the [`.env.example`](.env.example)-file.
 Each Instance:
 
 - can have 1 or multiple Sheet(s), each:
-
   - has a unique URL-slug (`[a-z0-9._-]`)
   - has a human-readable (short) label (can contain capitals, spaces, numbers, emoji, etc.)
   - has a `Google Spreadsheet ID`, a 44-character string (from: `https://docs.google.com/spreadsheets/d/`**`___SPREADSHEET_ID___`**`/edit?usp=sharing`)
