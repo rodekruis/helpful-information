@@ -7,7 +7,11 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ---
 
-## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v25.05.2...main)
+## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v25.08.0...main)
+
+---
+
+## 2025-08-28: [v25.08.0](https://github.com/rodekruis/helpful-information/releases/tag/v25.08.0)
 
 ### Fixed
 
