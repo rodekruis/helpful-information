@@ -32,7 +32,6 @@ See the GitHub-repository website to find out how it works and how to use it.
 - [ ] Choose or [Create a Google Account](#create-a-google-account) that will own all the content.
 - [ ] Sign into that Google account.
 - Create a copy of a HIA Google Sheet Template.
-
   - [ ] Select one of the template-sheets from the Google Drive folder: "[HIA Templates (public)](https://drive.google.com/drive/folders/1eoKlwKqPXagTnkQGxj0JpH5TRplqXX-C)".
 
     > [!TIP]
@@ -46,7 +45,6 @@ See the GitHub-repository website to find out how it works and how to use it.
   - [ ] (optional) These editors can already start adding/changing content in this sheet from this point forward.
 
 - Create a Google Sheets API-key, to let the web-app access the sheet in the visitors' browser
-
   - [ ] Go to <https://console.cloud.google.com/projectcreate>
   - [ ] Complete any "getting started"-steps when prompted. Select or create a 'project' with a descriptive title.
   - Enable the Google Sheets API
@@ -55,7 +53,6 @@ See the GitHub-repository website to find out how it works and how to use it.
     - [ ] Search for "google sheets api", or go directly to: <https://console.cloud.google.com/apis/library/sheets.googleapis.com>
     - [ ] Click on the "**Enable**"-button
   - Create an API-key
-
     - [ ] Go to <https://console.cloud.google.com/apis/credentials>, the "**Credentials**"-page
     - [ ] Click on the "**+ Create Credential**"-button
     - [ ] Select "**API-key**" from the list, wait for the key to be generated. Store the key at a secure place; you will need this later.
@@ -81,12 +78,10 @@ See the GitHub-repository website to find out how it works and how to use it.
   - [ ] Complete the process of creating the repository
   - [ ] Go to "**Settings**" > "**Pages**" and select "**Source**": "**Github Actions**".
 - Add the Google Sheet API Key as a secret to the repository
-
   - [ ] Go to the repository's "**Settings**" > "**Secret and variables**" > "**Actions**" > "**New repository secret**"
   - [ ] Name the secret: `GOOGLE_SHEETS_API_KEY`and insert the API Key as value
 
 - Define dynamic values and settings of your instance and deploy it
-
   - [ ] Go to the file: `.github/workflows/deploy-github-pages.yml` and click "**Edit this file**" (pencil icon)
   - [ ] Configure the necessary variables; see comment lines to understand what each variable does
   - [ ] Specifically make sure to fill in the `Google Spreadsheet ID` under `REGIONS_SHEET_IDS` (and remove the default/placeholder value)
@@ -95,7 +90,6 @@ See the GitHub-repository website to find out how it works and how to use it.
   - [ ] After a successful run, the instance should be available on the chosen URL
 
 - (Optional) Configure a custom (sub-)domain-name to use as public URL. (Applicable for [Solution 3](#solution-3-custom-domain-name) and [Solution 4](#solution-4-custom-sub-domain-name)
-
   - Edit the file: `.github/workflows/deploy-github-pages.yml`, below the line:
 
     ```yml
