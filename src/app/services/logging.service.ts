@@ -170,7 +170,7 @@ export class LoggingService {
         exception,
       });
     }
-    console.error(`LOG Exception`, exception);
+    console.error('LOG Exception', exception);
   }
 
   public logTrace(

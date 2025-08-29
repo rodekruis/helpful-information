@@ -12,7 +12,7 @@ import { ngxMarkdownModuleFactory } from 'src/main';
 import { QASetListComponent } from './q-a-set-list.component';
 
 const testDate = new Date('2022-02-22');
-const testDateFormatted = "22-02-'22";
+const testDateFormatted = '22-02-\'22';
 
 const mockList = [
   {
@@ -91,7 +91,7 @@ describe('QASetListComponent', () => {
     expect(listItems.length).toBe(testList.length);
   });
 
-  it("should show links to the Q&As' (sub-)category", () => {
+  it('should show links to the Q&As\' (sub-)category', () => {
     // Arrange
     const testList = [mockList[0]];
     component.list = testList;
