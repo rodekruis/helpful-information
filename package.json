@@ -57,6 +57,8 @@
     "@angular/compiler": "^19.2.14",
     "@angular/compiler-cli": "^19.2.14",
     "@angular/language-service": "^19.2.14",
+    "@eslint/json": "^0.13.2",
+    "@eslint/markdown": "^7.2.0",
     "@ionic/angular-toolkit": "^12.3.0",
     "@microsoft/applicationinsights-debugplugin-js": "^3.3.9",
     "@stylistic/eslint-plugin": "^5.2.3",
@@ -89,6 +91,6 @@
     "typescript": "~5.8.3"
   },
   "lint-staged": {
-    "*.{js,ts,html}": "eslint --fix"
+    "*.{js,ts,html,json,md}": "eslint --fix"
   }
 }

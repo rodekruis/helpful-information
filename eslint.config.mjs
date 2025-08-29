@@ -13,6 +13,8 @@ import noUnsanitizedPlugin from 'eslint-plugin-no-unsanitized';
 import jasminePlugin from 'eslint-plugin-jasmine';
 import noRelativeImportPathsPlugin from 'eslint-plugin-no-relative-import-paths';
 import stylisticPlugin from '@stylistic/eslint-plugin';
+import jsonPlugin from '@eslint/json';
+import markdownPlugin from '@eslint/markdown';
 
 /**
  * ESLint flat configuration for helpful-information project
@@ -26,11 +28,41 @@ export default [
     ignores: ['coverage/**', 'www/**'],
   },
 
+  // JSON files configuration
+  {
+    files: ['**/*.json'],
+    plugins: {
+      json: jsonPlugin,
+    },
+    rules: {
+      // Minimal JSON rules to avoid requiring changes to existing files
+      ...jsonPlugin.configs.recommended.rules,
+    },
+  },
+
+  // Markdown files configuration
+  {
+    files: ['**/*.md'],
+    plugins: {
+      markdown: markdownPlugin,
+    },
+    rules: {
+      // Minimal Markdown rules to avoid requiring changes to existing files
+      ...markdownPlugin.configs.recommended.rules,
+    },
+  },
+
   // 1. All JS/MJS/TS files with shared rules (largest set)
   {
     files: ['**/*.js', '**/*.mjs', '**/*.ts'],
     plugins: {
       '@stylistic': stylisticPlugin,
+      import: importPlugin,
+      'simple-import-sort': simpleImportSortPlugin,
+      promise: promisePlugin,
+      regexp: regexpPlugin,
+      'no-unsanitized': noUnsanitizedPlugin,
+      'no-relative-import-paths': noRelativeImportPathsPlugin,
     },
     rules: {
       // Basic shared rules for all JavaScript-like files
@@ -41,7 +73,7 @@ export default [
       
       // ESLint Stylistic rules equivalent to Prettier config
       '@stylistic/semi': ['error', 'always'], // semi: true
-      '@stylistic/quotes': ['error', 'single'], // singleQuote: true
+      '@stylistic/quotes': ['error', 'single', { avoidEscape: true }], // singleQuote: true, allow template literals to avoid escapes
       '@stylistic/indent': ['error', 2], // Standard 2-space indentation
       '@stylistic/comma-dangle': ['error', 'only-multiline'],
       '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
@@ -58,82 +90,12 @@ export default [
         ignoreTemplateLiterals: true,
         ignoreComments: true,
       }],
-    },
-  },
-
-  // 2. Rules specific to JS/MJS files
-  {
-    files: ['**/*.js', '**/*.mjs'],
-    languageOptions: {
-      ecmaVersion: 2021,
-      sourceType: 'module',
-    },
-    rules: {
-      'sort-imports': ['error'],
-    },
-  },
-
-  // 3. Rules for modern syntax in MJS files only
-  {
-    files: ['**/*.mjs'],
-    languageOptions: {
-      ecmaVersion: 2024, // Use latest ECMAScript features
-      sourceType: 'module',
-    },
-    rules: {
-      // Modern ES features can be enforced here
-      'prefer-arrow-callback': ['error'],
-      'prefer-template': ['error'],
-      'object-shorthand': ['error'],
-    },
-  },
-
-  // 4. Specific rules for all TypeScript files
-  {
-    files: ['**/*.ts'],
-    languageOptions: {
-      parser: typescriptParser,
-      parserOptions: {
-        project: ['tsconfig.json'],
-        createDefaultProgram: true,
-      },
-    },
-    plugins: {
-      '@angular-eslint': angular,
-      '@typescript-eslint': typescriptEslint,
-      import: importPlugin,
-      'simple-import-sort': simpleImportSortPlugin,
-      promise: promisePlugin,
-      regexp: regexpPlugin,
-      'no-unsanitized': noUnsanitizedPlugin,
-      'no-relative-import-paths': noRelativeImportPathsPlugin,
-    },
-    rules: {
+      
       // Import recommended rules from plugins
-      ...angular.configs.recommended.rules,
       ...importPlugin.configs.recommended.rules,
-      ...importPlugin.configs.typescript.rules,
       ...promisePlugin.configs.recommended.rules,
       ...noUnsanitizedPlugin.configs['recommended-legacy'].rules,
       ...regexpPlugin.configs.recommended.rules,
-      
-      // Angular-specific rules
-      '@angular-eslint/directive-selector': [
-        'error',
-        {
-          type: 'attribute',
-          prefix: 'app',
-          style: 'camelCase',
-        },
-      ],
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'app',
-          style: 'kebab-case',
-        },
-      ],
       
       // Import rules
       'no-relative-import-paths/no-relative-import-paths': [
@@ -182,7 +144,7 @@ export default [
       'regexp/sort-character-class-elements': ['error'],
       'regexp/use-ignore-case': ['error'],
       
-      // No loops restriction using core ESLint rule
+      // No loops restriction using core ESLint rule (ForOfStatement removed as requested)
       'no-restricted-syntax': [
         'error',
         {
@@ -201,11 +163,10 @@ export default [
           selector: 'ForInStatement',
           message: 'for-in loops are not allowed. Use Object.keys() with array methods instead.',
         },
-        {
-          selector: 'ForOfStatement',
-          message: 'for-of loops are not allowed. Use array methods instead.',
-        },
       ],
+      
+      // Template literal preference rules to minimize character escapes
+      'prefer-template': ['error'],
     },
     settings: {
       'import/parsers': {
@@ -219,9 +180,36 @@ export default [
     },
   },
 
-  // 5. Smaller sub-set of spec.ts files with test-related rules only
+  // 2. Rules specific to JS/MJS files
   {
-    files: ['**/*.spec.ts'],
+    files: ['**/*.js', '**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 2021,
+      sourceType: 'module',
+    },
+    rules: {
+      'sort-imports': ['error'],
+    },
+  },
+
+  // 3. Rules for modern syntax in MJS files only
+  {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 2024, // Use latest ECMAScript features
+      sourceType: 'module',
+    },
+    rules: {
+      // Modern ES features can be enforced here
+      'prefer-arrow-callback': ['error'],
+      'prefer-template': ['error'],
+      'object-shorthand': ['error'],
+    },
+  },
+
+  // 4. Specific rules for all TypeScript files
+  {
+    files: ['**/*.ts'],
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
@@ -229,6 +217,47 @@ export default [
         createDefaultProgram: true,
       },
     },
+    plugins: {
+      '@angular-eslint': angular,
+      '@typescript-eslint': typescriptEslint,
+    },
+    rules: {
+      // Import recommended rules from plugins
+      ...angular.configs.recommended.rules,
+      ...importPlugin.configs.typescript.rules,
+      
+      // Angular-specific rules
+      '@angular-eslint/directive-selector': [
+        'error',
+        {
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase',
+        },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case',
+        },
+      ],
+      
+      // Async/await spacing rules
+      '@stylistic/keyword-spacing': ['error', { 
+        after: true,
+        overrides: {
+          'async': { after: true },
+          'await': { after: true },
+        },
+      }],
+    },
+  },
+
+  // 5. Smaller sub-set of spec.ts files with test-related rules only
+  {
+    files: ['**/*.spec.ts'],
     plugins: {
       jasmine: jasminePlugin,
     },
