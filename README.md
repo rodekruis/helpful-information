@@ -117,8 +117,8 @@ Some specific information needs to be configured before use:
 
 ## Local development
 
-As part of the installed dev-dependencies, we use [Prettier](https://prettier.io/) to format our code.  
-To use these settings without a local setup, use the [Prettier Playground](https://prettier.io/playground/#N4Igxg9gdgLgprEAuEAdK7UwAoEMDO8ABAJ4QCuATkWABa5QDmc+RAllETLXEQDZwAZjCIAHBnD5EGAExoRRJLjyIUYo8iMGUIAW2W9KbRrRHiokgHSYoIADQgFMNtHzJQuSjoDueSgjcUXD5vXBI3BwAjSlwwAGs4GABlXF04ABkOOGRBYPw4KJj4xKTxMA5GZBhKcgKQOF1IuBkZZvSGRnJcZgAxCEpdXBhnJmQQXE0IexBTXT4AdVo2eHwyuCSA5bYAN2WSMbB8CJAOfMocGMZBnLy6gCt8AA8kioEARXIIeBu+fIdxShnMaDShxGQQby2f5GWDzNgybjIAAcAAZoRB8vMYqIxqJ-GdttkHABHT7wbA6USBcb4AC0FmazWm-lJbH8FO61yQuV+dXyujYVRqfNecAAgsMjJFNHBsHBKJkLELag58KKPl9skhqiqQDBcJE4QjaMgAEwOaq4Nh8CoAYT0XPGfD403I+QAKgbAjy-iBtrUAJJQVqwJJgIyiGBi4NJGAkAQ-fIAXyTQA) in your browser.
+As part of the installed dev-dependencies, we use [ESLint Stylistic](https://eslint.style/) to format our code and enforce consistent code style.  
+All formatting rules are configured through ESLint, providing a unified linting and formatting experience.
 
 When installing locally, we use [husky](https://typicode.github.io/husky/#/?id=faq) to automate the formatting and testing (when not already handled by your editor).
 

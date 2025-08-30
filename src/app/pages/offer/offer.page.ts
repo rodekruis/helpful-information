@@ -41,7 +41,7 @@ export default class OfferPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(async (params: Params) => {
+    this.route.params.subscribe(async(params: Params) => {
       this.handleRouteParams(params);
     });
   }

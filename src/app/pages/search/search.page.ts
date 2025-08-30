@@ -67,7 +67,7 @@ export default class SearchPageComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.route.params.subscribe(async (params: Params) => {
+    this.route.params.subscribe(async(params: Params) => {
       this.handleRouteParams(params);
     });
   }
@@ -160,7 +160,7 @@ export default class SearchPageComponent implements OnInit {
     results: SearchApiResultItem[],
   ): Promise<QASet[]> {
     const searchResults: QASet[] = [];
-    results.forEach(async (item) => {
+    results.forEach(async(item) => {
       const foundQASet = await this.offersService.findQA({
         region: this.region,
         categoryID: item.categoryID,

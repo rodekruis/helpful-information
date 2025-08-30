@@ -11,7 +11,7 @@ import { ngxMarkdownModuleFactory } from 'src/main';
 import { QASetComponent } from './q-a-set.component';
 
 const testDate = new Date('2022-02-22');
-const testDateFormatted = "22-02-'22";
+const testDateFormatted = '22-02-\'22';
 
 describe('QASetComponent', () => {
   let component: QASetComponent;
@@ -130,7 +130,7 @@ describe('QASetComponent', () => {
     expect(timeElements[0].textContent).toContain(testDateFormatted);
   });
 
-  it('should contain clickable links that open a new window, when answer contains plain-text (absolute) URL', waitForAsync(async () => {
+  it('should contain clickable links that open a new window, when answer contains plain-text (absolute) URL', waitForAsync(async() => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.answer =
@@ -158,7 +158,7 @@ describe('QASetComponent', () => {
     expect(linkElements[1].href).toContain('https://example.net/');
   }));
 
-  it('should contain (safe) clickable links that open a new window, when answer contains HTML-links', waitForAsync(async () => {
+  it('should contain (safe) clickable links that open a new window, when answer contains HTML-links', waitForAsync(async() => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.answer =
@@ -188,7 +188,7 @@ describe('QASetComponent', () => {
     });
   }));
 
-  it('should contain clickable links that open in same window, when answer contains local/relative links', waitForAsync(async () => {
+  it('should contain clickable links that open in same window, when answer contains local/relative links', waitForAsync(async() => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.answer =

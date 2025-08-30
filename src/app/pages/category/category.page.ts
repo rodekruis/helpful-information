@@ -44,7 +44,7 @@ export default class CategoryPageComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.route.params.subscribe(async (params: Params) => {
+    this.route.params.subscribe(async(params: Params) => {
       this.handleRouteParams(params);
     });
   }

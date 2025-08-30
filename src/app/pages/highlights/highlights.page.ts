@@ -31,7 +31,7 @@ export default class HighlightsPageComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.route.params.subscribe(async (params: Params) => {
+    this.route.params.subscribe(async(params: Params) => {
       this.region = params.region;
 
       if (!this.region && this.route.snapshot.parent) {
