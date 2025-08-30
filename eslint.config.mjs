@@ -83,6 +83,7 @@ export default [
       '@stylistic/space-in-parens': ['error', 'never'],
       '@stylistic/eol-last': ['error', 'always'],
       '@stylistic/no-trailing-spaces': 'error',
+      '@stylistic/template-curly-spacing': ['error', 'never'], // No spaces inside template literal expressions
       '@stylistic/max-len': ['error', { 
         code: 100,
         ignoreUrls: true,

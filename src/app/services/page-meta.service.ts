@@ -84,13 +84,13 @@ export class PageMetaService {
       canonicalUrl += parts.region;
     }
     if (parts.categorySlug) {
-      canonicalUrl += `/${  parts.categorySlug}`;
+      canonicalUrl += `/${parts.categorySlug}`;
     }
     if (parts.subCategorySlug) {
-      canonicalUrl += `/${  parts.subCategorySlug}`;
+      canonicalUrl += `/${parts.subCategorySlug}`;
     }
     if (parts.offerSlug) {
-      canonicalUrl += `/${  parts.offerSlug}`;
+      canonicalUrl += `/${parts.offerSlug}`;
     }
 
     if (parts.override) {
