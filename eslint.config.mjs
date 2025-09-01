@@ -73,13 +73,20 @@ export default [
       
       // ESLint Stylistic rules equivalent to Prettier config
       '@stylistic/semi': ['error', 'always'], // semi: true
-      '@stylistic/quotes': ['error', 'single', { avoidEscape: true }], // singleQuote: true, allow template literals to avoid escapes
+      '@stylistic/quotes': ['error', 'single', { 
+        avoidEscape: true,
+        allowTemplateLiterals: 'always',
+      }], // singleQuote: true, allow template literals to avoid escapes
       '@stylistic/indent': ['error', 2], // Standard 2-space indentation
       '@stylistic/comma-dangle': ['error', 'only-multiline'],
       '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
       '@stylistic/object-curly-spacing': ['error', 'always'],
       '@stylistic/array-bracket-spacing': ['error', 'never'],
-      '@stylistic/space-before-function-paren': ['error', 'never'],
+      '@stylistic/space-before-function-paren': ['error', {
+        anonymous: 'never',
+        named: 'never', 
+        asyncArrow: 'always',
+      }],
       '@stylistic/space-in-parens': ['error', 'never'],
       '@stylistic/eol-last': ['error', 'always'],
       '@stylistic/no-trailing-spaces': 'error',

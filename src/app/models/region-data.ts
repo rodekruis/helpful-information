@@ -124,6 +124,6 @@ export enum RegionDataFallback {
   labelOfferPhone = 'Phone-number(s)',
   labelOfferWebsite = 'Website(s)',
   labelSearchAction = 'Search',
-  labelSearchPageTitle = 'Search Q&A\'s',
+  labelSearchPageTitle = `Search Q&A's`,
   labelSearchResultsCount = 'Found results:',
 }

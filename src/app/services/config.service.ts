@@ -28,7 +28,7 @@ export class ConfigService {
     if (environment.regionConfig) {
       try {
         regionSets = JSON.parse(environment.regionConfig);
-      } catch(e) {
+      } catch (e) {
         console.error('Failed to parse regionConfig:', e);
       }
 

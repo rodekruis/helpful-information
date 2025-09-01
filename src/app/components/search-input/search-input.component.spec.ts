@@ -53,7 +53,7 @@ describe('SearchInputComponent', () => {
     expect(submitButton.textContent).toContain(fallbackText);
   });
 
-  it('should use the provided query as value for the input-field', async() => {
+  it('should use the provided query as value for the input-field', async () => {
     // Arrange
     const testQuery = 'TEST';
     component.searchQuery = testQuery;
