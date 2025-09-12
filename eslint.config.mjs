@@ -95,7 +95,14 @@ export default [
         ignoreTemplateLiterals: true,
         ignoreComments: true,
       }],
-      
+      '@stylistic/keyword-spacing': ['error', {
+        after: true,
+        overrides: {
+          'async': { after: true },
+          'await': { after: true },
+        },
+      }],
+
       // Import recommended rules from plugins
       ...importPlugin.configs.recommended.rules,
       ...promisePlugin.configs.recommended.rules,
@@ -198,7 +205,6 @@ export default [
     },
     rules: {
       'prefer-arrow-callback': ['error'],
-      'prefer-template': ['error'],
       'object-shorthand': ['error'],
     },
   },
@@ -237,15 +243,6 @@ export default [
           style: 'kebab-case',
         },
       ],
-      
-      // Async/await spacing rules
-      '@stylistic/keyword-spacing': ['error', { 
-        after: true,
-        overrides: {
-          'async': { after: true },
-          'await': { after: true },
-        },
-      }],
     },
   },
 
