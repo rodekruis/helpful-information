@@ -16,44 +16,41 @@ import stylisticPlugin from '@stylistic/eslint-plugin';
 import jsonPlugin from '@eslint/json';
 import markdownPlugin from '@eslint/markdown';
 
-/**
- * ESLint flat configuration for helpful-information project
- * Structured in staggered overrides from largest to smallest file sets
- * Using ESLint Stylistic instead of Prettier for consistent code formatting
- * @type {import('eslint').Linter.FlatConfig[]}
- */
 export default [
-  // Global ignores
   {
-    ignores: ['coverage/**', 'www/**'],
+    name: 'Global Config/Settings',
+    ignores: ['coverage/**', 'www/**', 'node_modules/**', 'dist/**', '.angular/**', 'package-lock.json'],
   },
 
-  // JSON files configuration
   {
+    name: 'All JSON',
     files: ['**/*.json'],
     plugins: {
       json: jsonPlugin,
     },
     rules: {
-      // Minimal JSON rules to avoid requiring changes to existing files
       ...jsonPlugin.configs.recommended.rules,
+      'json/top-level-interop': ['error', 'always'],
     },
   },
-
-  // Markdown files configuration
   {
+    name: 'Only JSON-Data',
+    files: ['data/**/*.json'],
+  },
+
+  {
+    name: 'All Markdown',
     files: ['**/*.md'],
     plugins: {
       markdown: markdownPlugin,
     },
     rules: {
-      // Minimal Markdown rules to avoid requiring changes to existing files
       ...markdownPlugin.configs.recommended.rules,
     },
   },
 
-  // 1. All JS/MJS/TS files with shared rules (largest set)
   {
+    name: 'All JavaScript/TypeScript',
     files: ['**/*.js', '**/*.mjs', '**/*.ts'],
     plugins: {
       '@stylistic': stylisticPlugin,
@@ -70,10 +67,10 @@ export default [
       'no-var': ['error'],
       'prefer-const': ['error'],
       'no-restricted-globals': ['error', ...confusingBrowserGlobals],
-      
+
       // ESLint Stylistic rules equivalent to Prettier config
       '@stylistic/semi': ['error', 'always'], // semi: true
-      '@stylistic/quotes': ['error', 'single', { 
+      '@stylistic/quotes': ['error', 'single', {
         avoidEscape: true,
         allowTemplateLiterals: 'always',
       }], // singleQuote: true, allow template literals to avoid escapes
@@ -84,14 +81,14 @@ export default [
       '@stylistic/array-bracket-spacing': ['error', 'never'],
       '@stylistic/space-before-function-paren': ['error', {
         anonymous: 'never',
-        named: 'never', 
+        named: 'never',
         asyncArrow: 'always',
       }],
       '@stylistic/space-in-parens': ['error', 'never'],
       '@stylistic/eol-last': ['error', 'always'],
       '@stylistic/no-trailing-spaces': 'error',
       '@stylistic/template-curly-spacing': ['error', 'never'], // No spaces inside template literal expressions
-      '@stylistic/max-len': ['error', { 
+      '@stylistic/max-len': ['error', {
         code: 100,
         ignoreUrls: true,
         ignoreStrings: true,
@@ -104,7 +101,7 @@ export default [
       ...promisePlugin.configs.recommended.rules,
       ...noUnsanitizedPlugin.configs['recommended-legacy'].rules,
       ...regexpPlugin.configs.recommended.rules,
-      
+
       // Import rules
       'no-relative-import-paths/no-relative-import-paths': [
         'error',
@@ -123,11 +120,7 @@ export default [
       ],
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
-      
-      // Promise rules
       'promise/no-multiple-resolved': ['error'],
-      
-      // Regexp rules
       'regexp/letter-case': [
         'error',
         {
@@ -151,8 +144,6 @@ export default [
       'regexp/sort-alternatives': ['error'],
       'regexp/sort-character-class-elements': ['error'],
       'regexp/use-ignore-case': ['error'],
-      
-      // No loops restriction using core ESLint rule (ForOfStatement removed as requested)
       'no-restricted-syntax': [
         'error',
         {
@@ -164,7 +155,7 @@ export default [
           message: 'while loops are not allowed. Use array methods or recursion instead.',
         },
         {
-          selector: 'DoWhileStatement', 
+          selector: 'DoWhileStatement',
           message: 'do-while loops are not allowed. Use array methods or recursion instead.',
         },
         {
@@ -172,8 +163,6 @@ export default [
           message: 'for-in loops are not allowed. Use Object.keys() with array methods instead.',
         },
       ],
-      
-      // Template literal preference rules to minimize character escapes
       'prefer-template': ['error'],
     },
     settings: {
@@ -188,8 +177,8 @@ export default [
     },
   },
 
-  // 2. Rules specific to JS/MJS files
   {
+    name: 'Only JavaScript',
     files: ['**/*.js', '**/*.mjs'],
     languageOptions: {
       ecmaVersion: 2021,
@@ -200,23 +189,22 @@ export default [
     },
   },
 
-  // 3. Rules for modern syntax in MJS files only
   {
+    name: 'JavaScript Module/Modern',
     files: ['**/*.mjs'],
     languageOptions: {
-      ecmaVersion: 2024, // Use latest ECMAScript features
+      ecmaVersion: 2024,
       sourceType: 'module',
     },
     rules: {
-      // Modern ES features can be enforced here
       'prefer-arrow-callback': ['error'],
       'prefer-template': ['error'],
       'object-shorthand': ['error'],
     },
   },
 
-  // 4. Specific rules for all TypeScript files
   {
+    name: 'Only TypeScript',
     files: ['**/*.ts'],
     languageOptions: {
       parser: typescriptParser,
@@ -230,11 +218,9 @@ export default [
       '@typescript-eslint': typescriptEslint,
     },
     rules: {
-      // Import recommended rules from plugins
       ...angular.configs.recommended.rules,
       ...importPlugin.configs.typescript.rules,
-      
-      // Angular-specific rules
+
       '@angular-eslint/directive-selector': [
         'error',
         {
@@ -263,20 +249,19 @@ export default [
     },
   },
 
-  // 5. Smaller sub-set of spec.ts files with test-related rules only
   {
+    name: 'Only TypeScript Tests',
     files: ['**/*.spec.ts'],
     plugins: {
       jasmine: jasminePlugin,
     },
     rules: {
-      // Only test-specific rules here
       ...jasminePlugin.configs.recommended.rules,
     },
   },
 
-  // 6. Lastly, rules for HTML files
   {
+    name: 'Only Angular HTML Templates',
     files: ['**/*.html'],
     languageOptions: {
       parser: angularTemplateParser,
