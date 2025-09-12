@@ -21,8 +21,7 @@
     "lint": "npm run lint:typecheck && npm run lint:code",
     "lint:code": "ng lint",
     "lint:typecheck": "npx tsc --noEmit",
-    "fix:code": "npm run lint:code -- --fix",
-    "fix": "npm run fix:code"
+    "fix": "npm run lint:code -- --fix"
   },
   "private": true,
   "engines": {

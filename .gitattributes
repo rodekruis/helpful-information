@@ -77,7 +77,6 @@ TODO              text
 *.lock            text -diff
 package.json      text eol=lf
 package-lock.json text eol=lf
-.prettierrc       text
 *.yaml            text
 *.yml             text
 browserslist      text
