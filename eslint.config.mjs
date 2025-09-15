@@ -30,7 +30,7 @@ export default [
     },
     rules: {
       ...jsonPlugin.configs.recommended.rules,
-      'json/top-level-interop': ['error', 'always'],
+      'json/top-level-interop': ['error'],
     },
   },
   {
