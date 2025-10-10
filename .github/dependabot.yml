@@ -17,6 +17,8 @@ updates:
     groups:
       angular:
         patterns: ['@angular*']
+      applicationinsights:
+        patterns: ['@microsoft/applicationinsights*']
       development:
         dependency-type: development
         exclude-patterns: ['*angular*']
