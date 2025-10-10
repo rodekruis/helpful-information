@@ -7,7 +7,7 @@ export const getFullUrl = (value: string): string => {
     !value.startsWith('http://') &&
     !value.startsWith('https://')
   ) {
-    value = 'https://' + value;
+    value = `https://${value}`;
   }
   return value;
 };
@@ -16,7 +16,7 @@ export const getDateFromString = (value: string): Date | null => {
   const cleanValue = value.trim().substring(0, 10);
 
   try {
-    const date = new Date(cleanValue + 'T00:00:00.000Z');
+    const date = new Date(`${cleanValue}T00:00:00.000Z`);
     const isoDate = date.toISOString();
 
     return isoDate.startsWith(cleanValue) ? date : null;
@@ -53,7 +53,7 @@ export const createSlug = (
   let slug = String(identifier);
 
   if (prefix && identifier) {
-    slug = prefix + '-' + slug;
+    slug = `${prefix}-${slug}`;
   }
 
   return slug;
@@ -70,7 +70,7 @@ export const getLegacyID = (
   if (!prefix || !prefix.match(/[a-z]+/)) {
     return null;
   }
-  const matched = slug.match(new RegExp('' + prefix + '-([0-9]+)', 'i'));
+  const matched = slug.match(new RegExp(`${prefix}-([0-9]+)`, 'i'));
 
   if (matched) {
     const fallbackID = Number(matched[1]);
@@ -93,7 +93,7 @@ export const formatPhoneNumberAsUrl = (rawNumber: string): string => {
 
   const onlyDigits = phoneNumber.replaceAll(/[^\d+]/g, '');
 
-  return 'tel:' + onlyDigits;
+  return `tel:${onlyDigits}`;
 };
 
 export const fillTemplateWithUrl = (template: string, url: string): string => {

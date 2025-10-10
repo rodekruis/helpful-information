@@ -1,31 +1,18 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[md]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[ts]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[js]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[yml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.enable": true,
   "eslint.format.enable": true,
-  "eslint.options": {
-    "extensions": [".ts", ".html"]
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.rules.customizations": [
+    {
+      "fixable": true,
+      "severity": "info"
+    }
+  ],
+  "eslint.lintTask.enable": true,
+  "eslint.useESLintClass": true,
+  "eslint.validate": ["javascript", "typescript", "html", "json", "markdown"],
   },
   "eslint.validate": ["javascript", "typescript", "html"],
   "typescript.preferences.importModuleSpecifier": "non-relative",

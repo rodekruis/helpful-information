@@ -22,13 +22,13 @@ export class BreadcrumbsComponent {
   @Input()
   public item:
     | {
-        categoryID?: number;
-        categorySlug?: string;
-        categoryName?: string;
-        subCategoryID?: number;
-        subCategorySlug?: string;
-        subCategoryName?: string;
-      }
+      categoryID?: number;
+      categorySlug?: string;
+      categoryName?: string;
+      subCategoryID?: number;
+      subCategorySlug?: string;
+      subCategoryName?: string;
+    }
     | Offer
     | QASet;
 

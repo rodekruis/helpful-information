@@ -51,7 +51,7 @@ function markedOptionsFactory(): MarkedOptions {
     );
     const isPlainUrl = href.includes(text);
     const rel = `external noopener noreferrer ${
-      isPlainUrl ? `x-plain-url` : ''
+      isPlainUrl ? 'x-plain-url' : ''
     }`;
 
     return `<a href="${href}"
@@ -63,7 +63,7 @@ function markedOptionsFactory(): MarkedOptions {
   renderer.html = ({ text }): string => {
     return text.replaceAll(
       /(?<raw_a_href>href=[\s"']*(?:http|\/\/))/gi,
-      ` target="_blank" rel="external noopener noreferrer" $<raw_a_href>`,
+      ' target="_blank" rel="external noopener noreferrer" $<raw_a_href>',
     );
   };
 

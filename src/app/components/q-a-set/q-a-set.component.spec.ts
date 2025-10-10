@@ -11,7 +11,7 @@ import { ngxMarkdownModuleFactory } from 'src/main';
 import { QASetComponent } from './q-a-set.component';
 
 const testDate = new Date('2022-02-22');
-const testDateFormatted = "22-02-'22";
+const testDateFormatted = `22-02-'22`;
 
 describe('QASetComponent', () => {
   let component: QASetComponent;
