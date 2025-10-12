@@ -1,5 +1,5 @@
-import { DOCUMENT, Location } from '@angular/common';
-import { Inject, Injectable, SecurityContext } from '@angular/core';
+import { Location } from '@angular/common';
+import { Inject, Injectable, SecurityContext, DOCUMENT } from '@angular/core';
 import { DomSanitizer, Title } from '@angular/platform-browser';
 import { ConfigService } from 'src/app/services/config.service';
 import { environment } from 'src/environments/environment';
