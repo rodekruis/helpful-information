@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { IonImg } from '@ionic/angular/standalone';
 import { MarkdownModule } from 'ngx-markdown';
@@ -15,7 +14,7 @@ import { formatPhoneNumberAsUrl } from 'src/app/shared/utils';
   selector: 'app-offer',
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.css'],
-  imports: [MarkdownModule, IonImg, NgIf, NgFor],
+  imports: [MarkdownModule, IonImg],
 })
 export class OfferComponent {
   @Input()

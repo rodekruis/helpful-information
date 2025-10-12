@@ -19,17 +19,18 @@
   <span
     class="list-item--content text-style--hide-overflow_5 text-style--size-08"
   >
-    <ng-container *ngIf="offer?.offerName">
+    @if (offer?.offerName) {
       <strong class="text-style--size-1">{{
         offer?.offerName || '&nbsp;'
       }}</strong
       ><br />
-    </ng-container>
-    <span
-      *ngIf="offer?.offerDescription"
-      markdown
-      [data]="offer?.offerDescription | slice: 0 : 200"
-      [inline]="true"
-    ></span>
+    }
+    @if (offer?.offerDescription) {
+      <span
+        markdown
+        [data]="offer?.offerDescription | slice: 0 : 200"
+        [inline]="true"
+      ></span>
+    }
   </span>
 </a>

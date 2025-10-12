@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
@@ -13,7 +12,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.css'],
-  imports: [NgIf, RouterLink],
+  imports: [RouterLink],
 })
 export class BreadcrumbsComponent {
   @Input()

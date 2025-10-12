@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
@@ -19,7 +18,7 @@ import { AppPath } from 'src/routes';
   selector: 'app-region-page',
   templateUrl: './region.page.html',
   styleUrls: ['./region.page.css'],
-  imports: [NgIf, NgFor, RouterLink, CategoryLinkComponent, MarkdownModule],
+  imports: [RouterLink, CategoryLinkComponent, MarkdownModule],
 })
 export default class RegionPageComponent implements OnInit {
   public useQandAs = environment.useQandAs;

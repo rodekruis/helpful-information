@@ -1,4 +1,4 @@
-import { Location, NgFor, NgIf } from '@angular/common';
+import { Location } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component, ViewChild } from '@angular/core';
 import type { Params } from '@angular/router';
@@ -39,8 +39,6 @@ import { AppPath } from 'src/routes';
   imports: [
     AppHeaderComponent,
     MarkdownComponent,
-    NgFor,
-    NgIf,
     RouterLink,
     RouterOutlet,
     IonHeader,

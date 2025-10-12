@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
@@ -12,7 +11,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [NgIf, IonApp, IonRouterOutlet],
+  imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
   public envName: string = environment.envName;

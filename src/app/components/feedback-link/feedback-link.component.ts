@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import type {
   ElementRef,
   OnChanges,
@@ -24,7 +23,7 @@ enum AnswerValue {
   selector: 'app-feedback-link',
   templateUrl: './feedback-link.component.html',
   styleUrls: ['./feedback-link.component.css'],
-  imports: [NgIf],
+  imports: [],
 })
 export class FeedbackLinkComponent implements OnChanges, OnInit {
   @ViewChild('details')

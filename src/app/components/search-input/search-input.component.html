@@ -13,15 +13,16 @@
       class="input-field--text text-style--size-1"
     />
 
-    <button
-      *ngIf="!!searchQuery"
-      type="button"
-      class="input-field--clear"
-      [title]="clearLabel || 'Clear'"
-      (click)="searchQuery = ''; doSubmit(); ngForm.q.focus()"
-    >
-      <strong>&times;</strong>
-    </button>
+    @if (!!searchQuery) {
+      <button
+        type="button"
+        class="input-field--clear"
+        [title]="clearLabel || 'Clear'"
+        (click)="searchQuery = ''; doSubmit(); ngForm.q.focus()"
+      >
+        <strong>&times;</strong>
+      </button>
+    }
   </span>
 
   <button

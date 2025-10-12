@@ -5,13 +5,14 @@
       (click)="logoClick($event)"
       class="app-header--logo-link"
     >
-      <img
-        *ngIf="logoUrl || fallbackLogoUrl"
-        [src]="logoUrl || fallbackLogoUrl"
-        alt=""
-        role="presentation"
-        class="app-header--logo-img"
-      />
+      @if (logoUrl || fallbackLogoUrl) {
+        <img
+          [src]="logoUrl || fallbackLogoUrl"
+          alt=""
+          role="presentation"
+          class="app-header--logo-img"
+        />
+      }
       <strong
         class="app-header--logo-title text-style--alt text-style--size-08 text-style--use-newlines"
       >

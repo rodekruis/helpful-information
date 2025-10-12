@@ -1,4 +1,4 @@
-import { DatePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import {
@@ -13,7 +13,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   selector: 'app-q-a-set',
   templateUrl: './q-a-set.component.html',
   styleUrls: ['./q-a-set.component.css'],
-  imports: [NgIf, NgFor, DatePipe, NgTemplateOutlet, MarkdownModule],
+  imports: [DatePipe, NgTemplateOutlet, MarkdownModule],
 })
 export class QASetComponent {
   @Input()

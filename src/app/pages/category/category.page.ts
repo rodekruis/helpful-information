@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import type { Params } from '@angular/router';
@@ -19,8 +18,6 @@ import { getLegacyID } from 'src/app/shared/utils';
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.css'],
   imports: [
-    NgIf,
-    NgFor,
     SubCategoryLinkComponent,
     CategoryFilterPipe,
     MarkdownModule,

@@ -1,34 +1,35 @@
 <app-parent-link [region]="region"></app-parent-link>
 
-<h2
-  *ngIf="category?.categoryName"
-  class="text-style--alt text-style--size-2"
->
-  {{ category?.categoryName }}
-</h2>
+@if (category?.categoryName) {
+  <h2 class="text-style--alt text-style--size-2">
+    {{ category?.categoryName }}
+  </h2>
+}
 
-<div
-  *ngIf="category?.categoryDescription"
-  markdown
-  [data]="category?.categoryDescription"
-  [inline]="false"
-  class="ion-margin-vertical"
-></div>
+@if (category?.categoryDescription) {
+  <div
+    markdown
+    [data]="category?.categoryDescription"
+    [inline]="false"
+    class="ion-margin-vertical"
+  ></div>
+}
 
-<ul
-  *ngIf="
-    subCategories &&
-    subCategories?.length &&
-    (subCategories | categoryFilter: category)?.length
-  "
-  class="list-flat ion-margin-vertical"
->
-  <li
-    *ngFor="let subCategoryItem of subCategories | categoryFilter: category"
-    class="ion-margin-bottom"
-  >
-    <app-sub-category-link
-      [subCategory]="subCategoryItem"
-    ></app-sub-category-link>
-  </li>
-</ul>
+@if (
+  subCategories &&
+  subCategories?.length &&
+  (subCategories | categoryFilter: category)?.length
+) {
+  <ul class="list-flat ion-margin-vertical">
+    @for (
+      subCategoryItem of subCategories | categoryFilter: category;
+      track subCategoryItem
+    ) {
+      <li class="ion-margin-bottom">
+        <app-sub-category-link
+          [subCategory]="subCategoryItem"
+        ></app-sub-category-link>
+      </li>
+    }
+  </ul>
+}

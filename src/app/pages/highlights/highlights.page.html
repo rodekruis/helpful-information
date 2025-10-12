@@ -4,12 +4,16 @@
   {{ regionData?.labelHighlightsPageTitle }}
 </h2>
 
-<p *ngIf="!qaHighlights?.length">{{ regionData?.labelHighlightsItemsZero }}</p>
+@if (!qaHighlights?.length) {
+  <p>{{ regionData?.labelHighlightsItemsZero }}</p>
+}
 
-<p *ngIf="qaHighlights?.length">
-  {{ regionData?.labelHighlightsItemsCount }}
-  <strong>{{ qaHighlights?.length }}</strong>
-</p>
+@if (qaHighlights?.length) {
+  <p>
+    {{ regionData?.labelHighlightsItemsCount }}
+    <strong>{{ qaHighlights?.length }}</strong>
+  </p>
+}
 
 <app-q-a-set-list
   [baseUrl]="'../'"

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
@@ -39,7 +38,6 @@ type SearchResult = QASet & {
   styleUrls: ['./search.page.css'],
   imports: [
     MarkdownModule,
-    NgIf,
     ParentLinkComponent,
     QASetListComponent,
     SearchInputComponent,

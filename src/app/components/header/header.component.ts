@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslationOptionsComponent } from 'src/app/components/translation-options/translation-options.component';
 import type { RegionData } from 'src/app/models/region-data';
@@ -8,7 +7,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  imports: [NgIf, TranslationOptionsComponent],
+  imports: [TranslationOptionsComponent],
 })
 export class AppHeaderComponent {
   @Input()

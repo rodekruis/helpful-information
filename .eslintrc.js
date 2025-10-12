@@ -33,6 +33,7 @@ module.exports = {
         'no-extra-boolean-cast': ['error'],
         'no-var': ['error'],
         'prefer-const': ['error'],
+        '@angular-eslint/prefer-inject': ['warn'],
         '@angular-eslint/directive-selector': [
           'error',
           {

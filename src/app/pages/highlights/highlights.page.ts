@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import type { Params } from '@angular/router';
@@ -16,7 +15,7 @@ import { AppPath } from 'src/routes';
   selector: 'app-highlights-page',
   templateUrl: './highlights.page.html',
   styleUrls: ['./highlights.page.css'],
-  imports: [NgIf, QASetListComponent, ParentLinkComponent],
+  imports: [QASetListComponent, ParentLinkComponent],
 })
 export default class HighlightsPageComponent implements OnInit {
   public region: string;

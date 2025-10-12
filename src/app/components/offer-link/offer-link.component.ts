@@ -1,4 +1,4 @@
-import { NgIf, SlicePipe } from '@angular/common';
+import { SlicePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IonImg } from '@ionic/angular/standalone';
@@ -14,7 +14,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-offer-link',
   templateUrl: './offer-link.component.html',
   styleUrls: ['./offer-link.component.css'],
-  imports: [MarkdownModule, IonImg, RouterLink, NgIf, SlicePipe],
+  imports: [MarkdownModule, IonImg, RouterLink, SlicePipe],
 })
 export class OfferLinkComponent {
   @Input()
