@@ -1,5 +1,5 @@
 import { SlicePipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IonImg } from '@ionic/angular/standalone';
 import { MarkdownModule } from 'ngx-markdown';
@@ -17,10 +17,10 @@ import { LoggingService } from 'src/app/services/logging.service';
   imports: [MarkdownModule, IonImg, RouterLink, SlicePipe],
 })
 export class OfferLinkComponent {
+  private loggingService = inject(LoggingService);
+
   @Input()
   public offer: Offer;
-
-  constructor(private loggingService: LoggingService) {}
 
   public click(offer: Offer) {
     this.loggingService.logEvent(

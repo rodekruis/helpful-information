@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { DOCUMENT, Inject, Injectable, SecurityContext } from '@angular/core';
+import { DOCUMENT, inject, Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer, Title } from '@angular/platform-browser';
 import { ConfigService } from 'src/app/services/config.service';
 import { environment } from 'src/environments/environment';
@@ -8,13 +8,11 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class PageMetaService {
-  constructor(
-    private titleService: Title,
-    @Inject(DOCUMENT) private dom: Document,
-    private domSanitizer: DomSanitizer,
-    private location: Location,
-    private configService: ConfigService,
-  ) {}
+  private titleService = inject(Title);
+  private dom = inject<Document>(DOCUMENT);
+  private domSanitizer = inject(DomSanitizer);
+  private location = inject(Location);
+  private configService = inject(ConfigService);
 
   public setDirection(direction: string = 'auto') {
     this.dom.documentElement.dir = direction;

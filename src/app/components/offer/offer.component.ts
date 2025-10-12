@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { IonImg } from '@ionic/angular/standalone';
 import { MarkdownModule } from 'ngx-markdown';
 import {
@@ -17,6 +17,8 @@ import { formatPhoneNumberAsUrl } from 'src/app/shared/utils';
   imports: [MarkdownModule, IonImg],
 })
 export class OfferComponent {
+  private loggingService = inject(LoggingService);
+
   @Input()
   public offer: Offer;
 
@@ -24,8 +26,6 @@ export class OfferComponent {
   public regionData: RegionData = {};
 
   public formatPhoneNumberAsUrl = formatPhoneNumberAsUrl;
-
-  constructor(private loggingService: LoggingService) {}
 
   public logDetailClick(name: string) {
     this.loggingService.logEvent(

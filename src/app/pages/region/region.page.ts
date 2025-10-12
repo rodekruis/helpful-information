@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -21,6 +21,11 @@ import { AppPath } from 'src/routes';
   imports: [RouterLink, CategoryLinkComponent, MarkdownModule],
 })
 export default class RegionPageComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private regionDataService = inject(RegionDataService);
+  private offersService = inject(OffersService);
+  private pageMeta = inject(PageMetaService);
+
   public useQandAs = environment.useQandAs;
   public useQandASearch = environment.useQandASearch;
   public AppPath = AppPath;
@@ -31,13 +36,6 @@ export default class RegionPageComponent implements OnInit {
   private subCategories: SubCategory[];
   public qaSets: QASet[];
   public qaHighlights: QASet[];
-
-  constructor(
-    private route: ActivatedRoute,
-    private regionDataService: RegionDataService,
-    private offersService: OffersService,
-    private pageMeta: PageMetaService,
-  ) {}
 
   async ngOnInit() {
     this.route.params.subscribe(async (params: Params) => {

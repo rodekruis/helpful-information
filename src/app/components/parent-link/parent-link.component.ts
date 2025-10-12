@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
@@ -14,6 +14,9 @@ import { LoggingService } from 'src/app/services/logging.service';
   imports: [RouterLink],
 })
 export class ParentLinkComponent {
+  private loggingService = inject(LoggingService);
+  private configService = inject(ConfigService);
+
   @Input()
   public label: string;
 
@@ -21,11 +24,6 @@ export class ParentLinkComponent {
   set region(value: string) {
     this.label = this.configService.getRegionByRegionSlug(value)?.label;
   }
-
-  constructor(
-    private loggingService: LoggingService,
-    private configService: ConfigService,
-  ) {}
 
   public click() {
     this.loggingService.logEvent(

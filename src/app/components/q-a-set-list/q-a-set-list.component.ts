@@ -1,5 +1,5 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import type { QASet } from 'src/app/models/qa-set.model';
@@ -23,7 +23,9 @@ export class QASetListComponent {
 
   public labelLastUpdated: string;
 
-  constructor(regionDataService: RegionDataService) {
+  constructor() {
+    const regionDataService = inject(RegionDataService);
+
     if (
       !!regionDataService &&
       !!regionDataService.data &&

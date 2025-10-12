@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
@@ -15,6 +15,8 @@ import { LoggingService } from 'src/app/services/logging.service';
   imports: [RouterLink],
 })
 export class BreadcrumbsComponent {
+  private loggingService = inject(LoggingService);
+
   @Input()
   public baseUrl: string = '';
 
@@ -30,8 +32,6 @@ export class BreadcrumbsComponent {
       }
     | Offer
     | QASet;
-
-  constructor(private loggingService: LoggingService) {}
 
   public click(categorySlug: string, subCategorySlug?: string) {
     this.loggingService.logEvent(

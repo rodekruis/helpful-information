@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -44,6 +44,14 @@ type SearchResult = QASet & {
   ],
 })
 export default class SearchPageComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private regionDataService = inject(RegionDataService);
+  private offersService = inject(OffersService);
+  private searchService = inject(SearchService);
+  private pageMeta = inject(PageMetaService);
+  private configService = inject(ConfigService);
+
   public useSearchApi = environment.useQandASearch && !!environment.searchApi;
 
   public region: string;
@@ -53,16 +61,6 @@ export default class SearchPageComponent implements OnInit {
   public searchQuery: string;
   public searchResults: QASet[];
   public loadingSearch: boolean;
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private regionDataService: RegionDataService,
-    private offersService: OffersService,
-    private searchService: SearchService,
-    private pageMeta: PageMetaService,
-    private configService: ConfigService,
-  ) {}
 
   async ngOnInit() {
     this.route.params.subscribe(async (params: Params) => {

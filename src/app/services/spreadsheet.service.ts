@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import type { Category } from 'src/app/models/category.model';
 import { CategoryCol } from 'src/app/models/category.model';
 import {
@@ -41,13 +41,11 @@ type KeyMap = Map<string, number>;
   providedIn: 'root',
 })
 export class SpreadsheetService {
+  private loggingService = inject(LoggingService);
+  private configService = inject(ConfigService);
+
   static visibleKey = 'Show';
   static booleanTrueKey = 'Yes';
-
-  constructor(
-    private loggingService: LoggingService,
-    private configService: ConfigService,
-  ) {}
 
   static readCellValue(row: string[], key: number): string {
     if (!!row && !!row[key] && key < row.length) {

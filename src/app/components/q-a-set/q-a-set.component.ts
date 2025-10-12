@@ -1,5 +1,5 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
@@ -16,6 +16,9 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   imports: [DatePipe, NgTemplateOutlet, MarkdownModule],
 })
 export class QASetComponent {
+  private regionDataService = inject(RegionDataService);
+  private loggingService = inject(LoggingService);
+
   @Input()
   qaSet: QASet;
 
@@ -24,10 +27,7 @@ export class QASetComponent {
 
   public labelLastUpdated: string;
 
-  constructor(
-    private regionDataService: RegionDataService,
-    private loggingService: LoggingService,
-  ) {
+  constructor() {
     if (
       !!this.regionDataService &&
       !!this.regionDataService.data &&

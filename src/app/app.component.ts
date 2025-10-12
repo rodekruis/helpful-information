@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import {
@@ -14,12 +14,12 @@ import { environment } from 'src/environments/environment';
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
+  private loggingService = inject(LoggingService);
+  private swUpdates = inject(SwUpdate);
+
   public envName: string = environment.envName;
 
-  constructor(
-    private loggingService: LoggingService,
-    private swUpdates: SwUpdate,
-  ) {
+  constructor() {
     this.setUpExternalLinkTracking();
     this.setUpPrintTracking();
 

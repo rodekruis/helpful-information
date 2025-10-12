@@ -1,12 +1,10 @@
-import { ErrorHandler, Injectable } from '@angular/core';
+import { ErrorHandler, inject, Injectable } from '@angular/core';
 
 import { LoggingService } from './logging.service';
 
 @Injectable()
 export class ErrorHandlerService extends ErrorHandler {
-  constructor(private loggingService: LoggingService) {
-    super();
-  }
+  private loggingService = inject(LoggingService);
 
   override handleError(error: Error) {
     this.loggingService.logException(error);

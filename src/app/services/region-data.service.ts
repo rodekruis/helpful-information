@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import type { RegionData } from 'src/app/models/region-data';
 
 import { SpreadsheetService } from './spreadsheet.service';
@@ -7,10 +7,10 @@ import { SpreadsheetService } from './spreadsheet.service';
   providedIn: 'root',
 })
 export class RegionDataService {
+  private spreadsheetService = inject(SpreadsheetService);
+
   private cacheRegion: string;
   public data: RegionData;
-
-  constructor(private spreadsheetService: SpreadsheetService) {}
 
   private isSameRegion(region: string): boolean {
     return this.cacheRegion === region;
