@@ -1,6 +1,5 @@
-import { NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
@@ -16,19 +15,17 @@ import { AppPath } from 'src/routes';
   selector: 'app-highlights-page',
   templateUrl: './highlights.page.html',
   styleUrls: ['./highlights.page.css'],
-  imports: [NgIf, QASetListComponent, ParentLinkComponent],
+  imports: [QASetListComponent, ParentLinkComponent],
 })
 export default class HighlightsPageComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private regionDataService = inject(RegionDataService);
+  private offersService = inject(OffersService);
+  private pageMeta = inject(PageMetaService);
+
   public region: string;
   public regionData: RegionData;
   public qaHighlights: QASet[];
-
-  constructor(
-    private route: ActivatedRoute,
-    private regionDataService: RegionDataService,
-    private offersService: OffersService,
-    private pageMeta: PageMetaService,
-  ) {}
 
   async ngOnInit() {
     this.route.params.subscribe(async (params: Params) => {

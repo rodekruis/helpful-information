@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
@@ -14,10 +14,10 @@ import { LoggingService } from 'src/app/services/logging.service';
   imports: [RouterLink],
 })
 export class SubCategoryLinkComponent {
+  private loggingService = inject(LoggingService);
+
   @Input()
   subCategory: SubCategory;
-
-  constructor(private loggingService: LoggingService) {}
 
   public click() {
     this.loggingService.logEvent(

@@ -1,11 +1,10 @@
-<div
-  *ngIf="lastUpdatedTime"
-  class="text-style--center"
->
-  <small>
-    {{ label }}
-    <time [attr.datetime]="lastUpdatedTime | date: 'YYYY-MM-ddTHH:mm:ss'">{{
-      lastUpdatedTime | date: 'd-M-YYYY HH:mm'
-    }}</time>
-  </small>
-</div>
+@if (lastUpdatedTime) {
+  <div class="text-style--center">
+    <small>
+      {{ label }}
+      <time [attr.datetime]="lastUpdatedTime | date: 'YYYY-MM-ddTHH:mm:ss'">{{
+        lastUpdatedTime | date: 'd-M-YYYY HH:mm'
+      }}</time>
+    </small>
+  </div>
+}

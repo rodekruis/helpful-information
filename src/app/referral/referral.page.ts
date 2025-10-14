@@ -1,6 +1,6 @@
-import { Location, NgFor, NgIf } from '@angular/common';
+import { Location } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import type { Params } from '@angular/router';
 import {
   ActivatedRoute,
@@ -39,8 +39,6 @@ import { AppPath } from 'src/routes';
   imports: [
     AppHeaderComponent,
     MarkdownComponent,
-    NgFor,
-    NgIf,
     RouterLink,
     RouterOutlet,
     IonHeader,
@@ -48,6 +46,16 @@ import { AppPath } from 'src/routes';
   ],
 })
 export class ReferralPageComponent implements OnInit {
+  private offersService = inject(OffersService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private location = inject(Location);
+  private regionDataService = inject(RegionDataService);
+  private lastUpdatedTimeService = inject(LastUpdatedTimeService);
+  private pageMeta = inject(PageMetaService);
+  private loggingService = inject(LoggingService);
+  private configService = inject(ConfigService);
+
   @ViewChild('content')
   private content: IonContent;
 
@@ -86,17 +94,7 @@ export class ReferralPageComponent implements OnInit {
 
   public AppPath = AppPath;
 
-  constructor(
-    private offersService: OffersService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
-    private regionDataService: RegionDataService,
-    private lastUpdatedTimeService: LastUpdatedTimeService,
-    private pageMeta: PageMetaService,
-    private loggingService: LoggingService,
-    private configService: ConfigService,
-  ) {
+  constructor() {
     this.regionSets = this.configService.config.regions;
 
     this.mainUrl = this.location.normalize('/');

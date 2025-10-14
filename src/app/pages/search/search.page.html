@@ -4,14 +4,15 @@
   {{ regionData?.labelSearchPageTitle }}
 </h2>
 
-<div
-  *ngIf="regionData?.labelSearchPageIntro"
-  markdown
-  [data]="regionData?.labelSearchPageIntro"
-  [inline]="false"
->
-  {{ regionData?.labelSearchPageIntro }}
-</div>
+@if (regionData?.labelSearchPageIntro) {
+  <div
+    markdown
+    [data]="regionData?.labelSearchPageIntro"
+    [inline]="false"
+  >
+    {{ regionData?.labelSearchPageIntro }}
+  </div>
+}
 
 <app-search-input
   [(searchQuery)]="searchQuery"
@@ -20,38 +21,42 @@
   class="ion-margin-vertical"
 ></app-search-input>
 
-<section
-  *ngIf="!!searchQuery"
-  id="search-results"
-  [tabindex]="-1"
-  class="focus--minimal focus--fade-out"
->
-  <div *ngIf="useSearchApi && loadingSearch">
-    <span
-      class="loading-text"
-      style="width: 95%"
-    ></span>
-    <span class="loading-text"></span>
-    <span
-      class="loading-text"
-      style="width: 88%"
-    ></span>
-    <span
-      class="loading-text"
-      style="width: 75%"
-    ></span>
-  </div>
-
-  <p *ngIf="!!searchQuery && !loadingSearch && searchResults?.length">
-    {{ regionData?.labelSearchResultsCount }}
-    <strong>{{ searchResults?.length }}</strong>
-  </p>
-
-  <app-q-a-set-list
-    *ngIf="!!searchQuery && !loadingSearch"
-    [baseUrl]="'../'"
-    [list]="searchResults"
-    [showDateUpdatedOutsideQuestion]="false"
-    class="ion-margin-vertical"
-  ></app-q-a-set-list>
-</section>
+@if (!!searchQuery) {
+  <section
+    id="search-results"
+    [tabindex]="-1"
+    class="focus--minimal focus--fade-out"
+  >
+    @if (useSearchApi && loadingSearch) {
+      <div>
+        <span
+          class="loading-text"
+          style="width: 95%"
+        ></span>
+        <span class="loading-text"></span>
+        <span
+          class="loading-text"
+          style="width: 88%"
+        ></span>
+        <span
+          class="loading-text"
+          style="width: 75%"
+        ></span>
+      </div>
+    }
+    @if (!!searchQuery && !loadingSearch && searchResults?.length) {
+      <p>
+        {{ regionData?.labelSearchResultsCount }}
+        <strong>{{ searchResults?.length }}</strong>
+      </p>
+    }
+    @if (!!searchQuery && !loadingSearch) {
+      <app-q-a-set-list
+        [baseUrl]="'../'"
+        [list]="searchResults"
+        [showDateUpdatedOutsideQuestion]="false"
+        class="ion-margin-vertical"
+      ></app-q-a-set-list>
+    }
+  </section>
+}

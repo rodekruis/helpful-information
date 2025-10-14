@@ -1,11 +1,16 @@
-import { NgIf } from '@angular/common';
 import type {
   ElementRef,
   OnChanges,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { Component, Input, SecurityContext, ViewChild } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  SecurityContext,
+  ViewChild,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
   LoggingEvent,
@@ -24,9 +29,12 @@ enum AnswerValue {
   selector: 'app-feedback-link',
   templateUrl: './feedback-link.component.html',
   styleUrls: ['./feedback-link.component.css'],
-  imports: [NgIf],
+  imports: [],
 })
 export class FeedbackLinkComponent implements OnChanges, OnInit {
+  private domSanitizer = inject(DomSanitizer);
+  private loggingService = inject(LoggingService);
+
   @ViewChild('details')
   private details: ElementRef<HTMLDetailsElement>;
 
@@ -49,11 +57,6 @@ export class FeedbackLinkComponent implements OnChanges, OnInit {
   public isEnabled = environment.useFeedbackPrompt;
 
   public answerValue: AnswerValue | null = null;
-
-  constructor(
-    private domSanitizer: DomSanitizer,
-    private loggingService: LoggingService,
-  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.template && changes.template.currentValue) {

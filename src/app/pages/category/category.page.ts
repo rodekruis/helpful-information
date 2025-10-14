@@ -1,6 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -19,8 +18,6 @@ import { getLegacyID } from 'src/app/shared/utils';
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.css'],
   imports: [
-    NgIf,
-    NgFor,
     SubCategoryLinkComponent,
     CategoryFilterPipe,
     MarkdownModule,
@@ -28,6 +25,11 @@ import { getLegacyID } from 'src/app/shared/utils';
   ],
 })
 export default class CategoryPageComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private offersService = inject(OffersService);
+  private pageMeta = inject(PageMetaService);
+
   public region: string;
 
   @Input()
@@ -35,13 +37,6 @@ export default class CategoryPageComponent implements OnInit {
 
   @Input()
   public subCategories: SubCategory[];
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private offersService: OffersService,
-    private pageMeta: PageMetaService,
-  ) {}
 
   async ngOnInit() {
     this.route.params.subscribe(async (params: Params) => {

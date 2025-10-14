@@ -1,9 +1,8 @@
 <ion-app>
   <ion-router-outlet [animated]="false"></ion-router-outlet>
 </ion-app>
-<div
-  *ngIf="envName"
-  class="env-label no-print"
->
-  <span class="env-label--name">{{ envName }}</span>
-</div>
+@if (envName) {
+  <div class="env-label no-print">
+    <span class="env-label--name">{{ envName }}</span>
+  </div>
+}

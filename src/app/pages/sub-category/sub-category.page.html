@@ -4,62 +4,60 @@
   {{ subCategory?.subCategoryName }}
 </h2>
 
-<div
-  *ngIf="subCategory?.subCategoryDescription"
-  markdown
-  [data]="subCategory?.subCategoryDescription"
-  [inline]="false"
-  class="ion-margin-vertical ion-padding-bottom"
-></div>
+@if (subCategory?.subCategoryDescription) {
+  <div
+    markdown
+    [data]="subCategory?.subCategoryDescription"
+    [inline]="false"
+    class="ion-margin-vertical ion-padding-bottom"
+  ></div>
+}
 
-<ul
-  *ngIf="
-    useQandAs &&
-    qaSets &&
-    qaSets?.length &&
-    (qaSets | categoryFilter: category | subCategoryFilter: subCategory)?.length
-  "
-  class="list-flat ion-margin-vertical"
->
-  <li
-    *ngFor="
-      let qaSetItem of qaSets
+@if (
+  useQandAs &&
+  qaSets &&
+  qaSets?.length &&
+  (qaSets | categoryFilter: category | subCategoryFilter: subCategory)?.length
+) {
+  <ul class="list-flat ion-margin-vertical">
+    @for (
+      qaSetItem of qaSets
         | categoryFilter: category
-        | subCategoryFilter: subCategory
-    "
-    class="ion-margin-bottom"
-  >
-    <app-q-a-set [qaSet]="qaSetItem"></app-q-a-set>
-  </li>
-</ul>
-
-<ng-container
-  *ngIf="
-    useOffers &&
-    offers &&
-    offers?.length &&
-    offerChapters &&
-    offerChapters?.length
-  "
->
-  <ng-container *ngFor="let offerChapter of offerChapters">
-    <h3
-      *ngIf="offerChapter[0]?.chapterName"
-      [id]="offerChapter[0]?.chapterSlug"
-      class="ion-padding-top"
-    >
-      {{ offerChapter[0].chapterName }}
-    </h3>
-    <ul class="list-flat ion-margin-vertical">
-      <li
-        *ngFor="let offerItem of offerChapter"
-        class="ion-margin-bottom"
-      >
-        <app-offer-link [offer]="offerItem"></app-offer-link>
+        | subCategoryFilter: subCategory;
+      track qaSetItem
+    ) {
+      <li class="ion-margin-bottom">
+        <app-q-a-set [qaSet]="qaSetItem"></app-q-a-set>
       </li>
+    }
+  </ul>
+}
+
+@if (
+  useOffers &&
+  offers &&
+  offers?.length &&
+  offerChapters &&
+  offerChapters?.length
+) {
+  @for (offerChapter of offerChapters; track offerChapter) {
+    @if (offerChapter[0]?.chapterName) {
+      <h3
+        [id]="offerChapter[0]?.chapterSlug"
+        class="ion-padding-top"
+      >
+        {{ offerChapter[0].chapterName }}
+      </h3>
+    }
+    <ul class="list-flat ion-margin-vertical">
+      @for (offerItem of offerChapter; track offerItem) {
+        <li class="ion-margin-bottom">
+          <app-offer-link [offer]="offerItem"></app-offer-link>
+        </li>
+      }
     </ul>
-  </ng-container>
-</ng-container>
+  }
+}
 
 <br />
 

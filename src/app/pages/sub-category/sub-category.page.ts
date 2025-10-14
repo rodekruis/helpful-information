@@ -1,6 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -28,8 +27,6 @@ import { environment } from 'src/environments/environment';
   templateUrl: './sub-category.page.html',
   styleUrls: ['./sub-category.page.css'],
   imports: [
-    NgIf,
-    NgFor,
     OfferLinkComponent,
     QASetComponent,
     LastUpdatedTimeComponent,
@@ -41,6 +38,12 @@ import { environment } from 'src/environments/environment';
   ],
 })
 export default class SubCategoryPageComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private offersService = inject(OffersService);
+  private regionDataService = inject(RegionDataService);
+  private pageMeta = inject(PageMetaService);
+
   public region: string;
   public regionData: RegionData;
 
@@ -59,14 +62,6 @@ export default class SubCategoryPageComponent implements OnInit {
 
   @Input()
   public qaSets: QASet[];
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private offersService: OffersService,
-    private regionDataService: RegionDataService,
-    private pageMeta: PageMetaService,
-  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(async (params: Params) => {

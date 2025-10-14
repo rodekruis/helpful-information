@@ -13,7 +13,7 @@
     "incremental": true,
     "lib": ["ES2022", "dom"],
     "module": "es2022",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitOverride": true,

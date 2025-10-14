@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackLinkComponent } from 'src/app/components/feedback-link/feedback-link.component';
@@ -26,19 +26,17 @@ import { getLegacyID } from 'src/app/shared/utils';
   ],
 })
 export default class OfferPageComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private regionDataService = inject(RegionDataService);
+  private offersService = inject(OffersService);
+  private pageMeta = inject(PageMetaService);
+
   public region: string;
   public regionData: RegionData;
 
   @Input()
   public offer: Offer;
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private regionDataService: RegionDataService,
-    private offersService: OffersService,
-    private pageMeta: PageMetaService,
-  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(async (params: Params) => {

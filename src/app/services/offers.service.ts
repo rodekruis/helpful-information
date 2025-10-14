@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import type { Category } from 'src/app/models/category.model';
 import {
   LoggingEvent,
@@ -24,6 +24,9 @@ const enum CacheName {
   providedIn: 'root',
 })
 export class OffersService {
+  private spreadsheetService = inject(SpreadsheetService);
+  private loggingService = inject(LoggingService);
+
   private cache: {
     [name in CacheName]: {
       region: string;
@@ -35,11 +38,6 @@ export class OffersService {
     [CacheName.offers]: null,
     [CacheName.qaSets]: null,
   };
-
-  constructor(
-    private spreadsheetService: SpreadsheetService,
-    private loggingService: LoggingService,
-  ) {}
 
   private needsCaching(name: CacheName, region: string): boolean {
     return (

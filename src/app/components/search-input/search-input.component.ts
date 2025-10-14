@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +6,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-search-input',
   templateUrl: './search-input.component.html',
   styleUrls: ['./search-input.component.css'],
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule],
 })
 export class SearchInputComponent implements OnInit {
   @Input()

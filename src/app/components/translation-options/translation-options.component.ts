@@ -1,5 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import type { Event } from '@angular/router';
 import { EventType, Router } from '@angular/router';
 import {
@@ -15,9 +14,13 @@ import { environment } from 'src/environments/environment';
   selector: 'app-translation-options',
   templateUrl: './translation-options.component.html',
   styleUrls: ['./translation-options.component.css'],
-  imports: [NgIf, NgFor],
+  imports: [],
 })
 export class TranslationOptionsComponent {
+  private router = inject(Router);
+  private loggingService = inject(LoggingService);
+  private configService = inject(ConfigService);
+
   public useRegionPerLocale = environment.useRegionPerLocale;
   public languageOptions: RegionData['localeAlternatives'] = [];
   public currentLanguageLabel: string | null;
@@ -45,11 +48,7 @@ export class TranslationOptionsComponent {
     }
   }
 
-  constructor(
-    private router: Router,
-    private loggingService: LoggingService,
-    private configService: ConfigService,
-  ) {
+  constructor() {
     if (this.useRegionPerLocale) {
       this.languageOptions = this.createLocalLanguageOptions();
     }

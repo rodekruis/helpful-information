@@ -23,34 +23,33 @@
   #content
 >
   <!-- Notification (optional) -->
-  <div
-    *ngIf="!!getNotificationContent()"
-    class="layout--container"
-  >
-    <details
-      open
-      (toggle)="logNotificationDismiss($event.target)"
-      class="dismissible-container ion-margin-vertical ion-padding text-area--level floating-box"
-    >
-      <summary
-        class="dismissible-container--close no-print action is_round is_inline is_flat text-style--center"
-        title="OK"
-        aria-label="OK"
+  @if (!!getNotificationContent()) {
+    <div class="layout--container">
+      <details
+        open
+        (toggle)="logNotificationDismiss($event.target)"
+        class="dismissible-container ion-margin-vertical ion-padding text-area--level floating-box"
       >
-        <strong aria-hidden="true">&times;</strong>
-      </summary>
-      <div
-        markdown
-        [data]="getNotificationContent()"
-        [inline]="true"
-        class="ion-padding-vertical"
-      ></div>
-    </details>
-  </div>
+        <summary
+          class="dismissible-container--close no-print action is_round is_inline is_flat text-style--center"
+          title="OK"
+          aria-label="OK"
+        >
+          <strong aria-hidden="true">&times;</strong>
+        </summary>
+        <div
+          markdown
+          [data]="getNotificationContent()"
+          [inline]="true"
+          class="ion-padding-vertical"
+        ></div>
+      </details>
+    </div>
+  }
 
   <div class="layout--container ion-padding">
     <!-- Loading-placeholder -->
-    <ng-container *ngIf="isSupportedRegion() && loading">
+    @if (isSupportedRegion() && loading) {
       <div class="ion-margin-vertical text-style--size-2">
         <span
           class="loading-text"
@@ -65,12 +64,14 @@
           style="width: 75%"
         ></span>
       </div>
-    </ng-container>
+    }
 
-    <router-outlet *ngIf="isSupportedRegion() && !loading"></router-outlet>
+    @if (isSupportedRegion() && !loading) {
+      <router-outlet></router-outlet>
+    }
 
     <!-- Error/404 page -->
-    <ng-container *ngIf="isSupportedRegion() && !loading && !dataAvailable">
+    @if (isSupportedRegion() && !loading && !dataAvailable) {
       <h2>{{ errorHeader }}</h2>
       <p>
         {{ errorMessage }}
@@ -88,10 +89,10 @@
           {{ errorRetry }}
         </a>
       </p>
-    </ng-container>
+    }
 
     <!-- Main/Root/Regions-list page -->
-    <ng-container *ngIf="!isSupportedRegion() && !isStaticPage()">
+    @if (!isSupportedRegion() && !isStaticPage()) {
       <div class="ion-margin-bottom">
         <h2 class="text-style--alt text-style--size-2">{{ pageHeader }}</h2>
         <div
@@ -100,134 +101,133 @@
           [inline]="false"
         ></div>
       </div>
-
-      <ng-container *ngFor="let regionSet of regionSets">
+      @for (regionSet of regionSets; track regionSet) {
         <div class="ion-margin-vertical ion-padding-top">
-          <h3
-            *ngIf="regionSet.name"
-            [id]="regionSet.slug"
-            class="ion-no-margin"
-          >
-            {{ regionSet.name }}
-          </h3>
+          @if (regionSet.name) {
+            <h3
+              [id]="regionSet.slug"
+              class="ion-no-margin"
+            >
+              {{ regionSet.name }}
+            </h3>
+          }
         </div>
         <ul
           class="list-flat tile-grid tile-grid_base-2 ion-margin-vertical text-style--use-newlines"
         >
-          <li
-            *ngFor="let region of regionSet.regions; index as index"
-            class="tile-grid--item"
-            [attr.aria-hidden]="!region.slug"
-          >
-            <a
-              *ngIf="region.slug"
-              [routerLink]="['/', region.slug]"
-              class="sheet--button action text-style--alt text-style--size-08"
+          @for (region of regionSet.regions; track region; let index = $index) {
+            <li
+              class="tile-grid--item"
+              [attr.aria-hidden]="!region.slug"
             >
-              <span>{{ region.label || region.slug }}</span>
-            </a>
-          </li>
-          <li
-            *ngIf="regionSet.regions.length % 2 === 1"
-            aria-hidden="true"
-            class="tile-grid--item"
-          >
-            <!-- filler-item for empty spot at 2nd-in-a-row -->
-          </li>
+              @if (region.slug) {
+                <a
+                  [routerLink]="['/', region.slug]"
+                  class="sheet--button action text-style--alt text-style--size-08"
+                >
+                  <span>{{ region.label || region.slug }}</span>
+                </a>
+              }
+            </li>
+          }
+          @if (regionSet.regions.length % 2 === 1) {
+            <li
+              aria-hidden="true"
+              class="tile-grid--item"
+            >
+              <!-- filler-item for empty spot at 2nd-in-a-row -->
+            </li>
+          }
         </ul>
-      </ng-container>
-    </ng-container>
+      }
+    }
 
     <!-- About page -->
-    <ng-container *ngIf="!isSupportedRegion() && isStaticPage(AppPath.about)">
+    @if (!isSupportedRegion() && isStaticPage(AppPath.about)) {
       <div
         markdown
         [data]="pageAbout"
         [inline]="false"
       ></div>
-    </ng-container>
+    }
 
     <!-- Privacy page -->
-    <ng-container *ngIf="!isSupportedRegion() && isStaticPage(AppPath.privacy)">
+    @if (!isSupportedRegion() && isStaticPage(AppPath.privacy)) {
       <div
         markdown
         [data]="pagePrivacy"
         [inline]="false"
       ></div>
-    </ng-container>
+    }
   </div>
 
-  <div
-    class="floating-action-area is_bottom-end"
-    *ngIf="isSupportedRegion() && hasContactOptions()"
-  >
-    <span
-      class="contact-button"
-      *ngIf="regionData.contactPhoneNumber"
-    >
-      <a
-        [href]="'tel:' + regionData.contactPhoneNumber"
-        target="_blank"
-        rel="noopener noreferrer"
-        (click)="logContactClick('tel')"
-        class="contact-button--link action is_round"
-      >
-        <img
-          src="assets/icons/contact_phone.png"
-          alt="Phone"
-          loading="lazy"
-          decoding="async"
-          width="48"
-          height="48"
-          class="contact-button--logo"
-        />
-      </a>
-    </span>
-    <span
-      class="contact-button"
-      *ngIf="regionData.contactWhatsAppLink"
-    >
-      <a
-        [href]="regionData.contactWhatsAppLink"
-        target="_blank"
-        rel="noopener noreferrer"
-        (click)="logContactClick('whatsapp')"
-        class="contact-button--link action is_round"
-      >
-        <img
-          src="assets/icons/contact_whatsapp.png"
-          alt="WhatsApp"
-          loading="lazy"
-          decoding="async"
-          width="48"
-          height="48"
-          class="contact-button--logo"
-        />
-      </a>
-    </span>
-    <span
-      class="contact-button"
-      *ngIf="regionData.contactTelegramLink"
-    >
-      <a
-        [href]="regionData.contactTelegramLink"
-        target="_blank"
-        rel="noopener noreferrer"
-        (click)="logContactClick('telegram')"
-        class="contact-button--link action is_round"
-      >
-        <img
-          src="assets/icons/contact_telegram.png"
-          alt="WhatsApp"
-          loading="lazy"
-          decoding="async"
-          width="48"
-          height="48"
-          class="contact-button--logo"
-        />
-      </a>
-    </span>
-  </div>
+  @if (isSupportedRegion() && hasContactOptions()) {
+    <div class="floating-action-area is_bottom-end">
+      @if (regionData.contactPhoneNumber) {
+        <span class="contact-button">
+          <a
+            [href]="'tel:' + regionData.contactPhoneNumber"
+            target="_blank"
+            rel="noopener noreferrer"
+            (click)="logContactClick('tel')"
+            class="contact-button--link action is_round"
+          >
+            <img
+              src="assets/icons/contact_phone.png"
+              alt="Phone"
+              loading="lazy"
+              decoding="async"
+              width="48"
+              height="48"
+              class="contact-button--logo"
+            />
+          </a>
+        </span>
+      }
+      @if (regionData.contactWhatsAppLink) {
+        <span class="contact-button">
+          <a
+            [href]="regionData.contactWhatsAppLink"
+            target="_blank"
+            rel="noopener noreferrer"
+            (click)="logContactClick('whatsapp')"
+            class="contact-button--link action is_round"
+          >
+            <img
+              src="assets/icons/contact_whatsapp.png"
+              alt="WhatsApp"
+              loading="lazy"
+              decoding="async"
+              width="48"
+              height="48"
+              class="contact-button--logo"
+            />
+          </a>
+        </span>
+      }
+      @if (regionData.contactTelegramLink) {
+        <span class="contact-button">
+          <a
+            [href]="regionData.contactTelegramLink"
+            target="_blank"
+            rel="noopener noreferrer"
+            (click)="logContactClick('telegram')"
+            class="contact-button--link action is_round"
+          >
+            <img
+              src="assets/icons/contact_telegram.png"
+              alt="WhatsApp"
+              loading="lazy"
+              decoding="async"
+              width="48"
+              height="48"
+              class="contact-button--logo"
+            />
+          </a>
+        </span>
+      }
+    </div>
+  }
 
   <!-- Add space before footer/bottom-of-viewport -->
   <div><br /><br /><br /></div>
@@ -237,14 +237,17 @@
     class="layout--stick-to-end text-area--alt ion-margin-top"
   >
     <div class="layout--container layout--container_wide">
-      <div *ngIf="!getFooterContent()"><br /><br /><br /></div>
-      <div
-        *ngIf="!!getFooterContent()"
-        markdown
-        [data]="getFooterContent()"
-        [inline]="false"
-        class="ion-padding-top ion-padding-horizontal text-style--size-08"
-      ></div>
+      @if (!getFooterContent()) {
+        <div><br /><br /><br /></div>
+      }
+      @if (!!getFooterContent()) {
+        <div
+          markdown
+          [data]="getFooterContent()"
+          [inline]="false"
+          class="ion-padding-top ion-padding-horizontal text-style--size-08"
+        ></div>
+      }
     </div>
   </footer>
 </ion-content>
