@@ -1,5 +1,4 @@
 import { Component, inject, Input } from '@angular/core';
-import { IonImg } from '@ionic/angular/standalone';
 import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
@@ -14,7 +13,7 @@ import { formatPhoneNumberAsUrl } from 'src/app/shared/utils';
   selector: 'app-offer',
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.css'],
-  imports: [MarkdownModule, IonImg],
+  imports: [MarkdownModule],
 })
 export class OfferComponent {
   private loggingService = inject(LoggingService);

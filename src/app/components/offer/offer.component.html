@@ -2,16 +2,16 @@
   <div class="offer">
     <div>
       <span class="logo-badge offer--float-logo">
-        <ion-img
+        <img
           [src]="
             offer.offerIcon ||
             'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
           "
           alt=""
-          [attr.loading]="'lazy'"
-          [attr.decoding]="'async'"
+          loading="lazy"
+          decoding="async"
           class="logo-badge--image"
-        ></ion-img>
+        />
       </span>
       @if (offer.offerName) {
         <h2 class="text-style--alt text-style--size-2">

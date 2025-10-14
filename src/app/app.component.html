@@ -1,6 +1,6 @@
-<ion-app>
-  <ion-router-outlet [animated]="false"></ion-router-outlet>
-</ion-app>
+<div class="app-root">
+  <router-outlet></router-outlet>
+</div>
 @if (envName) {
   <div class="env-label no-print">
     <span class="env-label--name">{{ envName }}</span>

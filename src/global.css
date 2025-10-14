@@ -1,17 +1,37 @@
-/* http://ionicframework.com/docs/theming/ */
-@import '@ionic/angular/css/core.css';
-@import '@ionic/angular/css/normalize.css';
-@import '@ionic/angular/css/structure.css';
-/* @import '@ionic/angular/css/typography.css'; */
-/* @import '@ionic/angular/css/display.css'; */
-@import '@ionic/angular/css/padding.css';
-/* @import '@ionic/angular/css/float-elements.css'; */
-/* @import '@ionic/angular/css/text-alignment.css'; */
-/* @import '@ionic/angular/css/text-transformation.css'; */
-/* @import '@ionic/angular/css/flex-utils.css'; */
-
 /* Baseline Print styles */
 @import '_print.css';
+
+/* Custom utility classes to replace Ionic CSS */
+/* Reset and normalize styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Utility classes for margins and padding */
+.ion-no-margin { margin: 0 !important; }
+.ion-margin { margin: 16px !important; }
+.ion-margin-top { margin-top: 16px !important; }
+.ion-margin-bottom { margin-bottom: 16px !important; }
+.ion-margin-vertical { margin-top: 16px !important; margin-bottom: 16px !important; }
+.ion-margin-horizontal { margin-left: 16px !important; margin-right: 16px !important; }
+
+.ion-padding { padding: 16px !important; }
+.ion-padding-top { padding-top: 16px !important; }
+.ion-padding-bottom { padding-bottom: 16px !important; }
+.ion-padding-vertical { padding-top: 16px !important; padding-bottom: 16px !important; }
+.ion-padding-horizontal { padding-left: 16px !important; padding-right: 16px !important; }
+
+/* Color classes */
+.ion-color-light {
+  background-color: #f8f9fa;
+  color: #000;
+}
 
 /*
 Configuration Variables

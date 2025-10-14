@@ -9,7 +9,6 @@ import {
   RouterLink,
   RouterOutlet,
 } from '@angular/router';
-import { IonContent, IonHeader } from '@ionic/angular/standalone';
 import { MarkdownComponent } from 'ngx-markdown';
 import { filter } from 'rxjs';
 import { AppHeaderComponent } from 'src/app/components/header/header.component';
@@ -36,14 +35,7 @@ import { AppPath } from 'src/routes';
   selector: 'app-referral',
   templateUrl: 'referral.page.html',
   styleUrls: ['referral.page.css'],
-  imports: [
-    AppHeaderComponent,
-    MarkdownComponent,
-    RouterLink,
-    RouterOutlet,
-    IonHeader,
-    IonContent,
-  ],
+  imports: [AppHeaderComponent, MarkdownComponent, RouterLink, RouterOutlet],
 })
 export class ReferralPageComponent implements OnInit {
   private offersService = inject(OffersService);
@@ -57,7 +49,7 @@ export class ReferralPageComponent implements OnInit {
   private configService = inject(ConfigService);
 
   @ViewChild('content')
-  private content: IonContent;
+  private content: HTMLElement;
 
   public region: string;
   public regionSets: RegionSet[];
@@ -104,7 +96,7 @@ export class ReferralPageComponent implements OnInit {
       .subscribe(() => {
         if (this.content) {
           // To prevent a confusing scroll-position inherited from a previous page:
-          this.content.scrollToTop(0);
+          this.content.scrollTo(0, 0);
         }
       });
 

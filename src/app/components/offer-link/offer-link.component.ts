@@ -1,7 +1,6 @@
 import { SlicePipe } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonImg } from '@ionic/angular/standalone';
 import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
@@ -14,7 +13,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-offer-link',
   templateUrl: './offer-link.component.html',
   styleUrls: ['./offer-link.component.css'],
-  imports: [MarkdownModule, IonImg, RouterLink, SlicePipe],
+  imports: [MarkdownModule, RouterLink, SlicePipe],
 })
 export class OfferLinkComponent {
   private loggingService = inject(LoggingService);
