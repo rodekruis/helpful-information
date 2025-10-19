@@ -13,6 +13,7 @@ data/**/values/*.json
 !data/test-sheet-id-3-language-ar/values/*.json
 
 # Generated code
+dist
 www
 coverage
 .angular/cache/
