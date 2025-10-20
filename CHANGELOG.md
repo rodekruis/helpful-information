@@ -9,6 +9,10 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v25.08.0...main)
 
+### Added
+
+- Support for GoatCounter third-party analytics-service. See: [`ENV`](.env.example) for `GOATCOUNTER_CONNECTION_STRING`.
+
 ---
 
 ## 2025-08-28: [v25.08.0](https://github.com/rodekruis/helpful-information/releases/tag/v25.08.0)

@@ -44,6 +44,7 @@ export const environment = {
   google_sheets_api_key: '${process.env.GOOGLE_SHEETS_API_KEY || ''}',
   google_sheets_api_url: '${process.env.GOOGLE_SHEETS_API_URL || ''}',
   matomoConnectionString: '${process.env.MATOMO_CONNECTION_STRING || ''}',
+  goatCounterConnectionString: '${process.env.GOATCOUNTER_CONNECTION_STRING || ''}',
   appInsightsConnectionString: '${process.env.AI_CONNECTION_STRING || ''}',
 };
 `;

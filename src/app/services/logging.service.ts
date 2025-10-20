@@ -7,10 +7,20 @@ import {
 } from 'src/app/models/logging-event.enum';
 import { environment } from 'src/environments/environment';
 
-// Decraling the Matomo-based 'data-store'
+// Declaring external 'data-store's / APIs
 declare global {
   interface Window {
+    // Matomo API
     _paq?: any[];
+    // GoatCounter API
+    goatcounter?: {
+      allow_local?: boolean;
+      count?: (params: {
+        path?: string;
+        title?: string;
+        event?: boolean;
+      }) => void;
+    };
   }
 }
 
@@ -20,15 +30,18 @@ declare global {
 export class LoggingService {
   matomoInitialized: boolean;
 
+  goatCounterInitialized: boolean;
+
   appInsights: ApplicationInsights;
   appInsightsInitialized: boolean;
 
   constructor() {
     this.setupMatomo();
+    this.setupGoatCounter();
     this.setupApplicationInsights();
   }
 
-  private parseMatomoInfo(connectionString: string | undefined) {
+  private parseConnectionStringInfo(connectionString: string | undefined) {
     const properties = ['id', 'api', 'sdk'];
     const connection: { id?: string; api?: string; sdk?: string } = {};
     if (typeof connectionString === 'string') {
@@ -44,7 +57,9 @@ export class LoggingService {
   }
 
   private setupMatomo() {
-    const connection = this.parseMatomoInfo(environment.matomoConnectionString);
+    const connection = this.parseConnectionStringInfo(
+      environment.matomoConnectionString,
+    );
 
     if (!connection.id || !connection.api || !connection.sdk) {
       return;
@@ -66,6 +81,26 @@ export class LoggingService {
       document.head.appendChild(script);
 
       this.matomoInitialized = true;
+    })();
+  }
+
+  private setupGoatCounter() {
+    const connection = this.parseConnectionStringInfo(
+      environment.goatCounterConnectionString,
+    );
+
+    if (!connection.api || !connection.sdk) {
+      return;
+    }
+
+    (() => {
+      const script = document.createElement('script');
+      script.async = true;
+      script.dataset.goatcounter = connection.api;
+      script.src = connection.sdk;
+      document.head.appendChild(script);
+
+      this.goatCounterInitialized = true;
     })();
   }
 
