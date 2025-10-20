@@ -114,6 +114,9 @@ This is an example of a [Helpful Information App](https://github.com/rodekruis/h
   // Matomo: (Format: "id=<site-id-number>;api=<url+path/php-filename>;sdk=<url+path/js-filename>")
   matomoConnectionString: '',
   //
+  // GoatCounter: (Format: "api=https://<your-code>.goatcounter.com/count;sdk=https://gc.zgo.at/count.js")
+  goatCounterConnectionString: '',
+  //
   // Application Insights:
   appInsightsConnectionString: '',
 };
