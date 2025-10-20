@@ -26,6 +26,7 @@ import {
   getFullUrl,
 } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
+import { withoutTrailingSlash } from 'ufo';
 
 enum SheetName {
   config = 'Referral Page',
@@ -64,7 +65,8 @@ export class SpreadsheetService {
 
   private getSheetUrl(region: string, sheetName: SheetName): string {
     const sheetId = this.configService.getRegionByRegionSlug(region)?.sheetId;
-    return `${environment.google_sheets_api_url}/${sheetId}/values/${sheetName}?key=${environment.google_sheets_api_key}&alt=json&prettyPrint=false`;
+    const apiUrl = withoutTrailingSlash(environment.google_sheets_api_url);
+    return `${apiUrl}/${sheetId}/values/${sheetName}?key=${environment.google_sheets_api_key}&alt=json&prettyPrint=false`;
   }
 
   private getIndexOfTag(collection: string[], tagName: string) {
