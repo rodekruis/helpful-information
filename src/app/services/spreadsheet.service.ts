@@ -21,6 +21,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { LoggingService } from 'src/app/services/logging.service';
 import { createLocaleAlternatives } from 'src/app/shared/util.locales';
 import {
+  createKeyValueList,
   createSlug,
   getDateFromString,
   getFullUrl,
@@ -757,7 +758,11 @@ export class SpreadsheetService {
           ? LoggingEvent.NotFoundParentQuestionIsSelf
           : LoggingEvent.NotFoundParentQuestion;
       this.loggingService.logEvent(LoggingEventCategory.error, errorType, {
-        name: `row=${element.id};slug=${element.slug};parent=${element.parentSlug}`,
+        name: createKeyValueList({
+          row: element.id,
+          slug: element.slug,
+          parent: element.parentSlug,
+        }),
         row: element.id,
         slug: element.slug,
         parentSlug: element.parentSlug,
