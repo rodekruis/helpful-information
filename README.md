@@ -18,9 +18,9 @@ Latest releases and notable changes are in the [CHANGELOG](CHANGELOG.md).
 
 ## How it works
 
-The Helpful Information App (HIA) is a web-app that can show a list of 1 or more "_regions_", each of which is a separate dataset of structured content. This consists of "_Offers_", sorted in "_Categories_" and (optional) "_Sub-Categories_".
+The Helpful Information App (HIA) is a web-app that can show a list of 1 or more "_Regions_", each of which is a separate dataset of structured content. This consists of "_Offers_", sorted in "_Categories_" and (optional) "_Sub-Categories_".
 
-The web-app is a pre-build, static web-app that lists links to "regions", which are all separate data-sources contained in Google Sheets 'files'.
+The web-app is a pre-build, static web-app that lists links to "Regions", which are all separate data-sources contained in Google Sheets 'files'.
 
 The different sheets within these 'files' each have a different data-model. So that their content can be used to display in the web-app.
 
@@ -174,7 +174,7 @@ Then, run the tests with:
 
 - [Ionic v8](https://ionicframework.com/docs/)
   > ⚠️ The [`Ionicons`](https://ionic.io/ionicons) icon-set is NOT included in the final build, so cannot be used 'by default'. Icons can be added manually.
-- [Angular v18](https://v18.angular.io/docs/)
+- [Angular](https://angular.dev/docs/)
 - [`ngx-markdown`](https://www.npmjs.com/package/ngx-markdown) is used to process Markdown-content into HTML. _No_ optional dependencies are included/used.
 
 ### Updating dependencies
@@ -321,7 +321,7 @@ Each Instance:
   - has a `Google Spreadsheet ID`, a 44-character string (from: `https://docs.google.com/spreadsheets/d/`**`___SPREADSHEET_ID___`**`/edit?usp=sharing`)
 
 - can have a customized 'color scheme' (and other CSS), by adjusting the contents of the [`overrides.css`](./src/theme/overrides.css)-file.  
-  This needs to be done _before_ building the web-app. (See for example: `[.github/workflows/deploy-staging.yml`](.github/workflows/deploy-staging.yml#L50)).
+  This needs to be done _before_ building the web-app. (See for example: [`.github/workflows/deploy-staging.yml`](.github/workflows/deploy-staging.yml#L50)).
 
 ### Sheet level configuration
 
