@@ -42,6 +42,8 @@ jobs:
         run: npm test
 
       - name: Prepare Environment
+        env:
+          HUSKY: 0
         run: |
           npm run setup
           npm run setup:e2e
