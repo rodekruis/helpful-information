@@ -145,13 +145,24 @@ To use a local API, without the need for any Google account/credentials:
 
 ### Testing
 
-Automated tests are configured and can be run (once) with:
+Unit-tests are configured and can be run (once) with:
 
     npm test
 
 During development, an automated watch-process can be run with:
 
     npm run test:watch
+
+#### E2E-tests
+
+End-to-End (E2E) tests are included, using [Playwright](https://playwright.dev/).
+Make sure all dependencies are installed, with:
+
+    npm run setup:e2e
+
+Then, run the tests with:
+
+    npm run test:e2e
 
 ### Recommended tools
 

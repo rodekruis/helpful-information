@@ -12,6 +12,7 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 ### Added
 
 - Support for GoatCounter third-party analytics-service. See: [`ENV`](.env.example) for `GOATCOUNTER_CONNECTION_STRING`.
+- (Basic) E2E-tests using Playwright. See: [`README / E2E-tests`](./README.md#e2e-tests) for more information.
 
 ---
 
