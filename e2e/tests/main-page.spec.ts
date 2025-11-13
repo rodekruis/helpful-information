@@ -7,10 +7,10 @@ test.describe('Main-page', () => {
     // Verify the page contents
     await expect(page).toHaveTitle(/Helpful Information/);
     await expect(page.getByRole('heading', { level: 2 })).toHaveText(
-      'The Red Cross provides Helpful Information.',
+      'The Red Cross provides helpful information.',
     );
-    await expect(page.getByRole('paragraph')).toHaveText(
-      'Please choose a location.',
+    await expect(page.getByRole('paragraph').last()).toHaveText(
+      'Please select your region:',
     );
   });
 
@@ -18,9 +18,12 @@ test.describe('Main-page', () => {
     await page.goto('/');
 
     // Verify the page contents
-    await expect(page.getByRole('list')).toBeVisible();
+    // await expect(page.getByTestId('region-list')).toHaveRole('list');
+    await expect(page.getByTestId('region-list')).toBeVisible();
     await expect(
-      page.getByRole('listitem', { includeHidden: false }),
-    ).toHaveCount(3);
+      page
+        .getByTestId('region-list')
+        .getByRole('listitem', { includeHidden: false }),
+    ).toHaveCount(4);
   });
 });
