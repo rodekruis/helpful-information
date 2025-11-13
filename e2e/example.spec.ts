@@ -18,6 +18,6 @@ test.describe('Homepage', () => {
     await page.waitForLoadState('networkidle');
 
     // Verify the page loaded without errors by checking the URL
-    expect(page.url()).toContain('localhost:4200');
+    expect(page.url()).toContain('localhost:8080');
   });
 });
