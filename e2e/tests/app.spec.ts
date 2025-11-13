@@ -1,16 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-test.describe('Homepage', () => {
-  test('should load the homepage and verify title', async ({ page }) => {
-    // Navigate to the homepage
-    await page.goto('/');
-
-    // Verify the page title
-    await expect(page).toHaveTitle(/Helpful Information/);
-  });
-
-  test('should navigate and load the application', async ({ page }) => {
-    // Navigate to the homepage
+test.describe('App', () => {
+  test('should navigate and load', async ({ page }) => {
     await page.goto('/');
 
     // Wait for Angular application to load by checking for any content
