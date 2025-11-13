@@ -20,6 +20,11 @@ coverage
 .nx/
 tsconfig.tsbuildinfo
 
+# Playwright test results
+test-results
+playwright-report
+playwright/.cache
+
 # Third party code
 node_modules
 
