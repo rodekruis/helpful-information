@@ -33,10 +33,18 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command:
-      'npm run build:production -- --configuration=test && npm run serve:production',
-    url: 'http://localhost:8080',
-    reuseExistingServer: !IS_CI,
-  },
+  webServer: [
+    {
+      name: 'data-server',
+      command: 'npm run serve:local-data',
+      url: 'http://localhost:3003',
+      reuseExistingServer: !IS_CI,
+    },
+    {
+      name: 'client',
+      command: 'npm run build:e2e && npm run serve:production',
+      url: 'http://localhost:8080',
+      reuseExistingServer: !IS_CI,
+    },
+  ],
 });

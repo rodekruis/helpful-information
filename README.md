@@ -134,7 +134,7 @@ To use a local API, without the need for any Google account/credentials:
        regionsSheetIds: 'test-sheet-id-1',
 
        google_sheets_api_key: '<can be anything, will be ignored>';
-       google_sheets_api_url: 'http://localhost:3001',
+       google_sheets_api_url: 'http://localhost:3003',
    ```
 
 2. Run (in a separate process/terminal):
