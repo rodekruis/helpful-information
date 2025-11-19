@@ -11,9 +11,8 @@ export default defineConfig({
   forbidOnly: IS_CI,
   retries: IS_CI ? 2 : 0,
   workers: IS_CI ? 1 : undefined,
-  reporter: IS_CI
-    ? 'github'
-    : 'list' /* See: https://playwright.dev/docs/test-reporters */,
+  /* See: https://playwright.dev/docs/test-reporters */
+  reporter: IS_CI ? [['list'], ['github']] : 'list',
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
