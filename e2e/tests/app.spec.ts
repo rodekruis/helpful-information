@@ -9,6 +9,6 @@ test.describe('App', () => {
     await page.waitForLoadState('networkidle');
 
     // Verify the page loaded without errors by checking the URL
-    expect(page.url()).toContain('localhost:8080');
+    expect(page.url()).toMatch(/\/$/);
   });
 });
