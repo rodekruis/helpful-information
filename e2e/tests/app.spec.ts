@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('App', () => {
-  test('should navigate and load', async ({ page }) => {
+  test('should load', async ({ page }) => {
     await page.goto('/');
 
     // Wait for Angular application to load by checking for any content
