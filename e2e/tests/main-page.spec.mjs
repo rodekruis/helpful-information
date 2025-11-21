@@ -26,7 +26,7 @@ test.describe('Main-page', () => {
     await expect(
       page
         .getByTestId('region-list')
-        .getByRole('listitem', { includeHidden: false }),
+        .getByRole('listitem', { includeHidden: false })
     ).toHaveCount(4);
   });
 });

@@ -111,7 +111,10 @@ With MarkDown and/or HTML content:`,
 
     await expect(regionPage.categoryList.first()).toBeVisible();
     await expect(regionPage.categoryList.first().locator('img')).toBeVisible();
-    const src = await regionPage.categoryList.first().locator('img').getAttribute('src');
+    const src = await regionPage.categoryList
+      .first()
+      .locator('img')
+      .getAttribute('src');
     expect(src).not.toBeNull();
     expect(src.startsWith('data:image/svg+xml,')).toBeTruthy();
   });
@@ -121,8 +124,8 @@ With MarkDown and/or HTML content:`,
     await regionPage.goto('test-local-1');
 
     const href = await regionPage.categoryList
-          .filter({ hasText: 'Single Level' })
-          .getAttribute('href');
+      .filter({ hasText: 'Single Level' })
+      .getAttribute('href');
     expect(href).not.toBeNull();
     expect(href.endsWith('/single-level/single-level')).toBeTruthy();
   });
