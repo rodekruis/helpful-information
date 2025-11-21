@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { RegionPage } from 'e2e/pages/RegionPage';
 
-test.describe('RegionPage', () => {
+test.describe('Region-page', () => {
   test('title and introduction', async ({ page }) => {
     const regionPage = new RegionPage(page);
     await regionPage.goto('test-local-1');

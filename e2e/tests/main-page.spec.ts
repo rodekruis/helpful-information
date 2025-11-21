@@ -18,7 +18,7 @@ test.describe('Main-page', () => {
     await page.goto('/');
 
     // Verify the page contents
-    // await expect(page.getByTestId('region-list')).toHaveRole('list');
+    await expect(page.getByTestId('region-list')).toHaveRole('list');
     await expect(page.getByTestId('region-list')).toBeVisible();
     await expect(
       page
