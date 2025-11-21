@@ -111,23 +111,19 @@ With MarkDown and/or HTML content:`,
 
     await expect(regionPage.categoryList.first()).toBeVisible();
     await expect(regionPage.categoryList.first().locator('img')).toBeVisible();
-    await expect(
-      (
-        await regionPage.categoryList.first().locator('img').getAttribute('src')
-      ).startsWith('data:image/svg+xml,'),
-    ).toBeTruthy();
+    const src = await regionPage.categoryList.first().locator('img').getAttribute('src');
+    expect(src).not.toBeNull();
+    expect(src.startsWith('data:image/svg+xml,')).toBeTruthy();
   });
 
   test('deep-link of category with single sub-category', async ({ page }) => {
     const regionPage = new RegionPage(page);
     await regionPage.goto('test-local-1');
 
-    expect(
-      (
-        await regionPage.categoryList
+    const href = await regionPage.categoryList
           .filter({ hasText: 'Single Level' })
-          .getAttribute('href')
-      ).endsWith('/single-level/single-level'),
-    ).toBeTruthy();
+          .getAttribute('href');
+    expect(href).not.toBeNull();
+    expect(href.endsWith('/single-level/single-level')).toBeTruthy();
   });
 });

@@ -4,7 +4,7 @@ import { expect, test } from '@playwright/test';
  * @param {import('@playwright/test').Page} page
  */
 test.describe('Main-page', () => {
-  test('should load and contain all the correct contents', async ({ page }) => {
+  test('basic contents', async ({ page }) => {
     await page.goto('/');
 
     // Verify the page contents
@@ -17,7 +17,7 @@ test.describe('Main-page', () => {
     );
   });
 
-  test('should show a list of Region-buttons', async ({ page }) => {
+  test('list of Region-buttons', async ({ page }) => {
     await page.goto('/');
 
     // Verify the page contents

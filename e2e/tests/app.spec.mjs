@@ -7,11 +7,10 @@ test.describe('App', () => {
   test('should load', async ({ page }) => {
     await page.goto('/');
 
-    // Wait for Angular application to load by checking for any content
-    // The app uses ion-router-outlet which should be present
+    // Wait for app to finish loading
     await page.waitForLoadState('networkidle');
 
-    // Verify the page loaded without errors by checking the URL
+    // TODO: Verify the page loaded without errors by something more specific/better
     expect(page.url()).toMatch(/\/$/);
   });
 });
