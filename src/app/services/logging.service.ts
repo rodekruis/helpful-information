@@ -189,7 +189,11 @@ export class LoggingService {
         category === LoggingEventCategory.ai ? '_' : `_${category}`;
       let eventDetails = '';
 
-      if (properties && Object.keys(properties).length === 1 && !!properties.name) {
+      if (
+        properties &&
+        Object.keys(properties).length === 1 &&
+        !!properties.name
+      ) {
         eventDetails = properties.name;
       } else if (properties && Object.keys(properties).length > 1) {
         eventDetails = createKeyValueList(properties);
