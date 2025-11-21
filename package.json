@@ -23,7 +23,7 @@
     "upgrade:angular": "ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits",
     "lint": "npm run lint:syntax && npm run lint:typecheck && npm run lint:code && npm run lint:e2e",
     "lint:code": "ng lint",
-    "lint:e2e": "eslint e2e/**/*.ts",
+    "lint:e2e": "eslint e2e/**/*",
     "lint:syntax": "prettier --check \"**/*.{md,yml,json,scss}\"",
     "lint:typecheck": "npx tsc --noEmit",
     "fix:code": "npm run lint:code -- --fix",
@@ -101,6 +101,6 @@
   },
   "lint-staged": {
     "*.{md,yml,json,scss}": "prettier --write",
-    "*.{js,ts,html}": "eslint --fix"
+    "*.{js,mjs,ts,html}": "eslint --fix"
   }
 }

@@ -1,3 +1,7 @@
+/**
+ * @typedef {import('@playwright/test').PlaywrightTestConfig} PlaywrightTestConfig
+ * @typedef {import('@playwright/test').Devices} Devices
+ */
 import { defineConfig, devices } from '@playwright/test';
 
 const IS_CI = !!process.env.CI;

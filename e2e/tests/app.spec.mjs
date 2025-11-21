@@ -1,5 +1,8 @@
 import { expect, test } from '@playwright/test';
 
+/**
+ * @param {import('@playwright/test').Page} page
+ */
 test.describe('App', () => {
   test('should load', async ({ page }) => {
     await page.goto('/');

@@ -1,6 +1,10 @@
 import { expect, test } from '@playwright/test';
-import { RegionPage } from 'e2e/pages/RegionPage';
 
+import { RegionPage } from '../pages/RegionPage.mjs';
+
+/**
+ * @param {import('@playwright/test').Page} page
+ */
 test.describe('Region-page', () => {
   test('title and introduction', async ({ page }) => {
     const regionPage = new RegionPage(page);
