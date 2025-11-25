@@ -116,7 +116,7 @@ With MarkDown and/or HTML content:`,
       .locator('img')
       .getAttribute('src');
     expect(src).not.toBeNull();
-    expect(src.startsWith('data:image/svg+xml,')).toBeTruthy();
+    expect(src?.startsWith('data:image/svg+xml,')).toBeTruthy();
   });
 
   test('deep-link of category with single sub-category', async ({ page }) => {
@@ -127,6 +127,6 @@ With MarkDown and/or HTML content:`,
       .filter({ hasText: 'Single Level' })
       .getAttribute('href');
     expect(href).not.toBeNull();
-    expect(href.endsWith('/single-level/single-level')).toBeTruthy();
+    expect(href?.endsWith('/single-level/single-level')).toBeTruthy();
   });
 });
