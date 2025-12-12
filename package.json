@@ -10,21 +10,26 @@
     "build": "ng build",
     "build:production": "npm run build -- --configuration=production",
     "postbuild:production": "node ./scripts/fix-output-path.js",
+    "build:e2e": "npm run build:production -- --configuration=test",
     "preserve:production": "cp www/index.html www/404.html",
     "serve:production": "npx http-server ./www/ -c-1",
     "start:production": "npm run build:production && npm run serve:production",
     "pretest": "npm run lint",
     "test": "ng test --configuration=ci",
     "test:watch": "ng test --configuration=development",
-    "serve:local-data": "npx http-server ./data/ --port=3001 --cors='*' -i=false -c=-1 --ext=json",
+    "setup:e2e": "playwright install --with-deps --no-shell chromium",
+    "test:e2e": "playwright test",
+    "serve:local-data": "npx http-server ./data/ --port=3003 --cors='*' -i=false -c=-1 --ext=json",
     "upgrade:angular": "ng update @angular/core @angular/cli @angular-eslint/schematics --create-commits",
-    "lint": "npm run lint:syntax && npm run lint:typecheck && npm run lint:code",
+    "lint": "npm run lint:syntax && npm run lint:typecheck && npm run lint:code && npm run lint:e2e",
     "lint:code": "ng lint",
+    "lint:e2e": "tsc --noEmit --project e2e && eslint --env node e2e/**/*.mjs",
     "lint:syntax": "prettier --check \"**/*.{md,yml,json,scss}\"",
     "lint:typecheck": "npx tsc --noEmit",
     "fix:code": "npm run lint:code -- --fix",
+    "fix:e2e": "npm run lint:e2e -- --fix",
     "fix:syntax": "npm run lint:syntax -- --write",
-    "fix": "npm run fix:code && npm run fix:syntax"
+    "fix": "npm run fix:code && npm run fix:e2e && npm run fix:syntax"
   },
   "private": true,
   "engines": {
@@ -62,6 +67,7 @@
     "@angular/language-service": "^20.3.4",
     "@ionic/angular-toolkit": "^12.3.0",
     "@microsoft/applicationinsights-debugplugin-js": "^3.3.10",
+    "@playwright/test": "^1.56.1",
     "@types/eslint": "^8.56.12",
     "@types/jasmine": "^5.1.9",
     "@types/node": "^20.19.21",
@@ -95,6 +101,6 @@
   },
   "lint-staged": {
     "*.{md,yml,json,scss}": "prettier --write",
-    "*.{js,ts,html}": "eslint --fix"
+    "*.{js,mjs,ts,html}": "eslint --fix"
   }
 }

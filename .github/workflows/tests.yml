@@ -36,7 +36,18 @@ jobs:
       - name: Install
         env:
           HUSKY: 0
-        run: npm ci --no-fund --no-audit
+        run: npm ci
 
       - name: Run Tests
         run: npm test
+
+      - name: Prepare Environment
+        env:
+          HUSKY: 0
+        run: |
+          npm run setup
+          npm run setup:e2e
+
+      - name: Run E2E-Tests
+        run: |
+          npm run test:e2e
