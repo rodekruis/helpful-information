@@ -27,7 +27,7 @@
     [tabindex]="-1"
     class="focus--minimal focus--fade-out"
   >
-    @if (useSearchApi && loadingSearch) {
+    @if (loadingSearch) {
       <div>
         <span
           class="loading-text"
@@ -43,20 +43,21 @@
           style="width: 75%"
         ></span>
       </div>
-    }
-    @if (!!searchQuery && !loadingSearch && searchResults?.length) {
-      <p>
-        {{ regionData?.labelSearchResultsCount }}
-        <strong>{{ searchResults?.length }}</strong>
-      </p>
-    }
-    @if (!!searchQuery && !loadingSearch) {
-      <app-q-a-set-list
-        [baseUrl]="'../'"
-        [list]="searchResults"
-        [showDateUpdatedOutsideQuestion]="false"
-        class="ion-margin-vertical"
-      ></app-q-a-set-list>
+    } @else {
+      @if (searchResults.length === 0) {
+        <p>No results found</p>
+      } @else {
+        <p>
+          {{ regionData?.labelSearchResultsCount }}
+          <strong>{{ searchResults?.length }}</strong>
+        </p>
+        <app-q-a-set-list
+          [baseUrl]="'../'"
+          [list]="searchResults"
+          [showDateUpdatedOutsideQuestion]="false"
+          class="ion-margin-vertical"
+        ></app-q-a-set-list>
+      }
     }
   </section>
 }
