@@ -191,6 +191,7 @@ export default class SearchPageComponent implements OnInit {
     });
 
     if (!response || !response.ok) {
+      // TODO: change to console.error?
       console.warn('Something went wrong:', response);
       return {
         results: [],
