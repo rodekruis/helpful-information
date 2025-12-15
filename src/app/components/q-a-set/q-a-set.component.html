@@ -6,7 +6,7 @@
     <small>
       {{ labelLastUpdated }}
       <time [attr.datetime]="date | date: 'yyyy-MM-dd'">
-        {{ date | date: "d-MM-''YY" }}
+        {{ date | date: 'dd-MM-y' }}
       </time>
     </small>
   }

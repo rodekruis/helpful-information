@@ -12,7 +12,7 @@ import { ngxMarkdownModuleFactory } from 'src/main';
 import { QASetListComponent } from './q-a-set-list.component';
 
 const testDate = new Date('2022-02-22');
-const testDateFormatted = "22-02-'22";
+const testDateFormatted = '22-02-2022';
 
 const mockList = [
   {
