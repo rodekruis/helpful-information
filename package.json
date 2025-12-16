@@ -45,7 +45,6 @@
     "@angular/router": "^20.3.4",
     "@angular/service-worker": "^20.3.4",
     "@ionic/angular": "^8.7.6",
-    "@ionic/cli": "^7.2.1",
     "@microsoft/applicationinsights-web": "^3.3.10",
     "marked": "^16.4.0",
     "ngx-markdown": "^20.1.0",
