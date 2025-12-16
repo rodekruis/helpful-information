@@ -70,17 +70,34 @@ export class SpreadsheetService {
     return `${apiUrl}/${sheetId}/values/${sheetName}?key=${environment.google_sheets_api_key}&alt=json&prettyPrint=false`;
   }
 
-  private getIndexOfTag(collection: string[], tagName: string) {
-    const tag = `#${tagName.toUpperCase()}`;
-    return collection.findIndex((value: string) => {
-      return value.toUpperCase().indexOf(tag) !== -1;
+  private getIndexOfTag({
+    collection,
+    tagName,
+  }: {
+    collection: string[];
+    tagName: string;
+  }) {
+    tagName = tagName.toUpperCase();
+    const index = collection.findIndex((value: string) => {
+      const collectionTag = value.split('#')[1];
+      if (!collectionTag) {
+        return false;
+      }
+      return collectionTag.toUpperCase() === tagName;
     });
+    return index;
   }
 
-  private createKeyMap(keys: string[], collection: string[]): KeyMap {
+  private createKeyMap({
+    tagNames,
+    collection,
+  }: {
+    tagNames: string[];
+    collection: string[];
+  }): KeyMap {
     const keyMap: KeyMap = new Map();
-    keys.forEach((keyName: string) => {
-      keyMap.set(keyName, this.getIndexOfTag(collection, keyName));
+    tagNames.forEach((tagName: string) => {
+      keyMap.set(tagName, this.getIndexOfTag({ collection, tagName }));
     });
     return keyMap;
   }
@@ -198,10 +215,10 @@ export class SpreadsheetService {
           );
         }
         const headerRow = response.values[0];
-        const categoriesColumnMap = this.createKeyMap(
-          Object.values(CategoryCol),
-          headerRow,
-        );
+        const categoriesColumnMap = this.createKeyMap({
+          tagNames: Object.values(CategoryCol),
+          collection: headerRow,
+        });
 
         return response.values
           .slice(1) // Remove header-row
@@ -267,10 +284,10 @@ export class SpreadsheetService {
           );
         }
         const headerRow = response.values[0];
-        const subCategoryColumnMap = this.createKeyMap(
-          Object.values(SubCategoryCol),
-          headerRow,
-        );
+        const subCategoryColumnMap = this.createKeyMap({
+          tagNames: Object.values(SubCategoryCol),
+          collection: headerRow,
+        });
 
         return response.values
           .slice(1) // Remove header-row
@@ -379,10 +396,10 @@ export class SpreadsheetService {
           );
         }
         const headerRow = response.values[0];
-        const offerColumnMap = this.createKeyMap(
-          Object.values(OfferCol),
-          headerRow,
-        );
+        const offerColumnMap = this.createKeyMap({
+          tagNames: Object.values(OfferCol),
+          collection: headerRow,
+        });
 
         return response.values
           .slice(1) // Remove header-row
@@ -673,20 +690,21 @@ export class SpreadsheetService {
         }
         const regionRows = response.values;
         const headerRow = regionRows[0];
-        const regionColumnMap = this.createKeyMap(
-          Object.values(RegionCol),
-          headerRow,
-        );
+        const regionColumnMap = this.createKeyMap({
+          tagNames: Object.values(RegionCol),
+          collection: headerRow,
+        });
         const valueCol = this.getIndexOrFallback(
           regionColumnMap.get(RegionCol.value),
           1,
         );
 
         const keysCol = this.createKeysCollection(regionRows, regionColumnMap);
-        const regionRowMap = this.createKeyMap(
-          Object.values(RegionDataKey),
-          keysCol,
-        );
+
+        const regionRowMap = this.createKeyMap({
+          tagNames: Object.values(RegionDataKey),
+          collection: keysCol,
+        });
 
         return this.convertConfigSheetToRegionData(
           regionRows,
@@ -790,7 +808,10 @@ export class SpreadsheetService {
           );
         }
         const headerRow = response.values[0];
-        const qaColumnMap = this.createKeyMap(Object.values(QACol), headerRow);
+        const qaColumnMap = this.createKeyMap({
+          tagNames: Object.values(QACol),
+          collection: headerRow,
+        });
 
         return response.values
           .slice(1) // Remove header-row
