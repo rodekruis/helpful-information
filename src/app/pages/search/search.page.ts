@@ -123,23 +123,12 @@ export default class SearchPageComponent implements OnInit {
     const safeQuery = this.searchService.sanitizeSearchQuery(query);
 
     if (this.useSearchApi) {
-      this.loadingSearch = true;
-      const apiResponse: SearchApiResponse =
-        await this.fetchApiResults(safeQuery);
-
-      if (apiResponse) {
-        this.loadingSearch = false;
-      }
-      if (apiResponse && apiResponse.results) {
-        this.searchResults = await this.createSearchResults(
-          apiResponse.results,
-        );
-      }
+      this.performApiSearchOrFallback({ safeQuery });
     } else {
-      this.searchResults = this.searchService.query(safeQuery);
+      this.performLocalSearch({ safeQuery });
     }
 
-    if (this.searchResults.length > 1) {
+    if (this.searchResults?.length > 1) {
       this.pageMeta.setTitle({
         pageName: `${this.regionData?.labelSearchPageTitle} (${this.searchResults.length})`,
         region: this.region,
@@ -150,6 +139,35 @@ export default class SearchPageComponent implements OnInit {
         resultFrame.focus();
       }
     }
+  }
+
+  private async performApiSearchOrFallback({
+    safeQuery,
+  }: {
+    safeQuery: string;
+  }): Promise<void> {
+    this.loadingSearch = true;
+
+    let apiResponse: SearchApiResponse;
+    try {
+      apiResponse = await this.fetchApiResults(safeQuery);
+    } catch (_error) {
+      this.performLocalSearch({ safeQuery });
+    }
+
+    this.loadingSearch = false;
+
+    if (apiResponse && apiResponse.results) {
+      this.searchResults = await this.createSearchResults(apiResponse.results);
+    }
+  }
+
+  private async performLocalSearch({
+    safeQuery,
+  }: {
+    safeQuery: string;
+  }): Promise<void> {
+    this.searchResults = this.searchService.query(safeQuery);
   }
 
   private async createSearchResults(
@@ -191,10 +209,8 @@ export default class SearchPageComponent implements OnInit {
     });
 
     if (!response || !response.ok) {
-      console.warn('Something went wrong:', response);
-      return {
-        results: [],
-      };
+      console.error('SearchPage: Search API Request failed:', response);
+      throw new Error('SearchPage: Search API Request failed');
     }
 
     const body: SearchApiResponse = await response.json();
