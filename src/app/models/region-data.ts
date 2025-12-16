@@ -11,6 +11,7 @@ export type RegionData = {
   feedbackShareCta?: string;
   feedbackShareUrl?: string;
   feedbackThanks?: string;
+  labelError?: string;
   labelFeedbackCta?: string;
   labelHighlightsButton?: string;
   labelHighlightsItemsCount?: string;
@@ -73,6 +74,7 @@ export enum RegionDataKey {
   highlightsItems = 'highlights.items',
   highlightsItemsZero = 'highlights.items.0',
   highlightsTitle = 'highlights.title',
+  labelError = 'label.error',
   labelFeedbackCta = 'label.feedback.cta',
   labelLastUpdated = 'label.last-updated',
   localeAlternatives = 'locale.alternatives',
@@ -95,7 +97,6 @@ export enum RegionDataKey {
   offerWebsite = 'offer.website',
   searchCta = 'search.cta',
   searchItems = 'search.items',
-  searchItemsZero = 'search.items.0',
   searchIntro = 'search.intro',
   searchTitle = 'search.title',
   timestampLastUpdated = 'timestamp.last-updated',
@@ -110,6 +111,7 @@ export enum RegionDataFallback {
   feedbackResultPostive = 'We are happy you found this information helpful.',
   feedbackShareCta = 'Share feedback',
   feedbackThanks = 'Thank you for sharing your opinion',
+  labelError = 'Something went wrong.',
   labelHighlightsButton = '!',
   labelHighlightsItemsCount = 'Highlighted items:',
   labelHighlightsItemsZero = 'No highlighted items.',

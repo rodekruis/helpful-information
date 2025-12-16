@@ -13,6 +13,11 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 - Support for GoatCounter third-party analytics-service. See: [`ENV`](.env.example) for `GOATCOUNTER_CONNECTION_STRING`.
 - (Basic) E2E-tests using Playwright. See: [`README / E2E-tests`](./README.md#e2e-tests) for more information.
+- A Generic Error-Message for use in various places. Using the `#label.error`-key in the `Referral Page`-sheet. See: [`Referral Page.json`](./data/test-sheet-id-1/values/Referral%20Page.json)
+
+### Removed
+
+- The `#search.items.0`-key from the `Referral Page`-sheet. It was never used/needed.
 
 ---
 
@@ -44,7 +49,7 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ### Added
 
-- Search-page can now have an optional introduction-text. Using the `#search.into`-field in the `Referral Page`-sheet.
+- Search-page can now have an optional introduction-text. Using the `#search.intro`-field in the `Referral Page`-sheet.
 - Search can be configured to use an _external_ API. See [`ENV`](.env.example) for `SEARCH_API` and `SEARCH_API_KEY`.
 
 ### Changed

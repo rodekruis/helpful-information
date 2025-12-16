@@ -497,6 +497,12 @@ export class SpreadsheetService {
         RegionDataKey.labelFeedbackCta,
         -1,
       ),
+      labelError: this.getConfigValueOrFallback(
+        sharedData,
+        RegionDataKey.labelError,
+        -1,
+        RegionDataFallback.labelError,
+      ),
       labelOfferAddress: this.getConfigValueOrFallback(
         sharedData,
         RegionDataKey.offerAddress,

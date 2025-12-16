@@ -27,6 +27,12 @@
     [tabindex]="-1"
     class="focus--minimal focus--fade-out"
   >
+    @if (hasSearchError) {
+      <p>
+        <strong>{{ regionData?.labelError }}</strong>
+      </p>
+    }
+
     @if (loadingSearch) {
       <div>
         <span
@@ -44,21 +50,16 @@
         ></span>
       </div>
     } @else {
-      @if (searchResults.length === 0) {
-        <!-- TODO: use correct copy -->
-        <p>No results found</p>
-      } @else {
-        <p>
-          {{ regionData?.labelSearchResultsCount }}
-          <strong>{{ searchResults?.length }}</strong>
-        </p>
-        <app-q-a-set-list
-          [baseUrl]="'../'"
-          [list]="searchResults"
-          [showDateUpdatedOutsideQuestion]="false"
-          class="ion-margin-vertical"
-        ></app-q-a-set-list>
-      }
+      <p>
+        {{ regionData?.labelSearchResultsCount }}
+        <strong>{{ searchResults?.length }}</strong>
+      </p>
+      <app-q-a-set-list
+        [baseUrl]="'../'"
+        [list]="searchResults"
+        [showDateUpdatedOutsideQuestion]="false"
+        class="ion-margin-vertical"
+      ></app-q-a-set-list>
     }
   </section>
 }

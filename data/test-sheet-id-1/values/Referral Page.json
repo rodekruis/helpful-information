@@ -65,6 +65,11 @@
       ""
     ],
     [
+      "Label: Generic Error message\n#label.error",
+      "Something went wrong.",
+      "\"Something went wrong.\", \"An error occured.\""
+    ],
+    [
       "Contact: Telegram URL\n#contact.telegram",
       "https://telegram.me/username",
       "https://telegram.me/username"

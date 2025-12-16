@@ -61,6 +61,7 @@ export default class SearchPageComponent implements OnInit {
   public searchQuery: string;
   public searchResults: QASet[];
   public loadingSearch: boolean;
+  public hasSearchError = false;
 
   async ngOnInit() {
     this.route.params.subscribe(async (params: Params) => {
@@ -124,22 +125,31 @@ export default class SearchPageComponent implements OnInit {
 
     if (this.useSearchApi) {
       this.loadingSearch = true;
-      const apiResponse: SearchApiResponse =
-        await this.fetchApiResults(safeQuery);
 
-      if (apiResponse) {
-        this.loadingSearch = false;
+      let apiResponse: SearchApiResponse;
+      try {
+        apiResponse = await this.fetchApiResults(safeQuery);
+      } catch (_error) {
+        this.hasSearchError = true;
       }
+
+      this.loadingSearch = false;
+
       if (apiResponse && apiResponse.results) {
         this.searchResults = await this.createSearchResults(
           apiResponse.results,
         );
       }
     } else {
-      this.searchResults = this.searchService.query(safeQuery);
+      try {
+        this.searchResults = this.searchService.query(safeQuery);
+      } catch (error) {
+        console.error('SearchPage: SearchService query error:', error);
+        this.hasSearchError = true;
+      }
     }
 
-    if (this.searchResults.length > 1) {
+    if (this.searchResults?.length > 1) {
       this.pageMeta.setTitle({
         pageName: `${this.regionData?.labelSearchPageTitle} (${this.searchResults.length})`,
         region: this.region,
@@ -191,11 +201,8 @@ export default class SearchPageComponent implements OnInit {
     });
 
     if (!response || !response.ok) {
-      // TODO: change to console.error?
-      console.warn('Something went wrong:', response);
-      return {
-        results: [],
-      };
+      console.error('SearchPage: Search API Request failed:', response);
+      throw new Error('SearchPage: Search API Request failed');
     }
 
     const body: SearchApiResponse = await response.json();
