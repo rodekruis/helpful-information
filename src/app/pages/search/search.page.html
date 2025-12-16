@@ -27,12 +27,6 @@
     [tabindex]="-1"
     class="focus--minimal focus--fade-out"
   >
-    @if (hasSearchError) {
-      <p>
-        <strong>{{ regionData?.labelError }}</strong>
-      </p>
-    }
-
     @if (loadingSearch) {
       <div>
         <span
