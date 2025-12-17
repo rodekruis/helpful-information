@@ -23,15 +23,14 @@ test.describe('Search-page', () => {
       query,
     });
 
-    await expect(searchPage.searchResultsLabel).toContainText(
-      `${expectedSearchResultCount}`,
-    );
+    await searchPage.assertSearchResultCount({
+      expectedCount: expectedSearchResultCount,
+    });
 
-    const searchResultsItems = searchPage.searchResultsItems;
-    await expect(searchResultsItems).toHaveCount(expectedSearchResultCount);
-    await expect(searchResultsItems.first()).toContainText(
-      expectedFirstResultText,
-    );
+    await searchPage.assertSearchResultItemText({
+      itemIndex: 0,
+      expectedText: expectedFirstResultText,
+    });
   });
 
   test('perform an usuccessful search', async ({ page }) => {
@@ -44,11 +43,8 @@ test.describe('Search-page', () => {
       query,
     });
 
-    await expect(searchPage.searchResultsLabel).toContainText(
-      `${expectedSearchResultCount}`,
-    );
-
-    const searchResultsItems = searchPage.searchResultsItems;
-    await expect(searchResultsItems).toHaveCount(expectedSearchResultCount);
+    await searchPage.assertSearchResultCount({
+      expectedCount: expectedSearchResultCount,
+    });
   });
 });
