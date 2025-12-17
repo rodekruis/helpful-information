@@ -11,6 +11,7 @@
       [(ngModel)]="searchQuery"
       enterkeyhint="search"
       class="input-field--text text-style--size-1"
+      data-testid="search-input"
     />
 
     @if (!!searchQuery) {
@@ -28,6 +29,7 @@
   <button
     type="submit"
     class="search-input--action action is_round is_inline is_outline text-style--alt text-style--size-1"
+    data-testid="search-button"
   >
     <strong>
       {{ actionLabel || 'Search' }}
