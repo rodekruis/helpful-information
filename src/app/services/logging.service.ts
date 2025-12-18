@@ -123,7 +123,7 @@ export class LoggingService {
 
       // Only initionalize after script has loaded
       script.addEventListener('load', () => {
-        this.goatCounterInitialized = 'goatcounter' in window;
+        this.goatCounterInitialized = true;
       });
       document.head.appendChild(script);
 
