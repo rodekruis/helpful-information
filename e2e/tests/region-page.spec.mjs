@@ -60,7 +60,6 @@ With MarkDown and/or HTML content:`,
 
     // Link(s)
     await expect(regionPage.regionPageIntroduction.locator('a')).toHaveCount(3);
-    // eslint-disable-next-line no-loops/no-loops
     for (const link of await regionPage.regionPageIntroduction
       .locator('a')
       .all()) {

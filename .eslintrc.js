@@ -1,5 +1,24 @@
 const restrictedGlobals = require('confusing-browser-globals');
 
+const restrictedSyntax = [
+  {
+    selector: 'ForStatement',
+    message: 'Consider using array iteration methods or for..of loops instead.',
+  },
+  {
+    selector: 'ForInStatement',
+    message: 'Consider using array iteration methods or for..of loops instead.',
+  },
+  {
+    selector: 'WhileStatement',
+    message: 'Consider using array iteration methods or for..of loops instead.',
+  },
+  {
+    selector: 'DoWhileStatement',
+    message: 'Consider using array iteration methods or for..of loops instead.',
+  },
+];
+
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
@@ -15,7 +34,6 @@ module.exports = {
         'no-relative-import-paths',
         'import',
         'simple-import-sort',
-        'no-loops',
         'promise',
         'jasmine',
       ],
@@ -67,6 +85,7 @@ module.exports = {
         'simple-import-sort/imports': 'error',
         'simple-import-sort/exports': 'error',
         'no-restricted-globals': ['error'].concat(restrictedGlobals),
+        'no-restricted-syntax': ['error'].concat(restrictedSyntax),
         'promise/no-multiple-resolved': ['error'],
         'regexp/letter-case': [
           'error',
@@ -91,7 +110,6 @@ module.exports = {
         'regexp/sort-alternatives': ['error'],
         'regexp/sort-character-class-elements': ['error'],
         'regexp/use-ignore-case': ['error'],
-        'no-loops/no-loops': ['error'],
       },
       settings: {
         'import/parsers': {
@@ -137,7 +155,6 @@ module.exports = {
         'no-relative-import-paths',
         'import',
         'simple-import-sort',
-        'no-loops',
         'promise',
       ],
       extends: [
@@ -166,6 +183,7 @@ module.exports = {
         'simple-import-sort/imports': 'error',
         'simple-import-sort/exports': 'error',
         'no-restricted-globals': ['error'].concat(restrictedGlobals),
+        'no-restricted-syntax': ['error'].concat(restrictedSyntax),
         'promise/no-multiple-resolved': ['error'],
         'regexp/letter-case': [
           'error',
@@ -190,7 +208,6 @@ module.exports = {
         'regexp/sort-alternatives': ['error'],
         'regexp/sort-character-class-elements': ['error'],
         'regexp/use-ignore-case': ['error'],
-        'no-loops/no-loops': ['error'],
       },
     },
   ],
