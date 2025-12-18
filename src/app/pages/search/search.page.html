@@ -44,7 +44,7 @@
         ></span>
       </div>
     } @else {
-      <p>
+      <p data-testid="search-results-label">
         {{ regionData?.labelSearchResultsCount }}
         <strong>{{ searchResults?.length }}</strong>
       </p>
@@ -53,6 +53,7 @@
         [list]="searchResults"
         [showDateUpdatedOutsideQuestion]="false"
         class="ion-margin-vertical"
+        data-testid="search-results-list"
       ></app-q-a-set-list>
     }
   </section>

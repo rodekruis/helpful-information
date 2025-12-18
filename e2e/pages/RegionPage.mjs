@@ -16,6 +16,8 @@ export class RegionPage {
     this.regionPageIntroduction = page.getByTestId('region-page-introduction');
     /** @type {Locator} */
     this.categoryList = page.getByTestId('categories-list').locator('li a');
+    /** @type {Locator} */
+    this.searchPageButton = page.locator('a[rel=search]');
   }
 
   /**
