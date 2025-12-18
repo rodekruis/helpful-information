@@ -35,7 +35,7 @@ See the GitHub-repository website to find out how it works and how to use it.
   - [ ] Select one of the template-sheets from the Google Drive folder: "[HIA Templates (public)](https://drive.google.com/drive/folders/1eoKlwKqPXagTnkQGxj0JpH5TRplqXX-C)".
 
     > [!TIP]
-    > The template-sheet "[HIA - Staging Demo/Example](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)" is recurrently used to test all HIA functionalities, so it is the best starting point to understand how the app works and what it offers.
+    > The template-sheet "[HIA - All Features - Demo](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)" is recurrently used to test all HIA functionalities, so it is the best starting point to understand how the app works and what it offers.
 
   - [ ] Click "**File**" > "**Make a copy**"; from now on, you will only work on this copy of the template-sheet. Give the sheet a descriptive title.
   - [ ] Share the file with "**Anyone with the link**" set to "**Viewer**".
@@ -113,6 +113,8 @@ See the GitHub-repository website to find out how it works and how to use it.
 
   Editors can now see their content-changes on the public URL.  
   People affected can be informed about the available information at the public URL.
+
+- Editors can see details about "[How to use](https://github.com/rodekruis/helpful-information#how-to-use)"-HIA in the [helpful-information/README](https://github.com/rodekruis/helpful-information#readme)
 
 ---
 
