@@ -32,15 +32,44 @@ export class SearchService {
       .map((keyword) => (keyword ? keyword.replaceAll('"', '') : '').trim()) // Remove double-quotes
       .filter((keyword) => !!keyword); // Remove (now) empty keywords
 
-    results = this.source.filter((item) => {
+    results = this.getQAsMatchingToQuery({ queryParts });
+
+    results = this.removeHiddenQAsFromSearchResults({ results });
+
+    return results;
+  }
+
+  private getQAsMatchingToQuery({
+    queryParts,
+  }: {
+    queryParts: string[];
+  }): QASet[] {
+    return this.source.filter((item) => {
       const isMatch = queryParts.some((keyWord) => {
         const regEx = new RegExp(keyWord, 'i');
         return regEx.test(item.question) || regEx.test(item.answer);
       });
       return isMatch ? item : false;
     });
+  }
 
-    return results;
+  private removeHiddenQAsFromSearchResults({
+    results,
+  }: {
+    results: QASet[];
+  }): QASet[] {
+    return results.filter((result) => {
+      if (!result.parentSlug) {
+        return result.isVisible;
+      }
+
+      const parent = this.source.find((qa) => qa.slug === result.parentSlug);
+      if (!parent) {
+        return true;
+      }
+
+      return parent.isVisible;
+    });
   }
 
   public sanitizeSearchQuery(rawValue: string): string {
