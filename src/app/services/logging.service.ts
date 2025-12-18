@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { DebugPlugin } from '@microsoft/applicationinsights-debugplugin-js';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import {
@@ -16,19 +17,32 @@ declare global {
     // GoatCounter API
     goatcounter?: {
       allow_local?: boolean;
-      count?: (params: {
-        path?: string;
+      no_events?: boolean;
+      no_onload?: boolean;
+      allow_frame?: boolean;
+      endpoint?: string;
+      count?: (params?: {
+        path?: string | ((p: string) => string);
         title?: string;
+        referrer?: string;
         event?: boolean;
       }) => void;
     };
   }
 }
 
+interface EventProperties {
+  name?: string;
+  value?: number;
+  [key: string]: any;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class LoggingService {
+  router = inject(Router);
+
   matomoInitialized: boolean;
 
   goatCounterInitialized: boolean;
@@ -95,13 +109,33 @@ export class LoggingService {
     }
 
     (() => {
+      window.goatcounter = window.goatcounter || {
+        allow_local: false,
+        no_events: true,
+        no_onload: false,
+        allow_frame: true,
+        endpoint: connection.api,
+      };
       const script = document.createElement('script');
       script.async = true;
-      script.dataset.goatcounter = connection.api;
+      script.crossOrigin = 'anonymous';
       script.src = connection.sdk;
+
+      // Only initionalize after script has loaded
+      script.addEventListener('load', () => {
+        this.goatCounterInitialized = true;
+      });
       document.head.appendChild(script);
 
-      this.goatCounterInitialized = true;
+      // Listen for navigation-events for pageview-tracking (as it is not built-into GoatCounter)
+      this.router.events.subscribe((event) => {
+        if (this.goatCounterInitialized && event instanceof NavigationEnd) {
+          // Wait for the new page to have fully rendered
+          window.setTimeout(() => {
+            this.logPageView();
+          }, 100);
+        }
+      });
     })();
   }
 
@@ -160,6 +194,9 @@ export class LoggingService {
       window._paq.push(['setDocumentTitle', name ?? document.title]);
       window._paq.push(['trackPageView']);
     }
+    if (this.goatCounterInitialized) {
+      window.goatcounter.count();
+    }
     if (this.appInsightsInitialized) {
       // Not necessary because of `enableAutoRouteTracking`-setting in `setupApplicationInsights()`
     }
@@ -169,11 +206,7 @@ export class LoggingService {
   public logEvent(
     category: LoggingEventCategory | string,
     action: LoggingEvent | string,
-    properties?: {
-      name?: string;
-      value?: number;
-      [key: string]: any;
-    },
+    properties?: EventProperties,
   ): void {
     if (this.matomoInitialized) {
       window._paq.push([
@@ -184,24 +217,15 @@ export class LoggingService {
         properties && properties.value ? properties.value : undefined,
       ]);
     }
-    if (this.goatCounterInitialized && !!window.goatcounter?.count) {
-      const categoryAsPrefix =
-        category === LoggingEventCategory.ai ? '_' : `_${category}`;
-      let eventDetails = '';
-
-      if (
-        properties &&
-        Object.keys(properties).length === 1 &&
-        !!properties.name
-      ) {
-        eventDetails = properties.name;
-      } else if (properties && Object.keys(properties).length > 1) {
-        eventDetails = createKeyValueList(properties);
+    if (this.goatCounterInitialized) {
+      if (this.goatCounterShouldExcludeEvent(action)) {
+        return;
       }
 
       window.goatcounter.count({
-        path: `${categoryAsPrefix}/${action}`,
-        title: eventDetails,
+        path: `_${action}`,
+        title: this.goatCounterPrepareEventDetails(properties),
+        referrer: window.location.toString(),
         event: true,
       });
     }
@@ -238,5 +262,28 @@ export class LoggingService {
       this.appInsights.trackTrace({ message }, properties);
     }
     console.error(`LOG Trace: "${message}"`, properties);
+  }
+
+  private goatCounterPrepareEventDetails(properties?: EventProperties): string {
+    let eventDetails = '';
+
+    if (properties && Object.keys(properties).length > 0) {
+      eventDetails = createKeyValueList(properties);
+    }
+
+    return eventDetails;
+  }
+
+  private goatCounterShouldExcludeEvent(
+    action: LoggingEvent | string,
+  ): boolean {
+    const excludedEvents = [
+      LoggingEvent.CategoryClick,
+      LoggingEvent.OfferClick,
+      LoggingEvent.OfferDetailClick,
+      LoggingEvent.SubCategoryClick,
+    ] as string[];
+
+    return excludedEvents.includes(action as string);
   }
 }
