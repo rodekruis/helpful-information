@@ -13,9 +13,9 @@ export class SearchPage {
     /** @type {Page} */
     this.page = page;
     /** @type {Locator} */
-    this.searchInput = page.getByTestId('search-input');
+    this.searchInput = page.locator('[name=q]');
     /** @type {Locator} */
-    this.searchButton = page.getByTestId('search-button');
+    this.searchButton = page.locator('[type=submit]');
     /** @type {Locator} */
     this.searchResultsLabel = page.getByTestId('search-results-label');
     /** @type {Locator} */
@@ -27,8 +27,7 @@ export class SearchPage {
   }
 
   /**
-   * @param {object} args
-   * @param {string} args.query
+   * @param {{query: string}} args
    * @returns {Promise<void>}
    */
   async performSearch({ query }) {
@@ -37,8 +36,7 @@ export class SearchPage {
   }
 
   /**
-   * @param {object} args
-   * @param {Number} args.expectedCount
+   * @param {{expectedCount: number}} args
    * @returns {Promise<void>}
    */
   async assertSearchResultCount({ expectedCount }) {
@@ -47,9 +45,10 @@ export class SearchPage {
   }
 
   /**
-   * @param {object} args
-   * @param {Number} args.itemIndex
-   * @param {string} args.expectedText
+   * @param {{
+   * itemIndex: number,
+   * expectedText: string
+   * }} args
    * @returns {Promise<void>}
    */
   async assertSearchResultItemText({ itemIndex, expectedText }) {

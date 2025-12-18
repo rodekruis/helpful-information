@@ -1,4 +1,5 @@
-import { expect, test } from '@playwright/test';
+/* eslint-disable sort-imports */
+import { test } from '@playwright/test';
 
 import { RegionPage } from '../pages/RegionPage.mjs';
 import { SearchPage } from '../pages/SearchPage.mjs';
@@ -33,7 +34,7 @@ test.describe('Search-page', () => {
     });
   });
 
-  test('perform an usuccessful search', async ({ page }) => {
+  test('perform an unsuccessful search', async ({ page }) => {
     const query = 'foo';
     const expectedSearchResultCount = 0;
 
