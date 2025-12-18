@@ -106,7 +106,7 @@ Some specific information needs to be configured before use:
 
 - For deployments:  
   The ENV-variables defined in the [`.env.example`](.env.example)-file need to be defined in the build-environment according to the specific deployment-tool/service.  
-  See for example the [GitHub Action workflow (production)](.github/workflows/deploy-production.yml).
+  See for example the [GitHub Action workflow (template)](https://github.com/helpful-info/template/blob/main/.github/workflows/deploy-github-pages.yml).
 
 ### Using the Google Sheets API
 
@@ -397,13 +397,20 @@ The web-app can be deployed as a static single-page-app or PWA.
 
 - This directory can be deployed to any hosting-solution (supporting HTTPS), using [the recommended server configuration](https://v13.angular.io/guide/deployment#server-configuration).
 
+### Using GitHub Pages
+
+To deploy the web-app using [GitHub Pages](https://pages.github.com/), there is a template-repository at: <https://github.com/helpful-info/template> containing all necessary configuration/settings.
+
+> [!NOTE]
+> A detailed guide to set-up an instance using GitHub Pages can be found at: [Guide: How to set up an instance (quickly)](./docs/Guide-How_to_set_up_an_instance.md)
+
 ### Using Azure Static Web Apps
 
 To deploy the web-app using [Azure Static Web App service](https://azure.microsoft.com/en-us/services/app-service/static/):
 
-- A GitHub-Actions workflow needs to be defined,  
-  See: [`.github/workflows/deploy-production.yml`](.github/workflows/deploy-production.yml)
-- The configuration of URLs, Headers for the web-app is defined,  
+- A GitHub-Actions workflow needs to be defined,
+  with the Azure Static Web Apps deploy-action: <https://github.com/Azure/static-web-apps-deploy>
+- The configuration of URLs, Headers, etc for the web-app is defined
   in: [`staticwebapp.config.json`](staticwebapp.config.json)  
   See documentation about the format in [this example configuration file](https://docs.microsoft.com/en-us/azure/static-web-apps/configuration#example-configuration-file)
 

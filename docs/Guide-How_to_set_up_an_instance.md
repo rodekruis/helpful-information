@@ -74,7 +74,7 @@ See the GitHub-repository website to find out how it works and how to use it.
 - Create the GitHub-repository
   - [ ] Log into GitHub; if you need a Github Organization to host HIA, make sure you have permission to create new repositories in that organization.
   - [ ] Go to <https://github.com/helpful-info/template/generate>
-  - [ ] Name the repository as (last part of) the URL; select as owner the appropriate GitHub Organization, if necessary.
+  - [ ] Name the repository as (the last part of) the URL; select as owner the appropriate GitHub Organization, if necessary.
   - [ ] Make sure to select "**Public**" as the repository visibility.
   - [ ] Complete the process of creating the repository
   - [ ] Go to "**Settings**" > "**Pages**" and select "**Source**": "**Github Actions**".
