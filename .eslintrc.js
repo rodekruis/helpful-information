@@ -152,7 +152,6 @@ module.exports = {
         'no-extra-boolean-cast': ['error'],
         'no-var': ['error'],
         'prefer-const': ['error'],
-        'sort-imports': ['error'],
         'import/first': 'error',
         'import/consistent-type-specifier-style': 'error',
         'import/newline-after-import': ['error', { count: 1 }],

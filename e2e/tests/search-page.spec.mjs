@@ -1,4 +1,3 @@
-/* eslint-disable sort-imports */
 import { test } from '@playwright/test';
 
 import { RegionPage } from '../pages/RegionPage.mjs';
