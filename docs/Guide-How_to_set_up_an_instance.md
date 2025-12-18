@@ -106,10 +106,14 @@ See the GitHub-repository website to find out how it works and how to use it.
   - On the GitHub repository-page, go to: "Settings" → "Pages" → "Custom domain" and fill in the applicable public URL
   - GitHub will validate the DNS-records for the (sub-)domain
 
+- (Optional) Add any files to the `public/files/`-folder in the repository.
+  - These files will be available at: `https://<your-public-instance-URL>/files/<file-name>`
+  - They can be linked to from the content in the Google Sheet, using this full URL. (or using a Markdown-link)
+  - They can be used as icons/logos for Offers, (Sub-)Categories, etc. Use this full URL in the applicable rows/columns in the Google Sheet(s).
 - ✅ Done.
 
-Editors can now see their content-changes on the public URL.  
- People affected can be informed about the available information at the public URL.
+  Editors can now see their content-changes on the public URL.  
+  People affected can be informed about the available information at the public URL.
 
 ---
 
