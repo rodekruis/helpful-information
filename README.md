@@ -26,6 +26,8 @@ The different sheets within these 'files' each have a different data-model. So t
 
 The contents of these sheets is loaded at runtime by the visitor's browser from the "Google Sheets API".
 
+The application is prepared to use several different services/tools to monitor its usage by visitors, like: Matomo, GoatCounter and Azure Application Insights.
+
 ## How to use
 
 Once the web-app is configured (See [Configuration](#configuration)) and deployed (See [Deployment](#deployment)) its content can be managed via the [Google Sheets interface](https://docs.google.com/spreadsheets).
