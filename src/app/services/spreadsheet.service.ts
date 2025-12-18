@@ -46,8 +46,8 @@ export class SpreadsheetService {
   private loggingService = inject(LoggingService);
   private configService = inject(ConfigService);
 
-  static visibleKey = 'Show';
   static booleanTrueKey = 'Yes';
+  static hiddenValues = ['HIDE', 'HIDDEN', 'NO', 'N', 'FALSE', '0', '-'];
 
   static readCellValue(row: string[], key: number): string {
     if (!!row && !!row[key] && key < row.length) {
@@ -57,7 +57,11 @@ export class SpreadsheetService {
   }
 
   static isVisible(value: string): boolean {
-    return value === this.visibleKey;
+    if (this.hiddenValues.includes(value.toUpperCase())) {
+      return false;
+    }
+
+    return true;
   }
 
   static isBoolean(value: string): boolean {
