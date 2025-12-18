@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { deburr } from 'es-toolkit/string';
 import type { QASet } from 'src/app/models/qa-set.model';
 
 @Injectable({
@@ -81,6 +82,8 @@ export class SearchService {
     let safeValue = rawValue.replaceAll(/[$()*+?[\\\]^{|}]/g, ' ').trim();
     // Collapse all whitespace-characters into 1 space
     safeValue = safeValue.replaceAll(/\s+/g, ' ');
+
+    safeValue = deburr(safeValue);
 
     return safeValue && safeValue.length > 1 ? safeValue : '';
   }
