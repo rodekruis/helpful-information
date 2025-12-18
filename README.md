@@ -53,6 +53,12 @@ So take appropriate precautions regarding file-ownership and "edit"-permissions 
 - Don't use the "insert link"-feature.  
   The plain text in a cell should be the full URL.
 
+Recommended:
+
+- Add as little (extra) content (outside of the tagged-columns) as possible; It will increase the filesize and loading-time. (And it is still also publicly visible on the internet, via de Google Sheets "view-only"-mode.)
+- _**Do use**_ the `#SLUG`-column with "human readable" identifiers, using: "lowercase letters, numbers and hyphens(`-`) only".  
+  This way URLs will be memorable and 'shareable' via speech/on the phone.
+
 Optional:
 
 - All columns can be reordered, as long as their `#tag`s remain in their header-cell.
