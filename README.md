@@ -62,7 +62,7 @@ Recommended:
 Optional:
 
 - All columns can be reordered, as long as their `#tag`s remain in their header-cell.
-- You can use the toggle in the "_Visible?_"-column to prepare a 'draft' of a row and finally 'publish' by setting it to "_Show_".
+- You can use the toggle in the "_Visible?_"-column to prepare a 'draft' in a row, by setting it to "_Hide_"(or 'hidden', `0`, `-`), and then finally 'publish' it by setting it to "_Show_". (Leaving it empty WILL show the row!)
 - You can use background-colors to mark/highlight any changes or 'flag issues'; These styles will not be used in the web-app.
 
 #### Text formatting
