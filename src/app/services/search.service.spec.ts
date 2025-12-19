@@ -30,6 +30,8 @@ describe('SearchService', () => {
       '?test',
       '   test   test  ',
       'test.test',
+      'tést',
+      'dæbürr',
     ];
     const resultQueries = [
       '',
@@ -40,6 +42,8 @@ describe('SearchService', () => {
       'test',
       'test test',
       'test.test',
+      'test',
+      'deburr',
     ];
 
     // Act
