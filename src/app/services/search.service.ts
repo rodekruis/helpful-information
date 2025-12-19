@@ -45,12 +45,24 @@ export class SearchService {
   }: {
     queryParts: string[];
   }): QASet[] {
+    const deburredQAs: QASet[] = this.source.map((item) => ({
+      question: deburr(item.question),
+      answer: deburr(item.answer),
+      ...item,
+    }));
+
+    const matchingQAIds = deburredQAs
+      .filter((item) => {
+        const isMatch = queryParts.some((keyWord) => {
+          const regEx = new RegExp(keyWord, 'i');
+          return regEx.test(item.question) || regEx.test(item.answer);
+        });
+        return isMatch ? item : false;
+      })
+      .map((qa) => qa.id);
+
     return this.source.filter((item) => {
-      const isMatch = queryParts.some((keyWord) => {
-        const regEx = new RegExp(keyWord, 'i');
-        return regEx.test(item.question) || regEx.test(item.answer);
-      });
-      return isMatch ? item : false;
+      matchingQAIds.includes(item.id);
     });
   }
 
