@@ -61,9 +61,7 @@ export class SearchService {
       })
       .map((qa) => qa.id);
 
-    return this.source.filter((item) => {
-      matchingQAIds.includes(item.id);
-    });
+    return this.source.filter((item) => matchingQAIds.includes(item.id));
   }
 
   private removeHiddenQAsFromSearchResults({

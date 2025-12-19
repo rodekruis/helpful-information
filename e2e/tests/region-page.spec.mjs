@@ -100,6 +100,7 @@ With MarkDown and/or HTML content:`,
         'Missing Slug',
         'Duplicate Slug 1',
         'Duplicate Slug 2',
+        '',
       ],
       { useInnerText: true },
     );
