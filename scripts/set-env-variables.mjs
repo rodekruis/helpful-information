@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
-import { writeFile } from 'node:fs';
+import { writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { join } from 'node:path';
-
-import { config } from 'dotenv';
-
-const require = createRequire(import.meta.url);
+import { loadEnvFile } from 'node:process';
 
 // Load environment-variables from .env file
-config({
-  debug: process.env.DEBUG,
-  override: true,
-});
+try {
+  loadEnvFile(join(import.meta.dirname, '../.env'));
+} catch (error) {
+  console.warn('No .env file found, proceeding without it.', error);
+}
+
+const require = createRequire(import.meta.url);
 
 const configFileTemplate = require(
   join(
@@ -21,19 +21,14 @@ const configFileTemplate = require(
   ),
 ).default;
 
+if (process.env.DEBUG || process.env.CI) {
+  console.log(configFileTemplate);
+}
+
 const targetPath = join(
   import.meta.dirname,
   '../src/environments/environment.prod.ts',
 );
 
-writeFile(targetPath, configFileTemplate, (err) => {
-  if (process.env.DEBUG || process.env.CI) {
-    console.log(configFileTemplate);
-  }
-
-  if (err) {
-    console.error(err);
-  }
-
-  console.info(`Output generated at: ${targetPath}`);
-});
+console.log(`Writing to: ${targetPath}`);
+writeFileSync(targetPath, configFileTemplate);
