@@ -138,7 +138,7 @@ module.exports = {
     {
       files: ['**/*.js'],
       parserOptions: {
-        ecmaVersion: 2021,
+        ecmaVersion: 2024,
       },
       extends: ['plugin:prettier/recommended'],
       rules: {
@@ -149,7 +149,7 @@ module.exports = {
       files: ['**/*.mjs'],
       parserOptions: {
         sourceType: 'module',
-        ecmaVersion: 2023,
+        ecmaVersion: 2024,
       },
       plugins: [
         'no-relative-import-paths',

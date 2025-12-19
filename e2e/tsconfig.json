@@ -1,11 +1,11 @@
 {
-  "$schema": "https://www.schemastore.org/tsconfig",
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["es2023"],
+    "lib": ["es2024", "ESNext.Array", "ESNext.Collection", "ESNext.Iterator"],
     "module": "nodenext",
     "moduleResolution": "node16",
     "noEmit": true,

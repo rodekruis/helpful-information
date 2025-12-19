@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "incremental": true,
-    "lib": ["ES2022", "dom"],
+    "lib": ["es2023", "dom"],
     "module": "es2022",
     "moduleResolution": "bundler",
     "noFallthroughCasesInSwitch": true,
