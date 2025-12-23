@@ -14,8 +14,13 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 - Support for GoatCounter third-party analytics-service. See: [`ENV`](.env.example) for `GOATCOUNTER_CONNECTION_STRING`.
 - (Basic) E2E-tests using Playwright. See: [`README / E2E-tests`](./README.md#e2e-tests) for more information.
 
+### Changed
+
+- Minimal supported Node.js-version is now v22.
+
 ### Removed
 
+- Support for Node.js-versions below v22. (These are "end-of-life". And no longer supported by GitHub Action-workflows soon.)
 - The `#search.items.0`-key from the `Referral Page`-sheet. It was never used/needed.
 
 ---

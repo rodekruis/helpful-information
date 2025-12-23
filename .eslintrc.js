@@ -1,5 +1,24 @@
 const restrictedGlobals = require('confusing-browser-globals');
 
+const restrictedSyntax = [
+  {
+    selector: 'ForStatement',
+    message: 'Consider using array iteration methods or for..of loops instead.',
+  },
+  {
+    selector: 'ForInStatement',
+    message: 'Consider using array iteration methods or for..of loops instead.',
+  },
+  {
+    selector: 'WhileStatement',
+    message: 'Consider using array iteration methods or for..of loops instead.',
+  },
+  {
+    selector: 'DoWhileStatement',
+    message: 'Consider using array iteration methods or for..of loops instead.',
+  },
+];
+
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
@@ -15,7 +34,6 @@ module.exports = {
         'no-relative-import-paths',
         'import',
         'simple-import-sort',
-        'no-loops',
         'promise',
         'jasmine',
       ],
@@ -67,6 +85,7 @@ module.exports = {
         'simple-import-sort/imports': 'error',
         'simple-import-sort/exports': 'error',
         'no-restricted-globals': ['error'].concat(restrictedGlobals),
+        'no-restricted-syntax': ['error'].concat(restrictedSyntax),
         'promise/no-multiple-resolved': ['error'],
         'regexp/letter-case': [
           'error',
@@ -91,7 +110,6 @@ module.exports = {
         'regexp/sort-alternatives': ['error'],
         'regexp/sort-character-class-elements': ['error'],
         'regexp/use-ignore-case': ['error'],
-        'no-loops/no-loops': ['error'],
       },
       settings: {
         'import/parsers': {
@@ -120,7 +138,7 @@ module.exports = {
     {
       files: ['**/*.js'],
       parserOptions: {
-        ecmaVersion: 2021,
+        ecmaVersion: 2024,
       },
       extends: ['plugin:prettier/recommended'],
       rules: {
@@ -131,13 +149,12 @@ module.exports = {
       files: ['**/*.mjs'],
       parserOptions: {
         sourceType: 'module',
-        ecmaVersion: 2023,
+        ecmaVersion: 2024,
       },
       plugins: [
         'no-relative-import-paths',
         'import',
         'simple-import-sort',
-        'no-loops',
         'promise',
       ],
       extends: [
@@ -152,7 +169,6 @@ module.exports = {
         'no-extra-boolean-cast': ['error'],
         'no-var': ['error'],
         'prefer-const': ['error'],
-        'sort-imports': ['error'],
         'import/first': 'error',
         'import/consistent-type-specifier-style': 'error',
         'import/newline-after-import': ['error', { count: 1 }],
@@ -167,6 +183,7 @@ module.exports = {
         'simple-import-sort/imports': 'error',
         'simple-import-sort/exports': 'error',
         'no-restricted-globals': ['error'].concat(restrictedGlobals),
+        'no-restricted-syntax': ['error'].concat(restrictedSyntax),
         'promise/no-multiple-resolved': ['error'],
         'regexp/letter-case': [
           'error',
@@ -191,7 +208,6 @@ module.exports = {
         'regexp/sort-alternatives': ['error'],
         'regexp/sort-character-class-elements': ['error'],
         'regexp/use-ignore-case': ['error'],
-        'no-loops/no-loops': ['error'],
       },
     },
   ],
