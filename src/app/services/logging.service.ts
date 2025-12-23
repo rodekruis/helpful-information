@@ -278,10 +278,16 @@ export class LoggingService {
     action: LoggingEvent | string,
   ): boolean {
     const excludedEvents = [
-      LoggingEvent.CategoryClick,
-      LoggingEvent.OfferClick,
-      LoggingEvent.OfferDetailClick,
-      LoggingEvent.SubCategoryClick,
+      // Sorted alphabetically:
+      LoggingEvent.CategoryClick, // Already tracked as regular page-view
+      LoggingEvent.FeedbackPromptVisible, // Automated/non-user action, un-actionable
+      LoggingEvent.LanguageOptionsClose, // Can do without, actionable data is in `LanguageOptionsOpen`
+      LoggingEvent.MainScreenClick, // (?) Already tracked as regular page-view?
+      LoggingEvent.OfferClick, // Already tracked as regular page-view
+      LoggingEvent.QuestionClose, // Can do without, actionable data is in `QuestionOpen`
+      LoggingEvent.SubCategoryClick, // Already tracked as regular page-view
+      LoggingEvent.SwUpdateNotActivated, // Automated/non-user action, un-actionable
+      LoggingEvent.SwUpdateNotAvailable, // Automated/non-user action, un-actionable
     ] as string[];
 
     return excludedEvents.includes(action as string);
