@@ -68,8 +68,8 @@ async function processAllSheetIds(sheetIds, from) {
 // Load environment-variables from .env file
 try {
   loadEnvFile(join(import.meta.dirname, '../.env'));
-} catch (error) {
-  console.warn('No .env file found, proceeding without it.', error);
+} catch (_error) {
+  console.warn('No .env file found, proceeding without it.');
 }
 
 const cli = parseArgs({
