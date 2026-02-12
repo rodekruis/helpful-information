@@ -5,6 +5,7 @@ import { join, resolve } from 'node:path';
 import { loadEnvFile } from 'node:process';
 import { parseArgs } from 'node:util';
 
+import { createTokenList } from './lib/createTokenList.mjs';
 import { getSheetIdsFromConfig } from './lib/getSheetIdsFromConfig.mjs';
 import { loadConfig } from './lib/loadConfig.mjs';
 
@@ -97,13 +98,17 @@ try {
     );
   }
 
-  console.log('process.env: ', process.env);
-
   let sheetIds = [];
 
-  if (process.env.REGIONS_SHEET_IDS?.length > 10) {
-    console.log('Using Sheet IDs from environment-variable.');
-    sheetIds = process.env.REGIONS_SHEET_IDS.split(',').map((id) => id.trim());
+  if (process.env.REGIONS_SHEET_IDS?.length >= 1) {
+    console.log('Using Sheet IDs from environment-variable: REGIONS_SHEET_IDS');
+    sheetIds = createTokenList(process.env.REGIONS_SHEET_IDS);
+  } else if (process.env.REGION_CONFIG?.length >= 40) {
+    console.log('Using Sheet IDs from environment-variable: REGION_CONFIG');
+    const regionSets = JSON.parse(process.env.REGION_CONFIG);
+
+    const config = { regionSets: regionSets };
+    sheetIds = getSheetIdsFromConfig(config);
   } else if (process.env.REGION_CONFIG?.length > 10) {
     console.log('Using Sheet IDs from configuration-file.');
     const config = loadConfig();

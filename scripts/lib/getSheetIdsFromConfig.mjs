@@ -1,10 +1,22 @@
 /**
+ * @typedef {Object} HIAConfig
+ * @property {Array<RegionSet>} regionSets
+ */
+
+/**
+ * @typedef {Object} RegionSet
+ * @property {Array<Region>} regions
+ */
+
+/**
+ * @typedef {Object} Region
+ * @property {string} sheetId
+ */
+
+/**
  * Extracts all `sheetId`s from the configuration.
  *
- * @param {Object} config
- * @param {Array<Object>} config.regionSets
- * @param {Array<Object>} config.regionSets[].regions
- * @param {string} config.regionSets[].regions[].sheetId
+ * @param {HIAConfig} config
  *
  * @returns {string[]}
  */
