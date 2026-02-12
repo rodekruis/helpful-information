@@ -390,6 +390,17 @@ Using the search-input Q&A-sets can be filtered to match 1 or more keywords to t
 - To include spaces in a keyword, surround with: `"` (double quotes)  
   For example: `help "Red Cross"` will match `help` or `Red Cross`
 
+##### Search via API
+
+The search-function can be configured to use an external API, instead of searching locally in the loaded data.
+
+To use this, some configuration and set-up is required.
+
+- Set the `SEARCH_API` and `SEARCH_API_KEY` ENV-variables in the build-environment (See: [Configuration](#configuration))
+  See the [`ENV`](.env.example) for `SEARCH_API` and `SEARCH_API_KEY` for more information.
+
+---
+
 ---
 
 ## Deployment

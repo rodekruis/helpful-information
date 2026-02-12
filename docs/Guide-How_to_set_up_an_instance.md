@@ -17,6 +17,7 @@ See the GitHub-repository website to find out how it works and how to use it.
 - Make sure to involve _all appropriate people from possible partner organizations_
 - Make sure to involve a _CEA specialist to start up the process of gathering, sorting, prioritizing all expected content_
 - Make sure to meet all [technical requirements](#technical-requirements) within the (partner-)organization.
+  - Decide on the use of the (third-party) [Search-via-API-with-AI service](../README.md#search-via-api)
 - Make sure to set up a monitoring/evaluation-process of the effectiveness of the content and categorization/prioritization.
 - Decide on using a (third-party) service for monitoring/analytics of the usage of the instance. To see which content is most used or searched-for/missing by visitors. See: [Set up Monitoring / Analytics](#set-up-monitoring--analytics).
 
@@ -187,7 +188,7 @@ This is the link/URL you'll communicate to the people affected and/or aid-worker
 ### Set up Monitoring / Analytics
 
 Each page-visit("a page-view") and user-interaction("an event") can be logged/monitored using a third-party (web-analytics) service.
-The application is set-up to do this in a privacy-concious way, by anonymizing IP-addresses and not using cookies, thus complying to GDPR-requirements.
+The application is set-up to do this in a privacy-conscious way, by anonymizing IP-addresses and not using cookies, thus complying to GDPR-requirements.
 
 #### Set up to use Matomo for Analytics
 
@@ -211,7 +212,7 @@ Matomo is a popular open-source web-analytics platform, that can be self-hosted 
 
 #### Set up to use GoatCounter for Analytics
 
-GoatCounter is a simple, privacy-concious web-analytics platform, that can be self-hosted or used as a service via [GoatCounter.com](https://www.goatcounter.com/).
+GoatCounter is a simple, privacy-conscious web-analytics platform, that can be self-hosted or used as a service via [GoatCounter.com](https://www.goatcounter.com/).
 It provides a generous free-tier for non-commercial projects.
 
 1. Create an initial GoatCounter-account, for the organization, on: <https://www.goatcounter.com/signup>
