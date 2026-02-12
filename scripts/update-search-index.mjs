@@ -83,6 +83,14 @@ const cli = parseArgs({
 });
 
 try {
+  if (!process.env.SEARCH_API || !process.env.SEARCH_API_KEY) {
+    console.log('Search-via-API not set-up, skipping update of search-index.');
+    console.log(
+      'To enable, set environment-variables: `SEARCH_API` and `SEARCH_API_KEY`',
+    );
+    process.exit(0);
+  }
+
   if (!process.env.SEARCH_API_BACKEND || !process.env.SEARCH_API_KEY_BACKEND) {
     throw new Error(
       'Environment-variables `SEARCH_API_BACKEND` and `SEARCH_API_KEY_BACKEND` not set or missing.',
