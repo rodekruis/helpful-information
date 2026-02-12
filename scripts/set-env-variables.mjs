@@ -8,8 +8,8 @@ import { loadEnvFile } from 'node:process';
 // Load environment-variables from .env file
 try {
   loadEnvFile(join(import.meta.dirname, '../.env'));
-} catch (error) {
-  console.warn('No .env file found, proceeding without it.', error);
+} catch (_error) {
+  console.warn('No .env file found, proceeding without it.');
 }
 
 const require = createRequire(import.meta.url);
