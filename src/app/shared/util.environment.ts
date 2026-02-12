@@ -1,11 +1,5 @@
+import { createTokenList } from 'scripts/lib/createTokenList.mjs';
 import { environment } from 'src/environments/environment';
-
-function createTokenList(value: string): string[] {
-  return value
-    .trim()
-    .split(/\s*,\s*/)
-    .map((s) => s.trim());
-}
 
 export function createRegionSlugs(
   regions: string = environment.regions,
