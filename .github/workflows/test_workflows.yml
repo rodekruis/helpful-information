@@ -20,7 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Lint GitHub Action workflows
+      - name: 'Set up Node.js version'
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.node-version'
+
+      - name: 'Lint GitHub Action workflows'
         uses: raven-actions/actionlint@v2
         with:
           group-result: false
@@ -28,8 +33,8 @@ jobs:
           pyflakes: false
           flags: '-ignore SC2086'
 
-      - name: Lint .env files
+      - name: 'Lint .env files'
         uses: dotenv-linter/action-dotenv-linter@v3
         with:
           reporter: github-pr-check
-          dotenv_linter_flags: --skip UnorderedKey
+          dotenv_linter_flags: --ignore-checks UnorderedKey
