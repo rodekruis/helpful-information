@@ -107,12 +107,15 @@ This is an example of a [Helpful Information App](https://github.com/rodekruis/h
 
   // Google Sheets API:
   google_sheets_api_key: '',
-  google_sheets_api_url: 'http://localhost:3001',
+  google_sheets_api_url: 'http://localhost:3003',
 
   // Monitoring/Telemetry:
   //
   // Matomo: (Format: "id=<site-id-number>;api=<url+path/php-filename>;sdk=<url+path/js-filename>")
   matomoConnectionString: '',
+  //
+  // GoatCounter: (Format: "api=https://<your-code>.goatcounter.com/count;sdk=https://gc.zgo.at/count.js")
+  goatCounterConnectionString: '',
   //
   // Application Insights:
   appInsightsConnectionString: '',

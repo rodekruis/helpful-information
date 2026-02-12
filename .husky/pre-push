@@ -1,4 +1,7 @@
+#!/bin/sh
 
-fnm use
+if command -v fnm > /dev/null 2>&1; then
+  fnm use
+fi
 
 npm test

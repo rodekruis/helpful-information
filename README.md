@@ -18,13 +18,15 @@ Latest releases and notable changes are in the [CHANGELOG](CHANGELOG.md).
 
 ## How it works
 
-The Helpful Information App (HIA) is a web-app that can show a list of 1 or more "_regions_", each of which is a separate dataset of structured content. This consists of "_Offers_", sorted in "_Categories_" and (optional) "_Sub-Categories_".
+The Helpful Information App (HIA) is a web-app that can show a list of 1 or more "_Regions_", each of which is a separate dataset of structured content. This consists of "_Offers_", sorted in "_Categories_" and (optional) "_Sub-Categories_".
 
-The web-app is a pre-build, static web-app that lists links to "regions", which are all separate data-sources contained in Google Sheets 'files'.
+The web-app is a pre-build, static web-app that lists links to "Regions", which are all separate data-sources contained in Google Sheets 'files'.
 
 The different sheets within these 'files' each have a different data-model. So that their content can be used to display in the web-app.
 
 The contents of these sheets is loaded at runtime by the visitor's browser from the "Google Sheets API".
+
+The application is prepared to use several different services/tools to monitor its usage by visitors, like: Matomo, GoatCounter and Azure Application Insights.
 
 ## How to use
 
@@ -51,10 +53,16 @@ So take appropriate precautions regarding file-ownership and "edit"-permissions 
 - Don't use the "insert link"-feature.  
   The plain text in a cell should be the full URL.
 
+Recommended:
+
+- Add as little (extra) content (outside of the tagged-columns) as possible; It will increase the filesize and loading-time. (And it is still also publicly visible on the internet, via de Google Sheets "view-only"-mode.)
+- _**Do use**_ the `#SLUG`-column with "human readable" identifiers, using: "lowercase letters, numbers and hyphens(`-`) only".  
+  This way URLs will be memorable and 'shareable' via speech/on the phone.
+
 Optional:
 
 - All columns can be reordered, as long as their `#tag`s remain in their header-cell.
-- You can use the toggle in the "_Visible?_"-column to prepare a 'draft' of a row and finally 'publish' by setting it to "_Show_".
+- You can use the toggle in the "_Visible?_"-column to prepare a 'draft' in a row, by setting it to "_Hide_"(or 'hidden', `0`, `-`), and then finally 'publish' it by setting it to "_Show_". (Leaving it empty WILL show the row!)
 - You can use background-colors to mark/highlight any changes or 'flag issues'; These styles will not be used in the web-app.
 
 #### Text formatting
@@ -104,7 +112,7 @@ Some specific information needs to be configured before use:
 
 - For deployments:  
   The ENV-variables defined in the [`.env.example`](.env.example)-file need to be defined in the build-environment according to the specific deployment-tool/service.  
-  See for example the [GitHub Action workflow (production)](.github/workflows/deploy-production.yml).
+  See for example the [GitHub Action workflow (template)](https://github.com/helpful-info/template/blob/main/.github/workflows/deploy-github-pages.yml).
 
 ### Using the Google Sheets API
 
@@ -134,7 +142,7 @@ To use a local API, without the need for any Google account/credentials:
        regionsSheetIds: 'test-sheet-id-1',
 
        google_sheets_api_key: '<can be anything, will be ignored>';
-       google_sheets_api_url: 'http://localhost:3001',
+       google_sheets_api_url: 'http://localhost:3003',
    ```
 
 2. Run (in a separate process/terminal):
@@ -145,13 +153,24 @@ To use a local API, without the need for any Google account/credentials:
 
 ### Testing
 
-Automated tests are configured and can be run (once) with:
+Unit-tests are configured and can be run (once) with:
 
     npm test
 
 During development, an automated watch-process can be run with:
 
     npm run test:watch
+
+#### E2E-tests
+
+End-to-End (E2E) tests are included, using [Playwright](https://playwright.dev/).
+Make sure all dependencies are installed, with:
+
+    npm run setup:e2e
+
+Then, run the tests with:
+
+    npm run test:e2e
 
 ### Recommended tools
 
@@ -163,7 +182,7 @@ During development, an automated watch-process can be run with:
 
 - [Ionic v8](https://ionicframework.com/docs/)
   > ⚠️ The [`Ionicons`](https://ionic.io/ionicons) icon-set is NOT included in the final build, so cannot be used 'by default'. Icons can be added manually.
-- [Angular v18](https://v18.angular.io/docs/)
+- [Angular](https://angular.dev/docs/)
 - [`ngx-markdown`](https://www.npmjs.com/package/ngx-markdown) is used to process Markdown-content into HTML. _No_ optional dependencies are included/used.
 
 ### Updating dependencies
@@ -310,7 +329,7 @@ Each Instance:
   - has a `Google Spreadsheet ID`, a 44-character string (from: `https://docs.google.com/spreadsheets/d/`**`___SPREADSHEET_ID___`**`/edit?usp=sharing`)
 
 - can have a customized 'color scheme' (and other CSS), by adjusting the contents of the [`overrides.css`](./src/theme/overrides.css)-file.  
-  This needs to be done _before_ building the web-app. (See for example: `[.github/workflows/deploy-staging.yml`](.github/workflows/deploy-staging.yml#L50)).
+  This needs to be done _before_ building the web-app. (See for example: [`.github/workflows/deploy-staging.yml`](.github/workflows/deploy-staging.yml#L50)).
 
 ### Sheet level configuration
 
@@ -384,13 +403,20 @@ The web-app can be deployed as a static single-page-app or PWA.
 
 - This directory can be deployed to any hosting-solution (supporting HTTPS), using [the recommended server configuration](https://v13.angular.io/guide/deployment#server-configuration).
 
+### Using GitHub Pages
+
+To deploy the web-app using [GitHub Pages](https://pages.github.com/), there is a template-repository at: <https://github.com/helpful-info/template> containing all necessary configuration/settings.
+
+> [!NOTE]
+> A detailed guide to set-up an instance using GitHub Pages can be found at: [Guide: How to set up an instance (quickly)](./docs/Guide-How_to_set_up_an_instance.md)
+
 ### Using Azure Static Web Apps
 
 To deploy the web-app using [Azure Static Web App service](https://azure.microsoft.com/en-us/services/app-service/static/):
 
-- A GitHub-Actions workflow needs to be defined,  
-  See: [`.github/workflows/deploy-production.yml`](.github/workflows/deploy-production.yml)
-- The configuration of URLs, Headers for the web-app is defined,  
+- A GitHub-Actions workflow needs to be defined,
+  with the Azure Static Web Apps deploy-action: <https://github.com/Azure/static-web-apps-deploy>
+- The configuration of URLs, Headers, etc for the web-app is defined
   in: [`staticwebapp.config.json`](staticwebapp.config.json)  
   See documentation about the format in [this example configuration file](https://docs.microsoft.com/en-us/azure/static-web-apps/configuration#example-configuration-file)
 

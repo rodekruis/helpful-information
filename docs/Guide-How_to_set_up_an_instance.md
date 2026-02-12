@@ -17,7 +17,8 @@ See the GitHub-repository website to find out how it works and how to use it.
 - Make sure to involve _all appropriate people from possible partner organizations_
 - Make sure to involve a _CEA specialist to start up the process of gathering, sorting, prioritizing all expected content_
 - Make sure to meet all [technical requirements](#technical-requirements) within the (partner-)organization.
-- Make sure to set up a follow-up/monitoring/evaluation process of the effectiveness of the content and categorization/prioritization.
+- Make sure to set up a monitoring/evaluation-process of the effectiveness of the content and categorization/prioritization.
+- Decide on using a (third-party) service for monitoring/analytics of the usage of the instance. To see which content is most used or searched-for/missing by visitors. See: [Set up Monitoring / Analytics](#set-up-monitoring--analytics).
 
 ## Technical Requirements
 
@@ -35,7 +36,7 @@ See the GitHub-repository website to find out how it works and how to use it.
   - [ ] Select one of the template-sheets from the Google Drive folder: "[HIA Templates (public)](https://drive.google.com/drive/folders/1eoKlwKqPXagTnkQGxj0JpH5TRplqXX-C)".
 
     > [!TIP]
-    > The template-sheet "[HIA - Staging Demo/Example](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)" is recurrently used to test all HIA functionalities, so it is the best starting point to understand how the app works and what it offers.
+    > The template-sheet "[HIA - All Features - Demo](https://docs.google.com/spreadsheets/d/1l43SgRymj3EPBOd-wp3mWrfcqDZlKbuAy7HQGo8YnT8)" is recurrently used to test all HIA functionalities, so it is the best starting point to understand how the app works and what it offers.
 
   - [ ] Click "**File**" > "**Make a copy**"; from now on, you will only work on this copy of the template-sheet. Give the sheet a descriptive title.
   - [ ] Share the file with "**Anyone with the link**" set to "**Viewer**".
@@ -73,7 +74,7 @@ See the GitHub-repository website to find out how it works and how to use it.
 - Create the GitHub-repository
   - [ ] Log into GitHub; if you need a Github Organization to host HIA, make sure you have permission to create new repositories in that organization.
   - [ ] Go to <https://github.com/helpful-info/template/generate>
-  - [ ] Name the repository as (last part of) the URL; select as owner the appropriate GitHub Organization, if necessary.
+  - [ ] Name the repository as (the last part of) the URL; select as owner the appropriate GitHub Organization, if necessary.
   - [ ] Make sure to select "**Public**" as the repository visibility.
   - [ ] Complete the process of creating the repository
   - [ ] Go to "**Settings**" > "**Pages**" and select "**Source**": "**Github Actions**".
@@ -105,10 +106,16 @@ See the GitHub-repository website to find out how it works and how to use it.
   - On the GitHub repository-page, go to: "Settings" → "Pages" → "Custom domain" and fill in the applicable public URL
   - GitHub will validate the DNS-records for the (sub-)domain
 
+- (Optional) Add any files to the `public/files/`-folder in the repository.
+  - These files will be available at: `https://<your-public-instance-URL>/files/<file-name>`
+  - They can be linked to from the content in the Google Sheet, using this full URL. (or using a Markdown-link)
+  - They can be used as icons/logos for Offers, (Sub-)Categories, etc. Use this full URL in the applicable rows/columns in the Google Sheet(s).
 - ✅ Done.
 
-Editors can now see their content-changes on the public URL.  
- People affected can be informed about the available information at the public URL.
+  Editors can now see their content-changes on the public URL.  
+  People affected can be informed about the available information at the public URL.
+
+- Editors can see details about "[How to use](https://github.com/rodekruis/helpful-information#how-to-use)"-HIA in the [helpful-information/README](https://github.com/rodekruis/helpful-information#readme)
 
 ---
 
@@ -176,3 +183,46 @@ This is the link/URL you'll communicate to the people affected and/or aid-worker
 
 - **URL**: `https://<specific-sub-domain>.<service-domain>`
 - Depending on service, for options, see [helpful-information / Deployment](https://github.com/rodekruis/helpful-information#deployment)
+
+### Set up Monitoring / Analytics
+
+Each page-visit("a page-view") and user-interaction("an event") can be logged/monitored using a third-party (web-analytics) service.
+The application is set-up to do this in a privacy-concious way, by anonymizing IP-addresses and not using cookies, thus complying to GDPR-requirements.
+
+#### Set up to use Matomo for Analytics
+
+Matomo is a popular open-source web-analytics platform, that can be self-hosted or used as a service via [Matomo Cloud](https://matomo.org/matomo-cloud/).
+
+1. Create a Matomo-account/user, either self-hosted or via Matomo Cloud.
+2. Create a new "Measurable"(with the type "Website") in Matomo for your HIA-instance.
+3. After creation, click the "View tracking code"-link.  
+   In the shown JavaScript Tracking Code, take note of the following values:
+   - As "Site ID", the _number_ shown in: `_paq.push(['setSiteId', '00']);` (without the `'`-quotes)
+   - As "Matomo URL", the _URL_ shown in: `var u="https://matomo.example.org/";`
+4. Use these values to configure the ENV-variable `MATOMO_CONNECTION_STRING`, following the format (specified in [`.env.example`](../.env.example)):
+
+   ```ts
+   id=<Site-ID-number>;api=<Matomo-URL+matomo.php>;sdk=<Matomo-URL+matomo.js>
+   ```
+
+   - Note that Matomo Cloud, uses a _different_ CDN-version of the `sdk=`-URL!
+
+5. This combined connection-string should be configured for the instance as the ENV-variable `MATOMO_CONNECTION_STRING` in the `.github/workflows/deploy-github-pages.yml`-file.
+
+#### Set up to use GoatCounter for Analytics
+
+GoatCounter is a simple, privacy-concious web-analytics platform, that can be self-hosted or used as a service via [GoatCounter.com](https://www.goatcounter.com/).
+It provides a generous free-tier for non-commercial projects.
+
+1. Create an initial GoatCounter-account, for the organization, on: <https://www.goatcounter.com/signup>
+   - Note the "Account name", as this will be used in the connection-string AND the (public) URL to view the dashboard.
+   - Under this 'organization', other users can be created/added to ALSO manage the dashboard(s)/account.
+2. Make sure to review the GoatCounter settings for the account, especially regarding data-retention and privacy.
+3. Use the "Account name"(as "YOUR_CODE") to configure the ENV-variable `GOATCOUNTER_CONNECTION_STRING`, following the format (specified in [`.env.example`](../.env.example)):
+
+   ```ts
+   api=https://<your-code>.goatcounter.com/count;sdk=https://gc.zgo.at/count.js
+   ```
+
+4. This combined connection-string should be configured for the instance as the ENV-variable `GOATCOUNTER_CONNECTION_STRING` in the `.github/workflows/deploy-github-pages.yml`-file.
+5. After deployment, visit the dashboard at: `https://<your-code>.goatcounter.com/`

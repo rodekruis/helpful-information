@@ -47,5 +47,6 @@ export const environment = {
 
   // Monitoring/Telemetry:
   matomoConnectionString: '',
+  goatCounterConnectionString: '',
   appInsightsConnectionString: '',
 };

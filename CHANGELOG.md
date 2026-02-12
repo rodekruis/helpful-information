@@ -9,6 +9,20 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v25.08.0...main)
 
+### Added
+
+- Support for GoatCounter third-party analytics-service. See: [`ENV`](.env.example) for `GOATCOUNTER_CONNECTION_STRING`.
+- (Basic) E2E-tests using Playwright. See: [`README / E2E-tests`](./README.md#e2e-tests) for more information.
+
+### Changed
+
+- Minimal supported Node.js-version is now v22.
+
+### Removed
+
+- Support for Node.js-versions below v22. (These are "end-of-life". And no longer supported by GitHub Action-workflows soon.)
+- The `#search.items.0`-key from the `Referral Page`-sheet. It was never used/needed.
+
 ---
 
 ## 2025-08-28: [v25.08.0](https://github.com/rodekruis/helpful-information/releases/tag/v25.08.0)
@@ -39,7 +53,7 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ### Added
 
-- Search-page can now have an optional introduction-text. Using the `#search.into`-field in the `Referral Page`-sheet.
+- Search-page can now have an optional introduction-text. Using the `#search.intro`-field in the `Referral Page`-sheet.
 - Search can be configured to use an _external_ API. See [`ENV`](.env.example) for `SEARCH_API` and `SEARCH_API_KEY`.
 
 ### Changed

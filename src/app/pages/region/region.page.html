@@ -34,6 +34,7 @@
         [attr.title]="regionData?.labelSearchPageTitle"
         [attr.aria-label]="regionData?.labelSearchPageTitle"
         class="action is_inline is_round is_outline text-style--center ion-margin-bottom"
+        rel="search"
       >
         <!-- See Source: /src/assets/icons/search.svg -->
         <img
@@ -53,13 +54,17 @@
 <h2 class="ion-no-margin">{{ regionData?.pageGreeting }}</h2>
 
 <div
+  data-testid="region-page-introduction"
   markdown
   [data]="regionData?.pageInstructions"
   [inline]="false"
   class="ion-margin-vertical ion-padding-bottom"
 ></div>
 
-<ul class="list-flat tile-grid tile-grid_base-3 ion-margin-vertical">
+<ul
+  data-testid="categories-list"
+  class="list-flat tile-grid tile-grid_base-3 ion-margin-vertical"
+>
   @for (categoryItem of categories; track categoryItem) {
     <li class="tile-grid--item">
       <app-category-link

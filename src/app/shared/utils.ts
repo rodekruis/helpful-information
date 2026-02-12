@@ -32,6 +32,8 @@ export const getDateFromString = (value: string): Date | null => {
  * @returns {String}
  */
 export const slugify = (value: string): string => {
+  // NOTE: Consider using: https://es-toolkit.dev/reference/string/kebabCase.html
+  // NOTE: Consider ALSO using: https://es-toolkit.dev/reference/string/deburr.html
   return value
     .toLowerCase()
     .replace(/\W+/g, '-')
@@ -102,4 +104,54 @@ export const fillTemplateWithUrl = (template: string, url: string): string => {
   }
 
   return template.replaceAll('{URL}', window.encodeURIComponent(url));
+};
+
+/**
+ * Create a plain string of all properties in `data` as key=value pairs, separated by ";"
+ * @example { a: 'valueA', b: 'valueB' } => "a=valueA;b=valueB"
+ * @example { c: [1, 2, 3] } => "c=1,2,3"
+ */
+export const createKeyValueList = (
+  data:
+    | Record<string | number, boolean | string | number | string[] | number[]>
+    | string
+    | number
+    | string[]
+    | number[]
+    | null
+    | undefined,
+): string => {
+  if (!data) {
+    return '';
+  }
+  if (typeof data === 'string' || typeof data === 'number') {
+    return valueToString(data);
+  }
+  if (Array.isArray(data)) {
+    return arrayToString(data);
+  }
+  return Object.keys(data)
+    .map((key) => {
+      const value = Array.isArray(data[key])
+        ? arrayToString(data[key])
+        : valueToString(data[key]);
+      return `${key}=${value}`;
+    })
+    .join(';');
+};
+const valueToString = (
+  value: boolean | string | number | null | undefined,
+): string => {
+  if (value === null || value === undefined) {
+    return '';
+  }
+  return String(value).trim();
+};
+const arrayToString = (
+  value: (boolean | string | number | null | undefined)[],
+): string => {
+  return value
+    .map((v) => valueToString(v))
+    .filter((v) => v.length > 0)
+    .join(',');
 };
