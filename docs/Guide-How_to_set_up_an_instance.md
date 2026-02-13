@@ -59,12 +59,12 @@ See the GitHub-repository website to find out how it works and how to use it.
     - [ ] Select "**API-key**" from the list, wait for the key to be generated. Store the key at a secure place; you will need this later.
     - [ ] After closing the pop-up, click the "**Edit API key**"-link
     - [ ] Give it a recognizable name; make sure to include its _scope_, i.e. "production" or "local-dev", to know which key is responsible for what.
-    - [ ] (_Optional, but highly recommended; Can be enabled/updated later._)  
+    - [ ] (_Optional, but highly recommended; can be enabled/updated later._)  
            Select "**HTTP referrers (websites)**" from the "**Application restrictions**"-list.  
            Add (all) the public URL(s) under "**Website Restrictions**".  
            For example `https://<organization-or-user-name>.github.io/*`
 
-    - [ ] (_Optional, but highly recommended; Can be enabled/updated later._)  
+    - [ ] (_Optional, but highly recommended; can be enabled/updated later._)  
            Set "**API restrictions**" to "**Restrict key**" and Select the "**Google Sheets API**" from the list
     - [ ] Save all changes/settings
 
@@ -81,6 +81,11 @@ See the GitHub-repository website to find out how it works and how to use it.
 - Add the Google Sheet API Key as a secret to the repository
   - [ ] Go to the repository's "**Settings**" > "**Secret and variables**" > "**Actions**" > "**New repository secret**"
   - [ ] Name the secret: `GOOGLE_SHEETS_API_KEY`and insert the API Key as value
+- (_Optional, but highly recommended; can be enabled/updated later._)  
+  Add the [hia-search](https://github.com/rodekruis/hia-search) API Key as a secret to the repository, to enable semantic search
+  - [ ] Find the item called `HIA Search API-key(s) [production]` in Bitwarden and copy the value of `API_KEY`
+  - [ ] Go to the repository's "**Settings**" > "**Secret and variables**" > "**Actions**" > "**New repository secret**"
+  - [ ] Name the secret: `SEARCH_API_KEY`and insert the API Key as value
 
 - Define dynamic values and settings of your instance and deploy it
   - [ ] Go to the file: `.github/workflows/deploy-github-pages.yml` and click "**Edit this file**" (pencil icon)
