@@ -12,8 +12,8 @@ export const environment = {
   useRegionPerLocale: false,
   useFeedbackPrompt: true,
 
+  useSearchApi: false,
   searchApi: '',
-  searchApiKey: '',
 
   // Configuration of content
   localeLanguage: 'en',

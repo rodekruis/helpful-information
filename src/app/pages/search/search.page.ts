@@ -195,7 +195,6 @@ export default class SearchPageComponent implements OnInit {
       credentials: 'omit',
       mode: 'cors',
       headers: {
-        Authorization: environment.searchApiKey,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },

@@ -15,11 +15,13 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 - (Basic) E2E-tests using Playwright. See: [`README / E2E-tests`](./README.md#e2e-tests) for more information.
 - [Command-line scripts](./scripts/) for:
   - Updating the index of the Search-API at build-time (or any other time).  
+    Needs to be enabled via the ENV-variables: `NG_USE_SEARCH_VIA_API`, `SEARCH_API` and optionally `SEARCH_API_KEY`.
     See: [`update-search-index.mjs`](./scripts/update-search-index.mjs)
 
 ### Changed
 
 - Minimal supported Node.js-version is now v22.
+- Using the "Search via API" needs to be explicitly enabled via the `NG_USE_SEARCH_VIA_API`-ENV-variable. See: [`ENV`](.env.example)
 
 ### Removed
 

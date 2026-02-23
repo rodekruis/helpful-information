@@ -7,16 +7,41 @@ import { parseArgs } from 'node:util';
 
 import { createTokenList } from './lib/createTokenList.mjs';
 import { getSheetIdsFromConfig } from './lib/getSheetIdsFromConfig.mjs';
+import { isEnabled } from './lib/isEnabled.mjs';
 import { loadConfig } from './lib/loadConfig.mjs';
 
+const UPDATE_SEARCH_INDEX_PATH = '/create-vector-store';
+
 /**
- * @param {string} sheetId
+ * Create the API URL based on the environment-variable.
+ * This can be set to a full URL (with path; like previously supported), or only the origin (minimal required value).
+ *
+ * @param {string} env The environment-variable
+ * @return {string} The full API URL
+ */
+function createApiUrl(env) {
+  try {
+    const url = new URL(env);
+    return `${url.origin}${UPDATE_SEARCH_INDEX_PATH}`;
+  } catch (error) {
+    console.error(`Invalid URL provided in SEARCH_API: "${env}".`, error);
+    process.exit(1);
+  }
+}
+
+/**
+ * @param {string} apiUrl
  * @param {'local' | 'id-only'} from - Whether to read local data or send only the ID
+ * @param {string} sheetId
  *
  * @returns {Promise<void>}
  */
-async function processSheet(sheetId, from) {
+async function processSheet(apiUrl, from, sheetId) {
   console.log(`Processing sheet ID: ${sheetId}...`);
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
   const requestBody = {
     googleSheetId: sheetId,
   };
@@ -25,6 +50,7 @@ async function processSheet(sheetId, from) {
     if (from === 'local') {
       console.log(`Reading local data...`);
       try {
+        headers.Authorization = process.env.SEARCH_API_KEY.trim();
         const sheetFile = readFileSync(
           resolve(`www/data/${sheetId}/values/Q&As`),
           'utf-8',
@@ -32,16 +58,13 @@ async function processSheet(sheetId, from) {
         requestBody.data = JSON.parse(sheetFile);
         console.log(`Found: ${requestBody.data.values.length} rows.`);
       } catch (err) {
-        console.error(`Failed to read or parse data: ${err.message}`);
+        throw new Error(`Failed to read or parse data: ${err.message}`);
       }
     }
 
-    const response = await fetch(process.env.SEARCH_API_BACKEND, {
+    const response = await fetch(apiUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: process.env.SEARCH_API_KEY_BACKEND,
-      },
+      headers,
       body: JSON.stringify(requestBody),
     });
 
@@ -52,14 +75,15 @@ async function processSheet(sheetId, from) {
 }
 
 /**
- * @param {string[]} sheetIds
+ * @param {string} apiUrl
  * @param {'local' | 'id-only'} from - Whether to read local data or send only the ID
+ * @param {string[]} sheetIds
  *
  * @returns {Promise<void>}
  */
-async function processAllSheetIds(sheetIds, from) {
+async function processAllSheetIds(apiUrl, from, sheetIds) {
   for (const [index, sheetId] of sheetIds.entries()) {
-    await processSheet(sheetId, from);
+    await processSheet(apiUrl, from, sheetId);
     console.log(`Progress: ${index + 1} of ${sheetIds.length}`);
   }
 }
@@ -70,7 +94,7 @@ async function processAllSheetIds(sheetIds, from) {
 try {
   loadEnvFile(join(import.meta.dirname, '../.env'));
 } catch (_error) {
-  console.warn('No .env file found, proceeding without it.');
+  console.info('No .env file found, proceeding without it.');
 }
 
 const cli = parseArgs({
@@ -84,17 +108,27 @@ const cli = parseArgs({
 });
 
 try {
-  if (!process.env.SEARCH_API || !process.env.SEARCH_API_KEY) {
+  if (!isEnabled(process.env.NG_USE_SEARCH_VIA_API)) {
     console.log('Search-via-API not set-up, skipping update of search-index.');
-    console.log(
-      'To enable, set environment-variables: `SEARCH_API` and `SEARCH_API_KEY`',
+    console.info(
+      'To enable, set all appropriate environment-variables. See: .env.example',
     );
     process.exit(0);
   }
 
-  if (!process.env.SEARCH_API_BACKEND || !process.env.SEARCH_API_KEY_BACKEND) {
+  const apiUrl = createApiUrl(process.env.SEARCH_API);
+  if (!apiUrl) {
     throw new Error(
-      'Environment-variables `SEARCH_API_BACKEND` and `SEARCH_API_KEY_BACKEND` not set or missing.',
+      'Environment-variable `SEARCH_API` is required to update the search-index.',
+    );
+  }
+
+  if (
+    cli.values.from === 'local' &&
+    (!process.env.SEARCH_API_KEY || !process.env.SEARCH_API_KEY.trim())
+  ) {
+    throw new Error(
+      'Environment-variable `SEARCH_API_KEY` is required to update the search-index with local-data.',
     );
   }
 
@@ -120,7 +154,7 @@ try {
   console.log(`Found: ${sheetIds.length} sheets.`);
 
   // Run the process
-  processAllSheetIds(sheetIds, cli.values.from)
+  processAllSheetIds(apiUrl, cli.values.from, sheetIds)
     .then(() => {
       console.log('Finished.');
       process.exit(0);
