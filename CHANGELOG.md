@@ -27,6 +27,8 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 - Support for Node.js-versions below v22. (These are "end-of-life". And no longer supported by GitHub Action-workflows soon.)
 - The `#search.items.0`-key from the `Referral Page`-sheet. It was never used/needed.
+- Use of an API-key for the Search-API is now ONLY required, when using local sheet-data.  
+  See: [`ENV`](.env.example) for `SEARCH_API_KEY`; And: [`update-search-index.mjs`](./scripts/update-search-index.mjs)
 
 ---
 
