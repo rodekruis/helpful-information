@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+
 /**
  * Load the HIA-Config from package.json.
  *
@@ -5,7 +8,7 @@
  */
 export const loadConfig = () => {
   console.log('Loading config...');
-  const packageJsonPath = resolve('../package.json');
+  const packageJsonPath = resolve(join(import.meta.dirname, '../package.json'));
   const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
   const config = packageJson.config;
 

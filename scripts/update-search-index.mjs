@@ -55,7 +55,9 @@ async function processSheet(apiUrl, from, sheetId) {
         headers.append('Authorization', process.env.SEARCH_API_KEY?.trim());
 
         const sheetFile = readFileSync(
-          resolve(`www/data/${sheetId}/values/Q&As`),
+          resolve(
+            join(import.meta.dirname, `../www/data/${sheetId}/values/Q&As`),
+          ),
           'utf-8',
         );
         requestBody.data = JSON.parse(sheetFile);
