@@ -10,22 +10,24 @@ import { getSheetIdsFromConfig } from './lib/getSheetIdsFromConfig.mjs';
 import { isEnabled } from './lib/isEnabled.mjs';
 import { loadConfig } from './lib/loadConfig.mjs';
 
-const UPDATE_SEARCH_INDEX_PATH = '/create-vector-store';
+const UPDATE_SEARCH_INDEX_ENDPOINT = 'create-vector-store';
 
 /**
- * Create the API URL based on the environment-variable.
+ * Create the full API URL
  * This can be set to a full URL (with path; like previously supported), or only the origin (minimal required value).
  *
- * @param {string} env The environment-variable
+ * @param {string} value
  * @return {string} The full API URL
  */
-function createApiUrl(env) {
+function createApiUrl(value) {
   try {
-    const url = new URL(env);
-    return `${url.origin}${UPDATE_SEARCH_INDEX_PATH}`;
+    const url = new URL(value);
+    url.pathname = UPDATE_SEARCH_INDEX_ENDPOINT;
+    return url.toString();
   } catch (error) {
-    console.error(`Invalid URL provided in SEARCH_API: "${env}".`, error);
-    process.exit(1);
+    throw new Error(`Invalid URL provided in SEARCH_API: "${value}".`, {
+      cause: error,
+    });
   }
 }
 
@@ -39,9 +41,9 @@ function createApiUrl(env) {
 async function processSheet(apiUrl, from, sheetId) {
   console.log(`Processing sheet ID: ${sheetId}...`);
 
-  const headers = {
-    'Content-Type': 'application/json',
-  };
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+
   const requestBody = {
     googleSheetId: sheetId,
   };
@@ -50,7 +52,8 @@ async function processSheet(apiUrl, from, sheetId) {
     if (from === 'local') {
       console.log(`Reading local data...`);
       try {
-        headers.Authorization = process.env.SEARCH_API_KEY.trim();
+        headers.append('Authorization', process.env.SEARCH_API_KEY?.trim());
+
         const sheetFile = readFileSync(
           resolve(`www/data/${sheetId}/values/Q&As`),
           'utf-8',
@@ -58,7 +61,9 @@ async function processSheet(apiUrl, from, sheetId) {
         requestBody.data = JSON.parse(sheetFile);
         console.log(`Found: ${requestBody.data.values.length} rows.`);
       } catch (err) {
-        throw new Error(`Failed to read or parse data: ${err.message}`);
+        throw new Error(`Failed to read or parse data: ${err.message}`, {
+          cause: err,
+        });
       }
     }
 
