@@ -403,7 +403,7 @@ The search-function can be configured to use an external API, instead of searchi
 
 To use this, some configuration and set-up is required.
 
-- Set the `NG_USE_SEARCH_VIA_API` and `SEARCH_API` ENV-variables in the build-environment (See: [Configuration](#configuration))
+- Set the `NG_USE_SEARCH_VIA_API` and `SEARCH_API` ENV-variables in the build-environment (See: [Configuration](#configuration)).  
   See the [`ENV`](.env.example) near `SEARCH_API` for more information.
 
 ##### Update of search-index
