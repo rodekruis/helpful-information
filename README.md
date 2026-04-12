@@ -55,7 +55,7 @@ So take appropriate precautions regarding file-ownership and "edit"-permissions 
 
 Recommended:
 
-- Add as little (extra) content (outside of the tagged-columns) as possible; It will increase the filesize and loading-time. (And it is still also publicly visible on the internet, via de Google Sheets "view-only"-mode.)
+- Add as little (extra) content (outside of the tagged-columns) as possible; It will increase the file-size and loading-time. (And it is still also publicly visible on the internet, via de Google Sheets "view-only"-mode.)
 - _**Do use**_ the `#SLUG`-column with "human readable" identifiers, using: "lowercase letters, numbers and hyphens(`-`) only".  
   This way URLs will be memorable and 'shareable' via speech/on the phone.
 
@@ -104,15 +104,15 @@ An explanation of (a lot of) the features of this syntax can be found in the [Ma
 
 Some specific information needs to be configured before use:
 
-- For use in development:  
+- For use in development-mode:  
   Set these different properties in the [`environment.ts`](./src/environments/environment.ts)-file.
 
-- For use in production:  
+- For use in production-mode:  
   These values need to be set in the [`.env`](.env.example)-file. Or as ENV-variables via other means.
 
 - For deployments:  
   The ENV-variables defined in the [`.env.example`](.env.example)-file need to be defined in the build-environment according to the specific deployment-tool/service.  
-  See for example the [GitHub Action workflow (template)](https://github.com/helpful-info/template/blob/main/.github/workflows/deploy-github-pages.yml).
+  See [Deployment](#deployment).
 
 ### Using the Google Sheets API
 
@@ -319,8 +319,6 @@ classDiagram
 
 ### Build level configuration
 
-See the options in the [`.env.example`](.env.example)-file.
-
 Each Instance:
 
 - can have 1 or multiple Sheet(s), each:
@@ -330,6 +328,15 @@ Each Instance:
 
 - can have a customized 'color scheme' (and other CSS), by adjusting the contents of the [`overrides.css`](./src/theme/overrides.css)-file.  
   This needs to be done _before_ building the web-app. (See for example: [`.github/workflows/deploy-staging.yml`](.github/workflows/deploy-staging.yml#L50)).
+
+- can have custom text-labels (in any language), for some generic elements.
+- can have some features enabled/disabled, like:
+  - Using the Q&As content-type and related features, like Search etc.
+  - Feedback-widget
+  - Language-switcher
+  - Analytics/usage-monitoring
+
+  See for all options the [`.env.example`](.env.example)-file.
 
 ### Sheet level configuration
 
