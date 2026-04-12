@@ -2,7 +2,7 @@
 # See: https://aka.ms/swaworkflowconfig
 # See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
-name: 'Tests'
+name: Tests
 
 on:
   workflow_dispatch:
@@ -31,7 +31,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: npm
 
       - name: Install
         env:
