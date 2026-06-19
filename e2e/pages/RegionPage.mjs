@@ -11,7 +11,7 @@ export class RegionPage {
     /** @type {Page} */
     this.page = page;
     /** @type {Locator} */
-    this.regionPageHeader = page.locator('h2').first();
+    this.regionPageHeader = page.getByRole('heading', { level: 2 }).first();
     /** @type {Locator} */
     this.regionPageIntroduction = page.getByTestId('region-page-introduction');
     /** @type {Locator} */

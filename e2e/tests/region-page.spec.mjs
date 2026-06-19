@@ -42,13 +42,15 @@ With MarkDown and/or HTML content:`,
     ).toHaveText('HTML');
 
     // List(s)
-    await expect(regionPage.regionPageIntroduction.locator('ul')).toHaveCount(
-      1,
-    );
     await expect(
-      regionPage.regionPageIntroduction.locator('ul li'),
+      regionPage.regionPageIntroduction.getByRole('list'),
+    ).toHaveCount(1);
+    await expect(
+      regionPage.regionPageIntroduction.getByRole('listitem'),
     ).toHaveCount(4);
-    await expect(regionPage.regionPageIntroduction.locator('ul li')).toHaveText(
+    await expect(
+      regionPage.regionPageIntroduction.getByRole('listitem'),
+    ).toHaveText(
       [
         'lists',
         'plain URL-links: https://example.org',
@@ -59,9 +61,11 @@ With MarkDown and/or HTML content:`,
     );
 
     // Link(s)
-    await expect(regionPage.regionPageIntroduction.locator('a')).toHaveCount(3);
+    await expect(
+      regionPage.regionPageIntroduction.getByRole('link'),
+    ).toHaveCount(3);
     for (const link of await regionPage.regionPageIntroduction
-      .locator('a')
+      .getByRole('link')
       .all()) {
       await expect(link).toHaveAttribute('href', 'https://example.org');
       await expect(link).toHaveAttribute('target', '_blank');
@@ -70,19 +74,18 @@ With MarkDown and/or HTML content:`,
       await expect(link).toHaveAttribute('rel', /noreferrer/);
     }
     await expect(
-      regionPage.regionPageIntroduction.locator('a').first(),
+      regionPage.regionPageIntroduction.getByRole('link').first(),
     ).toHaveAttribute('rel', /x-plain-url/);
 
     // Headings
-    await expect(regionPage.regionPageIntroduction.locator('h3')).toHaveText([
-      'No level-1 Headings here',
-      'Level 3+ Headings only here',
-    ]);
+    await expect(
+      regionPage.regionPageIntroduction.getByRole('heading', { level: 3 }),
+    ).toHaveText(['No level-1 Headings here', 'Level 3+ Headings only here']);
 
     // Extra's
-    await expect(regionPage.regionPageIntroduction.locator('hr')).toHaveCount(
-      1,
-    );
+    await expect(
+      regionPage.regionPageIntroduction.getByRole('separator'),
+    ).toHaveCount(1);
   });
 
   test('main categories', async ({ page }) => {
