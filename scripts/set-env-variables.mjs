@@ -9,7 +9,7 @@ import { loadEnvFile } from 'node:process';
 try {
   loadEnvFile(join(import.meta.dirname, '../.env'));
 } catch (_error) {
-  console.warn('No .env file found, proceeding without it.');
+  console.info('No .env file found, proceeding without it.');
 }
 
 const require = createRequire(import.meta.url);
