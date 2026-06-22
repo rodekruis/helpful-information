@@ -12,6 +12,16 @@ import { loadConfig } from './lib/loadConfig.mjs';
 
 const UPDATE_SEARCH_INDEX_ENDPOINT = 'create-vector-store';
 
+function printHelp() {
+  console.log(`
+The Helpful CLI: Update Search Index
+
+Options:
+  --help, -h                  Show this help message
+  --from <local|id-only>      Whether to read local data or send only the ID (default: id-only)
+`);
+}
+
 /**
  * Create the full API URL
  * This can be set to a full URL (with path; like previously supported), or only the origin (minimal required value).
@@ -106,6 +116,10 @@ try {
 
 const cli = parseArgs({
   options: {
+    help: {
+      type: 'boolean',
+      short: 'h',
+    },
     from: {
       type: 'string',
       short: 'f',
@@ -113,6 +127,11 @@ const cli = parseArgs({
     },
   },
 });
+
+if (cli.values.help) {
+  printHelp();
+  process.exit(0);
+}
 
 try {
   if (!isEnabled(process.env.NG_USE_SEARCH_VIA_API)) {
