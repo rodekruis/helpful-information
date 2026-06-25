@@ -113,40 +113,20 @@
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:vitest",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [],
-            "scripts": [],
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "./assets"
-              }
-            ],
-            "codeCoverage": true,
-            "watch": true,
-            "progress": true,
-            "browsers": "Chrome"
+            "include": ["src/**/*.spec.ts"]
           },
           "configurations": {
-            "production": {},
             "ci": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.test.ts"
                 }
-              ],
-              "progress": false,
-              "watch": false,
-              "browsers": "ChromeHeadless"
+              ]
             },
-            "test": {},
             "development": {
               "fileReplacements": [
                 {

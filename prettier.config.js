@@ -1,7 +1,7 @@
 // See: https://prettier.io/docs/en/options.html
 
 /** @type {import("prettier").Config} */
-module.exports = {
+export default {
   semi: true,
   singleAttributePerLine: true,
   singleQuote: true,

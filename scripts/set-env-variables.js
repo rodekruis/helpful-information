@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const dotenv = require('dotenv');
+import { dirname, join } from 'path';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { writeFile } from 'fs';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Load environment-variables from .env file
 dotenv.config({
@@ -10,15 +13,12 @@ dotenv.config({
   override: true,
 });
 
-const configFileTemplate = require(
-  path.join(__dirname, '../src/environments/environment.prod.ts.template.js'),
+const { default: configFileTemplate } = await import(
+  join(__dirname, '../src/environments/environment.prod.ts.template.js')
 );
-const targetPath = path.join(
-  __dirname,
-  '../src/environments/environment.prod.ts',
-);
+const targetPath = join(__dirname, '../src/environments/environment.prod.ts');
 
-fs.writeFile(targetPath, configFileTemplate, (err) => {
+writeFile(targetPath, configFileTemplate, (err) => {
   if (process.env.DEBUG || process.env.CI) {
     console.log(configFileTemplate);
   }
