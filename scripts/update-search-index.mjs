@@ -73,7 +73,7 @@ async function processSheet(apiUrl, from, sheetId) {
         requestBody.data = JSON.parse(sheetFile);
         console.log(`Found: ${requestBody.data.values.length} rows.`);
       } catch (err) {
-        throw new Error(`Failed to read or parse data: ${err.message}`, {
+        throw new Error(`Failed to read or parse data from: ${err.path}`, {
           cause: err,
         });
       }
@@ -87,7 +87,8 @@ async function processSheet(apiUrl, from, sheetId) {
 
     console.log(`API Response: ${response.status} - ${await response.text()}`);
   } catch (error) {
-    console.error(`Error processing sheet ID ${sheetId}:`, error);
+    console.error(`Error processing sheet ID: ${sheetId}`);
+    console.error(error.message ?? error);
   }
 }
 
