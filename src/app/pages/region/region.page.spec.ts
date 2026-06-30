@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
-import { ngxMarkdownModuleFactory } from 'src/main';
+import { ngxMarkdownModuleFactory } from 'src/app/shared/ngx-markdown.factory';
 
 import RegionPageComponent from './region.page';
 
