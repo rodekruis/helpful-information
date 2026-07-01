@@ -1,0 +1,30 @@
+# Exclude unnecessary files from the installed package
+# See also: .gitignore, etc.
+
+# Unnecessary code/config
+.devcontainer/
+.github/
+.husky/
+.vscode/
+data/
+e2e/
+.eslintrc.json
+.markdownlint.yml
+.prettierignore
+.yamllint.yml
+playwright.config.mjs
+prettier.config.mjs
+
+# Sensitive(?) values
+.env
+.env.*
+!.env.example
+
+# Generated files
+.angular/
+.nx/
+coverage/
+dist/
+playwright-report/
+test-results/
+www/
