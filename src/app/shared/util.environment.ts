@@ -1,21 +1,11 @@
+import { createTokenList } from 'scripts/lib/createTokenList.mjs';
 import { environment } from 'src/environments/environment';
 
-function createTokenList(value: string): string[] {
-  return value
-    .trim()
-    .split(/\s*,\s*/)
-    .map((s) => s.trim());
-}
-
-export function createRegionSlugs(
-  regions: string = environment.regions,
-): string[] {
+export function createRegionSlugs(regions: string): string[] {
   return createTokenList(regions).map((s) => s.toLowerCase());
 }
 
-function createRegionLabels(
-  regionLabels: string = environment.regionsLabels,
-): string[] {
+function createRegionLabels(regionLabels: string): string[] {
   return createTokenList(regionLabels);
 }
 
@@ -35,8 +25,8 @@ export function getSheetIds(): { [key: string]: string } {
 }
 
 export function getRegionLabel(region: string = ''): string {
-  const regions = createRegionSlugs();
-  const regionsLabels = createRegionLabels();
+  const regions = createRegionSlugs(environment.regions);
+  const regionsLabels = createRegionLabels(environment.regionsLabels);
 
   let label = regionsLabels[regions.indexOf(region)];
 

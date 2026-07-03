@@ -41,7 +41,6 @@
     ["#search.title", "Zoek-resultaten"],
     ["#search.cta", "Zoek"],
     ["#search.items", "Resultaten:"],
-    ["#search.items.0", "Geen resultaten."],
     [],
     ["#offer.address", "Adres"],
     ["#offer.phone", "Telefoon"],

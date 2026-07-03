@@ -12,6 +12,10 @@
     "gencer.html-slim-scss-css-class-completion",
     "angular.ng-template",
     "vitaliymaz.vscode-svg-previewer",
-    "xshrim.txt-syntax"
+    "xshrim.txt-syntax",
+    "lucono.karma-test-explorer",
+    "ms-playwright.playwright",
+    "hbenl.vscode-test-explorer",
+    "ms-vscode.test-adapter-converter"
   ]
 }

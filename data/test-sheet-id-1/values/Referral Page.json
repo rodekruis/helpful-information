@@ -111,11 +111,6 @@
       "Results:",
       "\"Search results:\", \"Found:\""
     ],
-    [
-      "Label: Search - \"no items\"\n#search.items.0",
-      "",
-      "\"No results.\", \"Nothing found.\""
-    ],
     [],
     [
       "Label: Offer - Address\n#offer.address",

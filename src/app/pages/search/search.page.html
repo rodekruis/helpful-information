@@ -27,7 +27,7 @@
     [tabindex]="-1"
     class="focus--minimal focus--fade-out"
   >
-    @if (useSearchApi && loadingSearch) {
+    @if (loadingSearch) {
       <div>
         <span
           class="loading-text"
@@ -43,19 +43,17 @@
           style="width: 75%"
         ></span>
       </div>
-    }
-    @if (!!searchQuery && !loadingSearch && searchResults?.length) {
-      <p>
+    } @else {
+      <p data-testid="search-results-label">
         {{ regionData?.labelSearchResultsCount }}
         <strong>{{ searchResults?.length }}</strong>
       </p>
-    }
-    @if (!!searchQuery && !loadingSearch) {
       <app-q-a-set-list
         [baseUrl]="'../'"
         [list]="searchResults"
         [showDateUpdatedOutsideQuestion]="false"
         class="ion-margin-vertical"
+        data-testid="search-results-list"
       ></app-q-a-set-list>
     }
   </section>

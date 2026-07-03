@@ -9,6 +9,27 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ## [Unreleased](https://github.com/rodekruis/helpful-information/compare/v25.08.0...main)
 
+### Added
+
+- Support for GoatCounter third-party analytics-service. See: [`ENV`](.env.example) for `GOATCOUNTER_CONNECTION_STRING`.
+- (Basic) E2E-tests using Playwright. See: [`README / E2E-tests`](./README.md#e2e-tests) for more information.
+- [Command-line scripts](./scripts/) for:
+  - Updating the index of the Search-API at build-time (or any other time).  
+    Needs to be enabled via the ENV-variables: `NG_USE_SEARCH_VIA_API`, `SEARCH_API` and optionally `SEARCH_API_KEY`.  
+    See: [`update-search-index.mjs`](./scripts/update-search-index.mjs)
+
+### Changed
+
+- Minimal supported Node.js-version is now v22.
+- Using the "Search via API" needs to be explicitly enabled via the `NG_USE_SEARCH_VIA_API`-ENV-variable. See: [`ENV`](.env.example)
+
+### Removed
+
+- Support for Node.js-versions below v22. (These are "end-of-life". And no longer supported by GitHub Action-workflows soon.)
+- The `#search.items.0`-key from the `Referral Page`-sheet. It was never used/needed.
+- Use of an API-key for the Search-API is now ONLY required, when using local sheet-data.  
+  See: [`ENV`](.env.example) for `SEARCH_API_KEY`; And: [`update-search-index.mjs`](./scripts/update-search-index.mjs)
+
 ---
 
 ## 2025-08-28: [v25.08.0](https://github.com/rodekruis/helpful-information/releases/tag/v25.08.0)
@@ -39,7 +60,7 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 ### Added
 
-- Search-page can now have an optional introduction-text. Using the `#search.into`-field in the `Referral Page`-sheet.
+- Search-page can now have an optional introduction-text. Using the `#search.intro`-field in the `Referral Page`-sheet.
 - Search can be configured to use an _external_ API. See [`ENV`](.env.example) for `SEARCH_API` and `SEARCH_API_KEY`.
 
 ### Changed
