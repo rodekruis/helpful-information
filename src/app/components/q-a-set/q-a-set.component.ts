@@ -20,12 +20,23 @@ export class QASetComponent {
   private loggingService = inject(LoggingService);
 
   @Input()
-  qaSet: QASet;
+  qaSet: QASet = {
+    answer: '',
+    categoryID: 0,
+    children: [],
+    dateUpdated: null,
+    id: 0,
+    isHighlight: false,
+    isVisible: false,
+    question: '',
+    slug: '',
+    subCategoryID: 0,
+  };
 
   @Input()
   public showParentDateUpdated = true;
 
-  public labelLastUpdated: string;
+  public labelLastUpdated = '';
 
   constructor() {
     if (

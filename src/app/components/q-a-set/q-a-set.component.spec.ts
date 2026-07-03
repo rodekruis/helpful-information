@@ -41,7 +41,7 @@ describe('QASetComponent', () => {
 
   it('should create', () => {
     // Arrange
-    component.qaSet = mockQASet1;
+    fixture.componentRef.setInput('qaSet', mockQASet1);
 
     // Act
     fixture.detectChanges();
@@ -52,7 +52,7 @@ describe('QASetComponent', () => {
 
   it('should show a list of sub-questions', () => {
     // Arrange
-    component.qaSet = mockQASet2with1SubQuestion;
+    fixture.componentRef.setInput('qaSet', mockQASet2with1SubQuestion);
 
     // Act
     fixture.detectChanges();
@@ -69,7 +69,7 @@ describe('QASetComponent', () => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.dateUpdated = testDate;
-    component.qaSet = testQASet;
+    fixture.componentRef.setInput('qaSet', testQASet);
 
     // Act
     fixture.detectChanges();
@@ -85,8 +85,8 @@ describe('QASetComponent', () => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.dateUpdated = testDate;
-    component.qaSet = testQASet;
-    component.showParentDateUpdated = false;
+    fixture.componentRef.setInput('qaSet', testQASet);
+    fixture.componentRef.setInput('showParentDateUpdated', false);
 
     // Act
     fixture.detectChanges();
@@ -101,7 +101,7 @@ describe('QASetComponent', () => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.dateUpdated = null;
-    component.qaSet = testQASet;
+    fixture.componentRef.setInput('qaSet', testQASet);
 
     // Act
     fixture.detectChanges();
@@ -117,7 +117,7 @@ describe('QASetComponent', () => {
     const testQASet = mockQASet2with1SubQuestion;
     testQASet.dateUpdated = testDate;
     testQASet.children[0].dateUpdated = testDate;
-    component.qaSet = testQASet;
+    fixture.componentRef.setInput('qaSet', testQASet);
 
     // Act
     fixture.detectChanges();
@@ -135,7 +135,7 @@ describe('QASetComponent', () => {
     const testQASet = mockQASet1;
     testQASet.answer =
       'Answer with URL: www.example.org Test-link: https://example.net/';
-    component.qaSet = testQASet;
+    fixture.componentRef.setInput('qaSet', testQASet);
 
     // Act
     fixture.detectChanges();
@@ -169,7 +169,7 @@ describe('QASetComponent', () => {
       // 'Evil link: <a target="_self" href="//evil.example.net">link</a>' + // This circumvents the addition of target attribute :(
       // 'Evil link: <a rel="opener" href="//evil.example.net">link</a>' + // This circumvents the addition of rel attribute :(
       '';
-    component.qaSet = testQASet;
+    fixture.componentRef.setInput('qaSet', testQASet);
 
     // Act
     fixture.detectChanges();
@@ -198,7 +198,7 @@ describe('QASetComponent', () => {
       'an external HTML-link: <a href= https://example.org/test>external test</a> \n' +
       'an external Markdown-link: [external test](https://example.org/test) \n' +
       'a Markdown-link with formatting: [**External** _link_](https://example.org/test)';
-    component.qaSet = testQASet;
+    fixture.componentRef.setInput('qaSet', testQASet);
 
     // Act
     fixture.detectChanges();

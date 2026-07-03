@@ -24,7 +24,7 @@ describe('SearchInputComponent', () => {
   it('should use the provided label for the submit-button', () => {
     // Arrange
     const testText = 'TEST';
-    component.actionLabel = testText;
+    fixture.componentRef.setInput('actionLabel', testText);
 
     // Act
     fixture.detectChanges();
@@ -40,7 +40,7 @@ describe('SearchInputComponent', () => {
   it('should use the fallback-text as label for the submit-button', () => {
     // Arrange
     const fallbackText = 'Search';
-    component.actionLabel = null;
+    fixture.componentRef.setInput('actionLabel', null);
 
     // Act
     fixture.detectChanges();
@@ -56,7 +56,7 @@ describe('SearchInputComponent', () => {
   it('should use the provided query as value for the input-field', async () => {
     // Arrange
     const testQuery = 'TEST';
-    component.searchQuery = testQuery;
+    fixture.componentRef.setInput('searchQuery', testQuery);
 
     // Act
     fixture.detectChanges();
