@@ -6,7 +6,7 @@ import {
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import { ngxMarkdownModuleFactory } from 'src/main';
+import { ngxMarkdownModuleFactory } from 'src/app/shared/ngx-markdown.factory';
 
 import { QASetComponent } from './q-a-set.component';
 
