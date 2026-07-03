@@ -24,7 +24,7 @@
     "sourceMap": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true, // NOTE: Required for Angular v21+ / Ionic v8.8+ issue
     "target": "ES2022",
     "typeRoots": ["node_modules/@types"],
     "useDefineForClassFields": false,
