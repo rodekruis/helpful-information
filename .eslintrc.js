@@ -25,7 +25,7 @@ module.exports = {
   ignorePatterns: ['coverage', 'www'],
   overrides: [
     {
-      files: ['**/*.ts'],
+      files: ['**/*.ts', '**/*.mts'],
       parserOptions: {
         project: ['tsconfig.json'],
         createDefaultProgram: true,
@@ -113,7 +113,7 @@ module.exports = {
       },
       settings: {
         'import/parsers': {
-          '@typescript-eslint/parser': ['.ts', '.tsx'],
+          '@typescript-eslint/parser': ['.ts', '.mts'],
         },
         'import/resolver': {
           typescript: {

@@ -139,6 +139,7 @@ export const createKeyValueList = (
     })
     .join(';');
 };
+
 const valueToString = (
   value: boolean | string | number | null | undefined,
 ): string => {
@@ -147,6 +148,7 @@ const valueToString = (
   }
   return String(value).trim();
 };
+
 const arrayToString = (
   value: (boolean | string | number | null | undefined)[],
 ): string => {

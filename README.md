@@ -397,6 +397,22 @@ Using the search-input Q&A-sets can be filtered to match 1 or more keywords to t
 - To include spaces in a keyword, surround with: `"` (double quotes)  
   For example: `help "Red Cross"` will match `help` or `Red Cross`
 
+##### Search via API
+
+The search-function can be configured to use an external API, instead of searching locally in the loaded data.
+
+To use this, some configuration and set-up is required.
+
+- Set the `NG_USE_SEARCH_VIA_API` and `SEARCH_API` ENV-variables in the build-environment (See: [Configuration](#configuration)).  
+  See the [`ENV`](.env.example) near `SEARCH_API` for more information.
+
+##### Update of search-index
+
+When using the Search-via-API feature, the search-index needs to be updated explicitly, to use the latest content of the Google Sheet(s).
+
+When using local sheet-data, instead of via the Google Sheets API, updating the search-index requires an API-key.
+See the [`ENV`](.env.example) near `SEARCH_API_KEY` for more information.
+
 ---
 
 ## Deployment
