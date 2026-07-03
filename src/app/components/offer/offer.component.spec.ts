@@ -27,7 +27,7 @@ describe('OfferComponent', () => {
 
   it('should create', () => {
     // Arrange
-    component.offer = mockOffer;
+    fixture.componentRef.setInput('offer', mockOffer);
 
     // Act
     fixture.detectChanges();

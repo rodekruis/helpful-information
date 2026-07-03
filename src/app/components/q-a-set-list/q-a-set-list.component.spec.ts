@@ -67,7 +67,7 @@ describe('QASetListComponent', () => {
   it('should create', () => {
     // Arrange
     const testList = mockList;
-    component.list = testList;
+    fixture.componentRef.setInput('list', testList);
 
     // Act
     fixture.detectChanges();
@@ -79,7 +79,7 @@ describe('QASetListComponent', () => {
   it('should show a list of Q&As', () => {
     // Arrange
     const testList = mockList;
-    component.list = testList;
+    fixture.componentRef.setInput('list', testList);
 
     // Act
     fixture.detectChanges();
@@ -94,7 +94,7 @@ describe('QASetListComponent', () => {
   it("should show links to the Q&As' (sub-)category", () => {
     // Arrange
     const testList = [mockList[0]];
-    component.list = testList;
+    fixture.componentRef.setInput('list', testList);
 
     // Act
     fixture.detectChanges();
@@ -113,8 +113,8 @@ describe('QASetListComponent', () => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.dateUpdated = testDate;
-    component.list = [testQASet];
-    component.showDateUpdatedOutsideQuestion = false;
+    fixture.componentRef.setInput('list', [testQASet]);
+    fixture.componentRef.setInput('showDateUpdatedOutsideQuestion', false);
 
     // Act
     fixture.detectChanges();
@@ -135,8 +135,8 @@ describe('QASetListComponent', () => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.dateUpdated = testDate;
-    component.list = [testQASet];
-    component.showDateUpdatedOutsideQuestion = true;
+    fixture.componentRef.setInput('list', [testQASet]);
+    fixture.componentRef.setInput('showDateUpdatedOutsideQuestion', true);
 
     // Act
     fixture.detectChanges();
