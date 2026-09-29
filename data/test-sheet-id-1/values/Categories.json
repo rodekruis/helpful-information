@@ -75,6 +75,14 @@
       "This category is hidden and should not appear in the list.",
       ""
     ],
-    ["10"]
+    ["10"],
+    [
+      "11",
+      "Test Category",
+      "test-category",
+      "Test",
+      "Only for testing, not to show",
+      ""
+    ]
   ]
 }

@@ -99,10 +99,8 @@ With MarkDown and/or HTML content:`,
         'Empty',
         'Single Level',
         'Q&As',
-        'Missing Slug',
         'Duplicate Slug 1',
         'Duplicate Slug 2',
-        '', // TODO: Find out why this is necessary. Later.
       ],
       { useInnerText: true },
     );
