@@ -1,6 +1,6 @@
 {
   "name": "helpful-information",
-  "homepage": "https://helpfulinformation.redcross.nl/",
+  "homepage": "https://510.global/product/hia/",
   "scripts": {
     "prepare": "husky",
     "setup": "cp -i .env.example .env && npm run prepare",
