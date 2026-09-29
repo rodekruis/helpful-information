@@ -1,4 +1,5 @@
 import {
+  createKeyValueList,
   fillTemplateWithUrl,
   formatPhoneNumberAsUrl,
   getDateFromString,
@@ -235,6 +236,51 @@ describe('Utils - slugify', () => {
 
       // Assert
       expect(output).toEqual(testOutputs[index]);
+    });
+  });
+});
+
+describe('Utils - createKeyValueList', () => {
+  it('should return a plain string of all properties combined', () => {
+    // Arrange
+    const tests = [
+      {
+        properties: {},
+        output: '',
+      },
+      {
+        properties: { a: 'valueA', b: 'valueB' },
+        output: 'a=valueA;b=valueB',
+      },
+      {
+        properties: {
+          a: 'value',
+          b: '2',
+          c: true,
+          d: 3.5,
+          e: ['x', 'y', 'z'],
+          f: [1, 2, 3],
+          g: new Array(),
+          h: '',
+          // i: null,
+          // j: undefined,
+          k: 0,
+          l: ' ',
+          m: ['single'],
+          n: [42],
+          o: [' '],
+        },
+        output:
+          'a=value;b=2;c=true;d=3.5;e=x,y,z;f=1,2,3;g=;h=;k=0;l=;m=single;n=42;o=',
+      },
+    ];
+
+    tests.forEach((testParams) => {
+      // Act
+      const output = createKeyValueList(testParams.properties);
+
+      // Assert
+      expect(output).toEqual(testParams.output);
     });
   });
 });

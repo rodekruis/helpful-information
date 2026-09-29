@@ -7,12 +7,12 @@ import {
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LoggingService } from 'src/app/services/logging.service';
 import { RegionDataService } from 'src/app/services/region-data.service';
-import { ngxMarkdownModuleFactory } from 'src/main';
+import { ngxMarkdownModuleFactory } from 'src/app/shared/ngx-markdown.factory';
 
 import { QASetListComponent } from './q-a-set-list.component';
 
 const testDate = new Date('2022-02-22');
-const testDateFormatted = "22-02-'22";
+const testDateFormatted = '22-02-2022';
 
 const mockList = [
   {
@@ -67,7 +67,7 @@ describe('QASetListComponent', () => {
   it('should create', () => {
     // Arrange
     const testList = mockList;
-    component.list = testList;
+    fixture.componentRef.setInput('list', testList);
 
     // Act
     fixture.detectChanges();
@@ -79,7 +79,7 @@ describe('QASetListComponent', () => {
   it('should show a list of Q&As', () => {
     // Arrange
     const testList = mockList;
-    component.list = testList;
+    fixture.componentRef.setInput('list', testList);
 
     // Act
     fixture.detectChanges();
@@ -94,7 +94,7 @@ describe('QASetListComponent', () => {
   it("should show links to the Q&As' (sub-)category", () => {
     // Arrange
     const testList = [mockList[0]];
-    component.list = testList;
+    fixture.componentRef.setInput('list', testList);
 
     // Act
     fixture.detectChanges();
@@ -113,8 +113,8 @@ describe('QASetListComponent', () => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.dateUpdated = testDate;
-    component.list = [testQASet];
-    component.showDateUpdatedOutsideQuestion = false;
+    fixture.componentRef.setInput('list', [testQASet]);
+    fixture.componentRef.setInput('showDateUpdatedOutsideQuestion', false);
 
     // Act
     fixture.detectChanges();
@@ -135,8 +135,8 @@ describe('QASetListComponent', () => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.dateUpdated = testDate;
-    component.list = [testQASet];
-    component.showDateUpdatedOutsideQuestion = true;
+    fixture.componentRef.setInput('list', [testQASet]);
+    fixture.componentRef.setInput('showDateUpdatedOutsideQuestion', true);
 
     // Act
     fixture.detectChanges();

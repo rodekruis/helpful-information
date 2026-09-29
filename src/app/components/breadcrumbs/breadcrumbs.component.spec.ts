@@ -10,8 +10,8 @@ describe('BreadcrumbsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [provideRouter([])],
       providers: [
+        provideRouter([]),
         {
           provide: LoggingService,
         },

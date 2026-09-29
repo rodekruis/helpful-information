@@ -35,8 +35,8 @@ describe('TranslationOptionsComponent', () => {
       { key: 'nl', label: 'Nederlands' },
       { key: 'fr', label: 'Français' },
     ];
-    component.localeAlternatives = testLanguageSets;
-    component.sourceLanguage = 'en';
+    fixture.componentRef.setInput('localeAlternatives', testLanguageSets);
+    fixture.componentRef.setInput('sourceLanguage', 'en');
 
     // Act
     fixture.detectChanges();
@@ -56,8 +56,8 @@ describe('TranslationOptionsComponent', () => {
       { key: 'en', label: 'English' },
       { key: 'nl', label: 'Nederlands (duplicate by accident)' },
     ];
-    component.localeAlternatives = testLanguageSets;
-    component.sourceLanguage = 'nl';
+    fixture.componentRef.setInput('localeAlternatives', testLanguageSets);
+    fixture.componentRef.setInput('sourceLanguage', 'nl');
     const testLanguageLinkCount = 3;
 
     // Act
