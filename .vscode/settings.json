@@ -21,15 +21,21 @@
   "[yml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.enable": true,
   "eslint.format.enable": true,
-  "eslint.options": {
-    "extensions": [".ts", ".html"]
-  },
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.rules.customizations": [
+    {
+      "rule": "*",
+      "fixable": true,
+      "severity": "info"
+    }
+  ],
+  "eslint.lintTask.enable": true,
   "eslint.validate": ["javascript", "typescript", "html"],
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.preferences.autoImportFileExcludePatterns": [
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.autoImportFileExcludePatterns": [
     "@ionic/angular/common",
     "@ionic/angular"
   ]
