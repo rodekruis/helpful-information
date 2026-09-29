@@ -22,6 +22,7 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
 
 - Minimal supported Node.js-version is now v22.
 - Using the "Search via API" needs to be explicitly enabled via the `NG_USE_SEARCH_VIA_API`-ENV-variable. See: [`ENV`](.env.example)
+- Updated visibility-logic for Offers/Q&As to handle draft questions explicitly. See: [README](./README.md#sheet-level-configuration)
 
 ### Removed
 
