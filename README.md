@@ -62,7 +62,7 @@ Recommended:
 Optional:
 
 - All columns can be reordered, as long as their `#tag`s remain in their header-cell.
-- You can use the toggle in the "_Visible?_"-column to prepare a 'draft' in a row, by setting it to "_Hide_"(or 'hidden', `0`, `-`), and then finally 'publish' it by setting it to "_Show_". (Leaving it empty WILL show the row!)
+- You can use the toggle in the "_Visible?_"-column to prepare a 'draft' in a row, by leaving it empty, and then finally 'publish' it by setting it to one of the following values: `1`, `Show`, `True`, `Visible`, `Y`, `Yes`.
 - You can use background-colors to mark/highlight any changes or 'flag issues'; These styles will not be used in the web-app.
 
 #### Text formatting
@@ -353,7 +353,7 @@ Each (Sub-)Category:
   This _needs_ to be unique within all Categories; For each Sub-Category it needs to be unique within its parent Category _only_.
 - can have a multi-line description, [Markdown syntax](#text-formatting) can be used for structure/formatting.
 - can have an (absolute/relative/data-) URL for an icon
-- can be hidden by setting the "**Visible?**"-column to `Hide`.
+- will only be visible by setting the "**Visible?**"-column to one of the following values: `1`, `Show`, `True`, `Visible`, `Y`, `Yes`.
 
 ### Offer features
 
@@ -362,7 +362,7 @@ Each Offer
 - needs to have a `Category ID` and a `Sub-Category ID` set.
 - can have a URL-slug (`[a-z0-9._-]`);  
   This _needs_ to be unique within its parent Sub-Category _only_.
-- can be hidden by setting the "**Visible?**"-column to `Hide`.
+- will only be visible by setting the "**Visible?**"-column to one of the following values: `1`, `Show`, `True`, `Visible`, `Y`, `Yes`.
 - can have a Chapter-name (in plain/normal text);  
   This will be used to group Offers within their parent Sub-Category.
 - can have some multi-line fields, [Markdown syntax](#text-formatting) can be used for structure/formatting in those.
@@ -375,7 +375,7 @@ Each Q&A-set
 - needs to have an `Answer` value
 - can have a URL-slug (`[a-z0-9._-]`);  
   This _needs_ to be unique within all Q&A-sets.
-- can be hidden by setting the "**Visible?**"-column to `Hide`.
+- will only be visible by setting the "**Visible?**"-column to one of the following values: `1`, `Show`, `True`, `Visible`, `Y`, `Yes`.
 - can be shown as a Sub-Question by setting the `Parent`-column to the Slug of another Question.
 - can have a "(last) updated"-date set, to indicate its 'freshness'
 - can have a multi-line `Answer`, [Markdown syntax](#text-formatting) can be used for structure/formatting.
