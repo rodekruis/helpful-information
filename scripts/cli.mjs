@@ -7,7 +7,6 @@ import { join, resolve } from 'node:path';
 const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 const [command, ...commandArgs] = process.argv.slice(2);
 
-const hiaClientPath = resolve(process.cwd());
 const hiaToolPath = resolve(join(import.meta.dirname, '../'));
 
 /**
@@ -49,7 +48,6 @@ Usage:
 
 Commands:
   help, -h, --help            Show this help message
-  build [args]                Build the HIA instance
   update:search-index [args]  Update the search index
 `);
 }
@@ -60,22 +58,6 @@ try {
     case '-h':
     case '--help': {
       printHelp();
-      break;
-    }
-
-    case 'build': {
-      const outputPath = join(hiaClientPath, 'www');
-
-      await run(npmCommand, [
-        'run',
-        'build:production',
-        '--',
-        `--output-path=${outputPath}`,
-        ...commandArgs,
-      ]);
-
-      console.log('Build done.');
-
       break;
     }
 

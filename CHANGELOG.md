@@ -17,8 +17,6 @@ This project uses the [`CalVer`](https://calver.org/#scheme)-format: `YY.0M.MICR
   - Updating the index of the Search-API at build-time (or any other time).  
     Needs to be enabled via the ENV-variables: `NG_USE_SEARCH_VIA_API`, `SEARCH_API` and optionally `SEARCH_API_KEY`.  
     See: [`update-search-index.mjs`](./scripts/update-search-index.mjs)
-- A "Helpful CLI": [`npx helpful-information`](./scripts/cli.mjs):
-  To make it easier to change the build-pipeline of an instance, without having to change the GitHub Action-workflow of clients.
 
 ### Changed
 
