@@ -1,34 +1,62 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { DebugPlugin } from '@microsoft/applicationinsights-debugplugin-js';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import {
   LoggingEvent,
   LoggingEventCategory,
 } from 'src/app/models/logging-event.enum';
+import { createKeyValueList } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
-// Decraling the Matomo-based 'data-store'
+// Declaring external 'data-store's / APIs
 declare global {
   interface Window {
+    // Matomo API
     _paq?: any[];
+    // GoatCounter API
+    goatcounter?: {
+      allow_local?: boolean;
+      no_events?: boolean;
+      no_onload?: boolean;
+      allow_frame?: boolean;
+      endpoint?: string;
+      count?: (params?: {
+        path?: string | ((p: string) => string);
+        title?: string;
+        referrer?: string;
+        event?: boolean;
+      }) => void;
+    };
   }
+}
+
+interface EventProperties {
+  name?: string;
+  value?: number;
+  [key: string]: any;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoggingService {
+  router = inject(Router);
+
   matomoInitialized: boolean;
+
+  goatCounterInitialized: boolean;
 
   appInsights: ApplicationInsights;
   appInsightsInitialized: boolean;
 
   constructor() {
     this.setupMatomo();
+    this.setupGoatCounter();
     this.setupApplicationInsights();
   }
 
-  private parseMatomoInfo(connectionString: string | undefined) {
+  private parseConnectionStringInfo(connectionString: string | undefined) {
     const properties = ['id', 'api', 'sdk'];
     const connection: { id?: string; api?: string; sdk?: string } = {};
     if (typeof connectionString === 'string') {
@@ -44,7 +72,9 @@ export class LoggingService {
   }
 
   private setupMatomo() {
-    const connection = this.parseMatomoInfo(environment.matomoConnectionString);
+    const connection = this.parseConnectionStringInfo(
+      environment.matomoConnectionString,
+    );
 
     if (!connection.id || !connection.api || !connection.sdk) {
       return;
@@ -66,6 +96,46 @@ export class LoggingService {
       document.head.appendChild(script);
 
       this.matomoInitialized = true;
+    })();
+  }
+
+  private setupGoatCounter() {
+    const connection = this.parseConnectionStringInfo(
+      environment.goatCounterConnectionString,
+    );
+
+    if (!connection.api || !connection.sdk) {
+      return;
+    }
+
+    (() => {
+      window.goatcounter = window.goatcounter || {
+        allow_local: false,
+        no_events: true,
+        no_onload: false,
+        allow_frame: true,
+        endpoint: connection.api,
+      };
+      const script = document.createElement('script');
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.src = connection.sdk;
+
+      // Only initionalize after script has loaded
+      script.addEventListener('load', () => {
+        this.goatCounterInitialized = true;
+      });
+      document.head.appendChild(script);
+
+      // Listen for navigation-events for pageview-tracking (as it is not built-into GoatCounter)
+      this.router.events.subscribe((event) => {
+        if (this.goatCounterInitialized && event instanceof NavigationEnd) {
+          // Wait for the new page to have fully rendered
+          window.setTimeout(() => {
+            this.logPageView();
+          }, 100);
+        }
+      });
     })();
   }
 
@@ -124,6 +194,9 @@ export class LoggingService {
       window._paq.push(['setDocumentTitle', name ?? document.title]);
       window._paq.push(['trackPageView']);
     }
+    if (this.goatCounterInitialized) {
+      window.goatcounter.count();
+    }
     if (this.appInsightsInitialized) {
       // Not necessary because of `enableAutoRouteTracking`-setting in `setupApplicationInsights()`
     }
@@ -133,11 +206,7 @@ export class LoggingService {
   public logEvent(
     category: LoggingEventCategory | string,
     action: LoggingEvent | string,
-    properties?: {
-      name?: string;
-      value?: number;
-      [key: string]: any;
-    },
+    properties?: EventProperties,
   ): void {
     if (this.matomoInitialized) {
       window._paq.push([
@@ -147,6 +216,18 @@ export class LoggingService {
         properties && properties.name ? properties.name : undefined,
         properties && properties.value ? properties.value : undefined,
       ]);
+    }
+    if (this.goatCounterInitialized) {
+      if (this.goatCounterShouldExcludeEvent(action)) {
+        return;
+      }
+
+      window.goatcounter.count({
+        path: `_${action}`,
+        title: this.goatCounterPrepareEventDetails(properties),
+        referrer: window.location.toString(),
+        event: true,
+      });
     }
     if (this.appInsightsInitialized) {
       this.appInsights.trackEvent(
@@ -181,5 +262,34 @@ export class LoggingService {
       this.appInsights.trackTrace({ message }, properties);
     }
     console.error(`LOG Trace: "${message}"`, properties);
+  }
+
+  private goatCounterPrepareEventDetails(properties?: EventProperties): string {
+    let eventDetails = '';
+
+    if (properties && Object.keys(properties).length > 0) {
+      eventDetails = createKeyValueList(properties);
+    }
+
+    return eventDetails;
+  }
+
+  private goatCounterShouldExcludeEvent(
+    action: LoggingEvent | string,
+  ): boolean {
+    const excludedEvents = [
+      // Sorted alphabetically:
+      LoggingEvent.CategoryClick, // Already tracked as regular page-view
+      LoggingEvent.FeedbackPromptVisible, // Automated/non-user action, un-actionable
+      LoggingEvent.LanguageOptionsClose, // Can do without, actionable data is in `LanguageOptionsOpen`
+      LoggingEvent.MainScreenClick, // (?) Already tracked as regular page-view?
+      LoggingEvent.OfferClick, // Already tracked as regular page-view
+      LoggingEvent.QuestionClose, // Can do without, actionable data is in `QuestionOpen`
+      LoggingEvent.SubCategoryClick, // Already tracked as regular page-view
+      LoggingEvent.SwUpdateNotActivated, // Automated/non-user action, un-actionable
+      LoggingEvent.SwUpdateNotAvailable, // Automated/non-user action, un-actionable
+    ] as string[];
+
+    return excludedEvents.includes(action as string);
   }
 }

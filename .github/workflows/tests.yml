@@ -2,7 +2,7 @@
 # See: https://aka.ms/swaworkflowconfig
 # See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
-name: 'Tests'
+name: Tests
 
 on:
   workflow_dispatch:
@@ -21,22 +21,33 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ['20', '22']
+        node-version: ['22', '24']
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Node.js version
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: npm
 
       - name: Install
         env:
           HUSKY: 0
-        run: npm ci --no-fund --no-audit
+        run: npm ci
 
       - name: Run Tests
         run: npm test
+
+      - name: Prepare Environment
+        env:
+          HUSKY: 0
+        run: |
+          npm run setup
+          npm run setup:e2e
+
+      - name: Run E2E-Tests
+        run: |
+          npm run test:e2e

@@ -1,6 +1,9 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/6.4/config/configuration-file.html
 
+/**
+ * @param {import('karma').Config} config
+ */
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -11,7 +14,6 @@ module.exports = function (config) {
       require('karma-spec-reporter'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
-      
     ],
     client: {
       captureConsole: true,

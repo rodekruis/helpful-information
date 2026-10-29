@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+import { existsSync, readdir, rename } from 'node:fs';
+import { join } from 'node:path';
 
 const possibleOutputPaths = [
-  path.join(__dirname, '../www'),
-  path.join(__dirname, '../../www'),
-  path.join(__dirname, '../../public'),
+  join(import.meta.dirname, '../www'),
+  join(import.meta.dirname, '../../www'),
+  join(import.meta.dirname, '../../public'),
 ];
 
 const outputPath = possibleOutputPaths.find((option) => {
-  return fs.existsSync(option) && fs.existsSync(path.join(option, 'browser'));
+  return existsSync(option) && existsSync(join(option, 'browser'));
 });
 
 if (!outputPath) {
@@ -18,9 +18,9 @@ if (!outputPath) {
   process.exit(0);
 }
 
-const browserPath = path.join(outputPath, 'browser');
+const browserPath = join(outputPath, 'browser');
 
-fs.readdir(browserPath, (err, files) => {
+readdir(browserPath, (err, files) => {
   if (err) {
     console.error(err);
     return;
@@ -28,10 +28,10 @@ fs.readdir(browserPath, (err, files) => {
 
   // Move all files from browserPath to outputPath
   files.forEach((file) => {
-    const oldPath = path.join(browserPath, file);
-    const newPath = path.join(outputPath, file);
+    const oldPath = join(browserPath, file);
+    const newPath = join(outputPath, file);
 
-    fs.rename(oldPath, newPath, (err) => {
+    rename(oldPath, newPath, (err) => {
       if (err) {
         console.error(err);
       }

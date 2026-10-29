@@ -36,10 +36,10 @@ export class FeedbackLinkComponent implements OnChanges, OnInit {
   private loggingService = inject(LoggingService);
 
   @ViewChild('details')
-  private details: ElementRef<HTMLDetailsElement>;
+  private details?: ElementRef<HTMLDetailsElement>;
 
   @Input()
-  public template: string;
+  public template = '';
 
   @Input()
   public labels: {
@@ -50,10 +50,10 @@ export class FeedbackLinkComponent implements OnChanges, OnInit {
     resultPostive?: string;
     shareCta?: string;
     thanks?: string;
-  };
+  } = {};
 
   public AnswerValue = AnswerValue;
-  public safeUrl: string;
+  public safeUrl: string | null = null;
   public isEnabled = environment.useFeedbackPrompt;
 
   public answerValue: AnswerValue | null = null;
