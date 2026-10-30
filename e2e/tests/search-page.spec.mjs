@@ -47,4 +47,21 @@ test.describe('Search-page', () => {
       expectedCount: expectedSearchResultCount,
     });
   });
+
+  test(`make sure items under hidden (sub)categories don't show up in results`, async ({
+    page,
+  }) => {
+    const query = 'THIS Q&A SHOULD NOT SHOW';
+    const expectedSearchResultCount = 3;
+
+    const searchPage = new SearchPage(page);
+
+    await searchPage.performSearch({
+      query,
+    });
+
+    await searchPage.assertSearchResultCount({
+      expectedCount: expectedSearchResultCount,
+    });
+  });
 });

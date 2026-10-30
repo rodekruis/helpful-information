@@ -53,6 +53,16 @@
       "A category for Q&As",
       "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⁉️</text></svg>"
     ],
-    []
+    [],
+    [
+      "Hidden Category",
+      "9",
+      "17",
+      "Visible sub with hidden cat",
+      "test-subcat-with-hidden-cat",
+      "Yes",
+      "Despite being visible, this category and its Q&As shouldn't be visible in searches",
+      ""
+    ]
   ]
 }
