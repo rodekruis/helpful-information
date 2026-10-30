@@ -1,0 +1,29 @@
+/* Quick-actions (Highlights/Search) as a row of chips, next to the greeting */
+.floating-action-area.is_in-page {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-block: 0 0.5rem;
+  margin-inline-start: 1rem;
+
+  br {
+    display: none;
+  }
+  .action {
+    margin: 0;
+  }
+
+  /* Icon-only button (Search) as a circle */
+  .action[rel='search'] {
+    width: 2.75rem;
+    padding: 0;
+  }
+}
+
+/* Greeting: vertically centered with the quick-actions, wraps beside them */
+.floating-action-area.is_in-page + h2 {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+}

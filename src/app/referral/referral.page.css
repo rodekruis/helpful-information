@@ -1,0 +1,21 @@
+ion-header {
+  border-bottom: 1px solid var(--hia_border);
+  box-shadow: none;
+}
+ion-header::after {
+  display: none; /* Remove default Material-style shadow */
+}
+
+.notice {
+  margin-inline: 1rem;
+}
+@media (min-width: 48em) {
+  .notice {
+    margin-inline: 1.5rem;
+  }
+}
+
+.app-footer--content {
+  padding-block: 2rem calc(2rem + env(safe-area-inset-bottom));
+  line-height: 1.6;
+}

@@ -16,14 +16,37 @@
 /*
 Configuration Variables
 
+Based on the "121 Design System" (Figma: 📚 121 component library).
 Possible to override via the `theme/overrides.css`-file (set before/during build)
 */
 :root {
+  /* 121 Design System: Primitives */
+  --hia_121_neutral-0: #ffffff;
+  --hia_121_neutral-50: #f6f8fa;
+  --hia_121_neutral-100: #ecf0f4;
+  --hia_121_neutral-300: #d3dae0;
+  --hia_121_neutral-500: #8a95a0;
+  --hia_121_neutral-700: #49515b;
+  --hia_121_neutral-900: #0f1218;
+  --hia_121_blue-100: #e9f2ff;
+  --hia_121_blue-500: #0b4ec7;
+  --hia_121_blue-700: #0e2a87;
+  --hia_121_green-500: #368704;
+  --hia_121_red-500: #c70000;
+
+  /* 121 Design System: Radius */
+  --hia_radius_sm: 0.25rem;
+  --hia_radius_md: 0.5rem;
+  --hia_radius_lg: 0.75rem;
+  --hia_radius_xl: 1rem;
+  --hia_radius_full: 999px;
+
   /* Fonts
 
   Fonts - Theme (named fonts): */
   --hia_font_open-sans: 'Open Sans', Arial, 'Helvetica Neue', sans-serif;
-  --hia_font_montserrat: 'montserrat_webfont', Tahoma, 'Gill Sans', sans-serif;
+  --hia_font_montserrat:
+    'montserrat_webfont', 'Montserrat', Tahoma, 'Gill Sans', sans-serif;
 
   /* Fonts - Content-text: */
   --hia_content_font-family: var(
@@ -42,28 +65,64 @@ Possible to override via the `theme/overrides.css`-file (set before/during build
   /* Colors
 
   Colors - Theme (named colors): */
-  --hia_color_light-beige: #faf5e5;
-  --hia_color_dark-green: #2f5f6e;
+  --hia_color_light-grey: var(--hia_121_neutral-50);
   --hia_color_dark-navy: #011e41;
-  --hia_color_white: #ffffff;
+  --hia_color_navy: var(--hia_color_dark-navy);
+  --hia_color_ink: var(--hia_121_neutral-900);
+  --hia_color_white: var(--hia_121_neutral-0);
 
-  --hia_style_shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.1);
+  --hia_style_shadow:
+    0 1px 2px 0 rgba(15, 18, 24, 0.04), 0 4px 14px 0 rgba(15, 18, 24, 0.06);
+  --hia_style_shadow-raised:
+    0 2px 4px 0 rgba(15, 18, 24, 0.06), 0 8px 24px 0 rgba(15, 18, 24, 0.1);
 
   /* Colors - Functions
 
   Colors - Function: Base (the main body of content) */
-  --hia_base_text: var(--env_hia_base_text, var(--hia_color_dark-navy));
-  --hia_base_fill: var(--env_hia_base_fill, var(--hia_color_light-beige));
+  --hia_base_text: var(--env_hia_base_text, var(--hia_color_ink));
+  --hia_base_fill: var(--env_hia_base_fill, var(--hia_color_light-grey));
+  --hia_base_text-muted: color-mix(
+    in srgb,
+    var(--hia_base_text) 72%,
+    transparent
+  );
 
   /* Colors - Function: Alt (alternative color-scheme, used for Footer) */
   --hia_alt_text: var(--env_hia_alt_text, var(--hia_color_white));
-  --hia_alt_fill: var(--env_hia_alt_fill, var(--hia_color_dark-green));
+  --hia_alt_fill: var(--env_hia_alt_fill, var(--hia_color_navy));
 
   /* Colors - Function: Level (slightly raised, used for CTAs etc. */
-  --hia_level_text: var(--env_hia_level_text, var(--hia_color_dark-navy));
+  --hia_level_text: var(--env_hia_level_text, var(--hia_color_ink));
   --hia_level_fill: var(--env_hia_level_fill, var(--hia_color_white));
 
   --hia_level_shadow: var(--env_hia_level_shadow, var(--hia_style_shadow));
+
+  /* Colors - Function: Accent (primary actions, links, focus) */
+  --hia_accent: var(--env_hia_accent, var(--hia_color_dark-navy));
+  --hia_accent_text: var(--env_hia_accent_text, var(--hia_color_white));
+  --hia_accent_subtle: color-mix(
+    in srgb,
+    var(--hia_accent) 7%,
+    var(--hia_level_fill)
+  );
+  --hia_accent_hover: color-mix(in srgb, var(--hia_accent) 85%, white);
+
+  /* Colors - Function: Borders */
+  --hia_border: var(--env_hia_border, var(--hia_121_neutral-100));
+  --hia_border_strong: var(--hia_121_neutral-300);
+
+  /* Colors - Function: Notice (informational messages) */
+  --hia_notice_text: var(--env_hia_notice_text, var(--hia_121_blue-700));
+  --hia_notice_fill: var(--env_hia_notice_fill, var(--hia_121_blue-100));
+
+  /* Motion */
+  --hia_ease: cubic-bezier(0.2, 0, 0, 1);
+  --hia_duration: 160ms;
+
+  /* Icons (used as CSS masks, so they take on `currentColor`) */
+  --hia_icon_chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m9 6 6 6-6 6'/%3e%3c/svg%3e");
+  --hia_icon_chevron-down: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m6 9 6 6 6-6'/%3e%3c/svg%3e");
+  --hia_icon_search: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3ccircle cx='11' cy='11' r='7'/%3e%3cpath d='m20 20-3.5-3.5'/%3e%3c/svg%3e");
 }
 
 /* Custom Fonts */
@@ -151,31 +210,100 @@ html {
 /*
 Baseline / Normalizations
 */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+ion-content {
+  --background: var(--hia_base_fill);
+  --color: var(--hia_base_text);
+
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--hia_alt_font-family);
+  font-weight: bold;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+
+  [dir='rtl'] & {
+    letter-spacing: 0;
+  }
+}
+h2 {
+  margin-block: 1.25rem 0.75rem;
+  font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+}
+h3 {
+  margin-block: 1.5rem 0.5rem;
+  font-size: 1.125rem;
+}
+
+p {
+  text-wrap: pretty;
+}
+
 hr {
-  border-top: 1px dashed currentColor;
+  margin-block: 1.5rem;
+  border: 0;
+  border-top: 1px solid var(--hia_border_strong);
 }
 
 a {
-  color: inherit;
+  color: var(--hia_accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
   -webkit-touch-callout: initial; /* Enable "tap-and-hold" on links on mobile/touch/iOS */
+
+  &:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--hia_accent);
+  outline-offset: 2px;
 }
 
 details summary {
   cursor: pointer;
 }
 
-hr {
-  border-top: 1px dashed currentColor;
+::selection {
+  background-color: color-mix(in srgb, var(--hia_accent) 15%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 /* 'Page'-width */
 .layout--container {
   width: 100%;
   margin-inline: auto;
-  max-width: 500px;
+  max-width: 40rem;
 
   &.layout--container_wide {
-    max-width: 1024px;
+    max-width: 64rem;
+  }
+
+  &.ion-padding {
+    @media (min-width: 48em) {
+      --ion-padding: 1.5rem;
+    }
   }
 
   @media print {
@@ -237,6 +365,9 @@ Layout Utilities:
   > li {
     list-style: none;
   }
+  > li.ion-margin-bottom {
+    margin-bottom: 0.75rem;
+  }
 }
 .list-inline {
   > li {
@@ -245,30 +376,27 @@ Layout Utilities:
 }
 
 .tile-grid {
-  --column-gap: 0.1875rem;
-
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-content: flex-start;
-  margin-inline-start: calc(-2 * var(--column-gap));
-  margin-inline-end: calc(-2 * var(--column-gap));
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr));
+  gap: 0.75rem;
 
   .tile-grid--item {
-    padding-inline-start: var(--column-gap);
-    padding-inline-end: var(--column-gap);
-    margin-block: var(--column-gap);
-    min-width: 150px; /* To always fit 2 items for narrow viewports */
+    min-width: 0;
+
+    /* Filler-items are only needed for the old flex-layout */
+    &:empty {
+      display: none;
+    }
   }
 
   &.tile-grid_base-2 {
-    .tile-grid--item {
-      flex: 1 0 50%;
+    @media (min-width: 36em) {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
   &.tile-grid_base-3 {
-    .tile-grid--item {
-      flex: 1 0 33%;
+    @media (min-width: 36em) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }
@@ -276,6 +404,7 @@ Layout Utilities:
 /* Floating Action Button (bottom-end) */
 .floating-action-area {
   position: fixed;
+  z-index: 10;
 
   @media print {
     display: none;
@@ -283,10 +412,14 @@ Layout Utilities:
 
   &.is_in-page {
     position: relative;
+    z-index: auto;
   }
   &.is_bottom-end {
-    inset-inline-end: 1.33rem;
-    bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    inset-inline-end: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
   }
 }
 
@@ -325,11 +458,10 @@ Text Style Utilities:
 .text-style--alt {
   font-family: var(--hia_alt_font-family);
   font-weight: bold;
-  letter-spacing: 0.08em;
-
-  [dir='rtl'] & {
-    letter-spacing: 0;
-  }
+  letter-spacing: 0;
+}
+.text-style--muted {
+  color: var(--hia_base_text-muted);
 }
 .text-style--size-08 {
   font-size: 0.875rem;
@@ -338,7 +470,7 @@ Text Style Utilities:
   font-size: 1rem;
 }
 .text-style--size-2 {
-  font-size: 1.25rem;
+  font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
 }
 .text-style--hide-overflow_5 {
   display: -webkit-box;
@@ -368,6 +500,10 @@ Text Style Utilities:
 .text-area--alt {
   color: var(--hia_alt_text);
   background-color: var(--hia_alt_fill);
+
+  a {
+    color: inherit;
+  }
 }
 
 /*
@@ -378,8 +514,24 @@ Components
 
 Styling-only helper. */
 .floating-box {
-  border-radius: 0.25rem;
+  border: 1px solid var(--hia_border);
+  border-radius: var(--hia_radius_lg);
   box-shadow: var(--hia_level_shadow);
+}
+
+/* Component: Notice
+
+Informational message, i.e. for notifications */
+.notice {
+  color: var(--hia_notice_text);
+  background-color: var(--hia_notice_fill);
+  border: 1px solid color-mix(in srgb, var(--hia_notice_text) 20%, transparent);
+  border-radius: var(--hia_radius_lg);
+  box-shadow: none;
+
+  a {
+    color: inherit;
+  }
 }
 
 /* Component: Loading Text skeleton/placeholder */
@@ -392,16 +544,16 @@ Styling-only helper. */
   }
 }
 .loading-text {
-  --background-rgb: 184, 184, 184;
-
   display: inline-block;
   width: 100%;
   line-height: 1;
+  margin-block: 0.125rem;
+  border-radius: var(--hia_radius_sm);
   background: linear-gradient(
     to right,
-    rgba(var(--background-rgb), 0.1) 8%,
-    rgba(var(--background-rgb), 0.4) 18%,
-    rgba(var(--background-rgb), 0.1) 33%
+    var(--hia_121_neutral-100) 8%,
+    var(--hia_121_neutral-300) 18%,
+    var(--hia_121_neutral-100) 33%
   );
   background-size: 1000px 100%;
   animation-name: shine;
@@ -417,20 +569,40 @@ Styling-only helper. */
   }
 }
 
+/* Component: Icon via CSS-mask (inherits `currentColor`) */
+.icon-mask,
+.action.has_chevron::after,
+.q-a-set > .q-a-set--toggle::after {
+  content: '';
+  flex: 0 0 auto;
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: currentColor;
+  mask: var(--hia_icon_chevron) center / contain no-repeat;
+}
+
 /* Component: Action (CTA/Button) */
 .action {
   --action--color: var(--hia_level_text);
   --action--color-active: var(--hia_level_text);
   --action--background-color: var(--hia_level_fill);
-  --action--background-color-active: #efefef;
+  --action--background-color-active: var(--hia_level_fill);
+  --action--border-color: var(--hia_border);
+  --action--border-color-active: var(--hia_border_strong);
 
   display: block;
   width: 100%;
-  padding: 0.5em;
+  padding: 0.75rem 1rem;
 
-  border-radius: 0.25rem;
+  border: 1px solid var(--action--border-color);
+  border-radius: var(--hia_radius_lg);
   text-decoration: none;
   box-shadow: var(--hia_level_shadow);
+  -webkit-tap-highlight-color: transparent;
+  transition-property: background-color, border-color, box-shadow, transform;
+  transition-duration: var(--hia_duration);
+  transition-timing-function: var(--hia_ease);
 
   @media print {
     --action--color: #333;
@@ -450,27 +622,70 @@ Styling-only helper. */
     background-color: var(--action--background-color);
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: var(--action--color-active);
     background-color: var(--action--background-color-active);
-    outline-color: transparent;
-    outline-offset: 0.1875rem;
-    outline-width: 0.125rem;
-    outline-style: solid;
+    border-color: var(--action--border-color-active);
   }
-  &:focus {
-    outline-color: var(--action--color-active);
+  &:active {
+    transform: scale(0.985);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--hia_accent);
+    outline-offset: 2px;
   }
 
+  &.has_chevron {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &::after {
+      margin-inline-start: auto;
+      color: var(--hia_accent);
+    }
+    [dir='rtl'] &::after {
+      transform: scaleX(-1);
+    }
+  }
+
+  /* Secondary button (121: outlined pill) */
   &.is_outline {
-    padding: 0.5em 1em;
+    --action--color: var(--hia_accent);
+    --action--color-active: var(--hia_accent);
+    --action--background-color-active: var(--hia_accent_subtle);
+    --action--border-color: var(--hia_accent);
+    --action--border-color-active: var(--hia_accent);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: auto;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.25rem;
+    font-family: var(--hia_alt_font-family);
+    font-size: 0.875rem;
     font-weight: bold;
-    border: 0.0625rem solid var(--action--color);
+    line-height: 1.2;
+    border-radius: var(--hia_radius_full);
+    box-shadow: none;
+  }
+
+  /* Primary button (121: filled pill) */
+  &.is_primary {
+    --action--color: var(--hia_accent_text);
+    --action--color-active: var(--hia_accent_text);
+    --action--background-color: var(--hia_accent);
+    --action--background-color-active: var(--hia_accent_hover);
+    --action--border-color: var(--hia_accent);
+    --action--border-color-active: var(--hia_accent_hover);
   }
 
   &.is_inline {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: auto;
 
     .icon {
@@ -481,11 +696,11 @@ Styling-only helper. */
   &.is_round {
     line-height: 1;
     border-radius: 50%;
-    min-width: 2rem;
-    min-height: 2rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
 
     &.is_inline {
-      border-radius: 1rem;
+      border-radius: var(--hia_radius_full);
     }
   }
 
@@ -496,15 +711,76 @@ Styling-only helper. */
 
 /* Component: Q&A Set */
 .q-a-set {
+  overflow: hidden;
+
+  > .q-a-set--toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 3.5rem;
+    font-weight: bold;
+    line-height: 1.35;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    list-style: none;
+
+    &::-webkit-details-marker,
+    &::marker {
+      display: none;
+    }
+    &::after {
+      margin-inline-start: auto;
+      color: var(--hia_accent);
+      mask-image: var(--hia_icon_chevron-down);
+      transition: transform var(--hia_duration) var(--hia_ease);
+    }
+    &:hover {
+      background-color: var(--hia_accent_subtle);
+    }
+    &:active {
+      transform: none;
+    }
+    &:focus-visible {
+      outline-offset: -2px;
+    }
+  }
+
   &[open] > .q-a-set--toggle {
+    color: var(--hia_accent);
     box-shadow: none; /* Override .action styles */
+
+    &::after {
+      transform: rotate(180deg);
+    }
   }
 
   .q-a-set--content {
-    padding-inline-start: 1.6rem; /* Allow room for marker as padding */
+    border-top: 1px solid var(--hia_border);
 
-    *:first-of-type {
+    *:first-child {
       margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
+
+    > ul.ion-no-padding {
+      margin-block: 1rem 0;
+      list-style: none;
+    }
+  }
+
+  &.is_child {
+    background-color: var(--hia_base_fill);
+    box-shadow: none;
+
+    > .q-a-set--toggle {
+      --action--background-color: transparent;
+
+      min-height: 3rem;
+      padding-block: 0.625rem;
+      font-size: 0.9375rem;
     }
   }
 }
@@ -515,8 +791,9 @@ Styling-only helper. */
   justify-content: center;
   align-items: center;
   height: 100%;
-  min-height: 3em;
+  min-height: 4.5rem;
   text-align: center;
+  line-height: 1.3;
 }
 
 /* Component: Icon */
@@ -542,24 +819,27 @@ Styling-only helper. */
 Layout helper similar to "media object/island" */
 .list-item {
   display: flex;
+  align-items: flex-start;
 
   .list-item--icon {
     flex: 0 0 auto;
-    margin-inline-end: 0.75rem;
+    margin-inline-end: 1rem;
   }
   .list-item--content {
     flex: 1 1 100%;
+    min-width: 0;
   }
 }
 
 /* Component: Logo Badge */
 .logo-badge {
   display: flex;
-  width: 6.5rem;
-  height: 6.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
   padding: 0.5rem;
-  background-color: rgba(244, 247, 250, 1);
-  border-radius: 0.25rem;
+  background-color: var(--hia_121_neutral-50);
+  border: 1px solid var(--hia_border);
+  border-radius: var(--hia_radius_lg);
 
   .logo-badge--image {
     width: 100%;
@@ -573,21 +853,22 @@ Layout helper similar to "media object/island" */
   line-height: 1;
 
   .contact-button--link {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
     overflow: hidden;
+    box-shadow: var(--hia_style_shadow-raised);
   }
 
   .contact-button--logo {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 48px;
-    max-height: 48px;
+    display: block;
+    max-width: 2.5rem;
+    max-height: 2.5rem;
     aspect-ratio: 1 / 1;
   }
-}
-
-.contact-button + .contact-button {
-  margin-top: 1rem;
 }
 
 /* Component: Dismissable Container
@@ -595,6 +876,7 @@ Layout helper similar to "media object/island" */
 Details-element as 'sticky' notification */
 .dismissible-container {
   position: relative;
+  padding-inline-end: 3rem !important;
 
   /* Use summary-toggle as dismiss-button, so hide-when-closed: */
   &:not([open]) {
@@ -602,9 +884,22 @@ Details-element as 'sticky' notification */
   }
 
   .dismissible-container--close {
+    --action--background-color: transparent;
+    --action--background-color-active: color-mix(
+      in srgb,
+      currentColor 8%,
+      transparent
+    );
+    --action--border-color: transparent;
+    --action--border-color-active: transparent;
+    --action--color: inherit;
+    --action--color-active: inherit;
+
     position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
+    inset-block-start: 0.5rem;
+    inset-inline-end: 0.5rem;
+    font-size: 1.25rem;
+    list-style: none;
 
     &::-webkit-details-marker,
     &::marker {
@@ -622,6 +917,10 @@ Details-element as 'sticky' notification */
   h4,
   h5,
   h6 {
+    margin-bottom: 0.25rem;
+  }
+
+  & > :last-child {
     margin-bottom: 0;
   }
 
@@ -637,14 +936,33 @@ Details-element as 'sticky' notification */
 
   ol,
   ul {
-    padding-inline-start: 1em;
+    padding-inline-start: 1.25em;
+  }
+  li + li {
+    margin-top: 0.25em;
+  }
+  li::marker {
+    color: var(--hia_base_text-muted);
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--hia_radius_md);
   }
   table {
     width: 100%;
+    border-collapse: collapse;
   }
   th,
   td {
-    padding: 0.25em;
+    padding: 0.5em;
+    border-bottom: 1px solid var(--hia_border);
+    text-align: start;
+  }
+  blockquote {
+    margin-inline: 0;
+    padding-inline-start: 1rem;
+    border-inline-start: 3px solid var(--hia_border_strong);
   }
 
   @media print {
