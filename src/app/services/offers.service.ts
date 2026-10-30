@@ -252,15 +252,17 @@ export class OffersService {
       );
 
       let qaSets = await this.spreadsheetService.getQAs(region);
-      qaSets = qaSets.filter(
-        (qaSet) =>
-          visibleCategories.some(
-            (cat) => cat.categoryID === qaSet.categoryID,
-          ) &&
-          visibleSubCategories.some(
-            (subCat) => subCat.subCategoryID === qaSet.subCategoryID,
-          ),
-      );
+
+      const isVisibleQA = (qaSet: QASet): boolean =>
+        visibleCategories.some((cat) => cat.categoryID === qaSet.categoryID) &&
+        visibleSubCategories.some(
+          (subCat) => subCat.subCategoryID === qaSet.subCategoryID,
+        );
+      qaSets = qaSets.filter(isVisibleQA).map((qaSet) => ({
+        ...qaSet,
+        children: qaSet.children.filter(isVisibleQA),
+      }));
+
       qaSets = qaSets.map((qaSet: QASet) => {
         qaSet = SpreadsheetService.addParentCategoryDetails(
           qaSet,
