@@ -19,6 +19,8 @@ export class SearchPage {
     /** @type {Locator} */
     this.searchResultsLabel = page.getByTestId('search-results-label');
     /** @type {Locator} */
+    this.searchResultsList = page.getByTestId('search-results-list');
+    /** @type {Locator} */
     this.searchResultsItems = page
       .getByTestId('search-results-list')
       .getByRole('list')
@@ -55,5 +57,15 @@ export class SearchPage {
     await expect(this.searchResultsItems.nth(itemIndex)).toContainText(
       expectedText,
     );
+  }
+
+  /**
+   * @param {{
+   * expectedText: string
+   * }} args
+   * @returns {Promise<void>}
+   */
+  async assertTextIsMissingInSearchResults({ expectedText }) {
+    await expect(this.searchResultsList).not.toContainText(expectedText);
   }
 }

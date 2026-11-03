@@ -96,7 +96,7 @@ export default class SearchPageComponent implements OnInit {
     });
 
     if (!this.qaSets) {
-      this.qaSets = await this.offersService.getQAs(this.region);
+      this.qaSets = await this.offersService.getQAs({ region: this.region });
     }
     this.searchService.setSource(this.qaSets);
 

@@ -62,7 +62,7 @@ export default class RegionPageComponent implements OnInit {
       );
 
       if (this.useQandAs) {
-        this.qaSets = await this.offersService.getQAs(this.region);
+        this.qaSets = await this.offersService.getQAs({ region: this.region });
         this.qaHighlights = await this.offersService.getHighlights(this.region);
       }
     });
