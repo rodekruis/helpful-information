@@ -1,4 +1,6 @@
-<app-parent-link [label]="offer?.subCategoryName"></app-parent-link>
+<app-parent-link
+  [label]="$safeNavigationMigration(offer?.subCategoryName)"
+></app-parent-link>
 
 <article class="ion-margin-vertical">
   <app-offer
@@ -14,14 +16,20 @@
 <br />
 
 <app-feedback-link
-  [template]="regionData?.feedbackShareUrl"
+  [template]="$safeNavigationMigration(regionData?.feedbackShareUrl)"
   [labels]="{
-    answerNegative: regionData?.feedbackAnswerNegative,
-    answerPositive: regionData?.feedbackAnswerPositive,
-    question: regionData?.feedbackQuestion,
-    resultNegative: regionData?.feedbackResultNegative,
-    resultPostive: regionData?.feedbackResultPostive,
-    shareCta: regionData?.feedbackShareCta,
-    thanks: regionData?.feedbackThanks,
+    answerNegative: $safeNavigationMigration(
+      regionData?.feedbackAnswerNegative
+    ),
+    answerPositive: $safeNavigationMigration(
+      regionData?.feedbackAnswerPositive
+    ),
+    question: $safeNavigationMigration(regionData?.feedbackQuestion),
+    resultNegative: $safeNavigationMigration(
+      regionData?.feedbackResultNegative
+    ),
+    resultPostive: $safeNavigationMigration(regionData?.feedbackResultPostive),
+    shareCta: $safeNavigationMigration(regionData?.feedbackShareCta),
+    thanks: $safeNavigationMigration(regionData?.feedbackThanks),
   }"
 ></app-feedback-link>

@@ -1,4 +1,9 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
@@ -11,6 +16,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-sub-category-link',
   templateUrl: './sub-category-link.component.html',
   styleUrls: ['./sub-category-link.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterLink],
 })
 export class SubCategoryLinkComponent {

@@ -3,8 +3,8 @@
     <li>
       @if (item?.categoryID) {
         <a
-          [routerLink]="[baseUrl, item?.categorySlug]"
-          (click)="click(item?.categorySlug)"
+          [routerLink]="[baseUrl, $safeNavigationMigration(item?.categorySlug)]"
+          (click)="click($safeNavigationMigration(item?.categorySlug))"
           class="text-style--inline-link is_minimal"
           >{{ item?.categoryName || item?.categoryID }}</a
         >
@@ -18,8 +18,17 @@
         <strong aria-hidden="true">&nbsp;/ </strong>
         @if (item?.subCategoryID) {
           <a
-            [routerLink]="[baseUrl, item?.categorySlug, item?.subCategorySlug]"
-            (click)="click(item?.categorySlug, item?.subCategorySlug)"
+            [routerLink]="[
+              baseUrl,
+              $safeNavigationMigration(item?.categorySlug),
+              $safeNavigationMigration(item?.subCategorySlug),
+            ]"
+            (click)="
+              click(
+                $safeNavigationMigration(item?.categorySlug),
+                $safeNavigationMigration(item?.subCategorySlug)
+              )
+            "
             class="text-style--inline-link is_minimal"
             >{{ item?.subCategoryName || item?.subCategoryID }}</a
           >

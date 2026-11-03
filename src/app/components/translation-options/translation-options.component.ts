@@ -1,4 +1,9 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import type { Event } from '@angular/router';
 import { EventType, Router } from '@angular/router';
 import {
@@ -14,6 +19,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-translation-options',
   templateUrl: './translation-options.component.html',
   styleUrls: ['./translation-options.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [],
 })
 export class TranslationOptionsComponent {

@@ -1,5 +1,10 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject, Input } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -26,6 +31,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-sub-category-page',
   templateUrl: './sub-category.page.html',
   styleUrls: ['./sub-category.page.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     OfferLinkComponent,
     QASetComponent,

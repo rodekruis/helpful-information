@@ -1,4 +1,9 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
@@ -12,6 +17,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterLink],
 })
 export class BreadcrumbsComponent {

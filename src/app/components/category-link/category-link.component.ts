@@ -1,4 +1,9 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import type { Category } from 'src/app/models/category.model';
 import {
@@ -12,6 +17,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-category-link',
   templateUrl: './cateogry-link.component.html',
   styleUrls: ['./cateogry-link.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterLink],
 })
 export class CategoryLinkComponent {

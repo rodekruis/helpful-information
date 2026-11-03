@@ -4,7 +4,6 @@
   "compilerOptions": {
     "allowUnreachableCode": false,
     "alwaysStrict": true,
-    "baseUrl": "./",
     "declaration": false,
     "esModuleInterop": true,
     "experimentalDecorators": true,

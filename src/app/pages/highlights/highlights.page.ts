@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ParentLinkComponent } from 'src/app/components/parent-link/parent-link.component';
@@ -15,6 +15,7 @@ import { AppPath } from 'src/routes';
   selector: 'app-highlights-page',
   templateUrl: './highlights.page.html',
   styleUrls: ['./highlights.page.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [QASetListComponent, ParentLinkComponent],
 })
 export default class HighlightsPageComponent implements OnInit {

@@ -1,6 +1,7 @@
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 import {
   enableProdMode,
@@ -59,7 +60,7 @@ bootstrapApplication(AppComponent, {
     LoggingService,
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
     provideIonicAngular({
       mode: 'md',
       animated: false,

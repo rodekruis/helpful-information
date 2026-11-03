@@ -1,5 +1,10 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject, Input } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackLinkComponent } from 'src/app/components/feedback-link/feedback-link.component';
@@ -18,6 +23,7 @@ import { getLegacyID } from 'src/app/shared/utils';
   selector: 'app-offer-page',
   templateUrl: './offer.page.html',
   styleUrls: ['./offer.page.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     OfferComponent,
     LastUpdatedTimeComponent,

@@ -10,6 +10,7 @@ import {
   Input,
   SecurityContext,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
@@ -29,6 +30,7 @@ enum AnswerValue {
   selector: 'app-feedback-link',
   templateUrl: './feedback-link.component.html',
   styleUrls: ['./feedback-link.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [],
 })
 export class FeedbackLinkComponent implements OnChanges, OnInit {
