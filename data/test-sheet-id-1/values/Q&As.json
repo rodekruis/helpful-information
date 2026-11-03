@@ -215,7 +215,7 @@
       "⚠️ Answer not yet final. Do Not Publish!\n\n It will be certain that... [TBD]"
     ],
     [
-      "THIS Q&A SHOULD NOT SHOW: Visible sub with hidden cat",
+      "Visible Sub-Category in a hidden Category",
       "17",
       "9",
       "Yes",
@@ -223,7 +223,7 @@
       "qa-for-search-test",
       "",
       "THIS Q&A SHOULD NOT SHOW: Should this question show up in searches?",
-      "No, this question should not show up in searches."
+      "No, this question should not show up in searches. It is in a _visible_ Sub-Category within a hidden Category."
     ]
   ]
 }

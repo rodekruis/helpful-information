@@ -51,8 +51,8 @@ test.describe('Search-page', () => {
   test(`make sure items under hidden (sub)categories don't show up in results`, async ({
     page,
   }) => {
-    const query = 'THIS Q&A SHOULD NOT SHOW';
-    const expectedSearchResultCount = 3;
+    const query = '"THIS Q&A SHOULD NOT SHOW"';
+    const expectedSearchResultCount = 0;
 
     const searchPage = new SearchPage(page);
 
@@ -62,6 +62,10 @@ test.describe('Search-page', () => {
 
     await searchPage.assertSearchResultCount({
       expectedCount: expectedSearchResultCount,
+    });
+
+    await searchPage.assertTextIsMissingInSearchResults({
+      expectedText: query,
     });
   });
 });

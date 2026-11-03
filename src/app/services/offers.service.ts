@@ -99,10 +99,11 @@ export class OffersService {
     if (this.needsCaching(CacheName.subCategories, region)) {
       let subCategories =
         await this.spreadsheetService.getSubCategories(region);
+      const categories = await this.getCategories(region);
       subCategories = subCategories.map((subCategory: SubCategory) => {
         return SpreadsheetService.addParentCategoryDetails(
           subCategory,
-          this.cache[CacheName.categories].data,
+          categories,
         );
       });
 
@@ -239,17 +240,9 @@ export class OffersService {
 
   public async getQAs({ region }: { region: string }): Promise<QASet[]> {
     if (this.needsCaching(CacheName.qaSets, region)) {
-      const visibleCategories = (await this.getCategories(region)).filter(
-        (category) => category.categoryVisible,
-      );
+      const visibleCategories = await this.getCategories(region);
 
-      const visibleSubCategories = (
-        await this.getAllSubCategories(region)
-      ).filter(
-        (subCat) =>
-          subCat.subCategoryVisible &&
-          visibleCategories.some((cat) => cat.categoryID === subCat.categoryID),
-      );
+      const visibleSubCategories = await this.getAllSubCategories(region);
 
       let qaSets = await this.spreadsheetService.getQAs(region);
 
