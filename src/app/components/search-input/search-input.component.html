@@ -20,14 +20,26 @@
         [title]="clearLabel || 'Clear'"
         (click)="searchQuery = ''; doSubmit(); ngForm.q.focus()"
       >
-        <strong>&times;</strong>
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          class="input-field--clear-icon"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.25"
+            d="M7 7l10 10M17 7 7 17"
+          />
+        </svg>
       </button>
     }
   </span>
 
   <button
     type="submit"
-    class="search-input--action action is_round is_inline is_outline text-style--alt text-style--size-1"
+    class="search-input--action action is_round is_inline is_outline is_primary"
   >
     <strong>
       {{ actionLabel || 'Search' }}

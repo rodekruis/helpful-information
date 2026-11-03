@@ -1,0 +1,4 @@
+:host {
+  display: block;
+  color: var(--hia_base_text-muted);
+}
