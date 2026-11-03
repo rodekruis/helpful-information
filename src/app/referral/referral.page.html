@@ -1,9 +1,9 @@
 <ion-header class="text-area--level">
   <div class="layout--container layout--container_wide">
     <app-header
-      [title]="regionData?.pageTitle"
+      [title]="$safeNavigationMigration(regionData?.pageTitle)"
       [mainUrl]="mainUrl"
-      [logoUrl]="regionData?.pageLogo"
+      [logoUrl]="$safeNavigationMigration(regionData?.pageLogo)"
       (logoAction)="showRootPage()"
       [localeAlternatives]="
         regionData?.localeAlternatives || localeAlternatives

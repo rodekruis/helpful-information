@@ -1,5 +1,5 @@
 <a
-  [routerLink]="['./', offer?.slug]"
+  [routerLink]="['./', $safeNavigationMigration(offer?.slug)]"
   (click)="click(offer)"
   class="action list-item"
 >
@@ -28,7 +28,9 @@
     @if (offer?.offerDescription) {
       <span
         markdown
-        [data]="offer?.offerDescription | slice: 0 : 200"
+        [data]="
+          $safeNavigationMigration(offer?.offerDescription) | slice: 0 : 200
+        "
         [inline]="true"
       ></span>
     }

@@ -1,5 +1,10 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+} from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -17,6 +22,7 @@ import { getLegacyID } from 'src/app/shared/utils';
   selector: 'app-category-page',
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     SubCategoryLinkComponent,
     CategoryFilterPipe,

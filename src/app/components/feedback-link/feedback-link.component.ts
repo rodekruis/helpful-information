@@ -5,6 +5,7 @@ import type {
   SimpleChanges,
 } from '@angular/core';
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
@@ -29,6 +30,7 @@ enum AnswerValue {
   selector: 'app-feedback-link',
   templateUrl: './feedback-link.component.html',
   styleUrls: ['./feedback-link.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
 })
 export class FeedbackLinkComponent implements OnChanges, OnInit {

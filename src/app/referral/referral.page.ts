@@ -1,6 +1,11 @@
 import { Location } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component, inject, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  ViewChild,
+} from '@angular/core';
 import type { Params } from '@angular/router';
 import {
   ActivatedRoute,
@@ -36,6 +41,7 @@ import { AppPath } from 'src/routes';
   selector: 'app-referral',
   templateUrl: 'referral.page.html',
   styleUrls: ['referral.page.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AppHeaderComponent,
     MarkdownComponent,

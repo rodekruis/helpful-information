@@ -1,5 +1,10 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+} from '@angular/core';
 import { BreadcrumbsComponent } from 'src/app/components/breadcrumbs/breadcrumbs.component';
 import { QASetComponent } from 'src/app/components/q-a-set/q-a-set.component';
 import type { QASet } from 'src/app/models/qa-set.model';
@@ -9,6 +14,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   selector: 'app-q-a-set-list',
   templateUrl: './q-a-set-list.component.html',
   styleUrls: ['./q-a-set-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe, NgTemplateOutlet, BreadcrumbsComponent, QASetComponent],
 })
 export class QASetListComponent {

@@ -3,8 +3,16 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
-    "types": ["jasmine"]
+    "types": ["vitest/globals"]
   },
   "files": ["test.ts", "polyfills.ts"],
-  "include": ["**/*.spec.ts", "**/*.d.mts", "../scripts/**/*.d.mts"]
+  "include": ["**/*.spec.ts", "**/*.d.mts", "../scripts/**/*.d.mts"],
+  "angularCompilerOptions": {
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    }
+  }
 }

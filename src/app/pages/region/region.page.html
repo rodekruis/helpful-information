@@ -56,7 +56,7 @@
 <div
   data-testid="region-page-introduction"
   markdown
-  [data]="regionData?.pageInstructions"
+  [data]="$safeNavigationMigration(regionData?.pageInstructions)"
   [inline]="false"
   class="ion-margin-vertical ion-padding-bottom"
 ></div>

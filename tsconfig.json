@@ -4,7 +4,6 @@
   "compilerOptions": {
     "allowUnreachableCode": false,
     "alwaysStrict": true,
-    "baseUrl": "./",
     "declaration": false,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -19,17 +18,19 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
+    "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "rootDir": "./src",
+    "skipLibCheck": true, // NOTE: Required for Angular v21+ / Ionic v8.8+ issue
     "sourceMap": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
-    "skipLibCheck": true, // NOTE: Required for Angular v21+ / Ionic v8.8+ issue
     "target": "ES2022",
     "typeRoots": ["node_modules/@types"],
+    "types": ["node"],
     "useDefineForClassFields": false,
     "useUnknownInCatchVariables": true,
-    "noUncheckedIndexedAccess": true,
     "verbatimModuleSyntax": true
   },
   "angularCompilerOptions": {

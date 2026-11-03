@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -38,6 +38,7 @@ type SearchResult = QASet & {
   selector: 'app-search-page',
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MarkdownModule,
     ParentLinkComponent,
