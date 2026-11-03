@@ -1,9 +1,9 @@
 import type { OnInit } from '@angular/core';
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,7 +22,7 @@ import { getLegacyID } from 'src/app/shared/utils';
   selector: 'app-category-page',
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     SubCategoryLinkComponent,
     CategoryFilterPipe,

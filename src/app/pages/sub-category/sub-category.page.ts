@@ -1,9 +1,9 @@
 import type { OnInit } from '@angular/core';
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,7 +31,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-sub-category-page',
   templateUrl: './sub-category.page.html',
   styleUrls: ['./sub-category.page.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     OfferLinkComponent,
     QASetComponent,

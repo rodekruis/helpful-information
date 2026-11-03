@@ -1,9 +1,9 @@
 import type { OnInit } from '@angular/core';
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,7 +23,7 @@ import { getLegacyID } from 'src/app/shared/utils';
   selector: 'app-offer-page',
   templateUrl: './offer.page.html',
   styleUrls: ['./offer.page.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     OfferComponent,
     LastUpdatedTimeComponent,

@@ -1,9 +1,9 @@
 import { DatePipe } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
@@ -12,7 +12,7 @@ import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.servi
   selector: 'app-last-updated-time',
   templateUrl: './last-updated-time.component.html',
   styleUrls: ['./last-updated-time.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe],
 })
 export class LastUpdatedTimeComponent {

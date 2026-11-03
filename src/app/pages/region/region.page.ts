@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -18,7 +18,7 @@ import { AppPath } from 'src/routes';
   selector: 'app-region-page',
   templateUrl: './region.page.html',
   styleUrls: ['./region.page.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, CategoryLinkComponent, MarkdownModule],
 })
 export default class RegionPageComponent implements OnInit {

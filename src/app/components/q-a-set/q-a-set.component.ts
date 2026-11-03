@@ -1,9 +1,9 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import {
@@ -18,7 +18,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
   selector: 'app-q-a-set',
   templateUrl: './q-a-set.component.html',
   styleUrls: ['./q-a-set.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe, NgTemplateOutlet, MarkdownModule],
 })
 export class QASetComponent {

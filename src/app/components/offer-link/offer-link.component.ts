@@ -1,9 +1,9 @@
 import { SlicePipe } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IonImg } from '@ionic/angular/standalone';
@@ -19,7 +19,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-offer-link',
   templateUrl: './offer-link.component.html',
   styleUrls: ['./offer-link.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MarkdownModule, IonImg, RouterLink, SlicePipe],
 })
 export class OfferLinkComponent {

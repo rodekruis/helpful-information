@@ -1,8 +1,8 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
@@ -16,7 +16,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-parent-link',
   templateUrl: './parent-link.component.html',
   styleUrls: ['./parent-link.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink],
 })
 export class ParentLinkComponent {

@@ -1,23 +1,24 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import {
-  LoggingEvent,
-  LoggingEventCategory,
-} from 'src/app/models/logging-event.enum';
 import type { Offer } from 'src/app/models/offer.model';
 import type { QASet } from 'src/app/models/qa-set.model';
 import { LoggingService } from 'src/app/services/logging.service';
+
+import {
+  LoggingEvent,
+  LoggingEventCategory,
+} from '/src/app/models/logging-event.enum';
 
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink],
 })
 export class BreadcrumbsComponent {
