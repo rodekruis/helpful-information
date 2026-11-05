@@ -19,7 +19,11 @@ export class CategoryPage {
     this.categoryPageIntroduction = categoryContainer.locator('[markdown]');
     /** @type {Locator} */
     this.subCategoryList = categoryContainer
-      .locator('app-sub-category-link')
+      .getByRole('list')
+      .filter({ has: page.locator('app-sub-category-link') });
+    /** @type {Locator} */
+    this.subCategoryLinks = this.subCategoryList
+      .getByRole('listitem')
       .getByRole('link');
   }
 
