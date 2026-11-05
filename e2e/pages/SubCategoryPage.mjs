@@ -16,10 +16,10 @@ export class SubCategoryPage {
     this.pageHeading = this.pageContent.getByRole('heading', { level: 2 });
     /** @type {Locator} */
     this.parentCategoryLink = this.pageContent
-      .locator('app-parent-link')
+      .getByRole('navigation')
       .getByRole('link');
     /** @type {Locator} */
-    this.introduction = this.pageContent.locator(':scope > div[markdown]');
+    this.introduction = this.pageContent.locator(':scope > [markdown]');
     /** @type {Locator} */
     this.topLevelQAs = this.pageContent.locator(
       ':scope > ul > li > app-q-a-set',
@@ -29,11 +29,11 @@ export class SubCategoryPage {
     /** @type {Locator} */
     this.offerLinks = this.pageContent.locator('app-offer-link > a');
     /** @type {Locator} */
-    this.offerNames = this.offerLinks.locator('strong.text-style--size-1');
+    this.offerNames = this.offerLinks.locator(':scope > span > strong');
     /** @type {Locator} */
     this.offerPreviews = this.offerLinks.locator('[markdown]');
     /** @type {Locator} */
-    this.offerImages = this.offerLinks.locator('ion-img');
+    this.offerImages = this.offerLinks.locator('img');
     /** @type {Locator} */
     this.chapterHeadings = this.pageContent.locator('h3[id^="ch-"]');
   }

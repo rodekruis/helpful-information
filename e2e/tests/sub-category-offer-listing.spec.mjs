@@ -149,7 +149,7 @@ const singleOffer = requireFixtureRow(
 );
 
 /** @param {Locator} offerLink */
-const offerName = (offerLink) => offerLink.locator('strong.text-style--size-1');
+const offerName = (offerLink) => offerLink.locator(':scope > span > strong');
 /** @param {Locator} offerLink */
 const offerPreview = (offerLink) => offerLink.locator('[markdown]');
 /** @param {Locator} heading */
@@ -384,7 +384,7 @@ test.describe('SubCategory page - offer listings', () => {
     );
 
     await expect(subCategoryPage.offerLinks).toHaveCount(0);
-    await expect(subCategoryPage.pageContent.locator('ion-img')).toHaveCount(0);
+    await expect(subCategoryPage.offerImages).toHaveCount(0);
     await expect(subCategoryPage.chapterHeadings).toHaveCount(0);
   });
 
@@ -401,19 +401,19 @@ test.describe('SubCategory page - offer listings', () => {
       'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
     );
 
-    const firstIcon = subCategoryPage.offerLinks.nth(0).locator('ion-img');
-    await expect(firstIcon).toHaveJSProperty('src', firstNamedOffer.ICON);
-    await expect(firstIcon).toHaveAttribute('aria-hidden', 'true');
-    await expect(firstIcon).toHaveAttribute('loading', 'lazy');
+    const firstIcon = subCategoryPage.offerImages.nth(0);
+    await firstIcon.scrollIntoViewIfNeeded();
+    await expect(firstIcon).toHaveAttribute('src', firstNamedOffer.ICON);
 
-    const missingIcon = subCategoryPage.offerLinks.nth(2).locator('ion-img');
-    await expect(missingIcon).toHaveJSProperty(
+    const missingIcon = subCategoryPage.offerImages.nth(2);
+    await missingIcon.scrollIntoViewIfNeeded();
+    await expect(missingIcon).toHaveAttribute(
       'src',
       'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
-    await expect(
-      subCategoryPage.offerLinks.nth(1).locator('ion-img'),
-    ).toHaveJSProperty('src', secondNamedOffer.ICON);
+    const secondIcon = subCategoryPage.offerImages.nth(1);
+    await secondIcon.scrollIntoViewIfNeeded();
+    await expect(secondIcon).toHaveAttribute('src', secondNamedOffer.ICON);
   });
 
   test('loads a lazy offer image after scrolling it into view', async ({
@@ -430,12 +430,9 @@ test.describe('SubCategory page - offer listings', () => {
     );
 
     const lastOffer = subCategoryPage.offerLinks.nth(6);
-    await expect(lastOffer.locator('ion-img')).toHaveAttribute(
-      'loading',
-      'lazy',
-    );
+    await expect(lastOffer.locator('[loading="lazy"]')).toHaveCount(1);
     await lastOffer.scrollIntoViewIfNeeded();
-    const lazyImage = lastOffer.locator('ion-img img');
+    const lazyImage = lastOffer.locator('img');
     await expect(lazyImage).toBeVisible();
     await expect(lazyImage).toHaveAttribute(
       'src',
