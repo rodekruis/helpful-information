@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { deburr } from 'es-toolkit/string';
 import type { QASet } from 'src/app/models/qa-set.model';
 
 @Injectable({
@@ -32,15 +33,54 @@ export class SearchService {
       .map((keyword) => (keyword ? keyword.replaceAll('"', '') : '').trim()) // Remove double-quotes
       .filter((keyword) => !!keyword); // Remove (now) empty keywords
 
-    results = this.source.filter((item) => {
-      const isMatch = queryParts.some((keyWord) => {
-        const regEx = new RegExp(keyWord, 'i');
-        return regEx.test(item.question) || regEx.test(item.answer);
-      });
-      return isMatch ? item : false;
-    });
+    results = this.getQAsMatchingToQuery({ queryParts });
+
+    results = this.removeHiddenQAsFromSearchResults({ results });
 
     return results;
+  }
+
+  private getQAsMatchingToQuery({
+    queryParts,
+  }: {
+    queryParts: string[];
+  }): QASet[] {
+    const deburredQAs: QASet[] = this.source.map((item) => ({
+      question: deburr(item.question),
+      answer: deburr(item.answer),
+      ...item,
+    }));
+
+    const matchingQAIds = deburredQAs
+      .filter((item) => {
+        const isMatch = queryParts.some((keyWord) => {
+          const regEx = new RegExp(keyWord, 'i');
+          return regEx.test(item.question) || regEx.test(item.answer);
+        });
+        return isMatch ? item : false;
+      })
+      .map((qa) => qa.id);
+
+    return this.source.filter((item) => matchingQAIds.includes(item.id));
+  }
+
+  private removeHiddenQAsFromSearchResults({
+    results,
+  }: {
+    results: QASet[];
+  }): QASet[] {
+    return results.filter((result) => {
+      if (!result.parentSlug) {
+        return result.isVisible;
+      }
+
+      const parent = this.source.find((qa) => qa.slug === result.parentSlug);
+      if (!parent) {
+        return true;
+      }
+
+      return parent.isVisible;
+    });
   }
 
   public sanitizeSearchQuery(rawValue: string): string {
@@ -52,6 +92,8 @@ export class SearchService {
     let safeValue = rawValue.replaceAll(/[$()*+?[\\\]^{|}]/g, ' ').trim();
     // Collapse all whitespace-characters into 1 space
     safeValue = safeValue.replaceAll(/\s+/g, ' ');
+
+    safeValue = deburr(safeValue);
 
     return safeValue && safeValue.length > 1 ? safeValue : '';
   }

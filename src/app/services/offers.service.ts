@@ -99,10 +99,11 @@ export class OffersService {
     if (this.needsCaching(CacheName.subCategories, region)) {
       let subCategories =
         await this.spreadsheetService.getSubCategories(region);
+      const categories = await this.getCategories(region);
       subCategories = subCategories.map((subCategory: SubCategory) => {
         return SpreadsheetService.addParentCategoryDetails(
           subCategory,
-          this.cache[CacheName.categories].data,
+          categories,
         );
       });
 
@@ -237,17 +238,32 @@ export class OffersService {
     return foundOffer;
   }
 
-  public async getQAs(region: string): Promise<QASet[]> {
+  public async getQAs({ region }: { region: string }): Promise<QASet[]> {
     if (this.needsCaching(CacheName.qaSets, region)) {
-      const categories = await this.getCategories(region);
-      const subCategories = await this.getAllSubCategories(region);
+      const visibleCategories = await this.getCategories(region);
+
+      const visibleSubCategories = await this.getAllSubCategories(region);
 
       let qaSets = await this.spreadsheetService.getQAs(region);
+
+      const isVisibleQA = (qaSet: QASet): boolean =>
+        visibleCategories.some((cat) => cat.categoryID === qaSet.categoryID) &&
+        visibleSubCategories.some(
+          (subCat) => subCat.subCategoryID === qaSet.subCategoryID,
+        );
+      qaSets = qaSets.filter(isVisibleQA).map((qaSet) => ({
+        ...qaSet,
+        children: qaSet.children.filter(isVisibleQA),
+      }));
+
       qaSets = qaSets.map((qaSet: QASet) => {
-        qaSet = SpreadsheetService.addParentCategoryDetails(qaSet, categories);
+        qaSet = SpreadsheetService.addParentCategoryDetails(
+          qaSet,
+          visibleCategories,
+        );
         qaSet = SpreadsheetService.addParentSubCategoryDetails(
           qaSet,
-          subCategories,
+          visibleSubCategories,
         );
         return qaSet;
       });
@@ -264,7 +280,7 @@ export class OffersService {
     question?: string;
     slug?: string | null;
   }): Promise<QASet | undefined> {
-    const qaSets = await this.getQAs(query.region);
+    const qaSets = await this.getQAs({ region: query.region });
 
     const foundQA = qaSets.find((qaSet: QASet) => {
       const slugMatches = !!query.slug && qaSet.slug === query.slug;
@@ -292,7 +308,7 @@ export class OffersService {
 
   public async getHighlights(region: string): Promise<QASet[]> {
     // Load 'requirements'...
-    const qaSets = await this.getQAs(region);
+    const qaSets = await this.getQAs({ region });
 
     // Create a deep copy of the Q&A set:
     const items = qaSets.map((item) => ({ ...item }));
