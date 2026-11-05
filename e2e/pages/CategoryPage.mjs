@@ -20,7 +20,7 @@ export class CategoryPage {
     /** @type {Locator} */
     this.subCategoryList = categoryContainer
       .getByRole('list')
-      .filter({ has: page.locator('app-sub-category-link') });
+      .and(categoryContainer.locator(':scope > ul'));
     /** @type {Locator} */
     this.subCategoryLinks = this.subCategoryList
       .getByRole('listitem')
