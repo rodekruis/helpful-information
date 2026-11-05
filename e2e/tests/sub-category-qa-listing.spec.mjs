@@ -1,5 +1,3 @@
-import { createRequire } from 'node:module';
-
 import { expect, test } from '@playwright/test';
 
 import { SubCategoryPage } from '../pages/SubCategoryPage.mjs';
@@ -8,174 +6,6 @@ import { SubCategoryPage } from '../pages/SubCategoryPage.mjs';
  * @typedef {import('@playwright/test').Locator} Locator
  * @typedef {import('../pages/SubCategoryPage.mjs').SubCategoryPage} SubCategoryPageObject
  */
-
-const require = createRequire(import.meta.url);
-
-/**
- * @param {string} filename
- * @param {string[]} requiredTags
- * @returns {Array<Record<string, string>>}
- */
-function readFixture(filename, requiredTags) {
-  const fixture = require(`../../data/test-sheet-id-1/values/${filename}`);
-  if (
-    !fixture ||
-    !Array.isArray(fixture.values) ||
-    !fixture.values.every(Array.isArray)
-  ) {
-    throw new Error(`Missing rows in fixture ${filename}`);
-  }
-  /** @type {unknown[][]} */
-  const values = fixture.values;
-  const headers = values[0];
-  if (!headers) {
-    throw new Error(`Missing header row in fixture ${filename}`);
-  }
-
-  const columns = Object.fromEntries(
-    requiredTags.map((tag) => {
-      const index = headers.findIndex((header) =>
-        String(header).includes(`#${tag}`),
-      );
-      if (index < 0) {
-        throw new Error(
-          `Missing required #${tag} column in fixture ${filename}`,
-        );
-      }
-      return [tag, index];
-    }),
-  );
-
-  /** @type {Array<Record<string, string>>} */
-  const rows = values
-    .slice(1)
-    .map((cells) =>
-      Object.fromEntries(
-        Object.entries(columns).map(([tag, column]) => [
-          tag,
-          String(cells[column] ?? ''),
-        ]),
-      ),
-    );
-  return rows;
-}
-
-/**
- * @param {Array<Record<string, string>>} rows
- * @param {string} description
- * @param {(row: Record<string, string>) => boolean} predicate
- */
-function requireFixtureRow(rows, description, predicate) {
-  const row = rows.find(predicate);
-  if (!row) {
-    throw new Error(`Missing selected fixture row: ${description}`);
-  }
-  return row;
-}
-
-const qaRows = readFixture('Q&As.json', [
-  'ANSWER',
-  'CATEGORY',
-  'HIGHLIGHT',
-  'PARENT',
-  'QUESTION',
-  'SLUG',
-  'SUBCATEGORY',
-  'UPDATED',
-  'VISIBLE',
-]);
-
-const mainQuestionOne = requireFixtureRow(
-  qaRows,
-  'category-alpha/sub-category: Test Question 1',
-  (row) =>
-    row.CATEGORY === '1' &&
-    row.SUBCATEGORY === '1' &&
-    row.QUESTION === 'Test Question 1',
-);
-const mainQuestionTwo = requireFixtureRow(
-  qaRows,
-  'category-alpha/sub-category: Test Question 2',
-  (row) =>
-    row.CATEGORY === '1' &&
-    row.SUBCATEGORY === '1' &&
-    row.QUESTION === 'Test Question 2',
-);
-const qaRouteRows = qaRows.filter(
-  (row) => row.CATEGORY === '5' && row.SUBCATEGORY === '5',
-);
-const parentQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: parent with three child questions',
-  (row) => row.SLUG === 'test-parent-1',
-);
-const childQuestionA = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: Sub-Question A',
-  (row) => row.QUESTION === 'Sub-Question A',
-);
-const childQuestionB = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: Sub-Question B',
-  (row) => row.QUESTION === 'Sub-Quèstion B',
-);
-const childQuestionC = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: dated Sub-Question C',
-  (row) => row.QUESTION === 'Sub-Question C',
-);
-const invalidParentQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: question with nonexistent parent',
-  (row) => row.QUESTION === 'Sub-Question D (invalid parent)',
-);
-const selfReferencingQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: first self-referencing duplicate slug',
-  (row) =>
-    row.QUESTION === '(Sub-)Question S (pointing to self)' &&
-    row.SLUG === 'test-self',
-);
-const duplicateSelfQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: second self-referencing duplicate slug',
-  (row) => row.QUESTION === '(Sub-)Question T (pointing to self)',
-);
-const selfChildQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: Sub-Question U',
-  (row) => row.QUESTION === '(Sub-)Question U',
-);
-const longQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: long question with child and future date',
-  (row) => row.SLUG === 'test-2',
-);
-const longChildQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: Sub-Question E',
-  (row) => row.QUESTION === 'Sub-Question E',
-);
-const highlightedQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: highlighted question',
-  (row) => row.QUESTION === 'I need shelter for a few days',
-);
-const otherVisibleQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: visible Test question',
-  (row) => row.QUESTION === 'Test',
-);
-const unansweredQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: question without answer',
-  (row) => row.QUESTION === 'Question without Answer',
-);
-const hiddenQuestion = requireFixtureRow(
-  qaRouteRows,
-  'q-and-a-s: hidden draft question',
-  (row) => row.QUESTION === '[DRAFT] Question without a final answer',
-);
 
 /**
  * @param {SubCategoryPageObject} subCategoryPage
@@ -206,7 +36,7 @@ const childMarkdownAnswer = (child) =>
   childAnswer(child).locator(':scope > div[markdown]');
 
 test.describe('SubCategory page - Q&A listings', () => {
-  test('lists the two matching top-level questions in fixture order', async ({
+  test('lists the two matching top-level questions in order', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -221,8 +51,8 @@ test.describe('SubCategory page - Q&A listings', () => {
 
     await expect(subCategoryPage.topLevelQAs).toHaveCount(2);
     await expect(topLevelQuestionSummaries(subCategoryPage)).toHaveText([
-      mainQuestionOne.QUESTION,
-      mainQuestionTwo.QUESTION,
+      'Test Question 1',
+      'Test Question 2',
     ]);
   });
 
@@ -243,12 +73,12 @@ test.describe('SubCategory page - Q&A listings', () => {
     const firstAnswer = questionAnswer(firstQuestion);
     await expect(firstAnswer).toBeHidden();
     await questionSummary(firstQuestion).click();
-    await expect(firstAnswer).toContainText(mainQuestionOne.ANSWER);
+    await expect(firstAnswer).toContainText('Test answer 1.');
 
     const secondQuestion = subCategoryPage.topLevelQAs.nth(1);
     const secondAnswer = questionAnswer(secondQuestion);
     await questionSummary(secondQuestion).click();
-    await expect(secondAnswer).toContainText(mainQuestionTwo.ANSWER);
+    await expect(secondAnswer).toContainText('Test answer 2.');
 
     await questionSummary(firstQuestion).click();
     await expect(firstAnswer).toBeHidden();
@@ -278,7 +108,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     );
   });
 
-  test('shows no questions for routes without matching fixture questions', async ({
+  test('shows no questions on routes without matching questions', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -304,7 +134,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     await expect(subCategoryPage.topLevelQAs).toHaveCount(0);
   });
 
-  test('keeps parent and child questions in separate ordered lists', async ({
+  test('lists parent and child questions in their expected order', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -319,26 +149,22 @@ test.describe('SubCategory page - Q&A listings', () => {
 
     await expect(subCategoryPage.topLevelQAs).toHaveCount(6);
     await expect(topLevelQuestionSummaries(subCategoryPage)).toHaveText([
-      parentQuestion.QUESTION,
-      invalidParentQuestion.QUESTION,
-      selfReferencingQuestion.QUESTION,
-      longQuestion.QUESTION,
-      highlightedQuestion.QUESTION,
-      otherVisibleQuestion.QUESTION,
+      'A question to test with.',
+      'Sub-Question D (invalid parent)',
+      '(Sub-)Question S (pointing to self)',
+      'Another long-winding question that will run over multiple lines, with VLW(Very Long Words) or abbriviations and special ⚠️ characters etc.',
+      'I need shelter for a few days',
+      'Test',
     ]);
     await expect(
       childQuestionSummaries(subCategoryPage.topLevelQAs.nth(0)),
-    ).toHaveText([
-      childQuestionA.QUESTION,
-      childQuestionB.QUESTION,
-      childQuestionC.QUESTION,
-    ]);
+    ).toHaveText(['Sub-Question A', 'Sub-Quèstion B', 'Sub-Question C']);
     await expect(
       childQuestionSummaries(subCategoryPage.topLevelQAs.nth(2)),
-    ).toHaveText([duplicateSelfQuestion.QUESTION, selfChildQuestion.QUESTION]);
+    ).toHaveText(['(Sub-)Question T (pointing to self)', '(Sub-)Question U']);
     await expect(
       childQuestionSummaries(subCategoryPage.topLevelQAs.nth(3)),
-    ).toHaveText(longChildQuestion.QUESTION);
+    ).toHaveText('Sub-Question E');
     await expect(childDetails(subCategoryPage.topLevelQAs.nth(1))).toHaveCount(
       0,
     );
@@ -366,18 +192,12 @@ test.describe('SubCategory page - Q&A listings', () => {
     const firstChild = childDetails(parent).nth(0);
     const secondChild = childDetails(parent).nth(1);
     await firstChild.locator(':scope > summary').click();
-    await expect(childMarkdownAnswer(firstChild)).toHaveText(
-      childQuestionA.ANSWER,
-    );
+    await expect(childMarkdownAnswer(firstChild)).toHaveText('Sub-Answer A');
     await secondChild.locator(':scope > summary').click();
-    await expect(childMarkdownAnswer(secondChild)).toHaveText(
-      childQuestionB.ANSWER,
-    );
+    await expect(childMarkdownAnswer(secondChild)).toHaveText('Sûb-Answer B');
     const thirdChild = childDetails(parent).nth(2);
     await thirdChild.locator(':scope > summary').click();
-    await expect(childMarkdownAnswer(thirdChild)).toHaveText(
-      childQuestionC.ANSWER,
-    );
+    await expect(childMarkdownAnswer(thirdChild)).toHaveText('Sub-Answer C');
 
     await firstChild.locator(':scope > summary').click();
     await expect(childAnswer(firstChild)).toBeHidden();
@@ -390,12 +210,12 @@ test.describe('SubCategory page - Q&A listings', () => {
     const selfChild = childDetails(selfReferencingParent).nth(0);
     await selfChild.locator(':scope > summary').click();
     await expect(childMarkdownAnswer(selfChild)).toContainText(
-      duplicateSelfQuestion.ANSWER,
+      '(Sub-)Answer T',
     );
     const otherSelfChild = childDetails(selfReferencingParent).nth(1);
     await otherSelfChild.locator(':scope > summary').click();
     await expect(childMarkdownAnswer(otherSelfChild)).toContainText(
-      selfChildQuestion.ANSWER,
+      '(Sub-)Answer U',
     );
 
     const longParent = subCategoryPage.topLevelQAs.nth(3);
@@ -444,24 +264,30 @@ test.describe('SubCategory page - Q&A listings', () => {
     ]);
     const externalLinks = answer.getByRole('link');
     await expect(externalLinks).toHaveCount(4);
-    for (const [index, href] of [
+    await expect(externalLinks.nth(0)).toHaveAttribute(
+      'href',
       'https://example.org/see-this-link-for-more-info',
+    );
+    await expect(externalLinks.nth(1)).toHaveAttribute(
+      'href',
       'http://www.example.org',
+    );
+    await expect(externalLinks.nth(2)).toHaveAttribute(
+      'href',
       'https://this.example.org/',
+    );
+    await expect(externalLinks.nth(3)).toHaveAttribute(
+      'href',
       'https://example.org',
-    ].entries()) {
-      await expect(externalLinks.nth(index)).toHaveAttribute('href', href);
-    }
-    for (const link of await externalLinks.all()) {
-      await expect(link).toHaveAttribute('target', '_blank');
-      await expect(link).toHaveAttribute('rel', /noopener/);
-      await expect(link).toHaveAttribute('rel', /noreferrer/);
-    }
+    );
+    await expect(
+      answer.locator('a[target="_blank"][rel~="noopener"][rel~="noreferrer"]'),
+    ).toHaveCount(4);
 
     const secondParent = subCategoryPage.topLevelQAs.nth(1);
     await questionSummary(secondParent).click();
     await expect(questionMarkdownAnswer(secondParent)).toContainText(
-      invalidParentQuestion.ANSWER,
+      'Sub-Answer D',
     );
   });
 
@@ -482,7 +308,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     await questionSummary(parent).click();
     await expect(questionDetails(parent).getByRole('time')).toHaveAttribute(
       'datetime',
-      parentQuestion.UPDATED,
+      '2022-05-20',
     );
     await expect(questionDetails(parent).getByRole('time')).toHaveText(
       '20-05-2022',
@@ -496,7 +322,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     await datedChild.locator(':scope > summary').click();
     await expect(datedChild.getByRole('time')).toHaveAttribute(
       'datetime',
-      childQuestionC.UPDATED,
+      '2022-05-31',
     );
     await expect(datedChild.getByRole('time')).toHaveText('31-05-2022');
 
@@ -504,7 +330,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     await questionSummary(longParent).click();
     await expect(questionDetails(longParent).getByRole('time')).toHaveAttribute(
       'datetime',
-      longQuestion.UPDATED,
+      '2048-02-03',
     );
     await expect(questionDetails(longParent).getByRole('time')).toHaveText(
       '03-02-2048',
@@ -525,20 +351,16 @@ test.describe('SubCategory page - Q&A listings', () => {
     );
 
     await expect(topLevelQuestionSummaries(subCategoryPage).nth(3)).toHaveText(
-      longQuestion.QUESTION,
+      'Another long-winding question that will run over multiple lines, with VLW(Very Long Words) or abbriviations and special ⚠️ characters etc.',
     );
     await expect(
       childQuestionSummaries(subCategoryPage.topLevelQAs.nth(3)),
-    ).toHaveText(longChildQuestion.QUESTION);
-    expect(longQuestion.QUESTION).toContain('⚠️');
+    ).toHaveText('Sub-Question E');
   });
 
   test('keeps highlighted questions in fixture order and excludes hidden or unanswered questions', async ({
     page,
   }) => {
-    expect(highlightedQuestion.HIGHLIGHT).toBe('Yes');
-    expect(otherVisibleQuestion.HIGHLIGHT).toBe('');
-
     const subCategoryPage = new SubCategoryPage(page);
     await subCategoryPage.goto({
       regionSlug: 'test-local-1',
@@ -550,22 +372,25 @@ test.describe('SubCategory page - Q&A listings', () => {
     );
 
     await expect(topLevelQuestionSummaries(subCategoryPage)).toHaveText([
-      parentQuestion.QUESTION,
-      invalidParentQuestion.QUESTION,
-      selfReferencingQuestion.QUESTION,
-      longQuestion.QUESTION,
-      highlightedQuestion.QUESTION,
-      otherVisibleQuestion.QUESTION,
+      'A question to test with.',
+      'Sub-Question D (invalid parent)',
+      '(Sub-)Question S (pointing to self)',
+      'Another long-winding question that will run over multiple lines, with VLW(Very Long Words) or abbriviations and special ⚠️ characters etc.',
+      'I need shelter for a few days',
+      'Test',
     ]);
     await expect(
-      subCategoryPage.pageContent.getByText(unansweredQuestion.QUESTION, {
+      subCategoryPage.pageContent.getByText('Question without Answer', {
         exact: true,
       }),
     ).toHaveCount(0);
     await expect(
-      subCategoryPage.pageContent.getByText(hiddenQuestion.QUESTION, {
-        exact: true,
-      }),
+      subCategoryPage.pageContent.getByText(
+        '[DRAFT] Question without a final answer',
+        {
+          exact: true,
+        },
+      ),
     ).toHaveCount(0);
 
     const ordinaryQuestion = subCategoryPage.topLevelQAs.nth(5);

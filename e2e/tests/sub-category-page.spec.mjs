@@ -1,136 +1,6 @@
-import { createRequire } from 'node:module';
-
 import { expect, test } from '@playwright/test';
 
 import { SubCategoryPage } from '../pages/SubCategoryPage.mjs';
-
-const require = createRequire(import.meta.url);
-
-/**
- * @param {string} filename
- * @param {string[]} requiredTags
- * @returns {Array<Record<string, string>>}
- */
-function readFixture(filename, requiredTags) {
-  const fixture = require(`../../data/test-sheet-id-1/values/${filename}`);
-  if (
-    !fixture ||
-    !Array.isArray(fixture.values) ||
-    !fixture.values.every(Array.isArray)
-  ) {
-    throw new Error(`Missing rows in fixture ${filename}`);
-  }
-  /** @type {unknown[][]} */
-  const values = fixture.values;
-  const headers = values[0];
-  if (!headers) {
-    throw new Error(`Missing header row in fixture ${filename}`);
-  }
-
-  const columns = Object.fromEntries(
-    requiredTags.map((tag) => {
-      const index = headers.findIndex((header) =>
-        String(header).includes(`#${tag}`),
-      );
-      if (index < 0) {
-        throw new Error(
-          `Missing required #${tag} column in fixture ${filename}`,
-        );
-      }
-      return [tag, index];
-    }),
-  );
-
-  /** @type {Array<Record<string, string>>} */
-  const rows = values
-    .slice(1)
-    .map((cells) =>
-      Object.fromEntries(
-        Object.entries(columns).map(([tag, column]) => [
-          tag,
-          String(cells[column] ?? ''),
-        ]),
-      ),
-    );
-  return rows;
-}
-
-/**
- * @param {Array<Record<string, string>>} rows
- * @param {string} description
- * @param {(row: Record<string, string>) => boolean} predicate
- */
-function requireFixtureRow(rows, description, predicate) {
-  const row = rows.find(predicate);
-  if (!row) {
-    throw new Error(`Missing selected fixture row: ${description}`);
-  }
-  return row;
-}
-
-const categories = readFixture('Categories.json', ['ID', 'NAME', 'SLUG']);
-const subCategories = readFixture('Sub-Categories.json', [
-  'CATEGORY',
-  'ID',
-  'NAME',
-  'SLUG',
-  'DESCRIPTION',
-]);
-
-const categoryAlpha = requireFixtureRow(
-  categories,
-  'category-alpha',
-  (row) => row.SLUG === 'category-alpha',
-);
-const emptyCategory = requireFixtureRow(
-  categories,
-  'empty category',
-  (row) => row.SLUG === 'empty',
-);
-const alphaSubCategory = requireFixtureRow(
-  subCategories,
-  'category-alpha/sub-category',
-  (row) => row.CATEGORY === categoryAlpha.ID && row.SLUG === 'sub-category',
-);
-const richSubCategory = requireFixtureRow(
-  subCategories,
-  'category-alpha/another-sub-category rich introduction',
-  (row) =>
-    row.CATEGORY === categoryAlpha.ID && row.SLUG === 'another-sub-category',
-);
-const emptySubCategory = requireFixtureRow(
-  subCategories,
-  'empty/empty without description',
-  (row) => row.CATEGORY === emptyCategory.ID && row.SLUG === 'empty',
-);
-const singleLevelCategory = requireFixtureRow(
-  categories,
-  'single-level category',
-  (row) => row.SLUG === 'single-level',
-);
-const singleLevelSubCategory = requireFixtureRow(
-  subCategories,
-  'single-level/single-level',
-  (row) =>
-    row.CATEGORY === singleLevelCategory.ID && row.SLUG === 'single-level',
-);
-const qaCategory = requireFixtureRow(
-  categories,
-  'q-and-a-s category',
-  (row) => row.SLUG === 'q-and-a-s',
-);
-const qaSubCategory = requireFixtureRow(
-  subCategories,
-  'q-and-a-s/q-and-a-s',
-  (row) => row.CATEGORY === qaCategory.ID && row.SLUG === 'q-and-a-s',
-);
-
-/**
- * @param {Record<string, string>} subCategory
- * @param {Record<string, string>} category
- */
-const pageTitle = (subCategory, category) =>
-  `${subCategory.NAME} - ${category.NAME} - Test Local 1 - Helpful Information [ development ]`;
 
 test.describe('SubCategory page - generic behavior', () => {
   test('direct navigation shows the exact identity, title, and parent destination', async ({
@@ -144,7 +14,7 @@ test.describe('SubCategory page - generic behavior', () => {
     });
 
     await expect(subCategoryPage.page).toHaveTitle(
-      pageTitle(alphaSubCategory, categoryAlpha),
+      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
     );
     await expect(subCategoryPage.pageHeading).toHaveText('Sub-Category');
     await expect(subCategoryPage.parentCategoryLink).toHaveText(
@@ -166,7 +36,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      pageTitle(alphaSubCategory, categoryAlpha),
+      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
     );
 
     await subCategoryPage.parentCategoryLink.click();
@@ -187,7 +57,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      pageTitle(alphaSubCategory, categoryAlpha),
+      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
     );
 
     await expect(subCategoryPage.introduction).toBeVisible();
@@ -212,7 +82,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'another-sub-category',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      pageTitle(richSubCategory, categoryAlpha),
+      'Another Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
     );
 
     const introduction = subCategoryPage.introduction;
@@ -262,7 +132,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'empty',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      pageTitle(emptySubCategory, emptyCategory),
+      'Empty - Empty - Test Local 1 - Helpful Information [ development ]',
     );
 
     await expect(subCategoryPage.pageHeading).toHaveText('Empty');
@@ -286,7 +156,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'single-level',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      pageTitle(singleLevelSubCategory, singleLevelCategory),
+      'Single Level - Single Level - Test Local 1 - Helpful Information [ development ]',
     );
 
     await expect(subCategoryPage.pageHeading).toHaveText('Single Level');
@@ -308,7 +178,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'q-and-a-s',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      pageTitle(qaSubCategory, qaCategory),
+      'Q&As - Q&As - Test Local 1 - Helpful Information [ development ]',
     );
 
     await expect(subCategoryPage.pageHeading).toHaveText('Q&As');

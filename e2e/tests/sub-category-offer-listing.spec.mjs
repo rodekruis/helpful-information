@@ -1,152 +1,8 @@
-import { createRequire } from 'node:module';
-
 import { expect, test } from '@playwright/test';
 
 import { SubCategoryPage } from '../pages/SubCategoryPage.mjs';
 
 /** @typedef {import('@playwright/test').Locator} Locator */
-
-const require = createRequire(import.meta.url);
-
-/**
- * @param {string} filename
- * @param {string[]} requiredTags
- * @returns {Array<Record<string, string>>}
- */
-function readFixture(filename, requiredTags) {
-  const fixture = require(`../../data/test-sheet-id-1/values/${filename}`);
-  if (
-    !fixture ||
-    !Array.isArray(fixture.values) ||
-    !fixture.values.every(Array.isArray)
-  ) {
-    throw new Error(`Missing rows in fixture ${filename}`);
-  }
-  /** @type {unknown[][]} */
-  const values = fixture.values;
-  const headers = values[0];
-  if (!headers) {
-    throw new Error(`Missing header row in fixture ${filename}`);
-  }
-
-  const columns = Object.fromEntries(
-    requiredTags.map((tag) => {
-      const index = headers.findIndex((header) =>
-        String(header).includes(`#${tag}`),
-      );
-      if (index < 0) {
-        throw new Error(
-          `Missing required #${tag} column in fixture ${filename}`,
-        );
-      }
-      return [tag, index];
-    }),
-  );
-
-  /** @type {Array<Record<string, string>>} */
-  const rows = values
-    .slice(1)
-    .map((cells) =>
-      Object.fromEntries(
-        Object.entries(columns).map(([tag, column]) => [
-          tag,
-          String(cells[column] ?? ''),
-        ]),
-      ),
-    );
-  return rows;
-}
-
-/**
- * @param {Array<Record<string, string>>} rows
- * @param {string} description
- * @param {(row: Record<string, string>) => boolean} predicate
- */
-function requireFixtureRow(rows, description, predicate) {
-  const row = rows.find(predicate);
-  if (!row) {
-    throw new Error(`Missing selected fixture row: ${description}`);
-  }
-  return row;
-}
-
-const offerRows = readFixture('Offers.json', [
-  'CATEGORY',
-  'CHAPTER',
-  'DESCRIPTION',
-  'ICON',
-  'ID',
-  'NAME',
-  'SLUG',
-  'SUBCATEGORY',
-  'VISIBLE',
-]);
-
-const alphaOffers = offerRows.filter(
-  (row) => row.CATEGORY === '1' && row.SUBCATEGORY === '1',
-);
-const firstNamedOffer = requireFixtureRow(
-  alphaOffers,
-  'category-alpha/sub-category: The Servicename',
-  (row) => row.SLUG === 'the-servicename',
-);
-const secondNamedOffer = requireFixtureRow(
-  alphaOffers,
-  'category-alpha/sub-category: Another Service',
-  (row) => row.SLUG === 'another-service',
-);
-const unnamedOffer = requireFixtureRow(
-  alphaOffers,
-  'category-alpha/sub-category: unnamed offer',
-  (row) => row.ID === '3',
-);
-const hiddenOffer = requireFixtureRow(
-  alphaOffers,
-  'category-alpha/sub-category: hidden Temporary Service',
-  (row) => row.SLUG === 'temporary-service',
-);
-const chapterCFirst = requireFixtureRow(
-  alphaOffers,
-  'category-alpha/sub-category: first Chapter C offer',
-  (row) =>
-    row.CHAPTER === 'Chapter C' && row.DESCRIPTION === 'A service in Chapter C',
-);
-const chapterBFirst = requireFixtureRow(
-  alphaOffers,
-  'category-alpha/sub-category: first Chapter B offer',
-  (row) =>
-    row.CHAPTER === 'Chapter B' && row.DESCRIPTION === 'A service in Chapter B',
-);
-const chapterCSecond = requireFixtureRow(
-  alphaOffers,
-  'category-alpha/sub-category: second Chapter C offer',
-  (row) =>
-    row.CHAPTER === 'Chapter C' &&
-    row.DESCRIPTION === 'Another service in Chapter C',
-);
-const chapterBSecond = requireFixtureRow(
-  alphaOffers,
-  'category-alpha/sub-category: second Chapter B offer',
-  (row) =>
-    row.CHAPTER === 'Chapter B' &&
-    row.DESCRIPTION === 'Another service in Chapter B',
-);
-const anotherSubCategoryOffer = requireFixtureRow(
-  offerRows,
-  'category-alpha/another-sub-category: Evil Service',
-  (row) =>
-    row.CATEGORY === '1' &&
-    row.SUBCATEGORY === '2' &&
-    row.SLUG === 'evil-service',
-);
-const singleOffer = requireFixtureRow(
-  offerRows,
-  'single-level/single-level: Single Service',
-  (row) =>
-    row.CATEGORY === '4' &&
-    row.SUBCATEGORY === '4' &&
-    row.SLUG === 'single-service',
-);
 
 /** @param {Locator} offerLink */
 const offerName = (offerLink) => offerLink.locator(':scope > span > strong');
@@ -157,14 +13,6 @@ const chapterOffers = (heading) =>
   heading
     .locator('xpath=following-sibling::ul[1]')
     .locator('app-offer-link > a');
-/**
- * @param {string} categorySlug
- * @param {string} subCategorySlug
- * @param {string} offerSlug
- */
-const offerHref = (categorySlug, subCategorySlug, offerSlug) =>
-  `/test-local-1/${categorySlug}/${subCategorySlug}/${offerSlug}`;
-
 test.describe('SubCategory page - offer listings', () => {
   test('lists matching named and unnamed offers in chapter order', async ({
     page,
@@ -181,58 +29,81 @@ test.describe('SubCategory page - offer listings', () => {
 
     await expect(subCategoryPage.offerLinks).toHaveCount(7);
     await expect(subCategoryPage.offerNames).toHaveText([
-      firstNamedOffer.NAME,
-      secondNamedOffer.NAME,
+      'The Servicename',
+      'Another Service',
     ]);
-    const listedDestinations = [
-      offerHref('category-alpha', 'sub-category', 'the-servicename'),
-      offerHref('category-alpha', 'sub-category', 'another-service'),
-      offerHref('category-alpha', 'sub-category', 'offer-3'),
-      offerHref('category-alpha', 'sub-category', 'offer-7'),
-      offerHref('category-alpha', 'sub-category', 'offer-8'),
-      offerHref('category-alpha', 'sub-category', 'offer-5'),
-      offerHref('category-alpha', 'sub-category', 'offer-6'),
-    ];
-    for (const [index, destination] of listedDestinations.entries()) {
-      await expect(subCategoryPage.offerLinks.nth(index)).toHaveAttribute(
-        'href',
-        destination,
-      );
-    }
+    await expect(subCategoryPage.offerLinks.nth(0)).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/the-servicename',
+    );
+    await expect(subCategoryPage.offerLinks.nth(1)).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/another-service',
+    );
+    await expect(subCategoryPage.offerLinks.nth(2)).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/offer-3',
+    );
+    await expect(subCategoryPage.offerLinks.nth(3)).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/offer-7',
+    );
+    await expect(subCategoryPage.offerLinks.nth(4)).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/offer-8',
+    );
+    await expect(subCategoryPage.offerLinks.nth(5)).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/offer-5',
+    );
+    await expect(subCategoryPage.offerLinks.nth(6)).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/offer-6',
+    );
     await expect(
-      subCategoryPage.offerLinks.filter({ hasText: hiddenOffer.NAME }),
+      subCategoryPage.offerLinks.filter({
+        hasText: '[Draft] Temporary Service',
+      }),
     ).toHaveCount(0);
     await expect(
       subCategoryPage.offerLinks.filter({ hasText: 'Evil Service' }),
     ).toHaveCount(0);
 
     await expect(subCategoryPage.chapterHeadings).toHaveText([
-      chapterBFirst.CHAPTER,
-      chapterCFirst.CHAPTER,
+      'Chapter B',
+      'Chapter C',
     ]);
     await expect(subCategoryPage.chapterHeadings).toHaveCount(2);
     await expect(
       chapterOffers(subCategoryPage.chapterHeadings.nth(0)),
     ).toHaveCount(2);
-    for (const [index, destination] of [
-      offerHref('category-alpha', 'sub-category', 'offer-7'),
-      offerHref('category-alpha', 'sub-category', 'offer-8'),
-    ].entries()) {
-      await expect(
-        chapterOffers(subCategoryPage.chapterHeadings.nth(0)).nth(index),
-      ).toHaveAttribute('href', destination);
-    }
+    await expect(
+      chapterOffers(subCategoryPage.chapterHeadings.nth(0)).nth(0),
+    ).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/offer-7',
+    );
+    await expect(
+      chapterOffers(subCategoryPage.chapterHeadings.nth(0)).nth(1),
+    ).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/offer-8',
+    );
     await expect(
       chapterOffers(subCategoryPage.chapterHeadings.nth(1)),
     ).toHaveCount(2);
-    for (const [index, destination] of [
-      offerHref('category-alpha', 'sub-category', 'offer-5'),
-      offerHref('category-alpha', 'sub-category', 'offer-6'),
-    ].entries()) {
-      await expect(
-        chapterOffers(subCategoryPage.chapterHeadings.nth(1)).nth(index),
-      ).toHaveAttribute('href', destination);
-    }
+    await expect(
+      chapterOffers(subCategoryPage.chapterHeadings.nth(1)).nth(0),
+    ).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/offer-5',
+    );
+    await expect(
+      chapterOffers(subCategoryPage.chapterHeadings.nth(1)).nth(1),
+    ).toHaveAttribute(
+      'href',
+      '/test-local-1/category-alpha/sub-category/offer-6',
+    );
 
     await expect(subCategoryPage.offerGroups).toHaveCount(3);
     const unnamedChapterGroup = subCategoryPage.offerGroups.first();
@@ -244,19 +115,19 @@ test.describe('SubCategory page - offer listings', () => {
       unnamedChapterGroup.locator('app-offer-link > a').nth(0),
     ).toHaveAttribute(
       'href',
-      offerHref('category-alpha', 'sub-category', 'the-servicename'),
+      '/test-local-1/category-alpha/sub-category/the-servicename',
     );
     await expect(
       unnamedChapterGroup.locator('app-offer-link > a').nth(1),
     ).toHaveAttribute(
       'href',
-      offerHref('category-alpha', 'sub-category', 'another-service'),
+      '/test-local-1/category-alpha/sub-category/another-service',
     );
     await expect(
       unnamedChapterGroup.locator('app-offer-link > a').nth(2),
     ).toHaveAttribute(
       'href',
-      offerHref('category-alpha', 'sub-category', 'offer-3'),
+      '/test-local-1/category-alpha/sub-category/offer-3',
     );
 
     await expect(offerPreview(subCategoryPage.offerLinks.nth(0))).toContainText(
@@ -281,11 +152,11 @@ test.describe('SubCategory page - offer listings', () => {
       'this should not be visible in the list, only on the page',
     );
     await expect(offerPreview(subCategoryPage.offerLinks.nth(2))).toContainText(
-      unnamedOffer.DESCRIPTION,
+      'Another service without a specific name.',
     );
   });
 
-  test('shows two offers under each named chapter in fixture order', async ({
+  test('shows two offers under each named chapter in order', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -299,20 +170,20 @@ test.describe('SubCategory page - offer listings', () => {
     );
 
     const chapterB = subCategoryPage.chapterHeadings.filter({
-      hasText: chapterBFirst.CHAPTER,
+      hasText: 'Chapter B',
     });
     const chapterC = subCategoryPage.chapterHeadings.filter({
-      hasText: chapterCFirst.CHAPTER,
+      hasText: 'Chapter C',
     });
     await expect(chapterB).toHaveCount(1);
     await expect(chapterC).toHaveCount(1);
     await expect(chapterOffers(chapterB).locator('[markdown]')).toHaveText([
-      chapterBFirst.DESCRIPTION,
-      chapterBSecond.DESCRIPTION,
+      'A service in Chapter B',
+      'Another service in Chapter B',
     ]);
     await expect(chapterOffers(chapterC).locator('[markdown]')).toHaveText([
-      chapterCFirst.DESCRIPTION,
-      chapterCSecond.DESCRIPTION,
+      'A service in Chapter C',
+      'Another service in Chapter C',
     ]);
   });
 
@@ -331,11 +202,11 @@ test.describe('SubCategory page - offer listings', () => {
 
     await expect(subCategoryPage.offerLinks).toHaveCount(1);
     await expect(offerName(subCategoryPage.offerLinks)).toHaveText(
-      anotherSubCategoryOffer.NAME,
+      'Evil Service',
     );
     await expect(subCategoryPage.offerLinks).toHaveAttribute(
       'href',
-      offerHref('category-alpha', 'another-sub-category', 'evil-service'),
+      '/test-local-1/category-alpha/another-sub-category/evil-service',
     );
     await expect(offerPreview(subCategoryPage.offerLinks)).toContainText(
       'A row in the sheet containing',
@@ -343,7 +214,7 @@ test.describe('SubCategory page - offer listings', () => {
     await expect(subCategoryPage.chapterHeadings).toHaveCount(0);
     await expect(
       subCategoryPage.pageContent.locator('app-offer-link > a'),
-    ).not.toContainText(firstNamedOffer.NAME);
+    ).not.toContainText('The Servicename');
   });
 
   test('shows the single-level offer without chapter headings', async ({
@@ -361,11 +232,11 @@ test.describe('SubCategory page - offer listings', () => {
 
     await expect(subCategoryPage.offerLinks).toHaveCount(1);
     await expect(offerName(subCategoryPage.offerLinks)).toHaveText(
-      singleOffer.NAME,
+      'Single Service',
     );
     await expect(subCategoryPage.offerLinks).toHaveAttribute(
       'href',
-      offerHref('single-level', 'single-level', 'single-service'),
+      '/test-local-1/single-level/single-level/single-service',
     );
     await expect(subCategoryPage.chapterHeadings).toHaveCount(0);
   });
@@ -403,7 +274,10 @@ test.describe('SubCategory page - offer listings', () => {
 
     const firstIcon = subCategoryPage.offerImages.nth(0);
     await firstIcon.scrollIntoViewIfNeeded();
-    await expect(firstIcon).toHaveAttribute('src', firstNamedOffer.ICON);
+    await expect(firstIcon).toHaveAttribute(
+      'src',
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 100'%3E%3Crect width='150' height='100' x='0' y='0' fill='%23ddd'%3E%3C/rect%3E%3C/svg%3E",
+    );
 
     const missingIcon = subCategoryPage.offerImages.nth(2);
     await missingIcon.scrollIntoViewIfNeeded();
@@ -413,7 +287,10 @@ test.describe('SubCategory page - offer listings', () => {
     );
     const secondIcon = subCategoryPage.offerImages.nth(1);
     await secondIcon.scrollIntoViewIfNeeded();
-    await expect(secondIcon).toHaveAttribute('src', secondNamedOffer.ICON);
+    await expect(secondIcon).toHaveAttribute(
+      'src',
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 100'%3E%3Crect width='50' height='100' x='0' y='0' fill='%23ddd'%3E%3C/rect%3E%3C/svg%3E",
+    );
   });
 
   test('loads a lazy offer image after scrolling it into view', async ({
@@ -456,7 +333,7 @@ test.describe('SubCategory page - offer listings', () => {
     await subCategoryPage.offerLinks.first().click();
 
     await expect(page).toHaveURL(
-      offerHref('category-alpha', 'sub-category', 'the-servicename'),
+      '/test-local-1/category-alpha/sub-category/the-servicename',
     );
     await expect(page).toHaveTitle(
       'The Servicename - Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
