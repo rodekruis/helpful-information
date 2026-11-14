@@ -106,8 +106,6 @@ export default defineConfig([
     rules: {
       '@typescript-eslint/no-unused-vars': ['error', unusedVarsOptions],
       // TODO: Resolve existing violations, then change to 'error'
-      '@typescript-eslint/no-array-constructor': ['warn'],
-      '@typescript-eslint/no-duplicate-enum-values': ['warn'],
       '@typescript-eslint/no-explicit-any': ['warn'],
     },
   },
