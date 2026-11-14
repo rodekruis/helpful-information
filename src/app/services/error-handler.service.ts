@@ -16,7 +16,7 @@ export class ErrorHandlerService extends ErrorHandler {
   }
 
   private getOriginalError(error: any) {
-    // eslint-disable-next-line no-restricted-syntax
+    // eslint-disable-next-line no-restricted-syntax -- External example/recommended syntax used as-is
     while (error && error.originalError) {
       error = error.originalError;
     }

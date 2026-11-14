@@ -1,14 +1,15 @@
 // See: https://eslint.org/docs/latest/use/configure/configuration-files
-import eslint from '@eslint/js';
-import angular from 'angular-eslint';
-import restrictedGlobals from 'confusing-browser-globals';
 import { defineConfig, globalIgnores } from 'eslint/config';
-import prettier from 'eslint-config-prettier/flat';
+import angular from 'angular-eslint';
+import eslint from '@eslint/js';
+import eslintPluginComments from '@eslint-community/eslint-plugin-eslint-comments/configs';
+import globals from 'globals';
 import jasmine from 'eslint-plugin-jasmine';
 import noUnsanitized from 'eslint-plugin-no-unsanitized';
+import prettier from 'eslint-config-prettier/flat';
 import promise from 'eslint-plugin-promise';
 import regexp from 'eslint-plugin-regexp';
-import globals from 'globals';
+import restrictedGlobals from 'confusing-browser-globals';
 import tseslint from 'typescript-eslint';
 
 const FILES_TS = ['**/*.ts', '**/*.mts'];
@@ -59,13 +60,19 @@ export default defineConfig([
   {
     name: 'shared/base',
     files: FILES_ALL,
+    linterOptions: {
+      reportUnusedInlineConfigs: 'error',
+      reportUnusedDisableDirectives: 'error',
+    },
     extends: [
       eslint.configs.recommended,
+      eslintPluginComments.recommended,
       noUnsanitized.configs.recommended,
       promise.configs['flat/recommended'],
       regexp.configs['flat/recommended'],
     ],
     rules: {
+      '@eslint-community/eslint-comments/require-description': 'error',
       'no-extra-boolean-cast': ['error'],
       'no-unused-vars': ['error', unusedVarsOptions],
       'no-var': ['error'],
