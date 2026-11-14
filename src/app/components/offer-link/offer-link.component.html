@@ -1,7 +1,7 @@
 <a
   [routerLink]="['./', offer?.slug]"
   (click)="click(offer)"
-  class="action list-item"
+  class="action list-item has_chevron"
 >
   <span class="logo-badge list-item--icon">
     <ion-img
@@ -17,7 +17,7 @@
     ></ion-img>
   </span>
   <span
-    class="list-item--content text-style--hide-overflow_5 text-style--size-08"
+    class="list-item--content offer-link--content text-style--hide-overflow_5 text-style--size-08"
   >
     @if (offer?.offerName) {
       <strong class="text-style--size-1">{{
