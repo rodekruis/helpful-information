@@ -1,4 +1,6 @@
-<app-parent-link [label]="subCategory?.categoryName"></app-parent-link>
+<app-parent-link
+  [label]="$safeNavigationMigration(subCategory?.categoryName)"
+></app-parent-link>
 
 <h2 class="text-style--alt text-style--size-2">
   {{ subCategory?.subCategoryName }}
@@ -7,7 +9,7 @@
 @if (subCategory?.subCategoryDescription) {
   <div
     markdown
-    [data]="subCategory?.subCategoryDescription"
+    [data]="$safeNavigationMigration(subCategory?.subCategoryDescription)"
     [inline]="false"
     class="ion-margin-vertical ion-padding-bottom"
   ></div>
@@ -43,7 +45,7 @@
   @for (offerChapter of offerChapters; track offerChapter) {
     @if (offerChapter[0]?.chapterName) {
       <h3
-        [id]="offerChapter[0]?.chapterSlug"
+        [id]="$safeNavigationMigration(offerChapter[0]?.chapterSlug)"
         class="ion-padding-top"
       >
         {{ offerChapter[0].chapterName }}
@@ -66,14 +68,20 @@
 <br />
 
 <app-feedback-link
-  [template]="regionData?.feedbackShareUrl"
+  [template]="$safeNavigationMigration(regionData?.feedbackShareUrl)"
   [labels]="{
-    answerNegative: regionData?.feedbackAnswerNegative,
-    answerPositive: regionData?.feedbackAnswerPositive,
-    question: regionData?.feedbackQuestion,
-    resultNegative: regionData?.feedbackResultNegative,
-    resultPostive: regionData?.feedbackResultPostive,
-    shareCta: regionData?.feedbackShareCta,
-    thanks: regionData?.feedbackThanks,
+    answerNegative: $safeNavigationMigration(
+      regionData?.feedbackAnswerNegative
+    ),
+    answerPositive: $safeNavigationMigration(
+      regionData?.feedbackAnswerPositive
+    ),
+    question: $safeNavigationMigration(regionData?.feedbackQuestion),
+    resultNegative: $safeNavigationMigration(
+      regionData?.feedbackResultNegative
+    ),
+    resultPostive: $safeNavigationMigration(regionData?.feedbackResultPostive),
+    shareCta: $safeNavigationMigration(regionData?.feedbackShareCta),
+    thanks: $safeNavigationMigration(regionData?.feedbackThanks),
   }"
 ></app-feedback-link>

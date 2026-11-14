@@ -1,5 +1,5 @@
 <a
-  [routerLink]="['./', subCategory?.slug]"
+  [routerLink]="['./', $safeNavigationMigration(subCategory?.slug)]"
   (click)="click()"
   class="link-row action"
 >

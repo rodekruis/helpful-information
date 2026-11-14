@@ -7,7 +7,7 @@
 @if (regionData?.labelSearchPageIntro) {
   <div
     markdown
-    [data]="regionData?.labelSearchPageIntro"
+    [data]="$safeNavigationMigration(regionData?.labelSearchPageIntro)"
     [inline]="false"
   >
     {{ regionData?.labelSearchPageIntro }}
@@ -17,7 +17,7 @@
 <app-search-input
   [(searchQuery)]="searchQuery"
   (doSearch)="onSearchInput($event)"
-  [actionLabel]="regionData?.labelSearchAction"
+  [actionLabel]="$safeNavigationMigration(regionData?.labelSearchAction)"
   class="ion-margin-vertical"
 ></app-search-input>
 

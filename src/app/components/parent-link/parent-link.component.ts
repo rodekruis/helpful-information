@@ -1,4 +1,9 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   LoggingEvent,
@@ -11,6 +16,7 @@ import { LoggingService } from 'src/app/services/logging.service';
   selector: 'app-parent-link',
   templateUrl: './parent-link.component.html',
   styleUrls: ['./parent-link.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink],
 })
 export class ParentLinkComponent {

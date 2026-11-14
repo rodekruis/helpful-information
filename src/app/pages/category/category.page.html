@@ -9,7 +9,7 @@
 @if (category?.categoryDescription) {
   <div
     markdown
-    [data]="category?.categoryDescription"
+    [data]="$safeNavigationMigration(category?.categoryDescription)"
     [inline]="false"
     class="ion-margin-vertical"
   ></div>
