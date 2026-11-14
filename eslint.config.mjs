@@ -59,28 +59,19 @@ export default defineConfig([
   {
     name: 'shared/base',
     files: FILES_ALL,
-    extends: [eslint.configs.recommended],
+    extends: [
+      eslint.configs.recommended,
+      noUnsanitized.configs.recommended,
+      promise.configs['flat/recommended'],
+      regexp.configs['flat/recommended'],
+    ],
     rules: {
       'no-extra-boolean-cast': ['error'],
       'no-unused-vars': ['error', unusedVarsOptions],
       'no-var': ['error'],
-      'prefer-const': ['error'],
       'no-restricted-syntax': ['error', ...restrictedSyntax],
-    },
-  },
-  {
-    name: 'shared/promise',
-    files: FILES_ALL,
-    extends: [promise.configs['flat/recommended']],
-    rules: {
+      'prefer-const': ['error'],
       'promise/no-multiple-resolved': ['error'],
-    },
-  },
-  {
-    name: 'shared/regexp',
-    files: FILES_ALL,
-    extends: [regexp.configs['flat/recommended']],
-    rules: {
       'regexp/letter-case': [
         'error',
         {
@@ -105,11 +96,6 @@ export default defineConfig([
       'regexp/sort-character-class-elements': ['error'],
       'regexp/use-ignore-case': ['error'],
     },
-  },
-  {
-    name: 'shared/security',
-    files: FILES_ALL,
-    extends: [noUnsanitized.configs.recommended],
   },
 
   // TypeScript (browser + Node.js)
@@ -189,16 +175,12 @@ export default defineConfig([
     },
     rules: {
       ...jasmine.configs.recommended.rules,
-      // These rules use APIs removed in ESLint v10:
-      'jasmine/new-line-before-expect': ['off'],
-      'jasmine/no-unsafe-spy': ['off'],
-      'jasmine/prefer-promise-strategies': ['off'],
     },
   },
 
   // Formatting is handled by Prettier, so turn off conflicting rules
   {
-    name: 'format/prettier',
+    name: 'formatting',
     ...prettier,
   },
 ]);
