@@ -22,7 +22,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "eslint.enable": true,
-  "eslint.format.enable": true,
   "eslint.codeActionsOnSave.mode": "all",
   "eslint.rules.customizations": [
     {

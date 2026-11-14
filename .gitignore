@@ -19,6 +19,7 @@ coverage
 .angular/cache/
 .nx/
 tsconfig.tsbuildinfo
+.eslintcache
 
 # Playwright test results
 test-results
