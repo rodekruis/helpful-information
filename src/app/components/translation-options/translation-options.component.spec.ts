@@ -1,5 +1,6 @@
+import { beforeEach, describe, expect, it } from 'vitest';
 import { provideLocationMocks } from '@angular/common/testing';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { LoggingService } from 'src/app/services/logging.service';
 
@@ -9,8 +10,8 @@ describe('TranslationOptionsComponent', () => {
   let component: TranslationOptionsComponent;
   let fixture: ComponentFixture<TranslationOptionsComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       providers: [
         provideRouter([]),
         provideLocationMocks(),
@@ -23,7 +24,7 @@ describe('TranslationOptionsComponent', () => {
     fixture = TestBed.createComponent(TranslationOptionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

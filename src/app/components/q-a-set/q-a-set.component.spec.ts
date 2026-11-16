@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   mockQASet1,
   mockQASet2with1SubQuestion,
@@ -17,8 +18,8 @@ describe('QASetComponent', () => {
   let component: QASetComponent;
   let fixture: ComponentFixture<QASetComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [ngxMarkdownModuleFactory()],
       providers: [
         {
@@ -37,7 +38,7 @@ describe('QASetComponent', () => {
 
     fixture = TestBed.createComponent(QASetComponent);
     component = fixture.componentInstance;
-  }));
+  });
 
   it('should create', () => {
     // Arrange
@@ -130,7 +131,7 @@ describe('QASetComponent', () => {
     expect(timeElements[0].textContent).toContain(testDateFormatted);
   });
 
-  it('should contain clickable links that open a new window, when answer contains plain-text (absolute) URL', waitForAsync(async () => {
+  it('should contain clickable links that open a new window, when answer contains plain-text (absolute) URL', async () => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.answer =
@@ -156,9 +157,9 @@ describe('QASetComponent', () => {
 
     expect(linkElements[0].href).toContain('http://www.example.org/');
     expect(linkElements[1].href).toContain('https://example.net/');
-  }));
+  });
 
-  it('should contain (safe) clickable links that open a new window, when answer contains HTML-links', waitForAsync(async () => {
+  it('should contain (safe) clickable links that open a new window, when answer contains HTML-links', async () => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.answer =
@@ -186,9 +187,9 @@ describe('QASetComponent', () => {
       expect(link.rel).toContain('noopener');
       expect(link.rel).not.toContain('x-plain-url');
     });
-  }));
+  });
 
-  it('should contain clickable links that open in same window, when answer contains local/relative links', waitForAsync(async () => {
+  it('should contain clickable links that open in same window, when answer contains local/relative links', async () => {
     // Arrange
     const testQASet = mockQASet1;
     testQASet.answer =
@@ -231,5 +232,5 @@ describe('QASetComponent', () => {
     expect(linkElements[4].innerHTML).toContain(
       '<strong>External</strong> <em>link</em>',
     );
-  }));
+  });
 });

@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { LoggingService } from 'src/app/services/logging.service';
 import { OffersService } from 'src/app/services/offers.service';
@@ -10,8 +11,8 @@ describe('RegionPageComponent', () => {
   let component: RegionPageComponent;
   let fixture: ComponentFixture<RegionPageComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [ngxMarkdownModuleFactory()],
       providers: [
         provideRouter([]),
@@ -27,7 +28,7 @@ describe('RegionPageComponent', () => {
     fixture = TestBed.createComponent(RegionPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

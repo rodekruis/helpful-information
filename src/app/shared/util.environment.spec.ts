@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { getRegionLabel } from './util.environment';
 
 describe('Util: Environment', () => {
