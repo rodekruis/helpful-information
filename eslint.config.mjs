@@ -52,7 +52,6 @@ export default defineConfig([
       '.angular/',
       'test-results/',
       'playwright-report/',
-      'docs/legacy/',
     ],
     'global/ignores',
   ),
