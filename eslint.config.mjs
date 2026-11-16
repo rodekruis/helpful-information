@@ -113,8 +113,6 @@ export default defineConfig([
     extends: [tseslint.configs.recommended],
     rules: {
       '@typescript-eslint/no-unused-vars': ['error', unusedVarsOptions],
-      // TODO: Resolve existing violations, then change to 'error'
-      '@typescript-eslint/no-explicit-any': ['warn'],
     },
   },
 

@@ -10,10 +10,21 @@ import { createKeyValueList } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
 // Declaring external 'data-store's / APIs
+type MatomoCommand =
+  | ['setDoNotTrack', boolean]
+  | [
+      | 'disableCookies'
+      | 'enableLinkTracking'
+      | 'enableHeartBeatTimer'
+      | 'trackPageView',
+    ]
+  | ['setTrackerUrl' | 'setSiteId' | 'setDocumentTitle', string]
+  | ['trackEvent', string, string, string | undefined, number | undefined];
+
 declare global {
   interface Window {
     // Matomo API
-    _paq?: any[];
+    _paq?: { push(...commands: MatomoCommand[]): number | void };
     // GoatCounter API
     goatcounter?: {
       allow_local?: boolean;
@@ -34,7 +45,7 @@ declare global {
 interface EventProperties {
   name?: string;
   value?: number;
-  [key: string]: any;
+  [key: string]: string | number | boolean | null | undefined;
 }
 
 @Injectable({
@@ -245,10 +256,11 @@ export class LoggingService {
     console.info(`LOG Event: ${category} - ${action}`, properties);
   }
 
-  public logException(exception: Error): void {
+  public logException(exception: unknown): void {
     if (this.appInsightsInitialized) {
       this.appInsights.trackException({
-        exception,
+        exception:
+          exception instanceof Error ? exception : new Error(String(exception)),
       });
     }
     console.error(`LOG Exception`, exception);
