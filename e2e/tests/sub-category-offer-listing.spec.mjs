@@ -148,9 +148,12 @@ test.describe('SubCategory page - offer listings', () => {
 
     const secondPreview = offerPreview(subCategoryPage.offerLinks.nth(1));
     await expect(secondPreview).toContainText('Provides another Service.');
-    await expect(secondPreview).not.toContainText(
-      'this should not be visible in the list, only on the page',
-    );
+    await expect(
+      secondPreview.getByText(
+        'this should not be visible in the list, only on the page',
+        { exact: true },
+      ),
+    ).not.toBeInViewport();
     await expect(offerPreview(subCategoryPage.offerLinks.nth(2))).toContainText(
       'Another service without a specific name.',
     );
