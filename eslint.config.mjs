@@ -4,13 +4,13 @@ import angular from 'angular-eslint';
 import eslint from '@eslint/js';
 import eslintPluginComments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import globals from 'globals';
-import jasmine from 'eslint-plugin-jasmine';
 import noUnsanitized from 'eslint-plugin-no-unsanitized';
 import prettier from 'eslint-config-prettier/flat';
 import promise from 'eslint-plugin-promise';
 import regexp from 'eslint-plugin-regexp';
 import restrictedGlobals from 'confusing-browser-globals';
 import tseslint from 'typescript-eslint';
+import vitest from '@vitest/eslint-plugin';
 
 const FILES_TS = ['**/*.ts', '**/*.mts'];
 const FILES_JS = ['**/*.js', '**/*.mjs'];
@@ -25,7 +25,6 @@ const FILES_NODE = [
   'src/environments/*.mjs',
   '*.mjs',
 ];
-const FILES_COMMONJS = ['src/karma.conf.js'];
 
 const unusedVarsOptions = {
   argsIgnorePattern: '^_',
@@ -159,26 +158,11 @@ export default defineConfig([
       globals: globals.node,
     },
   },
-  {
-    name: 'node/commonjs',
-    files: FILES_COMMONJS,
-    languageOptions: {
-      sourceType: 'commonjs',
-      globals: globals.node,
-    },
-  },
-
   // Test-only
   {
     name: 'test/unit',
     files: FILES_UNIT_TESTS,
-    plugins: { jasmine },
-    languageOptions: {
-      globals: globals.jasmine,
-    },
-    rules: {
-      ...jasmine.configs.recommended.rules,
-    },
+    extends: [vitest.configs.recommended],
   },
 
   // Formatting is handled by Prettier, so turn off conflicting rules

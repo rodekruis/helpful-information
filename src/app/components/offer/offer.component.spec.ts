@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import mockOffer from 'src/app/mocks/offer.mock';
 import { LoggingService } from 'src/app/services/logging.service';
@@ -10,8 +11,8 @@ describe('OfferComponent', () => {
   let component: OfferComponent;
   let fixture: ComponentFixture<OfferComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [ngxMarkdownModuleFactory()],
       providers: [
         provideRouter([]),
@@ -23,7 +24,7 @@ describe('OfferComponent', () => {
 
     fixture = TestBed.createComponent(OfferComponent);
     component = fixture.componentInstance;
-  }));
+  });
 
   it('should create', () => {
     // Arrange

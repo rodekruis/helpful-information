@@ -153,13 +153,17 @@ To use a local API, without the need for any Google account/credentials:
 
 ### Testing
 
-Unit-tests are configured and can be run (once) with:
+Unit tests use [Vitest](https://vitest.dev/) with jsdom and can be run once with:
 
     npm test
 
 During development, an automated watch-process can be run with:
 
     npm run test:watch
+
+The test command generates HTML coverage under `coverage/app/` and a text summary. Angular's
+[Vitest migration guide](https://v21.angular.dev/guide/testing/migrating-to-vitest)
+describes the limitations of Zone.js-based test helpers.
 
 #### E2E-tests
 

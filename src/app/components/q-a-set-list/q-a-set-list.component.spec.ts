@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import {
   mockQASet1,
@@ -41,8 +42,8 @@ describe('QASetListComponent', () => {
   let component: QASetListComponent;
   let fixture: ComponentFixture<QASetListComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [ngxMarkdownModuleFactory()],
       providers: [
         provideRouter([]),
@@ -62,7 +63,7 @@ describe('QASetListComponent', () => {
 
     fixture = TestBed.createComponent(QASetListComponent);
     component = fixture.componentInstance;
-  }));
+  });
 
   it('should create', () => {
     // Arrange

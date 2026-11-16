@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { CategoryFilterPipe } from './category-filter.pipe';
 
 describe('CategoryFilterPipe', () => {
