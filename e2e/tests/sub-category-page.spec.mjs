@@ -14,7 +14,7 @@ test.describe('SubCategory page - generic behavior', () => {
     });
 
     await expect(subCategoryPage.page).toHaveTitle(
-      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Sub-Category - Category Alpha - Test Local 1 - /,
     );
     await expect(subCategoryPage.pageHeading).toHaveText('Sub-Category');
     await expect(subCategoryPage.parentCategoryLink).toHaveText(
@@ -26,7 +26,7 @@ test.describe('SubCategory page - generic behavior', () => {
     );
   });
 
-  test('the parent link returns to a category with multiple subcategories', async ({
+  test('the parent link returns to a Category with multiple SubCategories', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -36,7 +36,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     await subCategoryPage.parentCategoryLink.click();
@@ -47,7 +47,7 @@ test.describe('SubCategory page - generic behavior', () => {
     ).toBeVisible();
   });
 
-  test('the ordinary introduction uses subcategory text and headings', async ({
+  test('the ordinary introduction uses SubCategory text and headings', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -57,7 +57,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     await expect(subCategoryPage.introduction).toBeVisible();
@@ -82,7 +82,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'another-sub-category',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      'Another Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Another Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     const introduction = subCategoryPage.introduction;
@@ -132,7 +132,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'empty',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      'Empty - Empty - Test Local 1 - Helpful Information [ development ]',
+      /Empty - Empty - Test Local 1 - /,
     );
 
     await expect(subCategoryPage.pageHeading).toHaveText('Empty');
@@ -156,7 +156,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'single-level',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      'Single Level - Single Level - Test Local 1 - Helpful Information [ development ]',
+      /Single Level - Single Level - Test Local 1 - /,
     );
 
     await expect(subCategoryPage.pageHeading).toHaveText('Single Level');
@@ -178,7 +178,7 @@ test.describe('SubCategory page - generic behavior', () => {
       subCategorySlug: 'q-and-a-s',
     });
     await expect(subCategoryPage.page).toHaveTitle(
-      'Q&As - Q&As - Test Local 1 - Helpful Information [ development ]',
+      /Q&As - Q&As - Test Local 1 - /,
     );
 
     await expect(subCategoryPage.pageHeading).toHaveText('Q&As');

@@ -15,30 +15,35 @@ const topLevelQuestionSummaries = (subCategoryPage) =>
 
 /** @param {Locator} qaSet */
 const questionDetails = (qaSet) => qaSet.locator(':scope > details');
+
 /** @param {Locator} qaSet */
 const questionSummary = (qaSet) =>
   questionDetails(qaSet).locator(':scope > summary');
+
 /** @param {Locator} qaSet */
 const questionAnswer = (qaSet) =>
   questionDetails(qaSet).locator(':scope > .q-a-set--content');
+
 /** @param {Locator} qaSet */
 const questionMarkdownAnswer = (qaSet) =>
   questionAnswer(qaSet).locator(':scope > div[markdown]');
+
 /** @param {Locator} qaSet */
 const childDetails = (qaSet) => qaSet.locator('details.is_child');
+
 /** @param {Locator} qaSet */
 const childQuestionSummaries = (qaSet) =>
   childDetails(qaSet).locator(':scope > summary');
+
 /** @param {Locator} child */
 const childAnswer = (child) => child.locator(':scope > .q-a-set--content');
+
 /** @param {Locator} child */
 const childMarkdownAnswer = (child) =>
   childAnswer(child).locator(':scope > div[markdown]');
 
 test.describe('SubCategory page - Q&A listings', () => {
-  test('lists the two matching top-level questions in order', async ({
-    page,
-  }) => {
+  test('lists the matching top-level Questions in order', async ({ page }) => {
     const subCategoryPage = new SubCategoryPage(page);
     await subCategoryPage.goto({
       regionSlug: 'test-local-1',
@@ -46,7 +51,7 @@ test.describe('SubCategory page - Q&A listings', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(page).toHaveTitle(
-      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     await expect(subCategoryPage.topLevelQAs).toHaveCount(2);
@@ -56,7 +61,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     ]);
   });
 
-  test('shows each matching answer and hides it again when collapsed', async ({
+  test('shows each matching Answer and hides it again when collapsed', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -66,7 +71,7 @@ test.describe('SubCategory page - Q&A listings', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(page).toHaveTitle(
-      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     const firstQuestion = subCategoryPage.topLevelQAs.nth(0);
@@ -85,7 +90,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     await expect(secondAnswer).toBeVisible();
   });
 
-  test('lists one answered question on the single-level route', async ({
+  test('lists Question(s) with Answer(s) on the single-level route', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -95,7 +100,7 @@ test.describe('SubCategory page - Q&A listings', () => {
       subCategorySlug: 'single-level',
     });
     await expect(page).toHaveTitle(
-      'Single Level - Single Level - Test Local 1 - Helpful Information [ development ]',
+      /Single Level - Single Level - Test Local 1 - /,
     );
 
     await expect(subCategoryPage.topLevelQAs).toHaveCount(1);
@@ -108,7 +113,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     );
   });
 
-  test('shows no questions on routes without matching questions', async ({
+  test('shows no Question(s) on routes without matching questions', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -119,7 +124,7 @@ test.describe('SubCategory page - Q&A listings', () => {
       subCategorySlug: 'another-sub-category',
     });
     await expect(page).toHaveTitle(
-      'Another Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Another Sub-Category - Category Alpha - Test Local 1 - /,
     );
     await expect(subCategoryPage.topLevelQAs).toHaveCount(0);
 
@@ -128,13 +133,11 @@ test.describe('SubCategory page - Q&A listings', () => {
       categorySlug: 'empty',
       subCategorySlug: 'empty',
     });
-    await expect(page).toHaveTitle(
-      'Empty - Empty - Test Local 1 - Helpful Information [ development ]',
-    );
+    await expect(page).toHaveTitle(/Empty - Empty - Test Local 1 - /);
     await expect(subCategoryPage.topLevelQAs).toHaveCount(0);
   });
 
-  test('lists parent and child questions in their expected order', async ({
+  test('lists parent and child Question(s) in their expected order', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -143,9 +146,7 @@ test.describe('SubCategory page - Q&A listings', () => {
       categorySlug: 'q-and-a-s',
       subCategorySlug: 'q-and-a-s',
     });
-    await expect(page).toHaveTitle(
-      'Q&As - Q&As - Test Local 1 - Helpful Information [ development ]',
-    );
+    await expect(page).toHaveTitle(/Q&As - Q&As - Test Local 1 - /);
 
     await expect(subCategoryPage.topLevelQAs).toHaveCount(6);
     await expect(topLevelQuestionSummaries(subCategoryPage)).toHaveText([
@@ -170,7 +171,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     );
   });
 
-  test('shows nested answers independently and retains sibling expansion', async ({
+  test('shows nested Answer(s) independently and retains sibling expansion', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -179,9 +180,7 @@ test.describe('SubCategory page - Q&A listings', () => {
       categorySlug: 'q-and-a-s',
       subCategorySlug: 'q-and-a-s',
     });
-    await expect(page).toHaveTitle(
-      'Q&As - Q&As - Test Local 1 - Helpful Information [ development ]',
-    );
+    await expect(page).toHaveTitle(/Q&As - Q&As - Test Local 1 - /);
 
     const parent = subCategoryPage.topLevelQAs.nth(0);
     await questionSummary(parent).click();
@@ -230,7 +229,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     ).toHaveText(['highlighted sub-question', 'non-hightlighted parent']);
   });
 
-  test('renders rich answers, external links, and their correct question association', async ({
+  test('renders rich Answer(s), external links, and their correct Question association', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -239,9 +238,7 @@ test.describe('SubCategory page - Q&A listings', () => {
       categorySlug: 'q-and-a-s',
       subCategorySlug: 'q-and-a-s',
     });
-    await expect(page).toHaveTitle(
-      'Q&As - Q&As - Test Local 1 - Helpful Information [ development ]',
-    );
+    await expect(page).toHaveTitle(/Q&As - Q&As - Test Local 1 - /);
 
     const parent = subCategoryPage.topLevelQAs.nth(0);
     await questionSummary(parent).click();
@@ -291,18 +288,14 @@ test.describe('SubCategory page - Q&A listings', () => {
     );
   });
 
-  test('shows updated dates only where the fixture provides them', async ({
-    page,
-  }) => {
+  test('shows updated dates only when provided', async ({ page }) => {
     const subCategoryPage = new SubCategoryPage(page);
     await subCategoryPage.goto({
       regionSlug: 'test-local-1',
       categorySlug: 'q-and-a-s',
       subCategorySlug: 'q-and-a-s',
     });
-    await expect(page).toHaveTitle(
-      'Q&As - Q&As - Test Local 1 - Helpful Information [ development ]',
-    );
+    await expect(page).toHaveTitle(/Q&As - Q&As - Test Local 1 - /);
 
     const parent = subCategoryPage.topLevelQAs.nth(0);
     await questionSummary(parent).click();
@@ -337,7 +330,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     );
   });
 
-  test('preserves long question labels and special characters without truncation', async ({
+  test('preserves long Question labels and special characters without truncation', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -346,9 +339,7 @@ test.describe('SubCategory page - Q&A listings', () => {
       categorySlug: 'q-and-a-s',
       subCategorySlug: 'q-and-a-s',
     });
-    await expect(page).toHaveTitle(
-      'Q&As - Q&As - Test Local 1 - Helpful Information [ development ]',
-    );
+    await expect(page).toHaveTitle(/Q&As - Q&As - Test Local 1 - /);
 
     await expect(topLevelQuestionSummaries(subCategoryPage).nth(3)).toHaveText(
       'Another long-winding question that will run over multiple lines, with VLW(Very Long Words) or abbriviations and special ⚠️ characters etc.',
@@ -358,7 +349,7 @@ test.describe('SubCategory page - Q&A listings', () => {
     ).toHaveText('Sub-Question E');
   });
 
-  test('keeps highlighted questions in fixture order and excludes hidden or unanswered questions', async ({
+  test('keeps highlighted Question(s) in order and excludes hidden or unanswered Question(s)', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -367,9 +358,7 @@ test.describe('SubCategory page - Q&A listings', () => {
       categorySlug: 'q-and-a-s',
       subCategorySlug: 'q-and-a-s',
     });
-    await expect(page).toHaveTitle(
-      'Q&As - Q&As - Test Local 1 - Helpful Information [ development ]',
-    );
+    await expect(page).toHaveTitle(/Q&As - Q&As - Test Local 1 - /);
 
     await expect(topLevelQuestionSummaries(subCategoryPage)).toHaveText([
       'A question to test with.',

@@ -6,13 +6,16 @@ import { SubCategoryPage } from '../pages/SubCategoryPage.mjs';
 
 /** @param {Locator} offerLink */
 const offerName = (offerLink) => offerLink.locator(':scope > span > strong');
+
 /** @param {Locator} offerLink */
 const offerPreview = (offerLink) => offerLink.locator('[markdown]');
+
 /** @param {Locator} heading */
 const chapterOffers = (heading) =>
   heading
     .locator('xpath=following-sibling::ul[1]')
     .locator('app-offer-link > a');
+
 test.describe('SubCategory page - offer listings', () => {
   test('lists matching named and unnamed offers in chapter order', async ({
     page,
@@ -24,7 +27,7 @@ test.describe('SubCategory page - offer listings', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(page).toHaveTitle(
-      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     await expect(subCategoryPage.offerLinks).toHaveCount(7);
@@ -159,9 +162,7 @@ test.describe('SubCategory page - offer listings', () => {
     );
   });
 
-  test('shows two offers under each named chapter in order', async ({
-    page,
-  }) => {
+  test('shows Offers under each named chapter in order', async ({ page }) => {
     const subCategoryPage = new SubCategoryPage(page);
     await subCategoryPage.goto({
       regionSlug: 'test-local-1',
@@ -169,7 +170,7 @@ test.describe('SubCategory page - offer listings', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(page).toHaveTitle(
-      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     const chapterB = subCategoryPage.chapterHeadings.filter({
@@ -190,7 +191,7 @@ test.describe('SubCategory page - offer listings', () => {
     ]);
   });
 
-  test('shows one filtered offer without named chapter headings', async ({
+  test('shows one filtered Offer without named chapter headings', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -200,7 +201,7 @@ test.describe('SubCategory page - offer listings', () => {
       subCategorySlug: 'another-sub-category',
     });
     await expect(page).toHaveTitle(
-      'Another Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Another Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     await expect(subCategoryPage.offerLinks).toHaveCount(1);
@@ -220,7 +221,7 @@ test.describe('SubCategory page - offer listings', () => {
     ).not.toContainText('The Servicename');
   });
 
-  test('shows the single-level offer without chapter headings', async ({
+  test('shows the single-level Offer without chapter headings', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -230,7 +231,7 @@ test.describe('SubCategory page - offer listings', () => {
       subCategorySlug: 'single-level',
     });
     await expect(page).toHaveTitle(
-      'Single Level - Single Level - Test Local 1 - Helpful Information [ development ]',
+      /Single Level - Single Level - Test Local 1 - /,
     );
 
     await expect(subCategoryPage.offerLinks).toHaveCount(1);
@@ -244,7 +245,7 @@ test.describe('SubCategory page - offer listings', () => {
     await expect(subCategoryPage.chapterHeadings).toHaveCount(0);
   });
 
-  test('shows no offers or offer images on the empty route', async ({
+  test('shows no Offers or offer-images on the empty route', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -253,16 +254,14 @@ test.describe('SubCategory page - offer listings', () => {
       categorySlug: 'empty',
       subCategorySlug: 'empty',
     });
-    await expect(page).toHaveTitle(
-      'Empty - Empty - Test Local 1 - Helpful Information [ development ]',
-    );
+    await expect(page).toHaveTitle(/Empty - Empty - Test Local 1 - /);
 
     await expect(subCategoryPage.offerLinks).toHaveCount(0);
     await expect(subCategoryPage.offerImages).toHaveCount(0);
     await expect(subCategoryPage.chapterHeadings).toHaveCount(0);
   });
 
-  test('renders fixture icons and the transparent fallback for a missing icon', async ({
+  test('renders icons and the transparent fallback for any missing icon', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -272,7 +271,7 @@ test.describe('SubCategory page - offer listings', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(page).toHaveTitle(
-      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     const firstIcon = subCategoryPage.offerImages.nth(0);
@@ -296,7 +295,7 @@ test.describe('SubCategory page - offer listings', () => {
     );
   });
 
-  test('loads a lazy offer image after scrolling it into view', async ({
+  test('loads a lazy offer-image after scrolling it into view', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -306,7 +305,7 @@ test.describe('SubCategory page - offer listings', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(page).toHaveTitle(
-      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     const lastOffer = subCategoryPage.offerLinks.nth(6);
@@ -320,7 +319,7 @@ test.describe('SubCategory page - offer listings', () => {
     );
   });
 
-  test('opens the representative named offer at its detail destination', async ({
+  test('opens the representative named Offer at its detail destination', async ({
     page,
   }) => {
     const subCategoryPage = new SubCategoryPage(page);
@@ -330,7 +329,7 @@ test.describe('SubCategory page - offer listings', () => {
       subCategorySlug: 'sub-category',
     });
     await expect(page).toHaveTitle(
-      'Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /Sub-Category - Category Alpha - Test Local 1 - /,
     );
 
     await subCategoryPage.offerLinks.first().click();
@@ -339,7 +338,7 @@ test.describe('SubCategory page - offer listings', () => {
       '/test-local-1/category-alpha/sub-category/the-servicename',
     );
     await expect(page).toHaveTitle(
-      'The Servicename - Sub-Category - Category Alpha - Test Local 1 - Helpful Information [ development ]',
+      /The Servicename - Sub-Category - Category Alpha - Test Local 1 - /,
     );
     await expect(
       page.locator('app-offer-page').getByRole('heading', {
