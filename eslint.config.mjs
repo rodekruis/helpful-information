@@ -47,6 +47,7 @@ export default defineConfig([
   globalIgnores(
     [
       'www/',
+      'dist/',
       'coverage/',
       '.angular/',
       'test-results/',
