@@ -113,7 +113,10 @@ export const fillTemplateWithUrl = (template: string, url: string): string => {
  */
 export const createKeyValueList = (
   data:
-    | Record<string | number, boolean | string | number | string[] | number[]>
+    | Record<
+        string | number,
+        boolean | string | number | string[] | number[] | null | undefined
+      >
     | string
     | number
     | string[]

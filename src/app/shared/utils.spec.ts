@@ -260,10 +260,10 @@ describe('Utils - createKeyValueList', () => {
           d: 3.5,
           e: ['x', 'y', 'z'],
           f: [1, 2, 3],
-          g: new Array(),
+          g: new Array(0),
           h: '',
-          // i: null,
-          // j: undefined,
+          i: null as null,
+          j: undefined as undefined,
           k: 0,
           l: ' ',
           m: ['single'],
@@ -271,7 +271,7 @@ describe('Utils - createKeyValueList', () => {
           o: [' '],
         },
         output:
-          'a=value;b=2;c=true;d=3.5;e=x,y,z;f=1,2,3;g=;h=;k=0;l=;m=single;n=42;o=',
+          'a=value;b=2;c=true;d=3.5;e=x,y,z;f=1,2,3;g=;h=;i=;j=;k=0;l=;m=single;n=42;o=',
       },
     ];
 

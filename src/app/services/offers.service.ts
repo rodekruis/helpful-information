@@ -20,6 +20,18 @@ const enum CacheName {
   qaSets,
 }
 
+type CacheData = {
+  [CacheName.categories]: Category[];
+  [CacheName.subCategories]: SubCategory[];
+  [CacheName.offers]: Offer[];
+  [CacheName.qaSets]: QASet[];
+};
+
+type CacheEntry<T> = {
+  region: string;
+  data: T;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,10 +40,7 @@ export class OffersService {
   private loggingService = inject(LoggingService);
 
   private cache: {
-    [name in CacheName]: {
-      region: string;
-      data: any[];
-    } | null;
+    [name in keyof CacheData]: CacheEntry<CacheData[name]> | null;
   } = {
     [CacheName.categories]: null,
     [CacheName.subCategories]: null,
@@ -52,11 +61,15 @@ export class OffersService {
     return this.cache[name].region === region;
   }
 
-  private setCache(name: CacheName, region: string, data: any) {
+  private setCache<K extends CacheName>(
+    name: K,
+    region: string,
+    data: NoInfer<CacheData[K]>,
+  ) {
     this.cache[name] = {
       region: region,
       data: data,
-    };
+    } as (typeof this.cache)[K];
   }
 
   public async getCategories(region: string): Promise<Category[]> {

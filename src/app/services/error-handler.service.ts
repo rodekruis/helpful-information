@@ -6,7 +6,7 @@ import { LoggingService } from './logging.service';
 export class ErrorHandlerService extends ErrorHandler {
   private loggingService = inject(LoggingService);
 
-  override handleError(error: Error) {
+  override handleError(error: unknown) {
     this.loggingService.logException(error);
     const originalError = this.getOriginalError(error);
 
@@ -15,9 +15,14 @@ export class ErrorHandlerService extends ErrorHandler {
     }
   }
 
-  private getOriginalError(error: any) {
-    // eslint-disable-next-line no-restricted-syntax
-    while (error && error.originalError) {
+  private getOriginalError(error: unknown): unknown {
+    // eslint-disable-next-line no-restricted-syntax -- External example/recommended syntax used as-is
+    while (
+      error &&
+      (typeof error === 'object' || typeof error === 'function') &&
+      'originalError' in error &&
+      error.originalError
+    ) {
       error = error.originalError;
     }
     return error;
