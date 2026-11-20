@@ -122,7 +122,7 @@ export default class SubCategoryPageComponent implements OnInit {
     }
 
     if (this.useQandAs && !this.qaSets) {
-      this.qaSets = await this.offersService.getQAs(this.region);
+      this.qaSets = await this.offersService.getQAs({ region: this.region });
     }
 
     this.regionData = await this.regionDataService.getData(this.region);

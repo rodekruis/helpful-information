@@ -6,13 +6,24 @@ updates:
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'monthly'
+      interval: monthly
+    cooldown:
+      default-days: 8
 
-  - package-ecosystem: 'npm'
+  - package-ecosystem: 'devcontainers'
     directory: '/'
-    target-branch: 'develop'
     schedule:
-      interval: 'monthly'
+      interval: monthly
+    cooldown:
+      default-days: 8
+
+  - package-ecosystem: npm
+    directory: '/'
+    target-branch: develop
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 8
     versioning-strategy: increase
     groups:
       angular:

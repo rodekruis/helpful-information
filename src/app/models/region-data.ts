@@ -95,7 +95,6 @@ export enum RegionDataKey {
   offerWebsite = 'offer.website',
   searchCta = 'search.cta',
   searchItems = 'search.items',
-  searchItemsZero = 'search.items.0',
   searchIntro = 'search.intro',
   searchTitle = 'search.title',
   timestampLastUpdated = 'timestamp.last-updated',

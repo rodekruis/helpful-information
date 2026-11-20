@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { createLocaleAlternatives } from './util.locales';
 
 describe('Util: Locales', () => {

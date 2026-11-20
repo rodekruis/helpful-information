@@ -13,7 +13,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
 })
 export class QASetListComponent {
   @Input()
-  list: QASet[];
+  list: QASet[] = [];
 
   @Input()
   public baseUrl: string = '';
@@ -21,7 +21,7 @@ export class QASetListComponent {
   @Input()
   public showDateUpdatedOutsideQuestion = true;
 
-  public labelLastUpdated: string;
+  public labelLastUpdated = '';
 
   constructor() {
     const regionDataService = inject(RegionDataService);

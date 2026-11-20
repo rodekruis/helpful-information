@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "incremental": true,
-    "lib": ["ES2022", "dom"],
+    "lib": ["es2023", "dom"],
     "module": "es2022",
     "moduleResolution": "bundler",
     "noFallthroughCasesInSwitch": true,
@@ -24,6 +24,7 @@
     "sourceMap": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
+    "skipLibCheck": true, // NOTE: Required for Angular v21+ / Ionic v8.8+ issue
     "target": "ES2022",
     "typeRoots": ["node_modules/@types"],
     "useDefineForClassFields": false,

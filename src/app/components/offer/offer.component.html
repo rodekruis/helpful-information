@@ -26,7 +26,10 @@
         ></div>
       }
     </div>
-    <div class="offer--details ion-margin-vertical">
+    <div
+      data-testid="offer-details"
+      class="offer--details ion-margin-vertical"
+    >
       @if (offer.offerOpeningHoursWeekdays) {
         <div class="ion-margin-vertical">
           <h3 class="no-margin-bottom text-style--size-2">
@@ -115,29 +118,31 @@
         </div>
       }
       @if (offer.offerNumbers?.length) {
-        <h3 class="no-margin-bottom text-style--size-2">
-          <!-- See source: assets/icons/phone.svg -->
-          <svg
-            viewBox="0 0 13 13"
-            aria-hidden="true"
-            class="icon is_small is_inline-start"
-          >
-            <path
-              fill="currentColor"
-              d="M12.63 9.19 9.79 7.97a.6.6 0 0 0-.72.17L7.81 9.68a9.41 9.41 0 0 1-4.5-4.5l1.54-1.26a.6.6 0 0 0 .18-.7L3.81.36a.61.61 0 0 0-.7-.35L.47.62a.6.6 0 0 0-.47.6C0 7.73 5.28 13 11.78 13a.6.6 0 0 0 .6-.47l.6-2.64a.62.62 0 0 0-.35-.7Z"
-            />
-          </svg>
-          {{ regionData?.labelOfferPhone }}
-        </h3>
-        <p class="ion-no-margin ion-margin-bottom">
-          @for (offerNumber of offer.offerNumbers; track offerNumber) {
-            <a
-              [href]="formatPhoneNumberAsUrl(offerNumber)"
-              (click)="logDetailClick('phone')"
-              >{{ offerNumber }}</a
-            ><br />
-          }
-        </p>
+        <div class="ion-margin-vertical">
+          <h3 class="no-margin-bottom text-style--size-2">
+            <!-- See source: assets/icons/phone.svg -->
+            <svg
+              viewBox="0 0 13 13"
+              aria-hidden="true"
+              class="icon is_small is_inline-start"
+            >
+              <path
+                fill="currentColor"
+                d="M12.63 9.19 9.79 7.97a.6.6 0 0 0-.72.17L7.81 9.68a9.41 9.41 0 0 1-4.5-4.5l1.54-1.26a.6.6 0 0 0 .18-.7L3.81.36a.61.61 0 0 0-.7-.35L.47.62a.6.6 0 0 0-.47.6C0 7.73 5.28 13 11.78 13a.6.6 0 0 0 .6-.47l.6-2.64a.62.62 0 0 0-.35-.7Z"
+              />
+            </svg>
+            {{ regionData?.labelOfferPhone }}
+          </h3>
+          <p class="ion-no-margin ion-margin-bottom">
+            @for (offerNumber of offer.offerNumbers; track offerNumber) {
+              <a
+                [href]="formatPhoneNumberAsUrl(offerNumber)"
+                (click)="logDetailClick('phone')"
+                >{{ offerNumber }}</a
+              ><br />
+            }
+          </p>
+        </div>
       }
       @if (offer.offerAddress) {
         <div class="ion-margin-vertical">

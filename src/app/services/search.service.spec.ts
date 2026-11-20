@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, it } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import {
   mockQASet1,
@@ -30,6 +31,8 @@ describe('SearchService', () => {
       '?test',
       '   test   test  ',
       'test.test',
+      'tést',
+      'dæbürr',
     ];
     const resultQueries = [
       '',
@@ -40,6 +43,8 @@ describe('SearchService', () => {
       'test',
       'test test',
       'test.test',
+      'test',
+      'daeburr',
     ];
 
     // Act
@@ -82,9 +87,14 @@ describe('SearchService', () => {
     const testQuery = 'test-question';
     const testMatch = {
       ...mockQASet1,
+      id: 1,
       question: 'test-question 1',
     };
-    const source = [mockQASet1, mockQASet2with1SubQuestion, testMatch];
+    const source = [
+      { ...mockQASet1, id: 4 },
+      mockQASet2with1SubQuestion,
+      testMatch,
+    ];
 
     // Act
     service.setSource(source);
@@ -100,9 +110,14 @@ describe('SearchService', () => {
     const testQuery = 'test-answer';
     const testMatch = {
       ...mockQASet1,
+      id: 1,
       answer: 'test-answer 1',
     };
-    const source = [mockQASet1, mockQASet2with1SubQuestion, testMatch];
+    const source = [
+      { ...mockQASet1, id: 4 },
+      mockQASet2with1SubQuestion,
+      testMatch,
+    ];
 
     // Act
     service.setSource(source);
@@ -119,13 +134,15 @@ describe('SearchService', () => {
     const testMatch1 = {
       ...mockQASet1,
       answer: 'test-answer 1',
+      id: 1,
     };
     const testMatch2 = {
       ...mockQASet1,
       answer: 'TEST-ANSWER 2',
+      id: 4,
     };
     const source = [
-      mockQASet1,
+      { ...mockQASet1, id: 5 },
       mockQASet2with1SubQuestion,
       testMatch1,
       testMatch2,
@@ -145,21 +162,25 @@ describe('SearchService', () => {
     const testQuery = 'keyword-X keyword-B';
     const testMatch1 = {
       ...mockQASet1,
+      id: 1,
       answer: 'keyword-X keyword-Y keyword-Z',
     };
     const testMatch2 = {
       ...mockQASet1,
+      id: 4,
       answer: 'keyword-A keyword-B keyword-C',
     };
     const testMatch3 = {
       ...mockQASet1,
+      id: 5,
       answer: 'keyword-A keyword-B keyword-X',
     };
     const source = [
-      mockQASet1,
+      { ...mockQASet1, id: 6 },
       {
         ...mockQASet1,
         answer: 'keyword-1 keyword-2 keyword-3',
+        id: 7,
       },
       testMatch1,
       testMatch2,
@@ -180,13 +201,16 @@ describe('SearchService', () => {
     const testQuery = 'test-keyword-1 "keyword-B keyword-C" test-keyword-3';
     const testMatch1 = {
       ...mockQASet1,
+      id: 1,
       answer: 'keyword-A keyword-B keyword-C',
     };
+
     const source = [
-      mockQASet1,
+      { ...mockQASet1, id: 2 },
       testMatch1,
       {
         ...mockQASet1,
+        id: 3,
         answer: 'keyword-C keyword-B keyword-A',
       },
     ];

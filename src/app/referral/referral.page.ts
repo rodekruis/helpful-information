@@ -241,7 +241,7 @@ export class ReferralPageComponent implements OnInit {
       await this.offersService.getOffers(this.region);
     }
     if (this.useQandAs) {
-      await this.offersService.getQAs(this.region);
+      await this.offersService.getQAs({ region: this.region });
     }
 
     this.dataAvailable = this.hasDataAvailable();
