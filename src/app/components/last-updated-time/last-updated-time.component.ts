@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { RegionDataFallback } from 'src/app/models/region-data';
 import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.service';
 
@@ -11,6 +11,7 @@ import { LastUpdatedTimeService } from 'src/app/services/last-updated-time.servi
 })
 export class LastUpdatedTimeComponent {
   private lastUpdatedTimeService = inject(LastUpdatedTimeService);
+  private changeDetector = inject(ChangeDetectorRef);
 
   @Input()
   public label: string = RegionDataFallback.labelLastUpdated;
@@ -24,10 +25,12 @@ export class LastUpdatedTimeComponent {
         return;
       }
       this.lastUpdatedTime = value;
+      this.changeDetector.markForCheck();
     });
 
     this.lastUpdatedTimeService.lastUpdatedLabel$.subscribe((value) => {
       this.label = value;
+      this.changeDetector.markForCheck();
     });
   }
 }

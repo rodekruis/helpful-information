@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -25,6 +25,7 @@ export default class RegionPageComponent implements OnInit {
   private regionDataService = inject(RegionDataService);
   private offersService = inject(OffersService);
   private pageMeta = inject(PageMetaService);
+  private changeDetector = inject(ChangeDetectorRef);
 
   public useQandAs = environment.useQandAs;
   public useQandASearch = environment.useQandASearch;
@@ -44,6 +45,7 @@ export default class RegionPageComponent implements OnInit {
       if (!this.region) return;
 
       this.regionData = await this.regionDataService.getData(this.region);
+      this.changeDetector.markForCheck();
 
       this.pageMeta.setDirection(this.regionData.localeDirection);
       this.pageMeta.setLanguage(this.regionData.localeLanguage);
@@ -57,13 +59,17 @@ export default class RegionPageComponent implements OnInit {
       });
 
       this.categories = await this.offersService.getCategories(this.region);
+      this.changeDetector.markForCheck();
       this.subCategories = await this.offersService.getAllSubCategories(
         this.region,
       );
+      this.changeDetector.markForCheck();
 
       if (this.useQandAs) {
         this.qaSets = await this.offersService.getQAs({ region: this.region });
+        this.changeDetector.markForCheck();
         this.qaHighlights = await this.offersService.getHighlights(this.region);
+        this.changeDetector.markForCheck();
       }
     });
   }

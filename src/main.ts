@@ -6,7 +6,6 @@ import {
   enableProdMode,
   ErrorHandler,
   importProvidersFrom,
-  provideZoneChangeDetection,
 } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import {
@@ -36,7 +35,6 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideZoneChangeDetection(),
     provideRouter(
       routes,
       withRouterConfig({

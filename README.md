@@ -165,6 +165,13 @@ The test command generates HTML coverage under `coverage/app/` and a text summar
 [Vitest migration guide](https://v21.angular.dev/guide/testing/migrating-to-vitest)
 describes the limitations of Zone.js-based test helpers.
 
+The app uses [zoneless change detection](https://angular.dev/guide/zoneless).
+Asynchronous updates to template state must notify Angular, for example with a
+template-read signal, `AsyncPipe`, or `ChangeDetectorRef.markForCheck()`.
+Tests for these updates should wait for Angular to stabilize rather than forcing
+change detection after the update. Ionic requires `zone.js` as an npm peer
+dependency, but the app does not load it.
+
 #### E2E-tests
 
 End-to-End (E2E) tests are included, using [Playwright](https://playwright.dev/).

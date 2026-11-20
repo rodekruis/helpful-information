@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -43,6 +43,7 @@ export default class SubCategoryPageComponent implements OnInit {
   private offersService = inject(OffersService);
   private regionDataService = inject(RegionDataService);
   private pageMeta = inject(PageMetaService);
+  private changeDetector = inject(ChangeDetectorRef);
 
   public region: string;
   public regionData: RegionData;
@@ -84,6 +85,7 @@ export default class SubCategoryPageComponent implements OnInit {
         categoryID: getLegacyID(params.categorySlug, SlugPrefix.category),
         categorySlug: params.categorySlug,
       });
+      this.changeDetector.markForCheck();
     }
 
     if (!this.category) {
@@ -102,6 +104,7 @@ export default class SubCategoryPageComponent implements OnInit {
           SlugPrefix.subCategory,
         ),
       });
+      this.changeDetector.markForCheck();
     }
 
     if (!this.subCategory) {
@@ -119,13 +122,16 @@ export default class SubCategoryPageComponent implements OnInit {
       this.offerChapters = this.offersService.getOffersGroupedByChapter(
         this.offers,
       );
+      this.changeDetector.markForCheck();
     }
 
     if (this.useQandAs && !this.qaSets) {
       this.qaSets = await this.offersService.getQAs({ region: this.region });
+      this.changeDetector.markForCheck();
     }
 
     this.regionData = await this.regionDataService.getData(this.region);
+    this.changeDetector.markForCheck();
 
     this.pageMeta.setTitle({
       subCategoryName: this.subCategory.subCategoryName,

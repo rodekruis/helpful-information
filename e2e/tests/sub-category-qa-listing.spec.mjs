@@ -43,6 +43,21 @@ const childMarkdownAnswer = (child) =>
   childAnswer(child).locator(':scope > div[markdown]');
 
 test.describe('SubCategory page - Q&A listings', () => {
+  test('opens the question matching a later hash change', async ({ page }) => {
+    const subCategoryPage = new SubCategoryPage(page);
+    await subCategoryPage.goto({
+      regionSlug: 'test-local-1',
+      categorySlug: 'q-and-a-s',
+      subCategorySlug: 'q-and-a-s',
+    });
+    const question = questionDetails(subCategoryPage.topLevelQAs.first());
+    await expect(question).not.toHaveAttribute('open');
+
+    await page.evaluate("window.location.hash = 'test-parent-1'");
+    await expect(question).toHaveAttribute('open', '');
+    await expect(question).toContainText('A short and concise answer.');
+  });
+
   test('lists the matching top-level Questions in order', async ({ page }) => {
     const subCategoryPage = new SubCategoryPage(page);
     await subCategoryPage.goto({

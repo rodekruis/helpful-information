@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -29,6 +29,7 @@ export default class CategoryPageComponent implements OnInit {
   private router = inject(Router);
   private offersService = inject(OffersService);
   private pageMeta = inject(PageMetaService);
+  private changeDetector = inject(ChangeDetectorRef);
 
   public region: string;
 
@@ -59,6 +60,7 @@ export default class CategoryPageComponent implements OnInit {
         categoryID: getLegacyID(params.categorySlug, SlugPrefix.category),
         categorySlug: params.categorySlug,
       });
+      this.changeDetector.markForCheck();
     }
 
     if (!this.category) {
@@ -70,6 +72,7 @@ export default class CategoryPageComponent implements OnInit {
       this.subCategories = await this.offersService.getAllSubCategories(
         this.region,
       );
+      this.changeDetector.markForCheck();
     }
 
     this.pageMeta.setTitle({

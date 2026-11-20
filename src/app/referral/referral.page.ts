@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import type { OnInit } from '@angular/core';
-import { Component, inject, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, ViewChild } from '@angular/core';
 import type { Params } from '@angular/router';
 import {
   ActivatedRoute,
@@ -55,6 +55,7 @@ export class ReferralPageComponent implements OnInit {
   private pageMeta = inject(PageMetaService);
   private loggingService = inject(LoggingService);
   private configService = inject(ConfigService);
+  private changeDetector = inject(ChangeDetectorRef);
 
   @ViewChild('content')
   private content: IonContent;
@@ -118,6 +119,7 @@ export class ReferralPageComponent implements OnInit {
           this.setStaticPageMeta();
         }
       }
+      this.changeDetector.markForCheck();
     });
   }
 
@@ -220,7 +222,9 @@ export class ReferralPageComponent implements OnInit {
 
   private async loadAllData() {
     this.loading = true;
+    this.changeDetector.markForCheck();
     this.regionData = await this.regionDataService.getData(this.region);
+    this.changeDetector.markForCheck();
 
     this.pageMeta.setDirection(this.regionData.localeDirection);
     this.pageMeta.setLanguage(this.regionData.localeLanguage);
@@ -247,6 +251,7 @@ export class ReferralPageComponent implements OnInit {
     this.dataAvailable = this.hasDataAvailable();
 
     this.loading = false;
+    this.changeDetector.markForCheck();
   }
 
   public showRootPage() {

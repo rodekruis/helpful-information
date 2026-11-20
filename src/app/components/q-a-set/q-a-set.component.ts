@@ -1,5 +1,11 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  inject,
+  Input,
+} from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import {
   LoggingEvent,
@@ -18,6 +24,7 @@ import { RegionDataService } from 'src/app/services/region-data.service';
 export class QASetComponent {
   private regionDataService = inject(RegionDataService);
   private loggingService = inject(LoggingService);
+  private changeDetector = inject(ChangeDetectorRef);
 
   @Input()
   qaSet: QASet = {
@@ -50,6 +57,11 @@ export class QASetComponent {
 
   public isActive(slug: string | undefined): boolean {
     return !!slug && window.location.hash === `#${slug}`;
+  }
+
+  @HostListener('window:hashchange')
+  public onHashChange(): void {
+    this.changeDetector.markForCheck();
   }
 
   public logDetailsChange(

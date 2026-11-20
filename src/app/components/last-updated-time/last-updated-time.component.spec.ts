@@ -25,4 +25,15 @@ describe('LastUpdatedTimeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('renders later service updates without forcing change detection', async () => {
+    const service = TestBed.inject(LastUpdatedTimeService);
+
+    service.setLastUpdatedTime('2024-02-22T12:00:00Z');
+    service.setLastUpdatedLabel('Updated');
+    await fixture.whenStable();
+
+    expect(fixture.nativeElement.textContent).toContain('Updated');
+    expect(fixture.nativeElement.querySelector('time')).not.toBeNull();
+  });
 });

@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import type { Event } from '@angular/router';
 import { EventType, Router } from '@angular/router';
 import {
@@ -20,6 +20,7 @@ export class TranslationOptionsComponent {
   private router = inject(Router);
   private loggingService = inject(LoggingService);
   private configService = inject(ConfigService);
+  private changeDetector = inject(ChangeDetectorRef);
 
   public useRegionPerLocale = environment.useRegionPerLocale;
   public languageOptions: RegionData['localeAlternatives'] = [];
@@ -63,6 +64,7 @@ export class TranslationOptionsComponent {
       if (this.useRegionPerLocale) {
         this.isCurrentLanguageActive = this.checkActiveLanguage();
       }
+      this.changeDetector.markForCheck();
     });
   }
 

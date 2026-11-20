@@ -1,5 +1,11 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  Injector,
+} from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
@@ -53,6 +59,8 @@ export default class SearchPageComponent implements OnInit {
   private searchService = inject(SearchService);
   private pageMeta = inject(PageMetaService);
   private configService = inject(ConfigService);
+  private changeDetector = inject(ChangeDetectorRef);
+  private injector = inject(Injector);
 
   public useSearchApi =
     environment.useQandASearch &&
@@ -83,6 +91,7 @@ export default class SearchPageComponent implements OnInit {
     if (!this.region) return;
 
     this.regionData = await this.regionDataService.getData(this.region);
+    this.changeDetector.markForCheck();
 
     this.pageMeta.setDirection(this.regionData.localeDirection);
     this.pageMeta.setLanguage(this.regionData.localeLanguage);
@@ -103,6 +112,7 @@ export default class SearchPageComponent implements OnInit {
     this.route.queryParams.subscribe((queryParams: Params) => {
       this.handleQueryParams(queryParams);
     });
+    this.changeDetector.markForCheck();
   }
 
   private handleQueryParams(params: Params) {
@@ -111,6 +121,7 @@ export default class SearchPageComponent implements OnInit {
     if (params.q) {
       this.performSearch(params.q);
     }
+    this.changeDetector.markForCheck();
   }
 
   public onSearchInput(rawQuery: string) {
@@ -128,21 +139,22 @@ export default class SearchPageComponent implements OnInit {
     const safeQuery = this.searchService.sanitizeSearchQuery(query);
 
     if (this.useSearchApi) {
-      this.performApiSearchOrFallback({ safeQuery });
+      await this.performApiSearchOrFallback({ safeQuery });
     } else {
-      this.performLocalSearch({ safeQuery });
+      await this.performLocalSearch({ safeQuery });
     }
 
+    this.changeDetector.markForCheck();
     if (this.searchResults?.length > 1) {
       this.pageMeta.setTitle({
         pageName: `${this.regionData?.labelSearchPageTitle} (${this.searchResults.length})`,
         region: this.region,
       });
 
-      const resultFrame = document.getElementById('search-results');
-      if (resultFrame) {
-        resultFrame.focus();
-      }
+      afterNextRender(
+        () => document.getElementById('search-results')?.focus(),
+        { injector: this.injector },
+      );
     }
   }
 
@@ -152,18 +164,25 @@ export default class SearchPageComponent implements OnInit {
     safeQuery: string;
   }): Promise<void> {
     this.loadingSearch = true;
+    this.changeDetector.markForCheck();
 
-    let apiResponse: SearchApiResponse;
     try {
-      apiResponse = await this.fetchApiResults(safeQuery);
-    } catch (_error) {
-      this.performLocalSearch({ safeQuery });
-    }
+      let apiResponse: SearchApiResponse;
+      try {
+        apiResponse = await this.fetchApiResults(safeQuery);
+      } catch (error) {
+        console.error('SearchPage: Search API request failed', error);
+        await this.performLocalSearch({ safeQuery });
+      }
 
-    this.loadingSearch = false;
-
-    if (apiResponse && apiResponse.results) {
-      this.searchResults = await this.createSearchResults(apiResponse.results);
+      if (apiResponse) {
+        this.searchResults = await this.createSearchResults(
+          apiResponse.results ?? [],
+        );
+      }
+    } finally {
+      this.loadingSearch = false;
+      this.changeDetector.markForCheck();
     }
   }
 
@@ -178,20 +197,18 @@ export default class SearchPageComponent implements OnInit {
   private async createSearchResults(
     results: SearchApiResultItem[],
   ): Promise<QASet[]> {
-    const searchResults: QASet[] = [];
-    results.forEach(async (item) => {
-      const foundQASet = await this.offersService.findQA({
-        region: this.region,
-        categoryID: item.categoryID,
-        subCategoryID: item.subCategoryID,
-        question: item.question,
-        slug: item.slug,
-      });
-      if (foundQASet) {
-        searchResults.push(foundQASet);
-      }
-    });
-    return searchResults;
+    const searchResults = await Promise.all(
+      results.map((item) =>
+        this.offersService.findQA({
+          region: this.region,
+          categoryID: item.categoryID,
+          subCategoryID: item.subCategoryID,
+          question: item.question,
+          slug: item.slug,
+        }),
+      ),
+    );
+    return searchResults.filter((item): item is QASet => !!item);
   }
 
   private async fetchApiResults(query: string): Promise<SearchApiResponse> {

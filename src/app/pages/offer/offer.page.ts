@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import type { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackLinkComponent } from 'src/app/components/feedback-link/feedback-link.component';
@@ -31,6 +31,7 @@ export default class OfferPageComponent implements OnInit {
   private regionDataService = inject(RegionDataService);
   private offersService = inject(OffersService);
   private pageMeta = inject(PageMetaService);
+  private changeDetector = inject(ChangeDetectorRef);
 
   public region: string;
   public regionData: RegionData;
@@ -54,6 +55,7 @@ export default class OfferPageComponent implements OnInit {
     if (!this.region) return;
 
     this.regionData = await this.regionDataService.getData(this.region);
+    this.changeDetector.markForCheck();
 
     this.pageMeta.setDirection(this.regionData.localeDirection);
     this.pageMeta.setLanguage(this.regionData.localeLanguage);
@@ -71,6 +73,7 @@ export default class OfferPageComponent implements OnInit {
         offerID: getLegacyID(params.offerSlug, SlugPrefix.offer),
         offerSlug: params.offerSlug,
       });
+      this.changeDetector.markForCheck();
     }
     if (!this.offer) {
       this.router.navigate([
