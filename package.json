@@ -95,5 +95,12 @@
       "prettier --write",
       "eslint --fix"
     ]
+  },
+  "allowScripts": {
+    "@parcel/watcher": false,
+    "esbuild": false,
+    "fsevents": false,
+    "lmdb": false,
+    "msgpackr-extract": false
   }
 }

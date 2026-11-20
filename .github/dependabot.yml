@@ -10,6 +10,13 @@ updates:
     cooldown:
       default-days: 8
 
+  - package-ecosystem: 'devcontainers'
+    directory: '/'
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 8
+
   - package-ecosystem: npm
     directory: '/'
     target-branch: develop
