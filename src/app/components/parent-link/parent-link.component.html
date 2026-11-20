@@ -2,6 +2,21 @@
   <a
     [routerLink]="['../']"
     (click)="click()"
-    ><span aria-hidden="true">＜</span> {{ label }}</a
+    class="parent-link"
+    ><svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      class="parent-link--icon"
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2.25"
+        d="m15 6-6 6 6 6"
+      />
+    </svg>
+    {{ label }}</a
   >
 </nav>

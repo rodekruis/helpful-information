@@ -4,10 +4,48 @@
   margin-block-end: 1rem;
 }
 
+.offer--title {
+  margin-top: 0;
+}
+
 .offer--details {
+  display: grid;
+  gap: 0.75rem;
+
   &::before {
     content: '';
     display: block;
     clear: both;
+  }
+
+  > div {
+    margin: 0;
+    padding: 1rem;
+    background-color: var(--hia_level_fill);
+    border: 1px solid var(--hia_border);
+    border-radius: var(--hia_radius_lg);
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    overflow-wrap: anywhere;
+  }
+}
+
+.offer--section-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0 0 0.375rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--hia_base_text-muted);
+
+  .icon {
+    margin: 0;
   }
 }

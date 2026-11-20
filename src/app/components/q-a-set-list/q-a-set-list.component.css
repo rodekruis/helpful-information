@@ -1,0 +1,14 @@
+ol {
+  margin: 0;
+  padding-inline-start: 0;
+  list-style: none;
+}
+
+li + li {
+  margin-top: 0.5rem;
+}
+
+li > p {
+  margin-block: 0 0.5rem;
+  color: var(--hia_base_text-muted);
+}
