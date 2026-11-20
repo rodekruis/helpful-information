@@ -1,0 +1,83 @@
+# See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+
+name: 'Test `helpful-info/build`-action'
+
+# See the GitHub Action: https://github.com/helpful-info/build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - develop
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        actionVersion: ['main', 'v1']
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Set-up Build-Test-Environment
+        env:
+          BRANCH: ${{ github.head_ref || github.ref_name }}
+          NODE_ENV: test
+        run: |
+          echo "Setting up Build-Test-Environment for: $BRANCH"
+
+          echo "Creating package.json..."
+          node -e '
+            import { writeFileSync } from "node:fs";
+            const url = `https://github.com/rodekruis/helpful-information/tarball/${process.env.BRANCH}`;
+            const packageJson = { dependencies: { "helpful-information": url } };
+            writeFileSync("package.json", JSON.stringify(packageJson));
+          '
+          cat package.json
+          echo "\n"
+          echo "Creating Test file..."
+          mkdir -p public
+          echo "Test file" > public/test_file.txt
+
+      - name: 'Build action-version: main'
+        if: ${{ matrix.actionVersion == 'main' }}
+        uses: 'helpful-info/build@main'
+        with:
+          includePublicFiles: true
+
+      - name: 'Build action-version: v1'
+        if: ${{ matrix.actionVersion == 'v1' }}
+        uses: 'helpful-info/build@v1'
+        with:
+          includePublicFiles: true
+
+      - name: Verify Build Output
+        run: |
+          if [ ! -f www/index.html ]; then
+            echo "Build output 'index.html' not found!"
+            exit 1
+          fi
+          if [ ! -f www/404.html ]; then
+            echo "Build output '404.html' not found!"
+            exit 1
+          fi
+          if [ ! -f public/test_file.txt ]; then
+            echo "Test file not found!"
+            exit 1
+          fi
+          echo "Build output verified successfully."
