@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import {
   LoggingEvent,
   LoggingEventCategory,
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonApp, IonRouterOutlet],
+  imports: [RouterOutlet],
 })
 export class AppComponent {
   private loggingService = inject(LoggingService);
